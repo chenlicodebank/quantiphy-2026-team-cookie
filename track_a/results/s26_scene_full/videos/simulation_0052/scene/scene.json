@@ -1,0 +1,79 @@
+{
+  "video": "simulation_0052.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 30.003297,
+  "frames": 91,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; frame for time t = round(t * fps)",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (background identical across frames; no pan/shake detected; composite background from frame 0 left half + frame 90 right half shows no seams)",
+    "view": "frontal street view: optical axis ~perpendicular to the building wall; wall horizontals stay horizontal; lamp poles nearly vertical (lean of ~2-3 px over 180 rows, converging slightly downward => camera pitch ~0, at most slightly down)",
+    "horizon_estimate_y": "~540 (image centre) if the camera is level - not directly observable; no vanishing point in view",
+    "perspective_cues": "Both cars drive parallel to the image plane at constant depth (ground-contact rows constant: orange 794, black 900). Apparent side-profile sizes are constant over time (orange wheelbase 323.2 px everywhere it is measured). But wide-angle perspective is visible: when a car is right of the image centre its front face is visible (apparent front extends ~70-80 px further left than the side profile), when left of centre its rear face is visible (apparent rear extends up to ~100+ px further right). Black car (near lane) is closer to the camera than the orange car (far lane, at the curb).",
+    "focal_length": "unknown; estimate from depth_info if given"
+  },
+  "objects": [
+    {
+      "name": "orange_car",
+      "description": "orange modern sports sedan (Kia Stinger-like), black multi-spoke wheels with red brake calipers; far lane next to the curb",
+      "moves": true,
+      "direction": "right to left (-x), decelerating smoothly to a stop",
+      "visible_frames": [0, 90],
+      "notes_visibility": "f0-~18 rear part beyond right edge; front tip beyond left edge from ~f57; partially/mostly occluded by black car f24-46 (front wheel hidden f35-~52, rear wheel f27-45)",
+      "reference_point": "ref_x = midpoint between near-side front and rear wheel hubs (wheelbase centre); hub row y=745; tyre ground contact y=794",
+      "track_file": "tracks/orange_car.csv",
+      "side_profile_length_px": 518,
+      "length_measured_frames": [21, 22, 23, 54, 55, 56],
+      "height_px": 151,
+      "height_rows": [643, 794],
+      "wheelbase_px": 323.2,
+      "wheel_outer_diameter_px": "~95 (tyre top ~700, bottom ~794 around hub y 745)",
+      "front_overhang_px_from_front_hub": "~94 (at f22, front near image centre)",
+      "rear_overhang_px_from_rear_hub": "~102 (at f22; side profile)",
+      "ref_x_first_last": {"f0": 1343.7, "f90": 76.1},
+      "per_frame_dx_px": "~-28.9 at f1 decreasing almost linearly (~0.33-0.34 px/frame per frame) to 0 at f87"
+    },
+    {
+      "name": "black_car",
+      "description": "very dark green/black vintage coupe (Mercedes 300SL-like), chrome bumpers and hubcaps, red tail lights; near lane (closer to camera), heavily motion blurred",
+      "moves": true,
+      "direction": "right to left (-x), constant speed ~69.84 px/frame",
+      "visible_frames": [24, 53],
+      "notes_visibility": "enters at right edge f24 (lights), front hub visible f28-42, rear hub f35-49, last sliver at left edge f53, gone f54. Passes in front of (occludes) the orange car f24-46. Motion blur ~40-45 px horizontally.",
+      "reference_point": "ref_x = midpoint between near-side front and rear hubcaps; hub row y~852; tyre ground contact y~900",
+      "track_file": "tracks/black_car.csv",
+      "side_profile_length_px": "~834 (+-20; = wheelbase 489.6 + front overhang ~137 + rear overhang ~207, measured at f39 near image centre, mid-blur edges)",
+      "height_px": 263,
+      "height_rows": [637, 900],
+      "wheelbase_px": 489.6,
+      "wheel_outer_diameter_px": "~100 (blurred)",
+      "ref_x_first_last": {"f24": 1529.9, "f53": -495.5, "note": "f24-27 and f50-53 linearly extrapolated (hubs off-screen)"}
+    }
+  ],
+  "static_objects": [
+    {"name": "lamp_left", "description": "black cast-iron street lamp with lantern head, left, next to hydrant", "pole_centre_x": 201, "pole_width_px": 9, "lantern_x": [176, 231], "top_y": 366, "base_y": 757, "height_px": 391},
+    {"name": "lamp_right", "description": "identical black street lamp, right", "pole_centre_x": 897, "pole_width_px": 9, "lantern_x": [867, 922], "top_y": 366, "base_y": 757, "height_px": 391},
+    {"name": "fire_hydrant", "description": "white/cream hydrant with yellow-orange caps, far left on sidewalk", "x": [105, 165], "body_x": [113, 153], "y": [663, 757], "height_px": 94, "width_px_incl_nozzles": 60},
+    {"name": "graffiti_MEOW", "description": "teal/black graffiti tag on wall above the far curb, centre", "x": [522, 762], "y": [568, 712], "length_px": 240, "height_px": 144},
+    {"name": "windows", "description": "6 white-framed multi-pane windows in 2 rows x 3 columns", "columns_x": [[252, 337], [603, 689], [947, 1033]], "upper_row_y": [20, 160], "lower_row_y": [250, 405], "window_size_px": "~85 wide x ~140-155 tall"},
+    {"name": "building_wall", "description": "white-painted brick wall filling the background, fronto-parallel"},
+    {"name": "sidewalk_far", "description": "sidewalk at wall base", "y": [728, 763]},
+    {"name": "curb_far", "description": "curb face between far sidewalk and road", "y": [763, 790]},
+    {"name": "road_center_dashed_line", "description": "white dashed lane line across the road", "y": 844},
+    {"name": "curb_near", "description": "near curb/sidewalk edge at bottom", "y": [951, 966]},
+    {"name": "wooden_board", "description": "brown wooden board leaning at the right edge of wall", "x": [1065, 1080], "y": [495, 722]},
+    {"name": "manhole_patch", "description": "dark patch on road", "x": [180, 420], "y": [828, 840]}
+  ],
+  "events": [
+    {"event": "orange car in motion from the first frame (enters from right edge)", "frame": 0, "t": 0.0},
+    {"event": "orange car front wheel hub first fully trackable", "frame": 6, "t": 0.2},
+    {"event": "black car enters at right edge", "frame": 24, "t": 0.7999},
+    {"event": "black car starts overlapping/occluding orange car", "frame": 24, "t": 0.7999},
+    {"event": "black car reference passes orange car reference (ref_x equal)", "frame": "~39.4 (image x only; f39: black 482.2 vs orange 462.9, f40: 412.9 vs 447.0; the cars are at different depths, so this is not a 3D meeting)", "t": "~1.31"},
+    {"event": "black car no longer occludes orange car", "frame": 47, "t": 1.5665},
+    {"event": "black car leaves frame (last visible f53)", "frame": 54, "t": 1.7998},
+    {"event": "orange car comes to rest (per-frame dx < 0.05 px from here)", "frame": 87, "t": 2.8997}
+  ]
+}

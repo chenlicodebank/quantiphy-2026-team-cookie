@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0114_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "A2SX",
+ "fps": 24.0,
+ "frames": 80,
+ "duration_s": 3.3333,
+ "width": 1080,
+ "height": 1920,
+ "question": {
+  "id": 1816,
+  "question": "What is the width of the plane in meters?",
+  "prior": "acceleration of the plane = 18m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

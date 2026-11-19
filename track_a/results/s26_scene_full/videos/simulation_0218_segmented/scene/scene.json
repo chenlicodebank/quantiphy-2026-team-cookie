@@ -1,0 +1,49 @@
+{
+  "video": "simulation_0218_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (robot moves at constant image speed, vertical bbox constant to +-2 px; no background to check except frame 49, which is static scenery only)",
+    "perspective": "perspective render: robot shows its rear face when left of centre and its front (drill) face when right of centre, so its bbox length grows from 616 px (f9) to 700 px (f32); height constant ~626 px. Motion is a straight horizontal line parallel to the image plane (ref_y constant)."
+  },
+  "objects": {
+    "robot": {
+      "description": "tracked mining/drill robot: blue-teal body, red top box, black camera/lens head pointing left, drill (cone) + claw arm pointing right, black/grey caterpillar treads with 4 large wheels. The only object in the video.",
+      "moves": true,
+      "visible_frames": "0-48 (fully inside frame 9-32; cut by left edge 0-8, by right edge 33-48; at frame 48 only a 12-px sliver)",
+      "track_file": "tracks/robot.csv",
+      "reference_point": "ref_x = horizontal centre of the tread/wheel band (rows 800-880) obtained by template matching the frame-20 band (precise, rigid, independent of perspective changes of the bbox); ref_y = bbox vertical centre (582.5). Vehicle root is probably at the bottom-centre of the chassis (y ~ 895) - only x displacements matter since motion is horizontal.",
+      "motion": "pure horizontal translation to the RIGHT (+x) at constant image velocity 50.79 px/frame = 1218.9 px/s (linear fit over frames 2-44, max residual 0.4 px). No vertical motion, no acceleration, no stop, no turn.",
+      "ref_x_fit": "ref_x(frame) = -188.87 + 50.789 * frame (px)",
+      "sizes_px_frame20": {"bbox": [590, 270, 1225, 895], "length_bbox_px": 636, "height_px": 624, "tread_length_px": 475, "body_head_length_px": "~ 390 (camera head + box, approx)"},
+      "sizes_px_range": {"length_bbox_px_fully_visible_frames_9_32": [616, 698], "height_px": [622, 626], "tread_length_px_frames_9_36": [475, 520]},
+      "crosses_image_centre_x960_at_frame": 22.6
+    }
+  },
+  "static_objects": {
+    "white_background": "frames 0-48 are segmented: uniform white background, no ground features",
+    "frame49_background": {
+      "note": "the last frame (49, t=2.042 s) is an unsegmented grayscale render of the scene background without the robot: a warehouse wall with 3 corrugated panels, concrete pillars, ceiling lights, dark floor with two white horizontal floor lines and two short diagonal lines (parking-bay style).",
+      "pillar_left_x_px_at_row650": [643, 705],
+      "pillar_right_x_px_at_row650": [1593, 1649],
+      "pillar_spacing_centre_to_centre_px": 947,
+      "wall_base_y_px": "~820",
+      "floor_white_line_1_y_px": 843,
+      "floor_white_line_2_y_px": 908,
+      "warning": "robot track bottom (y 895) and floor lines come from different frames; frame 49 may not be co-registered with the robot frames"
+    }
+  },
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "video starts; robot already moving right, partly visible at left edge (front part only)"},
+    {"frame": 9, "time": 0.375, "event": "robot fully inside frame (rear leaves left edge between f8 and f9)"},
+    {"frame": 22.6, "time": 0.942, "event": "tread centre passes image centre x=960"},
+    {"frame": 33, "time": 1.375, "event": "drill tip reaches right image edge"},
+    {"frame": 48, "time": 2.0, "event": "last frame with robot (12-px sliver at right edge)"},
+    {"frame": 49, "time": 2.042, "event": "robot gone; frame shows the unsegmented background"}
+  ],
+  "files": {"tracks/robot.csv": "per-frame track", "notes.md": "method and reliability", "scripts/": "probe.py, track.py, track2.py, overlay.py"}
+}

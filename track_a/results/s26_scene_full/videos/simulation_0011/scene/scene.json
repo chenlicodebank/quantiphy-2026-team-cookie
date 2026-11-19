@@ -1,0 +1,67 @@
+{
+  "video": "simulation_0011.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "width_px": 1920,
+  "height_px": 1954,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "full-resolution pixels, x right, y down, origin top-left",
+  "camera": {
+    "motion": "static (phase-correlation shift vs frame 0 < 0.03 px on house and ground patches, all frames)",
+    "focal_length": "unknown; estimate from depth_info + a known size",
+    "perspective_cues": {
+      "ground_plane": "grass lawn rising to the house base; tree-trunk base at y~1550 (near), house base y~1365 (far), cart wheels touch ground y~1435",
+      "horizon_estimate_y_px": "roughly 1000-1100 (ground meets far hedge/forest ~ y 1300-1330; true horizon hidden by trees; camera looks roughly level, vertical house edges near-vertical)",
+      "principal_point_assumed": [960, 977]
+    }
+  },
+  "moving_objects": {
+    "crow": {
+      "description": "black bird (crow/raven) flying left-to-right in front of the house gable, flapping wings; the only bird; casts a faint shadow on the lawn below (y~1370-1390)",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "track_file": "tracks/crow.csv",
+      "reference_point": "mask centroid (cx, cy) ~ body centre; bbox centre also given",
+      "path_px": "x 1029 -> 1758 (frames 0 -> 59), y oscillates 1034-1106 (wingbeat + slight climb near frame 50-55)",
+      "apparent_size_px": "bbox_w (wingspan proxy) 55-160; ~100-130 frames 16-40, ~120-150 frames 41-59 (slightly growing: crow likely approaching camera a little or wings more spread); wings-up frames have smallest bbox_h (~36-45: frames 23-24, 41, 58), wings-spread/down frames largest (~90-100: frames 36-38, 52-55)",
+      "quality": "frames 5-15 partial mask (crow against dark foliage and eave post), centroid biased left; other frames good"
+    },
+    "black_fuzzy_ball": {
+      "description": "black, fuzzy/furry roughly spherical object close to the camera at the left: sits on a branch partly behind the big tree trunk, falls/drops down beside the trunk and lands on the lawn near the trunk base at about (295,1544); no bounce. Could be a furry ball or small dark animal (rests as a dome on the ground). Only such object.",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "track_file": "tracks/black_fuzzy_ball.csv",
+      "reference_point": "mask centroid (cx, cy); bbox centre also given",
+      "path_px": "on branch ~(219,1072) frames 0-15; drifts down slowly 16-23; clearly falling from ~frame 24; accelerating downward (dy/frame ~4 at f24-31, ~10 at f36, ~20 at f40, ~30 at f42-47, ~40-46 at f49-50); x drifts right 215 -> 295; lands frame 50 at (294.6,1543.9)",
+      "apparent_size_px": "fully visible only frames ~38-43: diameter ~120-135 px (bbox), eq_diam ~110-120; earlier masks are smaller only because trunk/leaves hide part of it (de-occlusion, not approach); frames 44-49 motion blurred (elongated 140 px along motion, ~85 across); on ground 134 wide x 75 tall dome (lower part hidden by grass / flattened)",
+      "quality": "frames 0-31 occluded (trunk/leaves), 44-49 motion blur, 50-59 static on ground"
+    }
+  },
+  "events": [
+    {"event": "crow in flight at start (already moving)", "frame": 0, "t": 0.0},
+    {"event": "crow passes the left eave corner of the house (low-contrast stretch)", "frames": [5, 15], "t": [0.208, 0.625]},
+    {"event": "crow still flying at end, right part of roof", "frame": 59, "t": 2.458},
+    {"event": "ball at rest on branch", "frames": [0, 15]},
+    {"event": "ball starts moving (slow drift begins ~16, clear fall by 24; uncertain +/-4 frames)", "frame": 16, "t": 0.667, "clear_motion_frame": 24, "clear_motion_t": 1.0},
+    {"event": "ball fully clear of trunk/leaves", "frame": 38, "t": 1.583},
+    {"event": "ball hits ground (first frame at rest position; no bounce)", "frame": 50, "t": 2.083},
+    {"event": "ball at rest on ground", "frames": [50, 59]}
+  ],
+  "static_objects": {
+    "house": {"desc": "timber-framed barn/house with gable facing camera, crossed beams at roof peak, broken shingle roof", "front_wall_bbox_px": [1115, 1080, 1575, 1365], "front_wall_width_px": 460, "gable_apex_y": 890, "crossed_beam_top_y": 775, "base_y": 1365, "side_wall_extends_to_x": 1885, "right_eave_end": [1880, 1135], "height_base_to_apex_px": 475, "height_base_to_beam_tips_px": 590},
+    "doorway_open": {"desc": "dark open doorway, centre of gable wall", "bbox_px": [1300, 1150, 1365, 1355], "w": 65, "h": 205},
+    "door_leaf": {"desc": "closed wooden plank door left of doorway", "bbox_px": [1210, 1155, 1290, 1350], "w": 80, "h": 195},
+    "barrel_left": {"desc": "wooden barrel left of pair, front of house right of doorway", "bbox_px": [1420, 1280, 1490, 1370], "w": 70, "h": 90},
+    "barrel_right": {"desc": "wooden barrel right of pair", "bbox_px": [1488, 1280, 1565, 1370], "w": 77, "h": 90},
+    "cart": {"desc": "wooden hand cart with large spoked wheels, right edge, cut off by frame", "bbox_px": [1450, 1215, 1920, 1440], "front_wheel_bbox_px": [1650, 1260, 1820, 1435], "wheel_diam_px": 172},
+    "white_flower_bush": {"desc": "small white flower bush at house left corner", "bbox_px": [1068, 1312, 1137, 1368]},
+    "big_tree_left": {"desc": "large tree in foreground left; trunk x~100-185, crown fills top-left; ball sits on its branch", "trunk_x_px": [100, 185], "trunk_base_y": 1550},
+    "round_small_tree": {"desc": "small round tree mid-left background", "bbox_px": [570, 1070, 790, 1350]},
+    "bright_tree_behind_house": {"desc": "tall bright-green tree behind house left", "bbox_px": [850, 630, 1110, 1340]},
+    "pink_flower_bushes": {"desc": "pink-flowered shrubs bottom-left foreground", "bbox_px": [0, 1500, 660, 1954]},
+    "lawn": {"desc": "grass ground with tree-shadow patches and a small mound bottom-centre (~x 1000-1400, y 1530-1650)"}
+  }
+}

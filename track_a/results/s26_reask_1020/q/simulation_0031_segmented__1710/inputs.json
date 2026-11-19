@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0031_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V3MX",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "question": {
+  "id": 1710,
+  "question": "What is the eagle’s wingspan (the distance from the tip of one wing to the tip of the other when fully spread) in meters?",
+  "prior": "speed of the person = 1.3m/s",
+  "depth_info": "t=1s, distance_boat_camera = 130.3493 m\nt=2s, distance_boat_camera = 133.7433 m\nt=1s, distance_human_camera = 139.9543 m\nt=2s, distance_human_camera = 139.9833 m\nt=1s, distance_eagle_camera = 139.7566 m\nt=2s, distance_eagle_camera = 130.2468m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

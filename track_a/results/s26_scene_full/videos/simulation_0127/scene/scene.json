@@ -1,0 +1,310 @@
+{
+ "video": "simulation_0127.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 57,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame = round(t*24); frame 0 at t=0",
+ "units": "pixels and seconds; image x to the right, y down; no metric scale assumed",
+ "camera": {
+  "motion": "static (phase correlation of background between frames 0,14,28,42,56: shift < 0.002 px)",
+  "view": "top-down (bird's-eye) view of a straight street running horizontally; motion is in the ground plane facing the camera. Weak perspective only: tall parts (cyclist's body) are displaced a few px outward from the image centre relative to ground-level parts (<= ~8 px between x=1720 and x=100), i.e. pixel scale differs <1% between ground level and rider height."
+ },
+ "moving_objects": {
+  "blue_car": {
+   "description": "blue sedan driving to the RIGHT (+x) in the upper lane, top edge just below the upper curb",
+   "reference_point": "centre of the car body's top-view box (proxy for the vehicle origin/root)",
+   "visible_frames": [
+    0,
+    38
+   ],
+   "fully_in_view_frames": "10-28 (0-9 rear part under tree canopy; front leaves right edge at frame 28.6)",
+   "size_px_at_frame12": {
+    "length_along_x": 236,
+    "width_along_y": 80,
+    "box": [
+     1254,
+     277,
+     1490,
+     357
+    ],
+    "uncertainty_px": 2
+   },
+   "track": "tracks/blue_car.csv",
+   "rotation": "none (heading constant +x, y constant within 0.5 px)",
+   "ref_y_px": 317.0,
+   "per_frame_dx_px": [
+    -0.1,
+    24.3,
+    24.7,
+    25.4,
+    24.7,
+    25.3,
+    25.2,
+    25.0,
+    25.6,
+    25.6,
+    25.2,
+    25.3,
+    25.3,
+    25.3,
+    25.0,
+    25.2,
+    25.1,
+    25.8,
+    25.4,
+    25.6,
+    25.4,
+    25.4,
+    25.4,
+    25.6,
+    25.6,
+    25.6,
+    25.3,
+    25.3,
+    25.5,
+    25.4,
+    25.4,
+    25.4,
+    25.4,
+    25.0,
+    25.1,
+    26.0,
+    24.0,
+    25.0
+   ],
+   "mean_step_px_per_frame_frames_2_on": 25.265
+  },
+  "cyclist": {
+   "description": "person riding a bicycle to the LEFT (-x) in the middle of the road (y~596); dark clothing, helmet; long shadow toward lower right",
+   "reference_point": "rider pelvis / saddle point (rear end of the dark torso, at bike-line level y=597)",
+   "other_points_at_frame36": {
+    "bike_front_tip": [
+     574,
+     596
+    ],
+    "bike_rear_tip": [
+     659,
+     596
+    ],
+    "helmet": [
+     609,
+     594
+    ],
+    "pelvis": [
+     631,
+     597
+    ],
+    "handlebar_x": 600
+   },
+   "visible_frames": [
+    0,
+    56
+   ],
+   "fully_in_view_frames": "0-53 (front tip leaves left edge at frame ~54, pelvis at frame ~56)",
+   "size_px": {
+    "bike_length_front_to_rear_tip": 85,
+    "bike_length_range_over_clip": "85-87",
+    "width_across_y_handlebar_rider": 26,
+    "box_at_frame36": [
+     574,
+     583,
+     659,
+     609
+    ],
+    "uncertainty_px": 3
+   },
+   "track": "tracks/cyclist.csv",
+   "rotation": "none (heading constant -x)",
+   "ref_y_px": 597.0,
+   "per_frame_dx_px": [
+    0.0,
+    -31.1,
+    -31.6,
+    -31.8,
+    -31.9,
+    -31.8,
+    -31.9,
+    -31.7,
+    -31.3,
+    -31.6,
+    -31.9,
+    -32.0,
+    -30.4,
+    -31.5,
+    -32.0,
+    -31.3,
+    -31.5,
+    -31.3,
+    -31.6,
+    -31.3,
+    -31.6,
+    -31.4,
+    -31.7,
+    -31.7,
+    -31.7,
+    -31.7,
+    -31.7,
+    -31.8,
+    -31.7,
+    -31.8,
+    -31.6,
+    -31.7,
+    -31.5,
+    -31.7,
+    -31.5,
+    -31.7,
+    -31.6,
+    -31.7,
+    -31.5,
+    -31.8,
+    -31.9,
+    -31.6,
+    -31.8,
+    -31.6,
+    -31.6,
+    -31.6,
+    -31.6,
+    -31.5,
+    -31.9,
+    -31.9,
+    -31.7,
+    -31.9,
+    -31.8,
+    -31.6,
+    -31.7,
+    -31.6
+   ],
+   "mean_step_px_per_frame_frames_2_on": 31.635
+  }
+ },
+ "static_objects": {
+  "red_car": {
+   "description": "red sedan parked at the lower curb, left edge of the image, nose toward the left",
+   "box_px": [
+    13,
+    713,
+    257,
+    807
+   ],
+   "length_px": 244,
+   "body_width_px": 86,
+   "width_incl_mirrors_px": 95,
+   "centre_px": [
+    135,
+    760
+   ],
+   "moves": false,
+   "uncertainty_px": 3
+  },
+  "dark_sports_car": {
+   "description": "dark grey/black coupe parked at the lower curb, right edge of the image",
+   "box_px": [
+    1687,
+    718,
+    1913,
+    815
+   ],
+   "length_px": 226,
+   "body_width_px": 90,
+   "width_incl_mirrors_px": 97,
+   "centre_px": [
+    1800,
+    767
+   ],
+   "moves": false,
+   "uncertainty_px": 3
+  },
+  "white_van": {
+   "description": "white van/truck roof at the bottom (x 638-745), parked in a driveway, cut off by the bottom edge",
+   "box_px": [
+    638,
+    920,
+    745,
+    1080
+   ],
+   "width_px": 107,
+   "visible_length_px": ">=160 (truncated)",
+   "moves": false
+  },
+  "orange_object": {
+   "description": "orange/brown elongated object lying diagonally on the lower sidewalk (fallen sign / bench-like prop) plus a thin red post at x~1370, y 870-945",
+   "box_px": [
+    1295,
+    847,
+    1370,
+    917
+   ],
+   "moves": false
+  },
+  "trees": {
+   "description": "tree canopies along the upper sidewalk (x~330-760 and x~770-1560, y<360) and lower verge (x 0-500 and 1600-1920, y>840); their shadows fall across the road toward lower-left",
+   "moves": false
+  },
+  "road": {
+   "upper_curb_y": 272,
+   "lower_curb_y": 820,
+   "road_width_px": 548,
+   "faint_lane_line_y": [
+    478,
+    655
+   ],
+   "lanes": "upper lane 275-478 (blue car), middle 478-655 (cyclist), lower 655-818 (parked cars)",
+   "uncertainty_px": 5
+  },
+  "sidewalks": {
+   "upper": "y ~135-262 (light paving)",
+   "lower": "y ~830-950 (light paving)",
+   "fence_upper_y": 118,
+   "white_dashed_kerb_lower_y": 970
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "frames 0 and 1 are identical (no object moved); both objects already move at full speed from frame 1->2 on (no visible start-up acceleration)"
+  },
+  {
+   "frame": 2,
+   "t": 0.0833,
+   "event": "first frame with motion of both objects"
+  },
+  {
+   "frame": 29,
+   "t": 1.2083,
+   "event": "blue car front crosses the right image edge (front x 1896 at f28, 1922 at f29)"
+  },
+  {
+   "frame": 38,
+   "t": 1.5833,
+   "event": "last frame with the blue car visible (rear at x~1912); gone from frame 39"
+  },
+  {
+   "frame": 13,
+   "t": 0.5417,
+   "event": "blue car centre and cyclist pelvis have equal x (they pass each other, in different lanes; no contact)"
+  },
+  {
+   "frame": 54,
+   "t": 2.25,
+   "event": "cyclist front tip reaches the left image edge"
+  },
+  {
+   "frame": 56,
+   "t": 2.3333,
+   "event": "last frame: only the cyclist's rear ~25 px visible, pelvis at x~-3"
+  }
+ ],
+ "no_events": "no bounces, impacts, contacts, stops or direction changes; both motions look uniform",
+ "files": {
+  "tracks": [
+   "tracks/blue_car.csv",
+   "tracks/cyclist.csv"
+  ],
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0162.mp4",
+ "video_source": "simulation",
+ "video_type": "S2SC",
+ "fps": 24.0,
+ "frames": 100,
+ "duration_s": 4.1667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 380,
+  "question": "What is the acceleration of the ball at time 2s in m/s^2?",
+  "prior": "diameter of the ball = 0.21m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,26 @@
+# q1999 — speed of the soccer ball at t = 1.5 s
+
+- This is a 2D segmentation video at 24 fps; question_fps is also 24, so there is no re-timing. t = 1.5 s is frame 36.
+- The only object is the ball, a light-grey disc (core ≈ 236) on white (255). It moves horizontally to the right and slows down gradually.
+- `measure.py` handles frames 2–50 (frames 0–1 are clipped). For each frame it:
+  - computes a contrast map d = (bg − I)/(bg − core);
+  - makes a half-contrast mask and dilates it;
+  - measures the contrast-weighted area and turns it into an equivalent diameter;
+  - takes the weighted centroid as the centre;
+  - measures the half-contrast horizontal and vertical extents with subpixel precision.
+- **Diameter**:
+  - The median equivalent diameter is 48.84 px (mean 49.05 ± 1.17).
+  - The horizontal extent is 49.5 px and may include a little motion blur. The vertical extent is 47.6 px.
+  - The record gives 49 px. I used 48.8 px.
+  - Scale = 0.344 / 48.8 = 7.05e-3 m/px.
+- **Speed**:
+  - Quadratic fits of x(frame) give a 35→36 backward-difference speed of:
+    - 27.63 px/frame over frames 2–50;
+    - 27.61 px/frame over frames 26–46;
+    - 27.67 px/frame over frames 30–42.
+  - Fit rms is 0.4–0.5 px. The raw single difference is 28.19 px/frame, which is noisier.
+  - Speed = 27.63 × 24 = 663 px/s, i.e. 4.67 m/s.
+- **Check**:
+  - The record's track (bbox midpoints) gives the same per-frame steps of about 27–28 px around frame 36.
+  - Changing the diameter between 47.6 and 49.5 px moves the answer between 4.79 and 4.61 m/s.
+- **Answer**: 4.67 m/s. Confidence is good, with an uncertainty of about ±3%, mostly from the soft edges of the mask.

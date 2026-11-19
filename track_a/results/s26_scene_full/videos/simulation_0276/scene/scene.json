@@ -1,0 +1,85 @@
+{
+  "video": "simulation_0276.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y downward; full-resolution pixel coordinates",
+  "view": "camera looks straight down (top-down / bird's-eye) onto flat brown dirt ground; the motion plane is the ground plane, facing the camera",
+  "camera": {
+    "motion": "static (phase correlation of top and bottom background strips vs frame 0: shift 0.00 px in every tested frame)",
+    "perspective": "none usable: orthographic-looking top-down view, flat ground, no horizon/vanishing points; one metres-per-pixel scale applies to the whole ground plane"
+  },
+  "objects": [
+    {
+      "name": "raccoon",
+      "description": "the only moving object: grey raccoon with a black/white ringed tail and a light-tan pointed snout, seen from above, walking in +x (left to right) along image row y ~ 728",
+      "moves": true,
+      "visible_frames": "0-71 (entirely in view in every frame, never occluded)",
+      "track_file": "tracks/animal.csv",
+      "reference_point": "cx_mask, cy_mask = centroid of the full top-down silhouette (tail + body + head + legs); best proxy for the rig root. bbox_cx/bbox_cy also given (noisier, swings with tail/snout).",
+      "position_frame0_px": [761.3, 727.6],
+      "position_frame71_px": [2198.1, 728.3],
+      "net_displacement_frame0_to_71_px": 1436.8,
+      "path_length_frame0_to_71_px": 1437.4,
+      "lateral_drift_px": "y stays within 727.1-731.0",
+      "mean_step_px_per_frame_frames2to71": 20.53,
+      "step_sd_px": 3.6,
+      "size_px": {
+        "length_nose_to_tail_tip_median": 295,
+        "length_p10_p90": [285, 300],
+        "length_range": [267, 304],
+        "width_across_incl_legs_median": 66,
+        "width_across_range": [62, 83],
+        "width_body_only_approx": 62,
+        "tail_length_median": 102,
+        "length_without_tail_snout_to_tail_base_median": 191,
+        "note": "length along motion axis (image x) = bbox_w; width = image-y extent; legs that swing out widen it. Vertical (world) height is not observable in this top-down view."
+      }
+    },
+    {
+      "name": "raccoon_shadow",
+      "description": "long dark shadow of the raccoon cast to the lower-left (behind it); moves with it; excluded from the mask",
+      "moves": true,
+      "visible_frames": "0-71"
+    },
+    {
+      "name": "canopy_left",
+      "description": "light-green leafy tree/bush canopy at the top-left edge (cut by the top border)",
+      "moves": false,
+      "bbox_frame0_px": [200, 0, 723, 383],
+      "extent_px": {"w": 524, "h_visible": 384},
+      "centroid_px": [460.9, 156.9]
+    },
+    {
+      "name": "trunk_top",
+      "description": "dark brown tree trunk / stump at the top edge, centre-right (cut by the top border)",
+      "moves": false,
+      "bbox_frame0_px": [1693, 0, 1903, 195],
+      "extent_px": {"w": 211, "h_visible": 196},
+      "centroid_px": [1794.6, 95.5]
+    },
+    {
+      "name": "canopy_right",
+      "description": "darker-green conifer branches in the top-right corner (cut by top and right borders)",
+      "moves": false,
+      "bbox_frame0_px": [2138, 0, 2559, 471],
+      "extent_px": {"w_visible": 422, "h_visible": 472},
+      "centroid_px": [2377.3, 163.4]
+    },
+    {
+      "name": "ground_and_tree_shadows",
+      "description": "flat brown dirt ground (no markings, lines or props); broad diagonal tree shadows run from lower-left to upper-right across the left half of the frame",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "frames 0 and 1 are identical (render hold); raccoon not displaced", "frames": [0, 1], "t_s": [0.0, 0.0417]},
+    {"event": "raccoon motion starts (first non-zero step)", "frame": 2, "t_s": 0.0833},
+    {"event": "steady walk in +x, no turns, stops or direction changes", "frames": [2, 71]},
+    {"event": "clip ends with raccoon still walking, at x ~ 2198", "frame": 71, "t_s": 2.9583}
+  ]
+}

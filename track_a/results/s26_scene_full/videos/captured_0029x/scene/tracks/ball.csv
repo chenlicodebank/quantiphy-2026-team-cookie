@@ -1,0 +1,50 @@
+frame,time,cx,cy,diam_px,centre_method,bbox_x0,bbox_y0,bbox_x1,bbox_y1,mask_len_major,mask_width_minor,mask_height,mask_area_px,equiv_diam,occluded,note,diam_med5
+0,0.0,1175.1,562.7,98.8,lsq_circle_full_contour,1122,519,1231,611,112.8,95.8,93,7704,99.0,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,98.8
+1,0.0417,1177.5,563.5,98.4,lsq_circle_full_contour,1124,520,1234,613,112.2,95.7,94,7638,98.6,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,99.0
+2,0.0833,1175.9,564.0,99.3,lsq_circle_full_contour,1122,520,1233,614,113.8,97.1,95,7753,99.4,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,98.8
+3,0.125,1170.9,564.3,99.9,lsq_circle_full_contour,1116,520,1227,614,115.2,96.1,95,7842,99.9,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,98.7
+4,0.1667,1168.2,563.9,98.7,lsq_circle_full_contour,1114,520,1225,613,112.0,96.3,94,7693,99.0,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,98.7
+5,0.2083,1167.5,563.5,98.2,lsq_circle_full_contour,1114,520,1225,613,112.4,96.3,94,7614,98.5,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,98.7
+6,0.25,1166.7,562.6,98.5,lsq_circle_full_contour,1114,518,1223,613,111.7,95.2,96,7669,98.8,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,98.7
+7,0.2917,1166.3,562.6,98.7,lsq_circle_full_contour,1113,518,1223,613,111.4,95.9,96,7692,99.0,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,98.7
+8,0.3333,1166.8,562.8,99.3,lsq_circle_full_contour,1113,518,1225,612,113.4,95.9,95,7801,99.7,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,99.0
+9,0.375,1166.5,563.2,99.0,lsq_circle_full_contour,1113,518,1224,613,112.6,95.1,96,7759,99.4,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,99.0
+10,0.4167,1167.4,563.6,99.0,lsq_circle_full_contour,1114,520,1225,613,114.2,95.4,94,7728,99.2,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,99.0
+11,0.4583,1167.7,563.9,97.9,lsq_circle_full_contour,1114,520,1225,612,112.4,93.9,93,7567,98.2,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,97.9
+12,0.5,1171.0,564.8,96.4,lsq_circle_full_contour,1120,522,1227,615,108.1,94.1,94,7346,96.7,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,96.4
+13,0.5417,1170.8,564.6,95.2,lsq_circle_full_contour,1120,522,1226,613,107.5,92.1,92,7188,95.7,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,95.2
+14,0.5833,1168.8,564.5,93.9,lsq_circle_full_contour,1118,522,1223,613,107.7,91.5,92,6990,94.3,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,93.9
+15,0.625,1165.3,564.3,93.0,lsq_circle_full_contour,1116,522,1217,611,104.5,89.5,90,6877,93.6,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,93.9
+16,0.6667,1159.8,564.0,93.9,lsq_circle_full_contour,1110,522,1212,612,105.4,91.2,91,7005,94.4,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,93.9
+17,0.7083,1152.1,559.1,97.9,lsq_circle_full_contour,1100,514,1205,608,105.2,94.5,95,7594,98.3,1,held in hand (hand segmented out); lower ball edge partly hidden/shadowed,93.9
+18,0.75,1114.8,541.5,106.7,lsq_circle_full_contour,1056,494,1179,597,126.3,98.9,104,8666,105.0,0,strong motion blur just after release; mask smeared,96.9
+19,0.7917,1041.0,518.0,96.9,lsq_circle_full_contour,986,480,1101,565,116.2,80.7,86,7074,94.9,0,strong motion blur just after release; mask smeared,91.8
+20,0.8333,974.4,502.2,86.7,lsq_circle_full_contour,920,468,1027,540,108.2,73.0,73,5691,85.1,0,strong motion blur just after release; mask smeared,86.7
+21,0.875,923.4,490.6,74.7,lsq_circle_full_contour,882,460,967,525,88.1,67.2,66,4387,74.7,0,strong motion blur just after release; mask smeared,74.7
+22,0.9167,880.7,481.0,63.6,lsq_circle_full_contour,846,452,917,512,73.9,61.6,61,3228,64.1,0,mild motion blur,63.6
+23,0.9583,847.3,473.6,57.9,robust_circle,816,446,879,509,64.7,65.3,64,2793,59.6,0,mild motion blur,60.8
+24,1.0,818.6,467.3,54.7,robust_circle,790,440,847,501,64.1,57.7,62,2487,56.3,0,mild motion blur,57.9
+25,1.0417,793.9,460.2,49.9,robust_circle,768,436,819,485,53.5,54.7,50,2032,50.9,0,clear; bottom touches table far edge / contact shadow,46.9
+26,1.0833,771.9,454.4,46.9,robust_circle,748,432,795,479,51.7,49.0,48,1804,47.9,0,clear; bottom touches table far edge / contact shadow,46.2
+27,1.125,752.2,449.0,45.6,robust_circle,730,426,777,471,48.9,47.0,46,1707,46.6,0,clear; bottom touches table far edge / contact shadow,45.6
+28,1.1667,734.4,444.5,42.6,robust_circle,714,424,755,465,44.3,42.3,42,1476,43.4,0,clear; bottom touches table far edge / contact shadow,42.6
+29,1.2083,718.2,439.9,41.6,robust_circle,698,420,739,459,43.8,42.1,40,1419,42.5,0,clear; bottom touches table far edge / contact shadow,41.6
+30,1.25,708.0,438.8,41.4,robust_circle,688,418,729,459,44.5,43.5,42,1407,42.3,0,clear; bottom touches table far edge / contact shadow,41.4
+31,1.2917,699.4,441.6,40.0,upper_arc_circle,680,422,719,475,54.9,41.1,54,1741,47.1,0,clear; bottom touches table far edge / contact shadow,41.4
+32,1.3333,690.6,441.9,41.2,upper_arc_circle,670,422,711,475,56.4,42.7,54,1707,46.6,0,clear; bottom touches table far edge / contact shadow,41.4
+33,1.375,679.3,444.0,43.4,robust_circle,658,422,701,475,57.4,45.7,54,1639,45.7,0,clear; bottom touches table far edge / contact shadow,43.4
+34,1.4167,668.8,444.9,43.7,robust_circle,648,424,691,477,60.1,45.8,54,1675,46.2,0,clear; bottom touches table far edge / contact shadow,43.7
+35,1.4583,657.9,445.6,44.1,robust_circle,636,424,679,467,46.8,45.9,44,1579,44.8,0,clear; bottom touches table far edge / contact shadow,44.1
+36,1.5,637.5,446.5,44.7,robust_circle,616,424,659,469,48.8,47.8,46,1636,45.6,0,clear; bottom touches table far edge / contact shadow,44.7
+37,1.5417,626.4,447.5,46.1,robust_circle,604,424,649,470,49.7,48.4,47,1739,47.1,0,clear; bottom touches table far edge / contact shadow,46.1
+38,1.5833,616.5,447.9,46.5,robust_circle,594,424,639,479,56.0,46.2,56,1787,47.7,0,clear; bottom touches table far edge / contact shadow,46.3
+39,1.625,605.6,448.6,46.5,robust_circle,582,424,629,471,50.1,48.0,48,1759,47.3,0,clear; bottom touches table far edge / contact shadow,46.5
+40,1.6667,595.7,448.9,46.3,robust_circle,574,424,617,471,50.8,48.3,48,1754,47.3,0,clear; bottom touches table far edge / contact shadow,46.5
+41,1.7083,584.7,449.6,47.2,robust_circle,561,426,607,473,50.8,49.4,48,1823,48.2,0,clear; bottom touches table far edge / contact shadow,47.2
+42,1.75,574.4,449.9,47.4,robust_circle,552,426,597,473,50.7,48.3,48,1839,48.4,0,clear; bottom touches table far edge / contact shadow,47.4
+43,1.7917,564.6,451.1,48.8,robust_circle,540,426,589,475,52.8,51.5,50,1946,49.8,0,clear; bottom touches table far edge / contact shadow,48.7
+44,1.8333,553.9,451.3,48.7,robust_circle,530,428,577,475,52.9,51.2,48,1937,49.7,0,clear; bottom touches table far edge / contact shadow,48.8
+45,1.875,544.4,451.9,49.0,robust_circle,520,428,569,475,54.3,51.2,48,1966,50.0,0,clear; bottom touches table far edge / contact shadow,49.0
+46,1.9167,534.2,453.0,49.9,robust_circle,510,428,559,485,57.7,50.4,58,2073,51.4,0,clear; bottom touches table far edge / contact shadow,49.9
+47,1.9583,525.0,453.4,50.6,robust_circle,500,428,551,477,54.8,53.5,50,2093,51.6,0,clear; bottom touches table far edge / contact shadow,50.2
+48,2.0,515.1,454.3,51.2,robust_circle,489,428,541,479,54.3,52.9,52,2136,52.2,0,clear; bottom touches table far edge / contact shadow,50.6

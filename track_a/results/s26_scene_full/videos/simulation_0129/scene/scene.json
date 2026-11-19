@@ -1,0 +1,67 @@
+{
+  "video": "simulation_0129.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 40,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (mean abs diff frame0 vs frame39 in untouched background = 0.04 grey levels); no per-frame background shift",
+    "view": "fronto-parallel view of a warehouse facade; floor seen from slightly above (floor band y~910-1080). Motion is in a plane facing the camera.",
+    "perspective_note": "forklift appears ~2-3% longer near the left image edge (frame 0: orange extent 256 px, wheelbase ~164 px) than near the image centre (frame 39: 250 px, ~159 px) - off-axis view of a 3D body (camera sees a little of the rear face). Its height (721->928) does not change, so depth is constant."
+  },
+  "objects": {
+    "red_ball": {
+      "description": "small glossy red sphere, the only red object above the forklift; falls straight down at x~956 in front of the wall between the two concrete pillars",
+      "moves": true,
+      "visible_frames": "0-38 fully (37-38 slightly motion-blurred); 39 occluded behind forklift mast (only red slivers at x~952-960, y~752-765)",
+      "reference_point": "centroid of red blob (sphere centre)",
+      "diameter_px": 20,
+      "diameter_note": "bbox 19-22 px wide, 16-20 px tall (threshold loses the dark rim); visual edge-to-edge ~20-21 px at frame 0 (x 946-967, y 76-95)",
+      "start_px": [956.1, 85.6],
+      "track": "tracks/red_ball.csv",
+      "x_constant_px": "955.1-956.4 (purely vertical fall, x drift < 1.5 px)",
+      "vertical_fit_check": "y(frame) = 0.4508 f^2 - 0.260 f + 86.78 over frames 2-38, rms 0.41 px; i.e. constant pixel acceleration ~0.90 px/frame^2 (= ~519 px/s^2) downward; vertex at frame ~0.3"
+    },
+    "forklift": {
+      "description": "orange-and-black Toyota counterbalance forklift seen from its left side, forks pointing right (direction of travel); only vehicle in the scene",
+      "moves": true,
+      "visible_frames": "0-39, never occluded (passes in front of concrete pillar 1 at the end)",
+      "reference_point": "x = frame-0 bbox centre (170.5) + rigid template-matching shift of the body (sub-pixel); y = bbox centre 824.5 (constant; it drives on a level floor). The rig root's exact location within the body is unknown but any body-fixed point gives the same displacements.",
+      "length_px": 256,
+      "length_note": "rear of orange counterweight to tip of fork tines, frame 0 (x 43-298). Same measure is 250 px at frame 39 (perspective/rear-face effect, see camera.perspective_note); 250-256 px, mid-clip ~254",
+      "height_px": 208,
+      "height_note": "top of overhead guard y 721 to tyre ground contact y 928 (+-2 px); constant over the clip",
+      "wheels_frame0": {"rear_wheel_centre": [68.5, 919.5], "rear_radius": 34, "front_wheel_centre": [232.5, 908.5], "front_radius": 33, "wheelbase_px": 164, "note": "Hough circles, +-3 px"},
+      "counterweight_hole_frame0": [96.5, 872.5],
+      "start_bbox_frame0": [43, 721, 298, 928],
+      "end_bbox_frame39": [741, 721, 990, 928],
+      "track": "tracks/forklift.csv",
+      "net_shift_px": "703.9 (template) / 704.5 (counterweight hole) / 698 rear edge / 692 tine tip / 700-705 wheels"
+    }
+  },
+  "static_objects": {
+    "concrete_pillar_1": {"x": [721, 759], "y_top": 75, "y_bottom": 910, "width_px": 38, "note": "light grey, left of the ball; forklift ends in front of it"},
+    "concrete_pillar_2": {"x": [1163, 1201], "y_top": 75, "y_bottom": 910, "width_px": 38, "note": "light grey, right of the ball"},
+    "black_steel_columns": {"x_ranges": [[39, 78], [482, 519], [1402, 1439], [1843, 1882]], "width_px": "37-39", "y": "~70-910"},
+    "pillar_spacing_px": "centre-to-centre pillar1-pillar2 = 442; steel column centres 58.5, 500.5, 1420.5, 1862.5 (spacing 442 / 920 / 442)",
+    "horizontal_steel_beams": "dark bands at y~195-215, ~435-470, ~670-700 and ceiling beam y~35-75",
+    "doorway": {"x": [885, 1037], "y": [745, 910], "note": "dark opening below the ball, behind the glass curtain wall"},
+    "glass_curtain_wall": "y ~705-910 across the frame",
+    "floor_edge_and_lines": "facade base / kerb y~910-925; white horizontal floor lines at y~926-928, ~938-942, ~1015-1020, ~1036-1041",
+    "floor_parking_stripes": {"note": "four groups of 2-3 slanted/vertical white stripes, y~945-1015", "x_at_row_980": [[80, 90], [137, 146], [246, 255], [302, 312], [822, 833], [879, 890], [1033, 1043], [1090, 1100], [1611, 1621], [1668, 1678], [1776, 1786], [1833, 1843]], "stripe_width_px": "~8-11"},
+    "diagonal_cross_braces": "X-bracing in each wall bay (two tiers, y~210-430 and ~490-665)"
+  },
+  "events": [
+    {"event": "both objects at rest", "frames": "0-1", "t": "0.000-0.042", "note": "frames 0 and 1 are identical for the ball and the forklift"},
+    {"event": "ball release / start of fall", "frame": 1, "t": 0.0417, "note": "first displacement between frames 1 and 2 (1.4 px); parabola vertex at frame ~0.3, so release is between frame 0 and 1"},
+    {"event": "forklift starts moving (from rest, accelerating right)", "frame": 1, "t": 0.0417, "note": "first displacement between frames 1 and 2 (1.3 px); then steadily increasing per-frame steps (~0.9 px/frame^2, noisier than the ball)"},
+    {"event": "forklift front (tine tip) reaches the ball's column x~946", "frame": 38, "t": 1.583},
+    {"event": "ball passes behind the forklift mast/overhead guard (occluded, no visible bounce or deflection)", "frame": 39, "t": 1.625},
+    {"event": "clip ends with both still moving; forklift never stops, ball never lands in view", "frame": 39, "t": 1.625}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/red_ball.csv", "tracks/forklift.csv"], "scripts": "scripts/"}
+}

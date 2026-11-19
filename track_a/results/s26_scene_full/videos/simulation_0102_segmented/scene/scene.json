@@ -1,0 +1,130 @@
+{
+ "video": "simulation_0102_segmented.mp4",
+ "source": "segmentation (simulation with background replaced by white)",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 73,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24; frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "evidence": "plain white background (exactly 255), no background features; both objects keep constant y and constant pixel size -> no zoom/shake visible"
+ },
+ "pixel_axes": "x right, y down, pixels",
+ "objects": {
+  "boat": {
+   "description": "red/white fishing boat 'AH805' (red hull upper, dark purple/navy lower hull, white wheelhouse with mast), side view, bow pointing RIGHT; upper half of frame",
+   "moves": true,
+   "visible_frames": [
+    0,
+    72
+   ],
+   "fully_in_frame_horizontally": [
+    0,
+    47
+   ],
+   "clipping": "mast top cut by the top image edge in ALL frames (bbox y0=0), so the true height is unknown (>= 646 px); bow leaves right edge from frame 48; the mast leaves at frame 70",
+   "track": "scene/tracks/boat.csv",
+   "reference_point": "bbox centre x (frames 0-47); frames 48-72 = rigid hull template position + offset (exact for a rigid translating boat). ref_y = bbox centre y, which is biased by the clipped mast (vertical origin unknown; motion is purely horizontal)",
+   "size_px_full_frames": {
+    "length_x": {
+     "median": 858.5,
+     "min": 856.0,
+     "max": 863.0
+    },
+    "visible_height_y_clipped": {
+     "median": 646.0,
+     "min": 644.0,
+     "max": 651.0
+    }
+   },
+   "parts_frame0": {
+    "hull_stern_x": 229,
+    "bow_tip_x": 1088,
+    "keel_bottom_y": 643,
+    "deck_rail_at_bow_y": 352,
+    "wheelhouse_x": [
+     640,
+     820
+    ],
+    "wheelhouse_roof_y": 237,
+    "mast_x": 712,
+    "mast_top": "clipped at y=0"
+   },
+   "motion": "stationary frames 0-1, then translates RIGHT at nearly constant ~17.9 px/frame (y constant)"
+  },
+  "shark": {
+   "description": "blue-grey shark with white belly, side view, head pointing LEFT; lower part of frame (y ~852-957), below the boat",
+   "moves": true,
+   "visible_frames": [
+    0,
+    72
+   ],
+   "fully_in_frame_horizontally": [
+    0,
+    58
+   ],
+   "clipping": "nose leaves the left edge at frame 59; only the tail fin remains at frame 72",
+   "track": "scene/tracks/shark.csv",
+   "reference_point": "bbox centre (frames 0-58); frames 59-72 = tail tip x1 - 139.5 px (approx, +-3 px because the tail flaps)",
+   "size_px_full_frames": {
+    "length_x_nose_to_tail": {
+     "median": 280.0,
+     "min": 278.0,
+     "max": 286.0
+    },
+    "height_y_dorsal_to_pectoral": {
+     "median": 105.0,
+     "min": 103.0,
+     "max": 107.0
+    }
+   },
+   "motion": "stationary frames 0-1, then swims LEFT with speed increasing steadily (~7.5-8 px/frame near frame 2-5 to ~15-16 px/frame near frame 55-58); y constant (~904)"
+  }
+ },
+ "static_objects": "none (white background, no ground, no markings)",
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "both objects at rest (frames 0 and 1 identical positions)"
+  },
+  {
+   "frame": 2,
+   "t": 0.0833,
+   "event": "boat starts moving right (+17.5 px from frame 1) and shark starts moving left (-7.7 px)"
+  },
+  {
+   "frame": 48,
+   "t": 2.0,
+   "event": "boat bow reaches right image edge (x=1919)"
+  },
+  {
+   "frame": 59,
+   "t": 2.4583,
+   "event": "shark nose reaches left image edge (x=0)"
+  },
+  {
+   "frame": 70,
+   "t": 2.9167,
+   "event": "boat mast leaves frame at right"
+  },
+  {
+   "frame": 72,
+   "t": 3.0,
+   "event": "last frame: boat about half visible, shark only tail visible"
+  }
+ ],
+ "relative_positions_frame0": {
+  "boat_ref": [
+   657.0,
+   322.5
+  ],
+  "shark_ref": [
+   811.5,
+   904.0
+  ],
+  "note": "boat ref_y is biased by mast clipping; keel bottom y=643, shark top y=853"
+ }
+}

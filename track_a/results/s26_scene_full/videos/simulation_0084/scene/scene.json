@@ -1,0 +1,78 @@
+{
+  "video": "simulation_0084.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 1080],
+  "units": "pixels (x right, y down, origin top-left), seconds; t = frame / 24",
+  "view": "top-down (bird's-eye) view of a flat uniform grey ground plane (RGB 158,158,158); cars drive horizontally in two parallel lanes",
+  "camera": {
+    "motion": "static (assumed: background is textureless so it cannot be checked directly; both cars move at constant pixel steps, consistent with a fixed camera)",
+    "per_frame_background_shift_px": [0, 0],
+    "perspective_note": "Slight perspective: car length in px is largest near the left/right image edges and smallest near the centre (dark car 275 px at x~215 -> 264 px at x~950-1180; yellow car 276 px at x~1770 -> 268 px at x~1190-1300). This is a ~4% effect from the car's height under a perspective top-down camera. Treat the scene as one plane with one scale; for a size prior, the mid-video length (frames ~30-50) is the most representative."
+  },
+  "objects": [
+    {
+      "name": "dark_car",
+      "aka": "black/dark grey car with a white front (nose); upper/lower: LOWER lane",
+      "distinguish": "dark grey/black body and roof, white/silver front end, front points RIGHT (+x); lane centreline y = 637.5",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "fully_in_frame": "all frames",
+      "track": "tracks/dark_car.csv",
+      "direction": "+x (left to right), purely horizontal, y constant",
+      "extents_px": {
+        "length_along_motion": "264-275 (frame-dependent, see CSV; ~268 at frames 30-50, 264-265 at frames 50-71, 275 at frame 0)",
+        "width_incl_mirrors": 115,
+        "body_width_excl_mirrors": 86,
+        "y_range_incl_mirrors": [581, 695],
+        "body_y_range": [595, 680],
+        "height": "not observable (top-down view)"
+      },
+      "per_frame_step_px": "+13.5..14 px/frame in x from frame 1->2 onward (0 px from frame 0->1)"
+    },
+    {
+      "name": "yellow_car",
+      "aka": "yellow car, UPPER lane",
+      "distinguish": "yellow body, dark windows/roof, front points LEFT (-x); lane centreline y = 525.5",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "fully_in_frame": "frames 12-71; frames 0-11 its rear is cut by the right image edge (x=1919)",
+      "track": "tracks/yellow_car.csv",
+      "direction": "-x (right to left), purely horizontal, y constant",
+      "extents_px": {
+        "length_along_motion": "268-276 (276 at frames 12-18, ~272 at frames 30-50, 268-270 at frames 55-71)",
+        "width_incl_mirrors": 116,
+        "body_width_excl_mirrors": 92,
+        "y_range_incl_mirrors": [468, 583],
+        "body_y_range": [480, 571],
+        "height": "not observable (top-down view)"
+      },
+      "per_frame_step_px": "-9..-10 px/frame in x (front bumper -10 px/frame, occasional -8/-12 from pixel rounding) from frame 1->2 onward (0 from frame 0->1)"
+    }
+  ],
+  "static_objects": "none: the ground is a uniform grey plane with no markings, lines or props. Only the soft shadows under each car (they move with the car).",
+  "lanes": {
+    "yellow_lane_centre_y": 525.5,
+    "dark_lane_centre_y": 637.5,
+    "lateral_separation_of_centres_px": 112.0,
+    "gap_between_bodies_px": "body edges 571 (yellow) and 595 (dark): 23 px gap; the mirrors overlap in y (yellow mirror reaches y=583, dark mirror y=581)"
+  },
+  "events": [
+    {"event": "both cars stationary (same position in frames 0 and 1); motion starts", "frame": 1, "time_s": 0.0417, "note": "first displacement between frame 1 and 2; the one-frame backward-difference speed is 0 at frame 1 and full speed from frame 2 (t=0.0833 s)"},
+    {"event": "yellow car fully enters the frame (rear bumper leaves the right edge)", "frame": 12, "time_s": 0.5},
+    {"event": "front bumpers aligned (yellow x0 == dark x1, x~1163) - cars start overlapping in x / passing", "frame": 60, "time_s": 2.5},
+    {"event": "near-side mirrors pass each other (near miss, no contact; no change in either car's motion)", "frame": 66, "time_s": 2.75, "note": "approximate, frames 66-67"},
+    {"event": "centres nearly aligned in x (cx gap 4.5 px; extrapolated crossing at ~frame 71.2)", "frame": 71, "time_s": 2.9583},
+    {"event": "end of clip, both still moving at constant speed", "frame": 71, "time_s": 2.9583}
+  ],
+  "key_positions_px": {
+    "dark_car_cx": {"f0": 215.0, "f1": 215.0, "f24": 533.5, "f48": 866.0, "f71": 1184.0},
+    "yellow_car_cx_est": {"f0": 1880.25, "f1": 1880.25, "f24": 1653.5, "f48": 1415.5, "f71": 1188.5},
+    "centre_distance_f0": "dx 1665.25, dy 112 -> 1669.0 px (yellow cx estimated, its rear is cut off)",
+    "centre_distance_f71": "dx 4.5, dy 112 -> 112.1 px"
+  },
+  "track_columns": "frame,time,cx (centre of visible x extent),cx_est (best centre estimate: for edge-cut frames front bumper + 137.25),cy (lane centreline),bbox_x0,bbox_y0,bbox_x1,bbox_y1 (incl. mirrors),length_px,width_incl_mirrors_px,body_width_px,height_px (blank),truncated_at_edge,reference_reliable,occluded"
+}

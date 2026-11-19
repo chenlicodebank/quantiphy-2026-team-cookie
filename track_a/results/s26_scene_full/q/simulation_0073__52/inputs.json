@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0073.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MS",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 52,
+  "question": "What is the acceleration of the white car at 1.0s in m/s^2?",
+  "prior": "speed of the bicycle = 5.33m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

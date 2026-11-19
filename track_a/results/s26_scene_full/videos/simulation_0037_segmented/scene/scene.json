@@ -1,0 +1,153 @@
+{
+ "video": "simulation_0037_segmented.mp4",
+ "source": "segmentation (of a Blender simulation)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 1080,
+ "height": 1080,
+ "time_of_frame": "t = frame / 24",
+ "background": "replaced by plain white (segmentation video); no ground, horizon or texture visible",
+ "camera": {
+  "motion": "static (rock slab bbox identical to +-1 px in all 72 frames)",
+  "perspective_cues": "only the rock slab: its bottom edge slopes from y~707 (x=20) to y~733 (x=670), its dark side face visible on the left end -> the slab is seen slightly from above and runs obliquely in depth; no horizon. Person feet at y~747-752, i.e. on/near the same ground level as the slab bottom."
+ },
+ "objects": [
+  {
+   "name": "person",
+   "type": "human walking",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never",
+   "distinguish": "the only person; small figure (~64 px tall) right of the rock, grey trousers, pale/pink top, light head",
+   "track": "tracks/person.csv",
+   "motion": "walks to the right (+x) at near-constant image rate, side view; slight downward drift of feet in image and slight shrink of height",
+   "pelvis_x_linear_fit_px_per_frame": 1.728,
+   "pelvis_x_frame0": 799.1,
+   "pelvis_x_frame71": 920.37,
+   "pelvis_path_length_px_0_71_raw": 138.3,
+   "pelvis_path_length_px_0_71_smoothed": 122.6,
+   "pelvis_net_displacement_px_0_71": 121.5,
+   "feet_bottom_y_trend_px_per_frame": 0.0571,
+   "bbox_height_px": {
+    "min": 60.0,
+    "max": 69.0,
+    "median": 64.0,
+    "first10_mean": 65.5,
+    "last10_mean": 62.5,
+    "linear_trend_px_per_frame": -0.0697
+   },
+   "bbox_width_px": {
+    "min": 15.0,
+    "max": 32.0
+   },
+   "gait_frames_legs_together_(bbox_w_local_min)": [
+    17,
+    35
+   ],
+   "gait_frames_legs_apart_(bbox_w_local_max)": [
+    11,
+    41,
+    58,
+    62,
+    70
+   ]
+  },
+  {
+   "name": "rock_slab",
+   "type": "large flat sandy/beige rock or sand mound (terrain piece)",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "distinguish": "large beige wedge-shaped mass on the left half, thick end at left (x~15) tapering to a thin tip at right (x~715)",
+   "image_bbox_xyxy": [
+    15,
+    594,
+    715,
+    734
+   ],
+   "width_px": 701,
+   "height_px": 141,
+   "centroid_px": [
+    297.2,
+    673.4
+   ],
+   "column_top_bottom_y": {
+    "20": [
+     663,
+     707
+    ],
+    "70": [
+     618,
+     708
+    ],
+    "120": [
+     597,
+     709
+    ],
+    "170": [
+     598,
+     710
+    ],
+    "220": [
+     607,
+     712
+    ],
+    "270": [
+     619,
+     715
+    ],
+    "320": [
+     625,
+     717
+    ],
+    "370": [
+     634,
+     719
+    ],
+    "420": [
+     644,
+     721
+    ],
+    "470": [
+     656,
+     723
+    ],
+    "520": [
+     672,
+     727
+    ],
+    "570": [
+     690,
+     727
+    ],
+    "620": [
+     700,
+     729
+    ],
+    "670": [
+     710,
+     733
+    ]
+   },
+   "note": "peak at x~120-170 (top y~597); gap between its right tip (x=715) and the person at frame 0 (bbox x0~790) is ~75 px"
+  }
+ ],
+ "events": [
+  {
+   "event": "person walking throughout (already moving at frame 0, still moving at frame 71); no start/stop",
+   "frames": [
+    0,
+    71
+   ]
+  },
+  {
+   "event": "no contact between person and rock; no other objects"
+  }
+ ]
+}

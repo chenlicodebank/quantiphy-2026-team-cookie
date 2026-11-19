@@ -1,0 +1,132 @@
+{
+ "wall_s": 2707,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 1,
+  "duration_ms": 4350,
+  "total_cost_usd": 3.0790873999999997,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 4,
+  "cache_creation_input_tokens": 644,
+  "cache_read_input_tokens": 123906,
+  "output_tokens": 136,
+  "output_tokens_details": {
+   "thinking_tokens": 56
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 644,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 4,
+    "output_tokens": 136,
+    "cache_read_input_tokens": 123906,
+    "cache_creation_input_tokens": 644,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 644
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 95,
+  "flags": [
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bt369fmxz.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bt369fmxz.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bt369fmxz.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bt369fmxz.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bt369fmxz.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bt369fmxz.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bfalvdd3y.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bfalvdd3y.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bxfvitdmy.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bxfvitdmy.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bfalvdd3y.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bfalvdd3y.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bfalvdd3y.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bfalvdd3y.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bgrkjqdzz.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bgrkjqdzz.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bbwzdoc89.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0074-q-1376/5066683d-17c0-4ff0-8424-265e6bf8b57b/tasks/bbwzdoc89.output\"}"
+   }
+  ]
+ },
+ "video": "simulation_0074",
+ "ids": [
+  1376
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0074__q1376.jsonl"
+}

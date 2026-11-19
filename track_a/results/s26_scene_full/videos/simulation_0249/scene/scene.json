@@ -1,0 +1,174 @@
+{
+ "video": "simulation_0249.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24; frame 0 at t=0; time t -> frame round(24 t)",
+ "view": "top-down (camera looks straight down at a featureless light-grey ground with radial vignette); all three animals walk on the ground plane facing +x (image right). Image y is the lateral direction on the ground.",
+ "camera": {
+  "static": true,
+  "evidence": "no background texture to track; vignette and soft shadows are stable; animal lanes (y) constant; treat as static."
+ },
+ "static_objects": {
+  "ground": "uniform light-grey plane, no markings, no other props"
+ },
+ "units": "pixels, seconds",
+ "reference_point_columns": "cx_bbox/cy_bbox (bbox centre, default origin proxy), cx_mask/cy_mask (mask centroid), cx_core/cy_core (centroid of torso after removing legs/head/tail)",
+ "objects": {
+  "brown_horse": {
+   "description": "large dark reddish-brown horse seen from directly above, upper lane (y~345); white muzzle at the right (head) end, dark mane stripe along neck, dark tail at left end. Walks to the right (+x).",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "track_file": "tracks/brown_horse.csv",
+   "first": {
+    "frame": 0,
+    "cx": 626.5,
+    "cy": 345.5,
+    "bbox": [
+     504.0,
+     310.0,
+     749.0,
+     381.0
+    ]
+   },
+   "last": {
+    "frame": 49,
+    "cx": 625.5,
+    "cy": 345.5,
+    "bbox": [
+     502.0,
+     310.0,
+     749.0,
+     381.0
+    ]
+   },
+   "length_px_along_x": {
+    "median": 246.2,
+    "min": 232.4,
+    "max": 274.4
+   },
+   "width_px_across": {
+    "median": 75.1,
+    "min": 70.7,
+    "max": 82.1
+   },
+   "height_px": "not observable (top-down view)",
+   "note": "Its animation/root resets at frame 49: frames 0..48 it walks from cx_bbox 626 to 832 px, then at frame 49 it is back at the frame-0 pose and position (cx 626). Frames 47-48 are nearly identical (cx 832). Treat frame 48->49 as a loop reset, not real motion.",
+   "net_dx_px_frame0_to_48": 206.0
+  },
+  "tan_horse": {
+   "description": "large tan/beige horse-like quadruped (horse/donkey) seen from above, middle lane (y~485-500); slightly larger in pixels than the brown horse; white muzzle at right, dark tail and hooves at left. Walks right (+x).",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "track_file": "tracks/tan_horse.csv",
+   "first": {
+    "frame": 0,
+    "cx": 984.5,
+    "cy": 500.5,
+    "bbox": [
+     842.0,
+     458.0,
+     1127.0,
+     543.0
+    ]
+   },
+   "last": {
+    "frame": 49,
+    "cx": 1364.5,
+    "cy": 487.5,
+    "bbox": [
+     1210.0,
+     446.0,
+     1519.0,
+     529.0
+    ]
+   },
+   "length_px_along_x": {
+    "median": 295.4,
+    "min": 277.1,
+    "max": 316.3
+   },
+   "width_px_across": {
+    "median": 86.7,
+    "min": 83.9,
+    "max": 93.5
+   },
+   "height_px": "not observable (top-down view)",
+   "net_dx_px_frame0_to_49": 380.0
+  },
+  "small_brown_animal": {
+   "description": "small orange-brown quadruped (rodent/puppy-like, ~60x33 px) in the lowest lane (y~608), below and ahead of the tan horse. Walks right (+x).",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "track_file": "tracks/small_brown_animal.csv",
+   "first": {
+    "frame": 0,
+    "cx": 1118.5,
+    "cy": 607.5,
+    "bbox": [
+     1088.0,
+     592.0,
+     1149.0,
+     623.0
+    ]
+   },
+   "last": {
+    "frame": 49,
+    "cx": 1492.5,
+    "cy": 607.5,
+    "bbox": [
+     1460.0,
+     592.0,
+     1525.0,
+     623.0
+    ]
+   },
+   "length_px_along_x": {
+    "median": 64.0,
+    "min": 58.1,
+    "max": 74.0
+   },
+   "width_px_across": {
+    "median": 32.8,
+    "min": 32.0,
+    "max": 36.4
+   },
+   "height_px": "not observable (top-down view)",
+   "net_dx_px_frame0_to_49": 374.0
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time_s": 0.0,
+   "what": "all three animals already walking right; no start/stop of motion within the clip"
+  },
+  {
+   "frame": 47,
+   "time_s": 1.9583,
+   "what": "brown_horse: frames 46-48 almost stationary (cx 832,832,832)"
+  },
+  {
+   "frame": 49,
+   "time_s": 2.0417,
+   "what": "brown_horse jumps back ~206 px to its frame-0 position/pose (animation loop reset)"
+  },
+  {
+   "frame": null,
+   "time_s": null,
+   "what": "no contacts or collisions: lanes separated (brown y~345, tan y~490, small y~608); small animal stays ahead (right) of the tan horse head throughout."
+  }
+ ]
+}

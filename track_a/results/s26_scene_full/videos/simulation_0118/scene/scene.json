@@ -1,0 +1,67 @@
+{
+ "video": "simulation_0118.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.003175,
+ "frames": 121,
+ "frame_size_px": [1080, 1080],
+ "time_convention": "t = frame / fps, frame 0 = t 0; frame for time t = round(t*fps)",
+ "units": "pixels and seconds; image coords x right, y down; no metric scale assumed",
+ "camera": {
+  "motion": "static (top-down view onto a table; frame differencing shows change only at the toy car, no background shift in any frame)",
+  "view": "near-orthographic overhead view; the table top is a rectangle rotated ~6.7 deg in the image; opposite sides 868/865 px and 664/666 px, so perspective distortion across the table is <0.5%",
+  "per_frame_background_shift_px": [0, 0]
+ },
+ "moving_objects": [
+  {
+   "name": "toy_car",
+   "description": "small light-brown (orange-tan) wooden toy car with 4 round wheels (2 visible on each side, top view), on the lower-left part of the table; the only moving object",
+   "distinguish": "only saturated orange-wood object on the table; lies on the table's lower-left region at y~730",
+   "moves": true,
+   "visible_frames": [0, 120],
+   "track_file": "tracks/toy_car.csv",
+   "reference_point": "cx_mask, cy_mask = centroid of the shadow-free car mask (top view, approximates the object origin/centre)",
+   "motion_summary": "straight line to the right (+x), essentially horizontal in the image (y constant 729-731 px); already moving at frame 0 and still moving at frame 120; uniform motion, no measurable acceleration (quadratic fit coefficient -6e-5 px/frame^2, residual 0.5 px)",
+   "position_frame0_px": [155.6, 730.0],
+   "position_frame120_px": [467.8, 730.2],
+   "net_displacement_px_0_to_120": 312.2,
+   "rear_edge_x_frame0_to_120_px": [92, 404],
+   "size_px": {
+    "length_along_motion": 130,
+    "length_range_p10_p90": [127, 132.4],
+    "width_across_incl_wheels": 42,
+    "width_range_p10_p90": [41, 45],
+    "height": "not visible (top-down view)",
+    "note": "car body length from clean colour mask on frame 60 is 126-128 px (x 248-374); 130 is the per-frame median of the shadow-rejected mask. Uncertainty about +-3 px."
+   }
+  }
+ ],
+ "static_objects": [
+  {"name": "table_top", "description": "large light oak wood table top filling most of the frame, seen from above, rotated ~6.7 deg clockwise",
+   "corners_px": [[158, 144], [1020, 246], [953, 907], [94, 807]],
+   "long_side_px": 867, "short_side_px": 665, "center_px": [556, 526], "moves": false},
+  {"name": "round_tray", "description": "round cream/white marble tray in the upper middle of the table",
+   "center_px": [552.8, 447.8], "diameter_px": 259, "moves": false},
+  {"name": "candle", "description": "white/pale blue round tealight-style candle (cylinder seen from above) in the lower-left part of the tray",
+   "center_px": [496, 472], "diameter_px": 51, "moves": false},
+  {"name": "glass_jar", "description": "small clear glass jar/votive with an engraved pattern, top-centre of the tray",
+   "center_px": [567, 420], "diameter_px": 52, "moves": false},
+  {"name": "black_disc", "description": "small black round object (knob/stone) on the right part of the tray",
+   "center_px": [623, 444], "diameter_px": 21, "moves": false},
+  {"name": "open_book", "description": "open instruction book/magazine (white pages with photo grid) at the upper-left of the table",
+   "center_px": [317, 306], "size_px": {"long_side_horizontal": 214, "short_side_vertical": 154}, "rotation_deg": "~4 deg (aligned with table)",
+   "corners_px": [[216, 221], [430, 237], [418, 391], [204, 374]], "moves": false},
+  {"name": "bead_garland", "description": "long cream wooden bead garland looping to the right of the tray, ending in two grey tassels",
+   "extent_bbox_px": [635, 228, 892, 606], "bead_diameter_px": "~13-15", "moves": false},
+  {"name": "tassel_left", "description": "grey tassel hanging down from the garland end, below the tray",
+   "extent_bbox_px": [648, 612, 700, 697], "length_px": 85, "moves": false},
+  {"name": "tassel_right", "description": "grey tassel pointing right, right of tassel_left",
+   "extent_bbox_px": [700, 595, 776, 642], "length_px": 75, "moves": false},
+  {"name": "floor", "description": "light grey floor around the table (table shadow on lower-left side), blurred grey furniture shape at the top edge", "moves": false}
+ ],
+ "events": [
+  {"event": "toy car already moving at first frame (motion start before video)", "frame": 0, "time_s": 0.0},
+  {"event": "toy car still moving at last frame (no stop in video)", "frame": 120, "time_s": 4.999},
+  {"event": "no bounces, contacts, or direction changes; straight uniform motion", "frame": null}
+ ]
+}

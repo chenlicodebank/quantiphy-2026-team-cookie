@@ -1,0 +1,419 @@
+{
+ "video": "simulation_0240.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1080,
+ "height": 1920,
+ "time_of_frame": "t = frame / 24 (frame 0 at t = 0)",
+ "units": "pixels and seconds; image coordinates x right, y down, full-resolution 1080x1920",
+ "camera": {
+  "motion": "static (consecutive-frame difference over sky/house < 0.05 grey levels; no pan, zoom or shake)",
+  "background_shift_px_per_frame": 0.0,
+  "view": "side view, near-horizontal; house facade faces the camera; motion of all animals is left->right, parallel to the facade, i.e. in a plane facing the camera",
+  "horizon_y_px": 988,
+  "note_2D": "scene given as 2D: use a single metres-per-pixel scale. Ground-contact rows differ slightly (chestnut hooves y~1048, pale horse hooves y~1055, rabbit bottom y~1062-1066), i.e. the rabbit is a little nearer the camera than the pale horse, and the pale horse a little nearer than the chestnut horse; apparent sizes of all three are constant over the clip (no depth change)."
+ },
+ "objects": {
+  "chestnut_horse": {
+   "description": "reddish-brown (chestnut) horse with grey-brown head and white socks, on the LEFT, walking right in front of the brick ground floor; the trailing horse",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occlusion": "none (fully visible; lower hooves partly in grass)",
+   "track_file": "tracks/chestnut_horse.csv",
+   "size_px_frames0_48": {
+    "len_px": {
+     "median": 187.0,
+     "min": 166.0,
+     "max": 213.0
+    },
+    "height_px": {
+     "median": 166.0,
+     "min": 159.0,
+     "max": 169.0
+    },
+    "axis_len_px": {
+     "median": 219.5,
+     "min": 199.2,
+     "max": 243.5
+    },
+    "axis_wid_px": {
+     "median": 156.8,
+     "min": 135.2,
+     "max": 167.1
+    },
+    "area_px": {
+     "median": 11321.0,
+     "min": 10442.0,
+     "max": 12233.0
+    }
+   },
+   "mean_dx_px_per_frame_f0_48": [
+    2.96,
+    3.15
+   ],
+   "position_f0": {
+    "mask_c": [
+     234.1,
+     959.5
+    ],
+    "bbox": [
+     153,
+     883,
+     337,
+     1048
+    ]
+   },
+   "position_f48": {
+    "mask_c": [
+     385.5,
+     963.3
+    ],
+    "bbox": [
+     295,
+     881,
+     495,
+     1048
+    ]
+   },
+   "special": "ANIMATION LOOP RESET: between frame 48 and 49 the chestnut horse jumps back from mask_cx 385.5 to 234.6 (its frame-0 position, -151 px in one frame). It does not walk back; frames 0-48 are one continuous walk to the right."
+  },
+  "pale_horse": {
+   "description": "light beige / cream (palomino-like) horse with darker mane and tail, in the MIDDLE/RIGHT, walking right, leading the chestnut horse by ~260 px",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occlusion": "none (hooves partly in grass)",
+   "track_file": "tracks/pale_horse.csv",
+   "size_px": {
+    "len_px": {
+     "median": 228.0,
+     "min": 215.0,
+     "max": 244.0
+    },
+    "height_px": {
+     "median": 177.5,
+     "min": 168.0,
+     "max": 188.0
+    },
+    "axis_len_px": {
+     "median": 250.0,
+     "min": 222.3,
+     "max": 272.6
+    },
+    "axis_wid_px": {
+     "median": 171.5,
+     "min": 150.1,
+     "max": 186.6
+    },
+    "area_px": {
+     "median": 16922.0,
+     "min": 15415.0,
+     "max": 19383.0
+    }
+   },
+   "mean_dx_px_per_frame": [
+    5.98,
+    5.89
+   ],
+   "position_f0": {
+    "mask_c": [
+     496.3,
+     960.2
+    ],
+    "bbox": [
+     394,
+     880,
+     623,
+     1061
+    ]
+   },
+   "position_f49": {
+    "mask_c": [
+     785.2,
+     960.7
+    ],
+    "bbox": [
+     665,
+     880,
+     908,
+     1059
+    ]
+   }
+  },
+  "rabbit": {
+   "description": "small brown rabbit/hare hopping right on the grass just in front of (ahead of) the pale horse's front hooves, near the wall base",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occlusion": "bottom (feet) partly hidden by grass blades; mask bottom often clipped at y=1066 by the processing cut, true bottom ~1062-1068",
+   "track_file": "tracks/rabbit.csv",
+   "size_px": {
+    "len_px": {
+     "median": 45.0,
+     "min": 38.0,
+     "max": 54.0
+    },
+    "height_px": {
+     "median": 34.0,
+     "min": 26.0,
+     "max": 38.0
+    },
+    "axis_len_px": {
+     "median": 46.2,
+     "min": 37.7,
+     "max": 55.6
+    },
+    "axis_wid_px": {
+     "median": 31.1,
+     "min": 25.3,
+     "max": 38.5
+    },
+    "area_px": {
+     "median": 876.5,
+     "min": 708.0,
+     "max": 1017.0
+    }
+   },
+   "mean_dx_px_per_frame": [
+    6.21,
+    6.25
+   ],
+   "position_f0": {
+    "mask_c": [
+     614.0,
+     1048.8
+    ],
+    "bbox": [
+     593,
+     1030,
+     635,
+     1066
+    ]
+   },
+   "position_f49": {
+    "mask_c": [
+     920.1,
+     1050.1
+    ],
+    "bbox": [
+     899,
+     1035,
+     943,
+     1066
+    ]
+   }
+  },
+  "house": {
+   "description": "two-storey half-timbered house filling the background; brick ground floor with three arched windows, cream timber-framed upper storey with large central wooden shutter, gabled shingle roof",
+   "moves": false,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "extents_px": {
+    "roof_peak_y": 262,
+    "roof_upper_eave_y": 295,
+    "roof_x_range_at_y450": [
+     215,
+     865
+    ],
+    "gable_eave_lowest_points": {
+     "left": [
+      180,
+      625
+     ],
+     "right": [
+      905,
+      625
+     ]
+    },
+    "upper_storey": {
+     "x": [
+      200,
+      880
+     ],
+     "y": [
+      625,
+      833
+     ],
+     "width_px": 680
+    },
+    "brick_ground_floor": {
+     "x": [
+      250,
+      830
+     ],
+     "y": [
+      835,
+      1038
+     ],
+     "width_px": 580,
+     "height_px": 203
+    },
+    "whole_house_height_px_peak_to_wall_base": 776,
+    "house_total_width_px_upper_storey": 680
+   },
+   "parts": {
+    "window_left": {
+     "x": [
+      272,
+      335
+     ],
+     "y": [
+      848,
+      950
+     ],
+     "w_px": 63,
+     "h_px": 102
+    },
+    "window_centre": {
+     "x": [
+      507,
+      572
+     ],
+     "y": [
+      848,
+      950
+     ],
+     "w_px": 65,
+     "h_px": 102
+    },
+    "window_right": {
+     "x": [
+      745,
+      808
+     ],
+     "y": [
+      848,
+      950
+     ],
+     "w_px": 63,
+     "h_px": 102
+    },
+    "big_central_shutter_upper_storey": {
+     "x": [
+      466,
+      615
+     ],
+     "y": [
+      628,
+      792
+     ],
+     "w_px": 149,
+     "h_px": 164
+    },
+    "gable_shutter": {
+     "x": [
+      425,
+      650
+     ],
+     "y": [
+      485,
+      580
+     ],
+     "approx": true
+    },
+    "small_shutters_upper_storey": {
+     "left": {
+      "x": [
+       255,
+       345
+      ],
+      "y": [
+       685,
+       740
+      ]
+     },
+     "right": {
+      "x": [
+       745,
+       828
+      ],
+      "y": [
+       685,
+       740
+      ]
+     },
+     "approx": true
+    }
+   }
+  },
+  "grass_field": {
+   "description": "green grass lawn from the wall base / horizon (y~988 at the image sides) to the bottom of the frame; tall grass blades in the foreground",
+   "moves": false
+  },
+  "red_flower_1": {
+   "description": "small red flower in the grass, left-middle",
+   "moves": false,
+   "bbox": [
+    316,
+    1240,
+    338,
+    1254
+   ],
+   "centre": [
+    325.7,
+    1247.5
+   ],
+   "size_px": [
+    22,
+    14
+   ]
+  },
+  "red_flower_2": {
+   "description": "small red/orange flower in the grass, right, lower",
+   "moves": false,
+   "bbox": [
+    960,
+    1644,
+    984,
+    1668
+   ],
+   "centre": [
+    968.5,
+    1657.8
+   ],
+   "size_px": [
+    24,
+    24
+   ]
+  },
+  "sky_clouds": {
+   "description": "blue sky with clouds above/around the house (static backdrop)",
+   "moves": false
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "all three animals already moving right at the first frame (no start of motion inside the clip)"
+  },
+  {
+   "frame": 48,
+   "t": 2.0,
+   "what": "last frame of the chestnut horse's continuous walk"
+  },
+  {
+   "frame": 49,
+   "t": 2.0417,
+   "what": "chestnut horse teleports back to its frame-0 position (loop reset, -151 px in x); pale horse and rabbit continue normally"
+  },
+  {
+   "frame": 49,
+   "t": 2.0417,
+   "what": "clip ends; all animals still moving"
+  }
+ ],
+ "no_contact": "animals never touch each other; the rabbit stays 5-40 px ahead of the pale horse's front hoof (touch_other=1 only at frame 23 from mask dilation, masks 5 px apart)",
+ "reference_point_note": "mask_cx/mask_cy = centroid of the full silhouette (best proxy of the body centre / rig root in x); bbox_cx/bbox_cy = box centre. For gait-independent horizontal motion use mask_cx (leg swing moves it by ~1-3 px). A horse rig root is usually at the pelvis/body centre, close to mask_cy (~960 px for both horses)."
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0125.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 24.0,
+ "frames": 71,
+ "duration_s": 2.9583,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 281,
+  "question": "What is the height of the person in meters?",
+  "prior": "speed of the person = 1.22 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

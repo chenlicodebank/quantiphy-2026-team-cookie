@@ -1,0 +1,75 @@
+{
+  "video": "simulation_0309.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "time_convention": "t = frame / 24; frame 0 at t = 0; time t -> frame round(t*24)",
+  "image_size_px": [2880, 1440],
+  "active_image_px": {"x0": 160, "x1": 2719, "y0": 0, "y1": 1439, "width": 2560, "height": 1440,
+    "note": "black pillarbox bars at x<160 and x>2719; rendered picture is 2560x1440 (16:9). Its centre (1439.5, 719.5) equals the full-frame centre; take the principal point there. If a field-of-view figure is ever used, it most likely refers to the 2560 px rendered width."},
+  "units": "pixels and seconds; no metric scale estimated",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of background patches vs frame 0 over all frames: shifts < 0.3 px (scripts/cam.py)",
+    "per_frame_background_shift_px": "0 (all frames)",
+    "view": "oblique high view looking down onto a snowy/rocky canyon terrain; no horizon or sky in frame (terrain fills the top edge). Ground recedes upward in the image (top = farther). No straight man-made lines, so no clean vanishing points."
+  },
+  "objects": [
+    {
+      "name": "dragon",
+      "description": "single dark grey winged dragon (wyvern-type: two hind legs, two large brown-grey membrane wings, long tail); the only moving object",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "fully_in_frame": "all frames (bbox never touches the active-image edge)",
+      "track_file": "tracks/dragon.csv",
+      "reference_point": "ref_x, ref_y = pelvis/hip (top of hind legs at the tail base), hand-marked on frames 0,4,...,64,71 and template-tracked in between; best available proxy for the rig root. Accuracy about +-10-15 px (worse, +-20-30 px, during the flapping frames 14-22 and 36-45 when the body is seen from behind/below).",
+      "image_path_summary": "moves right-to-left and up the image (away from the camera): ref (2115,985) at f0 -> (1614,703) f24 -> (1325,533) f44 -> (1220,433) f52 -> (1030,353) f71. Ref path length (sum of per-frame steps) about 1358 px; net 1256 px.",
+      "wing_pose_phases": [
+        {"frames": [0, 9], "pose": "wings raised (upstroke top / start of downstroke), mask large: bbox ~1144x786 at f0"},
+        {"frames": [12, 14], "pose": "wings swept level/low, widest horizontal spread of the flapping phase: bbox_w 1045-1050, bbox_h ~321-345 (f13-14)"},
+        {"frames": [15, 20], "pose": "wings down/forward, body seen from below-behind, bbox_w minimum ~477 (f17)"},
+        {"frames": [22, 26], "pose": "wings spread level: bbox_w 872-956 (f24-26)"},
+        {"frames": [27, 34], "pose": "wings raised (upstroke), bbox_w ~485 at f31-32"},
+        {"frames": [36, 38], "pose": "wings level: bbox_w 868 at f37, bbox_h 243"},
+        {"frames": [39, 46], "pose": "wings down, body seen from behind, bbox_w minimum 359 at f42"},
+        {"frames": [47, 71], "pose": "wings spread out; from about f51/52 to the end the dragon glides with an almost fixed pose (wings held spread, legs hanging, tail trailing down-right)"}
+      ],
+      "apparent_size": {
+        "glide_phase_bbox_w_px": {"51": 754, "52": 748, "56": 729, "60": 712, "64": 693, "68": 652, "71": 642},
+        "glide_phase_bbox_h_px": {"52": 332, "60": 311, "71": 281},
+        "note": "with the pose nearly fixed from f52 to f71 the bbox shrinks ~14% (748 -> 642 px): the dragon is moving away from the camera (depth grows roughly 1/0.86 = 1.17x over 0.83 s). During flapping (f0-50) bbox size is dominated by the wing pose, not by depth.",
+        "max_wingspan_like_extent_px": "largest horizontal mask extent while wings are level: f13-14 ~1045-1050 px; f25-26 ~932-956; f37 ~868; glide f52 ~748 (depth changes between these frames, so compare with care)",
+        "body_only_size_px_approx": "frame 56 (glide), read by eye from a gridded crop, +-15 px: head ~(1130,355), hip ~(1180,423), tail tip ~(1320,535), feet ~(1180,480); head-to-hip ~85 px, hip-to-tail-tip ~180 px, head-to-tail-tip ~270 px (projected, the body is foreshortened); wing tips at f56 set the mask bbox x-range 818-1546 (bbox y 216-538)"
+      }
+    },
+    {
+      "name": "dragon_shadow",
+      "description": "the dragon's cast shadow on the terrain (dark, soft-edged, broken up by rocks); sunlight from the upper right so the shadow lies below-left of the dragon in the image",
+      "moves": true,
+      "visible_frames": [13, 71],
+      "cut_by_bottom_edge_frames": [13, 37],
+      "track_file": "tracks/dragon_shadow.csv",
+      "reliability": "low: centroid/bbox of the segmented shadow fragments; jumps when fragments appear/disappear on the rough terrain; in frames 38-47 and 52-71 parts of the shadow lying close to the dragon may be missing or partly assigned to the dragon"
+    },
+    {
+      "name": "terrain",
+      "description": "static eroded rock/snow canyon covering the whole picture: pale pink-white rock blocks with vertical streaks, a smoother sandy flat in the lower right, dark rock face on the far right edge (x~2500-2720, y~350-1000)",
+      "moves": false,
+      "visible_frames": [0, 71],
+      "notes": "no distinct props, people, vehicles or markings. A small isolated dark spike/rock at about (2690,1240) near the right edge."
+    }
+  ],
+  "events": [
+    {"frame": 0, "t_s": 0.0, "event": "clip start; frames 0 and 1 are pixel-identical (duplicated first frame), so the image shows no motion between them"},
+    {"frame": 13, "t_s": 0.5417, "event": "dragon's shadow enters the bottom edge of the frame"},
+    {"frame": 13, "t_s": 0.5417, "event": "wings level at end of first downstroke (widest horizontal spread)"},
+    {"frame": 14, "t_s": 0.5833, "event": "ref point stops moving sideways-flat and starts climbing steeply in the image (y 906 at f14 -> 726 at f20)"},
+    {"frame": 32, "t_s": 1.3333, "event": "ref y local minimum (623): body dips slightly down in the image until f36-37 (y 648) during the third downstroke, then climbs again"},
+    {"frame": 38, "t_s": 1.5833, "event": "shadow fully inside the frame from here on"},
+    {"frame": 51, "t_s": 2.125, "event": "last wing stroke ends; glide with fixed wing pose until the end (f51/52-71); ref moves smoothly up-left, slowing slightly"},
+    {"frame": 71, "t_s": 2.9583, "event": "clip end; dragon still in view"}
+  ],
+  "no_contacts": "the dragon never touches the ground or any object; no release, bounce or impact events"
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0060.mp4",
+ "video_source": "internet",
+ "video_type": "A2SS",
+ "fps": 30.013643,
+ "frames": 110,
+ "duration_s": 3.665,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3190,
+  "question": "What is the width of the pink box in cm?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

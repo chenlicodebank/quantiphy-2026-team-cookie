@@ -1,0 +1,67 @@
+{
+  "video": "simulation_0149.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; time t -> frame round(24 t)",
+  "pixel_convention": "x right, y down, origin at top-left pixel of the 1920x1080 frame",
+  "setting": "Dimly lit underground car park (level 'B1'): concrete pillars, ceiling with long fluorescent tube lights, grey floor with green-painted front area. One yellow sports car (RX-7 style coupe, pop-up headlights, rear spoiler, white 5-spoke rims, California plate 'PSHERO') drives from the back left towards the camera and curves out to the right.",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of ceiling region (x 0-1450, y 0-450) vs frame 0: |shift| <= 0.023 px in every frame",
+    "per_frame_shift_px": "all ~0 (see notes)",
+    "horizon_y_px": 829,
+    "horizon_evidence": "two ceiling light tubes (parallel straight 3D lines) fitted y=0.15838x+187.09 and y=0.10591x+399.58 (rms <0.3 px) meet at (4050, 829); the floor colour edge y=-0.0418x+1001.9 also reaches y=829 near x~4140. The car's wheel hubs stay at y 819-845 at all distances -> camera height ~ wheel-hub height (very low camera), horizon ~ y 829. Camera roll ~0 (vertical pillar edges are vertical).",
+    "vanishing_point_main_scene_direction_px": [4050, 829],
+    "focal_length": "unknown - estimate from given depth_info + a known size (e.g. car length/height or wheel diameter)."
+  },
+  "objects": [
+    {
+      "name": "car",
+      "aliases": ["yellow car", "sports car", "vehicle"],
+      "description": "Yellow 2-door sports coupe (RX-7 FD style), white 5-spoke rims, rear wing, licence plate 'PSHERO'. The only moving object.",
+      "moves": true,
+      "visible_frames": [0, 47],
+      "not_visible_frames": [48, 49],
+      "track_file": "tracks/car.csv",
+      "wheel_track_file": "tracks/car_wheels.csv",
+      "reference_point": "mask_cx/mask_cy = centroid of the visible silhouette (the simulation origin = vehicle root, not visible; for a car rig usually at ground level between the axles - hub_rear/hub_front midpoint at ground_contact_y_est is a good proxy where both hubs exist, frames 20-32)",
+      "reliable_frames": "0-30 good, 31-33 fair (front end goes dark), 34-47 poor (front half invisible in darkness / leaving at right edge)",
+      "key_pixel_sizes": {
+        "frame_0_front_view_bbox_w_h": [382, 145],
+        "frame_0_note": "front view, nearly head-on; bbox bottom 864 is bumper bottom, tyre bottom ~893 (tyres dark, not in mask)",
+        "side_view_frames": "30-32 (hubs level, car broadside); frame 30: bbox x 452-1691 (len 1240, front end dark, +-15 px), roof y 540, ground ~958 (front tyre) / ~923 (rear tyre)",
+        "wheelbase_px_by_frame": "car_wheels.csv / car.csv wheelbase_px: 247 (f20) -> 499 (f30) -> 619 (f32); grows from turning to broadside and approaching",
+        "rim_height_px": "front rim 120 (f20) -> 168 (f29); rear rim 98 (f23) -> 160 (f36); tyre outer diameter ~1.5 x rim height (measured at f30: rear tyre y 717-923 = 206 px vs rim 137 px)"
+      }
+    },
+    {"name": "foreground_pillar_right", "description": "large dark concrete pillar nearest the camera on the right, yellow/black hazard tape strip on its left edge", "moves": false, "frame": 49, "bbox_px": [1475, 0, 1700, 940], "width_px": 225, "note": "the car passes IN FRONT of it (frames 28-44) while in deep shadow"},
+    {"name": "pillar_with_extinguisher", "description": "light concrete pillar left of centre carrying the fire extinguisher, hazard-striped corner posts", "moves": false, "frame": 49, "bbox_px": [475, 400, 700, 894], "width_px": 225, "base_y_px": 894},
+    {"name": "fire_extinguisher", "description": "red extinguisher hanging on pillar", "moves": false, "frame": 49, "bbox_px": [625, 603, 657, 706], "height_px": 103, "width_px": 32, "body_cylinder_y": [625, 706]},
+    {"name": "speed_limit_sign_30", "description": "round red-rimmed '30' sign on the pillar above the extinguisher", "moves": false, "frame": 49, "bbox_px": [637, 442, 689, 536], "height_px": 94, "width_px": 52, "note": "circle seen obliquely: vertical extent 94 px = true diameter in pixels"},
+    {"name": "no_entry_sign", "description": "small red 'DO NOT ENTER' sign on a pillar in the background, centre-right", "moves": false, "frame": 49, "bbox_px": [1121, 714, 1147, 753], "height_px": 39, "width_px": 26},
+    {"name": "B1_lettering", "description": "large yellow 'B1' painted on a background pillar", "moves": false, "frame": 49, "bbox_px": [1341, 603, 1420, 708], "height_px": 105, "width_px": 79},
+    {"name": "back_pillars", "description": "row of background pillars (x ~1105-1240, 1240-1330, 1330-1475) and a dark pillar x ~700-780; bases at y ~890-895", "moves": false, "frame": 49},
+    {"name": "hazard_posts", "description": "yellow/black striped corner guards on pillars", "moves": false, "frame": 49, "items_bbox_px": [[548, 767, 561, 894], [1327, 778, 1339, 878], [1472, 728, 1481, 937]]},
+    {"name": "wheel_stops", "description": "two black rubber wheel stops on the floor at the back", "moves": false, "frame": 49, "items_bbox_px": [[819, 859, 862, 872], [1080, 858, 1117, 872]]},
+    {"name": "back_wall_opening", "description": "lit grey wall / ramp area in the background between the pillars", "moves": false, "frame": 49, "bbox_px": [780, 625, 1105, 860]},
+    {"name": "ceiling_light_tubes", "description": "long fluorescent tube lines; upper tube y=0.15838x+187.09 (x 0-1475), lower tube y=0.10591x+399.58 (x 50-1475)", "moves": false},
+    {"name": "floor", "description": "grey floor band near the pillars, green-painted floor in front; boundary line y = -0.0418 x + 1001.9 (y 1000 at left, 949 at x 1220); faint light floor marking at x 1266-1425, y ~900", "moves": false}
+  ],
+  "events": [
+    {"event": "first frame: car visible at back left, nearly head-on, already pulling out (moving slowly)", "frame": 0, "t": 0.0},
+    {"event": "motion start / creeping: silhouette right edge 443 -> 443 -> 447 -> 452 (frames 0-3), so the car starts at or near rest around frame 0-1 and speeds up", "frame": 1, "t": 0.0417},
+    {"event": "car turning (yawing) continuously from facing the camera (frames 0-10) towards moving to the image right; near-side front rim first detectable", "frame": 10, "t": 0.4167},
+    {"event": "both near-side wheels visible (rear rim appears)", "frame": 20, "t": 0.8333},
+    {"event": "car broadside to the camera (hubs level, wheelbase growing fastest), front end reaches the dark zone at the foreground pillar", "frame": 30, "t": 1.25},
+    {"event": "front end fully lost in darkness; only rear half visible", "frame": 34, "t": 1.4167},
+    {"event": "near-side rear hub last detected", "frame": 39, "t": 1.625},
+    {"event": "last visible frame (tail corner at right edge x 1824-1919)", "frame": 47, "t": 1.9583},
+    {"event": "car out of frame / invisible", "frame": 48, "t": 2.0}
+  ],
+  "no_events": "no bounces, impacts, contacts or stops; single continuous drive with one gradual left turn (from the driver's view: heading towards camera -> heading to image right)",
+  "apparent_size_trend": "car approaches the camera: visible silhouette length 383 px (f0, front view) -> 757 (f20) -> 1029 (f27) -> ~1240 (f30, broadside, front dark); front rim height 54 (f10, partly hidden) / 120 (f20) -> 168 (f29); rear rim 98 (f23) -> 160 (f36). Rim height (vertical, yaw-independent) is the cleanest inverse-depth cue: depth ~ f * rim_diameter / rim_h."
+}

@@ -1,0 +1,63 @@
+{
+ "video": "simulation_0215.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+ "units": "pixels (x right, y down, full-resolution 1920x1080 image) and seconds; no metric scale recorded",
+ "view": "camera looks straight down at a living-room floor (top-down plan view). The floor plane faces the camera, so the dog's walking plane is the image plane (2D scene). Walls are seen slightly from inside (perspective at the image borders), but the floor is uniform in scale.",
+ "camera": {
+  "motion": "static",
+  "evidence": "mean absolute frame-to-frame grey difference outside the dog's strip <= 0.76 grey levels over all 49 frame pairs (compression noise only)",
+  "per_frame_background_shift_px": [0, 0]
+ },
+ "moving_objects": [
+  {
+   "name": "dog",
+   "description": "the only moving object: a black dog (seen from above), head pointing right (+x), tail to the left, walking on the carpet between the bench/TV console (above) and the round rug/sofa (below)",
+   "visible_frames": "0-49 (whole clip, never occluded, fully inside the frame)",
+   "track_file": "tracks/dog.csv",
+   "reference_point": "torso_cx, torso_cy = centroid of the body mask with the thin tail removed (best proxy for the rig origin/pelvis-body centre in a top view). Alternatives in the CSV: mask_cx/cy (whole mask incl. tail), nose_x (front-most pixel, the steadiest per-frame x)",
+   "motion_summary_px": {
+    "direction": "+x (to the right), essentially horizontal; y stays 357.5-361.2 (gait wobble)",
+    "torso_cx_frame0": 566.55, "torso_cy_frame0": 359.17,
+    "torso_cx_frame49": 1110.07, "torso_cy_frame49": 358.0,
+    "net_dx_torso_px_0_to_49": 543.5,
+    "per_frame_dx_torso_cx": "mean 11.09, std 1.34 (gait jitter), min 5.8, max 14.0",
+    "per_frame_dx_nose_x": "mean 11.02, std 0.55",
+    "per_frame_dx_mask_cx": "mean 11.02, std 0.79",
+    "linear_fit_torso_cx": "x = 569.04 + 10.99 * frame (quadratic term 0.0006 px/frame^2, i.e. no measurable acceleration)",
+    "10-frame slopes torso_cx (px/frame)": {"0-9": 11.54, "10-19": 10.58, "20-29": 11.38, "30-39": 10.17, "40-49": 11.45},
+    "10-frame slopes nose_x (px/frame)": {"0-9": 11.0, "10-19": 11.02, "20-29": 11.0, "30-39": 10.95, "40-49": 11.33}
+   },
+   "size_px": {
+    "length_nose_to_tail_tip_bbox_x": {"median": 191, "min": 183, "max": 200, "note": "full mask x-extent incl. tail; varies with tail pose"},
+    "length_nose_to_rump_torso": {"median": 155, "min": 151, "max": 180, "note": "tail removed; up to ~180 in frames 18-20 and 36-39 when hind legs stretch backwards"},
+    "width_body_y": {"median": 40, "min": 39, "max": 42, "note": "body width across the walking direction (top view); with tail curl the full mask y-extent is 39-50"},
+    "height": "not observable (top-down view)"
+   },
+   "apparent_size_change": "none (constant ~191 px long, ~40 px wide; moves parallel to the image plane at constant depth)"
+  }
+ ],
+ "events": [
+  {"event": "dog already walking at frame 0 (t=0); walks right at a steady pace through the end (frame 49, t=2.042 s); no start, stop, turn, bounce or contact", "frame": 0, "time": 0.0},
+  {"event": "render artefact: the dog's head is drawn as a flat grey disc instead of black from frame 45 on (included in the mask)", "frame": 45, "time": 1.875},
+  {"event": "last frame, dog nose at x=1187 (just right of the lamp centre x~1190, below it)", "frame": 49, "time": 2.0417}
+ ],
+ "static_objects": [
+  {"name": "bench", "description": "orange-brown wooden slatted bench/rack (14 vertical slats), top-left, against the top wall", "bbox_px": [244, 172, 533, 290], "length_px_x": 290, "width_px_y": 119, "centre_px": [388, 231], "reliability": "+-2 px (colour segmentation)"},
+  {"name": "tv_console", "description": "dark grey low wooden console/sideboard against the top wall, centre-top; right end hidden under the lamp", "bbox_px": [709, 168, 1145, 292], "length_px_x": "~437 visible (right end hidden under the lamp shade; may extend to ~1170)", "width_px_y": "~125 (top edge merges with the wall shadow, +-6 px)", "centre_px": [927, 230], "reliability": "x left +-2, bottom +-2, top +-6, right end uncertain"},
+  {"name": "vase", "description": "small white round vase/jar with a black opening, on the left end of the console", "bbox_px": [718, 202, 789, 272], "diameter_px": 71, "centre_px": [753, 237], "reliability": "+-3 px"},
+  {"name": "lamp", "description": "white pleated round lamp shade (brass centre) at the right end of the console", "bbox_px": [1116, 148, 1266, 299], "diameter_px": 150, "centre_px": [1191, 223], "reliability": "+-4 px (pleated edge)"},
+  {"name": "round_rug", "description": "round fluffy white/cream rug at left, partly under the left end of the sofa", "bbox_px": [197, 392, 645, 871], "diameter_px": "~476 (vertical extent at x=400: 396-870); horizontal visible 197-~645 (right side under the sofa)", "centre_px": [425, 632], "reliability": "+-8 px (fuzzy edge)"},
+  {"name": "sofa", "description": "large curved (crescent) cream sofa, centre-bottom, concave side facing up (toward the dog), with two grey pillows", "bbox_px": [565, 515, 1452, 998], "length_px_x": 888, "depth_px_y": 484, "seat_depth_px": "~250-280 measured across the curved body", "centre_bbox_px": [1008, 756], "reliability": "+-6 px (soft shading at edges)"},
+  {"name": "pillow_left", "description": "grey cushion on the left part of the sofa", "bbox_px": [628, 645, 858, 845], "reliability": "+-8 px, visual estimate"},
+  {"name": "pillow_right", "description": "grey cushion on the right part of the sofa", "bbox_px": [1133, 672, 1382, 862], "reliability": "+-8 px, visual estimate"},
+  {"name": "door_or_wall_panel_top_right", "description": "light green-beige panel with wooden frame seen at an angle at top-right (open door / board leaning on the wall)", "bbox_px": [1385, 85, 1660, 220], "reliability": "+-8 px, visual estimate"},
+  {"name": "floor_area", "description": "carpeted floor between the walls", "bbox_px": [187, 125, 1745, 1079], "note": "left wall edge x~187, right wall edge x~1745-1780 (perspective), top wall base y~125; floor continues past the bottom of the image"}
+ ],
+ "perspective": "2D top-down view; floor is the image plane. Wall faces visible at left/right/top edges show a perspective (not orthographic) camera, but everything relevant lies on the floor plane at one depth, so a single px scale applies on the floor. Tall objects (lamp, console top) are slightly closer to the camera than the floor and would appear marginally larger."
+}

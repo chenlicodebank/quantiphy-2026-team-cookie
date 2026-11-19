@@ -1,0 +1,73 @@
+{
+  "video": "simulation_0017_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by white; answers = original simulation)",
+  "scene_type": "3D",
+  "fps": 33.0,
+  "frames": 101,
+  "time_of_frame": "t = frame / 33.0 (frame 0 at t=0); time t -> frame round(t*33)",
+  "image_size_px": [1080, 1080],
+  "units": "pixels, image coords: x right, y down, origin top-left",
+  "camera": {
+    "motion": "static (phase correlation of a person-free region vs frame 0: max shift 0.17 px x, 0.30 px y over all frames)",
+    "focal_length": "unknown - estimate from given depth_info + a known size",
+    "principal_point_assumed": [540, 540],
+    "perspective_cues": "low, nearly level camera looking at the scene head-on. Floor-contact rows (lower = nearer): bench base bottom y=967 (nearest), person soles y~731, pedestal bottom ~y699 (hidden behind bench top), paintings' stand bases y~613, small statue base y~588 (farthest). Pedestal top face just visible (camera slightly above ~y550 level). No horizon line visible (white background)."
+  },
+  "objects": [
+    {
+      "name": "person",
+      "description": "the only moving object: a man in a light grey T-shirt and grey-blue jeans, white blank face, walking left to right behind the foreground bench and in front of the paintings and the sculpture",
+      "moves": true,
+      "visible_frames": [0, 100],
+      "track": "tracks/person.csv",
+      "reference_point": "pelvis: x = pelvis_x_smooth (head-centre based, smoothed), y = pelvis_y_est (head top + 169 px)",
+      "summary_px": {
+        "pelvis_x_smooth_frame0": -1.5,
+        "pelvis_x_smooth_frame100": 763.1,
+        "net_horizontal_shift_px_0_to_100": 764.6,
+        "mean_px_per_frame": 7.65,
+        "pelvis_y_range": [536, 547],
+        "head_top_y_range": [368, 378],
+        "full_height_head_top_to_sole_px": "356-364 px in frames 0-19 (trailing foot visible left of the bench); 364 at frames 4-7 (mid-stance, near standing height)",
+        "visible_height_when_feet_hidden_px": "~322-337 (cut at bench top y~697)",
+        "head_width_px": "~45 (46.7 mean fr 2-34, 43.3 fr 35-69, 45.2 fr 70-100)",
+        "chest_width_px": "~45-67 depending on arm position"
+      },
+      "apparent_size_change": "essentially constant (head width ~45 px, head-to-sole ~360 px): walks roughly parallel to the image plane at nearly constant depth"
+    },
+    {"name": "bench", "description": "large foreground bench/sofa: dark blue-grey slab with 4 light blue-grey cushions on a dark angled base; occludes the person's feet", "moves": false,
+     "bbox": [13, 690, 1058, 967], "width_px": 1046, "height_px": 278,
+     "parts": {"cushion_row_top_y": 697, "cushion_row_width_at_y720": 865, "frame_slab_width_at_y790": 1046, "base_width_at_y950": 804, "cushions": "4 cushions, each ~230-280 px wide"}},
+    {"name": "sculpture", "description": "silver/grey flame- or teardrop-shaped abstract sculpture with a pointed tip, centre of the scene", "moves": false,
+     "bbox": [434, 297, 622, 551], "width_px": 189, "height_px": 255, "centre": [528.0, 463.2]},
+    {"name": "pedestal", "description": "plinth under the sculpture: light-grey top tier (y~548-600) and dark-grey lower block (y~600-699, partly behind the bench)", "moves": false,
+     "bbox": [395, 548, 664, 699], "width_px": 270, "height_px": 152, "note": "bottom hidden by the bench top"},
+    {"name": "painting_left", "description": "framed abstract painting (orange/red/black ink) on a stand, left of the sculpture", "moves": false,
+     "bbox": [293, 464, 402, 614], "width_px": 110, "height_px": 151, "centre": [350.3, 540.4]},
+    {"name": "painting_right", "description": "framed abstract painting (orange/blue ink) on a stand, right of the sculpture", "moves": false,
+     "bbox": [666, 464, 782, 613], "width_px": 117, "height_px": 150, "centre": [724.5, 539.8]},
+    {"name": "small_statue_right", "description": "small silver abstract vertical statue at far right, smallest and farthest object", "moves": false,
+     "bbox": [930, 458, 976, 588], "width_px": 47, "height_px": 131, "centre": [947.7, 531.4]}
+  ],
+  "events": {
+    "person_motion": "walking (already in motion) from frame 0 to frame 100, steady left-to-right; no start/stop, no direction change",
+    "person_partly_outside_left_edge": [0, 4],
+    "feet_visible_left_of_bench": [0, 21],
+    "person_in_front_of_painting_left": [28, 61],
+    "person_in_front_of_sculpture_or_pedestal": [42, 90],
+    "pelvis_crosses_sculpture_centre_x528": 69,
+    "person_in_front_of_painting_right": [78, 100],
+    "pelvis_crosses_painting_left_centre": 45,
+    "pelvis_crosses_painting_right_centre": 95,
+    "gait_head_high_midstance_frames": [6, 22, 40, 56, 73, 90],
+    "gait_head_low_double_support_frames": [14, 31, 48, 65, 82],
+    "step_period_frames": "~17 (one step; stride ~34 frames)"
+  },
+  "files": {
+    "tracks/person.csv": "per-frame person track",
+    "static_extents.json": "static object bboxes from the median background",
+    "events_auto.json": "automatically derived event frames",
+    "bg.png": "median background (person removed)",
+    "notes.md": "method, reliability, ambiguities"
+  }
+}

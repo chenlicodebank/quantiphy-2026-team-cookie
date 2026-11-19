@@ -1,0 +1,108 @@
+{
+  "video": "internet_0050.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 94,
+  "duration_s": 3.1333,
+  "width": 3840,
+  "height": 2160,
+  "time_convention": "t = frame / 30; frame 0 = t 0; last frame 93 = t 3.100 s",
+  "units": "pixels and seconds; no metric scale assumed",
+  "summary": "Static outdoor basketball court (green/grey surface, white lines), seen from the near court. One person standing on an electric kick-scooter rides from right to left along the far baseline of the court for the whole clip at nearly constant speed (~16 px/frame). Background: grass field, soccer goals, Adirondack chair, two basketball hoops, Mediterranean-style buildings, trees. Handheld camera with slow drift (<= 13 px over the clip).",
+  "camera": {
+    "type": "handheld, nearly static; slow smooth drift, no pan following the rider",
+    "per_frame_shift_file": "scene/camera_shift.json (dx, dy of background content relative to frame 0, px; image point of a fixed ground feature at frame i = frame-0 position + (dx, dy))",
+    "total_drift_px": {"dx_frame93": 12.65, "dy_frame93": -7.23},
+    "note": "Drift is small vs the rider's ~1460 px travel (0.9 %), but rider.csv gives both raw image coords (*_img) and background-stabilised coords (*_stab, frame-0 background frame). Use *_stab for motion against the ground."
+  },
+  "objects": [
+    {
+      "name": "scooter_rider",
+      "description": "Person (white long-sleeve top, beige/white cap, dark olive trousers, black belt, light shoes; face blurred) standing on a black electric kick-scooter (two small black wheels, rear wheel with spokes/fender, tall stem with handlebar). The only moving object.",
+      "moves": true,
+      "visible_frames": "0-93 (all), never occluded, fully in frame",
+      "track_file": "scene/tracks/rider.csv",
+      "motion": "straight horizontal motion right->left (decreasing x) along the far baseline, ground-contact line y ~1177 (stab coords), no vertical motion; image x from bbox centre 2711.5 (f0) to 1235 (f93) stabilised",
+      "reference_point": "cx_stab/cy_stab = bbox centre of mask (person+scooter, shadow excluded); alternatives: centroid_x_stab, front_wheel_x_stab (leading edge of front wheel)",
+      "pixel_sizes_median_over_clip": {
+        "scooter_length_px": 177,
+        "scooter_length_note": "front edge of front wheel to back of rear wheel/fender, horizontal (= main motion axis); 182 px in frames 0-3 (slight motion blur/stem), 176-178 px afterwards",
+        "rider_plus_scooter_bbox_width_px": 177,
+        "rider_plus_scooter_height_px": 299,
+        "height_note": "top of cap to wheel ground contact; range 296-303",
+        "person_height_cap_to_soles_px": 275,
+        "person_height_note": "approx: soles stand on the deck ~23-25 px above ground contact (deck at about wheel-centre height). Person stands with knees slightly bent; +-5 px",
+        "wheel_diameter_px": 37,
+        "wheelbase_px_axle_to_axle": 139,
+        "wheel_note": "Hough circles at frames 0,15,...,93: radius 18.3-20 px (mostly 18.6), axle spacing 136.7-142.5 px (median ~139)"
+      },
+      "apparent_size_change": "none significant (bbox width 176-183, height 296-303 px); motion is parallel to the image plane at constant depth"
+    },
+    {
+      "name": "rider_shadow",
+      "description": "Long dark shadow of rider+scooter cast on the court to the right and slightly below the wheels; moves with rider. Excluded from rider mask.",
+      "moves": true, "visible_frames": "0-93"
+    },
+    {
+      "name": "left_basketball_hoop",
+      "description": "Left hoop: transparent rectangular backboard with orange rim, black pole; bird perched on top of backboard",
+      "moves": false,
+      "frame0_px": {"backboard_bbox": [415, 525, 670, 700], "backboard_w": 255, "backboard_h": 175, "rim_x": [470, 570], "rim_y": 668, "rim_diameter_px": 100, "pole_x": [652, 678], "pole_base_y": 1150, "pole_visible_below_board_px": 450, "structure_height_board_top_to_base_px": 625, "pole_shadow": "dark shadow on court right of pole base, x ~600-1110, y ~1195-1240"}
+    },
+    {
+      "name": "right_basketball_hoop",
+      "description": "Right hoop at right image edge, same type; pole bent/angled (goes up and to the right)",
+      "moves": false,
+      "frame0_px": {"backboard_bbox": [3412, 510, 3685, 695], "backboard_w": 273, "backboard_h": 185, "rim_x": [3530, 3628], "rim_y": 660, "rim_diameter_px": 98, "pole_x_at_base": [3396, 3420], "pole_base_y": 1163, "structure_height_board_top_to_base_px": 653}
+    },
+    {
+      "name": "bird",
+      "description": "Small dark bird (magpie/crow-like, black and white) perched on top edge of the left backboard",
+      "moves": "only head turns; body stationary",
+      "frame0_px": {"bbox": [605, 485, 635, 525], "height_px": 40}
+    },
+    {
+      "name": "soccer_goal_near",
+      "description": "White net soccer goal on the grass behind the left half of the court, angled",
+      "moves": false,
+      "frame0_px": {"bbox": [868, 915, 1055, 1052], "w": 187, "h": 137}
+    },
+    {
+      "name": "small_goal_far",
+      "description": "Smaller goal frame / bench further back on the grass left of the near goal",
+      "moves": false,
+      "frame0_px": {"bbox": [730, 940, 830, 1015]}
+    },
+    {
+      "name": "adirondack_chair",
+      "description": "Dark wooden Adirondack chair on the grass, far left",
+      "moves": false,
+      "frame0_px": {"bbox": [398, 985, 512, 1088], "w": 114, "h": 103}
+    },
+    {
+      "name": "court_lane_lines",
+      "description": "Two white lines of the key/lane running from the image bottom toward the far baseline, converging with perspective; they end at the far baseline line (faint white, y ~1158) just behind the rider's path",
+      "moves": false,
+      "frame0_px": {"left_lane_line_top": [1827, 1158], "right_lane_line_top": [2193, 1158], "lane_width_at_far_end_px": 366, "left_line_at_bottom_approx": [820, 2160], "right_line_at_bottom_approx": [2800, 2160], "near_crossing_lines_y": "horizontal white lines at y ~1750 (left, x 0-1210) and ~1780 (right, x 2580-3840)"}
+    },
+    {
+      "name": "far_baseline_and_arcs",
+      "description": "Far baseline (faint white line along the court/grass edge, y ~1158-1165) and 3-point arc lines on both sides of the far court",
+      "moves": false
+    },
+    {
+      "name": "background",
+      "description": "Grass field (y ~1000-1150), hedge/fence, pergola (right of centre, x ~2500-3300, y ~870-1000), tan multi-storey buildings with tiled roofs, trees, blue sky",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "rider already moving at start", "frame": 0, "time": 0.0},
+    {"event": "rider passes right lane line top (x~2193)", "front_wheel_frame": 27, "bbox_centre_frame": 33},
+    {"event": "rider passes left lane line top (x~1827)", "front_wheel_frame": 51, "bbox_centre_frame": 56},
+    {"event": "rider still moving at end, no stop, no direction change", "frame": 93, "time": 3.1}
+  ],
+  "motion_overview_px_per_frame": "bbox-centre step (stab) -17 at start, ~-15.5 mid-clip (frames 30-55), ~-16 at end; 10-frame steps: -165.5,-160.5,-157.5,-156,-154.5,-156.5,-159.5,-158.5,-159.5 (frames 0-90). Recorded only as a sanity check; no model fitted.",
+  "perspective": "2D-style: rider moves parallel to the image plane at constant depth (ground contact y constant +-2 px, size constant). Court plane recedes toward a horizon above the image region of the court (lane lines converge upward); hoops at the far baseline are at about the rider's depth (pole bases y 1150-1163 vs rider ground y ~1177, i.e. rider is slightly nearer than the baseline)."
+}

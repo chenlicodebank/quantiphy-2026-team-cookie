@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0038_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V3MX",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 1536,
+ "height": 1536,
+ "question": {
+  "id": 1735,
+  "question": "What is the height of the person in meters?",
+  "prior": "speed of the person = 1.3m/s",
+  "depth_info": "t=1s, distance_human_camera = 179.0908m\nt=2s, distance_human_camera = 179.1845m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

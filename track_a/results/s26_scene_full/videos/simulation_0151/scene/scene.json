@@ -1,0 +1,80 @@
+{
+  "video": "simulation_0151.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 42,
+  "duration_s": 1.75,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; no metric scale guessed",
+  "camera": {
+    "motion": "static (no pan/shake: background identical between frames, foreground pillars fixed at x=95 and x=1831 in every frame)",
+    "view": "looks horizontally straight down the long axis of an underground car park (level 'B1')",
+    "vanishing_point_px": [959.6, 539.3],
+    "vanishing_point_note": "intersection of the two ceiling light strips (lines y=0.4420x+115.2 and y=-0.4961x+1015.3); equals the image centre -> optical axis horizontal, principal point ~ (960,540), horizon row y ~ 539",
+    "focal_length": "unknown (estimate from given depths + a known size)",
+    "object_motion_vs_camera": "both vehicles drive right-to-left, parallel to the image plane (perpendicular to the optical axis): their vertical position and apparent size stay constant within +-1 px/<1%"
+  },
+  "objects": {
+    "car": {
+      "description": "yellow sports coupe (pop-up-headlight style, rear spoiler), seen from its left side, nose pointing left",
+      "moves": true,
+      "visible_frames": [0, 39],
+      "fully_visible_frames": [22, 27],
+      "track": "tracks/car.csv",
+      "depth_order": "nearest moving object (passes in front of the cart)",
+      "side_view_box_px_at_frame24": {"x0": 437, "y0": 530, "x1": 1585, "y1": 884, "length": 1148, "height": 354},
+      "length_px_range_frames22_27": [1132, 1149],
+      "ground_contact_y_px": 884,
+      "wheel_hub_y_px_approx": 788,
+      "wheel_radius_px_approx": 96,
+      "wheelbase_px_approx_frame24": "front hub x~633, rear hub x~1340 -> ~707 px",
+      "notes": "front/rear faces become visible by perspective when the car is off-centre, so the visible bbox is longer than the side-plane box away from the image centre (up to ~+100 px at the leading nose in frames 10-11, ~+70-100 px at the tail in frames 33-36)"
+    },
+    "cart": {
+      "description": "small light-blue electric utility cart / mobility vehicle with a canopy roof (orange LED strip at roof front, handle bar sticking up-back from the roof), blue seat, white rear box, 4 small black wheels; nose pointing left",
+      "moves": true,
+      "visible_frames": [0, 41],
+      "fully_visible_frames": [32, 41],
+      "track": "tracks/cart.csv",
+      "depth_order": "behind the car (farther from camera)",
+      "side_view_box_px_at_frame36": {"x0": 754.0, "y0": 492, "x1": 1128.7, "y1": 817, "length": 374.7, "height": 325},
+      "length_px_note": "374.7 px includes the roof handle tip at the rear-top; it is the max horizontal extent",
+      "ground_contact_y_px": 817,
+      "wheel_hub_y_px_approx": 790
+    }
+  },
+  "static_objects": {
+    "right_foreground_pillar": {"x_px": "1831 .. 1920 (left edge x=1831)", "role": "occludes both vehicles at the start (they emerge from behind it)"},
+    "left_foreground_pillar": {"x_px": "0 .. 95 (right edge x=95)", "role": "occludes the car as it leaves (frames 28-39)"},
+    "B1_sign_back_wall": {"bbox_px": [885, 428, 1063, 598], "w": 180, "h": 170, "note": "large dim yellow 'B1' letters on the far end wall, centre of image"},
+    "B1_sign_left_pillar": {"bbox_px": [18, 469, 93, 567], "note": "dim, on the left foreground pillar; colour threshold may miss the darker top part (true top possibly ~430); approx"},
+    "B1_sign_right_pillar": {"bbox_px": [1496, 430, 1556, 599], "w": 61, "h": 170, "note": "on a far pillar right of centre, seen obliquely"},
+    "fire_extinguisher_left": {"bbox_px": [412, 508, 441, 588], "w": 30, "h": 81, "note": "red, on left wall/pillar"},
+    "fire_extinguisher_right": {"bbox_px": [1827, 501, 1865, 619], "w": 39, "h": 119, "note": "red, on right foreground pillar (nearer than the left one)"},
+    "floor_arrow_marking": {"bbox_px": [795, 998, 951, 1079], "w": 157, "h": 82, "note": "white painted marking at bottom centre, cut by image bottom"},
+    "ceiling_light_strips": {"note": "two long fluorescent strips converging to the vanishing point; left y=0.4420x+115.2 (x 0-715), right y=-0.4961x+1015.3 (x 1178-1920)"},
+    "parking_bays": {"note": "green-floored bays left (x<~330) and right (x>~1500) behind yellow/black striped pillar guards"},
+    "floor": "glossy grey concrete, strong reflections of both vehicles (not part of the objects)"
+  },
+  "events": [
+    {"event": "car starts moving from (near) rest", "frame": 0, "t": 0.0, "note": "nose shift 3 px in frame 0->1, then increasing ~5-6 px/frame each frame"},
+    {"event": "cart starts moving from (near) rest", "frame": 0, "t": 0.0, "note": "~1 px in frame 0->1, increasing ~2 px/frame each frame early"},
+    {"event": "car centre passes cart centre (in image x)", "frame": 19, "t": 0.792},
+    {"event": "car rear fully out from behind right pillar (car fully visible)", "frame": 22, "t": 0.917},
+    {"event": "car nose reaches left pillar edge x=95", "frame": 28, "t": 1.167},
+    {"event": "cart no longer overlapped by car (visible silhouettes separate)", "frame": 31, "t": 1.292},
+    {"event": "car per-frame shift peaks (~102-103 px/frame), afterwards decreasing (car decelerating)", "frame": 31, "t": 1.292, "note": "broad maximum frames 29-32"},
+    {"event": "cart per-frame shift peaks (~33-34 px/frame), afterwards decreasing to ~29 px/frame", "frame": 29, "t": 1.208, "note": "broad maximum frames 26-34"},
+    {"event": "car leaves view (only last tail sliver at frame 39)", "frame": 40, "t": 1.667},
+    {"event": "no contact/collision between car and cart; no direction change (both always move left)", "frame": null}
+  ],
+  "perspective": {
+    "horizon_y_px": 539.3,
+    "ground_contact_rows": {"car": 884, "cart": 817},
+    "relative_depth_from_ground_contact": "Z proportional to 1/(y_contact - 539.3): car 1/344.7, cart 1/277.7 -> Z_cart/Z_car ~ 1.24 (near-side wheel contact points, assumes flat floor)",
+    "apparent_size_over_time": "constant for both (car height 354-358 px frames 15-35; cart box width 373-376 px frames 32-40)"
+  },
+  "files": {"notes": "notes.md", "tracks": ["tracks/car.csv", "tracks/cart.csv"], "scripts": "scripts/"}
+}

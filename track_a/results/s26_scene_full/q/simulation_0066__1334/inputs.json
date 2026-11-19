@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0066.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1334,
+  "question": "What is the height of the white car in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 21.0610m\nt=1.58s, distance_human_camera = 21.3488m\nt=0.58s, distance_yellow_car_camera = 19.6514m\nt=1.58s, distance_yellow_car_camera = 16.5490m\nt=0.58s, distance_white_car_camera = 23.5892m\nt=1.58s, distance_white_car_camera = 19.9903m\nt=0.58s, distance_bike_camera = 19.0650m\nt=1.58s, distance_bike_camera = 14.6515m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

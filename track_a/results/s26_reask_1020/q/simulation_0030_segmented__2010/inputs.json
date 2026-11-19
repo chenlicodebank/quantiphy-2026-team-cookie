@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0030_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V3MX",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "question": {
+  "id": 2010,
+  "question": "What is the length of the eagle in meters?",
+  "prior": "speed of the eagle = 12m/s",
+  "depth_info": "t=1s, distance_eagle_camera = 106.642m\nt=2s, distance_eagle_camera = 111.231m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

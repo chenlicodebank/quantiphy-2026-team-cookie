@@ -1,0 +1,139 @@
+{
+  "video": "internet_0057.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 188,
+  "duration_s": 6.2667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (frame pixel coordinates, x right, y down) and seconds; no metric scale is assumed",
+  "summary": "Indoor basketball court, camera roughly facing the baseline wall and hoop. A person (cap, beige top, olive cargo pants, white sneakers; face blurred) stands left of the hoop holding a basketball at face level, dips, jumps and releases a one-handed/two-handed jump shot at frame ~54. The ball flies up and to the right, reaches its apex at frame 71 in front of the backboard glass (above rim height), misses the rim entirely (no contact with rim or board), falls to the floor right of the lane and bounces three times (floor contacts frames 97, 135, 164, a 4th contact at the very end ~187) while drifting right. The person lands (frame ~63), stands, then walks to the right from about frame 90-105 to the end.",
+  "camera": {
+    "type": "hand-held / slowly drifting, no zoom",
+    "drift_vs_frame0": "image of a static point shifts by up to dx = -19 px, dy = -29 px and rotates up to +1.05 deg (roll) by the last frame; scale change < 0.6 %",
+    "per_frame_file": "tracks/camera_shift.csv (similarity transform frame-0 -> frame-i: scale, roll, shift of image centre)",
+    "compensated_coordinates": "track columns *_bgfixed_px are positions mapped back to frame-0 background coordinates (use these for motion)",
+    "perspective": {
+      "horizon_y_px_approx": 600,
+      "vanishing_point_of_lane_lines_px": [969, 599],
+      "note": "Camera height ~ eye level, optical axis roughly perpendicular to the baseline wall. Floor recedes upward. The person and ball move mostly parallel to the image plane but the shot also has a depth component (ball apparent diameter 48-49 px in the hands, ~43 px near the apex/hoop, 46-48 px after the bounces)."
+    }
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "the basketball, dark red-brown, the only ball in the scene",
+      "moves": true,
+      "visible_frames": [0, 187],
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre of the ball (x = centre of horizontal extent, y = row of maximum width, robust to vertical motion blur)",
+      "apparent_diameter_px": {"held_0_53": 49, "flight_54_70": 43, "falling_78_96": 43, "after_bounce1_100_134": 46, "after_bounce2_138_163": 47, "after_bounce3_167_187": 48, "overall_free_median": 46, "manual_check_frame112": "47 x 46"},
+      "notes": "Held in the hands frames 0-53 (partly covered by fingers; centre still reliable to ~3 px). Mask degraded frames 73-77 (ball overlaps the black pole/'3' logo behind the glass) and at floor contacts (reflection merges): flagged in occluded_or_degraded."
+    },
+    {
+      "name": "person",
+      "description": "the shooter: only person, beige cap, beige sleeveless top, olive cargo pants, white/pink sneakers; face blurred in the video",
+      "moves": true,
+      "visible_frames": [0, 187],
+      "track": "tracks/person.csv",
+      "reference_point": "centre of the bounding box (top of cap to lowest sole; arms included)",
+      "height_px": {"standing_still_0_38_median": 322, "standing_range": [316, 325], "walking_120_187_median": 314, "walking_range": [303, 326]},
+      "width_px": {"standing_0_38_median": 109, "walking_median": 135},
+      "notes": "Feet stand on a glossy floor with a strong mirror reflection; the box bottom is the sole/floor contact row read on keyframes and interpolated (+-4 px). Airborne frames 55-62 use the lowest visible foot."
+    },
+    {
+      "name": "hoop_rim",
+      "description": "orange rim of the basket, centred under the backboard",
+      "moves": false,
+      "image_extent_frame0_px": {"x": [921, 1014], "y": [302, 332], "outer_width_px": 90, "width_note": "orange-mask width 86 px, visual outer edges 921-1014 (93 px); use 90 +- 4"},
+      "centre_px": [967, 316]
+    },
+    {
+      "name": "net",
+      "description": "white net hanging below the rim",
+      "moves": false,
+      "image_extent_frame0_px": {"x": [925, 1010], "y": [318, 400]}
+    },
+    {
+      "name": "backboard",
+      "description": "transparent glass backboard with grey frame, black padding along the bottom and lower sides, red '3' logo and shooter's square behind/at the glass",
+      "moves": false,
+      "image_extent_frame0_px": {"x_with_padding": [786, 1146], "width_with_padding": 361, "x_glass_frame": [800, 1131], "width_glass_frame": 332, "y_top": 150, "y_bottom_padding": 362, "height": 213},
+      "notes": "Top edge ~150 (light frame), black top crossbar 163-177, bottom padding lower edge ~360-369."
+    },
+    {
+      "name": "support_pole",
+      "description": "black vertical pole holding the backboard from the ceiling",
+      "moves": false,
+      "image_extent_frame0_px": {"x": [944, 984], "width": 41, "y": [0, 150]}
+    },
+    {
+      "name": "wall_pads",
+      "description": "row of 8 beige padded panels on the wall under the hoop",
+      "moves": false,
+      "image_extent_frame0_px": {"x": [654, 1287], "width": 634, "y": [548, 784], "height": 237, "panel_width_approx": 79}
+    },
+    {
+      "name": "scoreboard",
+      "description": "black scoreboard top right ('HOME', 'PERIOD', 'GUEST', sign 'ERICKSON FAMILY COURT 3' above); cut off by the right image edge",
+      "moves": false,
+      "image_extent_frame0_px": {"x": [1643, 1919], "y": [9, 198], "note": "right part outside the image"}
+    },
+    {
+      "name": "notice_boards",
+      "description": "three framed notice boards on the wall right of the pads (tall left one, wide middle one, small right one)",
+      "moves": false,
+      "image_extent_frame0_px": {"left": {"x": [1596, 1675], "y": [510, 628]}, "middle": {"x": [1690, 1807], "y": [551, 629]}, "right": {"x": [1820, 1898], "y": [577, 628]}}
+    },
+    {
+      "name": "fire_extinguisher_cabinet",
+      "description": "white wall cabinet left of the person",
+      "moves": false,
+      "image_extent_frame0_px": {"x": [246, 294], "y": [643, 737]}
+    },
+    {
+      "name": "small_wall_items",
+      "description": "white square box (speaker/sensor) at x 591-637, y 253-296; red fire alarm at x 41-55, y 599-614; small grey plates at (620,647) and (1471,646); door at the far left edge",
+      "moves": false
+    },
+    {
+      "name": "wall_floor_line",
+      "description": "dark baseboard along the bottom of the wall",
+      "moves": false,
+      "image_extent_frame0_px": {"y": [790, 812], "note": "slightly tilted: top ~796 at x=200, ~789 at x=1300"}
+    },
+    {
+      "name": "court_lines",
+      "description": "maroon painted lines on the wooden floor: two diagonal lane (key) lines and a horizontal line between them at y~855; faint yellow lines lower down (y ~ 990-1030)",
+      "moves": false,
+      "image_lines_frame0_px": {"left_lane_line": "x = -1.163*y + 1665.9 (x=666 at y=860, x=411 at y=1079)", "right_lane_line": "x = 1.153*y + 278.0 (x=1270 at y=860, x=1522 at y=1079)", "horizontal_line_y": 855, "lane_width_at_y860_px": 604}
+    }
+  ],
+  "events": [
+    {"event": "ball held at face level, person stands still (set position)", "frames": [0, 38], "t_s": [0.0, 1.267]},
+    {"event": "dip: ball and body move down", "frames": [39, 46], "t_s": [1.3, 1.533], "note": "ball lowest at frame 46-47 (bg-fixed y ~670)"},
+    {"event": "shooting motion upward begins", "frame": 47, "t_s": 1.567},
+    {"event": "person takes off (jump shot, one leg kicked back)", "frame": 55, "t_s": 1.833},
+    {"event": "ball release (first frame clearly free of the fingers)", "frame": 54, "t_s": 1.8, "uncertainty_frames": 1},
+    {"event": "person lands", "frame": 63, "t_s": 2.1},
+    {"event": "ball apex of the shot", "frame": 71, "t_s": 2.367, "position_bgfixed_px": [909, 201]},
+    {"event": "ball passes the hoop region above rim height without touching rim or backboard (constant horizontal pixel velocity ~15.4 px/frame from 54 to 96)", "frames": [72, 80]},
+    {"event": "ball 1st floor contact (bounce)", "frame": 97, "t_s": 3.233, "position_bgfixed_px": [1302, 883], "ball_bottom_row_px": 900},
+    {"event": "ball apex after 1st bounce", "frame": 116, "t_s": 3.867, "position_bgfixed_px": [1406, 508]},
+    {"event": "ball 2nd floor contact", "frame": 135, "t_s": 4.5, "position_bgfixed_px": [1515, 878], "ball_bottom_row_px": 891},
+    {"event": "ball apex after 2nd bounce", "frame": 149, "t_s": 4.967, "position_bgfixed_px": [1585, 663]},
+    {"event": "ball 3rd floor contact", "frame": 164, "t_s": 5.467, "position_bgfixed_px": [1671, 876], "ball_bottom_row_px": 883},
+    {"event": "ball apex after 3rd bounce", "frame": 176, "t_s": 5.867, "position_bgfixed_px": [1721, 738]},
+    {"event": "ball 4th floor contact at/after the last frame (descending at 187)", "frame": 187, "t_s": 6.233, "note": "may be just after the clip ends"},
+    {"event": "horizontal ball motion slows at the 1st bounce: ~15.4 px/frame before, ~5.5 px/frame after", "frame": 97},
+    {"event": "person starts walking to the right", "frame": 100, "t_s": 3.333, "note": "first step (front leg/arm leaves the standing box) ~frame 90, rear edge of the body starts moving ~frame 105, walks steadily to the end; centre x (bg-fixed) 611 at f90, 868 at f130, 1064 at f150, 1247 at f170, 1398 at f187"}
+  ],
+  "files": {
+    "tracks/ball.csv": "per-frame ball track",
+    "tracks/person.csv": "per-frame person track",
+    "tracks/camera_shift.csv": "per-frame camera transform vs frame 0",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

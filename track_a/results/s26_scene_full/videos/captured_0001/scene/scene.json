@@ -1,0 +1,44 @@
+{
+ "video": "captured_0001.mp4",
+ "source": "lab (real recording, background replaced with Segment Anything 2 - watermark bottom right)",
+ "scene": "3D",
+ "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (phase correlation of table/leg region vs frame 0: |shift| <= 0.3 px in every frame)",
+  "intrinsics_lab_convention": "f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+  "view": "camera slightly above table height, looking along the table toward the back; ball rolls toward the camera",
+  "perspective_cues": "table top is a trapezoid (back edge y~445, x~480..833; front edge y~552, x~304..1027) -> front of table much closer to camera; no horizon visible (replaced background)"
+ },
+ "objects": [
+  {"name": "ball", "desc": "yellow (tennis-type) ball, the only moving object", "moves": true,
+   "visible_frames": "0-46 (46 only a small blurred sliver at bottom border; absent 47-48)",
+   "track": "tracks/ball.csv",
+   "rest_position_frame0": {"centre_px": [664.1, 332.9], "diameter_px": 44.7, "bbox": [642, 312, 686, 355]},
+   "apparent_diameter_px_vs_frame": {"0-29": 44.7, "31": 46.1, "34": 44.6, "35": 47.1, "36": 51.9, "37": 52.2, "38": 59.5, "39": 62.8, "40": 65.5, "41": 73.3, "42": 78.3, "43": 78, "44": "~94-98 (motion blur, unreliable)", "45": "~100 wide, cut by bottom border"},
+   "note": "use width_across (perpendicular to motion blur) as diameter during frames 31-45; vertical bbox_h is inflated by blur"},
+  {"name": "ramp_board", "desc": "white rectangular board leaning as an inclined ramp on the table, its top edge raised; ball starts on its top edge and rolls down its face toward the camera", "moves": false,
+   "visible_frames": "0-48",
+   "pixel_extents_frame48": {"top_edge": {"y": 353, "x": [568, 721], "length_px": 153},
+                             "bottom_edge": {"y": 496, "x": [539, 737], "length_px": 198},
+                             "vertical_extent_px": 143, "bbox": [539, 353, 737, 497]},
+   "note": "top edge is partly hidden behind the ball in frames 0-35; bottom edge rests on table top"},
+  {"name": "table", "desc": "brown wood-grain table top on a single dark central leg", "moves": false, "visible_frames": "0-48",
+   "pixel_extents_frame48": {"back_edge": {"y": 445, "x": [480, 833], "length_px": 353},
+                             "front_edge_top": {"y": "~552 (left) .. ~562 (right)", "x": [304, 1027], "length_px": 723},
+                             "front_face_thickness_px": "~30-35 (y ~552..~585 left, ~562..~595 right)",
+                             "depth_extent_on_image_px": "~107 (y 445 to 552)", "bbox": [304, 445, 1027, 596]}},
+  {"name": "table_leg", "desc": "dark grey/black vertical post under table centre", "moves": false, "visible_frames": "0-48",
+   "pixel_extents_frame48": {"x": [660, 709], "width_px": 50, "y": [592, 720], "visible_height_px": "128 (cut by frame bottom)"}}
+ ],
+ "events": [
+  {"event": "ball at rest on top edge of ramp", "frames": "0-27", "t": "0-1.125"},
+  {"event": "start of motion (ball begins rolling down ramp; first cy change >0.4 px)", "frame": 28, "t": 1.1667, "note": "tiny x drift 23-27 (<1.3 px), clear motion from 30 (t=1.25)"},
+  {"event": "ball reaches bottom of ramp / onto table top", "frame": "38-39", "t": "1.583-1.625", "note": "ball bottom y1=497 = board bottom edge y~496 at frame 38; cy dips 469.6->465.8 at 39 (small hop or mask noise at the transition)"},
+  {"event": "ball rolls on table toward camera", "frames": "39-43"},
+  {"event": "ball leaves front edge of table (start of fall)", "frame": "43-44", "t": "1.79-1.83", "note": "ball bottom at 557 at frame 43 ~ front edge y~552-560"},
+  {"event": "ball falls, heavy motion blur, exits bottom of frame", "frames": "44-46", "t": "1.833-1.917"},
+  {"event": "ball out of view", "frames": "47-48"}
+ ],
+ "frame_timing_notes": "frames 17,18,19 are byte-identical in the ball track (likely duplicated frames); step 35->36 (40 px) is larger than neighbours (16, 26 px) - possible dropped/irregular frame or blur-biased centroid"
+}

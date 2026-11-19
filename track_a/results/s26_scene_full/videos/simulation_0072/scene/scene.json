@@ -1,0 +1,302 @@
+{
+ "video": "simulation_0072.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "view": "top-down (orthographic-looking) view of a 4-way street intersection; image x to the right, image y down. Ground plane faces camera, so a single m/px scale applies to the ground plane.",
+ "camera": {
+  "static": true,
+  "evidence": "frame-difference of static props (lamps, squares, ball, rocks) is zero across all 72 frames; per-frame background shift = 0 px"
+ },
+ "moving_objects": {
+  "cyclist": {
+   "track": "tracks/cyclist.csv",
+   "description": "person riding a bicycle on the vertical (north-south) road, seen from above: front wheel at top, rider body, rear wheel at bottom; grey/dark; lane x~918",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "direction": "straight up the image (-y), x constant ~918.5",
+   "pixel_size": "mask length along travel (bike front tip to rear wheel) ~61-63 px, width across (rider shoulders/handlebar) ~18-20 px",
+   "step_px_per_frame": "about -9.0 px/frame in y, roughly constant (no visible acceleration)",
+   "first": {
+    "frame": 0,
+    "cx": 918.91,
+    "cy": 829.26,
+    "bbox": [
+     909,
+     797,
+     929,
+     858
+    ]
+   },
+   "last": {
+    "frame": 71,
+    "cx": 918.33,
+    "cy": 204.97,
+    "bbox": [
+     908,
+     174,
+     926,
+     236
+    ]
+   },
+   "n_frames": 72,
+   "mask_len_px_median": 61.05,
+   "mask_len_px_range": [
+    58.0,
+    63.0
+   ],
+   "mask_wid_px_median": 18.9,
+   "mask_wid_px_range": [
+    17.0,
+    20.3
+   ]
+  },
+  "pedestrian": {
+   "track": "tracks/pedestrian.csv",
+   "description": "person walking on the lower-right sidewalk, seen from above: white shirt/shoulders with dark head; small (~20-30 px), passes just below the lamp post at x~1416",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "direction": "to the right (+x), y ~844 constant",
+   "pixel_size": "mask extent along x 23-32 px (varies with arm/leg swing), across 13-23 px",
+   "step_px_per_frame": "about +2.0 px/frame in x, noisy per frame (gait)",
+   "first": {
+    "frame": 0,
+    "cx": 1331.77,
+    "cy": 843.81,
+    "bbox": [
+     1321,
+     833,
+     1340,
+     855
+    ]
+   },
+   "last": {
+    "frame": 71,
+    "cx": 1475.43,
+    "cy": 844.61,
+    "bbox": [
+     1462,
+     833,
+     1485,
+     855
+    ]
+   },
+   "n_frames": 72,
+   "mask_len_px_median": 28.55,
+   "mask_len_px_range": [
+    19.5,
+    39.0
+   ],
+   "mask_wid_px_median": 15.8,
+   "mask_wid_px_range": [
+    11.0,
+    24.0
+   ]
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time": 0.0,
+   "what": "frame 1 is (almost) identical to frame 0 for both movers (displacement ~0); motion visible from frame 1->2 onwards"
+  },
+  {
+   "frame": 1,
+   "time": 0.0417,
+   "what": "start of steady motion of cyclist and pedestrian; both move for the rest of the clip, no stops, turns, contacts or direction changes"
+  },
+  {
+   "frame": 71,
+   "time": 2.9583,
+   "what": "clip ends; cyclist top at y~172 (still in frame), pedestrian at x~1474"
+  }
+ ],
+ "static_objects": {
+  "road_vertical": {
+   "x_range": [
+    616,
+    1081
+   ],
+   "width_px": 466,
+   "note": "grey north-south road, cyclist on it"
+  },
+  "road_horizontal": {
+   "y_range": [
+    290,
+    755
+   ],
+   "width_px": 466,
+   "note": "grey east-west road"
+  },
+  "sidewalk_blocks": "four beige corner blocks: top-left x0-615 y0-289, top-right x1082-2159 y0-289, bottom-left x0-615 y756-1079, bottom-right x1082-2159 y756-1079 (rounded corners at the intersection, curb ~10 px brown rim)",
+  "white_ball": {
+   "center": [
+    2028.7,
+    432.5
+   ],
+   "bbox_white": [
+    2020,
+    423,
+    2038,
+    441
+   ],
+   "diameter_px": 19,
+   "note": "small white sphere on the horizontal road, right side; shadow to its left; does not move"
+  },
+  "rock_cluster": {
+   "center": [
+    2062.8,
+    622.1
+   ],
+   "bbox": [
+    2027,
+    596,
+    2092,
+    651
+   ],
+   "size_px": "66 x 56",
+   "note": "grey cluster of rocks/boulders on the horizontal road right side; static"
+  },
+  "dark_square": {
+   "center": [
+    1278,
+    72
+   ],
+   "bbox": [
+    1234,
+    27,
+    1321,
+    117
+   ],
+   "size_px": "88 x 91 incl. reddish rim (dark interior ~80x80)",
+   "note": "dark grey square (grate / manhole / pit) top-right sidewalk"
+  },
+  "brown_squares": {
+   "note": "three light brown-red square patches (planters/tiles) ~84 x 80 px",
+   "top_left": [
+    369,
+    182,
+    452,
+    260
+   ],
+   "bottom_left": [
+    369,
+    808,
+    452,
+    890
+   ],
+   "bottom_right": [
+    1177,
+    806,
+    1258,
+    885
+   ]
+  },
+  "street_lamps": {
+   "note": "Y-shaped poles with 2-3 round heads seen from above, along the sidewalks near the curbs; bbox each",
+   "top": [
+    [
+     167,
+     185,
+     237,
+     243
+    ],
+    [
+     1395,
+     184,
+     1430,
+     242
+    ],
+    [
+     1704,
+     184,
+     1760,
+     242
+    ],
+    [
+     2014,
+     185,
+     2089,
+     242
+    ]
+   ],
+   "bottom": [
+    [
+     167,
+     784,
+     236,
+     842
+    ],
+    [
+     1395,
+     784,
+     1430,
+     842
+    ],
+    [
+     1704,
+     784,
+     1760,
+     841
+    ],
+    [
+     2014,
+     784,
+     2089,
+     842
+    ]
+   ]
+  },
+  "benches_or_sculptures": {
+   "note": "grey/striped cross-shaped props near the four sidewalk corners (benches/bike racks)",
+   "top_left": [
+    516,
+    196,
+    573,
+    252
+   ],
+   "top_right": [
+    1140,
+    200,
+    1191,
+    240
+   ],
+   "bottom_left": [
+    508,
+    786,
+    576,
+    827
+   ],
+   "bottom_right": [
+    1114,
+    801,
+    1146,
+    856
+   ]
+  },
+  "green_bin": {
+   "center": [
+    1342.3,
+    806.1
+   ],
+   "bbox": [
+    1330,
+    794,
+    1355,
+    818
+   ],
+   "size_px": "26 x 25",
+   "note": "teal/green round object (trash bin / hydrant) bottom-right sidewalk, above pedestrian start"
+  }
+ }
+}

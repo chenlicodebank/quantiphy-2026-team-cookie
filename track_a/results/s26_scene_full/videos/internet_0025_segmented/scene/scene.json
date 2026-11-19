@@ -1,0 +1,47 @@
+{
+  "video": "internet_0025_segmented.mp4",
+  "source": "segmentation (internet footage, background replaced by pure white)",
+  "scene": "2D",
+  "fps": 29.970629,
+  "frames": 305,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "camera": {
+    "status": "no background visible (white), so camera motion cannot be measured; boat drifts steadily right in image coordinates and does not change size (length 230-237 px, no trend), consistent with a static or near-static side-on camera",
+    "background_shift_px": null
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "long wooden (orange-brown) canoe/dugout boat seen side-on, square stern at LEFT, pointed upturned bow at RIGHT, some dark cargo mid-deck",
+      "moves": true,
+      "visible_frames": [0, 304],
+      "track": "tracks/boat.csv",
+      "reference_point": "cx,cy = bbox centre of the whole foreground (boat+person); mask_cx/mask_cy = mask centroid; hull_x0 = stern end, hull_x1 = bow tip",
+      "length_px_stern_to_bow": {"median": 234, "range": [230, 237], "frame0": 234},
+      "height_px_bbox_incl_person": {"median": 50, "range": [46, 52]},
+      "hull_height_px_gunwale_to_keel": {"median": 20, "note": "hull_bot_y - hull_top_y, approx"},
+      "axis_angle_deg": "about 0-1.6 (horizontal)",
+      "position_frame0": {"bbox": [467, 403, 701, 452], "cx": 584.5},
+      "position_frame304": {"bbox": [624, 399, 855, 449], "cx": 739.5},
+      "net_x_displacement_px": 155,
+      "mean_px_per_frame": 0.51,
+      "direction": "to the right (+x), essentially horizontal; y drifts up ~3 px over clip"
+    },
+    {
+      "name": "person (boatman)",
+      "description": "single person in dark/blue clothing standing at the stern (left end) of the boat, handling a pole/paddle",
+      "moves": "rides with the boat; arm/paddle movements",
+      "visible_frames": [0, 304],
+      "track": "tracks/person.csv",
+      "height_above_deck_px": {"median": 30, "range": [26, 33]},
+      "note": "lower body hidden inside the boat (flag occluded=1); bbox width sometimes includes the paddle"
+    }
+  ],
+  "static_objects": [],
+  "events": [
+    {"event": "boat moving right at start of clip (already in motion)", "frame": 0, "time_s": 0.0},
+    {"event": "boat still moving right at end of clip, no stop", "frame": 304, "time_s": 10.1433}
+  ]
+}

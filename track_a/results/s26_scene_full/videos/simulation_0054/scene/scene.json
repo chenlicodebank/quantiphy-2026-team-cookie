@@ -1,0 +1,69 @@
+{
+  "video": "simulation_0054.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.003,
+  "frames_total": 100,
+  "frames_with_content": "0-90 (frames 91-99 are fully black: render ended)",
+  "image_size_px": [1080, 1080],
+  "units": "pixels, frames, seconds (t = frame / 30.003); image x right, y down; no metric scale",
+  "camera": {
+    "motion": "static (median background is sharp; road/lamp features fixed across all frames)",
+    "view": "orthographic-looking straight top-down view of a two-lane road; motion plane = road plane facing the camera; one px scale for everything on the road"
+  },
+  "moving_objects": {
+    "orange_car": {
+      "description": "orange sports car (grey/silver cabin), left lane, heading DOWN the image (+y), front/headlights at bottom",
+      "track": "tracks/orange_car.csv",
+      "visible_frames": [0, 90],
+      "fully_in_view_frames": [16, 90],
+      "entered_from": "top edge (partially visible frames 0-15)",
+      "lane_centre_x_px": 347,
+      "length_px": 293.0,
+      "length_px_note": "median of full-view mask lengths; ~291-295 when slow (frames 40-90); 303-306 during frames 16-24 due to motion blur",
+      "width_px": 124,
+      "width_px_note": "121-127 incl. side mirrors; 117 when a mirror drops out of the mask",
+      "motion": "straight down, decelerating continuously: per-frame centre displacement ~17 px (frames 1-20) -> ~15.5 (f25) -> ~13.5 (f35) -> ~12 (f42) -> ~10 (f50) -> ~8.5 (f60) -> ~8 (f66) -> ~6.5 (f72) -> ~5.5 (f78) -> ~3.5 (f88-90); still moving at last frame 90; x drifts only 358->346 px (bbox, mirror effects)"
+    },
+    "black_car": {
+      "description": "black car (dark green-black body, white tail/front light strips), right lane, heading DOWN the image (+y)",
+      "track": "tracks/black_car.csv",
+      "visible_frames": [24, 84],
+      "fully_in_view_frames": [37, 70],
+      "entered_from": "top edge at frame 24 (partially visible 24-36)",
+      "exited": "bottom edge, partially visible 71-84, gone from frame 85",
+      "lane_centre_x_px": 675,
+      "length_px": 292.2,
+      "width_px": 121,
+      "motion": "straight down at constant speed: per-frame displacement 22.41 px/frame (mean of per-frame differences frames 37-70, std 0.5; linear-fit slope 22.44), i.e. ~672-673 px/s; x constant 674-676"
+    }
+  },
+  "static_objects": {
+    "road": {"asphalt_x_px": [297, 845], "width_px": 548, "note": "two lanes between curbs; runs full image height (vertical)"},
+    "left_lane_line": {"x_px": 339, "width_px": 6, "note": "white, weathered, ~continuous"},
+    "centre_line": {"x_px": 570, "width_px": 6, "note": "white, weathered dashes, faint"},
+    "right_lane_line": {"x_px": 802, "width_px": 6, "note": "white, weathered, broken"},
+    "left_lane_width_px": "339->570 = 231 (line to centre line); right lane 570->802 = 232",
+    "left_curb": {"x_px": [280, 297], "note": "grey curb strip with weeds 297-320"},
+    "right_curb": {"x_px": [845, 862]},
+    "left_sidewalk": {"x_px": [40, 280], "note": "light grey wet paving slabs; grass strip x<40"},
+    "right_sidewalk": {"x_px": [862, 1080]},
+    "lamp_post_upper": {"lamp_head_centre_px": [194, 450], "lamp_head_size_px": [36, 37], "pole_top_centre_px": [244, 463], "pole_top_size_px": [32, 23], "note": "black hexagonal lamp head on arm, left sidewalk"},
+    "lamp_post_lower": {"lamp_head_centre_px": [194, 980], "lamp_head_size_px": [36, 38], "pole_top_centre_px": [244, 918], "pole_top_size_px": [38, 45], "note": "same design, arm pointing up-right"},
+    "small_props_near_lower_lamp": {"white_globe_px": [238, 965], "orange_white_item_px": [242, 948], "size_px": "~25-30 each", "note": "small white ball/globe and an orange-white object (hydrant/bin?) next to the lower lamp post"},
+    "road_patches": "dark irregular asphalt patches: centre-line patch y~195-430 (x 510-560), y~745-850, y~970-1080; square patch x 605-720 y 555-695; patches x 605-712 y 80-145 and y 855-920; rough patches near right line y~180-290, 720-835, 960-1060",
+    "brown_object_top_left": {"x_px": [0, 30], "y_px": [40, 210], "note": "brown wooden thing at far left edge (bench/planter), partly out of frame"}
+  },
+  "events": [
+    {"event": "orange_car visible (entering at top, moving)", "frame": 0, "t": 0.0},
+    {"event": "orange_car fully in view", "frame": 16, "t": 0.533},
+    {"event": "black_car first appears at top edge", "frame": 24, "t": 0.800},
+    {"event": "black_car fully in view", "frame": 37, "t": 1.233},
+    {"event": "black_car centre level with orange_car centre (overtakes it, other lane)", "frame": 63, "t": 2.100, "note": "dy black-orange = -1.5 px at f63, +13.5 at f64"},
+    {"event": "black_car front reaches bottom edge", "frame": 71, "t": 2.366},
+    {"event": "black_car last visible", "frame": 84, "t": 2.800},
+    {"event": "orange_car last frame (still moving ~3.5 px/frame, no stop seen)", "frame": 90, "t": 3.000},
+    {"event": "video goes black", "frame": 91, "t": 3.033}
+  ],
+  "no_contact": "cars are in separate lanes, never touch; no direction changes"
+}

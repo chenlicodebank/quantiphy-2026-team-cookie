@@ -1,0 +1,95 @@
+{
+  "video": "simulation_0122.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 25.0,
+  "frames": 40,
+  "duration_s": 1.6,
+  "image_size_px": [1152, 2048],
+  "units": "pixels (x right, y down, origin top-left of the full frame); time t = frame / 25",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of rows 1300-2000 vs frame 0: max |shift| 0.14 px (x), 0.18 px (y) over all 40 frames (scene/scripts/cam_shifts.json)",
+    "perspective": "forest scene seen nearly level; the sword falls vertically in a plane facing the camera, so one px scale applies to its motion. Its apparent size is constant: pommel-to-guard 69 px both in flight (f10-f16) and at rest (f17+), so no change in depth."
+  },
+  "objects": [
+    {
+      "name": "sword",
+      "description": "longsword with a silver blade, dark brown grip, bronze cross-guard with a round medallion, small light pommel cap; falls point-down and sticks into the top of the large mossy boulder",
+      "moves": true,
+      "visible_frames": "0-39 (f0-f8 only the blade is in view, hilt above the top edge; full sword in view from f10; from f17 the lower 117 px of the blade incl. the tip is inside the boulder)",
+      "track": "tracks/sword.csv",
+      "reference_point": "ref_x, ref_y_mid = midpoint of pommel top and tip (assumed geometric centre / origin). The sword is rigid and only translates, so every landmark (tip_y, guard_y, pommel_top_y) gives the same per-frame displacement",
+      "size_px": {
+        "length_pommel_top_to_tip": 417,
+        "length_uncertainty": 3,
+        "guard_centre_to_tip": 348,
+        "pommel_top_to_guard_centre": 69,
+        "guard_span_x": "about 95-105 px (changes slightly while falling because the sword spins about its long axis; ~105 px, x 525-630, at rest)",
+        "blade_width": 19,
+        "visible_length_at_rest": 300,
+        "embedded_length_at_rest": 117
+      },
+      "motion_axis": "vertical, downward; x = 575.5 +-0.5 px all the time",
+      "rest_position": {"pommel_top_y": 755, "guard_y": 823, "blade_enters_rock_y": 1055, "tip_y_inferred": 1172, "mid_y_inferred": 963.5, "x": 575.5}
+    },
+    {
+      "name": "boulder",
+      "description": "large pale grey rock covered in moss at image centre, the sword sticks into its top",
+      "moves": false,
+      "visible_frames": "0-39",
+      "bbox_px": {"x0": 415, "x1": 768, "y0": 1055, "y1": 1295},
+      "size_px": {"width": 353, "height": 240},
+      "note": "edges read by eye from frame 30 with a grid, +-10 px; top surface where the sword enters at y = 1055"
+    },
+    {
+      "name": "small_white_rock",
+      "description": "small pale rock to the right of and below the boulder",
+      "moves": false,
+      "visible_frames": "0-39",
+      "bbox_px": {"x0": 778, "x1": 922, "y0": 1213, "y1": 1285},
+      "size_px": {"width": 144, "height": 72},
+      "note": "+-10 px"
+    },
+    {
+      "name": "mossy_rock_foreground",
+      "description": "darker moss-topped rock in the foreground, lower left of the boulder",
+      "moves": false,
+      "visible_frames": "0-39",
+      "bbox_px": {"x0": 353, "x1": 558, "y0": 1408, "y1": 1546},
+      "size_px": {"width": 205, "height": 138},
+      "note": "+-10 px, edges blend into the grass"
+    },
+    {
+      "name": "trees",
+      "description": "many tall tree trunks (forest background). Notable: thick trunk left of the sword, x ~ 380-470 at y 500 and x ~ 320-390 at y 1150 (base ~y 1190); ivy-covered trunk just left of the sword behind it, x ~ 450-520 at y 900; trunk right of the boulder, x ~ 700-780 at y 1000 (base ~y 1160); trunk at far right x ~ 960-1040",
+      "moves": false,
+      "visible_frames": "0-39",
+      "note": "positions approximate (+-15 px), read from frame 30"
+    },
+    {
+      "name": "ground",
+      "description": "grassy forest floor, from about y 1200 down to the bottom edge; bright sun patches at lower left (x 60-220, y ~1310) and right (x 680-1120, y ~1480)",
+      "moves": false
+    },
+    {
+      "name": "light_effects",
+      "description": "fog / light shafts and small glints; the blade carries a glint (y ~ 90 in f3-f8) and a glow on the blade after it lands (f17+, around y 880-960). Light only, not objects",
+      "moves": "flicker"
+    }
+  ],
+  "events": [
+    {"event": "sword already falling at the first frame (enters from the top edge; tip at y 54 at f0, moving 11 px/frame between f0 and f1)", "frame": 0, "time_s": 0.0},
+    {"event": "whole sword (pommel) first fully in view", "frame": 10, "time_s": 0.4},
+    {"event": "last frame in free flight (tip at y 1049, about 6 px above the boulder top surface at y 1055)", "frame": 16, "time_s": 0.64},
+    {"event": "impact / tip touches the boulder: between f16 and f17 (tip reaches y 1055 about 0.05 frame after f16)", "frame": 16.05, "time_s": 0.642},
+    {"event": "sword at rest, stuck in the boulder (pommel 755, moved 120 px from f16, then 0 px from f17 to f39)", "frame": 17, "time_s": 0.68},
+    {"event": "end of motion; remains still to the end", "frame": 17, "time_s": 0.68}
+  ],
+  "measurement_quality": {
+    "tip_y_f9_f16": "+-1 px (mask)",
+    "tip_y_f0_f8": "+-2-3 px (by eye from 2x zooms; f0-f3 tips sit over background sparkles)",
+    "pommel_and_guard": "+-2 px; pommel_top_y in the track = tip_y - 417, matches eye readings within 3 px",
+    "rest_frames": "pommel 755 +-1 directly measured; tip and midpoint inferred from the in-flight length"
+  }
+}

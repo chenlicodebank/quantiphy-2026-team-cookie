@@ -1,0 +1,65 @@
+{
+  "video": "simulation_0266.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation of a background patch: |shift| < 0.05 px for all 72 frames; scene/scripts/cam_shift.json)",
+    "view": "top-down (bird's-eye) view onto snowy mountain terrain; motion is in the image plane",
+    "render_glitch": "frames 67-71: a large soft white blob covers the left part of the image (x<~950, y~200-1440) around the vehicle; vehicle rear still visible"
+  },
+  "objects": [
+    {
+      "name": "snowmobile",
+      "description": "the only moving object: black snowmobile/sled-like vehicle with white/grey seat area, two front skis, rear fins and a grey rear plate; seen from above, nose pointing LEFT (-x)",
+      "moves": true,
+      "visible_frames": "0-71 (fully visible 0-60; nose cut by left image border from frame 61; frames 67-71 also inside render-glitch halo)",
+      "track_file": "tracks/snowmobile.csv",
+      "reference_point": "cx_est, cy_est (bbox centre of full mask for frames 0-60; for 61-71 rear edge minus fitted rear-to-centre offset)",
+      "motion": "straight line, horizontal, leftward (-x); y constant at 719.5 +/- 1 px; starts from rest at frame 1 and speeds up steadily (per-frame step grows from ~1 px to ~62 px)",
+      "pixel_size": {
+        "length_along_motion_px": "785-787 at frames 0-9 (x 1603-2388 at frame 0); slowly decreases to 740 at frame 60 (perspective / rendering, not deformation) - mean over 0-60 = ~770",
+        "width_across_px": "365 +/- 2 (y 536-902), constant",
+        "note": "length includes front ski tips and rear fins (full silhouette); height not visible (top-down view)"
+      },
+      "start_position_frame0_px": {"cx": 1995.5, "cy": 719.0, "bbox": [1603, 536, 2388, 902]},
+      "position_frame60_px": {"cx": 399.0, "cy": 719.0, "bbox": [29, 536, 769, 902]}
+    },
+    {
+      "name": "small_rock",
+      "description": "small brown rock with a dark shadow pointing right, on snow below the vehicle path, lower-right-centre of the image",
+      "moves": false,
+      "visible_frames": "0-71",
+      "pixel_extent": "rock body approx x 1850-1965, y 1210-1290 (~115 x 80 px); its shadow extends right to x~2065 (y 1205-1240)",
+      "position_px": [1905, 1250]
+    },
+    {
+      "name": "central_rock_ridge",
+      "description": "dark grey rocky ridge/cliff band running roughly vertically through the image at x ~950-1200, from the dark slope at top-left (x 0-1050, y 0-~550) down to the bottom edge; the vehicle passes over/across it around frames 38-50",
+      "moves": false,
+      "pixel_extent": "ridge face approx x 950-1200 at y 550-1440 (width ~150-250 px)"
+    },
+    {
+      "name": "right_rock_ridge",
+      "description": "dark bluish rocky ridge at the right side, x ~2050-2500, y 0-1100; the vehicle starts in front of it (its rear at x~2388 at frame 0)",
+      "moves": false
+    },
+    {
+      "name": "snow_field",
+      "description": "white snow with brownish streaks covering most of the image; ground plane seen from above",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "snowmobile at rest", "frames": "0-1", "times_s": "0.000-0.042", "note": "bbox identical in frames 0 and 1"},
+    {"event": "motion start", "frame": 1, "time_s": 0.042, "note": "first displacement between frame 1 and 2 (~1 px); steady speed-up afterwards, no direction change"},
+    {"event": "nose reaches left image border", "frame": 61, "time_s": 2.542},
+    {"event": "render glitch (white halo) begins", "frame": 67, "time_s": 2.792},
+    {"event": "video end, vehicle still partly visible (rear at x=118)", "frame": 71, "time_s": 2.958}
+  ],
+  "notes_file": "notes.md"
+}

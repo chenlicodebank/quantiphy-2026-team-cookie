@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0124_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1840,
+  "question": "What is the width of the grey and red car in meters?",
+  "prior": "speed of the black car = 26.085m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

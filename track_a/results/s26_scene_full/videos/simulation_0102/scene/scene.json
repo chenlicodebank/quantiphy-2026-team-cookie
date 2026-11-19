@@ -1,0 +1,77 @@
+{
+  "video": "simulation_0102.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "duration_s": 3.0417,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale",
+  "camera": {
+    "motion": "static (background identical between frames 0 and 72 outside the objects; stitched background gives near-zero difference everywhere else)",
+    "per_frame_background_shift_px": [0, 0],
+    "layout": "split view: above-water view (grey sky, sea surface) for y < 672.5, flat blue underwater view for y > 672.5",
+    "perspective": "side-on orthographic-looking 2D layout; no vanishing cues used. Boat and shark keep constant pixel size over the clip (boat length 854 +/- 1 px, shark area 9300-9600 px^2) so each moves at constant depth. They are in different panels (above / below water) and may be at different depths; one scale from the prior object is the default."
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red-hulled fishing boat with white wheelhouse, mast, rails, registration 'AH805' on the bow; only object in the upper (above-water) panel",
+      "moves": true,
+      "direction": "+x (to the right), horizontal only (no vertical motion: hull/cabin top & bottom rows constant)",
+      "visible_frames": [0, 72],
+      "fully_visible_frames": [0, 47],
+      "notes": "mast top always cut by top image border; bow passes the right border from frame 48; at frame 72 about 420 px (stern part) remains visible",
+      "track_file": "tracks/boat.csv",
+      "reference_point": "ref_x = hull bounding-box centre (stern sub-pixel edge + 412.97 px); ref_y = 415.4 (fixed, centre of hull+cabin rows 231-599; boat has no vertical motion, true origin height unknown)",
+      "size_px_frame0": {
+        "length_stern_to_bow_bbox": 854,
+        "bbox_x": [232, 1086],
+        "cabin_roof_top_y": 231,
+        "bow_tip_top_y": 352,
+        "gunwale_at_stern_y": 455,
+        "keel_bottom_visual_y": 645,
+        "mask_bottom_incl_submerged_reflection_y": 672,
+        "mast_top_y": "clipped at 0 (above frame)",
+        "height_keel_to_cabin_roof": 414,
+        "height_mask_visible": 673,
+        "length_hull_rows_mean_stern_to_bow_edge": 811.3
+      }
+    },
+    {
+      "name": "shark",
+      "description": "grey shark (white belly, dorsal fin, forked tail) swimming in the lower blue underwater panel; only object there",
+      "moves": true,
+      "direction": "-x (to the left), horizontal (centroid y 906 +/- 0.3 for frames 0-60)",
+      "visible_frames": [0, 72],
+      "fully_visible_frames": [0, 60],
+      "notes": "nose reaches left border at frame 60; frames 61-72 only rear part / tail visible (at frame 72 only 44 px of tail). Tail beats, so tail-edge and centroid jitter about +/-1.5 px per frame.",
+      "track_file": "tracks/shark.csv",
+      "reference_point": "frames 0-60: mask centroid (approx. body centre); frames 61-72: tail edge - 129.14 px (mean centroid-tail offset of frames 49-60), extrapolated off-screen",
+      "size_px": {
+        "length_nose_to_tail_tip_bbox": 247.8,
+        "height_bbox_incl_dorsal_and_pectoral_fins": 101.1,
+        "bbox_frame0": [692, 854, 939, 953]
+      }
+    }
+  ],
+  "static_objects": [
+    {"name": "sea_horizon", "description": "boundary between grey sky and sea surface in upper panel", "y_px": 566},
+    {"name": "underwater_panel_top", "description": "top edge of the flat blue underwater area (cuts boat's submerged hull/reflection)", "y_px": 672.5},
+    {"name": "sea_surface_band", "description": "light purple-grey water surface band between horizon and panel top", "y_range_px": [566, 672]}
+  ],
+  "events": [
+    {"event": "both objects stationary between frames 0 and 1 (frame 1 identical position to frame 0)", "frame": 1, "t_s": 0.0417},
+    {"event": "motion start: first non-zero displacement, boat and shark", "frame": 2, "t_s": 0.0833, "note": "displacement from frame 1 to 2; boat jumps directly to its constant step (~17.9 px/frame), shark starts at ~7.5 px/frame and its steps grow steadily (~16.7-17.7 px/frame by frames 58-72)"},
+    {"event": "boat bow touches right image border", "frame": 48, "t_s": 2.0},
+    {"event": "shark nose touches left image border", "frame": 60, "t_s": 2.5},
+    {"event": "boat and shark horizontal reference x coincide (cross each other, in different panels)", "frame": 7, "t_s": 0.2917, "note": "boat ref_x 748.5 (f6) -> 766.5 (f7); shark ref_x 757.2 (f6) -> 747.0 (f7); crossing between frames 6 and 7 (~t 0.27 s)"},
+    {"event": "clip ends with both objects partly out of frame", "frame": 72, "t_s": 3.0}
+  ],
+  "measurement_reliability": {
+    "boat_ref_x": "+/-0.1 px per frame (sub-pixel stern edge averaged over 11 rows); offset to true origin unknown but constant",
+    "shark_ref_x": "+/-1.5 px per frame (body flex); frames 61-72 extrapolated from tail edge, +/-3 px",
+    "sizes": "+/-1-2 px (anti-aliased edges, threshold mask)"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0078.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale",
+  "camera": {
+    "motion": "static (fixed render camera; featureless floor, no visible shift)",
+    "view": "looking straight down at a uniform grey floor (top-down); the floor is the motion plane facing the camera",
+    "perspective": "noticeable: heads are displaced away from the image centre relative to the feet (head-top image displacement = ~1.13-1.14 x foot image displacement => camera height ~8-9 x person height). Principal point assumed at image centre (960,540).",
+    "horizon_or_vanishing_points": "none (overhead view)"
+  },
+  "objects": [
+    {
+      "name": "person_A_dark_shirt",
+      "description": "man, black T-shirt, blue jeans, dark shoes, brown hair; starts at left edge",
+      "moves": true,
+      "motion": "walks left -> right along image row y~550 through the whole clip, never stops",
+      "visible_frames": [0, 71],
+      "cut_by_left_edge_frames": [0, 5],
+      "track": "tracks/person_A_dark_shirt.csv",
+      "reference_point": "pelvis_est_x/y (valid from frame 6; see notes); head_x/y, mask_c, shirt_c, bbox_c also given",
+      "pelvis_est_px": {"f6": [94.8, 547.6], "f24": [298.9, 548.8], "f36": [424.9, 552.5], "f48": [559.0, 544.8], "f60": [695.3, 547.5], "f71": [817.4, 550.6]},
+      "approx_image_speed_px_per_frame": "pelvis mean 11.1, per-frame 9.3-13.4 (head-top 11.8, foot-plant progression 10.3-10.6)",
+      "step": {"period_frames": "~16.5-17 per step", "leading-foot plant progression px": [290, 474, 644, 828], "plant_frames": [9, 26, 42, 59]},
+      "mask_extents_px": "length along main axis 140-250 (gait: max at mid-stride, min ~140 when legs pass), width across 115-160 (arms incl.), bbox height (across walking direction) ~140-150"
+    },
+    {
+      "name": "person_B_white_shirt",
+      "description": "man, white/light-grey T-shirt, blue jeans, dark shoes with white stripes, brown hair; enters from the right edge",
+      "moves": true,
+      "motion": "walks right -> left along image row y~560 (about 10-12 px lower than A), never stops",
+      "visible_frames": [2, 71],
+      "cut_by_right_edge_frames": [2, 16],
+      "track": "tracks/person_B_white_shirt.csv",
+      "reference_point": "pelvis_est_x/y (valid from frame 17, when the head is fully inside)",
+      "pelvis_est_px": {"f17": [1825.0, 563.7], "f24": [1711.6, 559.4], "f36": [1543.8, 555.9], "f48": [1371.4, 562.4], "f60": [1192.8, 559.9], "f71": [1033.5, 557.7]},
+      "approx_image_speed_px_per_frame": "pelvis mean 14.7, per-frame 12.1-17.7 (head-top 15.4, foot-plant progression 13.5)",
+      "step": {"period_frames": "~16-17 per step", "leading-foot plant progression px": [1522, 1303, 1062], "plant_frames": [26, 42, 60]},
+      "mask_extents_px": "length along main axis 140-255, width across 110-158, bbox height ~140-150"
+    }
+  ],
+  "static_objects": [
+    {"name": "floor", "description": "uniform mid-grey (RGB ~136) ground plane filling the whole frame; no markings, no furniture, no props"}
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip starts; A already walking, partly cut by left edge"},
+    {"frame": 2, "t": 0.083, "event": "B's leading foot first enters at right edge"},
+    {"frame": 6, "t": 0.25, "event": "A fully inside frame"},
+    {"frame": 17, "t": 0.708, "event": "B fully inside frame"},
+    {"frame": 71, "t": 2.958, "event": "clip ends; the two walkers face each other, bounding boxes 16 px apart (A x1=920, B x0=936), pelvis_est x-gap 216 px (1033.5-817.4), y-gap 7 px; still approaching, no contact"},
+    {"note": "both walk continuously the whole clip; no start/stop, no turns; A plants leading foot at frames ~9, 26, 42, 59; B at ~26(+~10), 42, 60"}
+  ],
+  "files": {"notes": "notes.md", "tracks": "tracks/*.csv (final), tracks/*_raw.csv (raw segmentation output)", "scripts": "scripts/"}
+}

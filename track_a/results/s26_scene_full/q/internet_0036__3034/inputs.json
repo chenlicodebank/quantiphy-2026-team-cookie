@@ -1,0 +1,18 @@
+{
+ "video": "internet_0036.mp4",
+ "video_source": "internet",
+ "video_type": "S2SS",
+ "fps": 24.0625,
+ "frames": 69,
+ "duration_s": 2.8675,
+ "width": 2160,
+ "height": 4096,
+ "question": {
+  "id": 3034,
+  "question": "What is the speed of the bottom hand moves between 1.72s to 2.6s in m/s?",
+  "prior": "width of US one-dollar bill = 66.3 mm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 25.0
+ }
+}

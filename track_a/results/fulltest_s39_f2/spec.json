@@ -1,0 +1,16 @@
+{
+ "base": "results/fulltest_s39_f1/track_a_s39_f1.csv",
+ "files": {"E2": "results/fulltest_s27_e2/track_a_s27_e2.csv", "U1": "results/fulltest_s30_u1/track_a_s30_u1.csv",
+           "Blat": "results/fulltest_s37_b9lat/track_b_s33_b9lat.csv", "Bconst": "results/fulltest_s37_b9const/track_b_s33_b9const.csv"},
+ "steps": [
+  {"name": "d2_lab_u1", "op": "copy", "from": "U1", "ids": [2267, 2270, 2272, 2275, 2277, 2280]},
+  {"name": "s3_labmotion_lat_fuse", "op": "fuse", "a": "U1", "b": "Blat", "wA": 0.5, "cap": 0.4, "cats": ["S3"], "sources": ["lab"], "kinds": ["vel", "disp", "acc"]},
+  {"name": "s3_labsize_fuse", "op": "fuse", "a": "E2", "b": "Blat", "b_scale": 1.03, "wA": 0.5, "cap": 0.4, "cats": ["S3"], "sources": ["lab"], "kinds": ["size"],
+   "exclude_files": [{"path": "results/fulltest_s27_e2/combine_rows.csv", "col": "step", "val": "table"}]},
+  {"name": "s3_labdist_fuse", "op": "fuse", "a": "E2", "b": "Blat", "wA": 0.5, "cap": 0.4, "cats": ["S3"], "sources": ["lab"], "kinds": ["dist"]},
+  {"name": "d3_labmotion_const_fuse", "op": "fuse", "a": "E2", "b": "Bconst", "b_scale": 0.952, "wA": 0.6, "cap": 0.4, "cats": ["D3"], "sources": ["lab"], "kinds": ["vel", "disp", "acc"]},
+  {"name": "d3_labsizedist_fuse", "op": "fuse", "a": "E2", "b": "Bconst", "wA": 0.6, "cap": 0.4, "cats": ["D3"], "sources": ["lab"], "kinds": ["dist", "size"],
+   "exclude_files": [{"path": "results/fulltest_s27_e2/combine_rows.csv", "col": "step", "val": "table"}]},
+  {"name": "s2_acc_fuse", "op": "fuse", "a": "E2", "b": "Blat", "wA": 0.5, "cap": 0.4, "cats": ["S2"], "sources": ["simulation", "segmentation"], "kinds": ["acc"]}
+ ]
+}

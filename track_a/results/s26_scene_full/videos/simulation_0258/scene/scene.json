@@ -1,0 +1,91 @@
+{
+  "video": "simulation_0258.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 40,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 is t = 0",
+  "pixel_convention": "x right, y DOWN, pixel-edge coordinates (a pixel column k spans k..k+1, so centres are (x0+x1)/2 of exclusive bbox)",
+  "camera": {
+    "motion": "static (frame 0 vs other frames: differences only at the pen; background identical to the pixel)",
+    "view": "front-on view of a blue wall with a table; motion plane (pen fall) is parallel to the image plane, 2D scene -> one metres-per-pixel scale",
+    "perspective_cues": "table top seen slightly from above (top surface visible y~865..895), so the camera is a little above table height; pen falls in front of the wall, lands near the back of the table top"
+  },
+  "objects": [
+    {
+      "name": "pen",
+      "description": "black/silver ballpoint pen (white-silver tip on the left, silver clip near centre), held horizontal; the only moving object",
+      "moves": true,
+      "visible_frames": "3-39 (frames 0-2: above the top image edge, not visible)",
+      "track_file": "tracks/pen.csv",
+      "reference_point": "bbox centre of the pen (= pen centre/origin); x about 1025.0-1025.5 throughout",
+      "size_px": {"length_along_axis": 65.3, "length_range": [64, 66], "thickness_height": 6.3, "thickness_range": [5, 8], "note": "length = horizontal bbox width (pen within ~1-2 deg of horizontal); thickness ~6 px; no motion blur in render"},
+      "key_positions_px": {
+        "first_visible_frame3": [1025.0, 7.5],
+        "frame15_last_free_fall": [1026.0, 757.0],
+        "frame16": [1025.0, 864.5],
+        "bounce_apex_frames18_19": [1025.5, 855.8],
+        "rest_frames21_39": [1025.44, 866.62]
+      },
+      "vertical_drop_px_frame3_to_rest": 859.1
+    },
+    {
+      "name": "table",
+      "description": "long dark wood table top with black metal frame/legs, runs from behind AC unit's right side to x~1539",
+      "moves": false,
+      "image_extents_px": {"x_left": 518, "x_right": 1539, "length": 1021, "top_surface_back_edge_y": 865, "top_surface_front_edge_y": 895, "front_band_bottom_y": 912, "apron_bottom_y": 928, "legs": "black legs at x~520-555 (left) and ~1500-1539 (right), continue below image bottom"},
+      "reliability": "+-3 px; legs/bottom cut by frame edge so table height not measurable"
+    },
+    {
+      "name": "ac_outdoor_unit",
+      "description": "white LG air-conditioner outdoor unit with round fan grille, lower left",
+      "moves": false,
+      "image_extents_px": {"x_left": 132, "x_right": 638, "width": 506, "top_y": 758, "bottom": "cut by image bottom (1080)", "fan_grille_x": [150, 402], "fan_grille_y": [786, 1065]},
+      "reliability": "+-3 px; height not fully visible"
+    },
+    {
+      "name": "cup_with_plant",
+      "description": "white cup/pot with small white-green succulent, on table right of pen",
+      "moves": false,
+      "image_extents_px": {"x": [1084, 1130], "y_top_leaves": 810, "y_cup_top": 832, "y_bottom": 871, "width": 46, "height_with_plant": 61},
+      "reliability": "+-3 px (visual from 4x crop)"
+    },
+    {
+      "name": "wallet_or_phone_left",
+      "description": "flat dark rectangular object (phone/wallet) on table, left of pen",
+      "moves": false,
+      "image_extents_px": {"x": [901, 969], "y": [861, 870], "length": 68, "height": 9},
+      "reliability": "+-3 px"
+    },
+    {
+      "name": "remote_or_phone_right",
+      "description": "flat black object (remote / phone) on table, right of cup",
+      "moves": false,
+      "image_extents_px": {"x": [1141, 1191], "y": [865, 871], "length": 50, "height": 6},
+      "reliability": "+-3 px"
+    },
+    {
+      "name": "window_frame",
+      "description": "white window frame in the right part of the wall (right side wall area darker blue)",
+      "moves": false,
+      "image_extents_px": {"x": [1625, 1755], "y": [0, 840]},
+      "reliability": "rough +-10 px"
+    },
+    {
+      "name": "wall",
+      "description": "blue textured wall, background",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "release / start of fall (extrapolated, pen above frame)", "frame": 0, "time_s": 0.0, "note": "vertical pixel velocity extrapolates to 0 at frame ~-0.1; consistent with drop from rest at t=0"},
+    {"event": "pen enters view (fully visible at top edge)", "frame": 3, "time_s": 0.125},
+    {"event": "first impact with table top", "frame": 16, "time_s": 0.6667, "note": "contact occurs between frames 15 and 16 (extrapolated ~frame 16.0); at frame 16 pen already 2-3 px above rest height and moving up"},
+    {"event": "bounce apex", "frame": 18.5, "time_s": 0.771, "note": "frames 18 and 19 both at cy ~855.8 (~11 px above rest)"},
+    {"event": "second impact / settles", "frame": 21, "time_s": 0.875, "note": "between frames 20 and 21; from frame 21 on fully at rest"},
+    {"event": "end of motion", "frame": 21, "time_s": 0.875}
+  ],
+  "notes_file": "notes.md"
+}

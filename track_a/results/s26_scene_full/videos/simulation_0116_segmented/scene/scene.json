@@ -1,0 +1,43 @@
+{
+ "video": "simulation_0116_segmented.mp4",
+ "source": "segmentation (Blender render with background replaced by uniform white, RGB 253)",
+ "scene": "2D",
+ "fps": 24.0, "frames": 32, "duration_s": 1.3333, "width": 1386, "height": 1920,
+ "time_convention": "t = frame / 24; frame 0 = t 0",
+ "pixel_convention": "x right, y DOWN, origin top-left, full-resolution pixels",
+ "camera": {"motion": "static (cabinets' masks identical at frames 0 and 31 to within 1-2 px; uniform background)", "view": "frontal, 2D plane facing camera; no visible ground, horizon or vanishing points"},
+ "objects": [
+  {"name": "football",
+   "description": "American football (brown/dark leather with white stripes); only moving object; right side of image (x ~1010-1065). Frames 0-25 textured; frames 26-31 rendered as a pale grey silhouette (segmentation artifact) - same object, same track.",
+   "moves": true, "visible_frames": [0, 31], "occluded_frames": [],
+   "track_file": "tracks/football.csv",
+   "reference_point": "cx, cy = mask centroid (proxy for the rigid object's origin/centre); bbox_cx, bbox_cy also given",
+   "motion": "falls straight down (x constant 1035-1038), y from 228.5 (f0) to 1730.2 (f31); per-frame dy grows steadily from ~2 px (f0->1) to ~95 px (f30->31); appears to start from (near) rest at frame 0; still falling at the last frame, no impact",
+   "pixel_size": {"long_axis_px_f0_15_mean": 68, "short_axis_px_f0_15_mean": 45,
+                  "long_axis_px_f16_31_mean": 62, "short_axis_px_f16_31_mean": 41,
+                  "overall_long_axis_approx_px": 65, "overall_short_axis_approx_px": 44, "bbox_h_range_px": [59, 73], "bbox_w_range_px": [37, 48],
+                  "note": "long axis roughly vertical (angle 79-99 deg); slow tumble changes the outline a few px; frame 0 mask includes a small dark tip at the bottom (bbox_h 73)"}},
+  {"name": "upper_cabinet",
+   "description": "yellow metal cabinet / locker box with dark grey top band, the higher of the two yellow boxes, centre of image",
+   "moves": false, "visible_frames": [0, 31],
+   "bbox_px": {"x_min": 647, "x_max": 807, "y_min": 824, "y_max": 1151},
+   "width_px": 161, "height_px": 328,
+   "centre_px": [727, 988],
+   "details": "dark band y 824-~885; a white segmentation gap at y ~1040-1045 splits the yellow body; ragged yellow fragments below to y ~1170 (segmentation artifacts). Height uncertain by ~±20 px because of the ragged bottom."},
+  {"name": "lower_cabinet",
+   "description": "yellow metal cabinet / locker door with dark grey top band, handle on left, lower of the two yellow boxes, directly below upper_cabinet",
+   "moves": false, "visible_frames": [0, 31],
+   "bbox_px": {"x_min": 646, "x_max": 807, "y_min": 1374, "y_max": 1718},
+   "width_px": 162, "height_px": 345,
+   "centre_px": [727, 1546],
+   "details": "dark band y 1376-~1432; clean edges"}
+ ],
+ "gaps": {"upper_cabinet_bottom_to_lower_cabinet_top_px": 223, "football_x_to_cabinet_centre_x_px": 309},
+ "events": [
+  {"event": "football motion start / release (already falling, from near rest)", "frame": 0, "time_s": 0.0},
+  {"event": "football passes level of upper_cabinet top (cy = 824)", "frame": 20, "time_s": 0.8333, "note": "cy 792.9 at f19, 854.0 at f20; crossing ~f19.5"},
+  {"event": "football appearance switches to grey silhouette (render/segmentation artifact, not a physical event)", "frame": 26, "time_s": 1.0833},
+  {"event": "end of clip, football still falling (cy 1730, near lower_cabinet bottom level 1718)", "frame": 31, "time_s": 1.2917}
+ ],
+ "no_events": "no bounce, impact, contact or direction change in the clip"
+}

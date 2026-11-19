@@ -1,0 +1,314 @@
+{
+ "video": "simulation_0046.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 33.0,
+ "frames": 99,
+ "width": 1920,
+ "height": 766,
+ "time_of_frame_i": "t = i / 33",
+ "units": "pixels (image coords, x right, y down, origin top-left) and seconds; no metric scale assumed",
+ "camera": {
+  "motion": "static (phase correlation of the building facade vs median background: |shift| < 0.01 px in every frame)",
+  "view": "street scene seen roughly perpendicular to the street; facade/curb lines are horizontal in the image, so camera has ~no roll and little yaw; motion of both people is mostly parallel to the image x axis (right -> left)",
+  "perspective_cues": {
+   "ground_contact_rows_y": {
+    "walker_feet": "556-561",
+    "cyclist_wheel_bottoms": "~610 (f13) -> ~590 (f79)",
+    "pink_parked_bike_wheel_bottom": 680
+   },
+   "depth_order_near_to_far": [
+    "pink parked bicycle (near sidewalk/street edge, y~680)",
+    "cyclist (riding along the far curb, y~590-610)",
+    "walker (far sidewalk next to the houses, feet y~557)",
+    "house facades (base y~545)"
+   ],
+   "far_sidewalk_curb_edge_y": "~590-597 across the image",
+   "street": "y ~597-690",
+   "near_sidewalk": "y > 690",
+   "horizon": "not visible (above the frame); building horizontals ~level => horizon row unknown, optical axis roughly horizontal"
+  }
+ },
+ "objects": {
+  "walker": {
+   "description": "adult man, white T-shirt, light-blue jeans, dark grey hair, white/grey face; walks right->left on the far sidewalk in front of the green house / stone house",
+   "moves": true,
+   "visible_frames": "0-98 (whole clip)",
+   "occluded_frames": "13-33 (cyclist passes in front of him; legs/torso hidden behind bicycle and rider)",
+   "track_file": "tracks/walker.csv",
+   "reference_point": "pelvis estimate: x = median x of mask rows 20-45% of body height from top (torso), y = top + 0.47*height; frames 13-33: head_x + 1.95 px",
+   "x_start_end_px": [
+    1685.0,
+    1185.0
+   ],
+   "apparent_height_px": {
+    "frames_0_12": 246.0,
+    "frames_34_60": 244.0,
+    "frames_61_98": 242.0,
+    "max": 252.0,
+    "min": 236.0,
+    "note": "head top (hair) to lowest shoe pixel; varies with gait (head bob, foot lift) +-2-3 px measurement noise; slow decrease => walker drifts slightly away from camera"
+   },
+   "feet_row_y_median": {
+    "frames_0_12": 561.0,
+    "frames_34_98": 558.0
+   }
+  },
+  "cyclist": {
+   "description": "rider in dark navy jacket and light-blue jeans, dark hair, on a dark-blue city bicycle with rear rack; rides right->left along the far curb",
+   "moves": true,
+   "visible_frames": "2-98 (enters at right edge f2, fully inside f13-89, front wheel reaches left edge f90, still partly visible at f98)",
+   "occlusion": "in front of the walker f13-33 (cyclist bbox then includes walker pixels); behind the parked pink bicycle f73-98 (bike part hidden, rider upper body visible)",
+   "track_file": "tracks/cyclist.csv",
+   "reference_point": "midpoint between the two wheel hubs (close to the bottom bracket / a bicycle root at mid-wheelbase); rider pelvis (saddle) is about (+40, -95) px * tm_scale from it",
+   "frame35_geometry_px": {
+    "hub_front": [
+     1182.5,
+     552.5
+    ],
+    "hub_rear": [
+     1338.5,
+     557.5
+    ],
+    "wheelbase": 156,
+    "wheel_diameter": 97,
+    "length_front_wheel_edge_to_rear_wheel/rack_edge": 257,
+    "rider_head_top_y": 339,
+    "wheel_bottom_y": 598,
+    "total_height_head_to_ground": 259,
+    "saddle": [
+     1313,
+     467
+    ]
+   },
+   "apparent_scale_vs_frame35": {
+    "f13": 1.0500000000000003,
+    "f20": 1.04,
+    "f35": 1.0,
+    "f50": 0.9700000000000001,
+    "f65": 0.9400000000000001,
+    "f79": 0.92,
+    "note": "template-match scale; size shrinks ~12% over f13-79 and hub row rises 562->542 => cyclist moves away from the camera while riding left"
+   },
+   "hub_mid_y": {
+    "f13": 561.8,
+    "f35": 555.0,
+    "f50": 550.8,
+    "f65": 546.4,
+    "f79": 541.8
+   },
+   "hough_wheelbase_px_median": {
+    "f13_25": 162.5,
+    "f26_45": 156.0,
+    "f46_65": 150.0,
+    "f66_83": 143.0
+   }
+  },
+  "pink_parked_bicycle": {
+   "description": "pastel-pink women's bicycle with tan saddle, tan fenders, front basket, parked on kickstand at lower left, facing left, in front of the telephone booth",
+   "moves": false,
+   "visible_frames": "0-98",
+   "bbox_px": [
+    70,
+    452,
+    422,
+    682
+   ],
+   "length_px": 352,
+   "height_px": 230,
+   "rear_wheel_centre": [
+    357,
+    627
+   ],
+   "rear_wheel_diameter_px": 120,
+   "note": "front wheel partly hidden behind the small iron fence at x 0-200; closest object to the camera; occludes the cyclist f73-98"
+  },
+  "static_scene": {
+   "telephone_booth": {
+    "bbox_px": [
+     80,
+     152,
+     297,
+     540
+    ],
+    "note": "white/grey booth labelled TELEPHONE, posters, left of shop"
+   },
+   "photo_lab_sign_left": {
+    "bbox_px": [
+     10,
+     45,
+     515,
+     138
+    ]
+   },
+   "photo_lab_sign_right": {
+    "bbox_px": [
+     612,
+     100,
+     900,
+     172
+    ]
+   },
+   "photo_lab_blue_door": {
+    "bbox_px": [
+     303,
+     195,
+     450,
+     505
+    ]
+   },
+   "shop_window_display": {
+    "bbox_px": [
+     622,
+     180,
+     805,
+     415
+    ]
+   },
+   "trash_can": {
+    "bbox_px": [
+     600,
+     415,
+     652,
+     490
+    ]
+   },
+   "juice_up_cardboard_box": {
+    "bbox_px": [
+     688,
+     456,
+     780,
+     490
+    ],
+    "length_px": 92,
+    "height_px": 34
+   },
+   "green_house_wooden_door": {
+    "bbox_px": [
+     1010,
+     160,
+     1135,
+     425
+    ],
+    "width_px": 125,
+    "height_px": 265
+   },
+   "green_house_entry_steps": {
+    "bbox_px": [
+     985,
+     425,
+     1145,
+     545
+    ]
+   },
+   "green_house_window_glass": {
+    "bbox_px": [
+     1268,
+     155,
+     1370,
+     338
+    ],
+    "with_frame_and_sill": [
+     1228,
+     100,
+     1412,
+     372
+    ]
+   },
+   "iron_fence_and_hedge": {
+    "bbox_px": [
+     1185,
+     420,
+     1600,
+     515
+    ]
+   },
+   "stone_house_arched_door": {
+    "bbox_px": [
+     1622,
+     130,
+     1747,
+     430
+    ],
+    "width_px": 125,
+    "height_px": 300
+   },
+   "stone_house_gate_posts_with_finials": {
+    "left_bbox_px": [
+     1603,
+     310,
+     1655,
+     550
+    ],
+    "right_bbox_px": [
+     1828,
+     310,
+     1882,
+     552
+    ]
+   },
+   "small_iron_fence_lower_left": {
+    "bbox_px": [
+     0,
+     530,
+     200,
+     710
+    ]
+   },
+   "house_facade_base_y": 545,
+   "far_curb_y": "590-597",
+   "near_curb_y": "~690"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "walker already walking left (x~1685); cyclist not yet in view"
+  },
+  {
+   "frame": 2,
+   "t": 0.0606,
+   "event": "cyclist front wheel enters at the right image edge"
+  },
+  {
+   "frame": 13,
+   "t": 0.3939,
+   "event": "cyclist fully inside frame; begins to pass in front of the walker (image overlap f13-33)"
+  },
+  {
+   "frame": 21.6,
+   "t": 0.6545,
+   "event": "cyclist reference x passes walker reference x (overtakes him in image x, between f21 and f22)"
+  },
+  {
+   "frame": 33,
+   "t": 1.0,
+   "event": "cyclist no longer overlaps walker"
+  },
+  {
+   "frame": 73,
+   "t": 2.2121,
+   "event": "cyclist starts to pass behind the parked pink bicycle"
+  },
+  {
+   "frame": 90,
+   "t": 2.7273,
+   "event": "cyclist front wheel reaches the left image edge (starts leaving)"
+  },
+  {
+   "frame": 98,
+   "t": 2.9697,
+   "event": "clip ends; cyclist still partly visible at x 0-62; walker at x~1185 still walking"
+  },
+  {
+   "note": "no stops, bounces, impacts or direction reversals: both people move steadily right->left the whole time"
+  }
+ ],
+ "files": {
+  "tracks/walker.csv": "per-frame walker track",
+  "tracks/cyclist.csv": "per-frame cyclist track",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts"
+ }
+}

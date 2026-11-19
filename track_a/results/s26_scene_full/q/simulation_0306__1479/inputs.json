@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0306.mp4",
+ "video_source": "simulation",
+ "video_type": "V3SS",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 1479,
+  "question": "What is the length of the whale in meters?",
+  "prior": "speed of the whale = 1.67m/s",
+  "depth_info": "t = 1.0s, distance_whale_camera = 33.7307 m\nt = 2.0s, distance_whale_camera = 35.1624 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

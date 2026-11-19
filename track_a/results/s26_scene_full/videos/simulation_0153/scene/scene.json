@@ -1,0 +1,67 @@
+{
+  "video": "simulation_0153.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 42,
+  "duration_s": 1.75,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, full 1920x1080 resolution) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (mean |frame-to-frame diff| on cart-free ceiling/wall regions < 0.75 grey levels for all frames; no pan/shake)",
+    "view": "looking straight down an underground parking-garage aisle (one-point perspective, vanishing point near x~960-1000, y~430-450); the cart drives across the foreground, side-on, perpendicular to the view axis",
+    "ground_contact_line_y": 947,
+    "notes": "cart stays at a constant depth: wheel-ground contact y = 946-948 in all frames, body length 547-553 px and height 482-484 px once fully visible -> planar (2D) motion, one px scale applies to the cart"
+  },
+  "objects": [
+    {
+      "name": "cart",
+      "description": "light-blue small electric utility cart / golf-cart-like vehicle with a roof canopy (blue roof with orange/yellow light bar at its front edge), white/grey rear box, dark-blue seat, steering wheel, 2 visible black wheels with grey hubs, row of 3 small orange lights on the lower body between the wheels. Only moving object.",
+      "moves": true,
+      "direction": "left -> right (+x), purely horizontal; front faces right",
+      "visible_frames": "0-41 (enters from the left edge; partially out of frame at left in 0-22, fully in view 23-41; never leaves)",
+      "track_file": "tracks/cart.csv",
+      "size_px_when_fully_visible": {
+        "length_along_motion_px": 550,
+        "length_range_px": [547, 553],
+        "length_measured_frames": "31-41 (frames 23-27 give 553-570 and 28-30 give 566-597 because of floor-reflection contamination at the front)",
+        "height_px": 483,
+        "height_extent_y": [465, 948],
+        "height_note": "from canopy top (y 465-467) to tyre bottom (y 947)",
+        "wheel_diameter_px": 105,
+        "wheel_centre_y": 893,
+        "wheelbase_px": 337,
+        "wheelbase_note": "rear wheel centre ~582, front wheel centre ~919 at frame 30 (visual, +-4 px)",
+        "rear_canopy_tip_to_front_bumper": "x0 = rear tip of canopy (top left), x1 = front lower bumper / front wheel fender"
+      },
+      "reference_point_recommendation": "the vehicle root is not visible; use the bbox centre ref_x (frames 23-27, 31-41 clean) or, for frame-to-frame motion, a rigid feature: panel_x (frames 18-41, sub-pixel), front_upper_x (frames 0-41, integer), bbox_x0 rear (frames 23-41). Vertical position is constant (y ~ 885 for the panel, contact line 947).",
+      "ambiguity": "different rigid features give per-frame x increments that differ by up to ~1 px/frame (~2%); see notes.md"
+    },
+    {"name": "speed_limit_sign_30", "description": "round red-ringed white '30' speed-limit sign on the left pillar", "moves": false,
+     "centre_px": [356, 351], "diameter_px": 103, "bbox_px": [303, 300, 409, 404], "note": "left part of the red ring is in shadow; visual + colour-mask"},
+    {"name": "fire_extinguisher_left", "description": "red fire extinguisher on the left pillar below the sign (hidden behind the cart roughly frames 19-26)", "moves": false,
+     "bbox_px": [284, 498, 318, 599], "height_px": 102, "height_note": "red body; nozzle/handle adds ~10 px above", "width_px": 35},
+    {"name": "fire_extinguisher_right", "description": "red fire extinguisher on the right pillar (nearer pillar on the right)", "moves": false,
+     "bbox_px": [1388, 504, 1412, 569], "height_px": 66, "width_px": 25, "note": "colour mask of the red body only"},
+    {"name": "far_fire_extinguishers", "description": "small red extinguishers further down the aisle", "moves": false,
+     "bbox_px_list": [[760, 526, 773, 555], [804, 532, 813, 554], [1124, 530, 1134, 555]]},
+    {"name": "far_speed_sign", "description": "small round sign at the far end right of 'B1'", "moves": false, "bbox_px": [1104, 478, 1131, 505]},
+    {"name": "B1_wall_sign", "description": "yellow 'B1' letters on the far end wall", "moves": false, "bbox_px": [912, 534, 950, 560]},
+    {"name": "B1_pillar_sign", "description": "yellow vertical 'B1' on the right near pillar", "moves": false, "bbox_px": [1611, 448, 1655, 563]},
+    {"name": "left_pillar_yellow_mark", "description": "yellow vertical marking on the left pillar (the cart passes in front of it around frames 20-30)", "moves": false, "bbox_px": [492, 501, 513, 555]},
+    {"name": "floor_arrow", "description": "white painted arrow on the aisle floor near the centre, pointing away from camera", "moves": false,
+     "approx_bbox_px": [950, 735, 1050, 785], "note": "visual estimate from frames; colour mask only caught part"},
+    {"name": "pillars", "description": "concrete pillars on both sides with black/yellow striped bottoms; green-painted parking bays between them", "moves": false},
+    {"name": "ceiling_lights", "description": "two long fluorescent light strips converging toward the vanishing point", "moves": false},
+    {"name": "floor", "description": "glossy grey floor; shows the cart's reflection below the contact line y=947", "moves": false}
+  ],
+  "events": [
+    {"event": "cart already moving at frame 0 (front at x=32, just entering from left edge); it starts slowly (front edge +1 px between frames 0 and 1, +5 px 1->2) and speeds up", "frame": 0, "time_s": 0.0},
+    {"event": "lower front bumper enters frame (front_upper_x vs bbox_x1 diverge)", "frame": 6, "time_s": 0.25},
+    {"event": "cart fully inside the image (rear canopy tip x0 >= 91)", "frame": 23, "time_s": 0.958},
+    {"event": "maximum frame-to-frame displacement ~50 px/frame (speed peaks, then the cart decelerates)", "frame": 30, "frame_range": "29-31", "time_s": 1.25},
+    {"event": "end of clip; cart still moving (~43 px/frame) and still fully in view", "frame": 41, "time_s": 1.708}
+  ],
+  "no_events": "no bounce, impact, contact with other objects, or reversal of direction"
+}

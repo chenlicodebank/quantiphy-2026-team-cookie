@@ -1,0 +1,55 @@
+{
+  "video": "simulation_0268.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels, seconds; image x to the right, y down",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of background between frames (vehicle-free regions / frames 64-71) gives shifts < 0.03 px; no pan, zoom or shake",
+    "view": "looking straight at the plane of motion (vehicle seen from directly above/below, top-down view); background is a cloud/sky image",
+    "perspective_note": "the vehicle has real 3D depth: its top surface (body texture) moves ~3.5% faster in pixels than its silhouette extremes (nose, black fins), i.e. parallax inside the object; silhouette length varies 970-1066 px with image position (see notes). Only one moving object, so one scale is used."
+  },
+  "objects": [
+    {
+      "name": "vehicle",
+      "description": "white futuristic car/spaceship-like vehicle seen from above, nose pointing LEFT (-x); four black fin/wheel-like parts at the rear-right (two pairs) and two thin black blades at the nose",
+      "moves": true,
+      "track_file": "tracks/vehicle.csv",
+      "visible_frames": [0, 65],
+      "fully_in_frame_frames": [8, 50],
+      "truncation": "frames 0-7: rear ~10-20 px cut by right image edge; frames 51-65: nose leaves through left edge; frames 66-71: gone",
+      "reference_point_columns": "x_ref, y_ref (silhouette bbox centre, smooth; recommended origin proxy). Alternative: x_body_texture (top-surface texture point, moves 1/0.966 = 3.5% more pixels)",
+      "motion": "purely horizontal, toward -x (left); y constant 719.5 (dy < 0.15 px); speed increases steadily from rest; no direction change",
+      "size_px": {
+        "length_x_silhouette_near_image_centre": 1021,
+        "length_x_silhouette_range": [970, 1066],
+        "length_note": "frame 23-24 (centre x~1280-1750): 1020-1022 px; frame 30: 1031 px (nose 1016 -> fin tips 2046); grows toward left of image (1066 at frames 49-50), smaller at right (970-980 at frames 8-12). Nose edge is white-on-white cloud so +-10 px noise.",
+        "width_y_silhouette": 514,
+        "width_note": "y 463-976 in all fully visible frames (fins tip to fin tip), constant",
+        "main_axis_angle_deg": 0.0
+      }
+    }
+  ],
+  "static_objects": [
+    {
+      "name": "cloud_sky_background",
+      "description": "blue sky with white/grey clouds filling the whole frame; no ground, markings or other objects",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "at rest", "frames": [0, 1], "t": [0.0, 0.0417], "note": "frames 0 and 1 identical position"},
+    {"event": "start of motion", "frame": 1, "t": 0.0417, "note": "first displacement between frame 1 and 2 (1.9 px)"},
+    {"event": "rear fully enters frame", "frame": 8, "t": 0.3333},
+    {"event": "vehicle centre crosses image centre x=1280", "frame": 36, "t": 1.5, "note": "x_ref 1299.7 at f36, 1255.5 at f37"},
+    {"event": "nose reaches left edge (starts leaving)", "frame": 51, "t": 2.125},
+    {"event": "x_ref (centre) leaves frame", "frame": 59, "t": 2.4583},
+    {"event": "last visible frame", "frame": 65, "t": 2.7083},
+    {"event": "vehicle gone", "frames": [66, 71]}
+  ],
+  "per_frame_step_px_summary": "x_ref step |dx| per frame: f2 1.9, f10 11.6, f20 23.8, f30 35.8, f40 47.8, f50 59.7, f60 71.9, f65 77.8 (steadily increasing)"
+}

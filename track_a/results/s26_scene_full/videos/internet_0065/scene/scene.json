@@ -1,0 +1,109 @@
+{
+  "video": "internet_0065.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 31,
+  "frame_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels and seconds; no metric scale estimated",
+  "description": "Handheld phone looking straight down at a polished wooden gym floor. A basketball rolls (on the floor, apparently) from left to right across the upper half of the image, entering at the left edge around frame 2 and leaving at the right edge after frame 24. The filmer's shoes are visible at the bottom centre. The camera drifts slowly (about 10 px left / 57 px down over the clip).",
+  "camera": {
+    "motion": "handheld, slow smooth drift (no pan of note, no zoom): image content shifts by up to -9 px in x and +57 px in y by frame 30 relative to frame 0; rotation up to 0.41 deg; scale change <0.5 %",
+    "per_frame_transform_file": "tracks/camera.csv (2x3 similarity mapping frame-i pixel coords -> frame-0 pixel coords; bg_shift_x/y = displacement of image content at the image centre relative to frame 0)",
+    "shift_samples_px_content_motion_vs_frame0": {"frame5": [-3.0, -0.4], "frame10": [-5.4, 7.4], "frame15": [-8.2, 19.4], "frame20": [-9.8, 32.7], "frame25": [-9.6, 43.6], "frame30": [-9.0, 56.8]},
+    "view": "near-nadir top-down view of the floor; floor is effectively a plane facing the camera; mild wide-angle stretch towards image edges (ball's unblurred vertical extent ~253-256 px near the centre, ~258-268 px towards the left/right edges)"
+  },
+  "objects": [
+    {
+      "name": "basketball",
+      "moves": true,
+      "identify": "the only ball; orange-brown with black seams, upper half of image (y ~ 260-580 px)",
+      "visible_frames": "2-24 (frame 2: leading edge sliver only; frames 3-4 cut by left border; 5-21 fully in view; 22-24 cut by right border); not in view 0-1 and 25-30 (frame 1 shows only its shadow)",
+      "track": "tracks/basketball.csv",
+      "reference_point": "visible centre (mask centroid; edge-corrected cx_est for frames cut by the border)",
+      "pixel_size": {
+        "diameter_unblurred_vertical_extent_px": {"median_frames5_21": 258, "range": [253, 268], "near_image_centre_frames11_16": 255},
+        "length_along_motion_blurred_px": {"median_frames5_21": 274.6, "range": [253.9, 292.7], "note": "includes motion blur of ~15-20 px"},
+        "recommended_diameter_px": 258
+      },
+      "motion_summary": "straight line left->right, nearly horizontal in image (stabilised path drops ~20 px over ~1570 px); per-frame horizontal displacement ~93-103 px (noise +/-4 px), no visible speeding up or slowing down, no bounce or direction change"
+    },
+    {
+      "name": "ball_shadow",
+      "moves": true,
+      "identify": "soft grey shadow next to the ball (right of it mid-clip, left of it near the right edge); enters before the ball (frame 1)",
+      "note": "excluded from the ball mask; not tracked separately"
+    },
+    {
+      "name": "filmer_shoes",
+      "moves": false,
+      "identify": "two light-grey/blue sneaker toes at bottom centre, either side of the blue stripe",
+      "image_position_frame0": {"left_shoe_bbox_xywh": [873, 1019, 105, 61], "right_shoe_bbox_xywh": [1153, 1012, 109, 68]},
+      "note": "only toes visible, cut by bottom border; move with the camera drift only"
+    },
+    {
+      "name": "top_maroon_line",
+      "moves": false,
+      "identify": "dark maroon horizontal boundary line across the top of the image",
+      "frame0_rows_px": {"x100": [210, 255], "x500": [206, 255], "x960": [206, 255], "x1400": [200, 249], "x1800": [194, 243]},
+      "width_px": 46,
+      "orientation": "tilted ~0.5 deg (rises to the right) in frame 0; spans full image width"
+    },
+    {
+      "name": "right_maroon_line",
+      "moves": false,
+      "identify": "dark maroon vertical line on the right, from the top line down to the bottom edge",
+      "frame0_columns_px": {"y320": [1651, 1701], "y650": [1654, 1705], "y900": [1656, 1707], "y1050": [1660, 1709]},
+      "width_px": 50
+    },
+    {
+      "name": "left_maroon_line",
+      "moves": false,
+      "identify": "dark maroon vertical line along the left image border (partly cut off)",
+      "frame0_columns_px": {"y320": [0, 41], "y650": [0, 40], "y900": [0, 32]},
+      "note": "cut by the left border; true width unknown"
+    },
+    {
+      "name": "blue_stripe",
+      "moves": false,
+      "identify": "light-blue (pale) vertical stripe in the middle, between the shoes, from the top maroon line to the bottom edge",
+      "frame0_columns_px": [1052, 1101],
+      "width_px": 50,
+      "centre_x_px_frame0": 1076.5,
+      "frame0_rows_px": [255, 1079],
+      "spacing_blue_centre_to_right_maroon_centre_px_at_y650": 603
+    },
+    {
+      "name": "light_reflections",
+      "moves": false,
+      "identify": "two bright ceiling-light reflections on the floor, frame-0 approx. centres (550, 710) and (1290, 720); plus bluish window reflections along the left edge (x ~ 35-110)",
+      "note": "reflections, not objects"
+    },
+    {
+      "name": "floor_boards",
+      "moves": false,
+      "identify": "vertical hardwood floor strips, ~60-100 px wide in the image",
+      "note": "texture used for camera stabilisation"
+    }
+  ],
+  "events": [
+    {"event": "ball shadow appears at left edge", "frame": 1, "time_s": 0.033},
+    {"event": "ball first visible (leading edge at left border)", "frame": 2, "time_s": 0.067},
+    {"event": "ball fully inside image", "frame": 5, "time_s": 0.167},
+    {"event": "ball centre crosses blue stripe centre", "frame_between": [14, 15], "time_s_approx": 0.48},
+    {"event": "ball centre crosses right maroon line centre", "frame_between": [20, 21], "time_s_approx": 0.69},
+    {"event": "ball starts leaving at right border", "frame": 22, "time_s": 0.733},
+    {"event": "last frame with ball visible (sliver)", "frame": 24, "time_s": 0.8},
+    {"event": "ball gone", "frame": 25, "time_s": 0.833},
+    {"event": "no bounce, impact, release or direction change observed", "frame": null}
+  ],
+  "files": {
+    "tracks/basketball.csv": "per-frame ball track (all 31 frames; visible flag)",
+    "tracks/camera.csv": "per-frame camera similarity transform to frame 0",
+    "camera_affine.json": "same transforms (raw)",
+    "static_raw.json": "raw static-marking measurements in frame 0",
+    "track_check.jpg": "stabilised track and bboxes drawn on frame 0",
+    "notes.md": "method, reliability, ambiguities"
+  }
+}

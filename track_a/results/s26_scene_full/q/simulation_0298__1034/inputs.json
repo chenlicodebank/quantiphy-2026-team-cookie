@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0298.mp4",
+ "video_source": "simulation",
+ "video_type": "V2SX",
+ "fps": 24.005263,
+ "frames": 73,
+ "duration_s": 3.041,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1034,
+  "question": "What is the length of the fire truck in meters?",
+  "prior": "speed of the fire truck = 11.18m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

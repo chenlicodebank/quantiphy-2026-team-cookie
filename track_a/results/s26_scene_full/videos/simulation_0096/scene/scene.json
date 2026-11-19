@@ -1,0 +1,53 @@
+{
+  "video": "simulation_0096.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 41,
+  "duration_s": 1.7083,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, pixel centres at integer coordinates",
+  "camera": {
+    "motion": "static (uniform grey background with faint fixed texture; no shift seen; background differencing against a fixed frame leaves no residue)",
+    "perspective": "none visible: side (profile) views of both objects, no ground plane, no horizon; treated as one image plane",
+    "scale_consistency_check": "plane length / car length in px = 750.5 / 113.5 = 6.61 (an A320 ~37.6 m over a Cybertruck ~5.7 m is ~6.6), consistent with both objects at the same depth - sanity only, not a scale"
+  },
+  "objects": [
+    {
+      "name": "plane",
+      "description": "white Air China airliner (A320-family look), red phoenix logo on the tail fin, side view facing right, upper part of the frame",
+      "moves": true,
+      "motion": "translates horizontally to the RIGHT at constant pixel speed (~50.5 px/frame), y constant; leaves the frame through the right edge",
+      "visible_frames": "0-25 (fully visible 0-10; truncated by the right image edge 11-25; gone from 26)",
+      "track_file": "tracks/plane.csv",
+      "full_size_px": {"length_tail_to_nose": 750.5, "height_fin_top_to_engine_bottom": 226.8, "note": "mean over fully visible frames 0-10 (range 749-753); length includes horizontal-stabiliser tip at left and nose at right"},
+      "reference_point": "bbox centre in frames 0-10; frames 11-25 = tail (left) edge x0 + 374.77 px, y = 397.09 (constant mean of frames 0-10)",
+      "position_frame0_px": {"bbox": [688, 284, 1440, 510], "centre": [1064.0, 397.0]}
+    },
+    {
+      "name": "car",
+      "description": "silver/white angular pickup (Tesla Cybertruck look), side view, below the plane at y ~585-622",
+      "moves": true,
+      "motion": "drives horizontally to the LEFT, starting from rest (frames 0 and 1 identical) and speeding up steadily (per-frame step grows ~0.35-0.4 px/frame each frame, ~14 px/frame by frame 40); y constant",
+      "visible_frames": "0-40 (whole clip, never occluded or truncated)",
+      "track_file": "tracks/car.csv",
+      "full_size_px": {"length_bumper_to_bumper": 113.5, "height_roof_to_wheel_bottom": 36.5, "note": "length 113-114 px while slow (frames 0-20); grows to 117 px by frame 40 from motion blur; height jitters 35/38 px because the low-contrast roof edge sits at the threshold"},
+      "reference_point": "bbox centre",
+      "position_frame0_px": {"bbox": [842, 588, 954, 622], "centre": [898.0, 605.0]}
+    }
+  ],
+  "static_objects": "none - background is a plain uniform grey (no ground, markings or props)",
+  "events": [
+    {"event": "frames 0 and 1 are identical for both objects (motion starts after frame 1)", "frame": 1, "t": 0.0417},
+    {"event": "plane and car both begin moving (first nonzero displacement between frames 1 and 2)", "frame": 2, "t": 0.0833},
+    {"event": "plane nose reaches the right image edge (last fully visible frame 10)", "frame": 11, "t": 0.4583},
+    {"event": "plane last visible (only tail tip, 16 px)", "frame": 25, "t": 1.0417},
+    {"event": "plane completely out of frame", "frame": 26, "t": 1.0833},
+    {"event": "car still accelerating leftward at end of clip; no stops, bounces, contacts or direction changes", "frame": 40, "t": 1.6667}
+  ],
+  "relations_px": {
+    "vertical_offset_plane_centre_to_car_centre": 208.0,
+    "frame0_centre_distance_plane_car": 266.1
+  }
+}

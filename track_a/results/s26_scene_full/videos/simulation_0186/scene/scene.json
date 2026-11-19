@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0186.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "n_frames": 40,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 = t 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of wall patch (x1000-1900, y50-450) vs frame 0: |shift| <= 0.01 px in all 40 frames (cam_dx, cam_dy columns in tracks/gift_box.csv)",
+    "view": "looking roughly horizontally at a grey breeze-block wall; blue slide/ramp runs from upper-left (near the crates) diagonally down to the lower-right, ending on a wooden floor/platform; ramp also comes slightly toward the camera as it descends (box grows ~8% linear size along the slide)",
+    "perspective_cues": {
+      "wall": "fronto-parallel-ish brick wall, mortar rows nearly horizontal -> image rows ~ horizontal world direction",
+      "ramp_far_edge_line": "points (760,562) -> (1440,974); image slope dy/dx = 0.606 (31.2 deg below horizontal)",
+      "ramp_top_end_edge": "approx horizontal at y ~537 from x ~255 to ~720",
+      "horizon": "not visible; camera roughly level (wall mortar lines horizontal)"
+    }
+  },
+  "objects": [
+    {
+      "name": "gift_box",
+      "description": "white wrapped gift box with yellow ribbon cross and yellow bow on top; the ONLY moving object",
+      "moves": true,
+      "visible_frames": [0, 39],
+      "track_file": "tracks/gift_box.csv",
+      "reference_point": "body_cx, body_cy = centroid of the convex hull of the white paper (bow excluded) = best estimate of the projected box centre/origin; cx, cy = centroid of the full silhouette incl. bow (~6 px higher)",
+      "apparent_size_px": {
+        "frame0_bbox_wh_incl_bow": [144, 139],
+        "frame0_body_bbox_wh": [144, 121],
+        "frame0_body_hull_area": 11229,
+        "frame38_bbox_wh_incl_bow": [151, 164],
+        "frame38_body_hull_area": 13146,
+        "note": "box is tilted (rotated ~20-30 deg in image) so bbox is larger than a face; the box is roughly a cube; bow adds ~18 px on top. sqrt(area) grows ~8% from frame 0 to 38 (moving toward camera)."
+      },
+      "occlusion": "none; frame 39 bottom of box is cut by the image bottom edge (truncated_by_frame_edge=1)"
+    },
+    {"name": "slide_ramp", "description": "blue inclined slide / roller conveyor with blue side rails and dark mottled surface, from upper-left (behind crates, top end y~537) down to lower-right where it meets the wooden floor (~x1420-1460, y~990); near rail runs out of the bottom of the frame", "moves": false, "image_extent_px": {"x": [190, 1460], "y": [520, 1080]}, "top_end_edge_px": [[255, 537], [720, 538]], "far_edge_line_px": [[720, 538], [1460, 987]], "lower_end_meets_floor_px": [1440, 985], "visible_frames": [0, 39]},
+    {"name": "support_post", "description": "blue vertical post under the top end of the ramp, left of image", "moves": false, "image_extent_px": {"x": [209, 287], "y": [590, 1079]}, "width_px": 79, "visible_height_px": 460, "note": "bottom cut by frame edge; upper part hidden by ramp/crate"},
+    {"name": "cardboard_box_rome_italy", "description": "brown cardboard box printed 'PRODUCT OF ROME ITALY ... CERONA FOODS', top-left corner, cut by left and top frame edges", "moves": false, "image_extent_px": {"x": [0, 275], "y": [0, 365]}},
+    {"name": "crate_seedless_jaffas", "description": "light wooden crate printed 'SEEDLESS JAFFAS / ZIMBABWE ORANGES' with red '6/72' label, under the brown box, left edge; the slide starts at its right side", "moves": false, "image_extent_px": {"x": [0, 320], "y": [338, 535]}, "note": "cut by left frame edge; visual estimate +-5 px"},
+    {"name": "wooden_shelf_board", "description": "light wood board under the crate at the ramp top, y~535-575, x 0-255", "moves": false, "image_extent_px": {"x": [0, 255], "y": [535, 575]}},
+    {"name": "warning_sign", "description": "orange sign 'TAKE CARE WHEN STACKING CRATES' on the wall, right of centre", "moves": false, "image_extent_px": {"x": [1462, 1677], "y": [578, 790]}, "size_px_wh": [215, 212], "centre_px": [1570, 684]},
+    {"name": "wooden_floor", "description": "light wooden floor / pallet platform with bolts, bottom right, where the ramp ends", "moves": false, "image_extent_px": {"x": [1420, 1920], "y": [985, 1080]}},
+    {"name": "brick_wall", "description": "grey breeze-block wall filling the background; blocks ~140 px wide x ~95-100 px tall near the sign (mortar rows ~ y 50,150,...)", "moves": false}
+  ],
+  "events": [
+    {"event": "start (already released, falling from rest)", "frame": 0, "time_s": 0.0, "note": "frame0->1 displacement only 1.9 px, increments then grow ~3.7-3.9 px/frame each frame: free fall from (near) rest at t~0"},
+    {"event": "free fall", "frames": [0, 8], "note": "body_cx constant ~554 px; vertical only"},
+    {"event": "impact / landing on slide", "frame": 9, "time_s": 0.375, "note": "between frames 8 and 9 the box hits the ramp surface (frame 8 last free-fall frame, dy 28.1 px; frame 9 dy 9.1 px with dx 7.6 px). No visible bounce."},
+    {"event": "slides down the ramp, accelerating", "frames": [9, 39], "note": "direction ~ along ramp, image slope dy/dx ~0.6; per-frame pixel step grows 11.8 -> 54.7 px"},
+    {"event": "end of clip, box near lower end of ramp, partly out of frame", "frame": 39, "time_s": 1.625}
+  ]
+}

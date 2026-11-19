@@ -1,0 +1,50 @@
+frame,t,visible,occluded,cx,cy,bbox_x0,bbox_y0,bbox_x1,bbox_y1,bbox_w,bbox_h,len_main,width_across,main_axis_deg,area_px,cover_cx,cover_cy,cover_len_main,cover_width,frame_diff_mean,duplicate_of_prev,note
+0,0.0,1,0,788.02,369.59,718,329,853,396,136,68,123.8,69.6,145.0,5079,786.37,366.57,103.0,47.0,,0,at rest at top of ramp; blurred hand/person behind its right end
+1,0.0417,1,0,787.98,369.62,718,329,853,396,136,68,123.8,69.6,145.0,5080,786.04,366.52,117.0,47.0,0.299,0,at rest at top of ramp; blurred hand/person behind its right end
+2,0.0833,1,0,787.98,369.62,718,329,853,396,136,68,123.8,69.6,145.0,5081,783.78,366.83,119.0,47.0,0.151,0,at rest at top of ramp; blurred hand/person behind its right end
+3,0.125,1,0,788.03,369.28,718,329,852,396,135,68,134.7,64.4,162.4,5162,782.91,367.39,119.0,43.0,0.628,0,at rest at top of ramp; blurred hand/person behind its right end
+4,0.1667,1,0,788.0,369.23,718,330,852,396,135,67,135.2,64.2,164.2,5175,782.45,366.95,119.0,43.0,0.524,0,at rest at top of ramp; blurred hand/person behind its right end
+5,0.2083,1,0,787.75,369.29,718,330,852,396,135,67,134.8,63.9,162.8,5176,783.13,366.42,121.6,43.5,0.415,0,at rest at top of ramp; blurred hand/person behind its right end
+6,0.25,1,0,787.65,369.36,718,330,852,396,135,67,134.8,63.9,162.8,5188,782.9,366.56,121.6,43.5,0.195,0,at rest at top of ramp; blurred hand/person behind its right end
+7,0.2917,1,0,787.75,369.38,718,330,852,397,135,68,134.8,63.9,162.8,5210,783.0,366.95,118.7,43.0,0.227,0,at rest at top of ramp; blurred hand/person behind its right end
+8,0.3333,1,0,787.79,369.33,718,330,852,396,135,67,134.8,63.9,162.8,5198,782.98,366.91,118.3,43.3,0.131,0,at rest at top of ramp; blurred hand/person behind its right end
+9,0.375,1,0,787.76,369.42,718,330,852,397,135,68,134.8,63.9,162.8,5200,782.81,367.13,119.6,43.2,0.114,0,at rest at top of ramp; blurred hand/person behind its right end
+10,0.4167,1,0,787.87,369.35,718,330,852,396,135,67,134.8,63.9,162.8,5195,782.97,366.97,118.3,43.3,0.127,0,at rest at top of ramp; blurred hand/person behind its right end
+11,0.4583,1,0,787.87,369.36,718,330,852,396,135,67,134.8,63.9,162.8,5195,782.89,366.99,118.7,43.2,0.138,0,at rest at top of ramp; blurred hand/person behind its right end
+12,0.5,1,0,787.81,369.39,718,330,852,396,135,67,135.2,64.1,164.1,5197,782.86,366.81,119.6,43.2,0.152,0,at rest at top of ramp; blurred hand/person behind its right end
+13,0.5417,1,0,787.77,369.38,718,330,852,396,135,67,135.2,64.1,164.1,5191,782.86,366.98,118.7,43.2,0.112,0,at rest at top of ramp; blurred hand/person behind its right end
+14,0.5833,1,0,787.77,369.39,718,330,852,396,135,67,135.2,64.1,164.1,5190,782.93,366.86,118.3,43.3,0.07,0,at rest at top of ramp; blurred hand/person behind its right end
+15,0.625,1,0,787.83,369.39,718,330,852,396,135,67,135.2,64.1,164.1,5200,782.8,367.0,119.6,43.2,0.133,0,at rest at top of ramp; blurred hand/person behind its right end
+16,0.6667,1,0,787.77,369.38,718,330,852,396,135,67,135.2,64.1,164.1,5191,782.93,366.86,118.3,43.3,0.087,0,at rest at top of ramp; blurred hand/person behind its right end
+17,0.7083,1,0,787.77,369.39,718,330,852,396,135,67,135.2,64.1,164.1,5190,782.93,366.86,118.3,43.3,0.061,0,at rest at top of ramp; blurred hand/person behind its right end
+18,0.75,1,0,787.77,369.39,718,330,852,396,135,67,135.2,64.1,164.1,5190,782.93,366.86,118.3,43.3,0.067,0,at rest at top of ramp; blurred hand/person behind its right end
+19,0.7917,1,0,787.9,370.63,718,330,859,397,142,68,138.9,62.0,155.2,5065,781.42,368.13,127.1,41.7,0.726,0,at rest at top of ramp; blurred hand/person behind its right end
+20,0.8333,1,0,785.19,373.58,715,333,849,399,135,67,136.4,55.6,164.9,4866,778.94,370.06,127.2,41.6,1.153,0,sliding on ramp
+21,0.875,1,0,779.68,378.02,710,346,843,403,134,58,136.6,51.8,167.4,4760,773.46,373.92,125.6,39.3,1.308,0,sliding on ramp
+22,0.9167,1,0,773.84,381.9,704,348,840,408,137,61,141.2,53.1,171.5,4990,764.96,380.17,111.6,34.3,1.32,0,sliding on ramp
+23,0.9583,1,0,765.32,386.4,696,348,837,415,142,68,147.1,58.9,172.2,5446,757.63,385.1,110.9,42.5,1.554,0,sliding on ramp
+24,1.0,1,0,750.62,397.27,687,368,815,423,129,56,125.2,53.3,6.2,4767,746.66,392.41,114.2,38.2,1.658,0,sliding on ramp
+25,1.0417,1,0,738.26,406.68,677,379,803,435,127,57,123.6,53.1,7.6,4772,734.97,401.73,112.0,39.9,1.532,0,sliding on ramp
+26,1.0833,1,0,723.65,416.59,664,386,787,447,124,62,118.7,57.4,12.0,4894,721.73,412.14,103.5,44.4,1.634,0,sliding on ramp
+27,1.125,1,0,706.66,427.59,650,395,769,461,120,67,112.7,62.5,17.8,5103,704.66,424.33,97.8,49.5,1.804,0,sliding on ramp
+28,1.1667,1,0,688.74,441.44,636,405,747,477,112,73,96.8,71.9,148.2,4990,686.16,437.53,84.3,58.2,1.993,0,sliding on ramp
+29,1.2083,1,1,670.32,451.9,620,416,725,487,106,72,93.9,71.5,38.7,4752,666.74,448.53,77.5,62.1,2.248,0,"transition ramp->table; front part partly merged with ramp shadow, mask incomplete"
+30,1.25,1,1,655.21,455.29,599,422,709,488,111,67,109.3,55.1,24.3,4224,648.76,453.77,87.8,59.1,2.099,0,"transition ramp->table; front part partly merged with ramp shadow, mask incomplete"
+31,1.2917,1,1,636.6,463.21,576,435,698,486,123,52,122.4,48.1,9.2,3869,630.66,461.96,98.5,43.0,2.051,0,"transition ramp->table; front part partly merged with ramp shadow, mask incomplete"
+32,1.3333,1,0,616.14,471.22,557,449,686,490,130,42,129.7,37.0,15.2,2856,616.88,471.22,88.6,22.6,2.176,0,"on table, decelerating; mask bottom edge may miss ~5px"
+33,1.375,1,0,601.53,475.57,537,460,671,491,135,32,134.9,28.7,8.1,2698,596.86,472.26,91.0,19.0,1.521,0,"on table, decelerating; mask bottom edge may miss ~5px"
+34,1.4167,1,0,585.43,476.01,521,459,657,492,137,34,137.2,29.3,8.1,2743,585.52,473.37,88.2,19.2,1.112,0,"on table, decelerating; mask bottom edge may miss ~5px"
+35,1.4583,1,0,578.17,476.24,511,460,652,493,142,34,141.9,28.4,9.0,2887,576.15,474.29,101.8,18.8,1.014,0,"on table, decelerating; mask bottom edge may miss ~5px"
+36,1.5,1,0,572.81,476.68,502,461,648,493,147,33,146.9,27.6,6.8,2868,566.41,474.48,101.0,16.6,0.957,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+37,1.5417,1,0,572.75,476.7,502,461,648,493,147,33,146.9,27.5,6.9,2862,567.13,474.5,106.9,16.6,0.112,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+38,1.5833,1,0,572.68,476.71,502,461,648,493,147,33,146.9,27.5,6.9,2862,566.41,474.48,101.0,16.6,0.109,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+39,1.625,1,0,572.67,476.71,502,461,648,493,147,33,146.9,27.5,6.9,2862,566.43,474.52,101.0,16.8,0.112,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+40,1.6667,1,0,572.81,476.74,502,461,648,493,147,33,146.9,27.5,6.9,2869,566.68,474.57,99.4,16.8,0.143,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+41,1.7083,1,0,572.7,476.68,502,461,648,493,147,33,146.9,27.7,7.2,2873,566.43,474.53,101.0,16.8,0.093,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+42,1.75,1,0,572.68,476.68,502,461,648,493,147,33,146.9,27.7,7.2,2875,566.39,474.51,101.0,16.8,0.081,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+43,1.7917,1,0,572.71,476.69,502,461,648,493,147,33,146.9,27.9,7.2,2894,566.37,474.54,101.0,16.8,0.159,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+44,1.8333,1,0,572.81,476.73,502,461,648,493,147,33,146.9,27.9,7.2,2883,566.5,474.51,101.0,16.8,0.084,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+45,1.875,1,0,572.68,476.68,502,461,648,493,147,33,146.9,27.7,7.2,2874,566.37,474.54,101.0,16.8,0.153,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+46,1.9167,1,0,572.68,476.68,502,461,648,493,147,33,146.9,27.7,7.2,2875,566.39,474.51,101.0,16.8,0.095,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+47,1.9583,1,0,572.81,476.73,502,461,648,493,147,33,146.9,27.9,7.2,2885,566.35,474.56,101.0,16.8,0.171,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)
+48,2.0,1,0,572.72,476.68,502,461,648,493,147,33,146.9,27.7,7.2,2873,566.39,474.51,101.0,16.8,0.201,0,at rest on table; mask misses ~6px of lower page edge (true bottom ~y499)

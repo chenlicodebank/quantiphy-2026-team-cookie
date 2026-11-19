@@ -1,0 +1,85 @@
+{
+  "video": "simulation_0044.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left of the 1080x1080 image",
+  "view": "aerial, camera looking (near) straight down at a sand spit / beach with a large rock, sea (green water) at bottom and right",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of every 6th frame vs frame 0: shift < 0.03 px; mean abs diff in rock region < 0.12 grey levels",
+    "perspective_cues": "near-nadir view: no horizon, no visible vanishing points; ground (sand + water surface) roughly fills the image as a plane facing the camera. Bird flies between camera and ground; its shadow on the sand is offset ~ +235 px x, -35 to -46 px y from the bird."
+  },
+  "objects": [
+    {
+      "name": "bird",
+      "description": "the only animal: a dark (black-brown) bird with flapping wings, seen from above, sharp silhouette; flies left-to-right and slightly downwards across the image (from the sand over the shoreline onto the water)",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/bird.csv",
+      "start_px": [117.1, 549.7],
+      "end_px": [835.0, 744.0],
+      "net_displacement_px": 744.1,
+      "path_length_px_frames_0_71": 749.4,
+      "per_frame_step_px": "0 for frame 0->1 (frame 1 is a duplicate of frame 0), then 10.0-11.4 px/frame for every step 1->71 (median 10.8; slightly larger in the second half: mean ~10.5 frames 1-35, ~10.9 frames 36-71)",
+      "heading_image_deg": "about 15 deg below the +x axis (down-right), with small wiggles",
+      "apparent_size_px": {
+        "mask_length_main_axis": {"min": 20.1, "median": 28.7, "max": 40.0},
+        "mask_width_across": {"min": 11.4, "median": 16.2, "max": 19.4},
+        "bbox_w": {"min": 13, "median": 18, "max": 24},
+        "bbox_h": {"min": 18, "median": 26, "max": 37},
+        "area": {"min": 154, "median": 211, "max": 323},
+        "trend": "no systematic growth or shrinkage over the clip (changes come from wing flapping / pose), so the bird's camera distance stays roughly constant"
+      }
+    },
+    {
+      "name": "bird_shadow",
+      "description": "soft, blurred dark shape on the sand to the upper right of the bird (~240 px away), moving parallel to it and mirroring its wing pose; interpreted as the bird's cast shadow (not a second bird): it is blurrier than the bird and fades out over the water",
+      "moves": true,
+      "visible_frames": [0, 41],
+      "track_file": "tracks/bird_shadow.csv",
+      "start_px": [350.3, 514.3],
+      "end_px": [761.1, 618.8],
+      "offset_from_bird_px": "frame 0: (+233, -35); frame 24: (+245, -38); frame 40: (+243, -48)",
+      "note": "very faint after frame ~35 (over the water); lost after frame 41"
+    },
+    {
+      "name": "rock",
+      "description": "large boulder / rock outcrop, white-lit on its left side, dark shadowed facets on its right; upper middle of the image, on the sand next to the water",
+      "moves": false,
+      "visible_frames": [0, 71],
+      "measured_frame": 0,
+      "centroid_px": [640.9, 202.5],
+      "bbox_px": [385, 0, 919, 456],
+      "bbox_size_px": [535, 457],
+      "main_axis_length_px": 543,
+      "width_across_px": 422,
+      "main_axis_deg_image": 154,
+      "area_px": 171983,
+      "reliability": "+-15 px; mask includes a thin strip of sand on the right edge; top edge at/near y = 0 (rock may be cut by the frame top)"
+    },
+    {
+      "name": "sand_spit",
+      "description": "pale pink-beige sand area (beach) covering the upper-left part of the image, with lighter concentric bands; its edge to the water runs from about (0, 470) at the left down to its lowest point near (360, 770), then up-right to about (1000, 0)",
+      "moves": false
+    },
+    {
+      "name": "water",
+      "description": "dark green sea occupying the lower-left, bottom and right of the image, with a light green shallow band along the sand edge",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "clip starts with the bird already in flight", "frame": 0, "time_s": 0.0},
+    {"event": "frame 1 identical to frame 0 (no motion between them; true for whole image)", "frame": 1, "time_s": 0.0417},
+    {"event": "shadow leaves the sand onto the shallow water / starts fading", "frame": 27, "time_s": 1.125},
+    {"event": "shadow no longer detectable", "frame": 42, "time_s": 1.75},
+    {"event": "bird crosses the sand edge and flies over the water (contrast drop)", "frame": 45, "time_s": 1.875},
+    {"event": "clip ends, bird still flying over the water", "frame": 71, "time_s": 2.958}
+  ],
+  "notes_file": "notes.md"
+}

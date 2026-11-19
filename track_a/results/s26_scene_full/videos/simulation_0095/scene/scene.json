@@ -1,0 +1,131 @@
+{
+ "video": "simulation_0095.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "image_size_px": [
+  1920,
+  1080
+ ],
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "camera": {
+  "motion": "static (background uniform grey RGB 132,126,135, no texture; no shift)",
+  "notes": "2D side view; both objects move right-to-left horizontally at constant image rows. Weak perspective visible as small changes of apparent length of 3D objects with image x (see notes)."
+ },
+ "background": "uniform grey, no ground, horizon or markings",
+ "objects": {
+  "airplane": {
+   "desc": "white Air China passenger jet (A320-type, red phoenix logo on tail fin), side view, nose pointing left; the upper/larger object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    32
+   ],
+   "fully_in_frame": [
+    7,
+    16
+   ],
+   "track": "tracks/plane.csv",
+   "reference_point": "ref_x/ref_y = centre of the full nose-to-tail, fin-top-to-engine-bottom bbox (from frame 10) moved by template-matched shifts; nose_x_fit / tail_x_fit = nose tip / tail-cone tip x",
+   "size_px_frame10": {
+    "length_nose_to_tail": 1106,
+    "height_fin_top_to_engine_bottom": 328,
+    "bbox": [
+     510,
+     170,
+     1615,
+     497
+    ],
+    "fuselage_rows_approx": [
+     338,
+     462
+    ]
+   },
+   "length_px_range_full_frames": [
+    1094,
+    1119
+   ],
+   "motion": "pure horizontal leftward, constant pixel step: nose 74.20 px/frame, tail 73.01 px/frame, centre ~73.6 px/frame (bbox-centre steps 72.5-75.5); vertical drift < 0.05 px/frame",
+   "y_ref": 333.5
+  },
+  "car": {
+   "desc": "silver angular pickup (Cybertruck-like), black wheels, side view facing left; the small lower object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "fully_in_frame": [
+    0,
+    71
+   ],
+   "track": "tracks/car.csv",
+   "reference_point": "ref_x/ref_y = bbox centre (x0+x1)/2,(y0+y1)/2; mask_cx/mask_cy = mask centroid",
+   "size_px_frame0_static": {
+    "length": 171,
+    "height": 54,
+    "bbox": [
+     1473,
+     606,
+     1643,
+     659
+    ]
+   },
+   "length_px_range": [
+    165,
+    173
+   ],
+   "motion": "horizontal leftward, starting from rest, pixel step growing ~linearly (uniform acceleration) from ~1 px/frame (frame 2) to ~36 px/frame (frame 71)",
+   "y_ref": 632
+  }
+ },
+ "static_objects": "none (empty uniform background)",
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "frames 0 and 1 are identical images; both objects at rest/unchanged"
+  },
+  {
+   "frame": 2,
+   "t": 0.0833,
+   "event": "motion starts: plane already at full constant step (~73.6 px/frame from frame 1 to 2); car begins accelerating from rest (~1 px step)"
+  },
+  {
+   "frame": 5,
+   "t": 0.2083,
+   "event": "plane tail fin fully enters (top of bbox reaches y=170)"
+  },
+  {
+   "frame": 7,
+   "t": 0.2917,
+   "event": "plane's tail cone enters: plane fully in frame frames 7-16"
+  },
+  {
+   "frame": 17,
+   "t": 0.7083,
+   "event": "plane nose reaches left image edge, starts leaving"
+  },
+  {
+   "frame": 32,
+   "t": 1.3333,
+   "event": "last frame with any plane pixels (tail-cone tip); plane gone from frame 33"
+  },
+  {
+   "frame": 71,
+   "t": 2.9583,
+   "event": "video ends; car still in frame (x~249), still accelerating"
+  }
+ ],
+ "contacts": "none (objects never overlap; plane above car, ~300 px vertical separation of reference points)",
+ "files": {
+  "notes": "notes.md",
+  "tracks": [
+   "tracks/plane.csv",
+   "tracks/car.csv",
+   "tracks/plane_raw.csv",
+   "tracks/car_raw.csv"
+  ]
+ }
+}

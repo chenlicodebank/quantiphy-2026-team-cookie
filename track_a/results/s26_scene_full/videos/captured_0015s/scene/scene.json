@@ -1,0 +1,71 @@
+{
+  "video": "captured_0015s.mp4",
+  "source": "lab (real recording; background replaced by a synthetic colour gradient, 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "duration_s": 3.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y DOWN, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (background identical across frames: mean abs diff ~4/765 per pixel, no shift); person's feet fixed at the same pixels all clip",
+    "lab_intrinsics_from_benchmark": {"hfov_deg": 80, "focal_px": 762.8, "principal_point_px": [640, 360]},
+    "perspective_cues": "none usable: no floor, walls or horizon visible (background replaced). Toy moves roughly in a plane facing the camera, close to the person's right side; its apparent size stays ~constant (flight height 92-98 px)."
+  },
+  "objects": [
+    {
+      "name": "teddy",
+      "description": "small brown red-panda / bear plush toy (orange-brown fur, white face markings, striped tail), held in the person's hands and tossed upward twice",
+      "moves": true,
+      "visible_frames": "0-72 (always visible; partly hidden by hands except during flight)",
+      "track": "tracks/teddy.csv",
+      "reference_point": "visible centre = bbox centre (cx, cy); in flight frames also mask centroid (mask_cx, mask_cy)",
+      "size_px_in_flight": {
+        "vertical_bbox_height": "92-98 (median ~95), toy upright head-up during both flights",
+        "main_axis_length_pca": "93.5-98.0 (median ~96)",
+        "width_across_axis": "40-59 (tail sticking out sideways makes it vary; body alone ~40)",
+        "bbox_width": "40-63"
+      },
+      "size_px_held_frames": "manual bbox ~ 45-60 wide x 85-95 tall (less reliable, partly behind hands)"
+    },
+    {
+      "name": "person",
+      "description": "woman (face blurred), grey short-sleeve T-shirt, black baggy trousers, white sneakers with black stripes; stands in place facing right-front; tosses and catches the toy with both hands",
+      "moves": "stands still (feet, legs, torso, head fixed); only arms/hands move",
+      "visible_frames": "0-72",
+      "track": "tracks/person.csv",
+      "static_extents_px": {
+        "head_top_y": 132, "head_top_y_range": [132, 134],
+        "shoe_sole_bottom_y": 640, "sole_range": [640, 641],
+        "standing_height_px": 508, "standing_height_note": "top of hair to shoe sole, head tilted slightly up; 508-510 over the clip",
+        "body_centre_x": 349, "mask_centroid_xy": [348.5, 395],
+        "waistband_y": 322,
+        "torso_x_range_at_chest": [293, 400],
+        "trousers_x_range": [297, 405],
+        "front_shoe_x_range": [352, 397], "back_shoe_x_range": [307, 368],
+        "hand_right_extent_x": "~415-433 while holding low; up to 487-491 with arms out during the tosses"
+      }
+    }
+  ],
+  "static_scene": "no physical static objects: background is a synthetic smooth colour gradient (blue left, yellow/green centre, red/pink right), not a real surface",
+  "events": [
+    {"event": "toy held at waist level, nearly still", "frames": "0-9", "t": "0.000-0.375", "cy_px": "~363-375"},
+    {"event": "toss 1: hands start lifting toy", "frame": 10, "t": 0.417},
+    {"event": "toss 1: release (toy leaves hands)", "frame": 16, "t": 0.667, "note": "touching hand at 15, clearly free at 17; uncertainty +-1 frame"},
+    {"event": "toss 1: apex", "frame": 19, "t": 0.792, "cy_px": 178.0, "mask_cy_px": 179.4},
+    {"event": "toss 1: catch (first contact with right hand)", "frame": 22, "t": 0.917, "note": "toy lowered by hands to waist by ~frame 30"},
+    {"event": "toy back at waist, held", "frames": "30-44", "t": "1.250-1.833"},
+    {"event": "toss 2: hands start lifting toy", "frame": 45, "t": 1.875},
+    {"event": "toss 2: release", "frame": 52, "t": 2.167, "note": "toy bottom touching hand at 51, small gap at 52; +-1 frame"},
+    {"event": "toss 2: apex", "frames": "54-55", "t": "2.250-2.292", "cy_px": 150.5, "mask_cy_px": 149.1},
+    {"event": "toss 2: catch", "frame": 59, "t": 2.458, "note": "toy bottom meets right hand; lowered to waist by ~frame 64"},
+    {"event": "toy held at waist until end", "frames": "64-72", "t": "2.667-3.000"}
+  ],
+  "files": {
+    "tracks/teddy.csv": "per-frame toy box/centre (all 73 frames)",
+    "tracks/person.csv": "per-frame person mask bbox (x0 contaminated by background artefacts; use upper_x0 / static extents)",
+    "bg.png": "reconstructed static background used for segmentation",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

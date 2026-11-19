@@ -1,0 +1,55 @@
+{
+  "video": "simulation_0160.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 40,
+  "duration_s": 1.3333,
+  "image_size_px": [1920, 1080],
+  "units": "pixels (x right, y down, origin top-left of the 1920x1080 frame), time in s = frame/30",
+  "view": "orthographic-looking top-down view of a pool table; all balls lie on the felt plane facing the camera (one px scale for the whole table)",
+  "camera": {"motion": "static", "evidence": "frame differences are zero everywhere except at the moving ball; table edges and pockets do not move", "per_frame_shift_px": [0, 0]},
+  "moving_objects": [
+    {
+      "name": "ball13_orange_stripe",
+      "description": "white ball with an orange stripe (number 13), the only moving object; starts right of table centre and rolls left along y~506->499",
+      "track_file": "tracks/striped_ball.csv",
+      "reference_point": "centroid of the filled convex hull of the ball mask = ball centre (top view)",
+      "visible_frames": "0-39 (in frame 1 it is drawn at a wrong place, see glitch)",
+      "diameter_px": {"median": 48.4, "range": [47.8, 50.2], "note": "mask ellipse major axis; minimum-enclosing-circle 48.8-51 (includes 1 px blur/shadow fringe). Width across ~47.7. Static balls measure 48x48 bbox."},
+      "start_position_px": [1300.96, 506.03],
+      "end_position_px_frame39": [219.35, 498.85],
+      "direction": "leftwards (-x), drifting slowly up by ~7 px over ~1080 px (about 0.4 deg above horizontal)",
+      "net_displacement_frame0_to_39_px": 1081.6
+    }
+  ],
+  "static_objects": [
+    {"name": "ball3_red_solid", "desc": "solid red, top-left area near top cushion", "centre_px": [464.4, 178.3], "bbox_px": [440, 154, 489, 203], "diameter_px": 49},
+    {"name": "ball10_blue_stripe", "desc": "white ball showing thin blue ring (blue stripe seen end-on), top middle", "centre_px": [1072.7, 225.1], "bbox_px": [1050, 202, 1097, 249], "diameter_px": 48},
+    {"name": "ball12_purple_stripe", "desc": "white ball with purple edge, top right of the white pair", "centre_px": [1253.4, 265.2], "bbox_px": [1230, 242, 1277, 289], "diameter_px": 48},
+    {"name": "ball9_yellow_stripe", "desc": "white ball with yellow stripe, upper middle", "centre_px": [827.2, 286.2], "bbox_px": [804, 264, 851, 309], "diameter_px": 47},
+    {"name": "ball14_green_stripe", "desc": "white ball with dark-green stripe, against left cushion", "centre_px": [222, 330], "bbox_px": [198, 306, 246, 354], "diameter_px": 48, "note": "low contrast against felt; centre +-2 px"},
+    {"name": "ball6_green_solid", "desc": "solid dark green (number 6), left area", "centre_px": [442, 344], "bbox_px": [418, 320, 466, 368], "diameter_px": 48, "note": "low contrast against felt; centre +-2 px"},
+    {"name": "ball5_orange_solid", "desc": "solid orange, just below ball 6", "centre_px": [480.1, 396.3], "bbox_px": [456, 372, 505, 421], "diameter_px": 49},
+    {"name": "ball1_yellow_solid", "desc": "solid yellow, lower middle", "centre_px": [941.3, 755.6], "bbox_px": [918, 732, 965, 779], "diameter_px": 48},
+    {"name": "ball8_black", "desc": "black ball near bottom cushion, left of centre", "centre_px": [506.1, 899.4], "bbox_px": [482, 876, 529, 923], "diameter_px": 48},
+    {"name": "ball7_maroon_solid", "desc": "solid dark red/maroon near bottom cushion, right of the bottom-middle pocket", "centre_px": [1051.8, 889.2], "bbox_px": [1028, 866, 1075, 913], "diameter_px": 48},
+    {"name": "ball11_red_stripe", "desc": "white ball with red stripe, next to the maroon ball near the bottom cushion", "centre_px": [1115.8, 906.5], "bbox_px": [1092, 882, 1139, 931], "diameter_px": 48},
+    {"name": "felt_playing_surface", "desc": "green cloth inside the cushions", "bbox_px": [184, 148, 1707, 937], "length_px": 1524, "width_px": 790, "centre_px": [945.5, 542.5]},
+    {"name": "table_wooden_rail", "desc": "brown wooden frame around the felt", "outer_bbox_px": [110, 84, 1781, 999], "length_px": 1672, "width_px": 916, "rail_thickness_px": {"left": 74, "right": 74, "top": 64, "bottom": 62}},
+    {"name": "pockets", "desc": "6 black pockets (4 corners, 2 side-middle on top and bottom rails)",
+     "centres_px": {"top_left": [167.9, 136.2], "top_middle": [945.9, 122.6], "top_right": [1723.9, 136.2], "bottom_left": [167.8, 947.0], "bottom_middle": [945.5, 960.2], "bottom_right": [1723.6, 947.2]},
+     "corner_pocket_dark_region_bbox_size_px": [130, 120], "middle_pocket_dark_region_bbox_size_px": [118, 97],
+     "pocket_mouth_on_felt_width_px": {"corner": 41, "middle": 69}},
+    {"name": "floor", "desc": "grey wooden floor around the table, with a white/grey pattern at the left edge (x<40, y~320-500)", "moves": false}
+  ],
+  "events": [
+    {"event": "ball 13 already moving / starts moving", "frame": 0, "time_s": 0.0, "note": "frame0->2 step only 3.3 px (over 2 frames), then 14-18 px/frame: motion starts at or just after frame 0; no cue or other ball strikes it in view"},
+    {"event": "glitch frame: ball 13 rendered at (1305,801), 295 px below its path, and missing from its path", "frame": 1, "time_s": 0.0333},
+    {"event": "duplicated frames (ball identical to previous frame)", "frames": [5, 10, 13, 19, 26, 28, 35]},
+    {"event": "double-length steps (about 2x the neighbouring step)", "frames": [9, 11, 17, 24, 27, 34, 37]},
+    {"event": "ball 13 passes ball 6/5 region and nears the left cushion, no contact", "frame": 39, "time_s": 1.3, "note": "left edge of ball at x=196, felt edge at x=184 (gap ~12 px); no bounce, no collision occurs in the clip"},
+    {"event": "no collisions, no other object moves", "frames": "0-39"}
+  ],
+  "files": {"track": "tracks/striped_ball.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

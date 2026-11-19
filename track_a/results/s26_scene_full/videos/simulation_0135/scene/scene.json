@@ -1,0 +1,64 @@
+{
+  "video": "simulation_0135.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of upper 700 rows vs frame 0: shift < 0.07 px at frames 20, 30, 59 (scene/static_measure.json)",
+    "view": "front-on view of a kitchen back-wall and countertop; counter top surface runs horizontally; motion is along x in a plane facing the camera"
+  },
+  "moving_objects": {
+    "blue_cylinder": {
+      "description": "dark-blue (navy) cylinder (cup/can-like, one end cap visible), the only moving object; slides/rolls left-to-right along the countertop and over the black cooktop while tumbling about a vertical axis (apparent axis angle swings from ~-40 deg through vertical end-on view ~frame 20 to ~+45 deg)",
+      "track_file": "tracks/blue_cylinder.csv",
+      "visible_frames": [5, 53],
+      "fully_in_frame": [7, 46],
+      "partly_cut_by_left_edge": [5, 6],
+      "partly_cut_by_right_edge": [47, 53],
+      "absent_frames": "0-4 and 54-59",
+      "reference_point": "cx/cy_mask_centroid (centre of the visible blue silhouette, approximates the rigid body origin); cx_edge_est for edge-cut frames",
+      "vertical_position": "centroid y ~910-913 px throughout frames 7-46 (stays on the counter; bbox bottom 995-999 = contact with counter)",
+      "apparent_size_px": {
+        "bbox_height": "166-170 (frames 7-47, constant)",
+        "bbox_width": "200 at frame 7, min ~125 at frames 18-21 (end-on), ~186 at frame 46",
+        "mask_len_main_axis": "215 (f7) -> ~165 (f18-21) -> ~204 (f46)",
+        "mask_width_across": "118-138"
+      }
+    }
+  },
+  "static_objects": {
+    "toaster": {"desc": "red retro 4-slot toaster with cream base, left of counter", "red_body_bbox": [76, 678, 499, 895], "red_body_w_h": [424, 218], "with_cream_base_approx_bbox": [60, 678, 505, 930], "centroid_red": [288.6, 791.4]},
+    "wall_socket_plate": {"desc": "black wall plate with 2 sockets + switch, on back wall", "bbox": [599, 712, 800, 788], "w_h": [202, 77], "centre": [699.2, 749.7]},
+    "cooktop": {"desc": "black induction hob with white ring markings set in counter, right side, extends past right image edge", "bbox_visible": [1197, 894, 1919, 974], "w_visible": 723, "h_apparent": 81, "note": "foreshortened (top surface seen at grazing angle); right end cut by frame edge"},
+    "range_hood_vent": {"desc": "slatted grille under upper cabinets, top right", "approx_bbox": [1180, 125, 1900, 160]},
+    "upper_cabinets": {"desc": "wood-veneer wall cabinets, top of frame", "approx_bottom_y": 115, "approx_door_seams_x": [123, 635, 1147]},
+    "countertop": {"desc": "beige/grey stone counter", "back_edge_y_approx": 893, "front_edge_y_approx": 1000, "dark_lip_y_approx": [1015, 1035]},
+    "sink_edge": {"desc": "sink cut-out edge at far left of counter", "approx_bbox": [0, 900, 70, 935]},
+    "under_cabinet_light_strip": {"desc": "bright LED band on wall below cabinets", "y_range_approx": [160, 215]}
+  },
+  "events": [
+    {"name": "cylinder enters from left edge (already moving)", "frame": 5, "t": 0.2083},
+    {"name": "cylinder fully in frame", "frame": 7, "t": 0.2917},
+    {"name": "fast near-constant phase ~80-82 px/frame (centroid dx)", "frames": [8, 13]},
+    {"name": "deceleration phase, dx falls ~78 -> ~30 px/frame", "frames": [13, 29], "note": "strongest slowdown ~frames 15-21"},
+    {"name": "passes in front of / below toaster", "frames": [6, 12]},
+    {"name": "end cap faces camera (axis vertical in image, min apparent width ~125 px)", "frames": [18, 21]},
+    {"name": "leading edge reaches cooktop left edge (x~1197)", "frame": 22, "t": 0.9167},
+    {"name": "centroid crosses onto cooktop (cx ~1200)", "frame": 25, "t": 1.0417},
+    {"name": "near-constant speed ~28 px/frame", "frames": [29, 46]},
+    {"name": "leading edge reaches right image edge", "frame": 47, "t": 1.9583},
+    {"name": "last visible frame", "frame": 53, "t": 2.2083},
+    {"name": "fully exited right", "frame": 54, "t": 2.25}
+  ],
+  "files": {
+    "notes": "notes.md",
+    "static_measurements": "static_measure.json",
+    "scripts": "scripts/"
+  }
+}

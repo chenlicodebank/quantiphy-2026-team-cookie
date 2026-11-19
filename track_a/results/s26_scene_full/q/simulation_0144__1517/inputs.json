@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0144.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 35,
+ "duration_s": 1.4583,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1517,
+  "question": "What is the acceleration of the rocket at time 1s in m/s^2?",
+  "prior": "length of the rocket = 2.9m",
+  "depth_info": "t=0s, distance_rocket_camera = 43.064m   \nt=0.5s, distance_rocket_camera = 41.127m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

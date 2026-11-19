@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0284.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, full-resolution pixels (2560x1440)",
+  "view": "top-down (camera looking straight down at a white floor/backdrop); the aircraft flies parallel to the floor, its shadow falls on the floor",
+  "camera": {
+    "motion": "static (no pan/shake: background corners unchanged within <0.5 grey levels except when aircraft/shadow pass)",
+    "picture_area": "letterboxed: picture rows y = 80..1359 (1280 rows), black bars above and below",
+    "perspective": "none usable; single planar motion facing the camera; apparent size of the aircraft constant (wingspan 725 px in every frame 0..64 by raw silhouette)"
+  },
+  "objects": [
+    {
+      "name": "aircraft",
+      "description": "the only moving object: grey/silver fighter-like aircraft seen from above, nose pointing LEFT (-x), swept wings with two rotor fans and two long under-wing pods, twin tail fins at the right end. Appears dark/black near the right and left edges of the picture (lighting falloff), light grey in the middle.",
+      "moves": true,
+      "visible_frames": "0-71 (fully in picture 0-56; nose/pod tips leave the left edge from frame 57; frame 71 only the tail end, ~90 px)",
+      "track_file": "tracks/aircraft.csv",
+      "reference_point": "ref_x, ref_y = centre of the aircraft's 2D bounding box (pod tips to tail tip, wingtip to wingtip). Use as origin proxy. centroid_x/y (silhouette area centroid, ~38 px forward/left of the box centre) also given; the two differ by a constant, so displacements/speeds are identical.",
+      "size_px": {
+        "length_along_motion_x": 566,
+        "length_note": "x extent from the under-wing pod tips/forward guns (x=1133 at frame 24) to the fuselage tail tip (x=1698 at frame 24); fuselage centre line itself spans ~1202..1698",
+        "wingspan_y": 725,
+        "wingspan_note": "y = 367..1091 wingtip fairing to wingtip fairing, constant all frames",
+        "height": "not observable (top-down view)",
+        "silhouette_area_px": 190846
+      },
+      "position_frame24_px": {"bbox": [1133, 367, 1698, 1091], "box_centre": [1415.5, 729.0], "centroid": [1377.1, 728.57]},
+      "motion_summary_px": "frames 0 and 1 identical (stationary); from frame 1->2 onward it moves left in a straight horizontal line (y constant to +-0.03 px) by 34.1-34.5 px per frame (template frames 2-60), no visible acceleration; exits the left edge (fully gone after frame 71)."
+    },
+    {
+      "name": "aircraft_shadow",
+      "description": "soft, blurred dark shadow of the aircraft on the floor; moves with the aircraft but its offset from the aircraft changes (lies to the right of the aircraft at the start, under/behind it mid-clip, to the left of it near the end) - a point/near light source above the centre. NOT part of the aircraft; excluded from all aircraft measurements.",
+      "moves": true,
+      "visible_frames": "0-~66"
+    },
+    {
+      "name": "floor_backdrop",
+      "description": "uniform white/light-grey floor filling the picture, darker towards the right edge (vignette). No markings.",
+      "moves": false
+    },
+    {
+      "name": "backdrop_edge",
+      "description": "static dark curved boundary at the right edge of the picture (edge of the floor plane / backdrop): starts at x~2390 near the top row of the picture (y~90), x~2516 at mid-height (y~720), x~2454 near the bottom (y~1350); beyond it is black.",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "aircraft at rest (frames 0 and 1 identical)", "frame": 0, "t": 0.0},
+    {"event": "motion start (first displacement between frame 1 and 2)", "frame": 2, "t": 0.0833},
+    {"event": "aircraft first touches left picture edge (pod tips at x~0)", "frame": 57, "t": 2.375},
+    {"event": "box centre (ref point) crosses left edge x=0", "frame": 66, "t": 2.75},
+    {"event": "last frame, only tail tip (~80 px) visible", "frame": 71, "t": 2.9583}
+  ],
+  "no_events": "no bounces, contacts, impacts or direction changes; straight-line leftward motion throughout"
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0033.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 19.293478,
+ "frames": 47,
+ "duration_s": 2.4361,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 3023,
+  "question": "What is the speed of the plate of tomatoes from 1s to 1.6s in m/s?",
+  "prior": "size of the fork = 20.3 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 25.0
+ }
+}

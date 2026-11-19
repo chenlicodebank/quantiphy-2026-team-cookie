@@ -1,0 +1,51 @@
+{
+ "id": 1680,
+ "video": "simulation_0024_segmented",
+ "submitted": 20.5008,
+ "submitted_is": "a fixed-rule blend exp(0.7 ln A + 0.3 ln B) of the Claude line's answer A = 23 and an earlier DeepSeek median B = 15.675; the rule blends every row of its population where the two differ by less than about 50 pct, so it is no judgement about this question",
+ "deepseek_median": 15.671630419327784,
+ "candidates": [
+  {
+   "name": "C1",
+   "kind": "claude",
+   "answer": 23.0,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "kind": "claude",
+   "answer": 16.4,
+   "who": "Claude Sonnet 5.5 (Claude Code agent), 26_80 repeat, repeat run 2 of 3 (26_80, Sonnet 5.5 effort high, per-question median of three)",
+   "source": "s26_repeat_1021_a attempt 2"
+  },
+  {
+   "name": "C3",
+   "kind": "claude",
+   "answer": 16.4,
+   "who": "Claude Sonnet 5.5 (Claude Code agent), 26_80 repeat, repeat run 3 of 3 (26_80, Sonnet 5.5 effort high, per-question median of three)",
+   "source": "s26_repeat_1021_a attempt 3"
+  },
+  {
+   "name": "C4",
+   "kind": "claude",
+   "answer": 21.0,
+   "who": "Claude Opus 5.5 (Claude Code agent), 30_x adjudication, 30_9a D3 adjudication batch 1 (DeepSeek+SAM 3 differs >25 pct)",
+   "source": "s30_adj_d3 attempt 1"
+  },
+  {
+   "name": "C5",
+   "kind": "deepseek",
+   "answer": 16.0,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r1",
+   "source": "s37_test_repeats r1"
+  },
+  {
+   "name": "C6",
+   "kind": "deepseek",
+   "answer": 15.35,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r2",
+   "source": "s37_test_repeats r2"
+  }
+ ]
+}

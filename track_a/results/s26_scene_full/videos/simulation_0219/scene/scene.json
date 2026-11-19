@@ -1,0 +1,64 @@
+{
+  "video": "simulation_0219.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type_given": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale estimated",
+  "camera": {
+    "motion": "static (phase correlation of the ceiling strip vs frame 0: |shift| <= 0.16 px in all frames)",
+    "lighting": "scene lighting/shadows on the back wall change strongly over the clip (not camera motion)",
+    "perspective": "clear perspective although labelled 2D: the tank's near parts move faster in pixels than its far parts (drill tip 54.0, main body 51.8, rear track plate 50.9, claws ~44, far-side rear ~46 px/frame); the robot stands nearer the camera than the tank (feet at y~965 vs tank track bottom y=894). Ground plane: floor with white lane lines; the back wall is parallel to the image plane; horizon not visible (above the frame)."
+  },
+  "objects": [
+    {
+      "name": "tank_drill_robot",
+      "description": "large blue tracked robot vehicle: blue body cylinder with red top box and handle, blue drill arm with a dark conical drill pointing right, two dark C-shaped claws, brown/grey caterpillar tracks. The only coloured object (background is greyscale).",
+      "moves": true,
+      "motion": "translates rightwards at constant pixel speed through the whole clip (no start/stop, no vertical motion: y drift < 1.5 px)",
+      "visible_frames": "0-47 (frames 0-8 cut by the left image edge, 9-32 fully in frame, 33-47 cut by the right edge; gone at 48-49)",
+      "track_file": "tracks/tank_drill_robot.csv",
+      "reference_point": "ref_x = main-body template point + 30 px (about the chassis mid-x), ref_y = middle of box (582.5). Moves 51.80 px/frame. Alternatives in the CSV: tip_x (54.02 px/frame), rear_plate_x_meas (50.89), body_x (51.80), left_x and box_center_x",
+      "pixel_speeds_px_per_frame": {"drill_tip": 54.02, "main_body": 51.80, "rear_track_plate": 50.89, "leftmost_visible_point": "about 50 at frame 12, falling to about 46 at frame 45 (quadratic)"},
+      "extents_frame12_px": {"x": [181, 799], "y": [271, 894], "length": 618, "height": 623, "tracks_length": "about 181..690 = 509", "body_cylinder": "about 195..625 = 430 long, 335..495 tall", "drill_tip": [799, 655]},
+      "apparent_length_px": "614 (frame 9) to 705 (frame 32) while fully in frame; grows over time because of perspective. Height constant at 623 px"
+    },
+    {
+      "name": "small_grey_robot",
+      "description": "small grey humanoid toy robot with a large semi-transparent mushroom/dome head on a short neck (dark cup under the dome), round body with a dark disc, ball-jointed arms and legs, big feet; walks leftwards with a walk cycle (turns from 3/4 view to side view and back)",
+      "moves": true,
+      "motion": "walks left at a steady 8.40 px/frame (neck axis; residual of a linear fit <= 1.5 px); vertical bob of the head and neck about 20 px peak-to-peak (cup top 725-746 px; lowest at frames ~12 and ~49, highest at ~3-5, ~22-24 and ~42-43)",
+      "visible_frames": "0-49, never occluded (it is in front of the tank in frames 22-36)",
+      "track_file": "tracks/small_grey_robot.csv",
+      "reference_point": "ref_x = body axis x (centre of the dark neck cup under the dome); ref_y = cup top + 154 px (estimated hip/pelvis height, the hip ball joints by eye in frames 0-4)",
+      "size_px": "height from dome top to lowest foot about 300-317 px (frame 0: 661.5 to 964, 302.5 px). Dome head about 120 px wide, about 77 px tall above the cup. Width with arms 100-230 px depending on pose"
+    }
+  ],
+  "static_objects": [
+    {"name": "left_pillar", "description": "light concrete column of the back wall", "x": [642, 712], "y": [0, 825], "width_px": 70, "accuracy_px": 5},
+    {"name": "right_pillar", "description": "light concrete column of the back wall", "x": [1577, 1655], "y": [0, 825], "width_px": 78, "accuracy_px": 5},
+    {"name": "wall_windows", "description": "corrugated/slatted window bands of the back wall between the pillars", "y": [205, 540], "bays_x": [[0, 640], [712, 1577], [1655, 1920]]},
+    {"name": "wall_rail", "description": "horizontal light concrete beam under the windows", "y": [540, 580]},
+    {"name": "lower_wall_panel", "description": "plain grey lower wall", "y": [580, 820]},
+    {"name": "floor_wall_junction", "y": 820},
+    {"name": "lane_line_far", "description": "white floor line along the wall", "y": 843, "x": [0, 1920]},
+    {"name": "lane_line_near", "description": "white floor line, nearer the camera", "y": 907, "x": [0, 1920]},
+    {"name": "lane_diagonal_left", "description": "white diagonal stripe joining the two lane lines", "x": [515, 640], "y": [843, 907]},
+    {"name": "lane_diagonal_right", "description": "white diagonal stripe joining the two lane lines", "x": [1610, 1810], "y": [843, 907]},
+    {"name": "ceiling_beams_lights", "description": "dark steel ceiling beams with fluorescent lights at the top of the image", "x": [[520, 680], [1615, 1920]], "y": [0, 175]}
+  ],
+  "events": [
+    {"event": "both objects already moving at frame 0; no start, stop, bounce or contact during the clip", "frame": 0, "time_s": 0.0},
+    {"event": "tank fully inside the frame (left edge >= 0)", "frame": 9, "time_s": 0.375},
+    {"event": "tank drill tip reaches the right image edge", "frame": 33, "time_s": 1.375},
+    {"event": "tank drill tip passes the small robot's axis (tank starts passing behind the robot)", "frame": "between 23 and 24", "time_s": "0.958-1.000"},
+    {"event": "tank reference x passes the robot's axis", "frame": "between 29 and 30", "time_s": "1.208-1.250"},
+    {"event": "tank rear (leftmost point) passes the robot's axis", "frame": "between 34 and 35", "time_s": "1.417-1.458"},
+    {"event": "tank last visible (small sliver at the right edge)", "frame": 47, "time_s": 1.9583},
+    {"event": "the two robots never touch: the small robot is nearer the camera and the tank passes behind it", "frame": "22-36"}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/tank_drill_robot.csv", "tracks/small_grey_robot.csv"], "scripts": "scripts/"}
+}

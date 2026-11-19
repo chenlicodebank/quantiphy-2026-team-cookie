@@ -1,0 +1,18 @@
+{
+ "video": "internet_0053.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 30.0,
+ "frames": 81,
+ "duration_s": 2.7,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3137,
+  "question": "What is the wheel-to-wheel width of the scooter in meters?",
+  "prior": "average speed of the person riding scooter = 4.46 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

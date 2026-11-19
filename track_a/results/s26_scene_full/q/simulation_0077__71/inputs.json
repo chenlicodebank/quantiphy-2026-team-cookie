@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0077.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 71,
+  "question": "What is the distance between the person in the black shirt and the person in the white shirt at 1.0s in meters?",
+  "prior": "speed of the person in the black shirt = 1m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

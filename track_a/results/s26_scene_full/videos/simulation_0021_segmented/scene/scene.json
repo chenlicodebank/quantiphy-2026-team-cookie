@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0021_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by white)",
+  "scene_type": "3D",
+  "fps": 29.0, "frames": 89, "duration_s": 3.069, "width": 1080, "height": 1080,
+  "time_convention": "t = frame / 29.0, frame 0 at t = 0",
+  "pixel_convention": "x right, y down, full-resolution pixels (1080x1080)",
+  "camera": {
+    "motion": "static (lamp post and hydrant pixel-stable over all 89 frames; median background subtraction leaves no residue on them)",
+    "background": "uniform white (~253), no ground plane, horizon or vanishing lines visible",
+    "perspective_cues": "Only ground-contact rows: hydrant base y=892, lamp base y=893, man's feet y~866-873 (he is slightly farther from the camera than the two props, he passes BEHIND both). Lamp post appears vertical (no tilt visible). Man's apparent height constant (~217 px median) -> walks at ~constant depth, roughly parallel to image plane."
+  },
+  "objects": {
+    "man": {
+      "description": "the only person: adult man, dark navy jacket, grey trousers, dark hair, white/blank face; walks left to right",
+      "moves": true, "visible_frames": [0, 88],
+      "track_file": "tracks/man.csv",
+      "reference_point": "pelvis estimate: x = head centre + (-4.7 px torso offset), y = head_top + 0.47*222 px",
+      "pelvis_x_px": {"frame0": 85.8, "frame88": 252.3, "net_dx": 166.5},
+      "pelvis_y_px": "~754 (+-2, gait bob)",
+      "apparent_height_px": {"standing_estimate": 222, "mask_min": 208, "mask_max": 224, "median": 217, "note": "mask min values <208 (frames 12-14) are feet hidden behind hydrant, ignore"},
+      "head_width_px": "21-26 (median 23)",
+      "mask_width_px": {"min": 38, "max": 116, "note": "varies with stride (legs apart ~110-116, legs together ~40)"},
+      "head_top_y_px": [649, 654],
+      "occlusion": "bbox overlaps hydrant frames 0-57 (legs/lower body hidden mainly frames 0-~40); overlaps lamp post frames 19-20 and 32-88 (torso largely hidden ~55-68); head partly behind lamp shaft frames 49-70 (frames ~59-62 head almost fully hidden)"
+    },
+    "lamp_post": {
+      "description": "black street lamp with lantern head on a tall thin shaft and a wider base; right of hydrant",
+      "moves": false, "visible_frames": [0, 88],
+      "bbox_px": [159, 330, 235, 893],
+      "height_px": 564, "max_width_px": 77,
+      "bbox_centre_px": [197, 611.5], "mask_centroid_px": [193.8, 635.3],
+      "lantern_width_px": 73, "lantern_y_range_px": [330, 395],
+      "shaft_width_px": 12, "shaft_x_center_px": 193,
+      "base_width_px": "33 (y 750-850), 54 at foot (y 880)",
+      "ground_contact_y_px": 893,
+      "note": "in front of the man (occludes him)"
+    },
+    "fire_hydrant": {
+      "description": "white/grey weathered fire hydrant with rust spots and a chain, side nozzle to the right; leftmost object",
+      "moves": false, "visible_frames": [0, 88],
+      "bbox_px": [63, 758, 140, 892],
+      "height_px": 135, "max_width_px": 78,
+      "bbox_centre_px": [101.5, 825], "mask_centroid_px": [96.9, 827.3],
+      "body_width_px": 41, "cap_width_px": 48, "base_flange_width_px": 62,
+      "ground_contact_y_px": 892,
+      "note": "in front of the man (occludes his legs early in the clip)"
+    }
+  },
+  "events": [
+    {"event": "man already walking at first frame (no start-from-rest)", "frame": 0, "time": 0.0},
+    {"event": "man's head starts passing behind lamp shaft", "frame": 49, "time": 1.6897},
+    {"event": "man's head centre aligned with lamp shaft (~x 191)", "frame": 60, "time": 2.069},
+    {"event": "man's head fully clear of lamp shaft on right", "frame": 71, "time": 2.4483},
+    {"event": "man's pelvis_x passes hydrant centre x (101.5 px) (man is behind it)", "frame": 12, "time": 0.4138},
+    {"event": "man's rear foot / body last overlaps hydrant bbox (bbox_x0 <= 140)", "frame": 57, "time": 1.9655},
+    {"event": "man's pelvis_x passes lamp shaft axis x=193 (man is behind it)", "frame": 63, "time": 2.1724},
+    {"event": "man still walking at last frame", "frame": 88, "time": 3.0345}
+  ],
+  "direction": "man moves monotonically +x (rightwards); no direction changes; vertical position constant apart from gait bob"
+}

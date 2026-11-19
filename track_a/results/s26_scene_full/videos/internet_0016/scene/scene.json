@@ -1,0 +1,51 @@
+{
+  "video": "internet_0016.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 29.901099,
+  "frames": 91,
+  "duration_s": 3.0434,
+  "image_size_px": [2160, 3840],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t * fps)",
+  "coordinates": "pixels, x right, y down, origin top-left of the full-resolution frame. *_bgref_px columns = position minus camera shift (frame-0 background coordinates).",
+  "description": "Grayscale (contrast-boosted, shadows clipped to black) near-top-down drone view of a full outdoor basketball court in portrait orientation. Top of image = one basket, bottom = the other. Bottom half: a rebound - the ball comes off the bottom rim at frame 0, bounces once on the court (frame 13) and is caught by player B (dark shirt), who then moves/dribbles to the right holding it; player A (white shirt) walks/jogs up-left away from the basket. Player C stands almost motionless near the top basket with arms raised. Sun from upper-left: every object casts a long hard shadow toward lower-right.",
+  "camera": {
+    "type": "drone, nearly top-down, hovering",
+    "motion": "small slow drift only: total shift <= ~8 px (dx 0..+5, dy 0..-8 px vs frame 0); per-frame shifts in tracks/camera_shift.csv (phase correlation, confirmed by 5 static line-corner templates to ~1 px)",
+    "perspective": "slight tilt: the court is wider at the bottom of the image than at the top (bottom lane 639 px wide vs top lane 615 px, +3.9%; sidelines converge upward). Players near the bottom are seen slightly obliquely. Treat as planar for the annotator convention (one scale)."
+  },
+  "objects": {
+    "ball": {"moves": true, "track": "tracks/ball.csv", "frames_visible": "0-43 (0 overlaps rim), 64-68, 86-90; partly/fully hidden in B's hands/body 44-63, 69-85",
+             "distinguish": "only ball in play; light-grey disc ~33-35 px tall (bright part ~27 px wide, right side shaded dark)",
+             "diameter_px": {"vertical_extent_median_frames1_25": 33, "range": "31 (near the bounce) - 35 (frame 0, highest/closest to camera)", "by_eye_frame6": 35}},
+    "ball_shadow": {"moves": true, "track": "tracks/ball_shadow.csv", "frames": "0-26", "distinguish": "dark ellipse ~37x32 px, lower-right of the ball; meets the ball at the bounce"},
+    "player_A_white": {"moves": true, "track": "tracks/player_A_white.csv", "frames_visible": "0-90", "distinguish": "white shirt, dark hair, bottom-left on the left lane line at start (~(765,3530)); walks up-left to ~(470,3195) by frame 90"},
+    "player_B_dark": {"moves": true, "track": "tracks/player_B_dark.csv", "frames_visible": "0-90", "distinguish": "black shirt, starts inside the bottom lane at ~(1040,3222) jumping/reaching up, catches the rebound at frame 26 and moves right to ~(1355,3415) by frame 90, crossing the right lane line ~frames 84-90"},
+    "player_C_top": {"moves": "almost static (centre wobble <= ~5 px, arms raised over head)", "track": "tracks/player_C_top.csv", "frames_visible": "0-90", "distinguish": "only person in the top half, just below the top basket inside the top lane",
+                     "bbox_frame30_px": [1075, 360, 1167, 512], "extent_px": {"x": 93, "y": 153}},
+    "bottom_hoop": {"moves": false, "rim_ring_bbox_px": [1028, 3537, 1097, 3600], "rim_centre_px": [1062, 3568], "rim_outer_diameter_px": {"x": 69, "y": 63}, "backboard_bbox_px": [967, 3618, 1147, 3667], "backboard_width_px": 180, "note": "seen from above; rim is above the floor so its image position is parallax-shifted"},
+    "top_hoop": {"moves": false, "rim_ring_bbox_px": [1008, 145, 1080, 217], "rim_centre_px": [1044, 181], "rim_outer_diameter_px": 72, "backboard_bbox_px": [960, 73, 1128, 135], "backboard_width_px": 168},
+    "court_lines": {"moves": false, "line_width_px": "10-12",
+      "top_baseline_y": 133, "bottom_baseline_y": 3705, "baseline_to_baseline_px": 3572,
+      "half_court_line_y": 1874,
+      "left_sideline_x": {"y300": 124, "y1300": 119.5, "y3100": 97, "y3600": 96}, "right_sideline_x": {"y300": 2003, "y1300": 2013.5, "y3100": 2045.5, "y3600": 2059},
+      "court_width_px": {"top_y300": 1879, "middle_y1300": 1894, "bottom_y3600": 1963},
+      "top_lane": {"x_left": 755, "x_right": 1370, "width_px": 615, "free_throw_line_y": 848, "length_from_baseline_px": 715},
+      "bottom_lane": {"x_left": 750.5, "x_right": 1390, "width_px": 639.5, "free_throw_line_y": 2927.5, "length_from_baseline_px": 777.5},
+      "centre_circle": {"centre_px": [1065, 1874], "vertical_diameter_px": 454, "top_y": 1647, "bottom_y": 2101},
+      "top_free_throw_semicircle_apex_y": 1071.5, "bottom_free_throw_semicircle_apex_y": 2693.5,
+      "top_three_point_arc_apex_y": 1184.5, "bottom_three_point_arc_apex_y": 2576.5,
+      "note": "line centres measured on the median background (frame-0 coordinates) with intensity profiles (scripts/court_lines.py)"},
+    "light_pole_shadows": {"moves": false, "note": "two long diagonal pole shadows from the left edge ending in lamp-head shadows at ~(760,1335) and ~(755,3140)"},
+    "tree_shadow": {"moves": false, "note": "large dark tree shadow over the left of the court, y ~1400-2950"},
+    "bottom_hoop_stanchion": {"moves": false, "note": "pole/base below the bottom baseline, x ~1040-1100, y ~3700-3800, plus its shadow"}
+  },
+  "events": [
+    {"frame": 0, "t_s": 0.0, "event": "clip starts with the ball just off the bottom rim (overlapping the ring) moving up-right in the image; B under the basket reaching up, A on the left lane line"},
+    {"frame": 13, "t_s": 0.4348, "event": "ball bounces on the court: ball-shadow image distance minimum (22.5 px; 27 px at 12, 36 px at 14) and abrupt change of the ball's image velocity (~(3.5,-8.4) px/frame before, ~(0.8,-2.5) after)"},
+    {"frame": 26, "t_s": 0.8695, "event": "B's hand reaches the ball (ball blob merges with hand); from frame 27 the ball moves with B (held)"},
+    {"frame": "27-90", "event": "ball held/dribbled by B, mostly hidden; visible again at B's lower-right 86-90"},
+    {"frame": "0-90", "event": "A moves continuously up-left (net (-297,-330) px); B moves continuously down-right then right (net (+305,+199) px); C stays put"}
+  ],
+  "files": {"tracks": ["tracks/ball.csv", "tracks/ball_shadow.csv", "tracks/player_A_white.csv", "tracks/player_B_dark.csv", "tracks/player_C_top.csv", "tracks/camera_shift.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

@@ -1,0 +1,72 @@
+{
+  "video": "captured_0015x.mp4",
+  "source": "lab",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "duration_s": 3.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (person's feet stay at y 640-641, silhouette left edge x 285-293 throughout; no background texture: background is replaced by pure white)",
+    "intrinsics_for_lab": "focal ~ 0.5959 * 1280 = 763 px, principal point ~ (640, 360) (given by benchmark convention, not measured)",
+    "perspective": "single person standing ~fronto-parallel in the left of frame; bear moves almost purely vertically in a plane in front of / beside the person; no ground plane visible (white background)"
+  },
+  "objects": [
+    {
+      "name": "teddy_bear",
+      "description": "brown plush teddy bear with pale muzzle/paws, the only prop; tossed straight up twice by the person and caught",
+      "moves": true,
+      "visible_frames": "0-72 (always visible; frames 0-16, 23-52, 59-60, 62-72 held in hands -> partly occluded)",
+      "track": "tracks/teddy_bear.csv",
+      "size_px_free_flight": {
+        "frames_used": "17-22, 53-58 (detached from hands, exact silhouette)",
+        "bbox_height_median": 95.0, "bbox_height_range": [92, 99],
+        "bbox_width_median": 52.5, "bbox_width_range": [47, 66],
+        "mask_length_main_axis_median": 97.5, "mask_length_range": [93.4, 99.4],
+        "mask_width_across_median": 52.3, "mask_width_range": [46.1, 61.2],
+        "note": "bear stays upright in flight (main axis ~vertical, angle ~90 deg). Width varies with arm pose/rotation (arm sticking out in 18-22 -> 57-66 px)."
+      },
+      "image_x_range_px": [390, 472]
+    },
+    {
+      "name": "person",
+      "description": "woman (face blurred), grey T-shirt, black trousers, white/black sneakers, standing still at left-centre, facing right of camera; tosses the bear with both hands",
+      "moves": "body static (stands in place); arms move during tosses",
+      "visible_frames": "0-72",
+      "track": "tracks/person.csv",
+      "height_px": 508,
+      "height_note": "silhouette top (hair) y 133-135 to shoe soles y 640-641, frames without bear above head; frame 52 bbox top 119 is the bear, not the head",
+      "silhouette_x_range_px": [285, 492],
+      "body_centre_px_approx": [354, 388],
+      "pelvis_approx_px": [350, 370],
+      "pelvis_note": "visual estimate only (trouser waistband ~y 330, hips ~y 360-380, torso width x ~300-400); +-15 px"
+    },
+    {
+      "name": "watermark",
+      "description": "small grey text box bottom-right (x ~1000-1280, y ~690-720); not a physical object; masked out",
+      "moves": false
+    }
+  ],
+  "static_objects_note": "No furniture, ground or markings: background is uniform white. Only static physical object is the standing person's body.",
+  "events": [
+    {"name": "bear held at rest at hip level (toss 1 wind-up)", "frames": "0-7", "bear_centre_px": [431, 373]},
+    {"name": "toss 1: upward hand motion starts", "frame": 8, "t": 0.333},
+    {"name": "toss 1: release (last frame touching hand 16, first detached 17)", "frame": 17, "t": 0.708, "uncertainty_frames": 1},
+    {"name": "toss 1: apex (min box-centre y = 177.5; top y 131 at frame 19)", "frame": 19, "t": 0.792, "note": "frames 19-20 nearly equal (cy 177.5, 180.0)"},
+    {"name": "toss 1: catch / contact with hands (last free 22)", "frame": 23, "t": 0.958, "uncertainty_frames": 1},
+    {"name": "bear brought down to hip after catch 1, lowest at", "frame": 30, "t": 1.25},
+    {"name": "small re-lift and settle at hip", "frames": "31-42"},
+    {"name": "toss 2: upward hand motion starts", "frame": 43, "t": 1.792},
+    {"name": "toss 2: release (last contact 52, first detached 53)", "frame": 53, "t": 2.208, "uncertainty_frames": 1},
+    {"name": "toss 2: apex (min cy = 150.0, top y 101; frames 54-55 equal)", "frame": 54, "t": 2.25, "note": "54 and 55 both cy 150.0; apex between, ~54.5"},
+    {"name": "toss 2: catch (last free 58, in hands 59)", "frame": 59, "t": 2.458, "uncertainty_frames": 1},
+    {"name": "bear lowered back to hip, nearly at rest", "frames": "65-72"}
+  ],
+  "free_flight_bear_centres_px": {
+    "toss1": {"17": [439.0, 186.5], "18": [436.0, 179.5], "19": [435.0, 177.5], "20": [434.0, 180.0], "21": [434.5, 188.5], "22": [433.0, 202.0]},
+    "toss2": {"53": [443.5, 156.5], "54": [442.0, 150.0], "55": [441.0, 150.0], "56": [439.5, 153.5], "57": [438.5, 163.5], "58": [439.0, 177.5]},
+    "note": "bbox centres of the detached silhouette; mask centroids are in the CSV (centroid_y differs from bbox centre by up to ~4 px because of the outstretched arm)"
+  }
+}

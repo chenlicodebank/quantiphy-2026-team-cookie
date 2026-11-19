@@ -1,0 +1,10 @@
+3D pinhole reconstruction: f=975 px and boat depth Z=5.81 m solved from the two given boat depths (7.452/6.655 m) plus the boat's image positions at t=0 and t=1 s (reproduces both to 0.01 m); camera height above water 1.27 m from the boat's waterline. The boat's apparent size is constant (hull height 89 px at f55 and 88 px at f65), so it translates laterally at constant depth; bow-tip track x=986.95-10.169*frame (rms 4.6 px) gives its centre at frame 72 (t=3 s @24 fps) at X=0.20, Z=5.81 m. The pier's outer (front) edge is at v=643.5 px; combining it with the given pier distance 11.579 m and the observed back edge gives Z_front=8.00 m, independently confirmed by the constant platform width (1.44 m front vs 1.45 m back) and by the waterline at the pier's front posts (predicted 694.5 px vs measured ~693 px). Distance from the pier end (0.05,-0.85,8.00) to the boat origin (0.20,-1.10,5.81) = 2.21 m; alternative time base (frame 68.4) gives 2.24 m.
+
+Final message:
+**Answer: 2.21 m**
+
+Method summary:
+- **Scale/camera**: solved the pinhole focal length (f = 975 px) and the boat's constant depth (Z = 5.81 m) from the two given boat–camera distances (7.452 m at t=0, 6.655 m at t=1 s) together with the boat's image positions — the model reproduces both given depths to 0.01 m. Camera height above the water plane = 1.27 m from the boat's waterline.
+- **Boat motion**: apparent size is constant (hull height 89 px at f55, 88 px at f65), so the boat only translates laterally at fixed depth; the bow-tip track (x = 986.95 − 10.169·frame, rms 4.6 px) extrapolates to frame 72 (t = 3 s at question_fps 24) at X = 0.20 m, Z = 5.81 m.
+- **Pier outer end**: front edge at v = 643.5 px; combined with the given pier distance (11.579 m) and the observed back edge this gives Z_front = 8.00 m, independently confirmed by the constant platform width (1.44 m front vs 1.45 m back) and by the waterline at the pier's front posts (predicted 694.5 px vs measured ~693 px).
+- **Distance**: 3D distance from the pier's outer end (0.05, −0.85, 8.00) to the boat's origin (0.20, −1.10, 5.81) = **2.21 m** (2.24 m under the alternative file-fps time base).

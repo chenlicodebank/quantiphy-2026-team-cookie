@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0106.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 215,
+  "question": "What is the velocity of the left virus at 1.0s in m/s?",
+  "prior": "speed of the right virus = 1.5667m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

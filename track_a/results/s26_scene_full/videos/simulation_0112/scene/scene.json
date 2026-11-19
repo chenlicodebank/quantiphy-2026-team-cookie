@@ -1,0 +1,64 @@
+{
+  "video": "simulation_0112.mp4",
+  "source": "simulation",
+  "scene_type": "2D (per inputs.json) - but mild perspective is visible, see notes.md",
+  "fps": 24.006983,
+  "frames": 55,
+  "size_px": [1080, 1080],
+  "time_of_frame": "t = frame / 24.006983 (frame 0 at t = 0)",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale",
+  "camera": {
+    "motion": "static: phase correlation of the sky/tree region vs frame 0 shifts <= 0.02 px in all 55 frames",
+    "view": "side view at roughly car height, perpendicular to the car's path; principal point assumed at image centre (540, 540)",
+    "perspective_cues": "car's front face visible when it is at the left edge and rear face at the right edge; far-side tyres peek out ~35 px from the near-side tyres when |x-540| ~ 415-440 px => far side / near side depth ratio ~1.09. Bridge deck top edge is a horizontal line at y ~539-540 (car path line). Horizon hidden by hills.",
+    "apparent_size_change": "car silhouette height constant 125-129 px; full-car silhouette length 421-430 px (frames 13-36, slightly larger near the left edge, from perspective); wheel radius constant ~33.5 px; hub y constant 505.5 => constant depth"
+  },
+  "moving_objects": {
+    "car": {
+      "description": "red/maroon classic sports coupe (Porsche 911 Turbo-like, rear spoiler), seen from its right/near side, driving left to right on top of the bridge",
+      "moves": true,
+      "visible_frames": "0-52 (partial 0-12 entering at left edge, fully in view 13-36, partial 37-52 leaving at right edge; not visible 53-54)",
+      "track_file": "tracks/car.csv (main), tracks/car_mask.csv (raw silhouette per frame)",
+      "reference_point": "axle_mid_x/axle_y = midpoint of the two near-side wheel hubs (vehicle root proxy). bodycentre_x_est = axle_mid_x - 10.5 (silhouette bbox centre). centreplane_x_est = parallax-corrected to the car's centre depth (k = 0.957, estimate).",
+      "full_length_px": 423.5,
+      "full_length_px_range": [421, 430],
+      "height_px": 127,
+      "silhouette_y_range": [412, 539],
+      "wheelbase_px_near_side": 232,
+      "wheel_radius_px": 33.5,
+      "wheel_hub_y": 505.5,
+      "tyre_contact_y": 539,
+      "width_px": "not visible (pure side view); far-side tyres offset ~35 px by parallax only",
+      "measured_frame_for_sizes": "24 (car centred, bbox x 308-729, y 412-540)",
+      "motion": "straight horizontal, +x (left to right), uniform: near-side axle midpoint linear in frame with 28.227 px/frame slope, rms residual 0.65 px, quadratic term 0.0025 px/frame^2 (negligible); y constant",
+      "occlusion": "never occluded; it passes IN FRONT of the bare tree trunk (frames ~20-35) and the big tree trunk (frames ~36-52)"
+    }
+  },
+  "static_objects": {
+    "bridge": {"description": "rusty steel/concrete beam bridge spanning the whole frame width, the car drives on its deck", "x_range": [0, 1079], "deck_top_y": 539.5, "deck_slab_bottom_y": 556.5, "girder_bottom_y": 615, "total_visible_thickness_px": 76, "notes": "cut by both image edges; small brackets under the deck every ~150 px (x ~40, 190, 340, 490, 635, 785, 935)"},
+    "big_tree": {"description": "large leafy green tree at right", "trunk_x_range": [1006, 1067], "trunk_width_px": 60, "trunk_visible_y": [330, 495], "canopy_x_range": [510, 1080], "canopy_y_range": [0, 435]},
+    "bare_tree": {"description": "thin, sparsely leaved tree in the middle behind the bridge", "trunk_x_at_base": [587, 605], "base_y": 540, "crown_x_range": [385, 770], "crown_y_range": [195, 540], "height_px_visible": 345},
+    "rock_hill": {"description": "reddish-brown rocky hill at left background", "x_range": [0, 420], "y_range": [300, 540]},
+    "grass_hills": {"description": "green grassy slopes in background centre/right", "y_range": [380, 540]},
+    "stream": {"description": "water channel under the bridge, animated ripples; shows a faint reflection of the car", "x_range": [200, 1080], "y_range": [615, 1080]},
+    "log_rocks_in_water": {"description": "mossy log/rocks in the stream right of centre", "x_range": [525, 780], "y_range": [630, 750]},
+    "branch_in_water": {"description": "small dead branch at left bank", "x_range": [250, 345], "y_range": [680, 715]},
+    "grass_banks": {"description": "dry grass banks left (x 0-260) and right (x 740-1080) below the bridge", "y_range": [590, 1080]}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip starts with the car already moving; front bumper at x=96, front wheel hub just off-screen"},
+    {"frame": 13, "t": 0.5415, "event": "car first fully in view (rear bumper x=6)"},
+    {"frame": 24, "t": 0.9997, "event": "car at image centre (axle midpoint crosses x=540 at frame ~24.4)"},
+    {"frame": 36, "t": 1.4996, "event": "last frame fully in view (front bumper x=1054)"},
+    {"frame": 37, "t": 1.5412, "event": "front bumper reaches the right image edge"},
+    {"frame": 52, "t": 2.1660, "event": "last visible frame (rear bumper sliver x>=1047)"},
+    {"frame": 53, "t": 2.2077, "event": "car gone; frames 53-54 empty"},
+    {"event": "no start/stop, no braking, no direction change, no bounce or contact events (wheels in contact with deck throughout)"}
+  ],
+  "files": {
+    "tracks/car.csv": "per-frame car reference points, hubs, bbox, silhouette sizes",
+    "tracks/car_mask.csv": "raw background-difference silhouette per frame",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts (bg.py, track_car.py, refine_car.py, wheels.py, build_track.py, static.py, check_overlay.py) and bg.png (clean background)"
+  }
+}

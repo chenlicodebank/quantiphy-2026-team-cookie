@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0092.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale",
+  "background": "uniform flat grey (RGB ~78,79,86, std 0.2), no ground, horizon, markings or other static objects",
+  "camera": {
+    "motion": "static (background identical in all frames; no pan/shake)",
+    "perspective": "side view; both objects move horizontally in planes facing the camera. Apparent lengths change slightly with image x (end faces visible off-axis): airliner 857 px near image centre/left to 876 px at x~1470; car 128 px at x~1000 to 137 px at both edges. Vertical sizes constant. The airliner and car are probably at different depths (unknown); the single-scale 2D convention would use the prior object's own pixel size/speed."
+  },
+  "objects": {
+    "airliner": {
+      "description": "large white Air China passenger jet (red phoenix logo on tail fin, 'AIR CHINA' on fuselage, reg. B-9918), side view, nose pointing left; upper object",
+      "moves": true,
+      "direction": "right to left, horizontal (y constant)",
+      "visible_frames": [0, 45],
+      "fully_visible_frames": [12, 30],
+      "track": "tracks/airliner.csv",
+      "ref_point": "bbox centre (x0+x1)/2, (y0+y1)/2 when fully visible; when cut by the frame edge, visible far edge -/+ (full length-1)/2 (column ref_source)",
+      "extents_fully_visible_px": {"length_nose_to_tail": "857 (frames 20-30, image centre/left) .. 876 (frame 12, right side)", "height_fin_top_to_engine_bottom": 255, "fuselage_diameter": 93, "fin_top_y": 299, "belly_engine_bottom_y": 554},
+      "ref_y_px": 427,
+      "per_frame_step_px": "nose (leading edge) moves 57.0 px/frame from frame 1->2 to the end, constant; bbox-centre steps 56-59 px (perspective length change), mean 57.53 over frames 12-30",
+      "image_position_at_frame_24": {"bbox": [350, 299, 1206, 554], "ref": [778.0, 426.5]}
+    },
+    "car": {
+      "description": "small white/silver angular pickup (Cybertruck-like), side view, front pointing left; lower object, below the airliner",
+      "moves": true,
+      "direction": "right to left, horizontal (y constant)",
+      "visible_frames": [0, 70],
+      "fully_visible_frames": [3, 65],
+      "track": "tracks/car.csv",
+      "ref_point": "bbox centre; edge-based estimate when cut by the frame edge",
+      "extents_fully_visible_px": {"length": "128 (x~1000) .. 137 (edges)", "height_roof_to_wheel_bottom": 43, "body_height_roof_to_underbody": 33, "roof_peak_y": 631, "wheel_bottom_y": 673},
+      "ref_y_px": 652.5,
+      "per_frame_step_px": "28.45 px/frame constant (leading edge and centre), from frame 1->2 to the end",
+      "image_position_at_frame_24": {"bbox": [1186, 631, 1316, 673], "ref": [1251.0, 652.0]}
+    }
+  },
+  "static_objects": [],
+  "events": [
+    {"event": "both objects stationary between frame 0 and frame 1 (identical positions); motion starts at frame 1 (first displacement frame 1->2)", "frame": 1, "time": 0.0417},
+    {"event": "airliner fully inside frame", "frame": 12, "time": 0.5},
+    {"event": "car fully inside frame", "frame": 3, "time": 0.125},
+    {"event": "airliner nose reaches left edge", "frame": 31, "time": 1.2917},
+    {"event": "airliner last visible (tail tip)", "frame": 45, "time": 1.875},
+    {"event": "car front reaches left edge", "frame": 66, "time": 2.75},
+    {"event": "car last visible", "frame": 70, "time": 2.9167},
+    {"event": "frames 71-72 empty", "frame": 71, "time": 2.9583}
+  ],
+  "interactions": "none: no contact, no bounce, no direction change, no image overlap. At the start the car is below the airliner's fuselage span; the faster airliner pulls ahead and its tail tip (bbox x1) passes the car's front (bbox x0) between frame 24 (1206 vs 1186) and frame 25 (1149 vs 1158).",
+  "horizontal_gap_ref_points": "airliner and car origins: see tracks; e.g. frame 24 dx = 473 px, dy = 225.5 px"
+}

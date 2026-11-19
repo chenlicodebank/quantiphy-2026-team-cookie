@@ -1,0 +1,113 @@
+{
+ "video": "simulation_0304.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "units": "pixels and seconds; image coords x right, y down, origin top-left",
+ "camera": {
+  "motion": "static (background gradient pixel values identical across frames; no features move)",
+  "background": "featureless underwater blue gradient; no ground plane, horizon or vanishing points",
+  "view": "camera looks up at the whale from below / side (belly-ish view, head at upper left)",
+  "principal_point_assumed": [
+   1280,
+   720
+  ]
+ },
+ "objects": [
+  {
+   "name": "whale",
+   "description": "single dark-blue humpback-like whale (long pectoral fins), the only object; head upper-left, tail fluke lower-right in frames 0-50, tail swings up to the right by frame 71",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track_file": "tracks/whale.csv",
+   "tail_clipped_by_bottom_edge_frames": [
+    8,
+    38
+   ],
+   "reference_point": "ref_x/ref_y = 2D mask centroid (proxy for rig origin, which is not visible); head_x/head_y = centre of a template-tracked head/front-body patch (more rigid, better for scale)",
+   "frame0": {
+    "ref_x": "1511.21",
+    "ref_y": "810.18",
+    "head_x": "1225.0",
+    "head_y": "545.0",
+    "bbox_x0": "954",
+    "bbox_y0": "390",
+    "bbox_x1": "2446",
+    "bbox_y1": "1302",
+    "mask_len_main_axis": "1605.5",
+    "mask_width_across": "742.6"
+   },
+   "frame71": {
+    "ref_x": "1213.57",
+    "ref_y": "533.37",
+    "head_x": "1042.0",
+    "head_y": "432.5",
+    "bbox_x0": "773",
+    "bbox_y0": "297",
+    "bbox_x1": "1993",
+    "bbox_y1": "909",
+    "mask_len_main_axis": "1257.2",
+    "mask_width_across": "589.1"
+   },
+   "full_extent_unclipped_frames": {
+    "frame0": {
+     "bbox_w": "1493",
+     "bbox_h": "913",
+     "main_axis_len": "1605.5"
+    },
+    "frame71": {
+     "bbox_w": "1221",
+     "bbox_h": "613",
+     "main_axis_len": "1257.2"
+    }
+   },
+   "apparent_size_change": "head template scale vs frame 0: 1.00 (f0) -> ~0.96 (f20) -> ~0.93 (f36) -> ~0.90 (f55) -> 0.88 (f71); whale recedes from the camera (depth grows ~13% if scale ~ 1/depth)",
+   "path_px": {
+    "ref_centroid_path_len": 496.7,
+    "ref_centroid_net_disp": 406.5,
+    "head_path_len": 222.3,
+    "head_net_disp": 214.8
+   }
+  }
+ ],
+ "static_objects": [],
+ "events": [
+  {
+   "frame": 0,
+   "time_s": 0.0,
+   "what": "whale already swimming; frames 0 and 1 are identical (motion starts at frame 1->2)"
+  },
+  {
+   "frame": 8,
+   "time_s": 0.3333,
+   "what": "tail fluke starts to be clipped by bottom image edge"
+  },
+  {
+   "frame": 38,
+   "time_s": 1.5833,
+   "what": "last frame with tail clipped; tail fully visible again from frame 39"
+  },
+  {
+   "frame": 12,
+   "time_s": 0.5,
+   "what": "mask centroid y reaches max (~849) then turns upward (tail downstroke ends)"
+  },
+  {
+   "frame": 28,
+   "time_s": 1.1667,
+   "what": "centroid x briefly stalls (~1399, frames 26-31) while tail strokes"
+  },
+  {
+   "frame": 55,
+   "time_s": 2.2917,
+   "what": "tail lifts above the body line; bbox bottom stops moving up (~918) - fin now lowest point"
+  }
+ ]
+}

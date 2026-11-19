@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0140.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 100,
+ "duration_s": 4.1667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1506,
+  "question": "What is the total length of the bird’s flight path in meters?",
+  "prior": "width of each window frame = 1.48m",
+  "depth_info": "t=0s, distance_bird_camera = 25.328m\nt=0.5s, distance_bird_camera = 24.899m\ndistance_neonsign_camera = 34.5m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

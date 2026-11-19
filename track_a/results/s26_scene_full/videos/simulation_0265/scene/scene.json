@@ -1,0 +1,104 @@
+{
+ "video": "simulation_0265.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame / 24, frame 0 at t = 0",
+ "camera": {
+  "motion": "static (uniform grey background, no texture; nothing to pan against; background level constant ~193)",
+  "view": "orthographic-looking top-down view of the vehicle; motion is horizontal in the image plane"
+ },
+ "objects": [
+  {
+   "name": "vehicle",
+   "aliases": [
+    "car",
+    "futuristic car / racing vehicle",
+    "spaceship-like vehicle",
+    "the object"
+   ],
+   "description": "single dark grey/black futuristic vehicle seen from directly above, nose pointing LEFT (-x), four dark diamond-shaped wheel pods at the rear corners (right side), blade-like fins at the nose. Only object in the scene.",
+   "moves": true,
+   "track": "tracks/vehicle.csv",
+   "visible_frames": [
+    0,
+    66
+   ],
+   "fully_in_frame_frames": [
+    7,
+    50
+   ],
+   "truncated": "frames 0-6 rear tip cut by right edge (about 20 px at frame 0); frames 51-66 nose leaves through left edge; frames 67-71 empty",
+   "size_px": {
+    "length_along_motion_x_full_bbox": {
+     "frame7": 1012,
+     "frame30": 1033,
+     "frame50": 1071,
+     "note": "grows with speed (model stretches); frame 0 value by fit ~1012"
+    },
+    "nose_to_body_tail_centre_row": {
+     "frame7": 997,
+     "frame30": 1015,
+     "frame50": 1047
+    },
+    "width_across_y": 515,
+    "width_note": "rows 462/463-976/977, constant all clip",
+    "height": "not visible (top-down view)"
+   },
+   "image_y_centre": 719.7,
+   "motion": "starts at rest, moves straight LEFT (-x) along y=720 with steadily increasing speed (per-frame nose step grows by ~1.2 px/frame each frame: 2 px at frame 2, ~60 px at frame 50, ~76 px at frame 65)"
+  }
+ ],
+ "static_objects": "none: plain uniform light-grey background (~RGB 193), no ground markings, no horizon",
+ "events": [
+  {
+   "event": "at rest",
+   "frames": [
+    0,
+    1
+   ],
+   "note": "frames 0 and 1 identical"
+  },
+  {
+   "event": "motion start",
+   "frame": 1,
+   "time": 0.0417,
+   "note": "first displacement between frames 1 and 2 (2 px)"
+  },
+  {
+   "event": "rear tip fully inside frame",
+   "frame": 7,
+   "time": 0.2917
+  },
+  {
+   "event": "nose reaches left edge",
+   "frame": 51,
+   "time": 2.125,
+   "note": "nose_x=34 at frame 50"
+  },
+  {
+   "event": "reference centre crosses left edge (x=0)",
+   "frame": "between 58 and 59 (ref_x)",
+   "note": "see csv"
+  },
+  {
+   "event": "vehicle fully gone",
+   "frame": 67,
+   "time": 2.7917,
+   "note": "last sliver at frame 66"
+  },
+  {
+   "event": "no bounce/impact/direction change",
+   "note": "straight-line motion, direction constant"
+  }
+ ],
+ "files": {
+  "tracks/vehicle.csv": "per-frame track",
+  "tracks/vehicle_raw.csv": "raw segmentation output",
+  "notes.md": "methods and reliability",
+  "scripts/": "all measurement scripts"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0258.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MC",
+ "fps": 24.0,
+ "frames": 40,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 896,
+  "question": "What is the speed of the pen at time 0.4s in m/s?",
+  "prior": "acceleration of the pen before 0.5s = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,355 @@
+{
+ "video": "simulation_0214.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_of_frame_i": "i / 24 (frame 0 = t 0; last frame 49 = 2.0417 s)",
+ "pixel_coords": "full-resolution pixels, x right, y down, origin top-left",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of frames 10/25/40/49 vs frame 0 below the cats: shifts < 0.03 px",
+  "view": "top-down (bird's-eye) view of a living room; floor plane is the image plane. Inner faces of left, right and top walls are visible (perspective camera looking straight down), but both cats walk on the same floor so one px scale applies to both.",
+  "apparent_size_change": "none systematic: black cat length (incl. tail) 183-200 px, tabby body length 237-283 px vary only with gait/tail pose"
+ },
+ "moving_objects": {
+  "black_cat": {
+   "description": "all-black cat (small white hind paws), upper of the two cats (y~358), walks LEFT->RIGHT along +x for the whole clip",
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded": "never",
+   "track_file": "tracks/black_cat.csv",
+   "reference_point": "body_cx/body_cy (centroid of mask with thin tail removed by opening) = best origin proxy; cx/cy = full-mask centroid incl. tail",
+   "pos_frame0_body": [
+    570.14,
+    359.12
+   ],
+   "pos_frame49_body": [
+    1107.68,
+    358.47
+   ],
+   "head_front_x_frame0_49": [
+    647.0,
+    1185.0
+   ],
+   "mean_dx_per_frame_body_px": 10.97,
+   "mean_dx_per_frame_head_front_px": 10.98,
+   "extent_px_min_max_median": {
+    "length_incl_tail(x)": [
+     183.0,
+     200.0,
+     191.0
+    ],
+    "body_length_no_tail": [
+     146.0,
+     176.0,
+     155.6
+    ],
+    "width_across(y)": [
+     39.0,
+     50.0,
+     41.5
+    ],
+    "body_width_across": [
+     39.0,
+     48.1,
+     41.0
+    ]
+   }
+  },
+  "tabby_cat": {
+   "description": "orange/brown striped tabby cat, lower cat (y~450), walks RIGHT->LEFT along -x; starts from near rest, speeds up, slows to near stop at the end; tail curls up/down",
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded": "never",
+   "track_file": "tracks/tabby_cat.csv",
+   "reference_point": "body_cx/body_cy (mask centroid with tail removed) and torso_x/torso_y (frame-to-frame texture tracking of the back fur, smooth, may drift ~-20 px over the clip). See notes.md.",
+   "pos_frame0_body": [
+    1223.08,
+    454.41
+   ],
+   "pos_frame49_body": [
+    790.75,
+    454.76
+   ],
+   "pos_frame49_torso": [
+    771.35,
+    457.59
+   ],
+   "body_bbox_x_frame0": [
+    1095.0,
+    1345.0
+   ],
+   "body_bbox_x_frame49": [
+    666.0,
+    923.0
+   ],
+   "extent_px_min_max_median": {
+    "length_incl_tail(x)": [
+     254.0,
+     338.0,
+     285.0
+    ],
+    "body_length_no_tail": [
+     237.1,
+     282.9,
+     251.2
+    ],
+    "width_across_incl_tail(y)": [
+     102.0,
+     154.0,
+     121.5
+    ],
+    "body_width_across": [
+     98.3,
+     109.5,
+     103.8
+    ]
+   },
+   "artefact": "a flat light-brown rectangular patch (~40x60 px) is rendered at the head end (left/front) and moves with the cat; it is included in the mask (it occupies where the head is)."
+  }
+ },
+ "events": [
+  {
+   "event": "black cat already walking at frame 0, steady ~11 px/frame to the right through frame 49 (no start/stop inside the clip)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "tabby begins moving from near rest (torso step 0.5 px at frame 1, 2.5 at 2, 5 at 5)",
+   "frame": 1,
+   "t": 0.0417
+  },
+  {
+   "event": "tabby torso speed plateau/peak ~13-14 px/frame",
+   "frames": [
+    20,
+    33
+   ],
+   "t": [
+    0.8333,
+    1.375
+   ]
+  },
+  {
+   "event": "cats pass each other (equal x of body centres; vertical separation ~95 px)",
+   "frame": 31.5,
+   "t": 1.3125
+  },
+  {
+   "event": "closest approach of masks: tabby white tail tip ~4 px from black cat tail (no clear contact)",
+   "frame": 42,
+   "t": 1.75
+  },
+  {
+   "event": "tabby nearly stopped (torso step <1 px/frame)",
+   "frame": 49,
+   "t": 2.0417
+  }
+ ],
+ "static_objects_frame0": {
+  "wooden_slat_bench": {
+   "bbox": [
+    244,
+    172,
+    532,
+    291
+   ],
+   "w": 289,
+   "h": 120,
+   "centroid": [
+    387.7,
+    230.7
+   ],
+   "min_area_rect": [
+    [
+     387.7,
+     232.2
+    ],
+    [
+     118.8,
+     288.4
+    ],
+    -89.5
+   ],
+   "area_px": 32934,
+   "description": "orange-brown wooden slatted bench/rack, top-left, slats run vertically in image; long axis = x"
+  },
+  "tv_console_dark_cabinet": {
+   "bbox": [
+    697,
+    150,
+    1171,
+    292
+   ],
+   "w": 475,
+   "h": 143,
+   "centroid": [
+    931.3,
+    219.3
+   ],
+   "min_area_rect": [
+    [
+     934.0,
+     221.0
+    ],
+    [
+     142.0,
+     474.0
+    ],
+    -90.0
+   ],
+   "area_px": 56279,
+   "description": "dark grey low cabinet/console along top wall; visible dark part x 697-1171 (right end hidden under lamp shade, visually the cabinet ends ~1265); top edge visually ~168 (mask top 150 includes wall shadow); bottom 292"
+  },
+  "white_vase_on_console": {
+   "bbox": [
+    719,
+    205,
+    788,
+    271
+   ],
+   "w": 70,
+   "h": 67,
+   "centroid": [
+    754.1,
+    239.2
+   ],
+   "min_area_rect": [
+    [
+     752.9,
+     237.4
+    ],
+    [
+     64.8,
+     68.9
+    ],
+    -71.6
+   ],
+   "area_px": 2989,
+   "description": "round white patterned vase/bowl seen from above at left end of console, diameter ~68 px"
+  },
+  "pleated_lamp_shade": {
+   "bbox": [
+    1117,
+    152,
+    1263,
+    297
+   ],
+   "w": 147,
+   "h": 146,
+   "centroid": [
+    1188.8,
+    224.9
+   ],
+   "min_area_rect": [
+    [
+     1190.1,
+     223.3
+    ],
+    [
+     144.7,
+     145.6
+    ],
+    -68.2
+   ],
+   "area_px": 14778,
+   "description": "round white pleated lamp shade (seen from above) at right end of console, diameter ~146 px, centre ~(1190,224)"
+  },
+  "round_fluffy_rug": {
+   "bbox": [
+    202,
+    399,
+    639,
+    875
+   ],
+   "w": 438,
+   "h": 477,
+   "centroid": [
+    421.6,
+    644.0
+   ],
+   "min_area_rect": [
+    [
+     420.5,
+     637.0
+    ],
+    [
+     476.0,
+     437.0
+    ],
+    -90.0
+   ],
+   "area_px": 152074,
+   "description": "round white fluffy rug/pouf left of sofa; vertical diameter ~476 px (y 399-875), left edge x~200, right part hidden under sofa; measured bbox right edge is the sofa boundary"
+  },
+  "curved_sofa": {
+   "bbox": [
+    560,
+    535,
+    1442,
+    997
+   ],
+   "w": 883,
+   "h": 463,
+   "centroid": [
+    1005.4,
+    776.0
+   ],
+   "min_area_rect": [
+    [
+     1001.0,
+     766.3
+    ],
+    [
+     882.2,
+     461.6
+    ],
+    -0.1
+   ],
+   "area_px": 268156,
+   "description": "large curved cream sofa, centre-bottom; outer bbox approx x 560-1450, y 518-1000 (mask top 535 misses the soft outline, +-10 px)"
+  },
+  "grey_cushions": {
+   "left": {
+    "bbox_approx": [
+     628,
+     643,
+     858,
+     848
+    ]
+   },
+   "right": {
+    "bbox_approx": [
+     1133,
+     668,
+     1382,
+     865
+    ]
+   },
+   "description": "two light grey throw pillows on the sofa, rotated ~35 deg; read off a gridded frame, +-10 px"
+  },
+  "leaning_picture_frame": {
+   "bbox_approx": [
+    1385,
+    85,
+    1660,
+    222
+   ],
+   "description": "light frame/mirror leaning on top wall, top-right; seen in perspective"
+  },
+  "carpet_and_walls": {
+   "note": "carpet saturation > 40 along row y=600 and column x=1000",
+   "x_left": 186,
+   "x_right": 1747,
+   "y_top": 88,
+   "description": "beige carpet floor between left wall (x<~188), right wall (x>~1747) and top wall (y<~120 at the floor line; the 88 value is the wall-shadow start)"
+  }
+ }
+}

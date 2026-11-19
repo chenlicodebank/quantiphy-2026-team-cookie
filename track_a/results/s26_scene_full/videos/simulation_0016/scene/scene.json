@@ -1,0 +1,327 @@
+{
+ "video": "simulation_0016.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 33.004425,
+ "frames": 97,
+ "duration_s": 2.939,
+ "time_convention": "t = frame / fps, frame 0 at t = 0; frame for time t = round(t * fps)",
+ "image": {
+  "width": 1920,
+  "height": 1080,
+  "rendered_area": "x 420-1499, y 0-1079 (1080x1080 square); x < 420 and x > 1499 are black pillarbox bars",
+  "image_centre_of_rendered_area": [
+   960,
+   540
+  ]
+ },
+ "units": "pixels (full-resolution image coordinates, x right, y down) and seconds",
+ "camera": {
+  "motion": "static (phase correlation of background vs frame 0: |shift| < 0.03 px at frames 15, 45, 96)",
+  "view": "top-down (nadir): the camera looks straight down at a flat gallery floor",
+  "evidence": "floor-tile grout lines are evenly spaced over the whole image (horizontal lines every 131 px at y = 48,179,310,441,572,703,834,966 at both x~475 and x~1445; vertical lines every 140 px at x = 539,679,820,960,1100,1240,1379 at both y~290 and y~750) -> floor plane parallel to the image plane, no horizon; vertical edges (people, pedestal sides) point radially away from the image centre",
+  "vertical_vanishing_point_px": [
+   960,
+   540
+  ],
+  "vertical_vp_free_fit_from_person_px": [
+   950.9,
+   593.8
+  ],
+  "floor_scale": "uniform over the floor (one metres-per-pixel value for everything at floor level); a point at height h above the floor is magnified by K(h) = H/(H-h) about (960,540), H = camera height above floor",
+  "person_head_magnification_k": 1.2558,
+  "camera_height_relation": "H = h_head_point * k/(k-1) = 4.91 * h_head_point (h_head_point = height of the person's head point, ~stature - 0.10 m)",
+  "pelvis_magnification_k_pelvis": 1.134,
+  "lighting": "strong sunlight from lower-left through windows: diagonal window-mullion shadow bands on the floor; every object casts a shadow toward the upper right"
+ },
+ "objects": [
+  {
+   "name": "person",
+   "type": "human (man, white t-shirt, grey/blue jeans, black shoes, short dark hair; face blurred)",
+   "moves": true,
+   "visible_frames": "0-96 (frames 0-19 cut by the top image edge: only legs/torso visible at first; whole body from frame 20; pelvis inside image from frame 7)",
+   "role": "only moving object; walks straight down the image (+y) along x ~ 812-830, on the left of the central sculpture, between the top-left pedestal and the left bench",
+   "track": "tracks/person.csv",
+   "reference_point": "pelvis_x, pelvis_y (estimated pelvis image position; see notes)"
+  },
+  {
+   "name": "central_sculpture",
+   "type": "white abstract swirl/knot sculpture on a low square blue-edged plinth",
+   "moves": false,
+   "visible_frames": "0-96",
+   "image_extent_px": {
+    "plinth_outline": {
+     "x0": 882,
+     "x1": 1038,
+     "y0": 461,
+     "y1": 617,
+     "size_x": 156,
+     "size_y": 156
+    },
+    "sculpture": {
+     "x0": 884,
+     "x1": 1022,
+     "y0": 463,
+     "y1": 612
+    }
+   },
+   "centre_px": [
+    960,
+    539
+   ],
+   "note": "sits exactly at the image centre (directly below the camera); its cast shadow extends to the upper right up to y ~375"
+  },
+  {
+   "name": "bench_left",
+   "type": "bench with 4 light-blue square cushions in a row, dark frame/backrest rail on its right (inner) side",
+   "moves": false,
+   "visible_frames": "0-96",
+   "image_extent_px": {
+    "x0": 533,
+    "x1": 609,
+    "y0": 428,
+    "y1": 663,
+    "length_along_y": 235,
+    "width_along_x": 76,
+    "rail": {
+     "x0": 609,
+     "x1": 616,
+     "y0": 463,
+     "y1": 642
+    },
+    "cushion_pitch_y": 58
+   },
+   "centre_px": [
+    571,
+    545
+   ]
+  },
+  {
+   "name": "bench_right",
+   "type": "bench with 4 white/light square cushions, mirror of bench_left, dark rail on its left (inner) side",
+   "moves": false,
+   "visible_frames": "0-96",
+   "image_extent_px": {
+    "x0": 1296,
+    "x1": 1372,
+    "y0": 405,
+    "y1": 663,
+    "cushions_y0": 437,
+    "cushions_y1": 661,
+    "length_along_y_cushions": 224,
+    "length_along_y_incl_base_top": 258,
+    "width_along_x": 76,
+    "rail": {
+     "x0": 1291,
+     "x1": 1298,
+     "y0": 461,
+     "y1": 650
+    }
+   },
+   "centre_px": [
+    1334,
+    549
+   ],
+   "note": "upper end (y 405-437) is a dark base/shadow; boundary less certain than bench_left"
+  },
+  {
+   "name": "pedestal_top_left",
+   "type": "dark grey/black square pedestal with a bronze (copper) twisted sculpture on top",
+   "moves": false,
+   "visible_frames": "0-96 (cut by the top image edge)",
+   "image_extent_px": {
+    "x0": 655,
+    "x1": 762,
+    "y0": 0,
+    "y1": 112,
+    "top_face_x": [
+     655,
+     752
+    ],
+    "side_face_y": [
+     75,
+     112
+    ],
+    "bronze_sculpture": {
+     "x0": 660,
+     "x1": 752,
+     "y0": 0,
+     "y1": 72
+    }
+   },
+   "note": "partly outside the image; the person starts next to it (to its right) and walks away from it"
+  },
+  {
+   "name": "pedestal_bottom",
+   "type": "grey square pedestal with a small silver/chrome angular sculpture on top",
+   "moves": false,
+   "visible_frames": "0-96",
+   "image_extent_px": {
+    "top_face": {
+     "x0": 1052,
+     "x1": 1132,
+     "y0": 852,
+     "y1": 935,
+     "size_x": 80,
+     "size_y": 83
+    },
+    "side_face_toward_centre": {
+     "x0": 1050,
+     "x1": 1135,
+     "y0": 812,
+     "y1": 852
+    },
+    "silver_sculpture": {
+     "x0": 1068,
+     "x1": 1130,
+     "y0": 878,
+     "y1": 942
+    }
+   },
+   "centre_px_top_face": [
+    1092,
+    893
+   ],
+   "note": "sculpture shadow reaches up-right to ~(1150,765)"
+  },
+  {
+   "name": "floor_tiles",
+   "type": "light marble floor tiles with thin grout lines",
+   "moves": false,
+   "visible_frames": "0-96",
+   "image_extent_px": {
+    "tile_pitch_x": 140,
+    "tile_pitch_y": 131,
+    "grout_lines_y": [
+     48,
+     179,
+     310,
+     441,
+     572,
+     703,
+     834,
+     966
+    ],
+    "grout_lines_x": [
+     539,
+     679,
+     820,
+     960,
+     1100,
+     1240,
+     1379
+    ]
+   },
+   "note": "faint lines; tiles appear 140 x 131 px (not square in the image)"
+  },
+  {
+   "name": "window_light_pattern",
+   "type": "sunlight/shadow pattern of window mullions on the floor (diagonal and orthogonal bands)",
+   "moves": false,
+   "visible_frames": "0-96",
+   "note": "lighting only, not an object"
+  }
+ ],
+ "person_summary": {
+  "direction": "straight toward +y (down the image), x nearly constant; no turns",
+  "pelvis_px_frame0": [
+   812.6,
+   -29.4
+  ],
+  "pelvis_px_frame96": [
+   812.6,
+   398.3
+  ],
+  "gait": "6 front-foot plants, step period ~16.8-17 frames (0.51 s), step length ~67.4 px on the floor (alternating feet x = 836 / 821)",
+  "apparent_size": "head-to-front-foot length shrinks from ~142 px (frame 20) to ~75 px (frame 96) because the person approaches the nadir (perspective lean), NOT because of distance change; mask width ~58-74 px (arms/stride)",
+  "footprint_spacing": "footprint y: 99.4, 168.3, 235.3, 301.5, 368.3, 436.4 (successive plants 67-69 px apart, plants every 16-18 frames)"
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time_s": 0.0,
+   "event": "video starts; person already walking, entering from the top edge (only legs/lower torso visible)"
+  },
+  {
+   "frame": 3,
+   "time_s": 0.091,
+   "event": "front foot (right in image, x 836) planted at y 99"
+  },
+  {
+   "frame": 7,
+   "time_s": 0.212,
+   "event": "estimated pelvis enters the image (pelvis_y >= 0)"
+  },
+  {
+   "frame": 13,
+   "time_s": 0.394,
+   "event": "mid-stance over footprint 1 (pelvis above foot)"
+  },
+  {
+   "frame": 20,
+   "time_s": 0.606,
+   "event": "whole person inside image (head top at y 7)"
+  },
+  {
+   "frame": 22,
+   "time_s": 0.667,
+   "event": "foot plant 2 (x 821, y 168)"
+  },
+  {
+   "frame": 30,
+   "time_s": 0.909,
+   "event": "mid-stance 2"
+  },
+  {
+   "frame": 40,
+   "time_s": 1.212,
+   "event": "foot plant 3 (x 835, y 235)"
+  },
+  {
+   "frame": 47,
+   "time_s": 1.424,
+   "event": "mid-stance 3"
+  },
+  {
+   "frame": 56,
+   "time_s": 1.697,
+   "event": "foot plant 4 (x 821, y 302)"
+  },
+  {
+   "frame": 64,
+   "time_s": 1.939,
+   "event": "mid-stance 4"
+  },
+  {
+   "frame": 72,
+   "time_s": 2.182,
+   "event": "foot plant 5 (x 836, y 368)"
+  },
+  {
+   "frame": 81,
+   "time_s": 2.454,
+   "event": "mid-stance 5"
+  },
+  {
+   "frame": 90,
+   "time_s": 2.727,
+   "event": "foot plant 6 (x 821, y 436)"
+  },
+  {
+   "frame": 96,
+   "time_s": 2.909,
+   "event": "video ends; person still walking (pelvis ~ (813, 398), ~2/3 of the way from top edge to the central sculpture's top)"
+  }
+ ],
+ "files": {
+  "person_track": "tracks/person.csv",
+  "person_geometry": "tracks/person_geometry.json",
+  "raw": [
+   "tracks/person_raw.csv",
+   "tracks/person_kp_raw.csv",
+   "tracks/person_head_raw.csv"
+  ],
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

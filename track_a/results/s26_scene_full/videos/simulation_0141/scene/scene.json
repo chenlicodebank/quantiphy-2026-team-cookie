@@ -1,0 +1,92 @@
+{
+  "video": "simulation_0141.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 = t 0; last frame 59 = t 2.4583 s",
+  "units": "pixels (x right, y down, full-resolution image coordinates) and seconds; no metric scale guessed",
+  "camera": {
+    "motion": "static (phase correlation of three background regions vs frame 0: shift < 0.02 px in every frame)",
+    "view": "looks straight down a long arched corridor, optical axis horizontal and parallel to the corridor",
+    "vanishing_point_corridor_px": [959, 539],
+    "horizon_y_px": 536,
+    "horizon_note": "VP from floor-seam Hough lines = (959, 539); fit of the man's head-top vs sole y gives horizon 533. Use 536 +- 4. Principal point is consistent with the image centre (960, 540): no pitch, no roll.",
+    "camera_height_vs_man": "horizon crosses the man at ~0.745 of his head-to-sole extent (upper chest): camera height ~0.75 x man's standing height above the floor",
+    "focal_length": "unknown; estimate from given depth_info + the man's pixel height (height_px column), see notes.md"
+  },
+  "objects": [
+    {
+      "name": "man",
+      "description": "the only person and only moving object: man in dark pinstriped long-sleeve shirt and dark trousers, seen from behind as a near-black silhouette against the bright corridor",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "occlusion": "never occluded; fully inside the frame in all 60 frames",
+      "track_file": "tracks/man.csv",
+      "reference_point": "estimated pelvis: x = centre of the hip band of the body silhouette (45-53 % down from head top), y = sole_y - 0.53 x height_px",
+      "motion_summary": "walks away from the camera along the corridor for the whole clip, drifting slightly to image-right; ref x 657 -> 792 px, ref y 672 -> 611 px, sole y 1052 -> 805 px; apparent height 716 -> 366 px (shrinks by factor 1.96, i.e. his camera distance roughly doubles). Never stops, steady walking gait.",
+      "apparent_height_px_every_6_frames": {"0": 716, "6": 667, "12": 602, "18": 568, "24": 524, "30": 496, "36": 458, "42": 441, "48": 412, "54": 396, "59": 366},
+      "size_at_frame_0_px": {"height_head_to_sole": 716, "bbox_width_incl_arms": 255, "shoulder_width": 213}
+    },
+    {
+      "name": "man_reflection",
+      "description": "mirror reflection of the man on the glossy floor directly below his feet (not a separate object; excluded from the mask)",
+      "moves": true,
+      "visible_frames": [0, 59]
+    },
+    {
+      "name": "right_colonnade_arches",
+      "description": "repeating white curved arch ribs with dark rectangular pillars on the right side of the corridor; equally spaced in depth",
+      "moves": false,
+      "frame_measured": 59,
+      "pillar_bases_px": [
+        {"arch": 1, "nearest": true, "x_range": [1600, 1720], "base_y": 838, "note": "white rib x 1600-1660 + dark pillar 1660-1720, top beyond image top"},
+        {"arch": 2, "x_range": [1395, 1475], "base_y": 728},
+        {"arch": 3, "x_range": [1285, 1340], "base_y": 678},
+        {"arch": 4, "x_range": [1230, 1258], "base_y": 650},
+        {"arch": 5, "x_range": [1185, 1212], "base_y": 630},
+        {"arch": 6, "x_range": [1155, 1175], "base_y": 616}
+      ],
+      "spacing_check": "1/(base_y - 539) = 0.00337, 0.00529, 0.00719, 0.00901, 0.01099, 0.0130: constant step ~0.0019 -> arches equally spaced along the corridor",
+      "reliability": "base y read by eye from a zoomed grid, +-5 px"
+    },
+    {
+      "name": "left_window_wall",
+      "description": "left side: glazed wall with white diagonal truss members and a long horizontal rail at y ~500-560 px, receding to the VP",
+      "moves": false
+    },
+    {
+      "name": "ceiling_ribs",
+      "description": "curved white ribs over a dark wooden-textured ceiling, receding to the bright corridor end",
+      "moves": false
+    },
+    {
+      "name": "floor",
+      "description": "glossy grey tiled floor with seams converging to the VP (959, 539); strong reflections",
+      "moves": false
+    },
+    {
+      "name": "corridor_end_opening",
+      "description": "over-exposed white opening at the far end of the corridor, approx x 800-1060, y 470-600",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "man walking already at frame 0 (no start of motion in clip)", "frame": 0, "t": 0.0},
+    {"event": "foot contact (new stance foot lands; lowest sole point stops rising)", "frame": 10, "t": 0.417},
+    {"event": "foot contact", "frame": 22, "t": 0.917},
+    {"event": "foot contact", "frame": 34, "t": 1.417},
+    {"event": "foot contact", "frame": 46, "t": 1.917},
+    {"event": "foot contact", "frame": 58, "t": 2.417},
+    {"event": "man reaches about the depth of the nearest right arch (sole_y ~ 835 = arch-1 base y 838)", "frame": 46, "t": 1.917},
+    {"event": "clip ends, man still walking", "frame": 59, "t": 2.458}
+  ],
+  "gait": "step period ~12 frames (0.5 s), stride (two steps) ~24 frames (1.0 s); earlier contact before frame 0 (sole plateau 1052 px during frames 0-4)",
+  "files": {
+    "tracks/man.csv": "per-frame track of the man",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts (camcheck, segment, track, overlay, overlay_track, vp, summarize, probe)"
+  }
+}

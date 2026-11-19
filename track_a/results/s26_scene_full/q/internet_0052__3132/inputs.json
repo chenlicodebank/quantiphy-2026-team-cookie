@@ -1,0 +1,18 @@
+{
+ "video": "internet_0052.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 30.0,
+ "frames": 56,
+ "duration_s": 1.8667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3132,
+  "question": "What is the width of the no-parking sign in meters?",
+  "prior": "average speed of the person riding scooter = 2.91 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

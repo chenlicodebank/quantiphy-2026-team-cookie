@@ -1,0 +1,57 @@
+{
+  "video": "simulation_0264.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D",
+  "fps": 24.0, "frames": 72, "duration_s": 3.0, "width_px": 2560, "height_px": 1440,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, full 2560x1440 resolution) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (frames 68-71 are identical to the empty background within 14 grey levels; no pan or shake)",
+    "notes": "Rendered with a perspective camera at roughly car height: the car's apparent bbox length shrinks from ~1023 px (frame 9) to ~973 px (frame 52) as it crosses (more of the rear is seen on the right, more of the front on the left). Motion is horizontal in the image plane; the reference-point y stays at ~885 px."
+  },
+  "objects": [
+    {
+      "name": "hovercar",
+      "description": "The only object: a dark grey and white futuristic hover car / flying car with a light canopy, two thin antennas on the rear deck and light mechanical underparts. It hovers (no wheels touching) above the floor, nose pointing LEFT.",
+      "moves": true,
+      "visible_frames": "0-67 (frames 0-8 rear clipped by right image edge; 9-52 fully visible; 53-67 front clipped by left edge, only a sliver at 66-67); absent 68-71",
+      "track": "tracks/hovercar.csv",
+      "reference_point": "ref_x = bbox centre x (fully visible frames); for clipped frames extrapolated from the visible edge using the fitted apparent length L(f) = 1034.5 - 1.183*f px; ref_y = bbox centre y (~885 px, constant)",
+      "size_px_fully_visible": {
+        "bbox_length_px": "1023 at frame 9 ... 1001 at frame 30 ... 975 at frame 52 (median 1002.5); use the value at the frame of the question, or ~1000 at mid-frame",
+        "bbox_height_px": "315 (y 728-1042, includes antennas; top antenna tip at y 728, lowest underbody part at y ~1033-1042)",
+        "body_height_without_antennas_px": "~ y 775-1042 (about 265 px), approximate",
+        "hover_gap_px": "lowest car part y ~1042 to shadow top y 1076: ~34 px (car bottom to floor shadow)"
+      },
+      "pixel_extent_example_frame_30": {"x0": 1070, "x1": 2071, "y0": 728, "y1": 1041}
+    },
+    {
+      "name": "hovercar_shadow",
+      "description": "Dark elongated shadow of the car on the light floor, directly below it (y 1076-1130); moves with the car.",
+      "moves": true,
+      "visible_frames": "0-65",
+      "track": "tracks/hovercar_shadow.csv",
+      "size_px": "length ~1047 (frame 12) to ~980 (frame 51); thickness ~54 px"
+    },
+    {
+      "name": "studio_backdrop_floor",
+      "description": "Seamless grey studio cyclorama: darker grey wall at top, light grey floor below, soft curved transition around y ~950-1050. No markings, no other props.",
+      "moves": false,
+      "visible_frames": "0-71",
+      "size_px": "fills the frame; no measurable edges"
+    }
+  ],
+  "events": [
+    {"event": "car at rest / start of motion", "frame": 1, "t_s": 0.0417, "note": "front edge x0 = 1577 at frames 0 and 1, 1576 at 2, then moves left with steadily growing per-frame steps"},
+    {"event": "car rear fully enters the frame", "frame": 9, "t_s": 0.375},
+    {"event": "car front reaches the left image edge", "frame": 53, "t_s": 2.2083},
+    {"event": "car fully leaves the frame", "frame": 68, "t_s": 2.8333},
+    {"note": "no bounces, contacts or direction changes; motion is purely leftward (-x), accelerating smoothly throughout (per-frame step ~-1 px at frame 2 to ~-58 px at frame 52 and ~-70 px at frame 66)"}
+  ],
+  "files": {
+    "tracks/hovercar.csv": "per-frame car track (all 72 frames, visible flag)",
+    "tracks/hovercar_shadow.csv": "per-frame shadow track",
+    "scripts/": "track.py (segmentation + CSVs), overlay.py (visual check), check.py (per-frame steps), explore.py",
+    "notes.md": "method, reliability, ambiguities"
+  }
+}

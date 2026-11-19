@@ -1,0 +1,18 @@
+{
+ "video": "internet_0071.mp4",
+ "video_source": "internet",
+ "video_type": "S2SS",
+ "fps": 24.097768,
+ "frames": 60,
+ "duration_s": 2.4899,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3266,
+  "question": "What is the length of a wall tile in cm?",
+  "prior": "width of the toilet paper = 10 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

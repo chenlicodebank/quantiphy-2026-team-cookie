@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0068_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "A2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1779,
+  "question": "What is the average speed of the yellow car in m/s?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

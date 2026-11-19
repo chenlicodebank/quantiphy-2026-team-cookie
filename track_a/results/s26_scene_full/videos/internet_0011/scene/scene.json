@@ -1,0 +1,64 @@
+{
+  "video": "internet_0011.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down drone view of a basketball half court; ground plane ~parallel to image)",
+  "fps": 20.428571,
+  "frames": 107,
+  "size_px": [3840, 2160],
+  "units": "all positions/lengths in full-resolution pixels (3840x2160), image x right, y down; t = frame / fps",
+  "time_convention": "frame i <-> t = i / 20.428571; time t -> frame round(t*fps)",
+  "duplicate_frames": {
+    "frames": [65, 66, 70, 72, 73, 74, 77, 78, 91, 97],
+    "note": "each is an exact repeat of the previous decoded frame (65,66=64; 70=69; 72-74=71; 77,78=76; 91=90; 97=96). Positions do not change across them; one-frame differences there are 0 and the next step is larger. Column dup_of_prev in every track."
+  },
+  "camera": {
+    "type": "drone, nadir (looking straight down), nearly static",
+    "drift": "slow drift: image content shifts up to ~16 px in x and ~8 px in y over the clip, scale changes by ~1% (slight zoom-in / descent), rotation < 0.15 deg",
+    "file": "tracks/camera.csv (per frame: where the current image centre lies in frame-0 coordinates minus centre, scale cur->f0, rotation)",
+    "compensation": "tracks contain cx_f0, cy_f0 = reference point mapped into frame-0 coordinates; differences raw vs compensated are <= ~20 px over the clip"
+  },
+  "objects": [
+    {"name": "player_black", "desc": "player in black T-shirt with ginger/red curly hair, black shorts, black-white shoes; dribbles the basketball the whole clip", "moves": true,
+     "visible_frames": "0-106", "track": "tracks/player_black.csv",
+     "motion": "starts under the hoop (2022,492) and dribbles down-court (+y) to (2128,1172); net ~690 px, path ~790 px; weaves left/right",
+     "typical_extent_px": {"mask_len_main_axis_median": 240, "range": [170, 305], "width_across_median": 146, "bbox_w_median": 188, "bbox_h_median": 194},
+     "reliability": "centroid +-15 px: dark shirt is close in colour to the court shadow so the mask has holes; arms swing changes extents"},
+    {"name": "player_white", "desc": "player in white T-shirt, dark hair, black shorts; defender walking/back-pedalling in front of player_black", "moves": true,
+     "visible_frames": "0-106", "track": "tracks/player_white.csv",
+     "motion": "moves steadily down-court and slightly right from (1544,577) to (2082,1927); net ~1453 px, path ~1465 px; ~14 px/frame (raw frames), no stops",
+     "typical_extent_px": {"mask_len_main_axis_median": 190, "range": [167, 254], "width_across_median": 152, "bbox_w_median": 152, "bbox_h_median": 198},
+     "reliability": "centroid +-5 px (white shirt high contrast)"},
+    {"name": "basketball", "desc": "orange-brown ball dribbled by player_black", "moves": true, "visible_frames": "0-106 (partly hidden under the hand at times, motion-blurred 103-106)",
+     "track": "tracks/ball.csv",
+     "diameter_px": {"median": 53.4, "IQR": [50.8, 57.2], "note": "Hough-circle radius per frame is noisy (+-5 px); use the median ~53-54 px. Ball nearer camera at top of dribble so apparent size varies slightly"},
+     "motion": "goes from (2024,547) to (2052,1231); net ~684 px, image-plane path ~1200 px (includes left/right crossovers)",
+     "reliability": "centre +-5 px; frames 12-15 and 103-106 were placed by hand (manual=1)"},
+    {"name": "hoop_ring", "desc": "orange-red rim with white net, top centre", "moves": false, "position_px_f0": "rim outer extent x 1862-1992, y 440-590 (red pixels incl. bracket); centre ~(1928, 525)",
+     "size_px": {"rim_outer_diameter": 130}, "note": "elevated ~3 m above the floor, so it is closer to the drone and appears slightly larger than floor markings at the same scale"},
+    {"name": "backboard", "desc": "transparent backboard with red frame, seen edge-on from above", "moves": false, "position_px_f0": "x 1754-2092 (red frame), y ~370-440",
+     "size_px": {"width": 338}, "note": "elevated"},
+    {"name": "hoop_pole", "desc": "light-blue pole/arm from top edge to backboard", "moves": false, "position_px_f0": "x ~1915-1960, y 0-~400 (arm), shadowed pad region x 1845-2075, y 135-~280"},
+    {"name": "baseline", "desc": "white end line across the top", "moves": false, "position_px_f0": "y ~295 at x=400, 283 at x=1200, 265 at x=2700, 260 at x=3200 (slight tilt ~0.6 deg)"},
+    {"name": "sidelines", "desc": "outer white lines left and right", "moves": false, "position_px_f0": "left x ~304, right x ~3638 (at y=1000); separation ~3334 px"},
+    {"name": "three_point_straight_lines", "desc": "inner vertical lines near each sideline that join the 3-pt arc", "moves": false, "position_px_f0": "left x ~518, right x ~3409 (y=1000); separation ~2891 px; arc bottom at y ~2129 (x=1930)"},
+    {"name": "lane_paint", "desc": "key / free-throw lane rectangle", "moves": false, "position_px_f0": "x 1414-2491 (width ~1077 px at y=1000), from baseline (y~275) to free-throw line (y~1561); length ~1287 px"},
+    {"name": "free_throw_circle", "desc": "semicircle below the free-throw line", "moves": false, "position_px_f0": "centre ~(1963,1561), bottom y ~1959", "size_px": {"radius": 398, "diameter": 796}},
+    {"name": "restricted_arc", "desc": "small semicircle under the hoop", "moves": false, "position_px_f0": "straight ends at x ~1677 and ~2222 (width ~545 px), from y ~560; bottom y ~902"},
+    {"name": "large_rectangle", "desc": "extra wide rectangle line starting at y~1212 spanning x ~968-2958 (another court's marking)", "moves": false, "position_px_f0": "top line y ~1212, verticals x ~968 and ~2958 (width ~1990 px)"},
+    {"name": "tree_shadows", "desc": "diagonal dark streaks across the court (shadows), static", "moves": false},
+    {"name": "left_wall", "desc": "white/grey wall or fence strip at the very left edge (x 0-~40)", "moves": false}
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "clip starts with player_black right under the hoop holding/dribbling the ball (right hand, ball at image-right-front); player_white to his upper left"},
+    {"frame_range": [10, 20], "what": "ball moves from player_black's right side to his left (image-left) side; dribbling with the left arm frames ~16-56"},
+    {"frame_range": [56, 67], "what": "crossover: ball moves from image-left of player_black to in front of/right of him (dx ball-player -100 -> +30)"},
+    {"frame_range": [82, 92], "what": "crossover back: ball moves from image-right to image-left of player_black (dx +55 -> -40)"},
+    {"note": "both players move for the whole clip (no start/stop inside the clip). Individual dribble bounces cannot be timed reliably from the top-down view (vertical motion is along the line of sight)."}
+  ],
+  "files": {
+    "tracks/player_white.csv": "frame,t,cx,cy (mask centroid = visible centre),bbox_cx,bbox_cy,x0,y0,x1,y1,len_main_axis,width_across,main_axis_deg,mask_area_px,occl_or_near_other,cx_f0,cy_f0,dup_of_prev",
+    "tracks/player_black.csv": "same columns",
+    "tracks/ball.csv": "frame,t,cx,cy,diameter,x0,y0,x1,y1,score,manual,cx_f0,cy_f0,dup_of_prev",
+    "tracks/camera.csv": "frame,t,centre_in_f0_dx,centre_in_f0_dy,scale_cur_to_f0,rot_deg,inliers,matches,dup_of_prev"
+  }
+}

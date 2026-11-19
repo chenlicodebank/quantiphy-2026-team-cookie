@@ -1,0 +1,205 @@
+{
+ "video": "simulation_0213.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_of_frame_i": "i / 24",
+ "units": "pixels (x right, y down, origin top-left of the 1920x1080 frame), seconds",
+ "camera": {
+  "motion": "static (no pan/shake: background plate built from many frames is sharp, props do not move)",
+  "view": "side view, roughly horizontal camera facing a wall; animals walk left/right parallel to the image plane",
+  "wall_floor_boundary_y": 944,
+  "baseboard_line_y": 906,
+  "perspective_note": "Floor recedes to the wall; the dog walks nearer the camera than the cat (dog paws touch floor at y~1061-1070, cat paws at y~1017-1023, dog occludes cat). Pixel scale differs slightly between the two lanes; horizon row unknown (camera looks roughly level). If the horizon were at image centre y=540, the dog lane would be ~10% nearer (scale ratio (1066-540)/(1020-540)=1.10). Treat as 2D unless a question needs better."
+ },
+ "objects": {
+  "cat": {
+   "description": "black-and-white (tuxedo) cat with white paws/socks and an untextured grey head; tail raised; smaller animal",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "direction": "walks left -> right (+x)",
+   "track": "tracks/cat.csv",
+   "occluded_frames": [
+    23,
+    43
+   ],
+   "occluded_by": "dog (cat passes BEHIND the dog); heavily hidden ~frames 29-35",
+   "pace_px_per_frame_note": "nose (bbox_x1) is linear in time on visible frames: slope 17.76 px/frame, rms 0.7 px",
+   "size_px_visible_frames": {
+    "length_bbox_incl_tail": {
+     "min": 301.0,
+     "median": 307.0,
+     "max": 324.0
+    },
+    "length_notail": {
+     "min": 258.0,
+     "median": 297.0,
+     "max": 324.0
+    },
+    "height_tail_tip_to_paws": {
+     "min": 213.0,
+     "median": 222.0,
+     "max": 228.0
+    }
+   },
+   "ground_contact_y": "1016-1023"
+  },
+  "dog": {
+   "description": "brindle (brown striped) dog with white paws and an untextured grey head, head lowered (sniffing); larger animal, nearer the camera",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "direction": "walks right -> left (-x)",
+   "track": "tracks/dog.csv",
+   "occluded_frames": [],
+   "size_px_unmerged_frames": {
+    "length_bbox_incl_tail": {
+     "min": 459.0,
+     "median": 490.0,
+     "max": 609.0
+    },
+    "length_notail": {
+     "min": 437.0,
+     "median": 463.0,
+     "max": 486.0
+    },
+    "height_back_or_tail_to_paws": {
+     "min": 279.0,
+     "median": 293.0,
+     "max": 322.0
+    }
+   },
+   "ground_contact_y": "1055-1071"
+  },
+  "side_table": {
+   "description": "wooden slatted side table (orange-brown) at the right, with a lower shelf; partly cut by the right image edge",
+   "moves": false,
+   "bbox": [
+    1460,
+    771,
+    1919,
+    993
+   ],
+   "top_board_y": [
+    782,
+    830
+   ],
+   "lower_shelf_y": [
+    912,
+    935
+   ],
+   "legs_bottom_y": 993,
+   "note": "right end cut at x=1919; front of dog overlaps table in frames 0-~8"
+  },
+  "table_lamp": {
+   "description": "lamp on the table: white pleated cone shade + dark brown tapered wooden base",
+   "moves": false,
+   "bbox": [
+    1410,
+    502,
+    1625,
+    790
+   ],
+   "shade_bbox": [
+    1410,
+    502,
+    1625,
+    607
+   ],
+   "base_bbox": [
+    1494,
+    607,
+    1538,
+    790
+   ],
+   "height_px": 289,
+   "shade_width_px": 216
+  },
+  "vase": {
+   "description": "blue-and-white porcelain vase standing on the table at the right (the real one, the larger/right of the two)",
+   "moves": false,
+   "bbox": [
+    1727,
+    577,
+    1823,
+    790
+   ],
+   "height_px": 214,
+   "max_width_px": 97
+  },
+  "vase_reflection": {
+   "description": "mirror image of the vase, left of it, inside the mirror (not a real object)",
+   "moves": false,
+   "bbox": [
+    1668,
+    597,
+    1735,
+    790
+   ]
+  },
+  "floor_mirror": {
+   "description": "tall rectangular mirror with light wood frame leaning on the wall behind the table",
+   "moves": false,
+   "bbox": [
+    1632,
+    388,
+    1872,
+    968
+   ],
+   "height_px": 581,
+   "width_px": 241
+  },
+  "wall": {
+   "description": "plain light grey wall, background",
+   "moves": false
+  },
+  "floor": {
+   "description": "brownish-grey floor, below y=944",
+   "moves": false
+  }
+ },
+ "events": {
+  "dog_starts_walking": {
+   "frame": "0-3",
+   "note": "dog torso nearly at rest at frame 0 (steps ~1-4 px/frame over frames 0-3), then speeds up"
+  },
+  "dog_reaches_cruise": {
+   "frame": "~16-20",
+   "note": "torso steps ~18-25 px/frame between frames ~16 and ~33"
+  },
+  "dog_slows": {
+   "frame": "~33-49",
+   "note": "steps drop to ~10-16 px/frame by frames 38-44 and ~0.5-2 px/frame at frames 47-49 (dog nearly stopped at the end)"
+  },
+  "cat_walks_whole_clip": {
+   "frame": "0-49",
+   "note": "steady pace, ~17.8 px/frame to the right; no start/stop inside the clip"
+  },
+  "cat_nose_meets_dog_head": {
+   "frame": 23,
+   "t": 0.9583,
+   "note": "cat bbox_x1 (917) reaches dog bbox_x0 (913); blobs merge from frame 23"
+  },
+  "centres_cross": {
+   "frame": 32,
+   "t": 1.3333,
+   "note": "dog torso_cx equals cat fitted bbox_cx"
+  },
+  "cat_head_reappears_right_of_dog": {
+   "frame": 36
+  },
+  "cat_fully_clear_of_dog": {
+   "frame": 44,
+   "t": 1.8333
+  },
+  "no_bounce_impact_release": true
+ }
+}

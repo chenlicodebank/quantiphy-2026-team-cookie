@@ -1,0 +1,55 @@
+{
+ "video": "captured_0053s.mp4",
+ "source": "lab (captured; background replaced by a synthetic colour gradient, 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 48,
+ "duration_s": 2.0,
+ "image_size": [1280, 720],
+ "time_convention": "t = frame / 24; frame = round(t * 24)",
+ "camera": {
+  "motion": "static: phase-correlation shift of the three static objects vs the median background is < 0.3 px in every frame (scripts/camera_check.py)",
+  "intrinsics_lab_convention": {"fx_px": 763.0, "fy_px": 763.0, "cx_px": 640, "cy_px": 360, "note": "lab camera, HFOV 80 deg, f = 0.5959 * 1280"},
+  "view": "oblique top-down view of a flat surface (floor/table, replaced by gradient). Tops of cup and card are visible; image-up = farther from camera (blue object shrinks while moving up-left). No horizon, no ground texture, no shadows (background replaced), so no vanishing points measurable."
+ },
+ "objects": {
+  "blue_object": {
+   "description": "blue box-shaped toy (likely a toy car) with yellow and white rectangular print; the only moving object",
+   "moves": true,
+   "visible_frames": [0, 47],
+   "track": "tracks/blue_object.csv",
+   "reference_point": "mask centroid (cx, cy) = visible centre",
+   "start_px": [895.4, 442.7], "end_px": [537.5, 219.9],
+   "image_path_length_px_centroid_0_to_47": 422.5,
+   "image_net_displacement_px_0_to_47": 421.6,
+   "direction": "straight line up-left in the image, heading about -148 deg (atan2(dy,dx), y down), i.e. along its own long axis; nearly constant",
+   "apparent_size": "shrinks steadily: bbox 144x128 -> 109x88 px, mask area 11803 -> 6673 px (sqrt ratio 0.75); minAreaRect long side 134 -> 109 px, short side 102 -> 77 px. Early frames (0-10) are motion-blurred, which inflates length by several px",
+   "pixel_step_per_frame": "about 11-13 px/frame in frames 1-11, falling to about 5.5-7 px/frame by frames 33-47 (slowing in the image; partly because it moves away from the camera)"
+  },
+  "basketball": {
+   "description": "orange Wilson basketball, right of centre, near the blue object's start",
+   "moves": false, "visible_frames": [0, 47],
+   "centre_px": [985.8, 369.8], "bbox": [952, 340, 1019, 401], "bbox_w": 68, "bbox_h": 62,
+   "equiv_diam_px": 65.5
+  },
+  "cup": {
+   "description": "small white/silver tumbler (cup) with dark lid, standing upright, centre-left",
+   "moves": false, "visible_frames": [0, 47],
+   "centre_px": [564.2, 423.8], "bbox": [552, 402, 579, 448], "width_px": 28, "height_px": 47
+  },
+  "white_card": {
+   "description": "white rectangular flat item (box/booklet/card with grey print) lying on the surface, bottom centre, rotated about 60 deg",
+   "moves": false, "visible_frames": [0, 47],
+   "centre_px": [664.7, 614.1], "bbox": [630, 577, 701, 653], "minrect_len_px": 78.9, "minrect_wid_px": 47.4, "minrect_angle_deg": 59.5
+  }
+ },
+ "static_objects_detail": "static_objects.json",
+ "events": [
+  {"event": "blue_object already moving at first frame (no start of motion in clip)", "frame": 0, "t": 0.0},
+  {"event": "blue_object passes the basketball without contact (closest mask gap ~28 px at frame 0, increasing)", "frame": 0, "t": 0.0},
+  {"event": "irregular step (about 2x normal centroid step: 19.9 px vs ~10) - probable dropped/irregular capture frame", "frame": 12, "t": 0.5},
+  {"event": "irregular step (13.4 px vs ~6) - probable dropped/irregular capture frame", "frame": 36, "t": 1.5},
+  {"event": "blue_object still moving at last frame (no stop in clip)", "frame": 47, "t": 1.9583}
+ ],
+ "no_events": "no release, bounce, impact or contact; no direction change"
+}

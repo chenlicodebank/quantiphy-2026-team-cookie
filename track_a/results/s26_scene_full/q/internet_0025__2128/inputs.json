@@ -1,0 +1,18 @@
+{
+ "video": "internet_0025.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 29.970032,
+ "frames": 473,
+ "duration_s": 15.7824,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 2128,
+  "question": "What is the average speed of the canoe in m/s?",
+  "prior": "height of the boatman = 1.75m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

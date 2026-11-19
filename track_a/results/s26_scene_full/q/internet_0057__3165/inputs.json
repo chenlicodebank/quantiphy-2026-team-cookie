@@ -1,0 +1,18 @@
+{
+ "video": "internet_0057.mp4",
+ "video_source": "internet",
+ "video_type": "A2MS",
+ "fps": 30.0,
+ "frames": 188,
+ "duration_s": 6.2667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3165,
+  "question": "What is the velocity of the ball at 3.00s in m/s?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

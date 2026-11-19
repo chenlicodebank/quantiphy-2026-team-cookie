@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0069.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MS",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 40,
+  "question": "What is the length of the white car in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,65 @@
+{
+ "wall_s": 762,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 50,
+  "duration_ms": 760891,
+  "total_cost_usd": 2.4368588,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 54,
+  "cache_creation_input_tokens": 99409,
+  "cache_read_input_tokens": 1353354,
+  "output_tokens": 68535,
+  "output_tokens_details": {
+   "thinking_tokens": 51495
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 99409,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 780,
+    "cache_read_input_tokens": 107303,
+    "cache_creation_input_tokens": 2000,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 2000
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 47,
+  "flags": [
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_piersonal/simulation_0041_segmented/q_1745/frames/strip.png"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_piersonal/simulation_0041_segmented/q_1745/frames/strip.png\"}"
+   }
+  ]
+ },
+ "video": "simulation_0041_segmented",
+ "ids": [
+  1745
+ ],
+ "answered": 1,
+ "error": null
+}

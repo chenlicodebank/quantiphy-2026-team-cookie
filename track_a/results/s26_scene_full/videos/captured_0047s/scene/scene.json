@@ -1,0 +1,123 @@
+{
+ "video": "captured_0047s.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame": "t = frame / 24",
+ "camera": {
+  "motion": "static (background is a SAM-replaced smooth blue gradient; person feet fixed at y~543 all clip)",
+  "intrinsics_assumed": {
+   "f_px": 762.75,
+   "cx": 640,
+   "cy": 360,
+   "note": "lab convention f = 0.5959*W, used in the ball cone fit"
+  },
+  "perspective_cues": "no floor/horizon visible (background replaced). Ball rolls toward the camera and down-left; its apparent diameter grows 118 -> ~280 px, i.e. its distance shrinks by ~2.4x."
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "desc": "large dark-grey (exercise/gym) ball with white specular highlights; the only ball",
+   "moves": true,
+   "visible_frames": "0-46 (fully in frame 0-32; cut by bottom edge 33-46; gone 47-48)",
+   "track": "tracks/ball.csv",
+   "reference_point": "center_proj_x/y = image projection of the 3D sphere centre (cone fit); ell_cx/cy = centre of silhouette ellipse; vis_cx/cy = visible-mask centroid",
+   "static_size_frames_0_12": {
+    "equiv_diam_px": 118.0,
+    "silhouette_ellipse_major_minor_px": [
+     122.5,
+     120.2
+    ],
+    "bbox": [
+     511,
+     431,
+     632,
+     553
+    ],
+    "centre": [
+     571.6,
+     491.7
+    ],
+    "alpha_deg": 4.424,
+    "sin_alpha": 0.07716
+   }
+  },
+  {
+   "name": "person",
+   "desc": "one person in black hoodie/black trousers, white shoes, face blurred, crouching/squatting behind the ball; pushes the ball toward the camera then raises arms",
+   "moves": "stays in place (crouched, feet fixed); arms/torso move",
+   "visible_frames": "0-48",
+   "track": "tracks/person.csv",
+   "extent_after_release_frames_20_48": {
+    "bbox_x0_median": 512,
+    "bbox_y0_median": 348,
+    "bbox_x1_median": 638,
+    "bbox_y1_median": 543,
+    "height_px_median_crouched_head_to_shoe": 196
+   },
+   "note": "frames 0-16 the lower body/feet are hidden behind the ball, so person bbox there is only head-to-arms (height ~122 px)."
+  },
+  {
+   "name": "watermark",
+   "desc": "'Modified with Segment Anything 2 Demo' text box bottom-right (x>1030, y>690); not a scene object",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "ball held still against the person (hands on ball)",
+   "frames": "0-12",
+   "t": "0-0.500"
+  },
+  {
+   "event": "ball starts moving (push begins; centre first shifts ~1 px at f13, clearly from f14)",
+   "frame": 13,
+   "t": 0.5417
+  },
+  {
+   "event": "release: hands leave ball, arms fly up (person bbox height jumps 128->192 px)",
+   "frame": 17,
+   "t": 0.7083,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "ball bottom reaches image bottom edge",
+   "frame": 33,
+   "t": 1.375
+  },
+  {
+   "event": "last frame with ball visible (tiny sliver at bottom-left)",
+   "frame": 46,
+   "t": 1.9167
+  },
+  {
+   "event": "ball fully out of frame",
+   "frame": 47,
+   "t": 1.9583
+  },
+  {
+   "event": "person lowers arms back to knees",
+   "frames": "~40-46",
+   "t": "~1.67-1.92"
+  }
+ ],
+ "ball_motion_summary_px": {
+  "start_centre": [
+   571.6,
+   491.7
+  ],
+  "frame32_centre": [
+   445.68,
+   605.99
+  ],
+  "direction": "toward camera, image motion down-left, roughly straight; no bounce seen (rolling on the floor)"
+ },
+ "files": {
+  "tracks/ball.csv": "per-frame ball fit",
+  "tracks/person.csv": "per-frame person mask bbox",
+  "notes.md": "methods and reliability"
+ }
+}

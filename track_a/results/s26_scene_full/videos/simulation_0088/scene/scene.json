@@ -1,0 +1,39 @@
+{
+  "video": "simulation_0088.mp4",
+  "source": "simulation",
+  "scene": "2D",
+  "fps": 24.0,
+  "frames": 30,
+  "duration_s": 1.25,
+  "width": 1920,
+  "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {"motion": "static (uniform blue sky, no background features; nothing to pan against, birds move at constant pixel steps so no sign of camera motion)",
+             "background_rgb": [97, 149, 191], "perspective": "none visible; 2D scene, both birds fly on the same horizontal line (y ~552-554) in a plane facing the camera; seen from below (ventral view)"},
+  "objects": [
+    {"name": "eagle", "description": "large bald-eagle-like raptor: dark brown body and wings, white head with pale/yellow beak, white fanned tail; the LARGER bird, in front at start, flies faster",
+     "moves": true, "visible_frames": [0, 15], "fully_in_frame": [0, 14], "partly_out_left_edge": [15], "merged_with_crow": [0, 1],
+     "heading": "flies right-to-left (-x), head pointing left, body axis horizontal",
+     "body_length_px": {"value": 138.7, "range": [138, 140], "note": "beak tip to tail end, horizontal extent, constant (frames 2-14)"},
+     "wingspan_px": {"max": 324, "max_frame": 6, "min": 175, "min_frame": 12, "note": "vertical extent of mask (wingtip to wingtip, flapping); per-frame in track"},
+     "track": "tracks/eagle.csv"},
+    {"name": "crow", "description": "smaller all-black bird (crow/raven-like), black beak, wedge tail; the SMALLER bird, starts just behind (right of) the eagle and partly hidden by the eagle's tail in frames 0-1, flies slower",
+     "moves": true, "visible_frames": [0, 25], "fully_in_frame": [2, 24], "partly_out_left_edge": [25], "merged_with_eagle": [0, 1],
+     "heading": "flies right-to-left (-x), head pointing left, body axis horizontal",
+     "body_length_px": {"value": 86.6, "range": [85, 88], "note": "beak tip to tail end, horizontal extent, constant (frames 2-24)"},
+     "wingspan_px": {"max": 164, "max_frame": 3, "min": 106, "min_frame": 24, "note": "vertical extent of mask; flap cycle ~9 frames (maxima f3, f12, f21; minima f6, f15, f24)"},
+     "track": "tracks/crow.csv"}
+  ],
+  "static_objects": "none (plain sky only)",
+  "reference_point": "x = cx_bbox (mid-point between beak tip and tail end, horizontal extent is constant so it is a stable body point), y = body line (eagle ~554.2, crow ~552.4; mean of head_y/tail_y for eagle, tail_y for crow). cx_centroid/cy_centroid also given but y-centroid is biased by wing shape during flapping.",
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "first frame; frames 0 and 1 are identical (birds not yet moved). Birds overlapping: eagle tail end x=1762 over crow head (crow right/tail end x=1826)"},
+    {"frame": 1, "t": 0.04167, "what": "start of motion: from frame 1 to 2 both birds already move at their steady per-frame step (no visible acceleration phase)"},
+    {"frame": 2, "t": 0.08333, "what": "birds separate (two distinct masks from here on)"},
+    {"frame": 15, "t": 0.625, "what": "eagle reaches left edge (partly out), last frame visible"},
+    {"frame": 16, "t": 0.66667, "what": "eagle gone"},
+    {"frame": 25, "t": 1.04167, "what": "crow reaches left edge (partly out), last frame visible"},
+    {"frame": 26, "t": 1.08333, "what": "crow gone; frames 26-29 empty sky"}
+  ],
+  "motion_observation_px": {"eagle_step_px_per_frame": "tail end x steps 119-120 every frame, frames 1->14 (mean 119.69 = (1762-206)/13); y constant", "crow_step_px_per_frame": "tail end x steps 73-74 every frame, frames 1->24 (mean 73.26 = (1826-141)/23); y constant", "direction_changes": "none; both straight horizontal leftward"}
+}

@@ -1,0 +1,101 @@
+{
+  "video": "internet_0028.mp4",
+  "source": "internet",
+  "scene_type_declared": "2D",
+  "fps": 20.528302,
+  "frames": 93,
+  "duration_s": 4.5303,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels of the original 3840x2160 frame, origin top-left, x right, y down; seconds",
+  "description": "Close top-down (somewhat oblique) handheld-or-fixed view of an airport baggage carousel. Grey metal carousel plates with embossed logos fill the background; bags ride the carousel left -> right across the frame for the whole clip. No static background is visible, nobody appears, nothing is thrown or bounces.",
+
+  "camera": {
+    "motion": "cannot be separated from the belt: every visible surface (plates, rubber panels, bags) rides the carousel. No fixed reference exists in view. Global similarity fit frame to frame: rotation |rot| < 0.25 deg/frame (mostly < 0.06), scale 0.99-1.01, i.e. no visible zoom/rotation. Treat camera as static unless a question says otherwise.",
+    "global_motion_file": "scene/global_motion.csv (per-frame median image shift of all tracked features, px/frame; cumulative shift)",
+    "global_shift_px_per_frame": "dx 65-81 (median ~74), dy -2..+2. Slow variation: ~75 at f1-6, ~71 at f8-12, ~73 f13-23, ~74-77 f25-70, ~77-81 f73-86, ~74 f87-92",
+    "perspective": "STRONG depth effects despite the 2D label. Image speed depends on position and on height above the belt (scene/speed_map.json): belt plates in the upper band (y<~1000) move ~45-50 px/frame (down to ~37 at the top-right corner), the lower band / bag tops (y>~1100) ~70-82 px/frame. Raised bag tops move faster than the belt beside them (black hard case top ~64 vs belt ~48 at the same y). Different points of one bag differ by up to ~5-7 % (e.g. backpack logo 66-70 vs buckle 72-77 px/frame; orange suitcase tag 71-79 vs handle 69-75). Upper-right of frame is farthest.",
+    "lens": "4K wide-ish phone footage, mild motion blur (~10-30 px streaks) on every frame"
+  },
+
+  "ground_features": {
+    "carousel_plates": {"what": "grey overlapping metal plates of the carousel, seam lines run roughly top-to-bottom (tilted), each plate carries one embossed oval logo near y~750", "moves": true,
+      "plate_pitch_px": "~625 (autocorrelation of logo row y 550-950, frames 0/3/6: 627, 621, 620 px); visual logo spacing ~640 px at f0 (logos at x~500,1140,1790,2440,3060, y~750)",
+      "speed_band": "upper band moves ~46-50 px/frame (slower toward the right)"},
+    "rubber_panels": {"what": "dark ribbed rubber panels between plates in the lower band (e.g. f0: x 0-520 and 2840-3300, y 1220-2160)", "moves": true, "size_px_f0": "~450-500 wide x >900 tall"}
+  },
+
+  "objects": {
+    "blue_backpack": {
+      "describe": "large blue-and-light-grey hiking backpack (white 'deuter' logo), lying horizontally with its dark/black top end to the LEFT, grey strap tip sticking out left; lower half of frame",
+      "moves": true, "visible_frames": "0 - ~46 (track rows 0-42; leading right end leaves frame at f10)",
+      "track": "scene/tracks/blue_backpack.csv", "ref_point": "buckle on grey hip strap (template f0-22), continued by LK box shift f23-42",
+      "extents_f0_px": {"body_length_x": 2600, "body_x": [490, 3090], "incl_strap_tip_length_x": 2800, "strap_tip_x": 290, "top_y": 1020, "bottom_y": "below frame (>2160)", "visible_height_y": ">=1140"},
+      "reliability": "x extents +-30 px; bottom never visible"
+    },
+    "red_suitcase": {
+      "describe": "red suitcase at the top-right corner, only a corner visible, on a dark area (shadow / dark bag)",
+      "moves": true, "visible_frames": "0-14 (exits right edge)",
+      "track": "scene/tracks/red_suitcase.csv (red colour mask, visible part only)",
+      "extents_f0_px": {"visible_x": [3284, 3840], "visible_y": [0, 596]},
+      "note": "left edge moves ~40-44 px/frame (far, top-right region); full size never visible"
+    },
+    "orange_suitcase": {
+      "describe": "orange/brown leather-look suitcase lying flat, carry handle (black housing with tan grip) at its RIGHT (leading) end, wheels/feet at the left end, white-framed luggage ID tag on its top face; middle-lower band",
+      "moves": true, "visible_frames": "4 - ~90 (mask f4-84; full-box track f8-89)",
+      "track": "scene/tracks/orange_suitcase.csv", "ref_point": "centre of the white luggage ID tag (template f25-69), continued with LK box shift f8-24 and f70-89",
+      "fully_in_view_frames": "~40/48 - 57 (trailing wheel housing x>0 from ~f40 by the box; orange body x>0 from ~f47; handle reaches right border f58)",
+      "extents_f52_px": {
+        "overall_length_x_wheel_housing_to_handle_housing": 2455, "overall_x": [965, 3420],
+        "orange_body_length_x": 2090, "orange_body_x_at_y1100": [1065, 3155],
+        "orange_plus_tan_grip_mask_length_x": 2348, "mask_x_f52": [1036, 3384],
+        "mask_length_f48_to_f57": [2384, 2372, 2364, 2352, 2348, 2340, 2332, 2328, 2332, 2336],
+        "top_edge_y": 935, "bottom_edge": "below frame (>2160)", "visible_width_y": ">=1225",
+        "tag_size_px": "frame ~240 x 360 (x 2210-2450, y 1390-1750), centre (2330,1570)",
+        "handle_housing_x": [3170, 3420], "grip_y": [1200, 1880]
+      },
+      "reliability": "edges +-20-40 px (motion blur ~30 px); which length a question means is ambiguous - record gives overall (2455), body only (2090), body+grip (2348)"
+    },
+    "black_hard_case": {
+      "describe": "large black hard-shell suitcase lying flat, rotated (its long edge tilted), occupying the top band; two silver wheel hubs visible near its right end",
+      "moves": true, "visible_frames": "~6 - 92 (enters top-left ~f6; track rows 13-92)",
+      "track": "scene/tracks/black_hard_case.csv", "ref_point": "lower silver wheel hub (template f23-76; at f40 (1400,810)), continued by LK shift",
+      "extents": "never fully in view (most of it is above/left/right of the frame); the full_* box in its csv is only a loose region, NOT its size. Wheel hub separation f40: lower (1400,810) to upper (1710,250) = 640 px.",
+      "note": "upper wheel moves ~48 px/frame, lower ~64 px/frame - perspective"
+    },
+    "black_duffel": {
+      "describe": "black sports duffel bag with tan/beige crossing straps, white 'R SPORT' print, red cloth bundled on its top-right, white tags; arrives last",
+      "moves": true, "visible_frames": "~42 - 92 (enters from left)",
+      "track": "scene/tracks/black_duffel.csv", "ref_point": "white zipper pull on the bag (template f65-92; at f86 (1950,1400)), continued by LK shift f43-64",
+      "extents_f86_px": {"length_x_incl_red_cloth": 2090, "x": [1400, 3490], "top_y_black_body": 480, "top_y_red_cloth": 250, "bottom": "below frame"},
+      "reliability": "soft, deforms; +-50 px"
+    },
+    "grey_bag": {
+      "describe": "dark grey / black soft bag with elastic cords and orange trim, bottom-left in the last frames",
+      "moves": true, "visible_frames": "~66 - 92", "track": "scene/tracks/grey_bag.csv (LK box centre only)",
+      "extents_f86_px": {"x": ["<0", 1400], "top_y": 1380, "bottom": "below frame"}
+    }
+  },
+
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "clip starts; all bags already moving with the carousel (no start/stop of motion within the clip)"},
+    {"frame": 4, "t": 0.195, "what": "orange suitcase leading (handle) end appears at the left border"},
+    {"frame": 10, "t": 0.487, "what": "blue backpack right end reaches the right border"},
+    {"frame": 14, "t": 0.682, "what": "red suitcase leaves at the top-right"},
+    {"frame": 40, "t": 1.949, "what": "orange suitcase trailing end (wheel housing) enters the view (box estimate; orange body x>0 ~f47)"},
+    {"frame": 42, "t": 2.046, "what": "black duffel starts entering from the left"},
+    {"frame": 46, "t": 2.241, "what": "blue backpack fully gone at the right (estimate, last track row f42)"},
+    {"frame": 58, "t": 2.825, "what": "orange suitcase handle reaches the right border"},
+    {"frame": 69, "t": 3.361, "what": "black duffel trailing (left) edge enters view (box estimate)"},
+    {"frame": 89, "t": 4.335, "what": "orange suitcase almost gone at right (last track row; mask ends ~f84-90)"},
+    {"frame": 91, "t": 4.433, "what": "black duffel leading edge reaches right border"}
+  ],
+
+  "files": {
+    "tracks": "scene/tracks/<object>.csv (final); scene/tracks/raw/*_raw.csv (raw LK box + template outputs); scene/tracks/orange_suitcase_mask.csv (colour mask, valid f4-84)",
+    "global_motion": "scene/global_motion.csv",
+    "speed_map": "scene/speed_map.json (median dx, dy px/frame in 8x6 image bins for frame blocks 1-23, 24-46, 47-69, 70-92)",
+    "notes": "scene/notes.md",
+    "scripts": "scene/scripts/"
+  }
+}

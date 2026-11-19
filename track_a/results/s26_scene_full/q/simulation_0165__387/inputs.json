@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0165.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 24.0,
+ "frames": 80,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 387,
+  "question": "What is the width of the road that the bike is crossing through in meters?",
+  "prior": "speed of the bike = 5.52m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

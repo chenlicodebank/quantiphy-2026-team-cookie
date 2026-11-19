@@ -1,0 +1,120 @@
+{
+  "video": "simulation_0058.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2160, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; time t -> frame round(t*24)",
+  "pixel_convention": "x to the right, y downward, origin = top-left corner of the full 2160x1080 frame; all values in pixels",
+  "duplicate_frames": "frame 1 is pixel-identical to frame 0 (mean abs diff 0.01): nothing moves between frames 0 and 1; real motion starts between frames 1 and 2",
+
+  "camera": {
+    "motion": "static (phase correlation on a static traffic light: max shift 0.01 px over all 72 frames); no pan, no zoom, no shake",
+    "principal_point_assumed": [1080, 540],
+    "focal_length": "unknown (not estimated here; use depth_info + a known size, or the vanishing point / horizon below)",
+    "main_road_vanishing_point_px": [1253.1, 422.5],
+    "horizon_row_px": 422.5,
+    "horizon_note": "horizon ~118 px above the image centre row -> camera pitched slightly down; vanishing point ~173 px right of the image centre column -> camera yawed slightly left of the main-road direction",
+    "main_road_curb_lines": {"left": "x = -2.3852*y + 2260.8", "right": "x = 1.6948*y + 537.0", "rows_used": "450-580"},
+    "cross_street": "runs left-right across the view; its far curb is near-horizontal at y ~594 (x=100), 598 (x=500), 606 (x=1700), 608 (x=2100) -> image rows are (nearly) lines of constant depth on the ground there; van and cyclist travel along it at nearly constant image y",
+    "ground_plane": "flat road; ground-contact rows (larger y = closer to camera): BMW 589, van 640-646, cyclist 650, taxi 665 (frame 0) -> 848 (frame 71), pedestrian feet 777 -> 808, Mercedes tyres 826"
+  },
+
+  "objects": {
+    "taxi": {
+      "description": "yellow (pale cream-yellow) sedan taxi with roof sign 'TAXI', Ford Crown Victoria style; the only yellow object",
+      "moves": true,
+      "visible_frames": "0-71 (all)",
+      "track": "tracks/taxi.csv",
+      "motion_summary": "starts in the cross street left of centre, seen side-on moving right (image dx ~ +10 px/frame); turns towards the camera between ~frame 18 and ~44 (side view -> 3/4 view -> front view); image x of the box centre peaks at frame 41 (~819) then drifts slowly left while it approaches the camera (box grows, ground row 665 -> 848)",
+      "reference_point": "ref_x, ref_y = centre of the bounding box (x0..x1, y0..y1 with y1 = tyre-contact row). bottom_center_x + ground_y = ground point under the car; mask_cx/cy = mask centroid",
+      "pixel_size": "side view frames 0-12: length (bumper to bumper) 468-493 px, height (roof-sign top to tyre contact) 118-146 px; front view frame 44: width 228 px, height 198 px; frame 71: width 393 px, height 263 px",
+      "occlusion": "in front of everything it overlaps (van, cyclist); a traffic-light pole (x~445-455) crosses it in frames 0-20; it never leaves the frame"
+    },
+    "van": {
+      "description": "white full-size cargo van (Chevrolet Express style) with brown/copper side windows, seen side-on, travelling left-to-right along the cross street behind the taxi",
+      "moves": true,
+      "visible_frames": "0-71 (all; front reaches x~2031 at frame 71, still inside the frame)",
+      "track": "tracks/van.csv",
+      "motion_summary": "starts from rest (frame 1->2 shift 1 px) and accelerates steadily to the right all clip long (image dx ~1 px/frame at frame 2, ~10 at 20, ~20 at 40, ~33 at 60, ~38-40 at 70-71); vertical position constant (roof row 471-477)",
+      "reference_point": "ref_x = centre of bbox (x0 = rear bumper, x1 = front bumper), ref_y = middle between roof and wheel-contact row. rear_edge_row520 = the most reliable per-frame position measure (rear body edge at image row 520)",
+      "pixel_size": "length 459 px (frames 0-6), 447-451 px (frames 36-46), 462 (66) -> 479 px (70-71) (perspective: longer when far off the image centre); height roof->tyre contact 167-173 px (median 169)",
+      "occlusion": "lower body/wheels behind the taxi frames 0-47; passes in front of the parked BMW ~frames 38-59; its wheels go behind the Mercedes roof ~frames 54-66; the cyclist rides in front of its side frames ~55-71; static traffic-light pole x~1905 in front at the end"
+    },
+    "cyclist": {
+      "description": "man on a black bicycle with white tyres, dark long-sleeve top and grey trousers, riding left-to-right along the cross street (side view, facing right)",
+      "moves": true,
+      "visible_frames": "0-71 (all); frames 0-11 only head/torso visible above the taxi",
+      "track": "tracks/cyclist.csv",
+      "motion_summary": "constant rightward image speed ~17.2-18.6 px/frame (slightly increasing), image y constant (head top ~512, tyre contact ~650)",
+      "reference_point": "ref_x, ref_y = centre of the rider+bike bounding box",
+      "pixel_size": "bike+rider box 135 px long (rear tyre to front tyre) x 138 px tall (head top to tyre contact), measured frames 29-38 (135-136 x 137-138), assumed constant (template scale ~1.00 all clip)",
+      "occlusion": "behind the taxi frames 0-~22 (frames 0-11 only upper body visible); passes in front of the BMW frames ~25-37; lower wheels partly behind the Mercedes roof frames ~39-60; in front of the van frames ~55-71"
+    },
+    "pedestrian": {
+      "description": "man in white tank top and grey/blue jeans with dark hair, walking on the near-left sidewalk, leftwards and slightly towards the camera",
+      "moves": true,
+      "visible_frames": "0-45 (box touches the left image edge from frame 22; gone after frame 45)",
+      "track": "tracks/pedestrian.csv",
+      "motion_summary": "walks left at ~2-4 px/frame image speed, feet row 777 -> 808 (approaching camera slowly)",
+      "reference_point": "ref_x = mask centroid x; ref_y = estimated pelvis row = y1 - 0.47*height. (Biased once cut by the left edge, frames >= 22)",
+      "pixel_size": "height head-top to feet 232 px (frame 0) .. 237-241 (frames 4-16) .. 247-253 (frames 20-32) (grows as he approaches); width 65-76 px (arm swing / stride)",
+      "occlusion": "a lamp post (x~118-140) is in front of him frames ~0-13; cut by the left image edge from frame 22"
+    },
+    "mercedes_sedan": {
+      "description": "dark plum/maroon Mercedes sedan seen from behind, plate 'ADM-5470', parked in the main road lane right of centre, nearest car to the camera",
+      "moves": false,
+      "visible_frames": "0-71",
+      "bbox_px": [1255, 609, 1524, 826],
+      "pixel_size": "width 270 px (incl. mirrors), height roof -> tyre contact 218 px (mask incl. shadow reaches y=857)",
+      "ground_contact_row": 826,
+      "notes": "static; occludes the van wheels and the cyclist's lower wheels when they pass behind it"
+    },
+    "bmw_green_far": {
+      "description": "green/white-ish BMW (E21 style) seen from the front, parked far up the main road, left lane",
+      "moves": false,
+      "visible_frames": "0-71 (covered by the van ~frames 38-59, overlapped by the cyclist ~25-37)",
+      "bbox_px": [1031, 497, 1142, 589],
+      "pixel_size": "width 112 px, height 93 px (roof -> tyre contact 589; mask incl. shadow to 591)"
+    },
+    "trash_bin_left": {"description": "green striped cylindrical trash bin on the near-left sidewalk", "moves": false, "bbox_px": [180, 675, 256, 786], "pixel_size": "77 x 112 px"},
+    "lamp_post_left_double": {"description": "dark double-lantern street lamp on the near-left sidewalk (pedestrian walks behind it)", "moves": false, "bbox_px": [20, 334, 239, 829], "pixel_size": "220 px wide (lantern arms), 496 px tall (top finial to base); pole x ~118-140"},
+    "lamp_post_right_edge": {"description": "double-lantern lamp at the right image edge (partly cut)", "moves": false, "bbox_px": [2070, 324, 2159, 859]},
+    "traffic_light_left_near": {"description": "traffic light on a pole at the left corner with signal heads + pedestrian signal (red man) box and a triangular sign on top; its pole x~445-455 crosses the taxi in frames 0-20", "moves": false, "bbox_px": [389, 213, 507, 696], "pixel_size": "119 x 484 px"},
+    "traffic_light_center": {"description": "traffic light (red lit) with triangular pedestrian-crossing sign, far left corner of the main road", "moves": false, "bbox_px": [761, 293, 808, 593], "pixel_size": "48 x 301 px"},
+    "traffic_light_right_far": {"description": "traffic light far right corner, with pedestrian signal", "moves": false, "bbox_px": [1570, 303, 1658, 597], "pixel_size": "89 x 295 px"},
+    "traffic_light_right_near": {"description": "large traffic light (red lit) with pedestrian-crossing triangle sign on top, near-right corner; pole x~1900-1910 is in front of the van/cyclist at the end", "moves": false, "bbox_px": [1861, 187, 1956, 722], "pixel_size": "96 x 536 px"},
+    "pedestrian_signal_box_left": {"description": "small pedestrian signal (red man) box on the left traffic-light pole at x~425-470, y~465-530; the van's rear edge passes behind it in frames 28-30", "moves": false},
+    "street_lamps_far": {"description": "rows of identical double-lantern lamps receding along both sidewalks of the main road", "moves": false},
+    "brick_planters": {"description": "low red-brick rectangular tree pits on the sidewalks (one near-left, x~110-385, y~690-735; several far ones)", "moves": false},
+    "road_and_sidewalks": {"description": "grey asphalt crossroads (main road receding to VP (1253,422), cross street left-right), beige sidewalks with curbs; no lane markings or zebra stripes painted", "moves": false}
+  },
+
+  "events": [
+    {"frame": 0, "time_s": 0.0, "event": "clip start: taxi moving right, cyclist moving right (behind taxi), pedestrian walking left, van at rest"},
+    {"frame": 1, "time_s": 0.0417, "event": "frame 1 duplicates frame 0 (no motion 0->1)"},
+    {"frame": 2, "time_s": 0.0833, "event": "van starts moving (1 px shift 1->2) and then accelerates continuously to the end; all movers' displacement starts 1->2"},
+    {"frame": 12, "time_s": 0.5, "event": "cyclist's bicycle emerges in front of/right of the taxi's front (lower body visible from ~12)"},
+    {"frame": 18, "time_s": 0.75, "event": "taxi starts turning toward the camera (box width starts shrinking from ~490 px)"},
+    {"frame": 22, "time_s": 0.9167, "event": "pedestrian's box reaches the left image edge (partly out of frame from here)"},
+    {"frame": 28, "time_s": 1.1667, "event": "van rear passes behind the static pedestrian-signal box (frames 28-30 interpolated)"},
+    {"frame": 41, "time_s": 1.7083, "event": "taxi image-x reaches its maximum (~819) - lateral image motion reverses (right -> slowly left)"},
+    {"frame": 44, "time_s": 1.8333, "event": "taxi seen essentially head-on (narrowest box, 228 px); from here it drives straight towards the camera"},
+    {"frame": 45, "time_s": 1.875, "event": "pedestrian last visible (tiny sliver); gone from frame 46"},
+    {"frame": 55, "time_s": 2.2917, "event": "cyclist starts overlapping the van's front in the image (cyclist in front)"},
+    {"frame": 71, "time_s": 2.9583, "event": "clip end; all of taxi, van, cyclist still in frame and moving"}
+  ],
+  "contacts": "no collisions or contacts between objects (overlaps are only in the image: depth ordering taxi < cyclist < van; Mercedes is in front of van wheels / cyclist wheels)",
+
+  "files": {
+    "tracks/taxi.csv": "per-frame taxi box/reference/extents",
+    "tracks/van.csv": "per-frame van box/reference/extents",
+    "tracks/cyclist.csv": "per-frame cyclist box/reference",
+    "tracks/pedestrian.csv": "per-frame pedestrian box/reference (frames 0-45)",
+    "tracks/_*.csv|json": "raw intermediate measurements (see notes.md)",
+    "background_final.png": "clean static background (movers removed)",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

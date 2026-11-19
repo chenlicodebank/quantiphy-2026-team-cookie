@@ -1,0 +1,106 @@
+{
+  "video": "simulation_0014.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 73,
+  "width": 1920,
+  "height": 1954,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (rendered; background pixels identical between frames, clean plate used for differencing worked with no shift)",
+    "view": "eye-level-ish view across a grass yard toward a timber barn; foreground tree trunk at left edge (x 0-~50) with a leafy branch across the top of the frame",
+    "perspective_cues": {
+      "ground_plane": "grass yard occupies y > ~1180 (barn base at y ~1183, cart wheel ground contact y ~1248); ground objects nearer the camera appear lower in the image",
+      "horizon": "not directly visible (hills/trees); far grass hill meets sky at y ~1110-1120 on the right (x ~1600-1920), so the horizon is near y ~1100-1150",
+      "vanishing_points": "barn side wall and the lean-to roof recede to the right; the barn front faces the camera almost squarely"
+    },
+    "focal_length": "unknown (estimate from depth_info + a known size when a question gives them)"
+  },
+  "objects": [
+    {
+      "name": "fur_ball",
+      "description": "black, hairy/fuzzy soft ball (deformable, looks like a black hairball / furry ball). The only moving object.",
+      "distinguishing": "near-black fuzzy blob; starts lodged on the tree branch at upper left, falls and lands on the grass in the lower left foreground",
+      "moves": true,
+      "visible_frames": "0-72 (all)",
+      "track": "tracks/fur_ball.csv",
+      "reference_point": "mask centroid (cx, cy); for a roughly symmetric ball this approximates the object's origin/centre",
+      "apparent_size_px": {
+        "on_branch_frames_0_14": "bbox ~265-285 x ~192-200, equivalent-circle diameter ~218-220 (left part over dark trunk, partly behind leaves)",
+        "at_rest_frames_50_72": "bbox x 230-669, y 1595-1901 (438-440 wide x 307 high), centroid (461.8, 1760.2), equivalent diameter ~331, mask major axis ~452 at ~159 deg, minor ~274 (bottom skirt may include contact shadow)",
+        "note": "growth from ~220 to ~330 px equivalent diameter means the ball ends ~1.5x closer to the camera than it started (if its size were unchanged); in flight the size is unreliable because the soft body stretches (frames 44-49)"
+      }
+    },
+    {
+      "name": "tree_foreground",
+      "description": "large tree: trunk along the left image edge, leafy branch across the top; the ball starts on this branch",
+      "moves": false,
+      "image_extent_px": "trunk x 0-~50 full height down to the ground; foliage covers y 0-~560 across the width; the branch holding the ball runs from the trunk (x~40, y~520) up-right",
+      "visible_frames": "0-72"
+    },
+    {
+      "name": "barn",
+      "description": "timber-framed barn with gabled roof, front facing the camera, centre-left background",
+      "moves": false,
+      "image_extent_px": {"roof_left_eave_x": 311, "right_lean_to_roof_x": 1100, "front_wall_x": [417, 961], "front_wall_width": 544,
+                           "roof_apex_y": "~570 (partly behind leaves)", "eave_y": 861, "ground_line_y": 1183,
+                           "total_height_apex_to_ground": "~613", "wall_height_eave_to_ground": "~322"},
+      "visible_frames": "0-72 (partly occluded by the ball in frames ~38-45)"
+    },
+    {
+      "name": "barn_door",
+      "description": "dark open doorway in barn front (with an open wooden door leaf to its left)",
+      "moves": false,
+      "image_extent_px": {"opening_x": [639, 728], "opening_y": [948, 1172], "width": 89, "height": 224,
+                           "door_leaf_x": [537, 630], "door_leaf_y": [950, 1172]}
+    },
+    {
+      "name": "barrels",
+      "description": "two wooden barrels side by side at barn front right of the doorway",
+      "moves": false,
+      "image_extent_px": {"pair_x": [800, 953], "y": [1097, 1192], "each_width": "~75", "height": "~95"}
+    },
+    {
+      "name": "flower_bush",
+      "description": "small white/pink flower bush at barn front left corner",
+      "moves": false,
+      "image_extent_px": {"x": [398, 481], "y": [1128, 1198]}
+    },
+    {
+      "name": "cart",
+      "description": "wooden hand cart / wagon with a large spoked wheel, right side, tilted with shafts on the ground",
+      "moves": false,
+      "image_extent_px": {"x": [1085, 1596], "y": [1017, 1248], "length_shaft_tip_to_box_end": 511, "height": 231,
+                           "wheel_x": [1335, 1527], "wheel_y": [1062, 1248], "wheel_diameter_w": 192, "wheel_diameter_h": 186,
+                           "wheel_hub": [1431, 1153]}
+    },
+    {
+      "name": "fence",
+      "description": "short wooden rail fence behind the cart",
+      "moves": false,
+      "image_extent_px": {"x": [1118, 1300], "y": [1047, 1184]}
+    },
+    {
+      "name": "barn_side_ladder_steps",
+      "description": "wooden steps/ladder leaning at the barn's right side",
+      "moves": false,
+      "image_extent_px": {"x_approx": [960, 1100], "y_approx": [990, 1185]}
+    },
+    {
+      "name": "sunlit_ground_patches_and_shadows",
+      "description": "yellow sunlit grass patches and tree shadows on the yard (lighting only, not objects)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball sagging slowly on the branch (centroid drifts down ~6 px over frames 0-14)", "frames": [0, 14], "times_s": [0.0, 0.583]},
+    {"event": "ball leaves the branch / clear fall begins (downward pixel speed rises above ~2-4 px/frame); not a sharp event", "frame": "~19 (range 17-21)", "time_s": "~0.79 (0.71-0.875)"},
+    {"event": "ball clears the branch, fully below it", "frame": "~34", "time_s": 1.417},
+    {"event": "ball passes in front of barn (left part)", "frames": [40, 45]},
+    {"event": "ball hits the ground (first contact, strongly squashed/stretched in frame 49)", "frame": "49-50", "time_s": "2.042-2.083"},
+    {"event": "ball at rest on the grass (no bounce); tiny settling changes at frames 60 and 64 (<1 px in centroid)", "frame": 50, "time_s": 2.083},
+    {"event": "end of video, ball still at rest", "frame": 72, "time_s": 3.0}
+  ]
+}

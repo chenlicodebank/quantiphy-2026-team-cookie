@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0141.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1508,
+  "question": "What is the height of the man in meters?",
+  "prior": "walking speed = 1.693m/s",
+  "depth_info": "t=0s, distance_man_camera = 4.15m   \nt=0.5s, distance_man_camera = 5.03m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

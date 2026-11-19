@@ -1,0 +1,44 @@
+{
+  "video": "simulation_0257.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 40,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (phase correlation of AC unit, window and table regions vs frame 0: |shift| <= 0.03 px in every frame)",
+    "view": "fronto-parallel view of a blue wall; table front edge is horizontal; falling motion is in a plane facing the camera"
+  },
+  "moving_objects": {
+    "potted_plant": {
+      "description": "small white flower pot (light grey rim band) with a pale yellow-green succulent/rosette on top; the only moving object",
+      "track_file": "tracks/potted_plant.csv",
+      "visible_frames": "0-39 (whole clip), never occluded",
+      "reference_point": "mask_cx, mask_cy = centroid of the segmented pot+plant; bbox_cx/bbox_cy = bbox centre. The pot bottom edge y1 is the most robust coordinate during the fall (white pot vs wall); top y0 loses a few px of pale leaf tips on the light wall in frames ~6-14",
+      "size_at_frame0_px": {"bbox_w": 47, "bbox_h_total_pot_plus_plant": 67, "pot_body_width": 46, "bbox": [1043, 26, 1089, 92]},
+      "size_resting_upright_px": {"note": "frame 15 (just landed, upright): bbox x 1044-1089, y 810-868 (h 59, leaf tips partly lost); frame 0 value 67 px is the better full height"},
+      "motion_summary": "hangs/starts at top centre (x~1066) at frame 0, falls straight down (x constant within 1 px) to the table top, lands at frame 15, then rocks side to side on its base without leaving the table (tilts right to max at frame 21, back through upright ~frame 26, tilts left to max ~frame 32, back through upright ~frame 38, tilting right again at frame 39)",
+      "fall_px": {"bottom_y_frame0": 92, "bottom_y_landed": 868, "drop_of_bottom_edge": 776, "centroid_y_frame0": 59.2, "centroid_y_frame15": 839.4}
+    }
+  },
+  "static_objects": {
+    "table": {"description": "long dark-wood/black-metal console table along the wall, glossy top that mirrors the pot", "top_back_edge_y": 865, "top_front_edge_y": 895, "front_wood_band_y": [895, 911], "apron_bottom_y": 927, "left_end_x": 518, "right_end_x": 1539, "length_px": 1021, "legs": "left leg x 680-704, right leg x ~1500-1507 (plus white metal trim to ~1535); legs run off the bottom of the frame", "pot_contact_y": 868, "visible": "0-39"},
+    "ac_unit": {"description": "white LG outdoor air-conditioner unit with a round fan grille, bottom-left, behind the table's left end", "left_x": 132, "right_x": 637, "top_y": 758, "bottom": "cut off by frame bottom (>=1080)", "visible_width_px": 505, "visible_height_px": 322, "fan_grille": "approx x 150-400, y 785-1065 (circular fan ~250 px dia)", "lg_logo_centre": [489, 830]},
+    "notebook_with_pen": {"description": "dark notebook with a silver/black pen lying on it, on the table left of the pot", "bbox": [890, 858, 969, 873], "length_px": 80, "height_px": 16},
+    "phone": {"description": "black smartphone lying flat on the table right of the pot", "bbox": [1141, 866, 1191, 876], "length_px": 51, "height_px": 11},
+    "window": {"description": "white-framed window in the side wall at the right edge", "x_range": [1634, 1750], "y_range": [0, 833]},
+    "wall": {"description": "textured blue wall background, lit brighter in the middle"}
+  },
+  "events": [
+    {"event": "start of fall (release)", "frame": 0, "t": 0.0, "note": "bottom-edge y steps: +4 px (0->1), +11 (1->2), +17 (2->3): starts essentially from rest at frame 0"},
+    {"event": "impact on table top", "frame": 15, "t": 0.625, "note": "frame 14 bottom y=770, frame 15 bottom y=868 (resting on table); contact between frames 14 and 15, at or just before frame 15"},
+    {"event": "no bounce", "note": "bottom stays at y 867-868 from frame 15 to 39; the pot rocks on its base instead"},
+    {"event": "rocking: max tilt right (centroid x max 1082.3)", "frame": 21, "t": 0.875},
+    {"event": "rocking: passes upright", "frame": 26, "t": 1.083},
+    {"event": "rocking: max tilt left (centroid x min 1050.6)", "frame": 32, "t": 1.333},
+    {"event": "rocking: passes upright again", "frame": 38, "t": 1.583}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0030.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 29.1532,
+ "frames": 42,
+ "duration_s": 1.4407,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3007,
+  "question": "What is the average acceleration of the boat over 0.5 s to 1.37 s in m/s^2?",
+  "prior": "length of the speedboat = 3.2 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

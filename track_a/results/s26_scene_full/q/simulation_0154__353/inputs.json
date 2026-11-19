@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0154.mp4",
+ "video_source": "simulation",
+ "video_type": "V2SC",
+ "fps": 24.0,
+ "frames": 48,
+ "duration_s": 2.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 353,
+  "question": "What is the length of the shark in meters?",
+  "prior": "speed of the shark = 7 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

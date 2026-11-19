@@ -1,0 +1,18 @@
+{
+ "video": "captured_0031s.mp4",
+ "video_source": "lab",
+ "video_type": "S3MS",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2526,
+  "question": "What is the diameter of the white ball in cm?",
+  "prior": "diameter of the tennis ball = 6.7cm",
+  "depth_info": "t=1.6s, distance_tennis_ball_camera = 1.1900m\nt=1.6s, distance_white_ball_camera = 0.9940m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "video": "internet_0008.mp4",
+ "source": "internet",
+ "scene": "2D",
+ "fps": 30.0,
+ "frames": 529,
+ "width": 960,
+ "height": 540,
+ "time_convention": "t = frame/30; frame 0 at t=0",
+ "camera": {
+  "motion": "static (tripod, long telephoto). Horizon row = 437 px in all 529 frames (no tilt/shake). No fixed background landmark exists for a horizontal-pan check; sea texture drifts ~-0.2 px/frame (wave motion, not camera) and the sun drifts +0.10 px/frame right, -0.05 px/frame up (consistent with sun's own motion). Treat object pixel motion as motion relative to the scene.",
+  "horizon_row_px": 437,
+  "per_frame_shift_file": "tracks/camera.csv"
+ },
+ "objects": {
+  "sailboat": {
+   "desc": "dark silhouette of a two-masted sailing yacht (ketch: tall main mast + shorter mizzen on the left/stern side, three sails) on the horizon; the only large boat",
+   "moves": true,
+   "visible_frames": [
+    0,
+    528
+   ],
+   "direction": "left to right (+x), bow points right",
+   "reference_point": "bbox centre (bbox_cx,bbox_cy); also mask centroid",
+   "length_px_bbox_median": 105.0,
+   "length_px_bbox_range": [
+    101,
+    137
+   ],
+   "hull_length_px_median_(bottom 13 rows)": 101.0,
+   "height_px_mast_top_to_hull_bottom_median": 123.0,
+   "bbox_cx_first_last": [
+    289.0,
+    855.0
+   ],
+   "bbox_cx_net_shift_px": 566.0,
+   "mean_px_per_frame_x_(linear fit, info only)": 1.075,
+   "vertical_motion": "none beyond +-2 px jitter (bbox y0 ~393-398, y1 ~515-520)",
+   "track": "tracks/sailboat.csv"
+  },
+  "motorboat": {
+   "desc": "small dark motor boat / RIB with 2-3 people, low in the frame (y~510-539, in front of the sailboat), leaving a dark wake line",
+   "moves": true,
+   "visible_frames": [
+    224,
+    351
+   ],
+   "enters": "left frame edge at frame ~222-224",
+   "exits": "bottom-right frame edge, frames ~345-352 (cut by bottom edge from frame 316 on)",
+   "direction": "left to right, drifting slightly down in the image (y 520 -> 532)",
+   "reference_point": "bbox centre / mask centroid",
+   "length_px_median_fully_visible": 36.0,
+   "height_px_median_fully_visible": 17.0,
+   "mean_px_per_frame_x_frames_250_312_(info only)": 7.59,
+   "gap_frames": [
+    313,
+    314,
+    315
+   ],
+   "track": "tracks/motorboat.csv"
+  },
+  "sun": {
+   "desc": "large orange solar disc, partly crossed by a dark cloud band",
+   "moves": "slowly (+0.10 px/frame in x, rising -0.05 px/frame in y)",
+   "visible_frames": [
+    0,
+    528
+   ],
+   "diameter_px": 161,
+   "diameter_note": "horizontal chord, frames 0-280; top limb hidden by cloud early on",
+   "centre_first_last": [
+    [
+     492.0,
+     135.0
+    ],
+    [
+     547.0,
+     107.0
+    ]
+   ],
+   "track": "tracks/sun.csv"
+  },
+  "birds": {
+   "desc": "a few tiny dark specks (birds) in the sky, e.g. near (315,347) at frame 0 and (875,290) at frame 176; 2-4 px, not tracked",
+   "moves": true
+  },
+  "horizon": {
+   "desc": "sea/sky boundary, straight and level",
+   "moves": false,
+   "row_px": 437,
+   "spans_x": [
+    0,
+    959
+   ]
+  },
+  "sea": {
+   "desc": "sea surface below row 437 with horizontal wave bands",
+   "moves": "texture only"
+  }
+ },
+ "events": [
+  {
+   "event": "sailboat moving at the start, keeps a steady rightward motion to the end",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "motorboat enters at left edge",
+   "frame": 224,
+   "t": 7.467
+  },
+  {
+   "event": "motorboat fully in frame",
+   "frame": 232,
+   "t": 7.733
+  },
+  {
+   "event": "motorboat passes just below/in front of the sailboat (sailboat bbox x ~600-700)",
+   "frame": 316,
+   "t": 10.533
+  },
+  {
+   "event": "motorboat starts to be cut by the bottom frame edge",
+   "frame": 316,
+   "t": 10.533
+  },
+  {
+   "event": "motorboat leaves the frame (bottom-right)",
+   "frame": 352,
+   "t": 11.733
+  },
+  {
+   "event": "end of clip, sailboat still in frame at x~850",
+   "frame": 528,
+   "t": 17.6
+  }
+ ]
+}

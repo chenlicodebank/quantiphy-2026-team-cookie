@@ -1,0 +1,118 @@
+{
+ "video": "simulation_0114.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.002401,
+ "frames": 80,
+ "width": 1080,
+ "height": 1920,
+ "time_convention": "t = frame / fps, frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "max_background_shift_px": 0.1,
+  "file": "tracks/camera_shift.csv",
+  "view": "top-down (bird's-eye) view of a snowy mountain slope; the plane moves in a plane facing the camera"
+ },
+ "objects": [
+  {
+   "name": "plane",
+   "description": "small yellow/orange toy-like aeroplane seen from above (straight wing, tail stabiliser, nose pointing down the image)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    77
+   ],
+   "fully_visible_frames": [
+    0,
+    75
+   ],
+   "track": "tracks/plane.csv",
+   "reference_point": "ref_x, ref_y (blur-corrected bbox centre = assumed origin)",
+   "rest_size_px_frame0": {
+    "wingspan_x": 168,
+    "length_nose_to_tail_y": 108,
+    "bbox": [
+     587,
+     106,
+     755,
+     214
+    ],
+    "wing_bar_thickness_y": 24,
+    "tail_stabiliser_span_x": 92
+   },
+   "position_frame0_px": [
+    671.0,
+    160.5
+   ]
+  },
+  {
+   "name": "dark_rock_outcrop_large",
+   "moves": false,
+   "description": "large dark rock band near top-centre/right",
+   "bbox_px_approx": [
+    516,
+    220,
+    840,
+    550
+   ],
+   "note": "plane passes over it, frames ~0-35"
+  },
+  {
+   "name": "dark_rock_small",
+   "moves": false,
+   "description": "small dark rock spire on right side below the big outcrop",
+   "bbox_px_approx": [
+    860,
+    570,
+    980,
+    770
+   ]
+  },
+  {
+   "name": "crevasses",
+   "moves": false,
+   "description": "blue crevasse cracks at lower left/centre",
+   "bbox_px_approx": [
+    170,
+    1640,
+    680,
+    1920
+   ]
+  },
+  {
+   "name": "snow_ridge_edge",
+   "moves": false,
+   "description": "bright snow cornice edge running from left (y~960-1000) to lower right; plane crosses it around y~1150 (frame ~57)"
+  },
+  {
+   "name": "pale_backdrop_top",
+   "moves": false,
+   "description": "light grey angular rendered backdrop at the very top, y < ~200"
+  }
+ ],
+ "events": [
+  {
+   "event": "plane starts from rest / motion start",
+   "frame": 0,
+   "time_s": 0.0,
+   "note": "quadratic fit of ref_y over frames 2-40 puts zero velocity at frame -0.04; frames 0-1 show the same position (sub-pixel move)"
+  },
+  {
+   "event": "plane begins leaving bottom edge (nose cut)",
+   "frame": 76,
+   "time_s": 3.1663
+  },
+  {
+   "event": "plane mostly out of frame (only tail visible)",
+   "frame": 77,
+   "time_s": 3.208
+  },
+  {
+   "event": "plane gone",
+   "frame": 78,
+   "time_s": 3.2497
+  }
+ ],
+ "motion_summary": "plane moves straight down the image (+y), x constant at ~671 px, speeding up the whole time; no bounce or turn",
+ "notes": "notes.md"
+}

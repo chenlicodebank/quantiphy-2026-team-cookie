@@ -1,0 +1,119 @@
+{
+  "video": "simulation_0238.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (side view; motion in a plane roughly parallel to the image, along the front wall of a house)",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1080, 1920],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; time t -> frame round(t*24)",
+  "units": "pixels (x right, y down, full-resolution 1080x1920 image) and seconds; no metric scale anywhere",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the upper house (y 300-830) against frame 0: |shift| <= 0.01 px in every frame",
+    "perspective": "frontal view of the house facade; both horses walk on the same ground line just in front of the brick wall (hooves at y ~1041-1050 in every frame), i.e. effectively at one depth -> one px-to-metre scale applies to both. Far grass edge / horizon at y ~985-995 at the image sides (behind the house)."
+  },
+  "objects": [
+    {
+      "name": "horse_tan",
+      "description": "light tan / cream (buckskin-dun) horse with darker tail, the RIGHT-hand and LARGER of the two horses; walks to the right (+x) the whole clip",
+      "moves": true,
+      "visible_frames": "0-49 (all), never occluded",
+      "track_file": "tracks/horse_tan.csv",
+      "reference_point": "ref_x, ref_y = centroid of the torso blob (mask opened with 31 px disc: legs, tail, most of head removed) - proxy for the rig root/body centre",
+      "ref_first_frame0_px": [475.0, 957.8],
+      "ref_last_frame49_px": [783.8, 948.8],
+      "net_ref_dx_px_frames_0_to_49": 308.8,
+      "ref_x_step_px_per_frame_median": 6.4,
+      "bbox_length_px_nose_to_tail": {"median": 228.5, "p10": 218, "p90": 237, "min": 213, "max": 242},
+      "bbox_height_px_ear_or_head_top_to_hoof": {"median": 169, "p10": 164, "p90": 172, "min": 156, "max": 181},
+      "torso_length_px_rump_to_chest_incl_part_of_neck": {"median": 208, "p10": 194, "p90": 218},
+      "hoof_line_y_px": "1043-1051 (median 1048)",
+      "top_y_px": "867-890 (median 880)"
+    },
+    {
+      "name": "horse_brown",
+      "description": "chestnut / reddish-brown horse with white socks, the LEFT-hand and SMALLER of the two horses; walks to the right (+x) more slowly; its head renders as a dull grey-brown patch",
+      "moves": true,
+      "visible_frames": "0-49 (all), never occluded (its left part is over the white sky/background left of the house in early frames)",
+      "track_file": "tracks/horse_brown.csv",
+      "reference_point": "same definition as horse_tan",
+      "ref_first_frame0_px": [233.3, 950.9],
+      "ref_frame48_px": [384.7, 958.6],
+      "ref_last_frame49_px": [236.3, 956.1],
+      "net_ref_dx_px_frames_0_to_48": 151.4,
+      "ref_x_step_px_per_frame_median": 3.0,
+      "bbox_length_px_nose_to_tail": {"median": 183.5, "p10": 168, "p90": 196, "min": 163, "max": 206},
+      "bbox_height_px_ear_or_head_top_to_hoof": {"median": 159.5, "p10": 154, "p90": 164, "min": 147, "max": 166},
+      "torso_length_px": {"median": 164, "p10": 153, "p90": 182},
+      "hoof_line_y_px": "1039-1047 (median 1043)",
+      "top_y_px": "879-893 (median 884)",
+      "warning": "between frame 48 and frame 49 the brown horse jumps back ~148 px to (almost) its frame-0 position (animation loop reset). Treat frame 49 as a discontinuity, not motion."
+    },
+    {
+      "name": "house",
+      "description": "two-storey half-timbered house filling the image centre: brick ground floor with three arched windows, jettied timber-framed upper storey with a central wooden door/shutter and two small shutters, gable with wooden shutter, brown roof",
+      "moves": false,
+      "visible_frames": "0-49",
+      "brick_wall_ground_floor_px": {"x0": 251, "x1": 830, "width": 580, "y_top": 838, "y_base": 1045, "height_approx": 207},
+      "upper_storey_px": {"x0": 200, "x1": 880, "width": 681, "y_top_approx": 625, "y_bottom_approx": 835},
+      "gable_eave_corners_px": [[180, 620], [900, 620]],
+      "roof_px": {"x0": 221, "x1": 858, "ridge_line_y_approx": 295},
+      "apex_px": [540, 262],
+      "overall_height_px_apex_to_wall_base": 783,
+      "note": "edges from intensity steps on frame 49, +-3 px; apex/roof top +-8 px"
+    },
+    {
+      "name": "window_left", "description": "arched window, left of brick wall", "moves": false,
+      "bbox_px": {"x0": 271, "x1": 338, "y0": 845, "y1": 952}, "size_px": {"width": 67, "height": 107},
+      "note": "brown horse passes in front of it the whole clip"
+    },
+    {
+      "name": "window_middle", "description": "arched window, centre of brick wall", "moves": false,
+      "bbox_px": {"x0": 507, "x1": 572, "y0": 845, "y1": 952}, "size_px": {"width": 65, "height": 107}
+    },
+    {
+      "name": "window_right", "description": "arched window, right of brick wall", "moves": false,
+      "bbox_px": {"x0": 745, "x1": 810, "y0": 845, "y1": 952}, "size_px": {"width": 65, "height": 107}
+    },
+    {
+      "name": "upper_door", "description": "large wooden plank door/shutter in the middle of the upper storey", "moves": false,
+      "bbox_px_approx": {"x0": 463, "x1": 617, "y0": 630, "y1": 790}
+    },
+    {
+      "name": "gable_shutter", "description": "wide wooden shutter in the gable", "moves": false,
+      "bbox_px_approx": {"x0": 425, "x1": 650, "y0": 485, "y1": 580}
+    },
+    {
+      "name": "small_shutters", "description": "two small wooden shutters left and right on the upper storey", "moves": false,
+      "bbox_px_approx": [{"x0": 255, "x1": 347, "y0": 685, "y1": 740}, {"x0": 735, "x1": 825, "y0": 685, "y1": 740}]
+    },
+    {
+      "name": "red_flower_near_left", "description": "small red flower in the grass, left-centre", "moves": false,
+      "centre_px": [325, 1247], "size_px": {"width": 24, "height": 14}
+    },
+    {
+      "name": "red_flower_front_right", "description": "small red flower in the foreground grass, right", "moves": false,
+      "centre_px": [972, 1658], "size_px": {"width": 22, "height": 28}
+    },
+    {
+      "name": "grass_ground", "description": "grass meadow covering the lower ~45% of the frame; darker shadow band of the house just in front of the wall (y ~1050-1100)", "moves": false
+    },
+    {
+      "name": "sky", "description": "blue sky with large white clouds, above/around the house", "moves": false
+    }
+  ],
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "both horses already walking right (+x) at clip start; no start-from-rest"},
+    {"frame": 49, "time": 2.0417, "event": "tan horse still walking right at clip end (no stop)"},
+    {"frame": 48, "time": 2.0, "event": "last frame of the brown horse's continuous walk (ref_x 384.7)"},
+    {"frame": 49, "time": 2.0417, "event": "brown horse jumps back ~148 px to its starting pose/position (animation loop reset)"},
+    {"event": "no direction changes, contacts, impacts or bounces; the horses never touch or overlap (bbox gap brown front edge -> tan rear edge: 55 px at frame 0, growing to ~200 px at frame 48, since the tan horse is faster)"}
+  ],
+  "files": {
+    "tracks/horse_tan.csv": "per-frame track, 50 rows",
+    "tracks/horse_brown.csv": "per-frame track, 50 rows (frame 49 after loop reset)",
+    "notes.md": "method, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

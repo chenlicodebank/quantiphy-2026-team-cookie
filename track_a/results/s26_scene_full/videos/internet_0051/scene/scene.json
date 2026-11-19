@@ -1,0 +1,66 @@
+{
+  "video": "internet_0051.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 50,
+  "duration_s": 1.6667,
+  "image_size": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "coordinates": "pixels, x right, y down. '_bg' columns = frame-0 background coordinates (camera pan removed); '_img' = raw image coordinates",
+  "camera": {
+    "motion": "slow smooth pan following the rider (content drifts right); not static",
+    "pan_total_px": {"dx": 13.96, "dy": -0.08, "over_frames": "0-49"},
+    "pan_rate_px_per_frame": {"dx_mean": 0.285, "dy": "rises to +1.6 at frame ~22 then returns to ~0 by frame 49"},
+    "per_frame_shift": "scene/camera_shift.json (4 static patches) and pan_dx/pan_dy columns in tracks/rider_scooter.csv (mean of patches)",
+    "patch_spread_px": "patches disagree by up to ~3 px at frame 49 (12.4 to 15.6) - parallax/slight zoom; pan is <2% of the rider's motion"
+  },
+  "moving_objects": [
+    {
+      "name": "rider_scooter",
+      "description": "Person (grey-blue long-sleeve top, dark trousers, dark cap, face blurred, dark bag on right hip) standing on a black kick e-scooter, riding right-to-left along the lane in front of the parked cars",
+      "visible_frames": "0-49 (all)",
+      "track": "scene/tracks/rider_scooter.csv",
+      "reference_point": "bbox centre of rider+scooter mask (cx_bg, cy_bg)",
+      "direction": "-x (leftward), nearly horizontal; cy varies only +/-8 px",
+      "position_frame0_bg": {"cx": 1414.5, "cy": 715.5, "bbox": [1320, 554, 1509, 877]},
+      "position_frame49_bg": {"cx": 551.5, "cy": 716.0, "bbox": [454, 552, 649, 880]},
+      "net_displacement_px_bg": -863,
+      "mean_per_frame_dx_px": -17.61,
+      "per_frame_dx_first10_last10": [-17.55, -17.85],
+      "sizes_px": {
+        "scooter_length_wheel_to_wheel": {"mask_median": 188, "frames0_9": 190, "frames40_49": 192, "visual_frame0": 192, "visual_frame49": 198, "note": "mask tends to lose 1-6 px of the dark tyre edges; visual values from zoomed grid views"},
+        "rider_plus_scooter_height_cap_to_wheel_bottom": 322,
+        "rider_height_cap_to_shoe_soles": "~300 (frame 0: cap top y 554, soles ~853)",
+        "wheel_diameter": "~45 (rough)",
+        "handlebar_height_above_ground": "~200 (bar at y~675, ground y~877)"
+      },
+      "apparent_size_trend": "length grows ~3% (190 -> ~196) and bottom y 877 -> 880 over the clip: rider drifts slightly toward camera; treat as planar"
+    }
+  ],
+  "static_objects_frame0_bg": [
+    {"name": "blue_hatchback_subaru", "desc": "dark blue Subaru, front-facing, left of Jeep", "bbox": [75, 610, 455, 805]},
+    {"name": "brown_jeep_suv", "desc": "brown/bronze Jeep Grand Cherokee, rear view, plate BCS...", "bbox": [452, 572, 725, 800], "rear_width_px": 248, "height_px": 228},
+    {"name": "silver_car_far_left", "desc": "light silver car cut by left edge", "bbox": [0, 610, 160, 790]},
+    {"name": "white_suv_behind_tree", "desc": "white Mercedes-like SUV right of tree, partly hidden", "bbox": [1035, 585, 1190, 735]},
+    {"name": "mint_green_fiat500", "desc": "pale green Fiat 500, rear view", "bbox": [1095, 600, 1355, 798], "rear_width_px": 215, "height_px": 198},
+    {"name": "white_hyundai_elantra", "desc": "white Hyundai Elantra sedan, rear 3/4 view, plate 9MRB967", "bbox": [1365, 610, 1762, 800], "rear_face_width_px": 265},
+    {"name": "black_sedan_right", "desc": "black car cut by right edge", "bbox": [1700, 605, 1920, 805]},
+    {"name": "tree_in_planter", "desc": "leafy tree in the curbed planter island at image centre", "bbox": [740, 70, 1125, 790]},
+    {"name": "planter_curb_island", "desc": "concrete curb island around tree", "bbox": [755, 700, 1100, 835], "length_px": 345},
+    {"name": "light_pole_centre", "desc": "pole behind the tree, top cut by frame", "x": 923, "y_range": [0, 125]},
+    {"name": "light_pole_right", "desc": "lamp pole with head", "x": 1345, "y_range": [255, 580], "height_px": 325},
+    {"name": "light_pole_left", "desc": "lamp pole", "x": 233, "y_range": [260, 560], "height_px": 300},
+    {"name": "parking_signs", "desc": "small white signs at x~232,y~520 and x~1347,y~540", "bbox_px": "~15x30 each"},
+    {"name": "palm_trees", "desc": "palms at right, x 1420-1920, crowns y 220-500"},
+    {"name": "building_right", "desc": "building with red tile roof at right edge, x>1600, y 140-590"},
+    {"name": "foreground_dark_object_right_edge", "desc": "out-of-focus dark object near camera at right edge (bike/railing part)", "bbox": [1850, 690, 1920, 1075]},
+    {"name": "asphalt_lane", "desc": "dark asphalt, rider's ground line y ~877; parking-line stripe at x 320-400, y 805-840"}
+  ],
+  "events": [
+    {"event": "rider already moving at frame 0 and still moving at frame 49; no start/stop, no direction change", "frames": "0-49"},
+    {"event": "rider passes in front of the tree/planter (centre x ~930)", "frame": 27, "t": 0.9},
+    {"event": "rider passes in front of the Jeep", "frames": "40-49"}
+  ],
+  "files": {"notes": "scene/notes.md", "track": "scene/tracks/rider_scooter.csv", "camera": "scene/camera_shift.json", "scripts": "scene/scripts/"}
+}

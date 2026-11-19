@@ -1,0 +1,54 @@
+{
+ "video": "simulation_0216_segmented.mp4",
+ "source": "segmentation (Blender render with background replaced by white)",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "image_size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels (x right, y down, full-resolution image coordinates) and seconds; no metric scale recorded",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of the static upper scene between consecutive frames: max |dx| 0.20 px, max |dy| 0.06 px",
+  "perspective": "side-on view of a row of furniture; 2D scene, cat walks in a plane parallel to the image; cat apparent size constant (bbox length 277-323 px, height 198-227 px, mask area 19.3k-23.2k px, no trend)"
+ },
+ "moving_objects": {
+  "cat": {
+   "description": "black cat with grey/tan lower legs and paws and a grey muzzle; walks left to right along the floor in front of the bench and the TV stand; the only moving object",
+   "visible_frames": [0, 49],
+   "occluded": "never (it is in front of all furniture); never touches image edges",
+   "track_file": "tracks/cat.csv",
+   "recommended_reference_point": "dark_cx, dark_cy (centroid of the black body columns: torso+head, no tail/legs) or cx, cy (centroid of the full mask); both move ~17.7 px/frame horizontally with little vertical drift",
+   "position_frame0_px": {"cx": 380.4, "cy": 924.5, "dark_cx": 377.4, "dark_cy": 922.5, "bbox": [226, 797, 528, 1023]},
+   "position_frame49_px": {"cx": 1244.6, "cy": 926.0, "dark_cx": 1250.9, "dark_cy": 924.5, "bbox": [1094, 807, 1385, 1017]},
+   "net_displacement_frame0_to_49_px": {"cx": 864.2, "dark_cx": 873.6, "vertical": "about +1.5 (none)"},
+   "per_frame_x_step_px": {"cx_mean": 17.64, "cx_sd": 2.74, "dark_cx_mean": 17.83, "dark_cx_sd": 3.03, "first_half_vs_second_half_dark_cx": [17.88, 17.78]},
+   "size_px": {
+    "bbox_length_tail_tip_to_nose_median": 294.5, "bbox_length_p10_p90": [283, 309],
+    "bbox_height_tail_tip_to_paws_median": 219, "bbox_height_p10_p90": [210, 224],
+    "body_length_dark_columns_median": 260, "body_length_note": "columns with >= 35 px of black fur: rump to head, excludes tail and thin legs",
+    "top_of_tail_y_median": 800.5, "bottom_of_paws_y_median": 1021,
+    "body_top_y_approx": 880, "body_bottom_y_approx": 965, "shoulder_height_body_top_to_paws_approx": 140
+   }
+  }
+ },
+ "static_objects_file": "static_objects.json",
+ "static_objects": {
+  "bench": {"desc": "low slatted wooden bench/table, far left; cat starts in front of its right half", "bbox": [26, 779, 491, 991], "length_px": 466, "height_px": 213, "centre": [258.5, 885.0]},
+  "tv_stand": {"desc": "long wooden TV console with black metal base, centre; cat walks in front of it from ~frame 10 on", "bbox": [651, 777, 1422, 988], "length_px": 772, "height_px": 212, "centre": [1036.5, 882.5]},
+  "tv": {"desc": "black flat-screen TV on the stand", "bbox": [814, 529, 1212, 758], "width_px": 399, "height_px": 230, "centre": [1013.0, 643.5]},
+  "vase": {"desc": "white/grey patterned vase, left end of the stand", "bbox": [682, 575, 783, 790], "width_px": 102, "height_px": 216, "centre": [732.5, 682.5]},
+  "lamp": {"desc": "table lamp with white pleated shade and copper base, right end of the stand", "bbox": [1243, 503, 1448, 789], "width_px": 206, "height_px": 287, "centre": [1345.5, 646.0], "shade_width_px_approx": 206, "shade_y_range": [503, 608]},
+  "mirror": {"desc": "tall wooden-framed floor mirror leaning slightly, far right", "bbox": [1580, 390, 1845, 967], "width_px": 266, "height_px": 578, "centre": [1712.5, 678.5]},
+  "floor": "not visible (white replaced background); paws bottom at y ~1021 gives the floor line under the cat; bench feet ~991, stand base ~988 (furniture sits slightly further back)"
+ },
+ "events": [
+  {"frame": 0, "t": 0.0, "event": "video starts with the cat already walking (in front of the bench, centre x ~380)"},
+  {"frame": 8, "t": 0.333, "event": "cat's nose (bbox x1) passes the left end of the TV stand (x 651); x1 = 650 at frame 7, 671 at frame 8"},
+  {"frame": 25, "t": 1.042, "event": "cat's tail tip (bbox x0) clears the left end of the TV stand (x0 = 649 at frame 24, 655 at frame 25); cat fully in front of the stand from here"},
+  {"frame": 49, "t": 2.042, "event": "video ends with the cat still walking (centre x ~1245, nose x ~1385, i.e. near the right end of the stand at 1422)"},
+  {"note": "no start/stop, bounce, impact or direction change: steady left-to-right walk throughout; per-frame steps fluctuate with the gait"}
+ ],
+ "files": {"notes": "notes.md", "track": "tracks/cat.csv", "static": "static_objects.json", "scripts": "scripts/"}
+}

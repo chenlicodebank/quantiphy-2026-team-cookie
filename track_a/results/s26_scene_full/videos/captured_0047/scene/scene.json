@@ -1,0 +1,204 @@
+{
+ "video": "captured_0047.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame_i": "t = i / 24",
+ "camera": {
+  "motion": "static (background phase-correlation shift < 0.2 px over all frames; tracks/camera_shift.csv)",
+  "intrinsics_from_benchmark_convention": {
+   "focal_px": 762.8,
+   "cx": 640,
+   "cy": 360,
+   "note": "Orbbec Femto Mega, HFOV 80 deg, f = 0.5959 * 1280; not measured from this video"
+  },
+  "image_artifacts": "background outside person and ball is artificially blurred (SAM2 demo 'Modified with Segment Anything 2 Demo' watermark bottom-right, x~1035-1275,y~698-714); face blurred/greyed; rows y>=~712 are a bright encoding strip, treat y~711 as the effective bottom edge",
+  "perspective": {
+   "description": "camera looks into a room corner, roughly level, slightly downward; floor occupies y>~480",
+   "back_corner_floor_point_px": [
+    450,
+    485
+   ],
+   "back_wall_floor_line_px": [
+    [
+     450,
+     485
+    ],
+    [
+     1080,
+     572
+    ]
+   ],
+   "left_wall_floor_line_px": [
+    [
+     450,
+     485
+    ],
+    [
+     0,
+     600
+    ]
+   ],
+   "vertical_room_corner_x_px": 450,
+   "horizon_note": "floor lines of two perpendicular walls; horizon not directly visible; both floor lines slope down away from the corner so the camera is above floor level looking slightly down. Values read by eye from a gridded frame (+-5 px), background blurred."
+  }
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "desc": "large grey/purple-grey exercise (gym) ball, matte with specular highlights; the only rolling object",
+   "moves": true,
+   "visible_frames": "0-46 (46 only a sliver at bottom-left; fully gone 47-48)",
+   "track": "tracks/ball.csv",
+   "reference_point": "cx,cy = centre of circle fitted to the mask outline (visible centre of the sphere); use cx_fixedR,cy_fixedR for frames >=38 where the bottom is cut off",
+   "static_phase": {
+    "frames": "0-13",
+    "centre_px": [
+     566.2,
+     495.0
+    ],
+    "diameter_px": 113.9,
+    "bbox": [
+     510,
+     438,
+     621,
+     552
+    ],
+    "note": "held by the person's hands, upper-left/right rim partly covered by hands/forearms"
+   },
+   "apparent_size_change": "diameter 113.9 px (frames 0-13) -> 140 (21) -> 164 (26) -> 185 (29) -> 204 (32) -> ~248 (36) -> ~275-290 (38) -> ~310-330 (40); 1/diameter is close to linear in frame for 17-33 (ball approaching camera)"
+  },
+  {
+   "name": "person",
+   "desc": "person (long dark hair, black top and black trousers, white sneakers, face blurred) squatting against the back wall in the corner, behind the ball; pushes the ball toward the camera then raises the arms",
+   "moves": "body stays in place (squatting); arms move",
+   "visible_frames": "0-48",
+   "track": "tracks/person.csv (dark clothing+hair mask; excludes bare forearms/hands and white shoes)",
+   "full_extent_frame45_px": {
+    "head_top_y": 348,
+    "shoe_bottom_y": 540,
+    "height_px": 192,
+    "x_elbow_to_elbow": [
+     522,
+     645
+    ],
+    "note": "squatting height incl. shoes, by eye on a 3x zoomed grid, +-3 px"
+   }
+  },
+  {
+   "name": "tv_screen",
+   "desc": "black wall-mounted screen/monitor high on back wall, top cut by frame",
+   "moves": false,
+   "bbox_px": [
+    590,
+    0,
+    850,
+    190
+   ],
+   "width_px": 260,
+   "visible_height_px": 190
+  },
+  {
+   "name": "left_stand",
+   "desc": "grey tripod/A-frame light stand left of the person near the room corner",
+   "moves": false,
+   "apex_px": [
+    470,
+    180
+   ],
+   "feet_span_x_px": [
+    400,
+    535
+   ],
+   "feet_y_px": 490,
+   "height_px": 310
+  },
+  {
+   "name": "right_stand",
+   "desc": "grey tripod/A-frame stand on the right side of the room",
+   "moves": false,
+   "apex_px": [
+    975,
+    115
+   ],
+   "feet_px": [
+    [
+     870,
+     520
+    ],
+    [
+     1080,
+     640
+    ]
+   ],
+   "height_px": 450
+  },
+  {
+   "name": "right_partition",
+   "desc": "near grey wall/partition panel at right edge of image",
+   "moves": false,
+   "x_range_px": [
+    1100,
+    1280
+   ]
+  },
+  {
+   "name": "walls_and_floor",
+   "desc": "grey padded wall panels (vertical seams), white upper wall, grey floor with dark baseboard; small red/orange marks on floor at left (x~150-300, y~550-600)",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "ball held still by squatting person",
+   "frames": "0-13",
+   "t": "0-0.542"
+  },
+  {
+   "event": "push starts (ball centre/diameter start changing)",
+   "frame": 14,
+   "t": 0.583,
+   "note": "first clear change at frame 15 (t=0.625)"
+  },
+  {
+   "event": "release: hands leave the ball (arms raised)",
+   "frame": 18,
+   "t": 0.75,
+   "note": "+-1 frame; hands still touching at 17"
+  },
+  {
+   "event": "ball rolls on floor toward camera and to the left (image down-left)",
+   "frames": "18-46"
+  },
+  {
+   "event": "ball bottom first touches the bottom image edge",
+   "frame": 30,
+   "t": 1.25
+  },
+  {
+   "event": "ball centre leaves the image (cy_fixedR > 711)",
+   "frame": 38,
+   "t": 1.583,
+   "note": "free fit cy reaches 707 at 38, 726 at 39"
+  },
+  {
+   "event": "ball last visible (sliver)",
+   "frame": 46,
+   "t": 1.917
+  },
+  {
+   "event": "person arms: on ball 0-17, raised 18-~40, lowered/folded across knees ~41-48"
+  }
+ ],
+ "files": {
+  "tracks/ball.csv": "ball per frame",
+  "tracks/ball_pass1.csv": "first-pass RANSAC circle on Canny edges (noisier, superseded)",
+  "tracks/person.csv": "person dark-clothing mask per frame",
+  "tracks/camera_shift.csv": "background shift per frame",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts"
+ }
+}

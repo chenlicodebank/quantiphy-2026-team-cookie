@@ -1,0 +1,249 @@
+{
+ "video": "captured_0035bx.mp4",
+ "source": "lab (captured, background replaced by white via SAM2 segmentation)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame_i": "i / 24",
+ "camera": {
+  "static": true,
+  "evidence": "background is removed (pure white), so no background features to measure a shift against; both balls at rest in frames 0-10 stay fixed to <1 px, consistent with a static lab camera (no shake/pan detected)",
+  "intrinsics_from_benchmark": {
+   "fx_px": 763.0,
+   "fy_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "view": "elevated camera looking obliquely down at the floor; near person at bottom-left (large, ~630 px tall visible), far person top-right (only waist-down visible, cut by the top edge). Floor itself is not visible (white).",
+  "perspective_cues": "no ground texture/horizon. Depth cues are apparent sizes: soccer ball (rolls away from camera) shrinks from ~79 px to ~59 px diameter then grows again to ~67 px; orange ball (rolls toward camera) grows from ~64 px to ~84 px. Larger image y (lower in image) = nearer the camera."
+ },
+ "objects": {
+  "soccer_ball": {
+   "desc": "white soccer ball with black pentagons; starts at the near person's right shoe, bottom centre-left (cx~438, cy~687, touching the bottom image edge)",
+   "moves": true,
+   "visible_frames": "0-48",
+   "track": "tracks/soccer_ball.csv",
+   "apparent_size": {
+    "0": {
+     "circle_diam_px": 81.5,
+     "bbox_w": 82,
+     "bbox_h": 76
+    },
+    "6": {
+     "circle_diam_px": 80.6,
+     "bbox_w": 81,
+     "bbox_h": 77
+    },
+    "11": {
+     "circle_diam_px": 87.7,
+     "bbox_w": 86,
+     "bbox_h": 81
+    },
+    "14": {
+     "circle_diam_px": 82.3,
+     "bbox_w": 76,
+     "bbox_h": 80
+    },
+    "18": {
+     "circle_diam_px": 70.9,
+     "bbox_w": 64,
+     "bbox_h": 70
+    },
+    "22": {
+     "circle_diam_px": 66.1,
+     "bbox_w": 64,
+     "bbox_h": 60
+    },
+    "26": {
+     "circle_diam_px": 63.4,
+     "bbox_w": 63,
+     "bbox_h": 58
+    },
+    "30": {
+     "circle_diam_px": 63.2,
+     "bbox_w": 61,
+     "bbox_h": 61
+    },
+    "34": {
+     "circle_diam_px": 66.8,
+     "bbox_w": 64,
+     "bbox_h": 64
+    },
+    "38": {
+     "circle_diam_px": 66.6,
+     "bbox_w": 62,
+     "bbox_h": 64
+    },
+    "42": {
+     "circle_diam_px": 67.9,
+     "bbox_w": 67,
+     "bbox_h": 66
+    },
+    "44": {
+     "circle_diam_px": 69.7,
+     "bbox_w": 66,
+     "bbox_h": 68
+    },
+    "48": {
+     "circle_diam_px": 71.8,
+     "bbox_w": 69,
+     "bbox_h": 66
+    }
+   }
+  },
+  "basketball_orange": {
+   "desc": "orange basketball with dark seams; starts at the far person's left foot, top-right (cx~828, cy~279)",
+   "moves": true,
+   "visible_frames": "0-48 (partly covered by the near person's hands 45-48)",
+   "track": "tracks/basketball_orange.csv",
+   "apparent_size": {
+    "0": {
+     "circle_diam_px": 60.1,
+     "bbox_w": 56,
+     "bbox_h": 56
+    },
+    "6": {
+     "circle_diam_px": 60.2,
+     "bbox_w": 56,
+     "bbox_h": 56
+    },
+    "11": {
+     "circle_diam_px": 59.2,
+     "bbox_w": 57,
+     "bbox_h": 57
+    },
+    "14": {
+     "circle_diam_px": 64.6,
+     "bbox_w": 60,
+     "bbox_h": 64
+    },
+    "18": {
+     "circle_diam_px": 66.9,
+     "bbox_w": 65,
+     "bbox_h": 66
+    },
+    "22": {
+     "circle_diam_px": 72.3,
+     "bbox_w": 67,
+     "bbox_h": 70
+    },
+    "26": {
+     "circle_diam_px": 71.1,
+     "bbox_w": 66,
+     "bbox_h": 69
+    },
+    "30": {
+     "circle_diam_px": 72.3,
+     "bbox_w": 66,
+     "bbox_h": 71
+    },
+    "34": {
+     "circle_diam_px": 72.2,
+     "bbox_w": 67,
+     "bbox_h": 70
+    },
+    "38": {
+     "circle_diam_px": 75.4,
+     "bbox_w": 72,
+     "bbox_h": 75
+    },
+    "42": {
+     "circle_diam_px": 79.5,
+     "bbox_w": 74,
+     "bbox_h": 76
+    },
+    "44": {
+     "circle_diam_px": 79.4,
+     "bbox_w": 79,
+     "bbox_h": 77
+    },
+    "48": {
+     "circle_diam_px": 71.8,
+     "bbox_w": 70,
+     "bbox_h": 56
+    }
+   }
+  },
+  "person_near_left": {
+   "desc": "near person, long dark hair, dark grey T-shirt, black trousers, white sneakers; bottom-left, leaning back; kicks the soccer ball with the right foot, later bends forward and catches the orange ball",
+   "moves": true,
+   "visible_frames": "0-48 (feet/legs cut by bottom edge; left edge cuts the body in frames 17-31)",
+   "track": "tracks/person_near_left.csv"
+  },
+  "person_far_right": {
+   "desc": "far person, light grey top, dark blue baggy jeans, white sneakers with black stripes; top-right, visible from the chest/waist down only (cut by the top edge at y=0); kicks the orange ball with the foot on the image-left side",
+   "moves": true,
+   "visible_frames": "0-48 (always truncated)",
+   "track": "tracks/person_far_right.csv"
+  },
+  "watermark": {
+   "desc": "\"Modified with Segment Anything 2 Demo\" grey label, bottom-right x>=1030, y>=690; not a scene object",
+   "moves": false
+  },
+  "static_objects": "none visible (background removed)"
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "both balls at rest at the two persons' feet (soccer ball at near person's right shoe, orange ball at far person's left foot)"
+  },
+  {
+   "frame": 11,
+   "t": 0.4583,
+   "event": "kicks: near person's right foot pushes the soccer ball (it moves 4 px); far person's left foot touches the orange ball (orange still at rest)"
+  },
+  {
+   "frame": 12,
+   "t": 0.5,
+   "event": "both balls in motion (first large displacement 11->12: soccer ~70 px, orange ~28 px; unusually large -> a capture frame may be missing between 11 and 12)"
+  },
+  {
+   "frame": 14,
+   "t": 0.5833,
+   "event": "soccer ball separates from the near person's shoe (merged with it in frames 12-13)"
+  },
+  {
+   "frame": 24,
+   "t": 1.0,
+   "event": "balls meet: image outlines touch/overlap (centre distance 58 px < sum of radii 66 px)"
+  },
+  {
+   "frame": 25,
+   "t": 1.0417,
+   "event": "ball-ball contact / minimum image distance (47 px); soccer ball drops from ~14 to ~4-7 px/frame and turns from moving up-right to moving right-down; orange ball bends slightly (per-frame step ~(-11.3,+7.7) px in frames 20-23 vs ~(-11.7,+4.7) px in 28-31, ~12 deg flatter)"
+  },
+  {
+   "frame": 27,
+   "t": 1.125,
+   "event": "balls separated again"
+  },
+  {
+   "frame": 36,
+   "t": 1.5,
+   "event": "both balls show a double-size step 35->36 (orange 26 px vs ~13) -> probably a missing capture frame"
+  },
+  {
+   "frame": 45,
+   "t": 1.875,
+   "event": "near person's hand touches the orange ball (catch begins); ball still moving with the hands to 48"
+  },
+  {
+   "frame": 48,
+   "t": 2.0,
+   "event": "end: soccer ball still rolling right (~5-7 px/frame), orange ball held by near person"
+  }
+ ],
+ "direction_notes": {
+  "soccer_ball": "frames 11-24 moves up-right (toward the far person/away from camera), after contact 25-26 moves right and slightly down (dx~+6, dy~+2 px/frame)",
+  "basketball_orange": "frames 12-44 moves left-down toward the near person (dx~-12, dy~+5..+8 px/frame), approaching the camera"
+ },
+ "files": {
+  "tracks": "scene/tracks/*.csv",
+  "notes": "scene/notes.md",
+  "scripts": "scene/scripts/"
+ }
+}

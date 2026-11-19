@@ -1,0 +1,59 @@
+{
+ "wall_s": 35,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 8,
+  "duration_ms": 34026,
+  "total_cost_usd": 0.1956154,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 12,
+  "cache_creation_input_tokens": 13679,
+  "cache_read_input_tokens": 122877,
+  "output_tokens": 3078,
+  "output_tokens_details": {
+   "thinking_tokens": 720
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 13679,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 458,
+    "cache_read_input_tokens": 25103,
+    "cache_creation_input_tokens": 743,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 743
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "a",
+ "audit": {
+  "tool_calls": 7,
+  "flags": []
+ },
+ "video": "simulation_0289",
+ "ids": [
+  1012
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_a/simulation_0289__q1012.jsonl"
+}

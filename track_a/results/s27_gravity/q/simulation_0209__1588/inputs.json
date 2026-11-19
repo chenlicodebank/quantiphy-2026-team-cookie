@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0209.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MS",
+ "fps": 24.0,
+ "frames": 30,
+ "duration_s": 1.25,
+ "width": 2124,
+ "height": 1080,
+ "question": {
+  "id": 1588,
+  "question": "What is the speed of the typewriter at time 0.125s in m/s?",
+  "prior": "acceleration of the typewriter before 0.45s = 9.8m/s^2",
+  "depth_info": "t=0s, distance_typewriter_camera = 4.32m  \nt=0.5s, distance_typewriter_camera = 4.501m  \ndistance_gun_camera = 4.704m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

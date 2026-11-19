@@ -1,0 +1,91 @@
+{
+  "video": "simulation_0191.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 120.0,
+  "frames": 200,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 120; frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (frame differencing shows no change outside the moving parts; background pixels identical frame to frame)",
+    "view": "side view of a white catering/cargo truck (front facing right) in a gray hangar; near-orthogonal to the truck's long side, camera at about the height of the cargo-box roof (underside of the box is visible while it is high, top face hidden at rest)",
+    "scale_note": "2D scene: one metres-per-pixel scale from the prior object; box and truck side are roughly in the same plane (box sits on the truck roof centreline, so its front face is a bit behind the truck side panel -> small scale difference possible)"
+  },
+  "objects": [
+    {
+      "name": "box",
+      "description": "brown cardboard box with 'FRAGAIL' handling symbols on its right part, one open top flap at its right end; the only freely moving rigid object",
+      "moves": true,
+      "visible_frames": [0, 199],
+      "track_file": "tracks/box.csv",
+      "reference_point": "centre of the front face (cx, cy) = rest-centre + template-matched displacement",
+      "size_px": {"length_horizontal": 408, "height_vertical_front_face": 191, "note": "front face at rest (frame >= 74): x 529.5..937.5, y 216.5..407.5; flap rises ~15 px above the top edge at the right end and is NOT part of the size. Depth (into the scene) not measurable in this side view."},
+      "rest_position_px": {"cx": 733.5, "cy": 312.0, "bottom_edge_y": 407.5},
+      "start_position_px": {"frame": 0, "cx": 733.52, "cy": 59.26, "note": "frame 0: front-face top edge at y=-36 (cut off by the image top), bottom edge 154.8; a ~34 px underside strip is visible below it (y 155..189)"},
+      "motion": "pure vertical drop (cx constant 733.5 +/- 0.03), no visible rotation",
+      "total_vertical_drop_px_frame0_to_rest": 252.76
+    },
+    {
+      "name": "truck",
+      "description": "white catering truck (high-loader) with large white cargo box, white railing/platform on top of the cab at the right, cab facing right",
+      "moves": false,
+      "visible_frames": [0, 199],
+      "static_extents_px": {
+        "overall_length_rear_to_cab_front": {"x0": 122, "x1": 1812, "px": 1690, "note": "rear tail-lift bracket to cab front face; mirrors stick out to x~1840; +/-5 px"},
+        "overall_height_ground_to_top_of_railing": {"y_top": 348, "y_ground": 1062, "px": 714, "note": "+/-5 px"},
+        "cargo_box": {"x0": 128, "x1": 1458, "y_top": 410, "y_bottom": 845, "length_px": 1330, "height_px": 435, "note": "roof y 409-410 is where the box lands"},
+        "rear_wheel": {"centre": [705, 985], "diameter_px": 165, "note": "tyre approx x 622..788, eyeballed from grid, +/-8 px"},
+        "front_wheel": {"centre": [1580, 983], "diameter_px": 165, "note": "tyre approx x 1498..1663, +/-8 px"},
+        "wheelbase_px": 875,
+        "ground_line_y": 1062
+      }
+    },
+    {
+      "name": "rear_leg",
+      "description": "rear stabilizer leg (black column with yellow warning stickers, red round foot) just behind the rear wheel, x~487",
+      "moves": true,
+      "visible_frames": [0, 199],
+      "track_file": "tracks/rear_leg.csv",
+      "reference_point": "centroid of red foot",
+      "motion": "extends straight down slowly through the whole clip: foot centroid y 1026.5 (frame 0) -> 1059.1 (frame 199), ~33 px; red foot ~40 px wide, ~12 px tall"
+    },
+    {
+      "name": "front_leg",
+      "description": "front stabilizer leg (same type, red foot) just behind the cab / in front of the fuel tank, x~1283",
+      "moves": true,
+      "visible_frames": [0, 199],
+      "track_file": "tracks/front_leg.csv",
+      "reference_point": "centroid of red foot",
+      "motion": "same as rear_leg: y 1026.5 -> 1059.3"
+    },
+    {
+      "name": "small_black_jacks",
+      "description": "two small black jack pads (x~550 and x~1245, y~1000-1030) that also lower during the clip; not tracked separately (dark on dark)",
+      "moves": true
+    },
+    {
+      "name": "tail_lift_plate",
+      "description": "dark gray plate (tail lift / ramp) behind the rear of the truck, visible only left of x=128; folds up from almost horizontal (y~805) and disappears behind the cargo box by frame ~182",
+      "moves": true,
+      "visible_frames": [0, 181],
+      "track_file": "tracks/tail_lift_plate.csv",
+      "reference_point": "centroid of visible dark pixels (partial object - unreliable as a position)"
+    },
+    {
+      "name": "background",
+      "description": "hangar wall with vertical light-gray pillars, large dark window grid at upper right (x 1230-1710, y 15-320), gray floor with white dashed markings near rear wheel",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "box release / start of fall (from rest)", "frame": 1, "t": 0.0083, "note": "per-frame drop grows linearly from 0.04 px (frame 0->1); extrapolated zero-velocity point ~frame 0.6"},
+    {"event": "box first contact with truck roof (impact)", "frame": 61, "t": 0.5083, "note": "bottom edge reaches 407.5 at frame 61 (frame 60: 403.0)"},
+    {"event": "box small rebound, highest point", "frame": 68, "t": 0.5667, "note": "cy 309.42, i.e. 2.6 px above rest"},
+    {"event": "box second contact / comes to rest", "frame": 74, "t": 0.6167},
+    {"event": "box at rest", "frames": [74, 199]},
+    {"event": "stabilizer legs lowering", "frames": [0, 199], "note": "slow at first (~0.02 px/frame), ~0.2 px/frame later"},
+    {"event": "tail-lift plate folding up, hidden after", "frame": 182}
+  ]
+}

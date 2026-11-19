@@ -1,0 +1,71 @@
+{
+  "video": "simulation_0028.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "image_size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame = round(t * 25); frame 0 is t = 0",
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (phase correlation on the rock region, every 3rd frame: shift < 0.03 px all clip)",
+    "view": "high oblique aerial view looking down on a sandy beach with a raised white rock plateau (top) and green sea (bottom); no horizon or sky visible",
+    "perspective_cues": "ground (sand) plane fills y~0-530; sea from y~530 down; no usable vanishing points; scene far from camera so perspective across the bird's path is weak (bird apparent size roughly constant)"
+  },
+  "objects": [
+    {
+      "name": "bird",
+      "description": "the only animal: a dark brown bird (eagle/hawk-like) flying left-to-right across the upper part of the frame, flapping its wings",
+      "moves": true,
+      "visible_frames": [0, 54],
+      "track_file": "tracks/bird.csv",
+      "reference_point": "centroid of dark mask (proxy for the body/origin)",
+      "path_px": "x 59 -> 952 (exits right edge f52-54), y 223 -> ~250 (f10) -> ~233 (f23) -> ~261 (f38) -> ~248 (f50); mean image speed ~16.9 px/frame",
+      "apparent_size_px": "bbox_h 19-40, bbox_w 25-43 depending on wing phase; flap-cycle maxima of bbox_h ~37 (f0-1), ~40 (f25), ~39 (f49-50): no clear size trend -> roughly constant depth",
+      "notes": "f37-45 over dark brown rock: mask weaker (low_contrast=1). f52-54 partly outside frame (edge_clipped=1). Not visible f55-74."
+    },
+    {
+      "name": "bird_shadow",
+      "description": "the bird's shadow on the sand: grey-blue two-winged silhouette ~300 px right and 130-145 px below the bird; shape changes in phase with the wing beats",
+      "moves": true,
+      "visible_frames": [0, 33],
+      "track_file": "tracks/bird_shadow.csv",
+      "path_px": "x 376 -> 892, y 358 -> 393; disappears at f34 near the beach/sea edge around (900,393)",
+      "apparent_size_px": "axis_len 26-60 (max ~57 f0, ~60 f24-25), width 11-19",
+      "notes": "NOT a second bird; it is a shadow (its length oscillates in sync with the bird's flapping). Shadow offset from bird: (dx,dy) = (317,135) at f0, (303,146) at f25"
+    },
+    {
+      "name": "rock_plateau",
+      "description": "large raised white/snowy rock mass with brown eroded cliffs on its right and lower edges, top-centre/right of image",
+      "moves": false,
+      "image_bbox_px": [328, 25, 950, 310],
+      "extent_px": {"horizontal": 622, "vertical": 285},
+      "bright_top_cap_bbox_px": [336, 28, 654, 234],
+      "notes": "continues to right image edge; striped brown cliff base along y~285-310 for x~560-800"
+    },
+    {
+      "name": "sand_beach",
+      "description": "pale pink sand plain around the rock, ground plane",
+      "moves": false,
+      "seaward_edge_px": "(0,450) (150,500) (300,520) (500,530) (650,500) (720,460) (800,420) (880,350) (950,300) approx",
+      "notes": "wet-sand / shallow band between beach edge and green water, edge hazy"
+    },
+    {
+      "name": "sea",
+      "description": "green-turquoise water with moving wave texture, lower ~45% of frame",
+      "moves": "texture animates; not an object",
+      "image_region_px": "y > ~530 (left/centre), y > ~350 at right edge"
+    }
+  ],
+  "events": [
+    {"event": "bird already flying at clip start", "frame": 0, "t": 0.0},
+    {"event": "bird wing-beat: mask area minima (wings edge-on) approx", "frames": [6, 17, 32, 41], "t": [0.24, 0.68, 1.28, 1.64]},
+    {"event": "bird wing-beat: mask area maxima approx", "frames": [0, 10, 25, 38, 49], "t": [0.0, 0.4, 1.0, 1.52, 1.96]},
+    {"event": "bird slight vertical (image y) undulation: local y max", "frames": [11, 38], "t": [0.44, 1.52]},
+    {"event": "bird crosses over the rock plateau", "frames": [24, 52]},
+    {"event": "shadow leaves the visible sand (disappears)", "frame": 34, "t": 1.36},
+    {"event": "bird reaches right image edge / exits", "frames": [52, 54], "t": [2.08, 2.16]},
+    {"event": "no moving object in frame", "frames": [55, 74]}
+  ]
+}

@@ -1,0 +1,105 @@
+{
+ "video": "simulation_0303.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "image_size_px": [
+  2560,
+  1440
+ ],
+ "active_area_px": {
+  "x": [
+   0,
+   2559
+  ],
+  "y": [
+   80,
+   1359
+  ],
+  "note": "black letterbox bars rows 0-79 and 1360-1439; image centre (1280,720) is also centre of active area"
+ },
+ "camera": {
+  "motion": "static (high-pass sky texture phase correlation vs frame 0 < 0.1 px through frame 71)",
+  "background": "clear blue sky with very faint cloud gradient only; no ground, no horizon, no vanishing points visible",
+  "focal_length": "unknown; estimate from given depths + known size (pinhole: size_px = f * size_m / depth)"
+ },
+ "objects": [
+  {
+   "name": "craft",
+   "aliases": [
+    "spaceship",
+    "aircraft",
+    "jet",
+    "fighter",
+    "plane",
+    "vehicle"
+   ],
+   "description": "single dark navy/black futuristic flying craft (sci-fi fighter/airship, swept fins, glass canopy on top) seen side-on, nose pointing right, flying away from camera toward upper-left",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never; fully in frame every frame",
+   "track_file": "tracks/craft.csv",
+   "reference_point": "bbox_cx,bbox_cy (bbox centre) is recommended as image of the origin; cx,cy = mask centroid (differs by ~25 px in x at frame 0, ~5 px at end)",
+   "image_position_frame0": [
+    1668.0,
+    853.0
+   ],
+   "image_position_frame71": [
+    768.5,
+    351.0
+   ],
+   "pixel_extent_frame0": {
+    "bbox_w": 659.0,
+    "bbox_h": 285.0,
+    "axis_len": 665.7
+   },
+   "pixel_extent_frame71": {
+    "bbox_w": 458.0,
+    "bbox_h": 143.0,
+    "axis_len": 459.4
+   },
+   "apparent_size_change": "shrinks monotonically: bbox width 659 -> 458 px (ratio 0.695), so camera distance grows ~1.44x over the clip (receding)",
+   "image_motion": "moves up-left continuously, image step ~23.5 px/frame (frame 2) decreasing smoothly to ~9.4 px/frame (frame 71) (receding: perspective shrink), direction ~-152 deg (y-down image coords)",
+   "body_axis_ratio_note": "axis_len shrinks to 0.690 of frame 0 by frame 71 but axis_width/bbox_h shrink faster (279->130, 285->143): the view of the craft changes (seen more edge-on/from below less) as it recedes and rises, so use LENGTH (axis_len or bbox_w) as the depth proxy, not height or area"
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "sky",
+   "note": "uniform blue background; no measurable static objects"
+  }
+ ],
+ "events": [
+  {
+   "event": "frame 1 is a pixel-identical duplicate of frame 0 (craft does not move between frames 0 and 1); motion starts frame 1->2",
+   "frames": [
+    0,
+    1,
+    2
+   ],
+   "times_s": [
+    0.0,
+    0.041666666666666664,
+    0.08333333333333333
+   ]
+  },
+  {
+   "event": "craft in motion from frame 1->2 to end of clip (no stop, no bounce, no contact)",
+   "frames": [
+    2,
+    71
+   ],
+   "times_s": [
+    0.08333333333333333,
+    2.9583333333333335
+   ]
+  },
+  {
+   "event": "no direction change; heading in image steady (up-left, ~-150 deg in image coords y-down); body axis tilted ~-4.3..-5.2 deg (nose up-right)"
+  }
+ ]
+}

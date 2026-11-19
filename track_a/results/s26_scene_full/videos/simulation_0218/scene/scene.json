@@ -1,0 +1,96 @@
+{
+ "video": "simulation_0218.mp4",
+ "source": "simulation (Blender render)",
+ "scene_type": "2D (motion in a plane parallel to the image; but the render has visible perspective, see notes)",
+ "fps": 24.0,
+ "frames": 50,
+ "frame_size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+ "units": "pixels (x right, y down, full resolution) and seconds; no metric scale guessed",
+ "camera": {
+  "motion": "static. Phase correlation of the ceiling strip vs frame 0: |shift| <= 0.66 px in all frames (mostly < 0.3 px; sub-pixel noise from lighting changes)",
+  "lighting": "a bright light patch on the back wall travels ahead of the robot (wall brightness changes strongly over time); the robot also reflects faintly in the window band. The floor and floor lines are unaffected.",
+  "perspective": {
+   "depth_vanishing_point_px": [951, 561],
+   "how": "intersection of the two diagonal floor marks (box side lines receding toward the camera)",
+   "horizon_y_px": 561,
+   "note": "the camera looks roughly perpendicular to the back wall (vanishing point near the image centre). The robot is close to the camera: parts at different depths move at different pixel rates (45.8 to 54.5 px/frame) and the silhouette outline changes as it crosses the image centre."
+  }
+ },
+ "objects": [
+  {
+   "name": "robot",
+   "description": "blue tracked drilling robot (blue body and head, red handle/top box, black barrel at the back of the head, conical drill and grey claw at the front/right, black tracks with grey road wheels). The only moving object.",
+   "moves": true,
+   "direction": "left to right (+x), purely horizontal: feature y constant within 0.6 px",
+   "visible_frames": [0, 48],
+   "fully_in_frame": [9, 32],
+   "partial_frames": "0-8 (rear cut by left border; frame 0 visible fraction 0.26), 33-48 (front cut by right border; frame 48 only a ~10 px sliver at x>=1909)",
+   "absent_frames": [49],
+   "track_file": "tracks/robot.csv",
+   "reference_point_recommended": "origin_est_x/origin_est_y in robot.csv: midpoint of the near-side rear corner and the drill tip (linear model, exact for every frame including off-screen extrapolation); y fixed at the bbox centre 582. The true Blender origin is not visible; for speeds/distances only the horizontal pixel rate matters because motion is purely horizontal.",
+   "motion_summary_px": {
+    "type": "uniform (constant velocity); per-frame displacement constant within ~0.1-0.4 px for every rigid feature; no start/stop/acceleration visible",
+    "per_frame_displacement_by_point_px": {
+     "origin_est (near-side outline centre)": 52.46,
+     "chassis_plate (near side of chassis, y 778)": 50.75,
+     "head_stripes (near side of head, y 395)": 51.87,
+     "arm_box (front arm, nearest the camera, y 610)": 54.52,
+     "drill_tip (y 655)": 54.02,
+     "rear silhouette, frames 9-27 (near-side rear corner)": 50.90,
+     "rear silhouette, frames 30-47 (far-side rear corner)": 45.80,
+     "head barrel back, frames 9-27 / 30-47": [51.69, 46.31]
+    },
+    "pixel_rate_spread_note": "spread of 45.8-54.5 px/frame is perspective (depth differences across the robot), not acceleration"
+   },
+   "size_px": {
+    "height_px": 624,
+    "height_rows": [270, 894],
+    "height_note": "top = top of the red handle on the head, bottom = bottom of the tracks; constant in all frames (pure horizontal motion)",
+    "length_px_at_frame_20": 637.4,
+    "length_px_at_frame_21_robot_centred_on_image": 640.5,
+    "length_definition": "rear of the tracks (silhouette, row 843) to the drill tip (row 655); the drill tip is the rightmost point, the track rear the leftmost point in all frames",
+    "length_vs_frame_px": "grows with x from ~600 (frame 8) to 637 (frame 20) to 690 (frame 32), because of perspective (front face visible left of centre, back face right of centre). Column length_px in robot.csv.",
+    "sub_parts_at_frame_20": {
+     "head (blue box incl. black barrel at back)": {"x": [607, 998], "y": [330, 500]},
+     "red top box with handle": {"x": [762, 918], "y": [270, 335]},
+     "drill (cone)": {"x": [1030, 1230], "y": [590, 700], "tip": [1229.9, 655]},
+     "claw (grey)": {"x": [1040, 1130], "y": [512, 725]},
+     "track unit (blue frame + tracks)": {"x": [592, 1065], "y": [665, 894]},
+     "road wheels": "5 visible on the near side, centres at y ~846, spacing ~95 px (wheel hub template repeats every ~95 px; wheels rotate)"
+    }
+   }
+  }
+ ],
+ "static_objects": [
+  {"name": "back_wall", "description": "grey industrial wall spanning the whole frame, behind the robot", "image_rows": [0, 822]},
+  {"name": "window_band", "description": "dark corrugated/curtained window panels in three bays (left, centre, right)", "rows": [200, 538]},
+  {"name": "wall_rail", "description": "light horizontal concrete beam below the windows", "rows": [538, 576]},
+  {"name": "lower_wall_panels", "description": "mid-grey wall panels", "rows": [576, 820]},
+  {"name": "pillar_left", "description": "light concrete pillar between the left and centre bays", "x": [643, 714], "rows": [0, 822], "width_px": 71, "note": "edges +-3 px"},
+  {"name": "pillar_right", "description": "light concrete pillar between the centre and right bays", "x": [1578, 1656], "rows": [0, 822], "width_px": 78, "note": "edges +-4 px"},
+  {"name": "floor", "description": "dark asphalt floor", "rows": [822, 1079]},
+  {"name": "floor_line_back", "description": "white horizontal floor line nearer the wall, full width", "rows": [841, 845]},
+  {"name": "floor_line_front", "description": "white horizontal floor line nearer the camera, full width", "rows": [904, 911]},
+  {"name": "floor_mark_left_diagonal", "description": "white diagonal mark joining the two horizontal lines (left side of a floor box)", "endpoints_centre_px": [[642, 846], [552, 903]], "width_px": "~70 (horizontal)"},
+  {"name": "floor_mark_right_diagonal", "description": "white diagonal mark joining the two horizontal lines (right side of the floor box)", "endpoints_centre_px": [[1645, 846], [1771, 903]], "width_px": "~70 (horizontal)"},
+  {"name": "floor_box", "description": "box formed by the two horizontal lines and the two diagonal marks", "spacing_of_diagonals_at_row_875_px": 1124, "depth_rows": [843, 907]},
+  {"name": "ceiling_light_left", "description": "fluorescent tube fixtures on a dark steel bracket, top left", "x": [520, 680], "rows": [0, 175]},
+  {"name": "ceiling_light_right", "description": "fluorescent tube fixtures on a dark steel bracket, top right", "x": [1615, 1920], "rows": [0, 175]}
+ ],
+ "events": [
+  {"event": "robot already moving at frame 0 (front visible, rear off-screen)", "frame": 0, "time_s": 0.0},
+  {"event": "robot rear crosses the left image border (fully in frame)", "frame": 8.36, "time_s": 0.348, "note": "fractional frame from the rear-edge fit"},
+  {"event": "robot centre (origin_est) at image centre x=960", "frame": 20.93, "time_s": 0.872},
+  {"event": "rear silhouette switches from near-side to far-side corner (passes image centre)", "frame": "28-29"},
+  {"event": "drill tip reaches the right image border", "frame": 32.76, "time_s": 1.365},
+  {"event": "last frame with any robot pixels (~10 px sliver)", "frame": 48, "time_s": 2.0},
+  {"event": "robot completely out of frame", "frame": 49, "time_s": 2.042},
+  {"event": "no start, stop, bounce, contact or direction change; constant velocity throughout"}
+ ],
+ "files": {
+  "tracks/robot.csv": "per-frame robot track (see notes.md for columns)",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts; track_summary.json = linear fits; features_out.json = raw template matches"
+ }
+}

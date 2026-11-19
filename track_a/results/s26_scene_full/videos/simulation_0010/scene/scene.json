@@ -1,0 +1,62 @@
+{
+  "video": "simulation_0010.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 22.892308,
+  "frames": 59,
+  "frame_range": [0, 58],
+  "duration_s": 2.5773,
+  "image_size_wh": [1920, 1954],
+  "units": "pixels (x right, y down, full-resolution image coords) and seconds; t = frame / fps",
+  "camera": {
+    "motion": "static (phase-correlation shift of house and ground regions < 0.03 px over the whole clip)",
+    "per_frame_background_shift_px": 0.0,
+    "perspective": "3D rural scene, camera roughly level looking at a timber-framed house front-on (house front wall nearly fronto-parallel). Ground plane recedes upward; distant horizon/hill line at about y = 1080-1110 behind the fence/cart (true horizon is hidden by trees and buildings; it lies near y ~1080-1100). House front wall verticals are near vertical, so little tilt.",
+    "focal_length": "unknown - estimate from depth_info + a known size if a question gives them"
+  },
+  "objects": [
+    {
+      "name": "bird",
+      "description": "the only moving object: a black bird (crow/magpie-like, black body and wings with grey-white sheen on wing feathers and a grey head/beak) flying left -> right in front of the house, head pointing right (+x)",
+      "moves": true,
+      "visible_frames": [0, 58],
+      "occlusion": "unoccluded frames 0-38; foreground leaves of the right-hand tree partly overlap it frames 39-52 (small); frames 53-58 it flies behind the foreground branch and is mostly hidden (head and much of the body hidden, only a wing and tail visible) - positions/sizes there are NOT reliable",
+      "track_file": "tracks/bird.csv",
+      "reference_point": "cx,cy = centroid of the full bird mask (best proxy for the rig origin); body_x,body_y = centroid of the thick core of the mask (body, wings removed); bbox_cx,bbox_cy = bbox centre",
+      "image_path": "enters already in view at (355,780) at frame 0, flies nearly horizontally to the right; mask centroid x increases ~21.4 px/frame on average (frames 0-52), y oscillates 760-820 with the wingbeat (no net climb/descent: y 780 -> 790 over 0-52); at frame 58 at about (1430,838) behind leaves",
+      "apparent_size": "bbox width (tip-to-tail / wingtip extent along x) ~150-170 px, slow increase ~0.3 px/frame (155 median in frames 0-20, 167 in 40-52) -> at most ~10% closer at the end, i.e. roughly constant depth; bbox height 56 (wings level) to 134 px (wings spread up/down); main-axis length 121-192 px",
+      "wingbeat": "bbox_h maxima (wings spread vertically) at frames 5-6, 14, 23-24, 31-32, 40-41, 49; wings-level minima at frames 1, 19, 36, 44 -> period ~8.7 frames (~0.38 s)"
+    },
+    {
+      "name": "bird_shadow",
+      "description": "dark shadow of the bird moving across the sunlit ground in the lower-left/middle (e.g. near (840,1270) at frame 31); not tracked",
+      "moves": true
+    },
+    {"name": "house", "description": "timber-framed cottage with crossed roof boards on the ridge, centre-left", "moves": false,
+     "pixel_extent_frame0": {"walls_x": [210, 910], "roof_eaves_x": [80, 1025], "top_of_crossed_ridge_boards_y": 350, "roof_apex_y": 480, "eave_line_y": 790, "ground_line_y": 1175, "wall_width_px": 700, "height_ground_to_ridge_cross_px": 825, "wall_height_ground_to_eave_px": 385}},
+    {"name": "doorway", "description": "open dark doorway in the house front", "moves": false, "pixel_extent_frame0": {"x": [505, 625], "y": [880, 1160]}},
+    {"name": "door_leaf", "description": "wooden plank door, opened, left of the doorway", "moves": false, "pixel_extent_frame0": {"x": [400, 500], "y": [880, 1160]}},
+    {"name": "barrel_left", "description": "left of two wooden barrels at the house front right of the doorway", "moves": false, "pixel_extent_frame0": {"x": [742, 822], "y": [1062, 1175], "width_px": 80, "height_px": 113}},
+    {"name": "barrel_right", "description": "right of the two wooden barrels", "moves": false, "pixel_extent_frame0": {"x": [822, 916], "y": [1062, 1175], "width_px": 94, "height_px": 113}},
+    {"name": "ladder_poles", "description": "two long poles leaning against the house's right corner", "moves": false, "pixel_extent_frame0": {"x": [910, 1040], "y": [930, 1160]}},
+    {"name": "flower_bush_left", "description": "small white/pink flowering bush in front of the house's left corner", "moves": false, "pixel_extent_frame0": {"x": [265, 372], "y": [1108, 1200]}},
+    {"name": "climbing_roses", "description": "climbing plant with pink flowers on the house wall right of the doorway", "moves": false, "pixel_extent_frame0": {"x": [595, 850], "y": [700, 1060]}},
+    {"name": "fence", "description": "wooden rail fence right of the house, mid-distance", "moves": false, "pixel_extent_frame0": {"x": [1045, 1330], "y": [1005, 1180]}},
+    {"name": "cart", "description": "wooden hand cart with large spoked wheel, right side, shafts pointing left toward camera-left", "moves": false,
+     "pixel_extent_frame0": {"x": [1295, 1890], "y": [1010, 1270], "length_px_shaft_tip_to_back": 595},
+     "wheel": {"x": [1643, 1833], "y": [1053, 1263], "width_px": 190, "height_px": 210, "centre": [1738, 1158]}},
+    {"name": "flowering_shrub_behind_cart", "description": "lilac flowering shrub behind the cart", "moves": false, "pixel_extent_frame0": {"x": [1455, 1615], "y": [1000, 1085]}},
+    {"name": "foreground_tree_branches", "description": "leafy branches of a near tree entering from the right edge (yellow-green leaves around x 1170-1370, y 800-890); they occlude the bird at the end", "moves": false},
+    {"name": "left_tree", "description": "large tree at the left edge behind the house", "moves": false},
+    {"name": "background_tree", "description": "hazy tree behind the house's right side (x ~860-1260, y ~550-1000)", "moves": false},
+    {"name": "ground_path", "description": "sunlit yellowish dirt/grass path with tree shadows across the foreground", "moves": false}
+  ],
+  "events": [
+    {"event": "bird already flying at first frame (no take-off visible)", "frame": 0, "t_s": 0.0},
+    {"event": "bird passes in front of house wall, then past the roof edge into open sky", "frame": 30, "t_s": 1.3105},
+    {"event": "foreground leaves start to overlap the bird (partial)", "frame": 39, "t_s": 1.7036},
+    {"event": "bird goes mostly behind the foreground branch", "frame": 53, "t_s": 2.3152},
+    {"event": "last frame, bird still visible partly behind leaves", "frame": 58, "t_s": 2.5336}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/bird.csv", "tracks/bird_raw.csv"], "scripts": "scripts/"}
+}

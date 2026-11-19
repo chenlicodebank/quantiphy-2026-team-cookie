@@ -1,0 +1,67 @@
+{
+  "video": "simulation_0025_segmented.mp4",
+  "source": "segmentation (Blender simulation, background replaced by plain white)",
+  "scene": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left of the 960x960 image",
+  "camera": {
+    "motion": "static (no visible background; both objects move smoothly with no common jitter)",
+    "perspective_cues": "none visible: background is uniform white, no ground plane, horizon or vanishing points. Image centre (480,480) assumed principal point. Focal length unknown; derive from a given depth + known size.",
+    "image_centre_px": [480, 480]
+  },
+  "objects": {
+    "bird": {
+      "description": "single dark brown/black flying bird (eagle/hawk-like), flapping wings, flies left to right across the upper-middle of the frame (y ~ 355-410 px)",
+      "moves": true,
+      "visible_frames": [0, 66],
+      "fully_in_frame": [0, 62],
+      "cut_by_right_edge": [63, 66],
+      "absent_frames": [67, 74],
+      "track": "tracks/bird.csv",
+      "reference_point": "cx,cy = mask centroid (proxy for body origin; wing shape shifts it by a few px over the flap cycle)",
+      "image_path": "x 234 -> 953 px (frames 0-66), y oscillates 371-398 px with the flap cycle; net direction: rightwards, nearly horizontal",
+      "mean_x_step_px_per_frame": {"frames_0-20": 9.6, "frames_21-41": 11.0, "frames_42-62": 12.2, "frames_0-62": 11.0},
+      "wing_flap": {
+        "period_frames": 25,
+        "period_s": 1.0,
+        "wings_raised_V_shape_bbox_h_max_frames": [0, 24, 49],
+        "wings_flat_thin_bbox_h_min_frames": [6, 32, 57],
+        "note": "approx +-1 frame"
+      },
+      "apparent_size_px": {
+        "wingspan_proxy_bbox_w_max_per_cycle": {"frames_0-20": 46, "frames_21-41": 48, "frames_42-62": 55},
+        "typical_bbox_w_median": {"frames_0-20": 36, "frames_21-41": 42, "frames_42-62": 40},
+        "min_bbox_w_full_view": {"value": 22, "frame": 23},
+        "bbox_h_range": [9, 33],
+        "trend": "spread-wing width grows ~46 -> ~52-55 px and pixel speed grows ~9.6 -> ~12.2 px/frame from left to right: bird is getting somewhat closer to the camera (or further off-axis); assume depth changes along the path"
+      }
+    },
+    "human": {
+      "description": "single person in light/white clothing (white top, almost-white head, darker grey trousers), small figure below image centre, walking slowly",
+      "moves": true,
+      "visible_frames": [0, 74],
+      "track": "tracks/human.csv",
+      "reference_point": "pelvis estimate pelvis_x = mask centroid x, pelvis_y = y0 + 0.47*bh (hip level ~ crotch); feet_y = mask bottom",
+      "image_path": "centroid x 560 -> 521 px (leftwards ~0.53 px/frame), feet y 583 -> 591 px (slightly downwards = slightly toward camera); nearly constant apparent height",
+      "apparent_size_px": {
+        "height_bbox_h": {"frames_0-24_median": 53, "frames_25-49_median": 56, "frames_50-74_median": 54, "overall_range": [51, 62], "frame0": 57},
+        "width_bbox_w": {"median": 20, "range": [16, 27]},
+        "note": "head and shirt are near-white on white, so the top of the mask (head) is uncertain by ~3-5 px; height ~54-57 px is the best estimate (frame 0 standing pose cleanest: 57 px, y 527-583)"
+      }
+    }
+  },
+  "static_objects": "none (background replaced by plain white; no ground, markings or furniture visible)",
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip start; bird already flying at (234,380) with wings raised, human already walking at x~560"},
+    {"frame": 24, "t": 0.96, "event": "bird wings raised (V) - flap cycle 2 top"},
+    {"frame": 49, "t": 1.96, "event": "bird wings raised (V) - flap cycle 3 top"},
+    {"frame": 63, "t": 2.52, "event": "bird starts leaving the frame across the right edge"},
+    {"frame": 67, "t": 2.68, "event": "bird completely out of view"},
+    {"frame": 74, "t": 2.96, "event": "clip end; human still walking at x~521"}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/bird.csv", "tracks/human.csv"], "scripts": "scripts/"}
+}

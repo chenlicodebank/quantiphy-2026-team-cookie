@@ -1,0 +1,133 @@
+{
+ "video": "simulation_0057_segmented.mp4",
+ "source": "segmentation (of a Blender simulation)",
+ "scene": "2D",
+ "fps": 30.0,
+ "frames": 91,
+ "width": 1080,
+ "height": 1080,
+ "view": "top-down orthographic-looking view of a ground plane; white (segmented) background; image y increases downward",
+ "camera": {
+  "static": true,
+  "evidence": "both static props sit at the same pixels in all contact-sheet frames (0..90 step 6) and overlays (0,10,...,90); white background has no texture to track"
+ },
+ "objects": [
+  {
+   "name": "car",
+   "description": "orange sports car seen from above, long axis vertical, the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    90
+   ],
+   "partially_out_of_frame": [
+    0,
+    15
+   ],
+   "track": "tracks/car.csv",
+   "size_px": {
+    "length_along_motion_y": 289.0,
+    "width_body_x": 115,
+    "width_body_note": "bbox_w in frames 20-50 before a thin dark side protrusion (mirror/shadow edge) appears at left from ~frame 55",
+    "width_mask_incl_mirror_artifacts_x": 120.0,
+    "note": "length from frames 40-90 (less motion blur); frames 16-30 bbox_h 293-301 inflated by vertical motion blur"
+   },
+   "reference_point": "bbox centre (cx_bbox, cy_bbox) / mask centroid; for frames 0-15 use cy_from_front (front edge y1 minus half length)"
+  },
+  {
+   "name": "prop_upper",
+   "description": "dark grey/black dumbbell- or hammer-like prop (hexagonal head at left, thin shaft, round knob at right), lying nearly horizontal, left of the car path",
+   "moves": false,
+   "visible_frames": [
+    0,
+    90
+   ],
+   "bbox": [
+    177,
+    432,
+    263,
+    476
+   ],
+   "area": 2093,
+   "centroid": [
+    214.5260391782131,
+    455.4835164835165
+   ],
+   "bbox_center": [
+    220.0,
+    454.0
+   ],
+   "pca_length": 89.51845788315973,
+   "pca_width": 43.0495505517273,
+   "main_axis_deg": 14.510386467286219
+  },
+  {
+   "name": "prop_lower",
+   "description": "same kind of dark prop, lower-left, shaft diagonal (hex head bottom-left at ~(197,980), round knob top-right at ~(252,910))",
+   "moves": false,
+   "visible_frames": [
+    0,
+    90
+   ],
+   "bbox": [
+    177,
+    898,
+    263,
+    998
+   ],
+   "area": 2350,
+   "centroid": [
+    215.888085106383,
+    954.8642553191489
+   ],
+   "bbox_center": [
+    220.0,
+    948.0
+   ],
+   "pca_length": 122.56981579170338,
+   "pca_width": 41.93201167416952,
+   "main_axis_deg": 127.70072206682119
+  }
+ ],
+ "events": [
+  {
+   "event": "car already moving downward at frame 0 (enters from the top edge)",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "car fully inside frame (rear leaves top edge)",
+   "frame": 16,
+   "time": 0.5333
+  },
+  {
+   "event": "car centre passes prop_upper's y (454 px)",
+   "frame": 36,
+   "time": 1.2
+  },
+  {
+   "event": "car still moving (slowly, ~3.7 px/frame) at last frame; no stop, no contact with props",
+   "frame": 90,
+   "time": 3.0
+  }
+ ],
+ "motion_summary_px": {
+  "direction": "straight down (+y), slight leftward drift of x centroid 363->349 px over the clip",
+  "per_frame_dy_first": "~18 px/frame (frames 1-10, from front edge)",
+  "per_frame_dy_last": "~3.7 px/frame (frames 85-90)",
+  "character": "steady deceleration over the whole clip",
+  "car_centre_start_est": [
+   363.1,
+   -118.0
+  ],
+  "car_centre_end": [
+   349.4,
+   906.0
+  ]
+ },
+ "car_static_contact_frames": [],
+ "distances_px": {
+  "prop_upper_to_prop_lower_bbox_centres": 494.0,
+  "car_centre_x_minus_prop_bbox_centre_x_at_end": 129.4
+ }
+}

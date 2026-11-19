@@ -1,0 +1,80 @@
+{
+  "video": "simulation_0144.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 35,
+  "duration_s": 1.4583,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin at the top-left image corner; all values in pixels",
+  "camera": {
+    "motion": "static: phase correlation of the ground region vs frame 0 gives 0.00 px shift in every frame; the only pixel changes are the missile plus faint launch-flash lighting near the pod (frames 2-13)",
+    "perspective_cues": {
+      "horizon": "hidden by a hill; ridge peak at about (930, 535); far ground/sky edge at y about 615 (x=0) to 665 (x=1920); true horizon probably near y 560-620 (camera roughly level, slightly upward because the sky fills the top half)",
+      "ground": "sandy desert sloping up to the hill; a pale dirt track runs from bottom centre (~x 900, y 1080) toward the right edge (~x 1920, y 905) behind the truck",
+      "missile_apparent_size": "apparent length grows 145 px (f13) -> 213 px (f30), width 13.2 -> 15.4 px: the missile gets somewhat nearer to the camera as it climbs and/or turns more side-on; part of the length growth is motion blur (blur streak along the axis grows with speed: 30 -> 61 px/frame image speed). Width (blur-free) suggests about +15% scale change f15->f30."
+    },
+    "focal_length": "unknown (estimate from given depth_info + a known size)"
+  },
+  "objects": [
+    {
+      "name": "missile",
+      "aliases": ["rocket", "projectile", "GMLRS rocket"],
+      "description": "slender tan/brown rocket with pointed nose, launched from the rear-launcher pod of the truck, flies up and to the left in a straight image line and leaves the frame at the top edge near x 650",
+      "moves": true,
+      "visible_frames": "nose first visible frame 3 (only nose tip outside the tube until frame 12); fully visible frames 13-30; clipped by top edge frames 31-33; gone frame 34. In frames 0-2 it is inside its tube (not visible).",
+      "track_file": "tracks/missile.csv",
+      "image_flight_line": {"point": [987.58, 371.32], "direction_unit": [-0.6619, -0.7496], "angle_deg_from_+x_ccw_y_up": 131.45, "rms_offset_of_centres_px": 0.2},
+      "tube_mouth_px": [1284.8, 707.9],
+      "apparent_length_px": {"f13": 145.1, "f14": 146.1, "f16": 159.4, "f20": 160.5, "f25": 179.2, "f30": 213.3, "note": "includes motion blur along the axis"},
+      "apparent_width_px": {"f13": 13.2, "f20": 12.8, "f25": 14.1, "f30": 15.4}
+    },
+    {
+      "name": "launcher_truck",
+      "aliases": ["HIMARS", "rocket launcher truck", "truck", "vehicle"],
+      "description": "olive-grey 6-wheel military truck (cab at left facing the camera-left, three axles), with the raised launcher pod over its rear; parked on the dirt track, lower right of centre",
+      "moves": false,
+      "visible_frames": "0-34",
+      "bbox_px_frame0": {"x0": 1002, "y0": 648, "x1": 1470, "y1": 1034, "note": "including raised pod (top 648, right 1470); truck body without pod: x 1002-1437, y 836 (antenna) / 852 (cab roof) - 1034 (front wheel bottom)"},
+      "body_extents_px": {"cab_front_to_chassis_rear_x": [1002, 1437], "length_along_image_px": 435, "cab_roof_y": 852, "front_wheel_bottom_y": 1034, "rear_wheel_bottom_y": 1002, "height_cab_roof_to_front_wheel_bottom_px": 182, "note": "truck seen in 3/4 view from front-left; its length is foreshortened and not along the image x axis"},
+      "wheels_px": {"front_wheel_diameter_px": "about 65 wide x 77 tall (centre ~(1170, 995))", "rear_wheels_diameter_px": "about 60 x 70 (centres ~(1345, 965) and (1400, 955))"},
+      "origin_guess_px": "root not visible; bbox centre of body about (1220, 943), ground contact y about 1000-1034"
+    },
+    {
+      "name": "launcher_pod",
+      "aliases": ["launch pod", "launcher box", "rocket pod"],
+      "description": "grey box raised at an angle over the truck's rear, 6 tube openings (2 rows x 3) facing up-left, with a rectangular handle frame above the openings",
+      "moves": false,
+      "visible_frames": "0-34",
+      "bbox_px_frame0": {"x0": 1203, "y0": 648, "x1": 1470, "y1": 898},
+      "tube_face_px": {"x0": 1213, "y0": 695, "x1": 1300, "y1": 745},
+      "long_axis": "from tube face (~(1255, 725)) to the lower-right end (~(1450, 885)): about 250 px along the axis, tilted ~40 deg above horizontal in the image",
+      "note": "after the launch the upper-right tube is empty (persistent small change vs frame 0 at x 1063-1285, y 706-994 includes this and the flash-lit area)"
+    },
+    {
+      "name": "hill",
+      "description": "large sandy hill in the background, peak at about (930, 535), base spanning the whole image width at y ~600-665",
+      "moves": false
+    },
+    {
+      "name": "dirt_track",
+      "description": "pale pinkish dirt road under the truck, from bottom centre to the right edge (y ~905 at x=1920)",
+      "moves": false
+    },
+    {
+      "name": "rocks_and_mounds",
+      "description": "many small dark rocks/sand mounds on the slope (e.g. dark rock at (1637, 643), mounds at (625, 718), (380, 885)); a large dark shadow in the lower-left foreground (cast by something off-screen/terrain)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "launch flash / first lighting change near the pod", "frame": 2, "time_s": 0.0833, "reliability": "faint, +-1 frame"},
+    {"event": "missile nose first visible outside the tube (motion start, release begins)", "frame": 3, "time_s": 0.125, "reliability": "+-1 frame; extrapolating the nose displacement back to zero speed gives motion start around frame 1-2"},
+    {"event": "missile tail clears the tube mouth (fully out / release complete)", "frame": 13, "time_s": 0.5417, "reliability": "+-1 frame (tail at s=-427 vs mouth s=-449 at f13; at f12 still in tube)"},
+    {"event": "missile passes above the hill ridge line (sky background)", "frame": 18, "time_s": 0.75},
+    {"event": "missile nose reaches top image edge", "frame": 31, "time_s": 1.2917},
+    {"event": "missile fully out of frame", "frame": 34, "time_s": 1.4167, "reliability": "last visible frame 33 (only the tail end)"},
+    {"note": "missile accelerates throughout (image speed of centre ~6 px/frame at f3-4, ~30 at f16, ~61 at f30, ~65 at f32); no bounce, no direction change; straight image path"}
+  ]
+}

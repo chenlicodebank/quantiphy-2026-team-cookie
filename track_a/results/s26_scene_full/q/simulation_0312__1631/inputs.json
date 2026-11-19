@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0312.mp4",
+ "video_source": "simulation",
+ "video_type": "S3SX",
+ "fps": 24.008,
+ "frames": 72,
+ "duration_s": 2.999,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1631,
+  "question": "What is the average speed of the star from the beginning to the end in m/s?",
+  "prior": "height of the star = 0.2m",
+  "depth_info": "t=1.0s, distance_star_camera = 6.552m\nt=2.0s, distance_star_camera = 8.345m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

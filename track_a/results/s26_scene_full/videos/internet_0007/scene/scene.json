@@ -1,0 +1,70 @@
+{
+  "video": "internet_0007.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down drone view, camera looking straight down at a straight road)",
+  "fps": 29.943158,
+  "frames": 298,
+  "image_size_wh": [1080, 1920],
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "units": "pixels (full resolution) and seconds; image y grows downward",
+  "camera": {
+    "motion": "nearly static hovering drone; slow drift. Background similarity transform frame-0 -> frame-i in scene/camera.csv",
+    "max_translation_px": {"tx": [-6.5, 3.0], "ty": [-12.7, 1.0]},
+    "scale_range": [0.9997, 1.0129],
+    "rotation_deg": [-0.06, 0.12],
+    "note": "drift is <1% of car travel; raw (cx,cy) and background-stabilised (cx_stab,cy_stab) are both in the tracks"
+  },
+  "moving_objects": {
+    "blue_car": {
+      "description": "dark-blue/metallic blue car (saloon/hatch) in the LEFT lane (x ~ 537-545), driving toward the image TOP (-y)",
+      "track": "tracks/blue_car.csv",
+      "visible_frames": [0, 133],
+      "fully_in_frame": [0, 127],
+      "partially_out_top": [128, 134],
+      "gone_from": 135,
+      "occluded_by_tree": [86, 108],
+      "length_px_along_motion": 74.0,
+      "length_px_note": "clean-mask bumper-to-bumper length = 73-74 px in frames 0-85 (sunlit, reliable); 77-78 px in frames 109-127 after the tree (darker, mask probably includes a little blur/rear lights) - use 74",
+      "width_px": 35.0,
+      "width_px_note": "includes mirrors; body ~33",
+      "approx_motion_for_orientation_only": "~ -11.35 px/frame (stabilised y) over frames 0-20, ~ -11.9 to -12.0 from frame 20 on - nearly constant"
+    },
+    "white_car": {
+      "description": "white car in the RIGHT lane (x ~ 577-585), driving toward the image BOTTOM (+y)",
+      "track": "tracks/white_car.csv",
+      "visible_frames": [94, 297],
+      "entering_top_partial": [94, 98],
+      "fully_in_frame": [99, 290],
+      "partially_out_bottom": [291, 297],
+      "front_bumper_first_visible": "about frame 91-92 (edge-extrapolated)",
+      "length_px_along_motion": 63.0,
+      "length_px_note": "clean-mask length median 63 (p10-p90 60-65); varies with image position: ~65-66 near top (y<350), ~60-61 around y 800-1100, ~63-65 near bottom (y>1300) - small lens/perspective effect",
+      "width_px": 30.0,
+      "approx_motion_for_orientation_only": "~ +10.1 px/frame at entry slowly falling to ~ +8.8 px/frame at exit (gently decelerating)"
+    }
+  },
+  "events": [
+    {"event": "video start, blue car already moving up at frame 0", "frame": 0, "t": 0.0},
+    {"event": "blue car starts passing under overhanging tree (left side of road), partly/mostly hidden", "frame": 86, "t": 2.872},
+    {"event": "white car front bumper appears at top edge", "frame": 92, "t": 3.072, "note": "first measurable frame 94"},
+    {"event": "white car fully in frame", "frame": 99, "t": 3.306},
+    {"event": "blue car clear of tree", "frame": 109, "t": 3.640},
+    {"event": "cars pass each other (centres at same image y ~ 190)", "frame": 114.6, "t": 3.83, "note": "between frames 114 and 115"},
+    {"event": "blue car front reaches top edge", "frame": 127, "t": 4.241},
+    {"event": "blue car fully out of frame (top)", "frame": 135, "t": 4.509},
+    {"event": "white car passes SLOW road marking (centre y ~1195)", "frame": 214, "t": 7.15},
+    {"event": "white car front reaches bottom edge", "frame": 290, "t": 9.685},
+    {"event": "video end, white car rear still visible at bottom", "frame": 297, "t": 9.919}
+  ],
+  "static_objects": {
+    "road": {"description": "straight two-lane asphalt road running vertically through the frame", "x_edges_px": [524, 595], "width_px": 71, "length_px": "whole frame height 1920"},
+    "centre_line_dashes": {"description": "white dashed centre line at x ~ 559-560", "dash_length_px": 88, "dash_period_px": "~132-145 (gap ~45-55)", "example_dashes_y": [[680, 767], [812, 900], [1211, 1297]]},
+    "slow_marking": {"description": "'SLOW' painted in the right (white car's) lane, reads upside-down for downward traffic", "bbox_xy_px": [565, 1150, 607, 1240], "length_px": 90, "width_px": 42},
+    "big_tree_over_road": {"description": "large pale-yellow leafless willow-like tree on the left verge overhanging the left lane; occludes the blue car", "approx_center_px": [445, 400], "approx_size_px": 290, "road_overlap_y": [330, 560], "reliability": "coarse"},
+    "yellow_tree": {"description": "bright-yellow round tree on the left verge", "approx_center_px": [425, 960], "approx_size_px": 150, "reliability": "coarse"},
+    "side_track": {"description": "grey track/lane curving off to the left from near the road at lower left", "approx_y_px": [1400, 1500], "x_px": [0, 380], "reliability": "coarse"},
+    "grass_field": {"description": "green field left of the road", "x_px": [0, 420]},
+    "woodland_and_path": {"description": "brown/olive woodland right of the road with a thin dirt path at x ~ 900-960", "x_px": [620, 1080]}
+  },
+  "files": {"notes": "notes.md", "camera": "camera.csv", "tracks": ["tracks/blue_car.csv", "tracks/white_car.csv"], "scripts": "scripts/"}
+}

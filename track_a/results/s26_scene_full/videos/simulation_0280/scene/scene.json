@@ -1,0 +1,103 @@
+{
+  "video": "simulation_0280.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (full-resolution 3840x2160 image coordinates, x right, y down) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of a static seabed patch (x 500-1250, y 1240-1600) vs frame 0: |shift| <= 0.03 px for all frames (scripts/camcheck.py)",
+    "view": "side view, horizontal line of sight; whale swims in a plane roughly parallel to the image (2D scene). Seabed recedes in perspective below y ~1260, but the whale and its motion are treated as one plane."
+  },
+  "objects": [
+    {
+      "name": "whale",
+      "description": "single large blue humpback-type whale (long pectoral flippers, small dorsal hump), the only moving object; swims right-to-left (head left), slight downward-then-upward tail stroke",
+      "moves": true,
+      "visible_frames": "0-71 (all)",
+      "partially_out_of_frame": "frames 0-46 the tail/fluke is cut by the right image edge (x = 3839); whole whale visible frames 47-71 (frame 47 fluke tip touches x 3831, so 48/49+ is safest)",
+      "track_file": "tracks/whale.csv",
+      "reference_points": {
+        "ref_x/ref_y": "mask centroid (proxy for the rig origin / body centre); biased toward the head in frames 0-46 because the tail is cut off",
+        "snout_x/snout_y": "leftmost mask pixel (snout tip), integer, noise ~ +-5 px",
+        "jaw_front_x": "mean leftmost mask x over rows 880-979 (front of the lower head), smoothest translation reference, noise ~ +-2-3 px",
+        "front_x_780_880": "mean leftmost mask x over rows 780-879"
+      },
+      "pixel_sizes": {
+        "full_length_bbox_w_uncut_frames_47_71": {"min": 3303, "median": 3419, "max": 3454, "note": "snout to fluke tip, horizontal; decreases late (frames 60-71) as the tail bends upward"},
+        "full_length_principal_axis_uncut": {"min": 3357.6, "median": 3431, "max": 3453},
+        "straight_body_length_frames_49_53": "~3450 px (bbox_w 3437-3449, axis_len 3450-3453)",
+        "bbox_height_uncut": {"min": 762, "median": 906, "max": 1292, "note": "vertical extent incl. flipper (and raised fluke late)"},
+        "head_depth_at_snout_plus_400px": "~365 px (trunk_top/bot columns in whale.csv)"
+      },
+      "motion_summary_px": {
+        "snout_x": "947 (f0) -> 95 (f71), net -852 px",
+        "jaw_front_x": "1058.5 (f0) -> 220.1 (f71), net -838 px",
+        "per_frame_step": "jaw_front_x step ~ -12 px/frame early, ~ -12 to -15 px/frame late (see csv)",
+        "vertical": "head nearly level (snout_y ~820-835, head_cy ~842-847); centroid ref_y 885 -> 943 (f27) -> 822 (f71) driven by tail bend + tail cut"
+      }
+    },
+    {
+      "name": "whale_shadow",
+      "description": "dark elongated shadow of the whale on the seabed (y ~1560-1700), moves with the whale",
+      "moves": true,
+      "visible_frames": "0-71",
+      "track_file": "tracks/whale_shadow.csv",
+      "note": "cut by right edge frames 0-30; bbox from Lab-L < 105 threshold, can merge with the rock/coral at the left end"
+    },
+    {
+      "name": "rock",
+      "description": "pale speckled boulder on the seabed, lower left",
+      "moves": false,
+      "bbox_px_frame0": [937, 1471, 1167, 1579],
+      "extent_px": {"length_x": 230, "height_y": 108}
+    },
+    {
+      "name": "coral_bush",
+      "description": "dark branching coral/sea-fan just left of the rock",
+      "moves": false,
+      "bbox_px_frame0": [812, 1467, 967, 1579],
+      "extent_px": {"width_x": 155, "height_y": 112}
+    },
+    {
+      "name": "seaweed_stalks",
+      "description": "5 thin dark kelp stalks on the seabed, left of / behind the rock",
+      "moves": false,
+      "items_px_frame0": [
+        {"id": "A (leftmost, tallest)", "x": 571, "y_top": 1250, "y_bottom": 1588, "height": 338},
+        {"id": "B", "x": 718, "y_top": 1404, "y_bottom": 1583, "height": 179},
+        {"id": "C (behind coral)", "x": 933, "y_top": 1308, "y_bottom": 1567, "height": 259},
+        {"id": "D (behind rock)", "x": 990, "y_top": 1317, "y_bottom": 1475, "height": 158, "note": "lower part hidden by rock"},
+        {"id": "E (right of rock)", "x": 1221, "y_top": 1308, "y_bottom": 1571, "height": 263}
+      ],
+      "reliability": "+-10 px read from a 1.2x crop"
+    },
+    {
+      "name": "seabed",
+      "description": "sandy floor with moving caustic light patterns; far edge (floor/water boundary) at y ~1260",
+      "moves": false
+    },
+    {
+      "name": "water_surface_and_mid_water",
+      "description": "rippled water surface seen from below at the top (y < ~600), darker mid-water band y ~700-1260, faint pale vertical streaks at top-right (x 3550-3840, y ~690-760) are background texture",
+      "moves": "texture animates only"
+    }
+  ],
+  "events": [
+    {"event": "whale moving at clip start", "frame": 0, "t": 0.0, "note": "snout already moving at frame 0->1 (947->939) though jaw_front_x is flat 0->1 (1058.5->1058.6); treat motion as ongoing for the whole clip"},
+    {"event": "tail tip leaves contact with right image edge (whole whale in frame)", "frame": 47, "t": 1.958},
+    {"event": "tail lowest (max downward bend): bottom_y max 1648, centroid ref_y max 942.7", "frame": 28, "t": 1.167},
+    {"event": "tail sweeps upward; fluke above the body top from ~frame 52 (bbox_y0 drops 593 -> 187 at f71)", "frame": 52, "t": 2.167},
+    {"event": "no impacts, contacts, bounces or releases; no other moving objects", "frame": null}
+  ],
+  "files": {
+    "tracks/whale.csv": "per-frame whale track (72 rows)",
+    "tracks/whale_shadow.csv": "per-frame shadow box",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

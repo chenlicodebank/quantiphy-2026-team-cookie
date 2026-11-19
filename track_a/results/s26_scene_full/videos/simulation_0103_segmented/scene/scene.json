@@ -1,0 +1,39 @@
+{
+  "video": "simulation_0103_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by plain white)",
+  "scene_type": "2D",
+  "fps": 24.0, "frames": 54, "duration_s": 2.25, "width": 1920, "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {"motion": "static (white background, no texture; both objects keep constant y and constant pixel size)", "perspective": "none visible; side view, motion in the image plane"},
+  "objects": {
+    "boat": {
+      "description": "red fishing boat with purple/navy lower hull, white cabin with two windows, mast, hull lettering 'AH805'; bow points right; upper half of image",
+      "moves": true, "visible_frames": "0-53 (stern off left edge for frames 0-19, fully in frame horizontally from frame 20/21; mast top always cut by top image edge)",
+      "track": "tracks/boat.csv",
+      "reference_point": "ref_x = centre of hull horizontal extent (stern..bow tip); frames 0-20 use bow_tip_x - 427.5. ref_y = midpoint of cabin roof (y~237) and keel (y~644) = ~440.5",
+      "size_px": {"length_stern_to_bow_tip": 856, "length_note": "median of hull_x_max-hull_x_min+1 over frames 20-53 (range 853-857)",
+                  "height_keel_to_cabin_roof": 407, "keel_y": 644, "cabin_roof_y": 237, "bow_tip_y": 368, "deck_at_stern_y_approx": 460,
+                  "height_keel_to_top_of_mast": "not measurable, mast leaves frame at y=0 (> 645 px)",
+                  "cabin_width_px_approx": 175},
+      "motion": "at rest frame 0->1, then moves right at a steady ~17.8 px/frame (bow tip 522 at f1 -> 1451 at f53); no vertical motion, no rotation"
+    },
+    "shark": {
+      "description": "small grey-blue shark with white belly, nose pointing left; lower part of image (y 853-955)",
+      "moves": true, "visible_frames": "0-53, never clipped or occluded",
+      "track": "tracks/shark.csv",
+      "reference_point": "mask bounding-box centre (cx_bbox, cy_bbox ~904)",
+      "size_px": {"length_nose_to_tail_tip": 275, "length_range": "272-278 (bbox_w)", "height_incl_dorsal_and_pectoral_fins": 103, "body_axis_angle_deg": -2},
+      "motion": "at rest frame 0->1, then swims left with increasing speed: bbox-centre step ~7 px/frame near f2 rising to ~15 px/frame near f53 (roughly uniform acceleration); y constant"
+    }
+  },
+  "static_objects": "none (plain white background from segmentation; no ground, water line or markings)",
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "both objects at rest (frames 0 and 1 identical positions)"},
+    {"frame": 1, "t": 0.0417, "event": "last frame before motion; motion starts between frame 1 and 2 for both boat and shark"},
+    {"frame": 20, "t": 0.833, "event": "boat stern enters the frame (hull fully visible horizontally from frame 21)"},
+    {"frame": 41.5, "t": 1.73, "event": "boat bow tip x passes shark bbox-centre x (f41: 1235 vs 1252.5; f42: 1253 vs 1237.5). Boat and shark centres have NOT yet crossed in x by the end (f53: boat ref_x 1023.5, shark 1081). No contact: vertical gap keel y644 vs shark top y853"},
+    {"frame": 53, "t": 2.208, "event": "end of clip, both still moving"}
+  ],
+  "notes_file": "notes.md"
+}

@@ -1,0 +1,92 @@
+{
+  "video": "captured_0006.mp4",
+  "source": "lab",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "frame_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t=0",
+  "pixel_convention": "x right, y down, origin top-left pixel of the 1280x720 frame",
+  "camera": {
+    "motion": "static (phase correlation of monitor / right wall / right table region vs frame 0: |shift| < 0.15 px every frame)",
+    "intrinsics_from_task_spec": {"fx_px": 762.8, "fy_px": 762.8, "cx_px": 640, "cy_px": 360, "note": "lab camera, HFOV 80 deg, focal = 0.5959 x width; not measured"},
+    "perspective_cues": "Table top is a rectangle seen obliquely from the front and above: front edge 586 px long at y~514, back edge ~280 px long at y~431, so the back edge is about 2x farther than the front edge. The floor/wall junction lines converge toward the centre. The toy's apparent size grows from ~41 px (held by the person, behind the table) to ~95 px (on the table near its front edge): its camera distance roughly halves.",
+    "postprocessing": "Background was blurred and faces were replaced with flat beige ovals (watermark 'Modified with Segment Anything 2 Demo' bottom right). The toy itself is sharp but its own face was also flattened to a beige oval."
+  },
+  "objects": [
+    {
+      "name": "toy",
+      "description": "yellow plush pineapple-like toy with a green leaf tuft on top and a flat beige oval face patch (anonymiser artefact); the only yellow object in the scene",
+      "moves": true,
+      "visible_frames": [0, 47],
+      "track": "tracks/toy.csv",
+      "reference_point": "centroid of mask (yellow body hull + beige face patch), columns cx, cy; yellow_cx/yellow_cy = centroid of the yellow pixels only",
+      "apparent_size_px": {
+        "held_in_hand_f0_18": {"equiv_diam": 41.5, "bbox_w": 42, "bbox_h": 38, "note": "seen roughly face-on; partly covered by fingers at bottom"},
+        "near_apex_f24_27": {"equiv_diam": [50, 60]},
+        "resting_or_tumbling_on_table_f36_42": {"equiv_diam": 94.5, "bbox_w": [101, 119], "bbox_h": [76, 98], "major_axis": [106, 119], "minor_axis": [75, 86], "note": "lying on its side, long axis roughly horizontal ~114 px, short ~79 px"}
+      }
+    },
+    {
+      "name": "person",
+      "description": "person in light-blue denim overalls with black top, face anonymised; stands behind the table, left of centre; throws the toy with the right-side (image) hand",
+      "moves": "arm only (throw motion f19-f30), body essentially stationary",
+      "visible_frames": [0, 48],
+      "image_extent_px_f48": {"head_top_y": 45, "body_x": [310, 500], "head_x": [360, 450], "feet": "below the frame (cut off at y=720)", "shoulder_y": 185},
+      "note": "full height not measurable (feet out of frame)"
+    },
+    {
+      "name": "table",
+      "description": "wooden table, rectangular top on a single dark central pedestal, between camera and person",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "top_surface_corners_px_f48": {"back_left": [528, 431], "back_right": [805, 433], "front_left": [392, 514], "front_right": [978, 518]},
+      "front_edge_length_px": 586,
+      "back_edge_length_px": 277,
+      "top_surface_image_height_px": 83,
+      "front_face_thickness_px": 30,
+      "front_face_y": [515, 545],
+      "pedestal": {"x": [670, 705], "y": [545, 720], "note": "continues below the frame"}
+    },
+    {
+      "name": "tripod",
+      "description": "dark tripod with a small blue/white light on top, behind the table right of the person",
+      "moves": false,
+      "top_px": [688, 65],
+      "centre_column_x": 688,
+      "legs_spread_x": [560, 840],
+      "note": "blurred background"
+    },
+    {
+      "name": "monitor",
+      "description": "black screen / TV in top-right corner with a bright reflection",
+      "moves": false,
+      "bbox_px": [1000, 0, 1280, 140]
+    },
+    {
+      "name": "walls_floor",
+      "description": "grey partition wall panels, dark floor with red-tinted carpet strip; blurred",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"name": "toy held still in hand", "frames": [0, 16], "t": [0.0, 0.667], "note": "drifts down ~11 px over this interval"},
+    {"name": "throw wind-up (hand dips)", "frame": 18, "t": 0.75, "note": "lowest held position cy=236.9"},
+    {"name": "toy moving up with hand", "frames": [19, 22]},
+    {"name": "release", "frame": 22, "t": 0.917, "uncertainty_frames": 1, "note": "hand under toy through f22, clearly separated by f23-24"},
+    {"name": "apex of flight (min image y)", "frame": 25, "t": 1.042, "cy": 138.1},
+    {"name": "first impact on table (near front edge, centre x~550)", "frame": 32, "t": 1.333, "note": "f31 still airborne (bottom y 430, heavy blur); f32 bottom at y 511 = table front edge"},
+    {"name": "bounce airborne", "frames": [33, 35], "note": "rises to cy 423 at f34"},
+    {"name": "second contact with table", "frame": 36, "t": 1.5},
+    {"name": "tumbles / rolls leftward along table front edge", "frames": [36, 42]},
+    {"name": "leaves table over front-left corner (x~392,y~515)", "frame": 42, "t": 1.75, "uncertainty_frames": 1, "note": "f41-42 tipping over the corner, f43 clearly falling (cy jumps +18, +27, +52, +68 px/frame f42->f46)"},
+    {"name": "falls toward floor", "frames": [43, 47]},
+    {"name": "touches bottom edge of image", "frame": 46, "t": 1.917},
+    {"name": "toy out of view", "frame": 48, "t": 2.0}
+  ],
+  "files": {
+    "tracks/toy.csv": "per-frame toy track",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

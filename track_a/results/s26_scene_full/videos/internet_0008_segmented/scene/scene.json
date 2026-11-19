@@ -1,0 +1,116 @@
+{
+ "video": "internet_0008_segmented.mp4",
+ "source": "segmentation (SAM2 cut-out on white background) of internet footage",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 240,
+ "width": 960,
+ "height": 540,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "units": "pixels and seconds; no metric scale",
+ "camera": {
+  "status": "unknown/assumed static: background replaced by pure white, no background features to measure pan. Sailboat cy and bottom edge stay constant (\u00b11 px) and its x speed is constant, consistent with a static camera.",
+  "per_frame_background_shift": "not measurable (no background)"
+ },
+ "objects": [
+  {
+   "name": "sailboat",
+   "description": "dark red/maroon two-masted (ketch) sailboat, tall main sail right, smaller mizzen sail left, hull at bottom; the large object in every frame",
+   "moves": true,
+   "visible_frames": [
+    0,
+    239
+   ],
+   "track": "tracks/sailboat.csv",
+   "direction": "moves to the right (+x), essentially horizontal",
+   "reference_point": "cx,cy = bbox centre (visible centre); centroid_x/y = mask centroid; hull_x0/x1 = hull ends (bow/stern) in the bottom 13 mask rows",
+   "position_frame0": {
+    "cx": 289.5,
+    "cy": 454.0,
+    "bbox": [
+     241,
+     393,
+     338,
+     515
+    ]
+   },
+   "position_frame239": {
+    "cx": 627.5,
+    "cy": 455.5,
+    "bbox": [
+     578,
+     394,
+     677,
+     517
+    ]
+   },
+   "length_px_overall_bbox": {
+    "median": 100.0,
+    "min": 95.0,
+    "max": 105.0
+   },
+   "hull_length_px": {
+    "median": 98.0,
+    "min": 93.0,
+    "max": 103.0
+   },
+   "height_px_waterline_to_masttop": {
+    "median": 122.0,
+    "min": 117.0,
+    "max": 126.0
+   },
+   "net_x_displacement_px_0_to_239": 338.0,
+   "apparent_size_change": "none (length ~98-100 px, height ~122 px throughout)"
+  },
+  {
+   "name": "bottom_object",
+   "description": "small dark brown/black blob at the bottom edge (y~510-536), probably a small boat / dinghy or debris in the foreground, much faster than the sailboat",
+   "moves": true,
+   "visible_frames": [
+    179,
+    239
+   ],
+   "fully_in_frame_from": 184,
+   "track": "tracks/bottom_object.csv",
+   "direction": "enters from the left edge at frame 179, moves right (+x), drifting slightly down",
+   "length_px": {
+    "median": 41.0,
+    "min": 37.0,
+    "max": 43.0
+   },
+   "height_px": {
+    "median": 19.0,
+    "min": 17.0,
+    "max": 22.0
+   }
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "watermark",
+   "description": "grey box 'Modified with Segment Anything 2 Demo' bottom-right, x 705-960, y 508-540; not a scene object"
+  }
+ ],
+ "events": [
+  {
+   "event": "sailboat in steady motion for the whole clip (no start/stop seen)",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "bottom_object enters at left edge",
+   "frame": 179,
+   "time": 7.4583
+  },
+  {
+   "event": "bottom_object fully inside frame",
+   "frame": 184,
+   "time": 7.6667
+  },
+  {
+   "event": "clip ends; both objects still moving right",
+   "frame": 239,
+   "time": 9.9583
+  }
+ ]
+}

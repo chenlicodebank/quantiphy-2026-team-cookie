@@ -1,0 +1,90 @@
+{
+  "video": "simulation_0204.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 30,
+  "duration_s": 1.25,
+  "image_size_px": [2124, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down), seconds",
+  "camera": {
+    "motion": "static (background identical across frames; the magnifier's rest pose is pixel-identical in frames 24-29 and all static props stay fixed)",
+    "view": "front view, slightly above table height, looking at a desk mat on a table in front of a teal wall; the mat recedes in perspective (back edge y~948, front edge strip y~1045-1060), but the falling motion is vertical in a plane facing the camera",
+    "per_frame_background_shift_px": 0
+  },
+  "objects": [
+    {
+      "name": "magnifier",
+      "description": "magnifying glass: round lens with silver/bluish rim, white ferrule, tan/brown wooden handle with dark tip pointing right; the ONLY moving object",
+      "moves": true,
+      "visible_frames": "0-29",
+      "track_file": "tracks/magnifier.csv",
+      "reference_point": "bbox centre (ref_x/ref_y) and mask centroid both given; the Blender origin is not visible - for a rigid magnifier it is probably near the bbox centre or the lens centre. The motion is a vertical drop, so vertical displacements are the same for any point while the object does not rotate (frames 0-11).",
+      "extents_in_flight_px": {
+        "total_length_rim_to_handle_tip": 162,
+        "lens_diameter": 103,
+        "lens_x_range_frame0": [979, 1082],
+        "handle_x_range_frame0": [1082, 1141],
+        "handle_length_incl_ferrule": 59,
+        "lens_centre_x_frame0": 1030.5,
+        "edge_on_thickness_frame7_lens_rim": 20,
+        "edge_on_thickness_frame7_handle": 15,
+        "apparent_height_frame0": 42,
+        "note": "frames 0-10 the lens is nearly edge-on (slightly tilted, apparent height 42 px at f0 shrinking to 20 px at f7 then 40 px at f10/11 as it rotates slowly); horizontal length stays 161-162 px throughout the fall"
+      },
+      "extents_at_rest_px_frame29": {
+        "bbox": [974, 991, 1124, 1046],
+        "width": 151,
+        "height": 56,
+        "note": "lying flat on the mat, handle pointing right and toward the camera (foreshortened), so the horizontal extent (151) is less than the true length (162 in flight); bottom edge from mask clipped at y=1046 because of reflections on the mat front strip"
+      }
+    },
+    {
+      "name": "typewriter",
+      "description": "vintage black/cream typewriter on the left of the mat, keys facing camera",
+      "moves": false,
+      "visible_frames": "0-29",
+      "bbox_px": [486, 861, 798, 1033],
+      "width_px": 312,
+      "height_px": 172,
+      "centre_px": [642, 947],
+      "reliability": "edges read off zoomed frames, +/-5 px"
+    },
+    {
+      "name": "card_with_scissors_and_stamp",
+      "description": "small cream paper card lying on the mat right of centre, with a dark pair of scissors / metal tool lying on it and a dark brown block (stamp/ink pad) at its right end",
+      "moves": false,
+      "visible_frames": "0-29",
+      "card_bbox_px": [1192, 983, 1387, 1002],
+      "scissors_bbox_px": [1215, 969, 1308, 992],
+      "dark_block_bbox_px": [1321, 990, 1365, 1017],
+      "group_bbox_px": [1192, 969, 1387, 1017],
+      "reliability": "+/-5 px, small low-contrast objects"
+    },
+    {
+      "name": "desk_mat",
+      "description": "large dark green/brown leather desk mat with printed border, on a table; the ground surface the magnifier lands on",
+      "moves": false,
+      "visible_frames": "0-29",
+      "back_edge_y_px": 948,
+      "back_edge_x_range_px": [255, 1795],
+      "front_edge_strip_y_px": [1045, 1060],
+      "note": "extends past left/right/bottom image borders at the front; perspective trapezoid"
+    },
+    {
+      "name": "wall",
+      "description": "plain teal backdrop, upper ~88% of the image",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "release / start of fall", "frame": 0, "t_s": 0.0, "note": "first frame-to-frame drop is ~half of the later per-frame increment, i.e. starts from rest at frame 0"},
+    {"event": "last free-fall frame (above mat)", "frame": 11, "t_s": 0.4583},
+    {"event": "first impact with mat (lens rim)", "frame": 12, "t_s": 0.5, "note": "contact happens between frames 11 and 12 (~frame 11.2, t~0.467 s by extrapolating the bottom edge to the rest level y~1046)"},
+    {"event": "bounce: magnifier pivots on left rim, handle flips up", "frames": "13-16", "t_s": [0.5417, 0.6667], "note": "handle tip highest (y~932) at frame 15"},
+    {"event": "second landing (flat)", "frame": 18, "t_s": 0.75},
+    {"event": "small wobble/slide", "frames": "19-23"},
+    {"event": "comes to rest (end of motion)", "frame": 24, "t_s": 1.0, "note": "pixel-identical pose frames 24-29"}
+  ]
+}

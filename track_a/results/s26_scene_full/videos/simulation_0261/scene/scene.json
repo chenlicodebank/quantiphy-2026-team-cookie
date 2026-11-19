@@ -1,0 +1,64 @@
+{
+  "video": "simulation_0261.mp4",
+  "source": "simulation",
+  "scene": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "size_wh": [1080, 1920],
+  "time_convention": "t = frame / 24; frame = round(t*24); t=0 is frame 0",
+  "units": "pixels, seconds; image y grows downward",
+  "camera": {
+    "motion": "static (no pan/shake; the background rows and the wall/floor line are identical in frames 0 and 49 outside the mug)",
+    "view": "front view, roughly horizontal, looking at a plain beige backdrop; vertical falling plane faces the camera",
+    "wall_floor_boundary_row_px": 1535,
+    "perspective_note": "The mug's apparent height changes with its image row (top/bottom ellipses are visible far from the image centre, hidden near y~950); its width stays constant (body 81-82 px, total with handle 112 px), so it stays at one depth. Use the WIDTH for any 2D scale."
+  },
+  "objects": [
+    {
+      "name": "mug",
+      "description": "single beige/cream ceramic mug, handle on its right (+x) side; the only object in the scene",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "track_file": "tracks/mug.csv",
+      "reference_point": "cx,cy = mask centroid (includes handle); body_cx = centre of the cylinder without the handle; bbox_cx,bbox_cy = bbox centre. For vertical motion all agree to <1 px in differences; body_cx ~ 568.5, bbox_cx 583.5, centroid ~575",
+      "extents_px": {
+        "total_width_incl_handle": 112,
+        "body_diameter_without_handle": 81.5,
+        "handle_extra_width": 30,
+        "apparent_height_frame0_top_of_image": 112,
+        "apparent_height_min_frame13_14_near_image_centre": 89,
+        "apparent_height_at_rest_frames_24_49": 102.5,
+        "note": "true side-view cylinder height (no rim/bottom ellipse) is best approximated by the minimum ~89 px at frames 13-14 (mug near the image centre row y~836-956)"
+      },
+      "motion": "vertical free fall straight down (x constant to <1.5 px), hits the floor, small rebound/tilt, then rests",
+      "positions_px": {
+        "frame0_centroid": [574.4, 78.1],
+        "frame0_bbox_centre": [583.5, 77.5],
+        "rest_centroid_frames_24_49": [575.8, 1626.6],
+        "rest_bbox": [519, 1574, 639, 1676],
+        "rest_bbox_note": "x0=519 at rest includes a little contact shadow on the left; body x 529-609",
+        "total_vertical_drop_centroid": 1548.5,
+        "rest_bottom_y": 1676
+      }
+    },
+    {
+      "name": "floor",
+      "description": "plain beige floor plane, lower part of the image below the boundary row ~1535 (slightly brighter than the wall)",
+      "moves": false,
+      "image_rows": [1535, 1919]
+    },
+    {
+      "name": "backdrop_wall",
+      "description": "plain beige wall with a soft radial light spot centred about (x~540, y~600-650)",
+      "moves": false,
+      "image_rows": [0, 1535]
+    }
+  ],
+  "events": [
+    {"event": "release / start of fall", "frame": 0, "time_s": 0.0, "note": "centroid step frame0->1 is 5.0 px, then 13.8, 22.6, 31.8, 40.6 ... (constant increments ~8.8-9 px/frame^2): starts from (near) rest at frame 0"},
+    {"event": "last airborne frame", "frame": 18, "time_s": 0.75, "centroid_y": 1523.9},
+    {"event": "impact with floor (first contact)", "frame": 19, "time_s": 0.7917, "note": "contact happens between frames 18 and 19; at frame 19 the bottom is already at y=1679 (rest 1676)"},
+    {"event": "rebound / tilt after impact", "frames": [20, 22], "times_s": [0.8333, 0.9167], "note": "bbox top rises to 1559-1565 while the bottom stays ~1677: the mug rocks/hops a few px; centroid y 1621.5, 1618.7, 1620.8"},
+    {"event": "comes to rest", "frame": 23, "time_s": 0.9583, "note": "from frame 24 on the position is constant within 0.5 px"}
+  ]
+}

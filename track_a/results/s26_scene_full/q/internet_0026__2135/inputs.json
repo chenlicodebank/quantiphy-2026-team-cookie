@@ -1,0 +1,18 @@
+{
+ "video": "internet_0026.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 19.68,
+ "frames": 29,
+ "duration_s": 1.4736,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 2135,
+  "question": "What is the average speed of the toy truck in cm/s?",
+  "prior": "total height of the sofa = 90cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

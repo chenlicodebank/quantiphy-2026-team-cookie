@@ -1,0 +1,74 @@
+{
+  "video": "simulation_0047.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (near-nadir top-down view of a street; motion in the ground plane)",
+  "fps": 33.0,
+  "frames": 99,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 1072],
+  "time_convention": "t = frame / 33; frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y downward; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of static lower-left region vs frame 0: |shift| < 0.01 px for all frames (scripts/finalize.py)",
+    "view": "top-down over a straight street running horizontally across the image; ground plane ~ parallel to image plane, so one px-scale applies to all ground-level objects. Tall objects (buildings, utility box) show slight perspective lean (their sides are visible)."
+  },
+  "lighting": "low sun: every moving object casts a long shadow toward the upper-left (direction ~(-1,-0.35) in image). Shadows are NOT part of object extents.",
+  "moving_objects": {
+    "cyclist": {
+      "description": "person in black riding a white/silver bicycle with a rear rack, on the road (asphalt), moving right-to-left along y~465-478",
+      "distinguish": "the only object on the road; dark rider, white bike frame, ladder-like rear rack at right end",
+      "moves": true,
+      "visible_frames": "front wheel tip emerges from under the right tree canopy at ~frame 6; partially hidden under canopy frames 6-14 (occluded=1 in track); fully visible frames 15-98 (still in view at the end, ref x ~356 at frame 98)",
+      "track_file": "tracks/cyclist.csv",
+      "reference_point": "ref_x/ref_y = centre of the bike+rider bounding box (midpoint between front-wheel tip and rear-rack end; handlebar mid-height). extra_x/extra_y = rough rider pelvis/saddle estimate (16.5 px behind ref, toward rear). Rig root unknown; for displacements/speeds the choice does not matter (rigid translation).",
+      "motion_summary_px": "almost perfectly uniform: linear fit frames 14-98 x = 1619.23 - 12.849*frame, y = 479.71 - 0.154*frame (template centre); rms residual 0.26 px (x), 0.07 px (y). Per-frame displacement 12.85 px/frame (= 424 px/s), heading ~0.7 deg upward from -x direction.",
+      "size_px": {
+        "length_along_motion": 133,
+        "length_note": "front wheel tip to rear end of rack, measured on frame 50 zoom (x 907..1040); mask PCA length frames 40-70 median ~125 (thin front tip lost in mask)",
+        "width_across_motion": 46,
+        "width_note": "handlebar span / rider shoulders, y 448..494 at frame 50; mask height median 44",
+        "height": "not observable (top-down view)",
+        "rider_body_length_px": "~45 (dark blob x 960..1005 at frame 50)",
+        "rear_rack_px": "~31 x 10 (x 1009..1040)"
+      }
+    },
+    "pedestrian": {
+      "description": "person in white shirt and dark trousers walking on the upper (far-side) sidewalk, right-to-left along y~317-320, between the building steps and the road curb",
+      "distinguish": "the only person on the sidewalk; white top seen from above, dark head",
+      "moves": true,
+      "visible_frames": "0-98 (whole clip, never occluded)",
+      "track_file": "tracks/pedestrian.csv",
+      "reference_point": "ref_x/ref_y = head / torso centre seen from above (proxy for the pelvis in a top-down view), = template centre + (6,-1)",
+      "motion_summary_px": "walks steadily left: ref x 1410.5 (f0) -> 1083.9 (f98); mean per-frame step 3.35 px/frame (~110.5 px/s), per-frame steps 2.6-4.0 px oscillating with the gait (speed peaks near frames 2, 20, 37, 55, 71, 88 -> one step ~17 frames ~0.52 s). Path length f0-98 = 328.3 px, net displacement 326.7 px. y nearly constant (316-321).",
+      "size_px": {
+        "width_across_motion_shoulders": "41-45 (bbox_h median 44)",
+        "length_along_motion": "torso/head ~27-35; including swinging legs/arms up to ~55-65 (varies with gait; mask often loses dark legs on shadowed ground)",
+        "height": "not observable (top-down view; standing height cannot be measured from this view)"
+      }
+    }
+  },
+  "static_objects": {
+    "utility_box": {"description": "light grey/white cabinet (kiosk/utility box) on upper sidewalk near the curb, left part of image", "top_face_px": {"x": [346, 462], "y": [251, 363], "size": [117, 113]}, "full_visible_extent_incl_side": {"x": [346, 503], "y": [248, 382]}},
+    "manhole_cover": {"description": "round manhole on the road, left part of image, bright ring around dark disc", "centre_px": [442.5, 554.5], "outer_diameter_px": 94, "inner_dark_disc_diameter_px": 78, "note": "outer ring radius 39-48 px by radial profile; +-3 px"},
+    "road": {"description": "asphalt street running horizontally", "upper_curb_sidewalk_edge_y": 399, "upper_gutter_y": [400, 413], "lower_curb_y": [800, 815], "road_width_px": "~402 between curb faces (y 401..803); asphalt ~390 (y 413..803)"},
+    "upper_sidewalk": {"description": "sidewalk where the pedestrian walks", "y_range": [140, 399], "tile_joint_spacing_px": "~120 (joints near x 585, 702, 822, 942, 1062, 1182, 1302)"},
+    "lower_sidewalk": {"y_range": [815, 1072]},
+    "right_tree": {"description": "tree on the road edge at right; canopy hides the cyclist at the start", "canopy_px": {"x": [1480, 1910], "y": [265, 700]}, "trunk_pit_ring_centre_approx": [1530, 565]},
+    "left_tree": {"description": "tree lower-middle, over lower sidewalk/road edge", "canopy_px": {"x": [535, 950], "y": [610, 1072]}},
+    "parked_bicycle": {"description": "pink/rose bicycle with brown basket leaning diagonally at lower sidewalk next to a planter, does not move", "extent_px": {"x": [1130, 1256], "y": [806, 882]}, "length_along_frame_px": "~136 (rear lower-left ~(1135,875) to front upper-right ~(1255,810))"},
+    "building_upper": {"description": "row-house facade with two entrance staircases and a hedge, top of image", "extent_px": {"x": [900, 1820], "y": [0, 280]}, "left_stair_px": {"x": [950, 1130], "y": [110, 275]}, "right_stair_px": {"x": [1405, 1590], "y": [130, 278]}},
+    "building_upper_left": {"description": "beige/blue buildings top-left corner", "extent_px": {"x": [0, 500], "y": [0, 220]}},
+    "small_round_object": {"description": "small dark/green round item on upper-left sidewalk (bollard top or dropped object), static", "centre_px": [272, 184], "diameter_px": "~10"},
+    "planters_bushes": {"description": "flowering bushes: top right (x 1600-1800, y 105-245) and lower middle (x 975-1180, y 860-1050)"}
+  },
+  "events": [
+    {"frame": 0, "time": 0.0, "what": "pedestrian already walking left (moving in every frame); cyclist hidden under right tree canopy (only its shadow visible)"},
+    {"frame": 6, "time": 0.182, "what": "cyclist front wheel tip first visible at canopy edge (x~1450)"},
+    {"frame": 15, "time": 0.455, "what": "cyclist fully out from under the canopy (rear rack end x < 1488); tracked by template from frame 14"},
+    {"frame": 22, "time": 0.667, "what": "cyclist passes the pedestrian (same x), closest approach 155.9 px (they are on road vs sidewalk, never in contact)"},
+    {"frame": 98, "time": 2.970, "what": "end of clip: both still moving left at the same pace; no stops, starts, turns, contacts or collisions occur"}
+  ],
+  "relations": "cyclist and pedestrian move in the same direction (left) on parallel lines; ref-point y separation 158.5 px (f6) slowly shrinking to 147 px (f98). Cyclist ref x passes the pedestrian ref x at frame 22 (t=0.667 s), when their ref-ref distance is minimal (155.9 px). Ref-ref distance: 218.5 px f6, 160 f18, 175 f30, 246 f42, 343 f54, 449 f66, 556 f78, 667 f90, 723 f96 (scripts/relations.py).",
+  "notes_file": "notes.md"
+}

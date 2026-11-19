@@ -1,0 +1,55 @@
+{
+  "video": "internet_0052.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 56,
+  "duration_s": 1.8667,
+  "image_size": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 is t=0",
+  "coordinates": "pixels, x right, y down. Track columns without suffix are in frame-0-stabilised coordinates (background-referenced); *_orig columns are in raw frame pixels. Difference is <= ~9.5 px in x, ~2-5 px in y (see camera).",
+  "camera": {
+    "type": "handheld/tripod, near-static with slow drift",
+    "drift": "scene content shifts smoothly right by ~9 px and up by ~2 px (at curb centre) over the 55 frames (~0.17 px/frame x), rotation 0.18 deg total, no zoom (scale 1.000 +-0.0007)",
+    "per_frame_transform_file": "camera_transform.json (A maps frame-0 coords -> frame-i coords; shift_at_curb_* = background shift at curb level y=990)",
+    "note": "Rider moves ~18.7 px/frame, so drift is ~1% of the motion; stabilised columns already remove it."
+  },
+  "perspective": "Side view; rider travels right-to-left parallel to the image plane along the road just in front of the curb. Scooter length stays 201-205 px over frames 0-31 (and ~203 by visual check at frames 50, 54) -> constant depth, planar single-scale assumption is good.",
+  "objects": [
+    {"name": "rider_scooter", "aka": ["person on e-scooter", "scooter", "rider", "kick scooter"], "moves": true, "visible_frames": [0, 55],
+     "description": "Person (cap, white long-sleeve top, olive cargo pants, dark bag) standing on a black/grey electric kick scooter, moving right-to-left along the road at the curb. Only moving object.",
+     "track": "tracks/rider_scooter.csv",
+     "reference_points": "bbox_cx/bbox_cy = visible centre of rider+scooter box; scooter_front_x = leading (left) edge of front wheel; scooter_cx = scooter midpoint; person_cx = person (incl. steering stem) mid-x",
+     "sizes_px": {
+       "scooter_length_front_wheel_to_rear_fender": {"value": 203, "range": [199, 207], "frames": "0-31 reliable frames (rear_reliable=1)"},
+       "scooter_wheel_diameter": {"value": 45, "note": "approx, front wheel ~1262-1307 x at frame 0, visual"},
+       "scooter_height_ground_to_handlebar": {"value": 200, "note": "approx: handlebar y~830, wheel bottom y~1031 at frame 0 (visual)"},
+       "rider_plus_scooter_height_wheel_bottom_to_cap_top": {"value": 333, "range": [326, 345], "note": "median; frame 54 (361) contaminated", "column": "person_height_px"},
+       "rider_height_shoe_sole_to_cap_top": {"value": 305, "note": "approx: deck/shoe sole y~1003-1005, cap top y~698 at frame 0 (visual +-5)"},
+       "person_width_incl_stem_and_bag": {"range": [100, 140], "columns": "person_x0..person_x1"}
+     }},
+    {"name": "no_parking_sign", "moves": false, "description": "Red/white 'NO PARKING FIRE LANE' sign on grey pole, centre of image", "frame0_px": {"plate_x": [948, 996], "plate_y": [535, 605], "width": 48, "height": 70}},
+    {"name": "arrow_sign", "moves": false, "description": "small black/white double-arrow plate under the no-parking sign", "frame0_px": {"x": [948, 996], "y": [607, 632]}},
+    {"name": "tow_away_sign", "moves": false, "description": "small 'TOW AWAY ZONE' plate under the arrow plate", "frame0_px": {"x": [948, 996], "y": [634, 658]}},
+    {"name": "sign_pole", "moves": false, "description": "grey metal pole holding the signs (also a tall light pole continues above to top of frame)", "frame0_px": {"x": [964, 978], "width": 13, "y_bottom": 950, "y_top": "0 (out of frame)"}},
+    {"name": "pole_base_planter", "moves": false, "description": "concrete cylinder at foot of sign pole", "frame0_px": {"x": [940, 1000], "y": [825, 950]}},
+    {"name": "parked_bicycle", "moves": false, "description": "black bicycle parked on the right, behind the curb, viewed mostly end-on (foreshortened)", "frame0_px": {"x": [1620, 1745], "y": [780, 955]}},
+    {"name": "palm_tree_left", "moves": false, "description": "large palm trunk left of centre", "frame0_px": {"trunk_x_at_y800": [335, 445], "base_y": 920}},
+    {"name": "palm_tree_right", "moves": false, "description": "large palm trunk right of centre, rider passes in front of it in frames 0-8", "frame0_px": {"trunk_x_at_y800": [1365, 1470], "base_y": 900}},
+    {"name": "palm_trees_background", "moves": false, "description": "several further palm trunks (x~600-720 and ~1120-1260) behind the planting strip"},
+    {"name": "curb", "moves": false, "description": "beige concrete curb/sidewalk strip running full width; top edge y~962-968, road edge y~1000-1010 (sloping slightly)", "frame0_px": {"y_top": 965, "y_bottom": 1005}},
+    {"name": "road", "moves": false, "description": "asphalt road below curb (y>1005); right part in tree shade, left part sunlit near the end"},
+    {"name": "planting_strip", "moves": false, "description": "grasses/shrubs in the median, x~450-1300, y~720-950"},
+    {"name": "parked_cars", "moves": false, "description": "many parked cars in the lot behind (white, black, dark blue SUV left-centre x~440-890 y~700-900)"},
+    {"name": "manhole_cover", "moves": false, "description": "round cover in the road at right", "frame0_px": {"center": [1830, 990]}},
+    {"name": "yellow_road_signs", "moves": false, "description": "small yellow diamond signs far back at x~1470 and ~1855, y~655"}
+  ],
+  "events": [
+    {"event": "rider already moving at frame 0 and keeps moving to the end (frame 55); no start/stop, no direction change", "frames": [0, 55]},
+    {"event": "rider body overlaps right palm trunk (x 1365-1470) in image", "frames": [0, 2]},
+    {"event": "rider body overlaps sign pole (x 964-978) in image; rider is in front, no occlusion of rider", "frames": [18, 24]},
+    {"event": "scooter leaves tree shade into sunlight (appearance changes black->grey)", "frames": [33, 45]},
+    {"event": "rider body overlaps left palm trunk (x 335-445) in image", "frames": [46, 55]}
+  ],
+  "notes_file": "notes.md"
+}

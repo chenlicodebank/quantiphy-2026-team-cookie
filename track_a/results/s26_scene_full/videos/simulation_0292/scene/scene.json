@@ -1,0 +1,104 @@
+{
+  "video": "simulation_0292.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN (image rows); all values in pixels of the original 2560x1440 frame",
+  "camera": {
+    "motion": "static (cart pixels identical in frames 0 and 71 except where the lid moves; background gradient unchanged)",
+    "view": "side view, camera roughly at the height of the cart roof / lower drone path; grey studio backdrop with a light floor, no horizon or markings",
+    "perspective_note": "slight: the drone's plate is seen from above while low (frames <30) and from below when high, changing the visible top rim by ~6 px; drone apparent width constant (plate 231 px, body ~88 px) -> constant depth"
+  },
+  "objects": [
+    {
+      "name": "drone",
+      "description": "small black delivery drone: wide flat top plate with 4 motor arms and spinning white/grey propellers, a black cylindrical body hanging below; it starts docked inside the cart (only the plate visible on the roof) and flies straight up out of it",
+      "moves": true,
+      "visible_frames": "0-71 (body below the roof hidden in frames 0-25; fully visible 26-71)",
+      "track_file": "tracks/drone.csv",
+      "reference_point": "ref_x, ref_y = centre of the drone's bounding box (plate top edge to body bottom); used as the origin",
+      "sizes_px": {
+        "height_top_to_body_bottom": 194.1,
+        "height_including_bright_top_rim": "195-201 (rim adds ~1 px when high, ~6 px when low)",
+        "top_plate_width_dark_rim": 231,
+        "body_cylinder_width": 88,
+        "propeller_span_max": 353,
+        "propeller_span_note": "props spin; span varies 290-353 px frame to frame (tips 1159-1512)",
+        "ref_x": 1333.5
+      },
+      "motion_summary_px": {
+        "direction": "vertically upward (image -y); horizontal drift < 1 px over the clip",
+        "rest_frames": "0-1 (identical)",
+        "per_frame_displacement": "7.14 px/frame upward, constant from frame 1->2 to 70->71 (linear fit rms residual 0.27 px, quadratic term ~0)",
+        "top_y_frame0": 956.44,
+        "top_y_frame71": 457.0,
+        "total_rise_frames_1_to_71": 499.4
+      }
+    },
+    {
+      "name": "lid",
+      "description": "the cart's hinged roof hatch/handle frame (black flat frame with oval cut-out), hinged on the cart roof near the left (front-slope) edge; open, tilted up-left at the start; swings over the top to the right and down while the drone leaves",
+      "moves": true,
+      "visible_frames": "0-71",
+      "track_file": "tracks/lid.csv",
+      "hinge_px": [1187, 995],
+      "length_hinge_to_tip_px": 197,
+      "motion_summary": "at rest at ~40.5 deg (pointing up-left) frames 0-21; rotates clockwise in the image from frame ~22; vertical (90 deg) at frame ~45; 163.8 deg (pointing up-right, nearly closed) at frame 71, still moving"
+    },
+    {
+      "name": "cart",
+      "description": "static black delivery robot / cart: rounded box body with sloped front (left) face, grey chassis strip with a slot and two round buttons, two visible white-hub wheels with black tyres",
+      "moves": false,
+      "visible_frames": "0-71",
+      "extents_px": {
+        "roof_y_central": 983,
+        "ground_contact_y_wheel_bottom": 1434,
+        "height_roof_to_ground": 451,
+        "body_box_x": [1074, 1439],
+        "body_box_width": 366,
+        "body_max_x_incl_sloped_front": [1066, 1439],
+        "overall_x_incl_wheels": [1030, 1459],
+        "overall_width_incl_wheels": 430,
+        "body_bottom_y": 1300,
+        "chassis_strip_y": [1300, 1420]
+      }
+    },
+    {
+      "name": "left_wheel",
+      "description": "front/left visible wheel of the cart (white hub, black tyre)",
+      "moves": false,
+      "extents_px": {"x": [1030, 1140], "y": [1305, 1434], "approx_diameter": 125},
+      "note": "approximate; tyre outline blends with chassis at the top"
+    },
+    {
+      "name": "right_wheel",
+      "description": "rear/right visible wheel of the cart",
+      "moves": false,
+      "extents_px": {"x": [1330, 1459], "y": [1305, 1434], "approx_diameter": 125},
+      "note": "approximate"
+    },
+    {
+      "name": "floor_backdrop",
+      "description": "seamless grey studio backdrop / light floor; no markings",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "drone at rest docked in cart", "frames": "0-1", "time_s": "0-0.042"},
+    {"event": "drone take-off (start of motion): first moved frame", "frame": 2, "time_s": 0.0833, "note": "last rest frame 1 (t=0.0417); moves at full constant speed immediately"},
+    {"event": "lid starts to rotate", "frame": 22, "time_s": 0.917, "note": "+-1 frame"},
+    {"event": "drone body fully clears the cart roof (body bottom above roof y=983)", "frame": 26, "time_s": 1.083},
+    {"event": "lid vertical", "frame": 45, "time_s": 1.875},
+    {"event": "end of clip, drone still rising at constant speed, lid still closing", "frame": 71, "time_s": 2.958}
+  ],
+  "files": {
+    "tracks/drone.csv": "per-frame drone track (reference point, bbox pieces, extents, occlusion flag)",
+    "tracks/drone_raw.csv": "integer threshold measurements the track is built from",
+    "tracks/lid.csv": "per-frame lid tip and angle about hinge",
+    "notes.md": "method and reliability"
+  }
+}

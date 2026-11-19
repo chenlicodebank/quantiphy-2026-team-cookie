@@ -1,0 +1,64 @@
+{
+  "video": "simulation_0281.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 is t = 0",
+  "pixel_units": "all positions/sizes in original-resolution pixels (x right, y down)",
+  "camera": {
+    "motion": "static (top-down view of a whale over a sandy seabed; seabed prop at identical pixel position in frames 0 and 70; only the animated water caustics change)",
+    "view": "looking straight down; whale swims in a horizontal plane facing the camera, so one metres-per-pixel scale applies (2D)",
+    "per_frame_background_shift_px": [0, 0]
+  },
+  "objects": [
+    {
+      "name": "whale",
+      "description": "humpback-like whale, blue-grey, long pectoral fins, the only moving object; head points left",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "occluded": false,
+      "track_file": "tracks/whale.csv",
+      "reference_point_recommendation": "nose_x/nose_y (rigid snout tip) for translation; the Blender origin is presumably inside the body and translates rigidly with the snout. Mask centroid (cx,cy) and bbox centre are biased by the flapping/foreshortened tail flukes and pectoral fins - do not use them for speed.",
+      "motion_summary_px": "rest frames 0-2 (nose x = 1117); then swims straight left (-x) at a nearly constant ~8.6 px/frame (~206 px/s) of the nose until frame 71 (nose x 517); vertical drift < 5 px. Linear fit of nose_x over frames 3-71: x = 1127.5 - 8.567*f (quadratic term ~0).",
+      "size_px": {
+        "length_nose_to_fluke_tip_along_axis": {"min": 2126, "max": 2403, "mean": 2274, "min_frame": 26, "max_frame": 63, "note": "varies with the up/down fluke stroke (tail foreshortened when flexed); frames 0-1 at rest: 2352"},
+        "bbox_width_x": {"min": 2125, "max": 2405, "mean": 2275, "frame0": 2355},
+        "bbox_height_y_fin_tip_to_fin_tip": {"min": 958, "max": 1225, "mean": 1101, "frame0": 982, "note": "set by the pectoral fins (approx. flipper span), changes as fins move"},
+        "body_trunk_width_y": {"min": 466, "max": 605, "mean": 531, "note": "max vertical body extent 10-30% of length behind the nose (fins excluded); light dorsal edge sometimes missed by the mask, true width likely ~560-620"},
+        "axis_angle_deg": "within +-1 deg of horizontal"
+      }
+    },
+    {
+      "name": "whale_shadow",
+      "description": "faint dark diagonal blur on the seabed below/left of the whale, moves with the whale",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "tracked": false
+    },
+    {
+      "name": "seabed_prop",
+      "description": "small static cluster on the seabed upper-left of the whale: a blue rounded rock/object with a dark curved stroke and a pale slab, surrounded by 5 small green plants/sea-weed tufts",
+      "moves": false,
+      "visible_frames": [0, 71],
+      "image_position_px_frame0": {"centre_of_blue_object": [1165, 730], "bbox_incl_plants": [855, 610, 1345, 870], "bbox_blue_object_and_slab": [1090, 670, 1300, 800]},
+      "size_px": {"extent_incl_plants_x": 490, "extent_incl_plants_y": 260, "blue_object_diameter": 130},
+      "note": "eyeballed from a 2x crop (frames/obj_0.png), +-10 px; the whale's dorsal fin passes just right/below it late in the clip (no contact visible)"
+    },
+    {
+      "name": "seabed",
+      "description": "sandy sea floor with moving caustic light pattern, fills the frame",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "whale at rest", "frames": [0, 2], "t_s": [0.0, 0.083]},
+    {"event": "whale starts swimming left", "frame": 2, "t_s": 0.083, "note": "first nose displacement between frames 2 and 3 (frame 3 catches up 15 px, so the real start is ~frame 1-2)"},
+    {"event": "tail fluke maximally flexed (shortest apparent length)", "frame": 26, "t_s": 1.083},
+    {"event": "longest apparent length", "frame": 63, "t_s": 2.625},
+    {"event": "fluke turns, underside (dark) visible", "frames": [64, 71]},
+    {"event": "end of clip, still swimming", "frame": 71, "t_s": 2.958}
+  ]
+}

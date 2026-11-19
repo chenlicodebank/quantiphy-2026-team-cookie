@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0047.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 33.0,
+ "frames": 99,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1072,
+ "question": {
+  "id": 18,
+  "question": "What is the speed of the moving bicycle at 1.0s in m/s?",
+  "prior": "speed of the walking person = 1.236m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 33.0
+ }
+}

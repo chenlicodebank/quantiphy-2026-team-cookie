@@ -1,0 +1,191 @@
+{
+ "video": "internet_0074.mp4",
+ "source": "internet",
+ "scene_type": "2D",
+ "fps": 23.976023,
+ "frames": 122,
+ "width": 1440,
+ "height": 2560,
+ "time_convention": "t = frame / fps, frame 0 at t=0",
+ "description": "Top-down (near-nadir) drone view of an outdoor pickleball court (blue court, green surround, white lines, net across the middle, chain-link fence on the right). Portrait video. Two players (one at each end) play a point: near (bottom) player serves, far (top) player returns, near player hits a third shot; clip ends as that ball lands in the far court.",
+ "camera": {
+  "type": "overhead drone, essentially static; slow uniform zoom-in/descent of ~1.5% over the clip plus <=10 px drift",
+  "per_frame_file": "tracks/court_lines_per_frame.csv (court line centre positions each frame; use to correct for drift/zoom if needed)",
+  "court_length_px_baseline_centres": {
+   "frame0": 1991.0,
+   "frame60": 2011.4,
+   "frame121": 2023.3
+  },
+  "court_width_px_sideline_centres": {
+   "frame0": 902.5,
+   "frame60": 910.6,
+   "frame121": 916.9
+  },
+  "perspective_note": "near-nadir view; far half (baseline->kitchen 676 px) vs near half (kitchen->baseline 687 px) at frame 0 differ by 1.6%, a tiny tilt. Treat as planar."
+ },
+ "frame_timing_note": "The file repeats a pattern every 4 frames: the image step INTO frames 4,8,12,...(i%4==0) is ~2x the other steps (ball moves e.g. 38,38,38,79 px). The 23.976 fps file was made from a ~29.97 fps source by dropping every 5th frame. Per-frame differences across those frames are doubled; tracks/ball.csv column after_dropped_frame=1 marks them. True source time of file frame i ~ (i + floor(i/4)) / 29.97 s.",
+ "objects": [
+  {
+   "name": "ball",
+   "desc": "yellow-green pickleball, colour-mask bbox ~8 x 6 px (median; 8-10 px along motion blur), equivalent diameter 6-8 px (median 6.8)",
+   "moving": true,
+   "frames": "0-121",
+   "track": "tracks/ball.csv"
+  },
+  {
+   "name": "ball_shadow",
+   "desc": "dark blob of the ball's cast shadow, falls to the -x side (sun from the right); offset from the ball grows with ball height, ~0 at bounces",
+   "moving": true,
+   "frames": "16-121 with gaps (net shadow, player shadows)",
+   "track": "tracks/ball_shadow.csv"
+  },
+  {
+   "name": "near_player",
+   "desc": "bottom player (serves): white shirt, black shorts, white shoes, paddle; starts behind near baseline at x~650,y~2350, moves up to x~930,y~2010",
+   "moving": true,
+   "frames": "0-121 (partly out of the bottom edge ~frames 38-66)",
+   "track": "tracks/player_near.csv"
+  },
+  {
+   "name": "far_player",
+   "desc": "top player (returns): white shirt, dark cap, light shorts, paddle; starts behind far baseline at x~950,y~240, runs forward to x~850-1020,y~590-680",
+   "moving": true,
+   "frames": "0-121",
+   "track": "tracks/player_far.csv"
+  },
+  {
+   "name": "near_player_shadow",
+   "desc": "long cast shadow of near player extending to -x",
+   "moving": true,
+   "track": "tracks/shadow_near.csv"
+  },
+  {
+   "name": "far_player_shadow",
+   "desc": "long cast shadow of far player extending to -x",
+   "moving": true,
+   "track": "tracks/shadow_far.csv"
+  },
+  {
+   "name": "court",
+   "desc": "pickleball court, blue, white lines ~8-9 px wide",
+   "moving": false,
+   "frame0_line_centres_px": {
+    "left_sideline_x": 341,
+    "right_sideline_x": 1243,
+    "centre_line_x": 793,
+    "far_baseline_y": 322,
+    "far_kitchen_line_y": 998.5,
+    "near_kitchen_line_y": 1626,
+    "near_baseline_y": 2313
+   },
+   "frame0_outer_edges_px": {
+    "x": [
+     337,
+     1247
+    ],
+    "y": [
+     318,
+     2317
+    ],
+    "outer_width": 911,
+    "outer_length": 2000
+   },
+   "frame0_derived_px": {
+    "length_baseline_centres": 1991,
+    "width_sideline_centres": 902,
+    "kitchen_depth_far": 313.5,
+    "kitchen_depth_near": 314,
+    "kitchen_to_kitchen": 627.5,
+    "service_box_length_far": 676.5,
+    "service_box_length_near": 687,
+    "service_box_width": 451
+   },
+   "line_width_px": 8.5,
+   "per_frame": "tracks/court_lines_per_frame.csv"
+  },
+  {
+   "name": "net",
+   "desc": "net across the court centre; white top tape at y~1316, its dark shadow band y~1296-1311 (frame 0) extends left onto the grass to x~85; post at right x~1338",
+   "moving": false,
+   "frame0": {
+    "tape_y": 1316,
+    "x_extent_tape": [
+     255,
+     1345
+    ],
+    "shadow_rows": [
+     [
+      1296,
+      1311
+     ]
+    ]
+   }
+  },
+  {
+   "name": "fence",
+   "desc": "chain-link fence with dark posts/rail along the right side, vertical dark line x~1307-1316 (frame 0), from y~150 to y~2440; horizontal post shadows every ~290 px",
+   "moving": false
+  },
+  {
+   "name": "left_edge_objects",
+   "desc": "small whitish objects cut by the left image edge at y~1760 and y~1040 (unidentified, static)",
+   "moving": false
+  }
+ ],
+ "events": [
+  {
+   "frame": 0,
+   "event": "clip start: near player tossing ball for serve, ball at (692,2292) rising"
+  },
+  {
+   "frame": 6,
+   "event": "toss apex (ball image y min 2262)"
+  },
+  {
+   "frame": 14,
+   "event": "serve contact between frames 14 and 15 (ball nearly still at (712,2291) in 13-14, moving fast from 15)"
+  },
+  {
+   "frame": 34,
+   "event": "ball crosses net line (y~1315) going up-image"
+  },
+  {
+   "frame": 45,
+   "event": "bounce 1 in far right service box at (968,907); ball and shadow touch (offset 16 px)"
+  },
+  {
+   "frame": 58,
+   "event": "far player's return contact between frames 58 and 59 at ball (1054,665); ball direction reverses"
+  },
+  {
+   "frame": 69,
+   "event": "ball crosses net (between frames 69 y=1276 and 70 y=1319) going down-image"
+  },
+  {
+   "frame": 82,
+   "event": "bounce 2 in near right service box at (915,1844); shadow offset 14 px"
+  },
+  {
+   "frame": 93,
+   "event": "near player's hit between frames 93 and 94 at ball (921,2116)"
+  },
+  {
+   "frame": 109,
+   "event": "ball crosses net (y~1317) going up-image"
+  },
+  {
+   "frame": 121,
+   "event": "last frame: ball at/just before bounce 3 at (873,850) in far right service box (shadow offset 16 px)"
+  }
+ ],
+ "files": [
+  "tracks/ball.csv",
+  "tracks/ball_shadow.csv",
+  "tracks/player_far.csv",
+  "tracks/player_near.csv",
+  "tracks/shadow_far.csv",
+  "tracks/shadow_near.csv",
+  "tracks/court_lines_per_frame.csv",
+  "tracks/static_raw.json"
+ ]
+}

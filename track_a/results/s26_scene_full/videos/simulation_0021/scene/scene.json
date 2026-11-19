@@ -1,0 +1,152 @@
+{
+  "video": "simulation_0021.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 29.996629,
+  "frames": 89,
+  "frame_range": [0, 88],
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the wall region (x 400-1080, y 0-600) vs frame 0: max |shift| 0.007 px (x), 0.010 px (y) over all 89 frames",
+    "per_frame_background_shift_px": "0 for every frame",
+    "view": "frontal, looking perpendicular at a building wall; wall/curb/lane lines are horizontal in the image and wall edges vertical, so the camera is roughly level and its image plane roughly parallel to the wall; no vanishing point inside the image",
+    "horizon_note": "horizon not visible; for a level camera with a centred principal point it would be at y ~ 540",
+    "focal_length": "unknown (estimate from a given depth plus a known size)"
+  },
+  "ground_plane_lines_y_px": {
+    "wall_base_grass_strip_top": 806,
+    "grass_strip_bottom_sidewalk_start": 826,
+    "man_sole_contact_line_approx": 868,
+    "lamp_and_hydrant_base_bottom": 892,
+    "curb_top_edge": 907,
+    "curb_face_bottom_road_edge": 945,
+    "white_lane_line": 957
+  },
+  "objects": [
+    {
+      "name": "man",
+      "description": "walking man (adult male mannequin-like figure, dark navy jacket, white shirt, grey trousers, dark shoes, blank/white face)",
+      "role": "the only moving object",
+      "moves": true,
+      "visible_frames": [0, 88],
+      "track_file": "tracks/man.csv",
+      "reference_point": "pelvis estimate: x = ref_x_best, y = ref_y_best (image px)",
+      "motion_summary_px": "walks to the right (+x) at near-constant pace for the whole clip; best pelvis x 83.7 (f0) -> 252.2 (f88); head-centre x 88.5 -> 256.7; head top y 650-654 (gait bob), so no depth change",
+      "apparent_size_px": {
+        "standing_height_head_top_to_sole": "~218 +-5 (head top 650-654, sole line ~866-872; per-frame height_px column is noisy because the wet-pavement reflection blurs the sole)",
+        "max_height_while_walking": "~219 (head top 650 at mid-stance frames)",
+        "min_height_while_walking": "~214 (head top 654 at double-support frames)",
+        "width_along_motion_x": "41-116 px (bbox width; min with legs together ~41-44, max with full stride ~112-116)",
+        "torso_width_px": "~45 (jacket, shoulder to back)",
+        "size_change_over_time": "none measurable: head-top row and body height constant within gait bob, consistent with walking parallel to the image plane at constant depth"
+      },
+      "occlusion": "walks BEHIND the fire hydrant (lower body partly hidden, frames ~0-40) and BEHIND the lamp post (base and pole hide parts of the body, frames ~45-80; the pole covers the head ~f56-62)"
+    },
+    {
+      "name": "lamp_post",
+      "description": "black cast-iron street lamp with a lantern head, on the sidewalk left of centre, in front of the man's path",
+      "moves": false,
+      "visible_frames": [0, 88],
+      "bbox_px": {"x0": 155, "y0": 328, "x1": 236, "y1": 894},
+      "height_px": 566,
+      "lantern_head_px": {"x0": 155, "x1": 236, "y0": 328, "y1": 399, "width": 82, "height": 72},
+      "pole_width_px": 12,
+      "pole_centre_x": 191,
+      "base_width_px": "~53 (x 162-215 near y 885)",
+      "base_bottom_y": 893
+    },
+    {
+      "name": "fire_hydrant",
+      "description": "white fire hydrant with rust spots, chain and side nozzles, far left on the sidewalk, in front of the man's path",
+      "moves": false,
+      "visible_frames": [0, 88],
+      "bbox_px": {"x0": 60, "y0": 753, "x1": 140, "y1": 890},
+      "height_px": 137,
+      "width_px_incl_nozzles": 80,
+      "body_width_px": "~43 (x 72-115)",
+      "base_flange_px": "x ~61-124, y ~880-890",
+      "centre_px": [100, 821],
+      "accuracy": "+-3 px (manual reading of zoomed frames)"
+    },
+    {
+      "name": "window_lower_left",
+      "description": "white-framed sash window, lower row, left (glass + frame)",
+      "moves": false,
+      "bbox_px": {"x0": 254, "y0": 189, "x1": 370, "y1": 393},
+      "width_px": 117, "height_px": 205
+    },
+    {
+      "name": "window_lower_right",
+      "description": "white-framed sash window, lower row, right",
+      "moves": false,
+      "bbox_px": {"x0": 708, "y0": 190, "x1": 824, "y1": 393},
+      "width_px": 117, "height_px": 204
+    },
+    {
+      "name": "window_upper_left",
+      "description": "upper-row window, left, cut off by the top image edge (only the lower ~75 px visible)",
+      "moves": false,
+      "bbox_px_visible": {"x0": 259, "y0": 0, "x1": 370, "y1": 74}
+    },
+    {
+      "name": "window_upper_right",
+      "description": "upper-row window, right, cut off by the top image edge",
+      "moves": false,
+      "bbox_px_visible": {"x0": 708, "y0": 0, "x1": 823, "y1": 74}
+    },
+    {
+      "name": "graffiti_NEOM",
+      "description": "teal graffiti lettering 'NEOM.' with black outline on the wall, right of centre",
+      "moves": false,
+      "bbox_px": {"x0": 614, "y0": 604, "x1": 939, "y1": 791},
+      "width_px": 326, "height_px": 188,
+      "note": "x1 includes the final dot; letters alone end near x ~905"
+    },
+    {
+      "name": "building_wall",
+      "description": "white-painted brick wall with vertical pilasters (edges near x ~140, 470, 607, 935, 1065), fills the frame above y ~806",
+      "moves": false
+    },
+    {
+      "name": "grass_strip",
+      "description": "thin green moss/grass strip at the wall base",
+      "moves": false,
+      "y_range_px": [806, 826]
+    },
+    {
+      "name": "sidewalk",
+      "description": "wet grey paving with reflections (reflections of the man, lamp, graffiti visible on it)",
+      "moves": false,
+      "y_range_px": [826, 907]
+    },
+    {
+      "name": "curb",
+      "description": "concrete curb face with joints (joints near x ~73, 362, 650, 935)",
+      "moves": false,
+      "y_range_px": [907, 945]
+    },
+    {
+      "name": "road",
+      "description": "wet asphalt with a white lane line at y ~957 spanning the full width",
+      "moves": false,
+      "y_range_px": [945, 1080]
+    }
+  ],
+  "events": [
+    {"event": "man walking (already in motion)", "frame": 0, "t_s": 0.0},
+    {"event": "man behind hydrant (lower body partly hidden)", "frames": [0, 40]},
+    {"event": "man's legs together (mid-stance, min bbox width)", "frames": [0, 14, 28, 44, 57, 73, 88]},
+    {"event": "man's widest stride (max bbox width)", "frames": [8, 22, 36, 50, 65, 80], "note": "f36 and f65 are approximate because of occlusion"},
+    {"event": "man behind lamp post (pole/base hide parts of him)", "frames": [45, 80]},
+    {"event": "lamp pole covers the man's head", "frames": [56, 62]},
+    {"event": "man still walking at end of clip (no stop)", "frame": 88, "t_s": 2.9337}
+  ],
+  "files": {
+    "tracks/man.csv": "per-frame track of the man",
+    "notes.md": "method, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

@@ -1,0 +1,57 @@
+Context of this question (context/): every earlier session that answered THIS question saw only this question, its
+video, its prior and depth_info, as you do. context/CONTEXT.md is the organised record of what is known so far: the
+question, the answer currently submitted, every earlier answer and who made it, and (after earlier rounds) what earlier
+investigators of this question established. context/C<k>/ holds each earlier session's notes.md and scripts;
+context/round<k>/ holds an earlier investigation round of this question. The answers disagree by more than 25 pct, so
+at least one of them is wrong - possibly all of them.
+
+How the submitted answer was made: CONTEXT.md names it - a candidate's own answer, a fixed-rule blend of two
+readers' answers, or an answer times a fixed convention factor that was validated on held-out scores for its whole
+population. A difference from the candidates that is exactly that blend or factor is not an error of the submitted
+answer; it is the rule.
+
+Earlier rounds: read the Investigation rounds section of CONTEXT.md and context/round<k>/ before anything else.
+- If an earlier round proposed a change (decision switch or new), your first job is to VERIFY it: reproduce, with
+  your own code, the measurement its fault proof rests on, and say whether the claimed fault is real. A change stands
+  only if you reproduce the fault and your own value agrees with the proposed one within about 10 pct.
+- If an earlier round kept the answer with low or medium confidence, start from what it left open: settle the open
+  point with a measurement route that round did not use.
+
+Lessons (LESSONS.md): generic lessons about how answers to this benchmark go wrong, learned from investigating other
+questions; they hold no value of any question. Read them before you start and apply those that fit.
+
+Your job is to make this question's answer as accurate as possible and to leave its context better organised than you
+found it. Work in this order:
+1. Read inputs.json, context/CONTEXT.md and LESSONS.md; look at the video (a frame sheet, then zoomed frames at the
+   times the question and the prior name). Write down the measurements the answer depends on.
+2. Read every candidate's notes.md. Find the exact step where the answers part ways: which object or which part of it,
+   which dimension, which frame or time window, the reference point, the scale route (pixel scale, focal length, how
+   depth_info was used), the time base, a convention above, or arithmetic. Write this crux in one line.
+3. Re-measure that step yourself in code from the video by two independent routes (for example two frame windows, two
+   reference points, two scale routes, or a mask-based and an edge-based extent). Draw what you measure on frames and
+   look at the overlays.
+4. Recheck - all four are required; write each result in notes.md:
+   a. Closure: with the scale you use, re-derive this question's own prior from the video. It must come back within
+      about 5 pct; if it does not, your scale or geometry is wrong - fix it before going on.
+   b. Plausibility: every standard object in view (people, cars, doors, balls, furniture) must come out at a realistic
+      size or speed at your scale, as the conventions above describe.
+   c. Units and time base: the unit the question asks for; every time converted with question_fps.
+   d. Fault proof: for every candidate whose answer you do NOT follow, name the step it got wrong and show it (your
+      measurement of that step next to its value), or say that you cannot find one.
+5. Decide. The burden of proof is on change: the answer currently submitted stands unless step 4d shows a concrete
+   error in the way it was made AND your own value passes 4a-4c. Count no votes and never average answers: several
+   sessions agreeing is no evidence when they share a method, and a candidate that is internally consistent can still
+   rest on a wrong scale. If two readings of the question both survive the checks, keep the submitted answer.
+6. Write these files in your folder:
+   - answers.json: {{"<id>": <your final answer>}} (the submitted answer itself when you keep it);
+   - verdict.json: {{"answer": <number>, "decision": "keep" or "switch" or "new", "follows": "<candidate name or null>",
+     "crux": "<one line: the step where the answers part>", "fault_found": "<one line: the error you proved, or none>",
+     "closure_pct": <error in pct of the prior re-derived at your scale, or null>, "confidence": "high" or "medium" or
+     "low", "verified_previous": true or false or null (null when no earlier round proposed a change),
+     "lesson": "<one generic sentence that would help an investigator of a DIFFERENT question of this benchmark:
+     no numbers, no object names, nothing specific to this video; empty if nothing new>"}}
+     ("switch" = you follow another earlier candidate; "new" = your own value, close to none of them);
+   - context_update.md: an organised addendum to this question's context for the next round - what is now established
+     and by which measurement, what was ruled out, what remains open (short, factual, with numbers);
+   - notes.md: your method, measurements, the four rechecks and the decision.
+

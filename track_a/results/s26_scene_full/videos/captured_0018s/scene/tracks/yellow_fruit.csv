@@ -1,0 +1,50 @@
+frame,t,visible,cx_bbox,cy_bbox,cx_mask,cy_mask,x0,y0,x1,y1,bbox_w,bbox_h,mask_len,mask_wid,axis_deg,area,eq_diam,occluded,note
+0,0.0,1,878.5,243.5,877.7,243.04,868,238,889,249,22,12,22.69,11.35,170.76,180,15.14,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+1,0.04,1,878.5,243.5,877.85,243.04,868,238,889,249,22,12,22.66,11.34,171.33,183,15.26,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+2,0.08,1,877.5,243.5,877.11,242.82,868,238,887,249,20,12,21.22,11.2,168.41,169,14.67,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+3,0.12,1,877.5,243.5,877.19,242.77,868,238,887,249,20,12,21.05,11.2,167.88,171,14.76,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+4,0.17,1,876.5,244.0,876.28,243.14,866,238,887,250,22,13,23.34,10.68,165.46,168,14.63,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+5,0.21,1,877.0,243.5,875.83,242.64,867,238,887,249,21,12,21.39,10.75,166.97,143,13.49,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+6,0.25,1,876.5,244.0,876.06,243.07,866,238,887,250,22,13,23.38,11.59,164.33,176,14.97,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+7,0.29,1,876.5,243.5,875.35,242.91,866,238,887,249,22,12,22.19,12.07,161.54,155,14.05,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+8,0.33,1,876.5,243.5,875.7,243.0,866,238,887,249,22,12,22.27,11.0,163.54,161,14.32,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+9,0.38,1,875.0,243.5,873.7,242.97,866,238,884,249,19,12,20.67,11.25,152.87,139,13.3,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+10,0.42,1,875.0,245.0,873.7,242.7,865,238,885,252,21,15,24.26,11.24,153.16,149,13.77,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+11,0.46,1,874.0,244.5,872.44,242.65,864,238,884,251,21,14,23.35,11.12,151.96,147,13.68,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+12,0.5,1,874.5,243.5,872.72,241.85,864,237,885,250,22,14,23.45,11.1,156.86,144,13.54,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+13,0.54,1,874.5,243.5,872.91,241.68,864,237,885,250,22,14,23.45,11.12,156.77,151,13.87,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+14,0.58,1,873.0,247.0,871.12,243.16,861,236,885,258,25,23,29.55,14.75,138.06,153,13.96,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+15,0.62,1,873.5,247.5,870.58,243.33,862,236,885,259,24,24,29.39,15.59,136.57,163,14.41,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+16,0.67,1,871.0,245.5,868.72,242.51,862,236,880,255,19,20,25.18,12.42,130.99,131,12.91,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+17,0.71,1,871.0,243.0,869.05,241.01,862,236,880,250,19,15,21.99,10.27,142.75,122,12.46,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+18,0.75,1,871.0,241.5,869.44,240.17,862,235,880,248,19,14,21.09,9.95,150.09,115,12.1,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+19,0.79,1,871.0,241.5,869.09,239.84,860,235,882,248,23,14,23.88,12.41,154.67,113,11.99,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+20,0.83,1,869.0,240.0,867.93,239.28,860,234,878,246,19,13,20.96,9.56,145.99,108,11.73,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+21,0.88,1,869.0,240.0,867.82,238.38,860,234,878,246,19,13,21.0,9.5,147.04,108,11.73,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+22,0.92,1,866.0,241.0,865.26,239.51,858,233,874,249,17,17,21.52,9.03,133.41,115,12.1,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+23,0.96,1,867.0,240.5,865.23,238.6,858,233,876,248,19,16,23.08,9.1,138.02,115,12.1,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+24,1.0,1,868.5,239.5,866.48,237.66,858,233,879,246,22,14,23.3,11.58,151.96,121,12.41,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+25,1.04,1,868.5,238.0,865.71,236.9,858,232,879,244,22,13,22.78,11.48,159.7,120,12.36,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+26,1.08,1,866.0,251.0,864.8,242.15,856,233,876,269,21,37,37.35,21.79,85.6,132,12.96,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+27,1.12,1,866.5,256.5,866.52,258.36,856,238,877,275,22,38,39.58,21.54,75.09,203,16.08,1,"held in right person left hand; mostly hidden, only a yellow patch tracked: centre unreliable"
+28,1.17,1,866.5,282.0,864.49,286.53,856,262,877,302,22,41,43.33,25.11,73.49,512,25.53,1,"released, partly hidden behind hand; mask partial"
+29,1.21,1,865.5,303.5,865.63,302.63,854,278,877,329,24,52,52.06,24.4,88.61,992,35.54,1,"released, partly hidden behind hand; mask partial"
+30,1.25,1,864.5,327.0,864.77,326.06,850,292,879,362,30,71,71.0,30.11,88.19,1722,46.82,0,vertical motion blur: bbox_h inflated; width ~29-31px
+31,1.29,1,864.0,360.5,864.13,359.63,849,324,879,397,31,74,74.18,31.36,87.66,1872,48.82,0,vertical motion blur: bbox_h inflated; width ~29-31px
+32,1.33,1,863.0,400.0,863.52,401.11,848,363,878,437,31,75,75.05,31.12,88.75,1780,47.61,0,vertical motion blur: bbox_h inflated; width ~29-31px
+33,1.38,1,862.0,447.0,862.35,447.11,847,410,877,484,31,75,74.96,31.09,87.21,1797,47.83,0,vertical motion blur: bbox_h inflated; width ~29-31px
+34,1.42,1,861.0,502.0,861.03,502.62,847,463,875,541,29,79,79.38,29.32,85.78,1847,48.49,0,vertical motion blur: bbox_h inflated; width ~29-31px
+35,1.46,1,861.0,555.0,860.97,556.27,847,517,875,593,29,77,77.48,30.45,87.59,1942,49.73,0,vertical motion blur: bbox_h inflated; width ~29-31px; probable dropped camera frame between f35 and f36 (displacement ~2x)
+36,1.5,1,861.0,670.5,860.86,672.71,845,644,877,697,33,54,56.45,32.38,77.24,1314,40.9,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask; probable dropped camera frame between f35 and f36 (displacement ~2x)
+37,1.54,1,852.0,651.0,854.61,652.37,833,623,871,679,39,57,57.23,34.38,107.71,1528,44.11,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+38,1.58,1,853.0,636.5,852.42,636.39,839,601,867,672,29,72,72.25,28.88,94.23,1617,45.37,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+39,1.62,1,850.5,620.5,851.19,619.07,836,599,865,642,30,44,46.04,27.65,77.14,950,34.78,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+40,1.67,1,847.5,604.0,846.8,603.8,833,592,862,616,30,25,31.03,26.35,167.9,602,27.69,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+41,1.71,1,846.5,597.0,845.48,596.74,832,571,861,623,30,53,55.37,28.79,105.15,1157,38.38,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+42,1.75,1,842.5,595.5,842.91,594.7,830,568,855,623,26,56,56.58,26.81,94.17,1167,38.55,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+43,1.79,1,839.5,603.0,840.14,602.47,826,588,853,618,28,31,31.8,28.44,77.54,644,28.64,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+44,1.83,1,835.5,611.5,836.11,612.31,822,594,849,629,28,36,37.65,27.17,107.75,752,30.94,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+45,1.88,1,835.0,608.5,836.59,610.3,820,586,850,631,31,46,47.92,25.31,110.3,937,34.54,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+46,1.92,1,838.0,601.0,839.11,602.91,822,576,854,626,33,51,56.46,24.53,115.71,1047,36.51,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+47,1.96,1,841.5,598.0,842.25,597.72,825,575,858,621,34,47,51.6,25.01,118.75,977,35.27,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask
+48,2.0,1,847.0,596.0,846.0,594.78,832,575,862,617,31,43,47.02,23.21,119.55,811,32.13,0,bouncing / tumbling near ground; dark green leaf top often excluded from mask

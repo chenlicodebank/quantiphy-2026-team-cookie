@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0195.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MS",
+ "fps": 30.0,
+ "frames": 100,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1556,
+  "question": "What is the diameter of the model of Jupiter (the one at the center) in meters?",
+  "prior": "Callisto's model speed = 0.627 m/s",
+  "depth_info": "t=0s, distance_small_Callisto_camera = 13.004m   \nt =3s, distance_small_Callisto_camera = 13.856m\ndistance_big_europa_camera = 16.549m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

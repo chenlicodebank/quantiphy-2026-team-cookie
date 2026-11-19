@@ -1,0 +1,142 @@
+{
+ "video": "simulation_0028_segmented.mp4",
+ "source": "segmentation (of a Blender simulation render)",
+ "scene": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "time_convention": "t = frame / 25; frame 0 = t 0",
+ "pixel_coords": "x right, y down, origin top-left, full 960x960 resolution",
+ "camera": {
+  "static": true,
+  "max_background_shift_px": 0.16,
+  "note": "rock texture stationary over the clip (phase correlation of rock region vs frame 0); segmentation boundary of the rock flickers by a few px near its right/lower edge"
+ },
+ "objects": [
+  {
+   "name": "bird",
+   "kind": "flying bird (dark brown raptor-like, e.g. eagle/hawk), wings flapping",
+   "moves": true,
+   "distinguishing": "only animal / only moving object; dark brown body, flaps wings",
+   "visible_frames": [
+    0,
+    47
+   ],
+   "absent_frames": [
+    48,
+    74
+   ],
+   "absent_reason": "removed by the segmentation from frame 48 on (leaves a white notch in the rock edge at frame 48); not occluded by scene geometry",
+   "track": "tracks/bird.csv",
+   "motion_summary_px": "flies left->right roughly parallel to image x: x 59 -> 848 px over frames 0-47 (~16.8 px/frame, very steady), y oscillates 222-261 px",
+   "apparent_size_px": "mask main-axis length 25-43 px, bbox w 23-38 px, bbox h 18-44 px, oscillating with the wingbeat (~12 frame period); no systematic growth/shrink -> roughly constant camera distance",
+   "wingbeat": "bbox_h minima (wings level/edge-on) near frames 6, 18, 32, 43; maxima (wings raised) near 0-1, 10, 24-25, 47"
+  },
+  {
+   "name": "rock",
+   "kind": "snow-covered rocky mountain / terrain block (floating island-like, white snow top, brown cliffs on the right, striped brown base)",
+   "moves": false,
+   "distinguishing": "the only static object; upper right of frame",
+   "visible_frames": [
+    0,
+    74
+   ],
+   "bbox": [
+    328,
+    24,
+    959,
+    310
+   ],
+   "bbox_w": 632,
+   "bbox_h": 287,
+   "centroid": [
+    636.7,
+    167.0
+   ],
+   "area_px": 126782,
+   "axis_len": 630.7,
+   "axis_wid": 278.3,
+   "axis_angle_deg": 4.2,
+   "touches_right_edge": true,
+   "silhouette_top_bottom_every_50px": {
+    "328": [
+     152,
+     167
+    ],
+    "378": [
+     88,
+     212
+    ],
+    "428": [
+     54,
+     240
+    ],
+    "478": [
+     36,
+     265
+    ],
+    "528": [
+     25,
+     287
+    ],
+    "578": [
+     28,
+     300
+    ],
+    "628": [
+     44,
+     306
+    ],
+    "678": [
+     56,
+     310
+    ],
+    "728": [
+     58,
+     305
+    ],
+    "778": [
+     65,
+     293
+    ],
+    "828": [
+     70,
+     280
+    ],
+    "878": [
+     86,
+     244
+    ],
+    "928": [
+     128,
+     204
+    ]
+   }
+  }
+ ],
+ "background": "white (segmentation replaced the background); no ground plane, horizon or vanishing points are visible",
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "bird already in flight at x~59,y~223 (left edge region); motion starts before the clip"
+  },
+  {
+   "frame": 21,
+   "t": 0.84,
+   "what": "bird starts to pass in front of the rock (its image overlaps the rock silhouette from here on)"
+  },
+  {
+   "frame": 47,
+   "t": 1.88,
+   "what": "last frame with bird visible (x~848,y~247)"
+  },
+  {
+   "frame": 48,
+   "t": 1.92,
+   "what": "bird disappears (segmentation artefact), no impact or landing seen"
+  }
+ ]
+}

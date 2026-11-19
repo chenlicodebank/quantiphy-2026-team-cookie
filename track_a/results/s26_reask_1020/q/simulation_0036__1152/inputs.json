@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0036.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1152,
+  "question": "What is the average speed of the person from the beginning to the end in m/s?",
+  "prior": "length of the boat = 10m",
+  "depth_info": "t=1s, distance_boat_camera = 133.9572 m\nt=2s, distance_boat_camera = 131.2557 m\nt=1s, distance_human_camera = 139.1030m\nt=2s, distance_human_camera = 139.1044 m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

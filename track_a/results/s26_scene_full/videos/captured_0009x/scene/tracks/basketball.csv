@@ -1,0 +1,50 @@
+frame,t,x,y,diam_circle,bbox_x0,bbox_y0,bbox_x1,bbox_y1,bbox_w,bbox_h,len_major,width_minor,x_mask_centroid,y_mask_centroid,area_px,occluded,motion_blur,note
+0,0.0,483.06,186.36,136.08,415,119,551,239,137,121,139.1,123.0,483.92,176.6,11973,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+1,0.0417,482.97,186.18,136.34,415,118,551,239,137,122,139.3,124.2,484.07,176.13,11942,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+2,0.0833,482.94,185.77,136.21,415,118,551,238,137,121,139.2,123.9,484.07,175.76,11911,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+3,0.125,483.01,185.42,136.32,415,117,551,238,137,122,138.9,124.6,484.13,175.32,11916,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+4,0.1667,483.03,185.03,136.14,415,117,551,237,137,121,138.8,124.7,484.13,174.99,11929,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+5,0.2083,483.02,184.91,136.8,415,117,551,238,137,122,139.6,124.7,484.05,174.8,12027,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+6,0.25,483.27,184.52,136.21,415,116,551,237,137,122,138.6,125.3,484.36,174.35,11922,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+7,0.2917,483.3,184.16,136.04,415,116,551,236,137,121,138.7,124.9,484.39,174.04,11896,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+8,0.3333,483.34,183.93,136.11,415,116,551,236,137,121,138.7,124.9,484.45,173.8,11893,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+9,0.375,483.55,183.87,136.28,416,116,552,236,137,121,138.9,124.7,484.68,173.68,11901,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+10,0.4167,483.42,183.77,137.03,415,115,552,236,138,122,140.0,125.3,484.53,173.58,12042,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+11,0.4583,483.53,183.58,136.98,415,115,552,236,138,122,139.9,125.3,484.53,173.35,12036,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+12,0.5,483.54,183.22,136.9,415,115,552,236,138,122,139.9,126.1,484.6,172.95,12030,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+13,0.5417,483.67,183.24,136.83,415,115,552,236,138,122,139.8,126.0,484.73,172.94,12016,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+14,0.5833,483.77,183.29,136.94,416,115,552,236,137,122,139.8,126.0,484.82,172.92,12015,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+15,0.625,483.76,183.25,136.87,416,115,552,236,137,122,139.8,126.0,484.84,172.93,12012,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+16,0.6667,483.81,183.15,136.73,416,115,552,236,137,122,139.8,126.0,484.86,172.96,12018,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+17,0.7083,483.75,183.25,136.85,416,115,552,236,137,122,139.8,126.0,484.81,172.98,12016,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+18,0.75,483.67,183.24,136.78,416,115,552,236,137,122,139.6,125.9,484.7,173.05,12036,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+19,0.7917,483.57,183.3,136.94,415,115,552,236,138,122,139.8,126.0,484.65,172.95,12018,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+20,0.8333,483.47,183.05,136.87,415,115,552,236,138,122,139.7,126.2,484.52,172.72,12023,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+21,0.875,483.55,182.48,136.22,416,115,552,235,137,121,139.2,125.2,484.7,172.22,11883,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+22,0.9167,483.3,181.96,136.39,416,113,552,235,137,123,139.2,125.6,484.46,171.61,11887,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+23,0.9583,483.18,181.54,136.36,415,113,551,234,137,122,138.8,125.3,484.31,171.08,11892,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+24,1.0,482.87,180.65,136.99,415,112,551,234,137,123,139.8,125.7,483.98,170.4,12057,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+25,1.0417,482.61,180.08,137.01,415,111,551,234,137,124,139.9,125.4,483.7,169.68,12031,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+26,1.0833,482.61,179.7,137.09,415,111,551,233,137,123,140.7,125.1,484.13,168.97,11934,1,0,held by hand (hand removed by segmentation: white notch lower-left); centre from circle fit to outer arc
+27,1.125,482.93,182.73,137.04,415,114,552,233,138,120,141.3,115.7,486.65,169.28,11103,1,0,release: ball begins to drop; hand notch still present
+28,1.1667,483.54,195.43,135.88,417,127,551,265,135,139,141.3,134.9,490.25,178.65,9361,1,0,just released; removed hand splits ball mask into fragments; centre from circle fit to union of fragments (+-3 px)
+29,1.2083,485.9,216.26,134.28,421,149,553,284,133,136,138.5,138.5,492.05,208.36,8612,1,0,just released; removed hand splits ball mask into fragments; centre from circle fit to union of fragments (+-3 px)
+30,1.25,490.47,247.58,133.24,428,177,553,316,126,140,136.9,122.3,492.33,256.16,8140,1,0,just released; removed hand splits ball mask into fragments; centre from circle fit to union of fragments (+-3 px)
+31,1.2917,497.5,286.28,130.49,434,218,557,352,124,135,135.1,134.8,490.95,300.43,9565,1,0,small hand remnant at top; circle fit OK
+32,1.3333,500.58,330.54,124.66,442,265,564,394,123,130,133.0,124.4,500.51,331.0,12291,0,1,"fast fall, vertical motion blur: bbox_h > true diameter; use bbox_w (horizontal) as diameter"
+33,1.375,508.2,374.08,128.11,449,306,567,442,119,137,136.6,119.9,508.22,374.11,13041,0,1,"fast fall, vertical motion blur: bbox_h > true diameter; use bbox_w (horizontal) as diameter"
+34,1.4167,515.81,427.78,119.68,462,365,572,491,111,127,127.3,111.9,515.78,427.88,11400,0,1,"fast fall, vertical motion blur: bbox_h > true diameter; use bbox_w (horizontal) as diameter"
+35,1.4583,523.93,484.59,116.36,472,423,578,546,107,124,123.7,107.3,523.91,484.71,10771,0,1,"fast fall, vertical motion blur: bbox_h > true diameter; use bbox_w (horizontal) as diameter; NEXT step 35->36 is ~2x the neighbouring steps (likely a dropped frame in the recording)"
+36,1.5,539.3,598.97,109.06,491,541,589,656,99,116,116.1,99.1,539.34,598.72,9407,0,1,"fast fall, vertical motion blur: bbox_h > true diameter; use bbox_w (horizontal) as diameter"
+37,1.5417,547.25,657.82,104.51,501,603,593,715,93,113,112.9,93.9,547.4,657.62,8664,0,1,lowest centre position observed = bounce (floor contact around this frame)
+38,1.5833,544.41,634.16,100.17,496,583,592,688,97,106,106.2,97.1,544.51,633.99,7995,0,0,"first frame after bounce, moving up"
+39,1.625,540.29,600.39,100.74,492,550,591,650,100,101,106.7,102.3,540.36,600.75,8011,0,0,
+40,1.6667,536.38,571.19,102.22,487,520,587,622,101,103,107.6,101.4,536.14,571.11,8243,0,0,
+41,1.7083,533.32,544.13,102.25,482,493,584,595,103,103,107.8,100.8,533.3,544.23,8326,0,0,
+42,1.75,531.82,521.71,105.4,480,468,584,573,105,106,110.8,105.8,531.86,522.0,8830,0,0,
+43,1.7917,529.49,504.17,106.89,476,451,583,557,108,107,110.1,107.1,529.45,504.22,9114,0,0,
+44,1.8333,528.19,491.1,108.38,474,437,582,544,109,108,112.9,108.6,528.17,491.11,9379,0,0,
+45,1.875,527.79,483.66,109.79,473,429,582,539,110,111,114.7,109.8,527.8,483.66,9627,0,0,
+46,1.9167,527.98,481.46,110.12,473,427,583,537,111,111,114.3,110.5,527.98,481.47,9681,0,0,apex after bounce (highest point of rebound)
+47,1.9583,528.99,483.41,111.1,474,428,583,539,110,112,116.0,112.6,528.96,483.41,9852,0,0,
+48,2.0,530.36,490.83,110.2,476,434,584,546,109,113,114.0,111.5,530.33,490.84,9696,0,0,

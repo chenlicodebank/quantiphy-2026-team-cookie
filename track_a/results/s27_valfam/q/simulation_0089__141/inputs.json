@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0089.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MX",
+ "fps": 24.0,
+ "frames": 30,
+ "duration_s": 1.25,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 141,
+  "question": "What is the distance between the big bird and the small bird at 0.3s in meters?",
+  "prior": "length of the small bird = 0.94m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

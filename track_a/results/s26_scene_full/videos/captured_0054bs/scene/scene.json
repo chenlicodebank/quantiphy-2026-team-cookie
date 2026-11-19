@@ -1,0 +1,56 @@
+{
+  "video": "captured_0054bs.mp4",
+  "source": "lab (captured; background replaced with Segment Anything 2 - effectively a segmentation video)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left of the 1280x720 frame",
+  "camera": {
+    "motion": "static (background is a fixed replaced image; pixel-identical between frames outside the objects)",
+    "intrinsics_lab_convention": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "perspective_cues": "none: no floor, walls or horizon visible (synthetic snowy blue-to-white gradient background). Depth changes visible only through apparent size (circle_diam / mask_width columns)."
+  },
+  "timing_anomalies": [
+    {"between_frames": [35, 36], "what": "one source frame dropped: every object's frame-to-frame step doubles (basketball 11->21 px, yellow 35->68, grey 32->66, soccer 10->21)"},
+    {"between_frames": [11, 12], "what": "probably one source frame dropped: basketball step 27 -> 53 -> 24 px (only object moving then)"}
+  ],
+  "objects": [
+    {"name": "basketball", "track": "tracks/basketball.csv", "moves": true, "visible_frames": [0, 48],
+     "description": "orange basketball (black seams, 'Wilson' print); the largest orange object. Starts held lower right (x~875,y~667, bottom cut by image edge), thrown up-left away from camera, hits something (wall/backboard, not visible) and rebounds toward camera.",
+     "ref_point": "least-squares circle fit to the mask's convex hull (ball centre)",
+     "apparent_diameter_px": {"frame_12": 75.8, "frame_20": 64.3, "frame_30": 55.9, "frame_38": 49.7, "frame_39": 50.5, "frame_48": 52.3},
+     "best_clear_frames": "12-48"},
+    {"name": "soccer_ball", "track": "tracks/soccer_ball.csv", "moves": true, "visible_frames": [0, 48],
+     "description": "black-and-white soccer ball, right side (x~913,y~615 while held). Held (hand masked out) frames 0-22, thrown up and slightly left, moving away from camera (shrinks) until the end. From frame 27 the segmentation shows it only as a faint texture-less grey disc.",
+     "ref_point": "circle fit (frames 0-38 to mask hull; 39-48 disc fitted to the texture-less fill)",
+     "apparent_diameter_px": {"frame_9": 52.3, "frame_26": 70.7, "frame_28": 70.6, "frame_32": 62.0, "frame_36": 55.1, "frame_48": 51.9},
+     "best_clear_frames": "25-28 (textured, complete); 29-48 faint disc"},
+    {"name": "yellow_object", "track": "tracks/yellow_object.csv", "moves": true, "visible_frames": [17, 48],
+     "description": "small yellow ball (looks like a tennis ball / lemon; elongated in early frames only by motion blur). Enters from the left edge at frame 17 flying up-right, arcs over, falls, bounces at frame 37 and rises again; travels together with grey_object, moving away from camera.",
+     "ref_point": "mask centroid",
+     "apparent_size_px": "width across motion ~39-42 px at frames 18-22 (length 75-85 incl. blur); ~23 px at 42-44; ~21.5 at 48"},
+    {"name": "grey_object", "track": "tracks/grey_object.csv", "moves": true, "visible_frames": [20, 47],
+     "description": "light grey/off-white oval ball (slightly larger than yellow_object), flying next to and slightly ahead/above the yellow one along a similar arc; bounces at frame 38. Appears suddenly at frame 20 and vanishes after frame 47 (segmentation limits).",
+     "ref_point": "mask centroid",
+     "apparent_size_px": "width ~50 px at frames 20-21 (length ~81-85 incl. blur); ~31 px at 41-43; ~24-25 at 45-47"},
+    {"name": "hand/person", "moves": true, "visible_frames": [], "description": "not visible: the thrower's hands are masked out; they cause the occlusion of basketball (0-10) and soccer ball (0-24)."},
+    {"name": "watermark", "moves": false, "description": "text 'Modified with Segment Anything 2 Demo', bottom-right box x 1030-1280, y 692-720 (not a scene object)"}
+  ],
+  "static_objects": "none in the scene (background replaced).",
+  "events": [
+    {"frame": 5, "t": 0.2083, "event": "basketball starts moving (throw begins; held/occluded until ~10)"},
+    {"frame": 11, "t": 0.4583, "event": "basketball released, free flight from 11/12 on"},
+    {"frame": 17, "t": 0.7083, "event": "yellow_object enters at the left edge, flying up-right"},
+    {"frame": 20, "t": 0.8333, "event": "grey_object first visible (segmentation starts)"},
+    {"frame": 23, "t": 0.9583, "event": "soccer ball starts moving up (throw/release ~23-24; free from ~25)"},
+    {"frame": 27, "t": 1.125, "event": "yellow_object apex of its arc (min y 237.6 px); grey_object apex frame 27-28 (y~199)"},
+    {"frame": 37, "t": 1.5417, "event": "yellow_object bounce (lowest point y 489, then rises)"},
+    {"frame": 38, "t": 1.5833, "event": "grey_object bounce (lowest point y 471, then rises)"},
+    {"frame": 39, "t": 1.625, "event": "basketball impact/rebound: x and y motion reverse, apparent size stops shrinking and grows (comes back toward camera)"},
+    {"frame": 48, "t": 2.0, "event": "end of clip (yellow nearly horizontal motion, near new apex)"}
+  ],
+  "files": {"notes": "notes.md", "scripts": "scripts/"}
+}

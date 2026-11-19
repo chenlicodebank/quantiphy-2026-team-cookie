@@ -1,0 +1,51 @@
+{
+ "video": "simulation_0055.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 30.0,
+ "n_frames": 78,
+ "duration_s": 2.6,
+ "image_size_px": [1080, 1080],
+ "time_convention": "t = frame / 30; frame 0 = t 0",
+ "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale anywhere",
+ "camera": {
+  "motion": "static: lamp post, hydrant, windows identical in frame 0 and 77 (background shift 0 px)",
+  "view": "side-on street view, looking perpendicular at a building facade across a road; building verticals and lamp post are vertical and curb/road lines horizontal, so no visible pitch/roll; principal point assumed at image centre (540,540)",
+  "horizon_estimate_y": 540,
+  "horizon_note": "not visible (building blocks it). For a level camera the horizon is at the principal-point row ~540 (an assumption). With it, ground-contact rows give relative depth ~ 1/(y_contact - 540): car tyres y 865 (325 px below), lamp/hydrant bases y ~897 (357), man's feet y ~945 (405). So man is nearest, then lamp/hydrant, then car (car about 1.25x the man's depth). Only a rough cue.",
+  "ground_rows_y": {"wall_base": 660, "far_curb": "695-720", "road_far_edge": 720, "road_centre_dashed_line": 775, "near_road_edge_curb": 860, "near_curb_top": 866, "sidewalk_near": "866-1080 (wet, reflective)"}
+ },
+ "objects": [
+  {"name": "car", "desc": "orange sports sedan (fastback, black wheels, red brake callipers), drives left to right in the near road lane", "moves": true,
+   "visible_frames": "21-77 (nose enters at left edge at frame 21; fully in frame 49-50 only; front leaves the right edge at frame 69)",
+   "track": "tracks/car.csv", "reference_point": "centre_x = middle of the horizontal silhouette extent; centre_y = middle of bbox rows (vehicle root presumably on the ground below it, ground_y 865)",
+   "size_px": {"length": 739.7, "height": 219, "bbox_rows": [647, 865], "note": "constant through the clip (moves parallel to the image plane, constant depth): height 219 px every frame 40-77; length measured at frames 49-50 (740.2, 739.2)"}},
+  {"name": "man", "desc": "pedestrian in dark navy jacket, grey trousers, black beanie, black shoes; walks right to left along the near sidewalk, in front of (nearer than) the hydrant, lamp post and car", "moves": true,
+   "visible_frames": "0-77 (right part cut by the right image edge in 0-17 and 25-30, legs swing past it)",
+   "track": "tracks/man.csv", "reference_point": "pelvis_x = head centre + 3 px (median torso-head offset in clean frames); pelvis_y = feet_y - 0.53*height (estimate)",
+   "size_px": {"height_head_top_to_shoe_sole": {"median": 370, "min": 361, "max": 380, "note": "per-frame values in man.csv; +-5 px noise from shoe-sole detection; head top 573-580"}, "head_width": 51, "width_clean_frames": "72 (legs together) to 194 (full stride)"}},
+  {"name": "lamp_post", "desc": "black cast-iron street lamp on the near sidewalk edge, left of the hydrant", "moves": false, "visible_frames": "0-77",
+   "pixels": {"bbox": [760, 121, 871, 898], "height_px": 777, "top_finial_y": 121, "base_bottom_y": 898, "lantern_roof_width_px": 111, "lantern_x": [760, 871], "lantern_y": [121, 212], "upper_shaft_x": [806, 821], "upper_shaft_width_px": 16, "lower_column_x": [791, 836], "lower_column_width_px": 45, "base_x": [778, 851], "base_width_px": 73, "axis_x": 813.5}},
+  {"name": "fire_hydrant", "desc": "white fire hydrant with rusty caps, on the near sidewalk right of the lamp post", "moves": false, "visible_frames": "0-77 (partly hidden behind the man around frames 0-35)",
+   "pixels": {"bbox_incl_nozzles": [883, 708, 998, 896], "height_px": 188, "cap_x": [910, 978], "body_x": [916, 972], "body_width_px": 56, "base_x": [903, 987], "base_width_px": 84, "width_incl_side_nozzles_px": 115, "centre_x": 943, "base_bottom_y": 896}},
+  {"name": "building", "desc": "white-painted brick building facade behind the far sidewalk; fills x 0-~900", "moves": false, "pixels": {"right_edge_x": 900, "wall_base_y": 660}},
+  {"name": "windows", "desc": "4 visible sash windows in 2 columns x 2 rows (plus cut ones at the left edge x 0-30)", "moves": false,
+   "pixels": {"upper_left": [269, 21, 349, 153], "lower_left": [269, 233, 349, 375], "upper_right": [583, 22, 665, 155], "lower_right": [583, 233, 665, 375], "width_px": "80-82", "height_px": "132 (upper) / 142 (lower)", "column_spacing_px": 314}},
+  {"name": "graffiti", "desc": "teal and black graffiti tag on the wall, lower left", "moves": false, "pixels": {"bbox": [207, 520, 417, 647], "width_px": 210, "height_px": 127}},
+  {"name": "road", "desc": "wet asphalt street, white dashed centre line at y~775, car drives in near lane", "moves": false},
+  {"name": "sidewalks", "desc": "far sidewalk y 660-720; near sidewalk (wet, reflective) y 866-1080 where the man walks and lamp/hydrant stand", "moves": false},
+  {"name": "trees", "desc": "blurred trees/foliage right of the building, x>900; bright lamp/light blob at top right (~1020, 30)", "moves": false}
+ ],
+ "events": [
+  {"event": "man walking", "frames": "0-77", "note": "walks left the whole clip; never stops; ~3-4.5 px/frame"},
+  {"event": "car nose enters at left image edge", "frame": 21, "t": 0.7},
+  {"event": "car fully inside the image", "frames": "49-50", "t": "1.633-1.667"},
+  {"event": "car front reaches lamp post (front hidden from here)", "frame": 51, "t": 1.7},
+  {"event": "man starts to pass in front of the car", "frame": 52, "t": 1.733},
+  {"event": "car front leaves right edge", "frame": 69, "t": 2.3},
+  {"event": "car decelerating", "frames": "~25-77", "note": "per-frame centre step falls from ~29-30 px (frames 22-26) to ~8 px (frame 77) roughly linearly from about frame 30; earlier steps noisy (nose only, blur). Car still moving at the last frame (does not stop)."},
+  {"event": "man passes in front of the hydrant / lamp post", "frames": "hydrant ~0-40, lamp post ~68-77 (lamp axis x 813; man pelvis x crosses 813 between frames 74 (816.0) and 75 (812.5))"}
+ ],
+ "apparent_size_over_time": {"car": "constant height 219 px and length ~740 px -> constant depth (lateral motion)", "man": "height 361-380 px with no trend (gait bob only), head width constant 51 px -> constant depth"},
+ "files": {"tracks/car.csv": "car per frame (21-77)", "tracks/man.csv": "man per frame (0-77)", "tracks/car_template_match.csv": "superseded alternative car track (biased, do not use)", "bg.png": "clean background plate", "occluders_mask.png": "lamp+hydrant mask", "notes.md": "methods and reliability"}
+}

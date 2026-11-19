@@ -1,0 +1,5 @@
+{"answer": 3.68, "decision": "new", "follows": null,
+ "crux": "pixel slide acceleration at frame 18 for the scale (594 vs 700-736 px/s2) and centre pixel speed at frame 36 (881-1133 px/s), both hinging on tracking the centre of a yawing box",
+ "fault_found": "C1 extrapolated front-face texture at constant acceleration to v36=1056 px/s vs measured centre 963-979 px/s (trailing edge + half silhouette length); DeepSeek scales 700-736 px/s2 come from yaw-biased early windows (clean window 620-633, and 720 would make free fall 8.3 m/s2)",
+ "closure_pct": 3.0, "confidence": "medium", "verified_previous": true,
+ "lesson": "When a sliding or rolling object's silhouette changes shape (yaw, perspective side faces) in part of the clip, fit its acceleration only over frames where the silhouette extent is constant, and cross-check the resulting pixel scale against a free-fall segment's gravity if the clip has one."}

@@ -1,0 +1,74 @@
+{
+  "video": "captured_0031x.mp4",
+  "source": "lab (real recording; background blacked out by segmentation, only table + balls kept)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left of the 1280x720 frame) and seconds",
+  "camera": {
+    "motion": "static: phase correlation of two table regions balls never enter gives max |shift| 0.28 px over all frames",
+    "intrinsics_from_task_conventions": "lab camera, HFOV 80 deg: f = 0.5959*1280 = 763 px, principal point ~(640,360)",
+    "view": "slightly elevated view of a small table from in front; balls roll from the back of the table top toward the camera (down-left in the image) and the yellow one drops off the front edge",
+    "perspective_cues": "table top is a trapezoid: back edge y~425-427, x 566..850 (~285 px); front top edge y~485 (left corner x463) to ~497 (right corner x963), ~500 px wide -> front edge is much closer to the camera; table top slightly rolled (front edge lower on the right by ~10 px)"
+  },
+  "objects": [
+    {
+      "name": "yellow_ball",
+      "description": "yellow-green tennis ball (felt), the larger of the two balls, starts at the back-right of the table top",
+      "moves": true,
+      "visible_frames": "0-47 (47 truncated by the bottom image edge; gone at 48)",
+      "track": "tracks/yellow_ball.csv",
+      "apparent_diameter_px": {"f0-15 (at rest)": 30, "f20": 34, "f30": 42, "f36": 50, "f42 (at front edge)": 54, "f44-45 (falling, width)": 60},
+      "start_position_px": [758.5, 410.5],
+      "position_leaving_table_f42_px": [730.5, 460.5]
+    },
+    {
+      "name": "white_ball",
+      "description": "small white ball (ping-pong-like), left of the yellow ball at the back of the table top",
+      "moves": true,
+      "visible_frames": "0-48 (always on the table, still rolling at the end)",
+      "track": "tracks/white_ball.csv",
+      "apparent_diameter_px": {"f0-14 (at rest)": 17, "f20": 19, "f30": 20, "f40": 26, "f48": 29},
+      "start_position_px": [679.0, 416.0],
+      "end_position_f48_px": [642.0, 459.0]
+    },
+    {
+      "name": "table_top",
+      "description": "brown wooden table top (only one table), static",
+      "moves": false,
+      "visible_frames": "0-48",
+      "pixel_geometry_f48": {
+        "overall_bbox_x0_x1_y0_y1": [463, 963, 424, 518],
+        "back_edge": "y~425-427, x 566..850 (~285 px)",
+        "front_top_edge": "from (463,~485) to (963,~497), ~500 px long",
+        "front_face_thickness_px": "~20 (front face bottom y 505 at x470 ... 518 at x955)",
+        "top_surface_vertical_extent_px": "~60-70 (back edge to front edge)"
+      }
+    },
+    {
+      "name": "table_leg",
+      "description": "single dark grey central pedestal leg under the table top, static",
+      "moves": false,
+      "visible_frames": "0-48",
+      "pixel_geometry": "x 708..747 (~40 px wide), from y~518 (under top) to the bottom of the image (cut off at y=719)"
+    },
+    {
+      "name": "watermark_text",
+      "description": "tiny white text at the bottom-right corner (segmentation tool watermark), not a scene object",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "both balls at rest", "frames": "0-14", "t_s": "0-0.583"},
+    {"event": "both balls start rolling toward the camera (simultaneously; cause not visible)", "frame": 15, "t_s": 0.625, "uncertainty_frames": 1},
+    {"event": "yellow ball reaches front edge of table top and leaves it (start of fall)", "frame": 42.5, "t_s": 1.77, "note": "last on-table frame 42 (bottom of ball at front edge), frame 43 already dropping 18 px"},
+    {"event": "yellow ball falling in front of the table leg, heavy vertical motion blur", "frames": "43-47"},
+    {"event": "yellow ball partially out of the image bottom", "frame": 47, "t_s": 1.958},
+    {"event": "yellow ball gone from view", "frame": 48, "t_s": 2.0},
+    {"event": "white ball still rolling at end of clip", "frame": 48, "t_s": 2.0}
+  ],
+  "notes_file": "notes.md"
+}

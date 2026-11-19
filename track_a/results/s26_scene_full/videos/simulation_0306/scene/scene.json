@@ -1,0 +1,66 @@
+{
+  "video": "simulation_0306.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 is t=0",
+  "units": "pixels (original 2560x1440 resolution) and seconds; no metric scale estimated",
+  "camera": {
+    "motion": "static (mean abs diff of 4 background corner patches vs frame 0 <= 0.51 gray levels in every frame; see camera_check.csv)",
+    "view": "oblique, looking down onto an infinite light-grey floor (studio cyclorama); no horizon visible - the floor darkens toward the top of the image (far floor), light vignette",
+    "perspective_cues": "ground plane only (no lines, markings or vanishing points). The whale casts a soft shadow onto the floor below/right of it; the whale floats above the floor (it does not touch it). Moving up in the image = moving away from the camera on/over the floor.",
+    "principal_point_assumed": [1280, 720],
+    "focal_length": "unknown - estimate from the question's depth_info + a known size"
+  },
+  "objects": [
+    {
+      "name": "whale",
+      "description": "humpback whale (dark blue-grey back, lighter grey/white belly and fluke underside, long pectoral flippers). The only animal / moving object.",
+      "moves": true,
+      "visible_frames": "0-71 (all). Fluke partly cut off by the bottom image border in frames 8-39 (flag tail_cut/occluded in whale.csv). Head region looks faded/semi-transparent (render artefact) but is included in the mask.",
+      "motion": "swims steadily toward the upper-left of the image (away from the camera, roughly parallel to the floor - its shadow moves by about the same pixel vector) while doing one fluke stroke: tail sweeps DOWN (toward bottom of image) frames 1-~29, then UP frames ~29-71, ending with the body nearly straight/horizontal and the fluke at upper right.",
+      "reference_point_note": "the rig origin is not visible. Best proxies: whale_head.csv (template-tracked head patch, rigid-body translation, smooth) and the mask centroid cx,cy in whale.csv (biased by the tail flap). Root translation ~= head-track translation.",
+      "head_track_summary_px": {"frame0": [1140.0, 500.0], "frame71": [977.05, 383.57], "per_frame_step": "about 2.2-2.9 px/frame toward upper-left, frames 2-71; zero between frames 0 and 1"},
+      "mask_extents_frame0": {"bbox": [954, 390, 2445, 1301], "bbox_w": 1492, "bbox_h": 912, "pca_axis_len": 1605.4, "pca_width": 742.6, "max_span_tip_to_tip": 1605.5, "head_to_tail_tip": 1456.1},
+      "mask_extents_frame71": {"bbox": [774, 300, 1993, 911], "bbox_w": 1220, "bbox_h": 612, "pca_axis_len": 1260, "pca_width": 594, "max_span": 1302, "head_to_tail_tip": 1016.0},
+      "apparent_size_change": "head/front-body SIFT similarity scale vs frame 0: 0.994 (f5), 0.989 (f10), 0.976 (f15), 0.967 (f20), 0.955 (f25), 0.943 (f30), 0.932 (f35), 0.914 (f40), 0.886 (f45), ~0.86 (f50-55), ~0.84-0.85 (f65-71; noisy, body bending/pitch also contributes). The whale gets smaller as it swims away; see head_scale.csv",
+      "pectoral_flipper_left_frame0_px": "hanging flipper at image left of the body, from ~(1070,635) to ~(1025,1110): ~475 px long (rough, by eye)",
+      "tracks": ["tracks/whale.csv", "tracks/whale_head.csv"]
+    },
+    {
+      "name": "whale_shadow",
+      "description": "soft dark-grey shadow of the whale on the floor, below / lower-left to lower-right of the whale",
+      "moves": true,
+      "visible_frames": "0-71; its lower part is cut by the bottom border in all frames (cut_by_bottom_border flag)",
+      "tracks": ["tracks/whale_shadow.csv"],
+      "note": "centroid of gray<150 pixels outside the whale mask below y=500; displacement f0->f71 (-168,-129) px, similar to the head displacement (-163,-116)"
+    },
+    {
+      "name": "floor",
+      "description": "infinite light-grey ground plane / cyclorama, no texture or markings",
+      "moves": false,
+      "visible_frames": "0-71",
+      "extent": "fills the frame; no measurable features"
+    }
+  ],
+  "events": [
+    {"event": "video start, frames 0 and 1 identical (no motion between them)", "frame": 0, "t": 0.0},
+    {"event": "motion starts (first frame that differs)", "frame": 2, "t": 0.0833},
+    {"event": "fluke tip reaches bottom border (fluke partially out of frame)", "frame": 8, "t": 0.3333},
+    {"event": "tail downstroke ends / reverses to upstroke (minimum of whole-image frame difference at frames 27-28; fluke hidden below border so exact reversal estimated 27-30)", "frame": 28, "t": 1.1667},
+    {"event": "fluke fully back in frame", "frame": 40, "t": 1.6667},
+    {"event": "fastest tail upstroke (tail-tip y steps ~33-35 px/frame, frame difference peak)", "frame": 50, "t": 2.0833},
+    {"event": "end of clip, tail still rising slowly, body nearly straight", "frame": 71, "t": 2.9583}
+  ],
+  "files": {
+    "tracks/whale.csv": "per-frame whale mask: centroid, bbox, area, PCA axis length/width/angle, max tip-to-tip span and its endpoints, topmost point, head point, tail tip, head-to-tail distance, occluded/tail_cut flags",
+    "tracks/whale_head.csv": "per-frame head-patch template track (head_x, head_y, match_score)",
+    "tracks/whale_shadow.csv": "per-frame shadow blob centroid / bbox / area",
+    "camera_check.csv": "background stability check",
+    "head_scale.csv": "apparent scale of head region vs frame 0",
+    "notes.md": "methods and reliability"
+  }
+}

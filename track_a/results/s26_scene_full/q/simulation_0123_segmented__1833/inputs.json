@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0123_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1833,
+  "question": "What is the diameter of the rolling cup in meters?",
+  "prior": "speed of the cup = 0.338m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

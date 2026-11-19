@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0212.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1612,
+  "question": "What is the height of the vase in meters?",
+  "prior": "speed of the black cat = 0.94m/s",
+  "depth_info": "t=0s, distance_black_cat_camera=4.199m   \nt=1.0s, distance_black_cat_camera= 4.481m\nt=0s, distance_dog_camera = 5.094m  \nt=0.5s, distance_dog_camera = 4.625m\ndistance_floor_mirror_bottom_center_camera = 6.407m  \ndistance_closest_wooden_bench_leg_camera = 5.69m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

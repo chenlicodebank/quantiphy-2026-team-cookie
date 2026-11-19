@@ -1,0 +1,18 @@
+{
+ "video": "captured_0027.mp4",
+ "video_source": "lab",
+ "video_type": "S3SC",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2467,
+  "question": "What is the shoulder breadth of the person in cm?",
+  "prior": "diameter of the red ball = 7cm",
+  "depth_info": "t=0.2s, distance_book_camera=1.0995m\nt=0.6s, distance_book_camera=1.1510m\ndistance_person_left_camera=1.2750m\ndistance_person_right_camera=1.2305m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

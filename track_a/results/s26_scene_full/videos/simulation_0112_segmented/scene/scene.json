@@ -1,0 +1,75 @@
+{
+ "video": "simulation_0112_segmented.mp4",
+ "source": "segmentation (Blender render, background replaced by white)",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 55,
+ "frame_size_px": [1080, 1080],
+ "time_convention": "t = frame / 24; frame 0 at t=0",
+ "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+ "camera": {
+  "motion": "static (platform band vs frame 0: phase-correlation shift <=0.12 px in x, <=0.8 px in y, mean abs diff <=2.8 grey levels = noise)",
+  "projection": "perspective camera, side view, horizon not visible; car moves parallel to the image plane. Perspective parallax visible: near-side wheels move 28.23 px/frame while the car silhouette centre moves 27.29 px/frame; silhouette appears ~7-25 px longer near the image borders (3D car seen slightly from front/behind)."
+ },
+ "objects": [
+  {
+   "name": "car",
+   "description": "dark-red / burgundy classic sports coupe (Porsche 911 Turbo style, rear spoiler 'whale tail'), side view, facing +x (right)",
+   "moves": true,
+   "visible_frames": [0, 53],
+   "fully_in_view_frames": [13, 36],
+   "cut_by_left_border_frames": [0, 12],
+   "cut_by_right_border_frames": [37, 53],
+   "absent_frames": [54],
+   "track_file": "tracks/car.csv",
+   "reference_point": "centre of the silhouette bbox (bumper-to-bumper midpoint, vertical bbox middle); measured in frames 13-36, linear-fit extrapolation elsewhere",
+   "motion": "uniform horizontal motion to the right along the platform, no vertical motion (bbox bottom = 539 every full frame)",
+   "ref_x_linear_fit": {"px_per_frame": 27.285, "x_at_frame0": -136.31, "rms_resid_px": 0.85, "frames_used": "13-36"},
+   "ref_y_px": 476.5,
+   "size_px_fully_visible": {
+     "length_bumper_to_bumper": {"median": 421, "range": [420, 428], "note": "428-429 at frames 13-14 and 36 (near borders, perspective), 420-422 near image centre (frames 19-34)"},
+     "height_ground_to_roof": {"median": 126, "range": [125, 127], "bbox_y": [413, 539]},
+     "wheel_radius": 33.5, "wheel_diameter": 67,
+     "wheelbase_near_side_wheels": 232,
+     "rear_wheel_centre_f25": [440.5, 504.5], "front_wheel_centre_f25": [672.5, 506.5]
+   },
+   "clear_frame": 25,
+   "bbox_f25": [335, 414, 756, 539]
+  },
+  {
+   "name": "platform",
+   "description": "long dark weathered stone/rusty-metal slab (bridge deck / ledge) the car drives on, spans the full image width; small rectangular brackets under its top lip; tapered ends at lower corners",
+   "moves": false,
+   "visible_frames": [0, 54],
+   "top_surface_y_px": 541,
+   "top_surface_y_range": [539, 542],
+   "bottom_y_px": 618,
+   "thickness_px": 78,
+   "x_extent_px": "full width 0-1079 at rows 541-580; lower tapered part x 36-1073 at y=590, x 82-1010 at y=615",
+   "length_px": ">=1080 (extends past both image borders)"
+  },
+  {
+   "name": "background",
+   "description": "plain white (segmentation replacement), no other objects",
+   "moves": false
+  }
+ ],
+ "events": [
+  {"event": "car already moving at constant speed when video starts, front part visible at left border", "frame": 0, "time": 0.0},
+  {"event": "car fully enters view (rear bumper leaves left border)", "frame": 13, "time": 0.5417},
+  {"event": "car crosses image centre x=540 (ref_x)", "frame": 24.8, "time": 1.033},
+  {"event": "front bumper reaches right border", "frame": 37, "time": 1.5417},
+  {"event": "car last visible (only rear bumper sliver)", "frame": 53, "time": 2.2083},
+  {"event": "car gone", "frame": 54, "time": 2.25},
+  {"note": "no start/stop, bounce, contact change or direction change: uniform motion throughout"}
+ ],
+ "files": {
+  "tracks/car.csv": "final per-frame car track",
+  "tracks/car_raw.csv": "raw mask measurements (all frames)",
+  "tracks/car_wheels.csv": "Hough wheel centres/radii per frame",
+  "tracks/car_pairshift.csv": "frame-to-frame appearance shift (texture matching; biased toward near-side surface)",
+  "car_summary.json": "fit summary",
+  "bg_stats.json": "platform measurements from median background",
+  "notes.md": "description and reliability"
+ }
+}

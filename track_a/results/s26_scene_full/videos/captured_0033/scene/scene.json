@@ -1,0 +1,97 @@
+{
+  "video": "captured_0033.mp4",
+  "source": "lab (real recording; 'Modified with Segment Anything 2 Demo' watermark: background behind the ball is blurred, the ball stays sharp)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the right wall region vs frame 0: |shift| < 0.15 px at frames 12, 24, 36, 46, 48",
+    "intrinsics_lab_convention": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "note": "lab convention: f = 0.5959 x width, HFOV 80 deg"},
+    "perspective": "camera roughly at table-top height or a little above, looking slightly down at a table; table top seen as trapezoid (back edge ~y 430, front edge ~y 514-534) so depth increases upward in the image on the table plane; front edge slightly tilted (y 514 at left, 534 at right)"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ball (ping-pong-ball-like), the only moving prop; held by the person's right hand at frame 0",
+      "moves": true,
+      "visible_frames": "0-38 (0-10 partly hidden by fingers; 38 cut by bottom border); 39-48 out of frame",
+      "track": "tracks/ball.csv",
+      "reference_point": "centroid of the ball mask (visible centre)",
+      "apparent_diameter_px_clean_frames": {
+        "frames_4_6_near_hand_partly_occluded": "about 24-25 (not reliable, fingers)",
+        "frames_17_20_near_apex_after_bounce1": "31-34",
+        "frames_25_28_on_table_after_bounce2": "34-38",
+        "frames_30_33_rolling_toward_camera": "34-40 across, 49-57 along (motion blur)",
+        "frame_35_at_front_edge": "45 across",
+        "frames_36_37_falling_off_edge": "52-55 across (strong blur along motion)"
+      },
+      "size_note": "use width_across_px (across motion) as the diameter; the mask misses ~2-4 px of soft halo and sometimes the shadowed lower rim"
+    },
+    {
+      "name": "table",
+      "description": "rectangular wooden (light brown) table top on a single dark central leg, centre of image",
+      "moves": false,
+      "visible_frames": "0-48",
+      "top_surface_corners_px": {"back_left": [462, 430], "back_right": [771, 440], "front_right": [901, 534], "front_left": [309, 514]},
+      "front_edge_length_px": 592.3,
+      "back_edge_length_px": 309.2,
+      "front_face_thickness_px": {"left": 31, "right": 26},
+      "front_face_bottom_edge_px": [[305, 545], [910, 560]],
+      "leg": "dark grey column, x ~560-605, from y ~555 to the bottom border (bottom cut off)",
+      "bbox_px_top_surface": [309, 430, 901, 534],
+      "measured_at_frame": 46
+    },
+    {
+      "name": "person",
+      "description": "person in blue denim overalls with bare arms, face blurred, standing at left behind the table; right arm extended holding/releasing the ball",
+      "moves": "arm lifts ball frames 4-8 then releases ~frame 9; arm stays extended (hand ~ (560-620, 200-260)) and body nearly static afterwards",
+      "visible_frames": "0-48 (cut by left/top borders; legs hidden behind table)",
+      "bbox_px_approx": [200, 0, 640, 720]
+    },
+    {
+      "name": "tripod",
+      "description": "dark tripod behind the table with a small blue/cyan light at its top",
+      "moves": false,
+      "position_px": "top (blue light) ~ (688, 70); legs spread to ~x 600-780 at y ~430",
+      "visible_frames": "0-48"
+    },
+    {
+      "name": "monitor",
+      "description": "black screen / TV at top right with a bright reflection",
+      "moves": false,
+      "bbox_px_approx": [1000, 0, 1280, 140]
+    },
+    {
+      "name": "wall_panels",
+      "description": "grey partition panels forming the room's back and right walls; bright white ceiling area at top centre",
+      "moves": false
+    },
+    {
+      "name": "light_stand_left",
+      "description": "dark diagonal pole/stand at far left edge",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball held still in hand", "frames": "0-3", "t_s": "0.000-0.125", "ball_px": [625, 229]},
+    {"event": "hand lifts ball upward", "frames": "4-8", "t_s": "0.167-0.333", "note": "centre y 217 -> 172"},
+    {"event": "highest point / release", "frame": 9, "t_s": 0.375, "note": "highest at frame 8 (y 172); ball separates from fingers between frames 9 and 10 (uncertain +-1 frame)"},
+    {"event": "free fall", "frames": "9-14"},
+    {"event": "bounce 1 on table (back part of table top)", "frame": 14.5, "t_s": 0.604, "note": "lowest centre y 404 at frame 14 (blurred, falling); frame 15 already rising; ball bottom ~y 432 = near table back edge"},
+    {"event": "apex after bounce 1", "frame": 20, "t_s": 0.833, "ball_px": [616, 310]},
+    {"event": "bounce 2 on table", "frame": 25, "t_s": 1.042, "ball_px": [599, 434], "note": "frame 24 blurred falling, frame 25 lowest (bottom y 450), frame 26 up"},
+    {"event": "small hops / rolling toward camera and left on table", "frames": "26-35", "note": "low hop peaking ~frame 26-27 (y 425), then y increases steadily as ball approaches front edge"},
+    {"event": "ball leaves table front edge", "frame": 35, "t_s": 1.458, "ball_px": [457, 495], "note": "front edge at that x is y ~ 523; frame 36 clearly below the edge"},
+    {"event": "falling off table toward floor, near camera", "frames": "36-38"},
+    {"event": "ball exits bottom of frame", "frame": 39, "t_s": 1.625, "note": "frame 38 partly visible at bottom border; not visible 39-48"}
+  ],
+  "files": {
+    "tracks/ball.csv": "per-frame ball track",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

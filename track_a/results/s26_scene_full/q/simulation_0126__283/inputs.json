@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0126.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MS",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1790,
+ "question": {
+  "id": 283,
+  "question": "What is the speed of the puck at 0.5s in m/s?",
+  "prior": "diameter of the puck = 0.074m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,71 @@
+{
+  "video": "simulation_0031.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "image_size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, pixel centres at integer coordinates",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the cliff band (y 0-95) vs frame 0: max shift 0.01 px over all frames; shoreline identical in frames 0 and 74",
+    "view": "elevated, oblique view looking down onto a beach; no horizon or sky visible; cliff wall across the top of the image",
+    "perspective_cues": "ground plane = sand beach; farther = higher in the image. Cliff foot line roughly horizontal at y ~100-128 (lower on the right). Lower water/sand edge near y ~765-785 from x 480 to 960. Boat recedes (apparent scale 1.00 -> 0.92 while moving up-left). Focal length unknown: derive from depth_info + a known size."
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red-hulled fishing boat with white/grey cabin (red roof), black/white mast with cross-tree, black davit/crane on the foredeck, white railings; the only vessel",
+      "moves": true,
+      "motion": "drifts/sails steadily up-left across the water (away from camera), no rotation detected; stern leaves the left image edge from frame 52",
+      "visible_frames": "0-74 (fully in frame 0-51; stern/left part cut by left image edge 52-74, bow and mast always visible)",
+      "track": "tracks/boat.csv",
+      "reference_point": "ref_x/ref_y = centre of the hull box (deck/cabin body to hull bottom, stern to bow), mapped from frame 0 by template tracking; the true Blender origin is not visible - likely near hull centre / waterline",
+      "frame0_extents_px": {"full_bbox_incl_mast": [186, 466, 457, 922], "full_w": 272, "full_h_mast_top_to_hull_bottom": 456,
+                            "hull_bbox": [186, 690, 457, 922], "hull_w": 272, "hull_h": 232,
+                            "bow_tip": [455, 885], "mast_top": [291, 466], "cabin_roof_centre": [285, 683],
+                            "stern_to_bow_diagonal_px": "stern deck corner (186,705) to bow tip (455,885): 324 px"},
+      "apparent_scale": "scale_vs_f0 column: 1.00 at frame 0, 0.965 at 25, 0.94 at 50, 0.92 at 74"
+    },
+    {
+      "name": "person",
+      "description": "single adult man walking on the sand, white T-shirt, dark grey/blue jeans, bald/light head almost the colour of the sand; long cast shadow to his right",
+      "moves": true,
+      "motion": "walks steadily down-left (towards the camera and towards the water) the whole clip, ~1.6 px/frame of the pelvis estimate",
+      "visible_frames": "0-74, never occluded",
+      "track": "tracks/person.csv",
+      "reference_point": "ref = pelvis estimate: y = head_y + 0.47*(feet_y - head_y), x = mask mean in that row",
+      "pixel_sizes": "bbox height (head top to lowest foot) ~79 px at frames 0-9, ~76 px at 30-39 and 65-74 (noise +-3 px; frame 50 outlier 65); width ~24 px (walking stride, arms)",
+      "feet_y": "639 (frame 0) -> 687 (frame 74)"
+    },
+    {
+      "name": "bird",
+      "description": "dark brown/black bird (eagle/kite-like) with greyish wingtips, flapping, flying over the sand",
+      "moves": true,
+      "motion": "flies left-to-right and slightly down across the image (~12.4 px/frame), wings flapping (period ~10-13 frames); exits through the right edge",
+      "visible_frames": "0-58 (fully visible 0-53; cut by right image edge 54-58; gone from 59)",
+      "track": "tracks/bird.csv",
+      "reference_point": "centroid of the bird mask",
+      "pixel_sizes": "mask_len (PCA main-axis length ~ wingspan in image) max 74.6 px (frame 32), ~65-70 at other downstroke-flat frames (5-6, 16-18, 31-33, 41-43); min 44 px (frame 0, wings raised); bbox_w range 27-75 px",
+      "notes": "a faint moving dark streak on the sand right of the person at frame 0 (x~790-880, y~600) is probably the bird's shadow - not tracked"
+    }
+  ],
+  "static_objects": [
+    {"name": "cliff", "description": "tan rock cliff wall with vertical columns across the top of the image", "extent_px": "y 0 to foot at ~100-128 (foot y: 102 at x=80, 114 at x=240, 111 at x=480, 114 at x=720, 128 at x=880)"},
+    {"name": "sand_beach", "description": "large pinkish sand area, ground plane on which the person walks", "extent_px": "from cliff foot (y~110) down to the shoreline"},
+    {"name": "water", "description": "green sea with waves on the left and the bottom; the boat floats in it", "extent_px": "left part and bottom strip"},
+    {"name": "shoreline", "description": "wavy water/sand boundary (visual polyline, +-10 px)", "polyline_px": [[0, 310], [160, 370], [230, 420], [330, 490], [370, 560], [360, 630], [315, 660], [380, 720], [480, 765], [700, 775], [960, 780]]}
+  ],
+  "events": [
+    {"event": "boat moving", "frames": "0-74", "note": "already moving at frame 0 and still moving at 74; ~4.3 px/frame early, ~3.8 px/frame late (apparent, receding)"},
+    {"event": "boat stern reaches left image edge", "frame": 52, "time_s": 2.08},
+    {"event": "person walking", "frames": "0-74", "note": "no start/stop or direction change"},
+    {"event": "bird starts leaving frame (touches right edge)", "frame": 54, "time_s": 2.16},
+    {"event": "bird last visible", "frame": 58, "time_s": 2.32},
+    {"event": "bird wings fully spread / flat (span maxima)", "frames": [6, 17, 32, 43]},
+    {"event": "bird wings raised (span minima)", "frames": [0, 11, 21, 47], "note": "frames 35-40 only a shallow minimum (~62 px)"}
+  ],
+  "files": {"tracks": ["tracks/boat.csv", "tracks/person.csv", "tracks/bird.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

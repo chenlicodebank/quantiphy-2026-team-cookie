@@ -1,0 +1,129 @@
+{
+ "video": "simulation_0296.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_of_frame": "t = frame / 24",
+ "units": "pixels and seconds; no metric scale inferred",
+ "camera": {
+  "motion": "static (phase-correlation shift 0.00 px for every frame vs frame 0)",
+  "view": "top-down (bird's-eye) onto rocky/mossy ground; 2D: butterfly flies in a plane parallel to the image",
+  "perspective": "none usable; ground fills the frame, no horizon"
+ },
+ "objects": [
+  {
+   "name": "butterfly",
+   "description": "single light-blue butterfly (morpho-like), seen from above, body axis horizontal, head to the LEFT (larger forewings on the left), wings spread up/down in the image",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never",
+   "track_file": "tracks/butterfly.csv",
+   "reference_point": "ref_x/ref_y = centre of the wing-mask bounding box; lies on the body at the forewing/hindwing junction (thorax); proxy for the rig origin (x stable under flapping because wings rotate about the horizontal body axis)",
+   "start_px": [
+    1836.0,
+    720.5
+   ],
+   "end_px": [
+    742.5,
+    733.5
+   ],
+   "net_displacement_px_frame1_to_71": [
+    -1093.5,
+    13.0
+   ],
+   "path_length_px_frame1_to_71_raw": 1094.9,
+   "path_length_px_frame3_to_69_smoothed5": 1033.0,
+   "mean_dx_per_frame_px": -15.62,
+   "wingspan_px_vertical_extent": {
+    "max": 261,
+    "max_frame": 18,
+    "typical_open_flat": "254-261 (frames 0-3, 17-23, 37-44, 58-65)",
+    "min": 46,
+    "min_frame": 9,
+    "edge_on_minima_frames": [
+     9,
+     30,
+     51
+    ],
+    "edge_on_values": [
+     46,
+     52,
+     51
+    ]
+   },
+   "body_axis_length_px_horizontal_extent": {
+    "wings_open_median": 190.0,
+    "range_all_frames": [
+     169,
+     206
+    ],
+    "note": "horizontal (flight-direction) extent of the wings, not the body alone; 188-194 with wings open, 169-206 when folded"
+   },
+   "body_alone": "not measured: the thin dark body between the wings is barely distinguishable from the ground"
+  },
+  {
+   "name": "ground",
+   "description": "static rocky ground with stones, moss and grass patches covering the whole frame; no distinct markings",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ]
+  }
+ ],
+ "events": [
+  {
+   "event": "frames 0 and 1 identical (no motion between them)",
+   "frame": 1,
+   "time": 0.0417
+  },
+  {
+   "event": "butterfly motion begins (first displacement)",
+   "frame": 2,
+   "time": 0.0833
+  },
+  {
+   "event": "wings edge-on (min apparent wingspan, wing beat)",
+   "frames": [
+    9,
+    30,
+    51
+   ],
+   "times": [
+    0.375,
+    1.25,
+    2.125
+   ]
+  },
+  {
+   "event": "wings fully open/flat (max apparent wingspan)",
+   "frames": [
+    0,
+    18,
+    39,
+    60
+   ],
+   "times": [
+    0,
+    0.75,
+    1.625,
+    2.5
+   ],
+   "note": "plateau +-3 frames"
+  },
+  {
+   "event": "wing-beat period ~21 frames (0.875 s)"
+  },
+  {
+   "event": "steady flight leftwards, slight downward drift (~13 px over 70 frames); no stops or reversals; still in motion at last frame",
+   "frame": 71,
+   "time": 2.9583
+  }
+ ]
+}

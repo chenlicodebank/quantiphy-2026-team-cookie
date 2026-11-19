@@ -1,0 +1,190 @@
+{
+ "video": "captured_0008s.mp4",
+ "source": "lab (SAM2 background-replaced: uniform green background, watermark 'Modified with Segment Anything 2 Demo' bottom right)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (table board bbox identical within 1-2 px in frames 0,10,20,24,36,48)",
+  "intrinsics_from_task": {
+   "f_px": 762.8,
+   "cx": 640,
+   "cy": 360,
+   "hfov_deg": 80
+  },
+  "view": "oblique, looking down at a square table top from above/in front; the ball falls AWAY from the camera (apparent diameter shrinks ~130 -> ~105 px as it nears the board)"
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "desc": "orange basketball (Wilson logo, black seams), the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/ball.csv",
+   "ref_point": "centre of circle fitted (RANSAC) to the ball silhouette, columns x,y",
+   "apparent_diameter_px": {
+    "held_f0_21": 129.1,
+    "apex1_f36": 114.32,
+    "bounce1_f30": 104.95,
+    "bounce2_f41_42": [
+     109.58,
+     104.67
+    ],
+    "end_f48": 106.98
+   }
+  },
+  {
+   "name": "hand",
+   "desc": "a person's right hand holding the ball on its right side (x~550-595, y~95-150)",
+   "moves": "only opens to release",
+   "visible_frames": "fully visible 0-3; frames 4-23 the hand was cut out by the segmentation (green notches in the ball's right side); gone from 24",
+   "track": null
+  },
+  {
+   "name": "table_board",
+   "desc": "square light-wood board (table top), lower centre of the image, static",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "top_surface_corners_px_f0": {
+    "back_left": [
+     479,
+     416
+    ],
+    "back_right": [
+     683,
+     379
+    ],
+    "front_right": [
+     755,
+     542
+    ],
+    "front_left": [
+     432,
+     604
+    ]
+   },
+   "front_face_bottom_corners_px": {
+    "front_left": [
+     435,
+     616
+    ],
+    "front_right": [
+     755,
+     552
+    ]
+   },
+   "edge_lengths_px": {
+    "front": 328,
+    "back": 207,
+    "left": 194,
+    "right": 178
+   },
+   "diagonals_px": {
+    "BL_FR": 304,
+    "BR_FL": 337
+   },
+   "front_face_thickness_px": 11,
+   "bbox_px": [
+    432,
+    379,
+    755,
+    616
+   ],
+   "corner_accuracy_px": 3,
+   "note": "strong perspective: front edge (near camera) 328 px vs back edge 207 px; board is roughly square in reality"
+  },
+  {
+   "name": "pole",
+   "desc": "grey metal pole/stand under the board, leaving bottom edge of frame",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "bbox_px": [
+    620,
+    578,
+    669,
+    719
+   ],
+   "visible_length_px": 145,
+   "width_px": "~20-25",
+   "note": "cut by the image bottom; true length unknown"
+  },
+  {
+   "name": "ball_shadow",
+   "desc": "dark diffuse shadow of the ball on the board, under the ball near bounces (around x 540-620, y 470-560)",
+   "moves": true,
+   "visible_frames": "visible ~26-48, strongest near bounces",
+   "track": null
+  }
+ ],
+ "events": [
+  {
+   "event": "ball held still in hand",
+   "frames": [
+    0,
+    21
+   ],
+   "t": [
+    0.0,
+    0.875
+   ],
+   "note": "y drifts only 93-97 px"
+  },
+  {
+   "event": "release / start of fall",
+   "frame": 21,
+   "t": 0.875,
+   "note": "y 94.9 (f21) -> 106.3 (f22) -> 124.5 (f23); last still frame 20-21"
+  },
+  {
+   "event": "first impact on board (lowest point)",
+   "frame": 30,
+   "t": 1.25,
+   "y": 412.99,
+   "note": "y f29 409.8, f30 413.0, f31 379.0; contact at ~f30 (blurred)"
+  },
+  {
+   "event": "apex after first bounce",
+   "frame": 36,
+   "t": 1.5,
+   "y": 303.69
+  },
+  {
+   "event": "second impact on board",
+   "frame": 41.5,
+   "t": 1.7292,
+   "note": "y f41 410.1, f42 409.7 (both at board); contact between 41 and 42"
+  },
+  {
+   "event": "apex after second bounce",
+   "frame": 46,
+   "t": 1.9167,
+   "y": 371.89
+  },
+  {
+   "event": "ball falling again at end of clip",
+   "frames": [
+    47,
+    48
+   ]
+  }
+ ],
+ "files": {
+  "tracks/ball.csv": "per-frame ball track",
+  "tracks/ball_raw.csv": "raw tracker output",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts"
+ }
+}

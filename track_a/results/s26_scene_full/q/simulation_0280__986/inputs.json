@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0280.mp4",
+ "video_source": "simulation",
+ "video_type": "S2SC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 986,
+  "question": "What is the speed of the whale at 1.0s in m/s?",
+  "prior": "length of the whale = 19.17m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

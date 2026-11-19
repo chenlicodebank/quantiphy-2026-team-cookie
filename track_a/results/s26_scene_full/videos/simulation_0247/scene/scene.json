@@ -1,0 +1,128 @@
+{
+ "video": "simulation_0247.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 30.0,
+ "frames": 75,
+ "duration_s": 2.5,
+ "image_size": [
+  1920,
+  1080
+ ],
+ "units": "pixels (x right, y down, origin top-left), seconds",
+ "time_convention": "t = frame / 30; frame 0 is t = 0",
+ "camera": {
+  "motion": "static (empty floor/backdrop pixels identical across frames within ~1-2 grey levels)",
+  "view": "side view of a studio cyclorama (seamless floor curving into backdrop), seen slightly from above; no horizon, no floor markings; spotlight pool on the floor centred near (900, 950)",
+  "perspective": "objects walk along a line of nearly constant image y (feet at y~795-802); treat as one plane facing the camera (2D) - the rabbit is a little nearer the camera than the creature (its feet are ~5 px lower), negligible"
+ },
+ "objects": {
+  "creature": {
+   "description": "large fantasy quadruped (horse/antelope-like body, orange-brown with dark spots, white neck ruff, two long striped curved horns sweeping back over the body, long tail with a tufted end); walks left-to-right the whole clip",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "track": "tracks/creature_mask.csv",
+   "reference_point": "cx_mask, cy_mask = mask centroid (best proxy for the rig root/pelvis; the true root is not visible). cx_trunk = centroid of the body barrel at y 600-650 (noisier).",
+   "bbox_px_median": {
+    "w": {
+     "median": 538.0,
+     "min": 496.0,
+     "max": 580.0
+    },
+    "h": {
+     "median": 435.0,
+     "min": 427.0,
+     "max": 439.0
+    }
+   },
+   "bbox_notes": "bbox spans tail tuft (left) to ear/horn tip at the head (right), horn top (y~362) to hoof bottom (y~799). Width varies with gait 496-580 px; x0 (blurred tail tuft) uncertain ~15 px.",
+   "landmarks_frame37_px": {
+    "horn_top_y": 362,
+    "ear_tip_y": 455,
+    "back_top_y": 570,
+    "hoof_bottom_y": 798,
+    "rump_x": 820,
+    "chest_x": 1140,
+    "body_length_rump_to_chest": 320,
+    "body_length_rump_to_nose_approx": 390,
+    "shoulder_height_ground_to_withers_approx": 230,
+    "height_ground_to_ear_tip": 343,
+    "height_ground_to_horn_top": 436
+   },
+   "mask_centroid_x_first_last": [
+    709.58,
+    1287.07
+   ],
+   "mask_centroid_path_length_px": 582.5,
+   "mean_px_per_frame_x": 7.8
+  },
+  "rabbit": {
+   "description": "small orange-brown rabbit just ahead (right) of the creature's front hooves, facing right, hopping right at about the same pace as the creature",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "track": "tracks/rabbit_mask.csv",
+   "reference_point": "cx_mask, cy_mask = mask centroid",
+   "bbox_px": {
+    "w": {
+     "median": 82.0,
+     "min": 66.0,
+     "max": 103.0
+    },
+    "h": {
+     "median": 70.0,
+     "min": 60.0,
+     "max": 76.0
+    },
+    "len_major": {
+     "median": 84.3,
+     "min": 65.6,
+     "max": 104.2
+    }
+   },
+   "bbox_notes": "length nose-to-tail ~65-100 px (changes with hop stretch), height ~60-76 px including the raised ear; the ear tip and a pale translucent disc at the head are partly outside the mask",
+   "mask_centroid_x_first_last": [
+    975.25,
+    1544.47
+   ],
+   "mask_centroid_path_length_px": 570.9,
+   "mean_px_per_frame_x": 7.69
+  },
+  "floor_backdrop": {
+   "description": "seamless beige studio floor / darker backdrop; no features",
+   "moves": false
+  },
+  "creature_shadow": {
+   "description": "soft shadow to the lower-left and right of the creature on the floor/backdrop (excluded from masks)",
+   "moves": true
+  }
+ },
+ "events": [
+  {
+   "what": "both animals already moving at frame 0 and still moving at frame 74 (no start/stop in clip)",
+   "frame": 0
+  },
+  {
+   "what": "rabbit hop cycle ~13 frames (0.43 s): fast phases (per-frame dx 10-12 px) near frames 7, 20, 32, 45, 58, 71; slow phases (dx 4-6 px) near frames 2, 14, 28, 38, 54, 67",
+   "frame": null
+  },
+  {
+   "what": "rabbit body stretched / feet raised (bbox height minimum) near frames 4-6, 17-18, 30-31, 43-44, 56-57, 69-71",
+   "frame": null
+  },
+  {
+   "what": "creature steady walk, ~7.8 px/frame centroid; no direction change; no contact between animals (creature head is above the rabbit late in the clip, gap see tracks/pair_gap.csv)",
+   "frame": null
+  }
+ ],
+ "files": {
+  "tracks/creature_mask.csv": "per-frame mask centroid, trunk centroid, bbox, PCA extents, area",
+  "tracks/rabbit_mask.csv": "same for the rabbit",
+  "tracks/pair_gap.csv": "per-frame centroid offset rabbit-creature and horizontal bbox gap"
+ }
+}

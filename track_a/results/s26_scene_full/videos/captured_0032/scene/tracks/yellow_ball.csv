@@ -1,0 +1,49 @@
+frame,t,cx,cy,x0,y0,x1,y1,bb_w,bb_h,len_major,len_minor,eq_diam,area,occluded,note
+0,0.0,775.1,411.1,760,398,789,423,30,26,30.0,26.1,27.4,591,0,"static (resting, right hand touching it at back/right side)"
+1,0.0417,775.2,411.3,760,398,789,423,30,26,30.6,27.2,27.6,599,0,"static (resting, right hand touching it at back/right side)"
+2,0.0833,775.0,411.1,760,398,789,423,30,26,30.1,26.2,27.4,589,0,"static (resting, right hand touching it at back/right side)"
+3,0.125,775.0,411.1,760,398,789,423,30,26,30.2,26.4,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+4,0.1667,775.0,411.1,760,398,789,423,30,26,30.2,26.4,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+5,0.2083,774.9,411.1,760,398,789,423,30,26,30.3,26.4,27.5,592,0,"static (resting, right hand touching it at back/right side)"
+6,0.25,774.9,411.1,760,398,789,423,30,26,30.3,26.6,27.4,591,0,"static (resting, right hand touching it at back/right side)"
+7,0.2917,774.9,411.1,760,398,789,423,30,26,30.3,26.4,27.4,591,0,"static (resting, right hand touching it at back/right side)"
+8,0.3333,774.9,411.1,760,398,789,423,30,26,30.3,26.6,27.4,591,0,"static (resting, right hand touching it at back/right side)"
+9,0.375,774.9,411.0,760,398,789,423,30,26,30.4,26.6,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+10,0.4167,774.9,411.0,760,398,789,423,30,26,30.4,26.6,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+11,0.4583,774.9,411.0,760,398,789,423,30,26,30.4,26.6,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+12,0.5,774.9,411.0,760,398,789,423,30,26,30.4,26.6,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+13,0.5417,774.9,411.0,760,398,789,423,30,26,30.4,26.6,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+14,0.5833,774.9,411.0,760,398,789,423,30,26,30.4,26.6,27.3,587,0,"static (resting, right hand touching it at back/right side)"
+15,0.625,774.9,411.1,760,398,789,423,30,26,30.3,26.4,27.4,591,0,"static (resting, right hand touching it at back/right side)"
+16,0.6667,775.0,411.1,760,398,789,423,30,26,30.1,26.2,27.5,595,0,"static (resting, right hand touching it at back/right side)"
+17,0.7083,775.0,411.1,760,398,789,423,30,26,30.1,26.2,27.5,595,0,"static (resting, right hand touching it at back/right side)"
+18,0.75,775.0,411.1,760,398,789,423,30,26,30.1,26.2,27.5,595,0,"static (resting, right hand touching it at back/right side)"
+19,0.7917,775.0,411.1,760,398,789,423,30,26,30.1,26.2,27.5,595,0,"static (resting, right hand touching it at back/right side)"
+20,0.8333,775.1,411.1,760,398,789,423,30,26,30.0,26.1,27.4,591,0,"static (resting, right hand touching it at back/right side)"
+21,0.875,774.9,411.0,760,398,789,423,30,26,30.2,26.3,27.2,583,0,"static (resting, right hand touching it at back/right side)"
+22,0.9167,768.3,411.9,754,400,783,423,30,24,30.6,26.4,27.7,604,0,start of rolling (pushed by right hand)
+23,0.9583,757.8,412.7,742,400,775,425,34,26,34.9,27.3,28.9,657,0,"rolling on tabletop, horizontal motion blur"
+24,1.0,745.7,414.2,730,402,763,427,34,26,34.5,26.2,28.8,652,0,"rolling on tabletop, horizontal motion blur"
+25,1.0417,735.5,416.3,720,402,751,429,32,28,32.7,28.7,30.5,730,0,"rolling on tabletop, horizontal motion blur"
+26,1.0833,725.3,419.1,710,408,741,429,32,22,32.0,22.2,26.9,570,0,"rolling on tabletop, horizontal motion blur"
+27,1.125,714.2,419.6,696,406,733,431,38,26,38.1,26.1,30.9,751,0,"rolling on tabletop, horizontal motion blur"
+28,1.1667,702.6,420.1,686,405,719,433,34,29,34.5,29.7,32.7,841,0,"rolling on tabletop, horizontal motion blur"
+29,1.2083,693.1,421.8,676,406,711,435,36,30,36.8,31.5,33.4,874,0,"rolling on tabletop, horizontal motion blur"
+30,1.25,682.2,423.2,664,408,701,437,38,30,38.9,32.0,34.2,916,0,rolling; passes IN FRONT of white ball (white hidden behind it)
+31,1.2917,670.5,424.5,652,408,687,439,36,32,37.0,32.4,33.9,903,0,rolling; passes IN FRONT of white ball (white hidden behind it)
+32,1.3333,655.7,426.2,636,410,673,441,38,32,38.6,34.1,35.1,970,0,rolling; passes IN FRONT of white ball (white hidden behind it)
+33,1.375,642.6,428.1,622,412,661,445,40,34,41.4,37.7,37.0,1075,0,rolling on tabletop toward camera-left
+34,1.4167,628.8,430.4,610,412,649,447,40,36,42.7,38.7,38.1,1139,0,rolling on tabletop toward camera-left
+35,1.4583,613.7,432.3,594,414,633,449,40,36,42.1,38.7,38.6,1171,0,rolling on tabletop toward camera-left
+36,1.5,582.3,434.7,562,416,603,453,42,38,42.9,38.6,39.2,1205,0,rolling; DROPPED FRAME before this one (step 35->36 ~2x normal for both balls)
+37,1.5417,565.8,436.8,548,418,585,455,38,38,41.7,40.9,39.3,1212,0,rolling on tabletop toward camera-left
+38,1.5833,548.2,438.7,528,420,569,457,42,38,42.5,38.7,41.1,1326,0,rolling on tabletop toward camera-left
+39,1.625,530.1,440.7,510,420,551,459,42,40,42.7,40.3,41.3,1342,0,rolling on tabletop toward camera-left
+40,1.6667,510.6,442.5,490,422,531,463,42,42,45.5,43.5,42.5,1419,0,rolling on tabletop toward camera-left
+41,1.7083,490.6,444.5,468,424,511,465,44,42,46.8,45.7,43.3,1471,0,at left side edge of tabletop (last on-table frame)
+42,1.75,469.7,451.5,448,430,491,471,44,42,45.3,42.4,43.5,1485,0,"leaving table, starts falling"
+43,1.7917,446.1,470.6,424,448,469,491,46,44,50.0,44.1,43.8,1507,0,"falling, strong motion blur (centroid = saturated core of blur streak)"
+44,1.8333,421.5,504.5,398,482,445,527,48,46,57.6,46.3,47.5,1772,0,"falling, strong motion blur (centroid = saturated core of blur streak)"
+45,1.875,394.1,554.9,372,528,415,581,44,54,60.4,45.5,48.4,1840,0,"falling, strong motion blur (centroid = saturated core of blur streak)"
+46,1.9167,367.6,619.8,342,588,395,655,54,68,81.4,48.8,57.4,2591,0,"falling, strong motion blur (centroid = saturated core of blur streak)"
+47,1.9583,338.7,697.2,316,664,361,719,46,56,64.6,40.4,45.2,1606,1,"falling, clipped by bottom image edge (y1=719): centroid/box biased up"

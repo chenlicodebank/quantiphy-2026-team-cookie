@@ -1,0 +1,68 @@
+{
+ "wall_s": 368,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 39,
+  "duration_ms": 366491,
+  "total_cost_usd": 1.3930290000000005,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 42,
+  "cache_creation_input_tokens": 64526,
+  "cache_read_input_tokens": 966065,
+  "output_tokens": 34172,
+  "output_tokens_details": {
+   "thinking_tokens": 21318
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 64526,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 559,
+    "cache_read_input_tokens": 74809,
+    "cache_creation_input_tokens": 1590,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1590
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 38,
+  "flags": [
+   {
+    "tool": "Write",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_partial"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_b/simulation_0188/q_1440/fit_kin.py\", \"content\": \"import csv, numpy as np\\nfrom scipy.optimize import least_squares\\nD = '/private/tmp/qp_blind/scene_full_partial'\\nr = list(csv.DictReader(open('/private/tmp/qp_blind/scene_full_b/simulati"
+   }
+  ]
+ },
+ "video": "simulation_0188",
+ "ids": [
+  1440
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0188__q1440.jsonl"
+}

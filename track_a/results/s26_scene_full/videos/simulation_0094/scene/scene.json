@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0094.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 38,
+  "duration_s": 1.5833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_coords": "x to the right, y downward, origin top-left, full-resolution pixels",
+  "background": "uniform dark blue-grey (RGB 78,79,86), no ground, horizon or markings; faint compression texture only",
+  "camera": {
+    "motion": "static (frames 0-5 identical and empty; uniform background; both objects move at constant image rates)",
+    "projection_note": "perspective (not orthographic): bbox lengths shrink as objects approach the image centre (car 137 -> 129 px, airplane 875 -> 854 px) because parts that stick out toward the camera (car corners, airplane horizontal stabiliser) project further out when off-centre. Treat as a 2D scene with one scale; use the near-centre values for sizes."
+  },
+  "objects": {
+    "car": {
+      "description": "white/silver angular pickup (Cybertruck-like), black wheels, side view, lower object (y ~630-674)",
+      "moves": true,
+      "direction": "+x (left to right), horizontal; y constant",
+      "visible_frames": [6, 37],
+      "fully_in_frame": [11, 37],
+      "track": "tracks/car.csv",
+      "size_px_near_centre": {"frames": "30-37", "length": 130, "height": 44, "note": "length 137 at frames 11-12 (near left edge), 129-131 at frames 30-37; height 43-45 throughout"},
+      "parts_frame30_px": {"bbox": [567, 630, 697, 673], "roof_peak_x": 640, "rear_wheel_centre_x_approx": 593, "front_wheel_centre_x_approx": 677, "wheel_bottom_y": 673, "wheelbase_px_approx": 84},
+      "origin_proxy": "bbox centre (y ~652); if the rig root is at ground level use wheel-bottom y 673"
+    },
+    "airplane": {
+      "description": "Air China twin-engine narrow-body airliner (A320-like, livery 'AIR CHINA', red phoenix logo on fin, reg B-9918), side view, nose pointing left, upper object (y 300-554)",
+      "moves": true,
+      "direction": "-x (right to left), horizontal; y constant",
+      "visible_frames": [7, 37],
+      "fully_in_frame": [22, 37],
+      "track": "tracks/airplane.csv",
+      "size_px_near_centre": {"frames": "29-37", "length": 855, "height": 255, "note": "length = nose tip to stabiliser/tail-cone tip; 875 at frame 22 (right edge), 854-855 for frames 29-37; height = fin top (y 300) to engine-nacelle bottom (y 554)"},
+      "parts_frame30_px": {"nose_tip": [582, 495], "tail_most_x": 1436, "fin_top_y": 300, "fin_top_x_range": [1374, 1415], "fuselage_top_bottom_at_x1000": [433, 527], "fuselage_diameter": 94, "fuselage_axis_y": 480, "engine_bottom": {"y": 554, "x_range": [848, 914]}},
+      "origin_proxy": "nose_x + 426.75 (= bbox-centre x at frames 32-37); y = bbox centre 427, fuselage axis ~480"
+    }
+  },
+  "static_objects": "none (empty background, no ground plane or markings)",
+  "events": [
+    {"event": "car enters at left edge", "frame": 6, "t_s": 0.25},
+    {"event": "airplane nose enters at right edge", "frame": 7, "t_s": 0.2917},
+    {"event": "car fully in frame", "frame": 11, "t_s": 0.4583},
+    {"event": "airplane fin enters (bbox height reaches 255)", "frame": 21, "t_s": 0.875},
+    {"event": "airplane fully in frame", "frame": 22, "t_s": 0.9167},
+    {"event": "car origin passes under airplane origin (x proxies equal)", "frame": 34.4, "t_s": 1.433, "note": "between frames 34 (plane 781.8 vs car 745.5) and 35 (724.8 vs 774.5)"},
+    {"event": "no starts, stops, bounces, contacts or direction changes; per-frame steps constant within +-1 px for both objects (car bbox centre ~+28.4 px/frame, airplane nose ~-56.9 px/frame)", "frame": null}
+  ],
+  "vertical_separation_px": {"bbox_centres": 225, "car_bbox_centre_to_fuselage_axis": 172}
+}

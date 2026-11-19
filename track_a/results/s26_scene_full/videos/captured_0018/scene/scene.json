@@ -1,0 +1,89 @@
+{
+  "video": "captured_0018.mp4",
+  "source": "lab",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase-correlation shift of background regions vs frame 0 < 1.5 px all frames, mostly < 0.5 px; see scripts/camshift.py)",
+    "intrinsics_from_task": {"fx_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "horizon_y_px": 342,
+    "horizon_note": "horizontal (roll ~0); from the left-wall vanishing point; horizon ~18 px above image centre -> camera pitched up ~1.4 deg (rough, +-10 px)",
+    "vanishing_points_px": {
+      "left_wall_direction (into the room, parallel to left wall)": [1037, 342],
+      "back_wall_direction": "far to the left, roughly (-560..-830, 342); poorly constrained"
+    },
+    "perspective_lines_px": {
+      "left_wall_floor_baseboard": {"points": [[20, 590], [80, 576], [150, 555], [220, 540], [290, 524]], "fit": "y = 595 - 0.244 x"},
+      "left_wall_top_edge": {"points": [[20, 67], [80, 82], [150, 104], [220, 120], [290, 140]], "fit": "y = 62 + 0.27 x"},
+      "back_wall_floor_baseboard": {"points": [[480, 483], [600, 498], [650, 504], [700, 512], [760, 522], [820, 529]], "fit": "y = 483 + 0.135 (x - 480)"},
+      "back_left_room_corner_floor": [462, 482]
+    }
+  },
+  "anomalies": [
+    "Frame timestamps are uniform (1/24 s) but every falling object jumps about twice its expected step between frames 35 and 36 (soccer ball 26 -> 66 -> 36 px; lemon 54 -> 119 px; white box 29 -> 66 -> 45 px): a capture frame was very probably dropped between 35 and 36, so the real time gap 35->36 is ~2/24 s. Frame-diff energy also peaks at 35->36. The benchmark convention still maps time t to frame round(t*24)."
+  ],
+  "objects": {
+    "soccer_ball": {
+      "description": "black-and-white soccer ball held by the LEFT (farther, white top / dark green trousers) person in her left hand, at image right of her",
+      "moves": true, "visible_frames": [0, 48], "track": "tracks/soccer_ball.csv",
+      "size_px": {"diameter_frame0": 44, "range_sharp_frames": "43-46 (frame 0 held: 43x45; frames 46-48 free: 45-46 wide)", "note": "apparent size nearly constant -> depth nearly constant during fall and bounce"},
+      "image_position_frame0": {"centre": [541.5, 264], "bbox": [519, 240, 564, 288]}
+    },
+    "white_box": {
+      "description": "translucent white rectangular box/container with printed label, a dark label patch at its lower end and a red-orange end/cap visible after landing; held upright in the LEFT person's right hand next to the soccer ball",
+      "moves": true, "visible_frames": [0, 48], "track": "tracks/white_box.csv",
+      "size_px": {"frame0_upright": {"width": 23, "height": 57}, "lying_on_floor_frames_47_48": {"length": 56, "height": 29}, "note": "long axis ~57-58 px both upright (frame 0) and lying (frames 46-48 PCA length 57-58), short ~24-27 px"},
+      "image_position_frame0": {"centre": [481.5, 267], "bbox": [469, 238, 494, 296]}
+    },
+    "tennis_ball": {
+      "description": "yellow-green tennis ball held by the RIGHT (nearer, dark grey shirt, black trousers, cap) person in her extended left hand (left of the lemon)",
+      "moves": true, "visible_frames": [0, 48], "track": "tracks/tennis_ball.csv",
+      "size_px": {"diameter_frame0": 23, "frames_44_48": "24-26 (slight blur)"},
+      "image_position_frame0": {"centre": [771, 256.5], "bbox": [757, 243, 785, 270]}
+    },
+    "lemon_plush": {
+      "description": "yellow plush/toy lemon (or pear-shaped fruit) with two dark green leaves on top, held by the RIGHT person in her right hand",
+      "moves": true, "visible_frames": [0, 48], "track": "tracks/lemon_plush.csv",
+      "size_px": {"frame0_with_leaves": {"width": 38, "height": 68}, "body_only_frame0": {"width": 27, "height": "~42 (body y 235-277; leaves y 213-240)"}, "free_fall_sharpish": "mask 27-30 wide x 62-64 long incl. leaves (blurred vertically)"},
+      "image_position_frame0": {"centre": [881, 246], "bbox": [862, 212, 900, 280]}
+    },
+    "person_left": {
+      "description": "woman farther from camera, light grey/white top, dark green cargo trousers, white sneakers with black stripes; holds white_box (right hand) and soccer_ball (left hand), arms extended toward image right",
+      "moves": "stands in place; arms open outward after release (frames ~30-48)",
+      "size_px": {"standing_height_frame0": 402, "head_top_y": 173, "feet_bottom_y": 575, "body_x_range": [335, 425]},
+      "image_position_frame0": {"feet_centre": [380, 570]}
+    },
+    "person_right": {
+      "description": "woman nearer the camera, black cap, long hair, dark grey shirt, black trousers, white sneakers; holds tennis_ball (left hand) and lemon_plush (right hand), arms extended toward image left",
+      "moves": "stands in place; arms open after release",
+      "size_px": {"height_lower_bound": 622, "head_top_y": 98, "feet_bottom_y": ">=720 (rear foot cut by image bottom; front shoe sole ~673)", "body_x_range": [905, 1080]},
+      "image_position_frame0": {"feet_centre": [960, 690]}
+    },
+    "tripod_left": {"description": "black camera/light tripod behind the left person, head at ~(475,178), legs spreading to the floor near y~485-490 (x ~430..555)", "moves": false},
+    "tripod_right": {"description": "black tripod behind the right person, legs reach floor at ~(850,560) and ~(1060,655)", "moves": false},
+    "tv_screen": {"description": "wall-mounted black TV/monitor at top centre", "moves": false, "bbox_px": [583, 0, 850, 187], "note": "top edge cut by frame"},
+    "walls_floor": {"description": "grey cubicle-panel walls (left wall and back wall), grey carpet floor with faint lighter streaks, red-orange cable on the floor at left; right edge x>1100 is a near grey partition", "moves": false}
+  },
+  "events": [
+    {"frame": 26, "t": 1.0833, "event": "last frame tennis_ball clearly in hand (template score drops 0.95 -> 0.78)"},
+    {"frame": 27, "t": 1.125, "event": "release of tennis_ball and lemon_plush by right person (first frame displaced downward; same instant for both, uncertainty +-1 frame)"},
+    {"frame": 29, "t": 1.2083, "event": "release of white_box by left person (frame 30 already ~10 px lower; +-1 frame)"},
+    {"frame": 29.5, "t": 1.229, "event": "release of soccer_ball by left person (frame 29 at rest, frame 30 ~5 px lower) -> ~frame 29-30"},
+    {"frame": 36, "t": 1.5, "event": "tennis_ball floor impact (lowest point: centre y 599, bottom 615); rises from frame 37"},
+    {"frame": 36, "t": 1.5, "event": "lemon_plush floor impact (bottom y 703, near image bottom); bounces back/up, tumbling on floor frames 37-48 around (836-855, 596-640)"},
+    {"frame": 39, "t": 1.625, "event": "soccer_ball floor impact (lowest: centre y 541, bottom 565); rebounding upward from frame 40, still rising at frame 48 (centre y 402.5)"},
+    {"frame": 39, "t": 1.625, "event": "white_box lands upright (bottom y 598), then tips over to the left frames 40-46, lies on its side frames 47-48 (centre ~(423,594))"},
+    {"frame": 45, "t": 1.875, "event": "tennis_ball rebound apex (centre y 423); falling again frames 46-48"},
+    {"frame": "35->36", "event": "probable dropped capture frame (see anomalies)"}
+  ],
+  "apparent_size_over_time": {
+    "soccer_ball": "width 43-48 px throughout (held 45, free 43-47, frames 46-48 45-46) -> roughly constant depth",
+    "tennis_ball": "23 px held; 24-26 px after the bounce (frames 43-48) -> maybe ~5-10% closer or blur",
+    "lemon_plush": "orientation changes (tumbles) after impact; widths 25-33 px",
+    "white_box": "long axis 57-58 px upright and lying -> roughly constant depth"
+  }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0066.mp4",
+ "video_source": "internet",
+ "video_type": "A2SS",
+ "fps": 30.0,
+ "frames": 100,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3232,
+  "question": "What is the velocity of the ball at 2.00s in m/s?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

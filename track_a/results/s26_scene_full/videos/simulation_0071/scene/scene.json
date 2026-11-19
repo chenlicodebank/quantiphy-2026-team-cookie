@@ -1,0 +1,536 @@
+{
+ "video": "simulation_0071.mp4",
+ "source": "simulation",
+ "scene": "2D (top-down orthographic-looking view of a street intersection)",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_of_frame": "t = frame/24",
+ "units": "pixels (x right, y down, origin top-left of the 2160x1080 frame), seconds",
+ "camera": {
+  "motion": "static (background median subtraction leaves only the two movers; static objects identical in all frames)",
+  "view": "straight down at the ground (2D). No visible perspective: all lamp posts have the same pixel size (~57 px) at left and right of frame -> single px scale for the ground plane."
+ },
+ "moving_objects": {
+  "car": {
+   "desc": "single peach/cream sedan seen from above, the only vehicle",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/car.csv",
+   "reference_point": "centroid of full top-view car mask (= vehicle root/centre in plan view)",
+   "size_px": {
+    "length_mean": 222.5,
+    "length_range": [
+     220,
+     224.5
+    ],
+    "width_mean": 88,
+    "width_range": [
+     84.9,
+     92.0
+    ]
+   },
+   "motion": "stationary frames 0-1, moves from frame 2 on: drives up (north, -y) in the right half of the vertical road, turns right (clockwise) through the intersection, ends driving right (+x) in the lower half of the horizontal road; still moving at frame 71. Per-frame step roughly constant ~6.8 px/frame (range 5.7-7.7, mask noise).",
+   "heading_deg": "column heading_deg: 0 = +x (right), 90 = up; 89.6 at frame 0 -> ~0 at frame >= 63"
+  },
+  "pedestrian": {
+   "desc": "single person (white top, dark hair) walking on the bottom-right sidewalk along y~843, seen from above; tiny (~20x30 px mask incl. swinging limbs)",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/pedestrian.csv",
+   "reference_point": "centroid of person mask (pelvis proxy); cx_smooth/cy_smooth = 7-frame moving average (removes limb-swing jitter)",
+   "size_px": {
+    "mask_length_along_x_range": [
+     18.8,
+     38.4
+    ],
+    "mask_width_range": [
+     12.7,
+     24.2
+    ],
+    "note": "top-view; extents change with stride; standing height not observable from above"
+   },
+   "motion": "stationary frames 0-1, walks right (+x) ~2.0 px/frame from frame 2 to 71 (still walking at end)"
+  }
+ },
+ "summary_px": {
+  "car": {
+   "path_px": 476.2,
+   "net_px": 435.4,
+   "start": [
+    992.9,
+    850.7
+   ],
+   "end": [
+    1371.5,
+    635.7
+   ],
+   "occluded_frames": []
+  },
+  "pedestrian": {
+   "path_px": 145.4,
+   "net_px": 142.1,
+   "start": [
+    1331.3,
+    843.5
+   ],
+   "end": [
+    1473.4,
+    843.9
+   ],
+   "occluded_frames": [
+    25,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61
+   ]
+  }
+ },
+ "events": [
+  {
+   "event": "car and pedestrian both static (identical frames 0 and 1)",
+   "frame": [
+    0,
+    1
+   ],
+   "time": [
+    0.0,
+    0.0417
+   ]
+  },
+  {
+   "event": "car starts moving (first displacement between frame 1 and 2)",
+   "frame": 2,
+   "time": 0.0833
+  },
+  {
+   "event": "pedestrian starts walking",
+   "frame": 2,
+   "time": 0.0833
+  },
+  {
+   "event": "car heading starts changing (right turn begins) - heading already decreases from frame 2 (89.0 deg), fastest turn ~frames 20-35 (~2.3 deg/frame)",
+   "frame": 2,
+   "time": 0.0833
+  },
+  {
+   "event": "car heading 45 deg (mid-turn)",
+   "frame": 29,
+   "time": 1.2083
+  },
+  {
+   "event": "car turn essentially complete (heading < 1 deg)",
+   "frame": 61,
+   "time": 2.5417
+  },
+  {
+   "event": "pedestrian passes under/next to lamp_bottom_2 (bbox overlaps lamp bbox -> occluded=1; mask may be partial, e.g. frame 51 jump)",
+   "frame": [
+    25,
+    61
+   ]
+  },
+  {
+   "event": "video ends, both still moving",
+   "frame": 71,
+   "time": 2.9583
+  }
+ ],
+ "ground_features": {
+  "vertical_road": {
+   "x_range": [
+    615,
+    1081
+   ],
+   "width_px": 466,
+   "note": "spans full image height; includes curb strip edges"
+  },
+  "horizontal_road": {
+   "y_range": [
+    289,
+    756
+   ],
+   "width_px": 467,
+   "note": "spans full image width right of x=615 and left of it"
+  },
+  "intersection": {
+   "x_range": [
+    615,
+    1081
+   ],
+   "y_range": [
+    289,
+    756
+   ]
+  },
+  "sidewalk_blocks": {
+   "top_left": [
+    0,
+    0,
+    615,
+    289
+   ],
+   "top_right": [
+    1082,
+    0,
+    2160,
+    289
+   ],
+   "bottom_left": [
+    0,
+    756,
+    615,
+    1080
+   ],
+   "bottom_right": [
+    1081,
+    756,
+    2160,
+    1080
+   ],
+   "note": "beige blocks with rounded corners at the intersection, darker tan curb rim ~10 px"
+  }
+ },
+ "static_objects": {
+  "manhole_dark_square_top_right": {
+   "bbox": [
+    1235,
+    28,
+    1320,
+    117
+   ],
+   "centre": [
+    1277.8,
+    71.3
+   ],
+   "bbox_w": 86,
+   "bbox_h": 90,
+   "obb_long": 89.0,
+   "obb_short": 85.0
+  },
+  "planter_square_top_left": {
+   "bbox": [
+    340,
+    184,
+    479,
+    289
+   ],
+   "centre": [
+    410.1,
+    229.0
+   ],
+   "bbox_w": 140,
+   "bbox_h": 106,
+   "obb_long": 139.0,
+   "obb_short": 105.0
+  },
+  "planter_square_bottom_left": {
+   "bbox": [
+    370,
+    809,
+    451,
+    889
+   ],
+   "centre": [
+    410.2,
+    849.3
+   ],
+   "bbox_w": 82,
+   "bbox_h": 81,
+   "obb_long": 81.0,
+   "obb_short": 80.0
+  },
+  "planter_square_bottom_right": {
+   "bbox": [
+    1178,
+    807,
+    1257,
+    885
+   ],
+   "centre": [
+    1217.4,
+    845.8
+   ],
+   "bbox_w": 80,
+   "bbox_h": 79,
+   "obb_long": 79.0,
+   "obb_short": 78.0
+  },
+  "bench_top_left": {
+   "bbox": [
+    516,
+    197,
+    572,
+    252
+   ],
+   "centre": [
+    540.2,
+    226.7
+   ],
+   "bbox_w": 57,
+   "bbox_h": 56,
+   "obb_long": 67.9,
+   "obb_short": 41.7
+  },
+  "bench_top_right": {
+   "bbox": [
+    1140,
+    201,
+    1191,
+    239
+   ],
+   "centre": [
+    1164.8,
+    217.3
+   ],
+   "bbox_w": 52,
+   "bbox_h": 39,
+   "obb_long": 51.0,
+   "obb_short": 38.0
+  },
+  "bench_bottom_left": {
+   "bbox": [
+    509,
+    786,
+    576,
+    824
+   ],
+   "centre": [
+    543.2,
+    806.5
+   ],
+   "bbox_w": 68,
+   "bbox_h": 39,
+   "obb_long": 70.2,
+   "obb_short": 32.2
+  },
+  "bench_bottom_right": {
+   "bbox": [
+    1114,
+    801,
+    1145,
+    855
+   ],
+   "centre": [
+    1130.3,
+    826.7
+   ],
+   "bbox_w": 32,
+   "bbox_h": 55,
+   "obb_long": 54.0,
+   "obb_short": 31.0
+  },
+  "trash_can_green": {
+   "bbox": [
+    1331,
+    795,
+    1353,
+    817
+   ],
+   "centre": [
+    1342.3,
+    806.2
+   ],
+   "bbox_w": 23,
+   "bbox_h": 23,
+   "obb_long": 22.0,
+   "obb_short": 22.0
+  },
+  "white_ball_on_road": {
+   "bbox": [
+    2012,
+    423,
+    2038,
+    442
+   ],
+   "centre": [
+    2026.1,
+    432.9
+   ],
+   "bbox_w": 27,
+   "bbox_h": 20,
+   "obb_long": 25.5,
+   "obb_short": 19.2
+  },
+  "grey_rock_on_road": {
+   "bbox": [
+    2027,
+    597,
+    2092,
+    650
+   ],
+   "centre": [
+    2062.6,
+    622.0
+   ],
+   "bbox_w": 66,
+   "bbox_h": 54,
+   "obb_long": 66.6,
+   "obb_short": 43.3
+  },
+  "lamp_top_1": {
+   "bbox": [
+    168,
+    185,
+    236,
+    242
+   ],
+   "centre": [
+    192.0,
+    220.3
+   ],
+   "bbox_w": 69,
+   "bbox_h": 58,
+   "obb_long": 68.0,
+   "obb_short": 57.0
+  },
+  "lamp_top_2": {
+   "bbox": [
+    1395,
+    185,
+    1430,
+    242
+   ],
+   "centre": [
+    1416.3,
+    219.9
+   ],
+   "bbox_w": 36,
+   "bbox_h": 58,
+   "obb_long": 57.0,
+   "obb_short": 35.0
+  },
+  "lamp_top_3": {
+   "bbox": [
+    1704,
+    185,
+    1759,
+    242
+   ],
+   "centre": [
+    1739.5,
+    219.7
+   ],
+   "bbox_w": 56,
+   "bbox_h": 58,
+   "obb_long": 57.0,
+   "obb_short": 55.0
+  },
+  "lamp_top_4": {
+   "bbox": [
+    2014,
+    185,
+    2089,
+    242
+   ],
+   "centre": [
+    2061.6,
+    220.6
+   ],
+   "bbox_w": 76,
+   "bbox_h": 58,
+   "obb_long": 75.0,
+   "obb_short": 57.0
+  },
+  "lamp_bottom_1": {
+   "bbox": [
+    167,
+    784,
+    236,
+    841
+   ],
+   "centre": [
+    192.2,
+    807.5
+   ],
+   "bbox_w": 70,
+   "bbox_h": 58,
+   "obb_long": 68.2,
+   "obb_short": 57.1
+  },
+  "lamp_bottom_2": {
+   "bbox": [
+    1395,
+    784,
+    1430,
+    841
+   ],
+   "centre": [
+    1416.5,
+    807.2
+   ],
+   "bbox_w": 36,
+   "bbox_h": 58,
+   "obb_long": 57.0,
+   "obb_short": 35.0
+  },
+  "lamp_bottom_3": {
+   "bbox": [
+    1705,
+    784,
+    1759,
+    841
+   ],
+   "centre": [
+    1739.6,
+    807.1
+   ],
+   "bbox_w": 55,
+   "bbox_h": 58,
+   "obb_long": 57.0,
+   "obb_short": 54.0
+  },
+  "lamp_bottom_4": {
+   "bbox": [
+    2015,
+    784,
+    2089,
+    841
+   ],
+   "centre": [
+    2063.1,
+    807.1
+   ],
+   "bbox_w": 75,
+   "bbox_h": 58,
+   "obb_long": 73.9,
+   "obb_short": 57.0
+  }
+ },
+ "static_objects_note": "bbox [x0,y0,x1,y1] px from background image; obb_long/short = min-area rectangle. planter_square_top_left bbox merged with curb (true size ~80x80 like the other planters, centre ~(410,222)). Lamps are top-view lamp posts (two lamp heads + arm), benches/hydrant-like grey props at the corners."
+}

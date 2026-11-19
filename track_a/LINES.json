@@ -1,0 +1,30 @@
+{
+ "inputs": {
+  "results/fulltest_s27_e2/track_a_s27_e2.csv": "6e96661453bd33e72fe856aa15bd9bcd2794d4ed5207867e4b412e80e2750ebc",
+  "results/fulltest_s27_e2/combine_rows.csv": "d605333d52062185b96de526f18ff86ac03baaf496f8cd91ba3d224354fbec21",
+  "results/fulltest_s30_u1/track_a_s30_u1.csv": "fb8b6456f01335f9fc7ab578d213c31cc9251869ade7bc92bff2d5d8935667f4",
+  "results/s39_2dmotion/collected.csv": "f5d2739f1ba5d9d436790952fed3519fa41fbb5961f30d1c4c9f4ae78abe274f",
+  "results/fulltest_s37_b9lat/track_b_s33_b9lat.csv": "8ca2a2442810f95633a9686a0014838af6fa4bf529758fc475c4caa149935986",
+  "results/fulltest_s37_b9lat/aggregate.csv": "abac9bf6c3336c08a3f82dc4be67c7fd24bacc8c652d271c3d379985dc587a51",
+  "results/fulltest_s37_b9const/track_b_s33_b9const.csv": "6215a760e865862a21fb8b39eb074e61f6242d1d61f6f42824cfd83f77ecbb7a",
+  "results/fulltest_s26_reask_full/track_a_s26_reask_full.csv": "07e8c3e22fcbda8491af5507f1eb192ab4f690dc88243f3b3fa76217bb722e94",
+  "results/fulltest_s34_legit_a/changes.csv": "0999a14d82bc4a6de1f2c8e6eb874f0c4b1471cf691b43f765ba92afbe3f28c4",
+  "results/fulltest_s43_strict_rsi/apply_r123.csv": "ab646e6c710a20ce74d04078a87ef23ce99c78aad0406ceccd512db67d798c2c",
+  "results/fulltest_s43_gray_rsi/apply_final.csv": "6a3b640c342227d90b68b9d89a5c395a5adfb94e5299ea9e05ea15cb6a33d5f1",
+  "results/fulltest_s39_f2/spec.json": "c09e49edc56b12204bbd204bcf23664d727cb380b7d45aba97afb314c640f5e2",
+  "results/fulltest_s39_f3/spec.json": "ad940e232f70fb4094f95f5db426331f88cd70d67044107fce0483d8f4d65164",
+  "results/fulltest_s40_c1/spec.json": "11c07f028e9311f1ad802a03bb491ee88ddcec210da28f5b7cbd8d7c9d5a5282",
+  "results/s26_scene_full/ledger.csv": "7d0defbda9710969ed6b6a6b99f33a060afb7fc768b4d05ea6d674ff0e488fbf",
+  "data/test/test_dataset_current_20261021.json": "a5cbad4b546d07df41d02e5707de87f172ff37980af81996d8ac88599baba57c",
+  "data/validation/validation_dataset.csv": "4f29907c256371b998cf5f5b71287c12e2b3a60a87bacbb288036ffd35a1dc11",
+  "results/fulltest_s26_ccagent_full/track_a_s26_ccagent_full.csv": "874327402dbbfad849f990136678839c8ba1150c5e19a3db6ad83582252c6724"
+ },
+ "built": {
+  "results/fulltest_s39_f1/track_a_s39_f1.csv": "73e50c883e43eeb0d1c64e706a7179edc758e8e96e746ffd7ecd366f268f5c47",
+  "results/fulltest_s39_f2/track_a_s39_f2.csv": "b1136691bb62b1155d29757d14d5b9960d91325069951ed95c75ce4090b939c5",
+  "results/fulltest_s39_f3/track_a_s39_f3.csv": "108a4e0539dbfe675025725199d38e008d6ef47ad0368b40c281294f391b1699",
+  "results/fulltest_s40_c1/track_a_s40_c1.csv": "bdea3a0a49eb710ab95f2ac57c6bfdcf5533943076ee67c7a62f49274e38e057",
+  "results/fulltest_s43_strict_rsi/track_a_s43_strict_rsi.csv": "5e73fc704f79848ae6aab025bfaf0a743cbfa1207859bdfdd017c9690c822f92",
+  "results/fulltest_s43_gray_rsi/track_a_s43_gray_rsi.csv": "2c4b1273948dfc67f355a0f237f500ee318d9d0a046b144359414b15453459bd"
+ }
+}

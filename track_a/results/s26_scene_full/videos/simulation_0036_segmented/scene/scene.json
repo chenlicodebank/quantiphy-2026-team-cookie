@@ -1,0 +1,101 @@
+{
+ "video": "simulation_0036_segmented.mp4",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 1080,
+ "height": 1080,
+ "source": "segmentation (Blender render, background replaced by white)",
+ "scene": "3D",
+ "time_convention": "t = frame/24, frame 0 = t 0",
+ "camera": {
+  "motion": "static (no background features; both objects move smoothly, no common jitter)",
+  "perspective_cues": "none visible (white background, no ground/horizon). Both objects' bottoms at y~745-767, i.e. near the same image height; boat grows ~12% => approaching camera."
+ },
+ "objects": {
+  "boat": {
+   "desc": "red fishing boat with white cabin, tall mast, name 'AH805' on hull; bow points image-left, seen 3/4 from its starboard/front-left side",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/boat.csv",
+   "reference_point": "cx_mask,cy_mask = mask centroid (proxy for origin; true origin unknown, likely near hull centre)",
+   "motion": "moves steadily image-left (~3.0 px/frame in x) and slightly toward camera; cy ~716-719 nearly constant",
+   "bbox_width_px": {
+    "f0": 177.0,
+    "f36": 187.0,
+    "f71": 199.0
+   },
+   "full_height_px_mast_tip_to_keel": {
+    "f0": 216.0,
+    "f36": 223.0,
+    "f71": 230.0
+   },
+   "hull_red_extent_x_px": {
+    "f0": 174.0,
+    "f36": 184.0,
+    "f71": 195.0
+   },
+   "centroid_px": {
+    "f0": [
+     608.12,
+     715.94
+    ],
+    "f71": [
+     394.38,
+     718.59
+    ]
+   }
+  },
+  "person": {
+   "desc": "small human figure (light top, greyish trousers) left of boat, ~40 px tall",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/person.csv",
+   "reference_point": "cx_mask,cy_mask = mask centroid (approx pelvis height); bbox centre also given",
+   "motion": "walks image-right (toward the boat) ~1.04 px/frame; feet y 745->750 (slightly toward camera)",
+   "bbox_height_px": {
+    "f0": 41.0,
+    "f36": 40.0,
+    "f71": 40.0
+   },
+   "bbox_width_px": {
+    "f0": 11.0,
+    "f36": 11.0,
+    "f71": 13.0
+   },
+   "centroid_px": {
+    "f0": [
+     128.44,
+     727.96
+    ],
+    "f71": [
+     202.42,
+     733.66
+    ]
+   }
+  }
+ },
+ "static_objects": "none (background is uniform white)",
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "frames 0 and 1 nearly identical (boat dx -0.18 px, person -0.07 px): motion starts at frame 1 (t=0.042 s); boat reaches its steady ~3 px/frame by frame 2-3"
+  },
+  {
+   "frame": 71,
+   "t": 2.958,
+   "what": "end of clip; both still moving. No contact, no stop, no direction change"
+  }
+ ],
+ "pixel_gap_boat_person_centroids": {
+  "f0": 479.8,
+  "f36": 339.2,
+  "f71": 192.6
+ }
+}

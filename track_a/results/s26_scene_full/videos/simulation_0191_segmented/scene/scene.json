@@ -1,0 +1,38 @@
+{
+ "video": "simulation_0191_segmented.mp4",
+ "source": "segmentation (Blender simulation, background replaced by white)",
+ "scene_type": "2D",
+ "fps": 120.0, "frames": 200, "duration_s": 1.6667, "width": 1920, "height": 1080,
+ "time_convention": "t = frame / 120; frame 0 is t = 0",
+ "units": "pixels (x right, y DOWN from image top), seconds",
+ "camera": {"motion": "static", "evidence": "truck region mean |diff| vs frame 0 <= 1.6 grey levels over all 200 frames (only the box and flap change)",
+            "perspective": "near-orthographic side view; slight perspective: the falling box shows a thin strip of its underside (~25 px at frame 0, ~2 px at rest), so the camera is at about truck-roof height. No ground plane or horizon visible (white background)."},
+ "objects": [
+  {"name": "box", "description": "brown cardboard box printed 'FRAGAIL' with umbrella/glass/arrows/recycle icons on its right part; one dark lid flap sticks up at its top-right corner (x~825-935) from ~frame 40 on",
+   "moves": true, "visible_frames": [0, 199], "track": "tracks/box.csv",
+   "reference_point": "center_x, center_y = centre of the front face (face_left..face_right, face_top..face_bottom_left). Frames 0-27 the top is out of frame; center_y there = face_bottom_left - 95 (half the rest face height 190).",
+   "size_px": {"front_face_length_x": 410, "front_face_height_y": 190, "silhouette_height_incl_underside_at_rest": 192, "note": "length 409-411 px constant in every frame; face height 189-190 in every unclipped frame"},
+   "rest_position": {"center_x": 733.5, "center_y": 310.5, "face_top": 216, "face_bottom": 405, "frames": "74-199"}},
+  {"name": "truck", "description": "white rigid-box catering/lift truck facing right; cab at right with white scissor-lift cage on the cab roof; two visible wheels",
+   "moves": false, "visible_frames": [0, 199],
+   "size_px": {"overall_bbox_x0y0x1y1": [124, 349, 1840, 1063], "overall_length": 1717, "overall_height": 715,
+               "cargo_box_x": [130, 1460], "cargo_box_length_approx": 1330, "cargo_box_roof_y": 412, "cargo_box_bottom_y_approx": 845, "cargo_box_height_approx": 433,
+               "lift_cage_top_y": 349, "wheel_bottom_y": 1063},
+   "wheels": [{"name": "rear_wheel", "center": [702.6, 975.8], "radius": 88.4}, {"name": "front_wheel", "center": [1581.0, 973.4], "radius": 90.4}],
+   "wheelbase_px": 878.4},
+  {"name": "flap", "description": "dark/black flat panel appearing behind the left (rear) end of the truck, x 17-128, y 645-790; mostly hidden behind the truck's cargo box (its right part is occluded at x>=128)",
+   "moves": true, "visible_frames": [78, 174], "track": "tracks/flap.csv",
+   "note": "identity uncertain (likely a rear door / tail-lift part or a second dark object behind the truck); only its visible mask is tracked"}
+ ],
+ "events": [
+  {"event": "box at rest / release", "frame": 0, "time": 0.0, "note": "center_y ~60-61 for frames 0-4 (out-of-frame top); downward motion becomes measurable from frame ~5 (t~0.042 s); consistent with release from rest at t=0"},
+  {"event": "box top enters frame fully", "frame": 28, "time": 0.233},
+  {"event": "box lid flap starts to stick up", "frame": 40, "time": 0.333, "note": "approximate; visible at top-right corner"},
+  {"event": "box impact on truck roof", "frame": 60, "time": 0.5, "note": "bottom-left reaches 399 at f60 and 403 (contact) at f61; last free-fall frame ~f59-60"},
+  {"event": "small rebound/settle", "frames": [62, 73], "note": "face top rises 216->213 (2-3 px) over f62-70 then returns to 216 by f74"},
+  {"event": "box at final rest", "frame": 74, "time": 0.617},
+  {"event": "flap appears at left of truck", "frame": 78, "time": 0.65},
+  {"event": "flap disappears behind truck", "frame": 175, "time": 1.458}
+ ],
+ "files": {"box_track": "tracks/box.csv", "flap_track": "tracks/flap.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

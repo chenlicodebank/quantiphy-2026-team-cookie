@@ -1,0 +1,69 @@
+{
+  "video": "simulation_0167.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (top-down view of a street; all motion along image +x on the road plane)",
+  "fps": 24.0, "frames": 80, "duration_s": 3.3333, "width": 1920, "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (image coordinates, x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static: phase correlation of the static top band vs frame 0 gives < 0.011 px shift in all frames",
+    "view": "looking straight down (nadir) at the street, perspective camera; ground plane ~ parallel to image, so one px scale applies on the road surface",
+    "perspective_cue": "tall parts of objects are displaced radially away from the image centre (x~960,y~540): the police car roof vs bumper features shift by ~ +7 px (car at left) to -9 px (car at right) relative to each other; lamp posts appear as slanted lines. Object tops (car roof, rider head) therefore sit slightly further from image centre than their ground footprint. Effect on positions of the reference points < ~5 px."
+  },
+  "objects": {
+    "police_car": {
+      "description": "white police car (Belgian-style 'Police' lettering on the bonnet side, blue/yellow stripes), flashing blue roof lightbar with a blue glow on the road around it; faces +x (bonnet/windscreen on the right)",
+      "moves": true, "visible_frames": "0-79 (fully in frame all the time)",
+      "track": "tracks/police_car.csv",
+      "reference_point": "centre of the car's bumper-to-bumper / side-to-side box (vehicle root approximation), from template matching",
+      "motion_summary_px": "straight along +x at y = 639.0 (dy < 0.1 px/frame); per-frame dx = 18.04 +- 0.15 px/frame, constant all clip (no acceleration detectable; linear-fit residual 0.27 px). x(centre) 224.9 at f0 -> 1650.5 at f79",
+      "size_px": {
+        "length_bumper_to_bumper": "289 (template box at f40; mask 286-290 in clean frames 20-70)",
+        "width_incl_side_mirrors": "120-121",
+        "body_width_without_mirrors": "~111-115 (vertical diff profile at frame 40: rows 584-694 at x=840)",
+        "height": "not observable (top-down view)"
+      }
+    },
+    "cyclist": {
+      "description": "person riding a bicycle (delivery rider): pale blue helmet with orange stripe, orange/red arms, large green box backpack, yellow crate/basket at the front; rides in the same lane ahead of the police car, facing and moving +x",
+      "moves": true, "visible_frames": "0-79 (fully in frame; right end of bike at x~1902 in f79)",
+      "track": "tracks/cyclist.csv",
+      "reference_point": "pelvis estimate = point on the rear half of the green backpack above the saddle (picked at frame 40 = (1272,645)) followed by chained frame-to-frame template matching",
+      "motion_summary_px": "along +x, mean 14.42 px/frame (linear fit; f0 x=696.5 -> f79 x=1836.0); per-frame dx oscillates 13.0-15.8 px with a ~10-frame period (pedalling surge), y sways +-2.5 px with ~19-frame period",
+      "size_px": {
+        "length_rear_tyre_to_front_crate": "~105-110",
+        "width_shoulders_handlebar": "~42-48",
+        "height": "not observable (top-down view)"
+      }
+    }
+  },
+  "static_objects": {
+    "lane_markings": {
+      "solid_yellow_line": "y 542-547 (centre 544.5), x 88-1173",
+      "dashed_yellow_line": "y 528-533 (centre 530.5), dashes ~18 px long, period ~47 px (x 708-1149 measured)",
+      "white_edge_line_south": "y 735-743 (centre 739), x 88-1175",
+      "lane_width_between_line_centres": "194.5 px (y 544.5 -> 739); both moving objects travel in this lane",
+      "white_transverse_line": "vertical white line at x ~1177-1185 from y ~548 to ~745 (end of the left road segment / start of the intersection)",
+      "intersection_lines": "vertical yellow solid line x~1447 and dashed x~1427 (y 0-335 and y 760-1080); white stop line y~327 x 1222-1437; white lines x~1205 (y 0-285), x~1707 (y 0-335), x~1712 (y 760-1080); yellow solid+dashed lines right of x 1737 at y ~525-540"
+    },
+    "street_lamps": "4 black lamp posts with arms: (a) left, upper: pole line ~(366,260)-(366,415) with arm to ~(445,290); (b) left, lower: pole ~(366,690)-(366,850) with arm to ~(455,805) -- its head at (366,690-720) overlaps the police car in frames ~0-15; (c) top centre ~(1190,135) arm to (1345,133); (d) top right ~(1890,135) arm to (1740,133)",
+    "barrier_tape": "red-white tape across the top road at y~148-155 from x~1190 to ~1890",
+    "other": "dark low fence/hedge y~320 x 435-1068; kerbs/sidewalks top-left and bottom; grass beds top-right (x>1740,y<200) and bottom-right (x>1840,y>820); railing bottom x~1170 y 800-1080; building corner bottom x 440-700 y>990; green line x~1177 y 0-330"
+  },
+  "events": {
+    "start_of_motion": "none in clip: both objects already move at frame 0 and keep moving to frame 79",
+    "car_passes_lamp_post_b": "car front is at x~370 at f0 (already at the lamp); car rear passes x=366 at frame ~16; lamp head (x~366, y~690-720) is drawn over the car's lower edge in frames 0-15",
+    "cyclist_front_crosses_transverse_white_line_x1181": "frame ~28.7 (t~1.20 s)",
+    "cyclist_reference_point_crosses_x1181": "frame ~33.7 (t~1.40 s)",
+    "car_front_crosses_x1181": "frame ~45.0 (t~1.88 s)",
+    "car_centre_crosses_x1181": "frame ~53.0 (t~2.21 s)",
+    "car_rear_crosses_x1181": "frame ~61.0 (t~2.54 s)",
+    "car_closing_on_cyclist": "car-to-cyclist reference-point distance 471.6 px (f0), 325.5 (f40), 185.4 (f79); bumper to rear-tyre gap ~10-15 px at f79; NO contact within the clip",
+    "direction_changes": "none"
+  },
+  "files": {
+    "tracks/police_car.csv": "final car track (use x,y)",
+    "tracks/cyclist.csv": "final cyclist track (use x,y)",
+    "tracks/*_raw.csv, *_tm.csv, cyclist_chain.csv, cyclist_helmet.csv": "intermediate measurements (see notes.md)"
+  }
+}

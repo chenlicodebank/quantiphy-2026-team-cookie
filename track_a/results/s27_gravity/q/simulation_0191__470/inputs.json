@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0191.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MS",
+ "fps": 120.0,
+ "frames": 200,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 470,
+  "question": "What is the diameter of the truck's tire in meters?",
+  "prior": "acceleration of the box before 0.6s = 9.8m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 120.0
+ }
+}

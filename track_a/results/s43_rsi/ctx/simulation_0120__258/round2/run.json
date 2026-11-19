@@ -1,0 +1,59 @@
+{
+ "wall_s": 224,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 35,
+  "duration_ms": 223059,
+  "total_cost_usd": 1.0025568,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 34,
+  "cache_creation_input_tokens": 49674,
+  "cache_read_input_tokens": 701544,
+  "output_tokens": 23236,
+  "output_tokens_details": {
+   "thinking_tokens": 9311
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 49674,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 1065,
+    "cache_read_input_tokens": 65493,
+    "cache_creation_input_tokens": 4773,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 4773
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "audit": {
+  "tool_calls": 34,
+  "flags": []
+ },
+ "video": "simulation_0120",
+ "ids": [
+  258
+ ],
+ "round": 2,
+ "harness": "v3",
+ "account": "a",
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "commit": "fa62153bd"
+}

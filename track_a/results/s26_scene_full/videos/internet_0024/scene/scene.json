@@ -1,0 +1,57 @@
+{
+  "video": "internet_0024.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down view of a wooden desk)",
+  "fps": 25.0,
+  "frames": 30,
+  "duration_s": 1.2,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / 25; frame 0 is t=0",
+  "units": "pixels (full 3840x2160 resolution), seconds; x right, y down",
+  "camera": {
+    "motion": "static (tripod, overhead). Phase-correlation shift of the static upper-left region vs frame 0 stays within |dx|<0.6 px, |dy|<0.9 px for all 30 frames (tracks/camera_shift.csv) - no correction needed.",
+    "view": "near-orthographic overhead view of a flat desk; table plane ~ parallel to image plane"
+  },
+  "moving_objects": {
+    "coffee_cup": {
+      "description": "white ceramic mug full of black coffee, held by its handle by a right hand entering from the bottom-right (black smartwatch on wrist). The only rigid moving object.",
+      "track_file": "tracks/coffee_cup.csv",
+      "reference_point": "ref_x, ref_y = centre of the circle fitted to the outer edge of the mug's top rim (visible centre of the cup seen from above). coffee_cx/cy (centre of the dark coffee disc) agree within ~10 px and is an alternative.",
+      "visible_frames": "0-27 (frame 28 at most a sliver at the bottom edge; frames 28-29 not trackable)",
+      "fully_in_frame_frames": "0-19 (cup body touches the bottom edge from frame 20; rim circle touches/leaves bottom edge from ~frame 22-23)",
+      "size_px_frame0": {
+        "rim_outer_diameter": 417,
+        "coffee_surface_diameter": 373,
+        "visible_cup_extent_incl_side_wall_x": "3045-3463 (bbox, mug side wall seen in perspective to lower-left; handle under fingers)",
+        "visible_cup_bbox_frame0": [3045, 1086, 3463, 1583]
+      },
+      "apparent_size_change": "cup is lifted toward the camera while moving: rim diameter 417 (f0-4) -> 427 (f10) -> 459 (f15) -> 487 (f20) -> ~500 (f23-27); coffee diameter 373 -> 399 (f10) -> 414 (f15) -> 447 (f20) -> 484 (f27). Use the size measured in the same frame(s) the question's prior refers to; the annotator convention would normally use one pixel length (e.g. frame 0 rim diameter ~417 px).",
+      "motion_path": "frames 0-3 essentially at rest at ~(3248,1296) (jitter <=10 px, slow downward creep as the lift begins); from frame 4 moves down-left in a nearly straight line toward the bottom edge, accelerating to ~75-95 px/frame by frames 13-22; reaches ~(2060,2289) at frame 27 and exits through the bottom edge. Net path direction ~ 140 deg from +x (down-left; dx -1188, dy +996 px from f0 to f27)."
+    },
+    "hand": {
+      "description": "person's right hand/forearm with black smartwatch, holding the mug handle; moves with the cup. Only rough bbox recorded (hand_bbox column, 'x0 y0 x1 y1', from foreground minus cup; includes forearm, unreliable at frame edge).",
+      "visible_frames": "0-~28 (enters from bottom/bottom-right edge, always cut by frame edge)"
+    }
+  },
+  "static_objects_frame29": {
+    "laptop": {"desc": "silver MacBook-style laptop, upper-left, screen partly out of frame at top", "front_edge_px": 1396, "front_edge_endpoints": [[998,1271],[2281,720]], "left_side_front_to_hinge_px": 877, "note": "screen/top cut off by frame; bbox approx x 450-2285, y 0-1271", "reliability": "+-15 px"},
+    "pencil": {"desc": "wooden pencil, unsharpened end up at (2272,945), tip down at (2513,1660), between laptop and kraft notebook", "length_px": 754, "width_px": 45, "reliability": "+-5 px"},
+    "airpods_case": {"desc": "white rounded-square earbuds case right of the pencil", "centre_px": [2602,975], "bbox_px": [2480,850,2725,1100], "approx_side_lengths_px": [245, 205], "reliability": "+-15 px"},
+    "kraft_spiral_notebook": {"desc": "brown kraft-paper spiral notepad, centre-bottom, rotated ~40 deg, spiral along upper-left edge", "corners_px": {"spiral_left": [1536,1574], "spiral_right": [1910,1248], "far_right": [2511,1805], "far_left": "near/below bottom edge ~(2110,2160)"}, "spiral_edge_length_px": 496, "long_side_length_px": 819, "reliability": "+-15 px"},
+    "cactus_pot_with_saucer": {"desc": "small terracotta pot with cactus on white round saucer, top centre", "saucer_centre_px": [2486,211], "saucer_diameter_px": 434, "pot_rim_diameter_px": 303, "reliability": "+-15 px"},
+    "brown_leather_wallet": {"desc": "tan leather wallet/organiser with strap, on a dark grey notebook, upper right", "approx_long_side_px": 770, "approx_short_side_px": 520, "approx_centre_px": [3270,540], "reliability": "+-25 px"},
+    "dark_grey_notebook": {"desc": "dark grey hardcover notebook under the wallet, upper right, partly out of frame at top/right", "reliability": "partly out of frame; not measured"},
+    "polaroid_photo": {"desc": "instant photo of two people lying on the wallet", "approx_size_px": [290, 365], "approx_centre_px": [3110,425], "reliability": "+-20 px"},
+    "colour_cards": {"desc": "stack of paint-swatch cards (orange 'BLGR / Blogger', brown, beige) lower-left, partly out of frame", "orange_card_bbox_px": [55,1380,750,2160], "reliability": "rough"},
+    "desk": {"desc": "light pine wood plank table filling the background"}
+  },
+  "events": [
+    {"event": "cup at rest held in hand", "frames": "0-3", "t": "0.00-0.12"},
+    {"event": "start of motion (cup lifted and moved down-left)", "frame": 4, "t": 0.16, "note": "small creep from frame 1-3 (<= 10 px); clear motion starts frame 4-5"},
+    {"event": "cup body reaches bottom frame edge", "frame": 20, "t": 0.80},
+    {"event": "rim circle centre leaves frame (bottom)", "frame": 25, "t": 1.00},
+    {"event": "cup last visible", "frame": 27, "t": 1.08},
+    {"event": "cup out of frame", "frame": 28, "t": 1.12}
+  ],
+  "notes_file": "notes.md"
+}

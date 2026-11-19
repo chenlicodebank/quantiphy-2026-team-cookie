@@ -1,0 +1,97 @@
+{
+  "video": "simulation_0227_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by white)",
+  "scene_type": "2D (per inputs.json)",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, full-resolution pixels; all values in px and s, no metric scale",
+  "camera": {
+    "motion": "static (background median is sharp; chair pixels identical across frames apart from segmentation edge flicker)",
+    "per_frame_background_shift_px": 0,
+    "perspective_notes": "Background is pure white (no ground/horizon). Chairs are in two rows: back row appears ~145 px tall, front row ~167 px tall, so there is mild perspective/depth difference between rows. The cat (feet y~918-925) and float (bottom y~1010-1018) are lower in the image, i.e. nearer the camera than the chairs. Apparent sizes of both moving objects stay constant over the clip (float mask 158x125-133 px all frames; cat ~105x72 px), so each moves at roughly constant depth, parallel to the image plane."
+  },
+  "objects": [
+    {
+      "name": "cat",
+      "description": "black-and-white cat (black body/tail, white/grey head and paws), walking left-to-right in profile, facing right, tail raised; above-left of the float, in front of the chairs",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "track_file": "tracks/cat.csv",
+      "reference_point": "mask centroid (visible centre of the body incl. tail); simulation origin of an animal rig is near its pelvis/body centre - not directly observable",
+      "typical_extents_px": {"bbox_w_incl_tail_and_head": "101-114 (median ~106)", "bbox_h_tail_tip_to_feet": "66-83 (median ~74)"},
+      "motion_summary": "walks right steadily the whole clip; centroid x 567.4 -> 836.0 (268.6 px in 49 frames, mean 5.48 px/frame); y oscillates 884-892 with gait (no net vertical motion)",
+      "occlusion": "never occluded; from frame ~26 on it walks in front of the front-left chair's left front leg (x 762-772); mask in frames 26-27 includes some leg pixels (bbox_w 120-123 there, too wide)"
+    },
+    {
+      "name": "flamingo_float",
+      "description": "pink/purple inflatable flamingo pool ring (ring with upright neck+head on its right side, beak pointing right/down); lowest object in the image",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "track_file": "tracks/flamingo_float.csv",
+      "reference_point": "mask centroid (rigid object; Blender origin presumably near its centre - centroid is weighted toward the ring, neck pulls it up/right slightly)",
+      "typical_extents_px": {"bbox_w": "157-159", "bbox_h_neck_top_to_ring_bottom": "123-133 (125 typical late, 132 mid-clip)", "mask_main_axis_len": "~170", "mask_width_across": "~117"},
+      "motion_summary": "slides right without visible rotation; starts almost at rest (0.8 px/frame at frame 1), speeds up roughly linearly to a peak ~13.5 px/frame around frames 22-25 (t~0.92-1.04 s), then slows roughly linearly to ~1 px/frame at frame 49 (still creeping). Centroid x 733.2 -> 1162.7 (429.5 px). Centroid y 972 -> 969 (slight drift up 3 px)."
+    },
+    {
+      "name": "chair_back_left",
+      "description": "wooden lounge chair (sun lounger), back row, leftmost; backrest top-left at the top of the cluster",
+      "moves": false,
+      "image_extent_px": {"x": [652, 826], "y_top": 713, "y_bottom_legs": 857, "width": 175, "height": 145},
+      "visible_frames": [0, 49]
+    },
+    {
+      "name": "chair_back_middle",
+      "description": "lounge chair, back row, middle; mostly hidden behind the two front-left/middle chairs, only backrest top visible",
+      "moves": false,
+      "image_extent_px": {"x": [874, 1015], "y_top": 713, "width_backrest": 142, "note": "lower part occluded"},
+      "visible_frames": [0, 49]
+    },
+    {
+      "name": "chair_back_right",
+      "description": "lounge chair, back row, right; partly hidden by front-middle chair",
+      "moves": false,
+      "image_extent_px": {"x": [1063, 1225], "y_top": 713, "y_bottom_legs": 871, "width_backrest_top": 144},
+      "visible_frames": [0, 49]
+    },
+    {
+      "name": "chair_front_left",
+      "description": "lounge chair, front row, left (cat walks in front of its legs in the second half)",
+      "moves": false,
+      "image_extent_px": {"x": [764, 946], "y_top": 735, "y_bottom_legs": 901, "width": 183, "height": 167, "legs_x": [[764, 771], [940, 946]]},
+      "visible_frames": [0, 49]
+    },
+    {
+      "name": "chair_front_middle",
+      "description": "lounge chair, front row, middle",
+      "moves": false,
+      "image_extent_px": {"x": [1000, 1189], "y_top": 735, "y_bottom_legs": 901, "width": 190, "height": 167, "legs_x": [[1005, 1013], [1183, 1189]]},
+      "visible_frames": [0, 49]
+    },
+    {
+      "name": "chair_front_right",
+      "description": "lounge chair, front row, rightmost (separate from the others)",
+      "moves": false,
+      "image_extent_px": {"x": [1216, 1431], "y_top": 734, "y_bottom_legs": 901, "width": 216, "seat_front_width_at_y850": [1226, 1431], "height": 168, "legs_x": [[1249, 1256], [1424, 1431]]},
+      "visible_frames": [0, 49]
+    },
+    {
+      "name": "round_item",
+      "description": "small round greyish-olive object (side table / bucket / stool) between front-left and front-middle chairs, under the back-middle chair",
+      "moves": false,
+      "image_extent_px": {"x": [948, 995], "y": [828, 856], "width": 48, "visible_height": 29, "note": "partly hidden by chairs; segmentation edges flicker here"},
+      "visible_frames": [0, 49]
+    }
+  ],
+  "static_cluster_bbox_px": {"x": [652, 1431], "y": [713, 909]},
+  "events": [
+    {"frame": 0, "t_s": 0.0, "event": "clip start; cat already walking right; float nearly at rest (begins moving right)"},
+    {"frame": 1, "t_s": 0.0417, "event": "float first measurable displacement (0.8 px)"},
+    {"frame": 24, "t_s": 1.0, "event": "float reaches peak speed ~13.5 px/frame (plateau frames 22-25); turns from speeding up to slowing down"},
+    {"frame": 26, "t_s": 1.0833, "event": "cat head reaches / passes in front of the front-left chair's left front leg (x~765)"},
+    {"frame": 49, "t_s": 2.0417, "event": "clip end; float almost stopped (~1 px/frame), cat still walking"}
+  ],
+  "files": {"tracks": ["tracks/cat.csv", "tracks/flamingo_float.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

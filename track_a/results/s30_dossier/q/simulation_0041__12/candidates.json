@@ -1,0 +1,25 @@
+{
+ "id": 12,
+ "video": "simulation_0041",
+ "entry_e2": 3.38,
+ "candidates": [
+  {
+   "name": "C1",
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "answer": 3.32,
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run, width re-run under --size-names (user ok 2026-10-18)",
+   "answer": 3.38,
+   "source": "s26_scene_full attempt 2"
+  },
+  {
+   "name": "C3",
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight coding agent, two-phase)",
+   "answer": 5.4,
+   "source": "s29_pass_sam3 r1"
+  }
+ ]
+}

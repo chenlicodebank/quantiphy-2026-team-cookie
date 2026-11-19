@@ -1,0 +1,168 @@
+{
+ "video": "captured_0030x.mp4",
+ "source": "lab (captured, SAM2-segmented: background blacked out, mask outlines drawn dark)",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "evidence": "table silhouette identical in all frames (median background matches every frame outside the ball)",
+  "intrinsics_from_benchmark": {
+   "fx_px": 762.8,
+   "fy_px": 762.8,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "perspective": {
+   "table_side_edges_vanishing_point_px": [
+    605,
+    329
+   ],
+   "horizon_y_px_approx": 329,
+   "note": "table front/back edges are horizontal in the image -> table faces camera squarely; camera slightly pitched down (horizon ~31 px above principal point, ~2.3 deg)"
+  }
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "track": "tracks/ball.csv",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "description": "single reddish-brown sphere (looks bright orange in the most blurred front frames 0-2); travels a closed, roughly elliptical loop over the tabletop, clockwise seen from above (moves left along the front, right along the back); casts an orange glow/reflection on the table just below it",
+   "reference_point": "visible centre of the sphere (ref_x, ref_y)",
+   "apparent_diameter_px": {
+    "min_reliable": 41.57,
+    "max_reliable": 67.63,
+    "far_side_typical": "42-50 px (frames 12-19, 38-45)",
+    "near_side_typical": "63-69 px (frames 0-2, 26-28, vertical extent; horizontal is blurred)",
+    "left_end_frames_8_and_33": "55 / 61 px",
+    "right_end_frame_23": "60 px"
+   }
+  },
+  {
+   "name": "string",
+   "track": "tracks/string.csv",
+   "moves": true,
+   "visible_frames": "most frames, short pieces only",
+   "description": "thin light-grey line (string/tether) attached to the ball, trailing away from it toward the back of the table/upward; only fragments kept by the segmentation; not a rigid object - use only qualitatively"
+  },
+  {
+   "name": "table",
+   "moves": false,
+   "description": "single square wooden tabletop on one dark pedestal leg, centred in frame",
+   "tabletop_image_corners_px": {
+    "back_left": [
+     378,
+     443
+    ],
+    "back_right": [
+     812,
+     443
+    ],
+    "front_left_top": [
+     205,
+     530
+    ],
+    "front_right_top": [
+     970,
+     530
+    ]
+   },
+   "back_edge_length_px": 434,
+   "front_edge_length_px": 774,
+   "front_edge_rows_y": [
+    530,
+    558
+   ],
+   "front_edge_thickness_px": 28,
+   "tabletop_depth_extent_in_image_px": 87,
+   "full_tabletop_bbox_px": [
+    201,
+    441,
+    975,
+    558
+   ]
+  },
+  {
+   "name": "table_leg",
+   "moves": false,
+   "description": "dark grey cylindrical pedestal under the table centre",
+   "bbox_px": [
+    573,
+    559,
+    620,
+    719
+   ],
+   "width_px": 47,
+   "visible_height_px": 160,
+   "note": "runs off the bottom of the frame"
+  },
+  {
+   "name": "watermark",
+   "moves": false,
+   "description": "text \"Modified with Segment Anything 2 Demo\" bottom-right; not a physical object"
+  }
+ ],
+ "events": [
+  {
+   "frame": 0,
+   "time_s": 0.0,
+   "event": "clip starts with ball already moving fast leftward along the front of the table (no release seen)"
+  },
+  {
+   "frame": 8,
+   "time_s": 0.3333,
+   "event": "leftmost image x (horizontal direction reverses: leftward -> rightward), ball at left end of loop"
+  },
+  {
+   "frame": 18,
+   "time_s": 0.75,
+   "event": "far side of the loop (approx; smallest apparent size ~44-48 px, image y ~426; frames 15-19 bottom cut at table far edge)"
+  },
+  {
+   "frame": 23,
+   "time_s": 0.9583,
+   "event": "rightmost image x (direction reverses: rightward -> leftward), ball at right end of loop"
+  },
+  {
+   "frame": 28,
+   "time_s": 1.1667,
+   "event": "lowest image y = nearest to camera (front of loop, largest apparent size)"
+  },
+  {
+   "frame": 33,
+   "time_s": 1.375,
+   "event": "leftmost image x (horizontal direction reverses: leftward -> rightward), ball at left end of loop"
+  },
+  {
+   "frame": 42,
+   "time_s": 1.75,
+   "event": "far side of the loop (approx; smallest apparent size ~41-45 px at frames 41-45)"
+  },
+  {
+   "frame": 48,
+   "time_s": 2.0,
+   "event": "clip ends with ball still moving (right-back part of loop, heading toward right end)"
+  }
+ ],
+ "motion_summary_px": {
+  "image_x_range": [
+   398.26,
+   860.03
+  ],
+  "image_y_range": [
+   425.89,
+   510.0
+  ],
+  "loop_period_frames_approx": 25,
+  "note": "ball moves during the whole clip (no start/stop, no bounce); about two laps of the loop"
+ },
+ "occlusion": "frames 15-19: ball bottom coincides with the table far edge (y~442) - lower part hidden or cut; diameter/centre from the upper arc"
+}

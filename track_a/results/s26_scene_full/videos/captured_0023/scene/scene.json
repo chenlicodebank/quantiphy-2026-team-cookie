@@ -1,0 +1,102 @@
+{
+  "video": "captured_0023.mp4",
+  "source": "lab (real recording; background/person region blurred by a 'Segment Anything 2 Demo' edit, watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static: background patches shift < 0.4 px over the whole clip (scripts/camera_check.py)",
+    "intrinsics_lab_convention": {"focal_px": 763, "principal_point_px": [640, 360], "hfov_deg": 80},
+    "perspective_cues": {
+      "table_depth_vanishing_point_px": [609, 338],
+      "table_depth_vp_note": "from the table-top left/right edges (y 460-525); rough, +/- ~15 px. Camera is slightly above the table top and looks almost horizontally (VP 22 px above the principal point -> camera pitched ~1.7 deg down if the table is level).",
+      "ramp_slope_vanishing_point_px": [603, -21],
+      "ramp_slope_vp_note": "from the ramp's left/right edges (left x 518@y367 -> 494@y477, right 659@y367 -> 675@y477). Angle between table-depth direction and ramp up-slope direction with f=763: ~25 deg (rough estimate of ramp inclination, sensitive to edge errors, +/- ~5 deg).",
+      "ramp_width_ratio": "ramp top edge appears 145 px wide, bottom edge 183 px -> ramp foot is ~1.26x closer to the camera than the ramp top if the board is rectangular"
+    }
+  },
+  "objects": [
+    {
+      "name": "book",
+      "description": "small hardcover book/notebook with a light blue-grey cover and white page block; a thin pale cord/bookmark string sticks out of its left end when it lies on the table",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "occlusion": "never occluded (the person's hands touch its two ends until ~frame 20)",
+      "track_file": "tracks/book.csv",
+      "reference_point": "centroid of the visible-book mask (cx, cy); bbox centre also given",
+      "pixel_size": {
+        "at_rest_on_ramp_top_f0_20": {"bbox": [528, 345, 656, 391], "length_main_px": 127, "visible_height_px": 46, "note": "cover face seen obliquely + ~5 px page edge"},
+        "at_rest_on_table_f37_48": {"bbox": [478, 478, 651, 513], "length_main_px": 173, "visible_height_px": 30, "note": "lying flat, seen almost edge-on: cover top 478-~500, page block ~500-512; manual zoom gives x 477-654"}
+      },
+      "apparent_size_vs_time": "main-axis length grows 125-128 px (f0-22) -> 131 (f25) -> 141 (f28) -> 152 (f30) -> 163 (f32) -> ~172-174 (f36-48): it approaches the camera as it slides down the ramp"
+    },
+    {
+      "name": "ramp",
+      "description": "white rigid board (whiteboard/foam board) leaning back as an inclined plane on the table, its foot toward the camera; trapezoid in image",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "pixel_extent": {
+        "top_edge_y": 356, "top_edge_x": [517, 660], "top_width_px": 145,
+        "bottom_edge_y": 482, "bottom_edge_x": [494, 676], "bottom_width_px": 183,
+        "image_height_px": 126,
+        "bbox": [494, 356, 676, 483],
+        "corners_px_approx": {"top_left": [517, 358], "top_right": [660, 358], "bottom_left": [494, 480], "bottom_right": [676, 480]},
+        "measured_at": "f48 (top, book gone) and f0 (bottom, book not yet there); corners rounded",
+        "slope_length_image_px": "~126 px vertical in image (foreshortened)"
+      },
+      "notes": "The book starts with its upper part protruding ~10 px above the ramp top edge (book top y 345). A grey-white blob (x ~575-620, y ~340-356) above the ramp top after frame 21 is an artifact of the segmentation edit, not an object."
+    },
+    {
+      "name": "table",
+      "description": "wooden-top table (brown wood grain) with dark front edge band; ramp and book on it; central pedestal leg below (x ~605-630)",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "pixel_extent": {
+        "top_front_edge_y": 532, "top_front_edge_x": [282, 922], "front_edge_length_px": 640,
+        "front_edge_band_y": [532, 562],
+        "back_edge_y_approx": 440, "back_edge_x_approx": [410, 800],
+        "note": "back edge partly hidden by the person's blurred arms; side edges blurred; values +/- 5 px (front) / +/- 10 px (back)"
+      }
+    },
+    {
+      "name": "person",
+      "description": "person behind the table, crouching (blue jeans visible under the table, x ~380-780, y 560-720); head behind the ramp top (dark blob ~x 560-640, y 320-350); bare forearms resting on the table either side of the ramp; whole person blurred by the edit",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "motion": "hands hold the two ends of the book at the ramp top (x ~500 and ~660, y ~360) until frame ~20, then let go and the arms spread/lower slightly (f21-23); otherwise nearly still. Not tracked (blurred, no clear reference point).",
+      "track_file": null
+    },
+    {
+      "name": "tripod",
+      "description": "dark camera/light tripod behind the person, blurred; legs spread from x ~620-760 at y ~300-560; top with a light-blue light at (~690, 70)",
+      "moves": false
+    },
+    {
+      "name": "tv_monitor",
+      "description": "dark wall-mounted screen at top-right, x ~1010-1280, y 0-130, with a bright reflection near (1175, 50)",
+      "moves": false
+    },
+    {
+      "name": "walls_floor",
+      "description": "grey partition wall panels (vertical seams), bright ceiling light area top-centre, dark baseboard lines on the floor bottom-left and right",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "book held still at the ramp top by the person's hands", "frames": [0, 20], "t_s": [0.0, 0.8333]},
+    {"event": "release / start of motion (first centroid change +1 px at f21, +5 px at f22)", "frame": 21, "t_s": 0.875, "uncertainty_frames": 1, "note": "last fully static frame is 20"},
+    {"event": "slides down the ramp (accelerating; centroid y 369 -> 450)", "frames": [21, 30], "t_s": [0.875, 1.25]},
+    {"event": "front/lower edge reaches the ramp foot and the table (bbox bottom 481-483 = ramp bottom edge 482)", "frame": 30, "t_s": 1.25, "uncertainty_frames": 1},
+    {"event": "leaves ramp, pitches forward and lands flat on the table in front of the ramp foot", "frames": [31, 35], "t_s": [1.2917, 1.4583]},
+    {"event": "comes to rest on the table (centroid stable within ~1 px afterwards)", "frame": 37, "t_s": 1.5417, "uncertainty_frames": 1}
+  ],
+  "files": {
+    "tracks/book.csv": "per-frame book track (all 49 frames)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

@@ -1,0 +1,233 @@
+{
+ "video": "captured_0014s.mp4",
+ "source": "lab (captured; background replaced by green via segmentation, 'Modified with Segment Anything' watermark bottom-right)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame": "t = frame/24",
+ "camera": {
+  "motion": "static (phase-correlation shift of table region vs frame 48 < 0.15 px all frames)",
+  "intrinsics_from_benchmark": {
+   "fx_px": 763,
+   "fy_px": 763,
+   "cx_px": 640,
+   "cy_px": 360,
+   "note": "Orbbec Femto Mega, HFOV 80 deg, f = 0.5959*1280"
+  },
+  "view": "elevated, looking down obliquely at a small square table; table top recedes upward in image (back edge y~312-330, front edge y~454-509)",
+  "perspective": "table top is a horizontal plane; its back edge (~(446,330)-(659,312)) and front edge ((426,509)-(727,454)) both slope down-left, left/right edges converge upward; no horizon visible (green background)"
+ },
+ "objects": {
+  "ball": {
+   "moves": true,
+   "desc": "single pale beige/grey ball (~28 px diameter on the board), the only moving object",
+   "visible_frames": "0-29 (29 only a sliver at the bottom image edge); out of frame 30-48",
+   "track": "tracks/ball.csv",
+   "apparent_diameter_px": {
+    "frames_0_8_at_rest_y~296": "28-29 (bbox 27-28 w x 29-30 h)",
+    "frames_12_16_on_board_y~330-390": "27-28 (w 26-28, h 27-29)",
+    "frames_20_22_on_table_y~430-456": "w 30-32 (bright body; vertical extent smeared)",
+    "frames_25_28_falling": "width 36-41 incl. blur; height = blur streak 51-69"
+   }
+  },
+  "whiteboard": {
+   "moves": false,
+   "desc": "white rectangular board (clipboard/tablet-like) lying on the table centre-back; the ball starts at its top (far) edge and rolls down over it toward the camera (possibly an inclined ramp - cannot be confirmed from the image)",
+   "corners_px": {
+    "back_left": [
+     502,
+     312
+    ],
+    "back_right": [
+     593,
+     304
+    ],
+    "front_right": [
+     607,
+     409
+    ],
+    "front_left": [
+     510,
+     422
+    ]
+   },
+   "bbox": [
+    500,
+    302,
+    609,
+    422
+   ],
+   "centre": [
+    552.5,
+    362
+   ],
+   "edge_lengths_px": {
+    "back": 91,
+    "front": 98,
+    "left": 110,
+    "right": 106
+   }
+  },
+  "table_top": {
+   "moves": false,
+   "desc": "light wood square table top, single grey central leg",
+   "corners_px": {
+    "back_left_approx(hidden by cup)": [
+     446,
+     330
+    ],
+    "back_right": [
+     659,
+     312
+    ],
+    "front_right": [
+     727,
+     454
+    ],
+    "front_left": [
+     426,
+     509
+    ]
+   },
+   "bbox": [
+    426,
+    312,
+    727,
+    511
+   ],
+   "edge_lengths_px": {
+    "front": 306,
+    "right": 158,
+    "back_approx": 214,
+    "left_approx": 181
+   },
+   "front_edge_thickness_px": "~10",
+   "front_edge_y_at_ball_x545": 487
+  },
+  "table_leg": {
+   "moves": false,
+   "desc": "dark grey cylindrical central leg below table",
+   "top": [
+    596,
+    492
+   ],
+   "bottom": [
+    600,
+    612
+   ],
+   "length_px": 122,
+   "width_px": "20-25",
+   "bbox": [
+    582,
+    490,
+    615,
+    615
+   ]
+  },
+  "notebook": {
+   "moves": false,
+   "desc": "light-blue (mint) small notebook right of the board, with a white bookmark ribbon",
+   "corners_px_approx": {
+    "back_left": [
+     630,
+     392
+    ],
+    "back_right": [
+     659,
+     388
+    ],
+    "front_right": [
+     675,
+     422
+    ],
+    "front_left": [
+     640,
+     431
+    ]
+   },
+   "bbox": [
+    630,
+    388,
+    675,
+    431
+   ],
+   "minrect_len_wid": [
+    46.8,
+    37.9
+   ]
+  },
+  "cup": {
+   "moves": false,
+   "desc": "white/silver tumbler cup at back-left of table, upright",
+   "bbox_approx": [
+    451,
+    336,
+    491,
+    400
+   ],
+   "width_px": 40,
+   "height_px": 64
+  },
+  "cookie": {
+   "moves": false,
+   "desc": "round chocolate-chip cookie in front of the cup, left of the board",
+   "bbox_approx": [
+    469,
+    373,
+    503,
+    409
+   ],
+   "diameter_px": "~34 x 36"
+  },
+  "pen": {
+   "moves": false,
+   "desc": "black and silver pen lying across front-left of table",
+   "bbox_approx": [
+    434,
+    432,
+    501,
+    444
+   ],
+   "length_px": 68
+  }
+ },
+ "events": {
+  "ball_at_rest": {
+   "frames": "0-7",
+   "pos": [
+    544.5,
+    296.5
+   ]
+  },
+  "ball_starts_moving": {
+   "frame": 8,
+   "t": 0.333,
+   "note": "y 297.5 (f6-7) -> 298.2 (f8) -> 299.7 (f9) -> 303.2 (f10); onset 8 +-1"
+  },
+  "ball_leaves_board_onto_table": {
+   "frames": "17-19",
+   "t": "0.71-0.79",
+   "note": "board front edge y~420 at x~550; image speed drops from ~20 px/frame to ~4 px/frame in f17-19 (drop from board to table / possible impact), then resumes"
+  },
+  "ball_leaves_table_front_edge": {
+   "frame": "23-24",
+   "t": "0.96-1.00",
+   "note": "centre crosses table front edge y~487 between f23 (476.5) and f24 (498.8)"
+  },
+  "ball_falls": {
+   "frames": "24-29",
+   "note": "free fall in front of the table; streaks lengthen; no bounce seen"
+  },
+  "ball_exits_frame_bottom": {
+   "frame": 30,
+   "t": 1.25,
+   "note": "last sliver at f29"
+  }
+ },
+ "caveats": [
+  "frame-timing irregularity: f11->f12 jump of 21 px vs ~11-13 px neighbours; f19->f20->f21 steps 11,18,10 px",
+  "ball has a dark shadow / shaded lower half on the wood that is excluded from the mask"
+ ]
+}

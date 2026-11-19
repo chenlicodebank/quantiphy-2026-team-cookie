@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0253.mp4",
+ "video_source": "simulation",
+ "video_type": "S2SS",
+ "fps": 24.0,
+ "frames": 45,
+ "duration_s": 1.875,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 857,
+  "question": "What is the speed of the box at time 1.5s in m/s?",
+  "prior": "width of the box (side parallel to the slope) = 0.611m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

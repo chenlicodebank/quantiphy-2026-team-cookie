@@ -1,0 +1,98 @@
+{
+  "video": "internet_0029.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 50.0,
+  "frames": 25,
+  "duration_s": 0.5,
+  "image_size_px": [1080, 1080],
+  "units": "pixels, image coords (x right, y down), time t = frame/50 s",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of wall region (x 0-780, y 300-1000) vs frame 0: |shift| <= 0.25 px in all 25 frames",
+    "view": "roughly fronto-parallel to a white door/wall; ball falls in a plane close to the wall, parallel to the image plane"
+  },
+  "timing_irregularity": "Ball step sizes roughly double at frames 7, 12, 17, 22 (every 5th frame) and at 24: one source frame missing there (likely 60->50 fps conversion). Frames 0 and 1 look identical (held). Annotators most likely used the frames as-is at 50 fps.",
+  "objects": [
+    {
+      "name": "ball",
+      "description": "grey (taupe), matte ball, the only falling object; held at top centre by a hand, then dropped onto the grey box",
+      "moves": true,
+      "visible_frames": "0-24 (partly hidden by fingers 0-6)",
+      "track": "tracks/ball.csv",
+      "size_px": {
+        "diameter_horizontal_unblurred": 76,
+        "diameter_range_frames_8_23": [74, 77],
+        "diameter_circle_fit_held_frames_0_6": "2*R ~ 74-76 (free circle fit r 36.8-38.3)",
+        "vertical_extent_with_motion_blur": "81 (f8) growing to 90 (f23); not the true size",
+        "recommended_ball_diameter_px": 76
+      },
+      "reference_point": "visible centre: mask centroid for frames 8-23; circle fit with r=38 to the unoccluded rim for 0-7; manual for 24"
+    },
+    {
+      "name": "hand_arm",
+      "description": "person's right hand/forearm entering from the top right (grey fleece sleeve at right edge); holds then releases the ball, then moves up/right",
+      "moves": true,
+      "visible_frames": "0-24 (fingers only at top edge after frame ~12)",
+      "track": "tracks/hand.csv (skin-pixel bbox for x<760, y<260; coarse)"
+    },
+    {
+      "name": "person_sleeve",
+      "description": "grey fuzzy fleece sleeve/torso along the right edge, x ~955-1080, full height",
+      "moves": "slightly"
+    },
+    {
+      "name": "door_knob",
+      "description": "round brushed-steel flush door knob/pull on the right side of the white door",
+      "moves": false,
+      "centre_px": [805.0, 716.6],
+      "size_px": {"width": 64, "height": 63, "hough_diameter": 61}
+    },
+    {
+      "name": "grey_box_top",
+      "description": "grey box / storage bin / table-like object at bottom centre; its top surface is where the ball lands",
+      "moves": false,
+      "top_edge_y_px": 974,
+      "top_edge_x_px": [255, 740],
+      "top_edge_flat_part_x_px": [270, 725],
+      "bottom_of_frame_x_px_at_y1075": [222, 775],
+      "note": "rounded corners; sides splay outward toward the bottom of the frame (perspective, seen slightly from above); continues beyond frame bottom"
+    },
+    {
+      "name": "door",
+      "description": "white door filling most of the frame; right edge (dark gap/frame line) at x ~879-885",
+      "moves": false,
+      "right_edge_x_px": 879,
+      "left_edge_x_px": "about 75-90 (faint vertical line on the left)"
+    },
+    {
+      "name": "wall_light_spot",
+      "description": "bright lamp hotspot on the door, centred near (430, 420), ~400 x 250 px; second faint glow above the box near y 850-950",
+      "moves": false
+    },
+    {
+      "name": "door_frame_wall_right",
+      "description": "textured white wall/door frame strip between door edge (x~885) and the sleeve (x~1030)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball held, essentially stationary", "frames": "0-4", "t_s": "0.00-0.08", "ball_y_px": "~51-53"},
+    {"event": "fingers open / release begins (first downward motion of ball)", "frame": 5, "t_s": 0.10},
+    {"event": "ball separated from fingers, free fall", "frame": 7, "t_s": 0.14, "note": "release between frames 5 and 7; ball clearly free by 7"},
+    {"event": "ball reaches top edge of grey box (contact/impact)", "frame": 24, "t_s": 0.48, "note": "last frame; ball bottom ~y 1003 just past box top edge y~974; bounce not visible (video ends)"}
+  ],
+  "fall_summary_px": {
+    "ball_y_held": 52.9,
+    "ball_y_frame7": 88.2,
+    "ball_y_frame23": 837.5,
+    "ball_y_frame24": 962,
+    "x_drift": "x decreases steadily from ~565 to ~533 (slight leftward drift, ~1.3 px/frame)"
+  },
+  "files": {
+    "tracks/ball.csv": "final ball track",
+    "tracks/ball_raw.csv": "raw segmentation output incl. circle fits",
+    "tracks/hand.csv": "coarse hand skin blob",
+    "notes.md": "method and reliability"
+  }
+}

@@ -1,0 +1,449 @@
+{
+ "video": "simulation_0020.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 29.997709,
+ "frames": 131,
+ "width": 1080,
+ "height": 1080,
+ "time_convention": "t = frame / fps, frame 0 at t=0",
+ "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation first vs last frame shift (-0.01, 0.02) px; static-region mean abs diff to median < 1.7 grey levels",
+  "view": "fronto-parallel view of a building wall; wall plane faces the camera; horizontal floor/curb/road lines are horizontal in the image (no visible vanishing of horizontals); the hoop/backboard is a 3D prop seen slightly obliquely"
+ },
+ "objects": [
+  {
+   "name": "basketball",
+   "moves": true,
+   "track": "tracks/ball.csv",
+   "distinguish": "orange-red ball, the only ball; starts in the player's hands",
+   "visible_frames": "0-93 and 96-130 (94-95 hidden inside the net; 81-93 lower part hidden by rim/net; 0-20 partly covered by hands)",
+   "size_px": {
+    "diameter_free_flight_median": 29.64,
+    "diameter_p10_p90": [
+     29.01,
+     30.67
+    ],
+    "diameter_at_rest_on_floor_frames_126_130": 29.1,
+    "bbox_at_rest": [
+     278,
+     746,
+     309,
+     776
+    ]
+   },
+   "reference_point": "circle-fit centre of the orange mask (= rigid ball origin)"
+  },
+  {
+   "name": "player",
+   "moves": true,
+   "track": "tracks/player.csv",
+   "distinguish": "only person; basketball player in black jersey number 23 with light-blue trim, black shorts, white/blue shoes; face blurred grey; stands right of centre (x ~760-845)",
+   "visible_frames": "0-130",
+   "size_px": {
+    "standing_height_frames_49_130": 224,
+    "standing_bbox_frames_60_130": [
+     781,
+     588,
+     839,
+     811
+    ],
+    "standing_width_arms_down": 59,
+    "min_bbox_height": 187,
+    "min_bbox_height_frame": 10,
+    "max_bbox_height_incl_raised_arm": 257,
+    "max_bbox_height_frame": 25
+   },
+   "reference_point": "pelvis estimate: shorts leg-hem trim row - 28 px (fallback foot line - 116 px); x = mean torso-mask x just below the waist; standing pelvis ~ (808.8, 695)"
+  },
+  {
+   "name": "basketball_hoop_rim",
+   "moves": false,
+   "distinguish": "orange rim at left, seen almost edge-on",
+   "position_px": {
+    "orange_bbox": [
+     253,
+     492,
+     317,
+     500
+    ],
+    "rim_top_row": 492,
+    "rim_centre_x_approx": 293
+   },
+   "size_px": {
+    "visible_width": 64,
+    "visible_orange_core_width_x269_316": 47,
+    "thickness": 6
+   }
+  },
+  {
+   "name": "net",
+   "moves": false,
+   "distinguish": "white net hanging below the rim",
+   "position_px": {
+    "bbox": [
+     279,
+     500,
+     317,
+     538
+    ]
+   },
+   "size_px": {
+    "height": 38,
+    "top_width": 38,
+    "bottom_width": 24
+   }
+  },
+  {
+   "name": "backboard",
+   "moves": false,
+   "distinguish": "black board with white frame, seen obliquely, left of the rim",
+   "position_px": {
+    "bbox": [
+     223,
+     407,
+     280,
+     517
+    ],
+    "inner_white_box": [
+     245,
+     458,
+     260,
+     500
+    ]
+   },
+   "size_px": {
+    "width_oblique": 57,
+    "height": 110
+   }
+  },
+  {
+   "name": "shot_clock",
+   "moves": false,
+   "distinguish": "black box with green '12:00' display above the backboard",
+   "position_px": {
+    "bbox": [
+     144,
+     323,
+     225,
+     393
+    ]
+   },
+   "size_px": {
+    "width": 81,
+    "height": 70
+   }
+  },
+  {
+   "name": "hoop_support_frame",
+   "moves": false,
+   "distinguish": "grey metal truss from the left image edge to the backboard",
+   "position_px": {
+    "bbox": [
+     0,
+     400,
+     230,
+     545
+    ]
+   }
+  },
+  {
+   "name": "window_middle_left",
+   "moves": false,
+   "distinguish": "barred window centre-left",
+   "position_px": {
+    "bbox": [
+     362,
+     392,
+     570,
+     598
+    ],
+    "sill_bbox": [
+     347,
+     600,
+     578,
+     615
+    ]
+   },
+   "size_px": {
+    "width": 208,
+    "height": 206
+   }
+  },
+  {
+   "name": "window_middle_right",
+   "moves": false,
+   "distinguish": "barred window right, behind the player's head",
+   "position_px": {
+    "bbox": [
+     775,
+     392,
+     982,
+     598
+    ],
+    "sill_bbox": [
+     768,
+     600,
+     995,
+     615
+    ]
+   },
+   "size_px": {
+    "width": 207,
+    "height": 206
+   }
+  },
+  {
+   "name": "window_top_left",
+   "moves": false,
+   "position_px": {
+    "bbox": [
+     355,
+     0,
+     575,
+     100
+    ]
+   },
+   "note": "cut by top edge"
+  },
+  {
+   "name": "window_top_right",
+   "moves": false,
+   "position_px": {
+    "bbox": [
+     768,
+     0,
+     998,
+     100
+    ]
+   },
+   "note": "cut by top edge"
+  },
+  {
+   "name": "vent_upper",
+   "moves": false,
+   "position_px": {
+    "bbox": [
+     450,
+     270,
+     475,
+     298
+    ]
+   }
+  },
+  {
+   "name": "vent_lower",
+   "moves": false,
+   "position_px": {
+    "bbox": [
+     458,
+     675,
+     485,
+     700
+    ]
+   }
+  },
+  {
+   "name": "drain_pipe",
+   "moves": false,
+   "distinguish": "vertical grey pipe under the left window sill",
+   "position_px": {
+    "bbox": [
+     362,
+     615,
+     375,
+     740
+    ]
+   }
+  },
+  {
+   "name": "red_dot",
+   "moves": false,
+   "distinguish": "tiny static red dot below the net",
+   "position_px": {
+    "centre": [
+     293,
+     554
+    ]
+   },
+   "note": "2-3 px, unknown prop/artifact"
+  },
+  {
+   "name": "ground_features",
+   "moves": false,
+   "rows_px": {
+    "wall_base_grass_strip": [
+     740,
+     758
+    ],
+    "wet_sidewalk_floor": [
+     760,
+     843
+    ],
+    "player_foot_line": 811,
+    "ball_floor_contact_bottom_row": 773,
+    "ball_rest_bottom_row": 776,
+    "curb_top_edge": [
+     844,
+     855
+    ],
+    "gutter": [
+     856,
+     900
+    ],
+    "road_white_line": [
+     910,
+     914
+    ],
+    "road": [
+     915,
+     1080
+    ]
+   },
+   "note": "sidewalk is wet and reflective: mirror images of player and ball below their contact points"
+  }
+ ],
+ "events": [
+  {
+   "event": "player holds ball low, crouched",
+   "frames": [
+    0,
+    7
+   ]
+  },
+  {
+   "event": "duplicate first frame (frames 0 and 1 identical ball position)",
+   "frames": [
+    0,
+    1
+   ]
+  },
+  {
+   "event": "ball raised to set point above head, nearly still",
+   "frames": [
+    16,
+    20
+   ],
+   "ball_px": [
+    790,
+    557
+   ]
+  },
+  {
+   "event": "release: last frame in hands 20, first free frame 21",
+   "frame": 21,
+   "t": 0.7001
+  },
+  {
+   "event": "ball flight apex (min y = 444.6)",
+   "frame": 59,
+   "t": 1.9668,
+   "note": "y flat (within 0.5 px) frames 55-59"
+  },
+  {
+   "event": "ball reaches rim top (bbox bottom = 492 = rim top), horizontal motion stops",
+   "frame": 78,
+   "t": 2.6002
+  },
+  {
+   "event": "ball sinks into the hoop slowly (~1 px/frame), partly hidden",
+   "frames": [
+    79,
+    93
+   ]
+  },
+  {
+   "event": "ball hidden inside net",
+   "frames": [
+    94,
+    95
+   ]
+  },
+  {
+   "event": "ball emerges below net (centre y 551), nearly still frames 96-98 then falls straight down at x~293",
+   "frames": [
+    96,
+    98
+   ]
+  },
+  {
+   "event": "free fall from net to floor",
+   "frames": [
+    99,
+    119
+   ]
+  },
+  {
+   "event": "first floor contact (ball bottom row 773, lowest centre y 758.9)",
+   "frame": 120,
+   "t": 4.0003,
+   "note": "fall decelerates already from frame 117 (steps 13 -> 8.7 -> 7.2 -> 5.3 -> 0.8 px)"
+  },
+  {
+   "event": "bounce apex (centre y 729.6, 29 px above contact)",
+   "frame": 123,
+   "t": 4.1003
+  },
+  {
+   "event": "second floor contact, then rest (centre 293.1, 760.6)",
+   "frame": 126,
+   "t": 4.2003
+  },
+  {
+   "event": "ball at rest",
+   "frames": [
+    127,
+    130
+   ]
+  },
+  {
+   "event": "player feet raised off floor (foot bbox bottom < 805; floor line 811)",
+   "frames": [
+    8,
+    12
+   ],
+   "min_foot_row": 782,
+   "min_frame": 10
+  },
+  {
+   "event": "player feet raised off floor (foot bbox bottom < 805; floor line 811)",
+   "frames": [
+    18,
+    24
+   ],
+   "min_foot_row": 797,
+   "min_frame": 22
+  },
+  {
+   "event": "player feet raised off floor (foot bbox bottom < 805; floor line 811)",
+   "frames": [
+    31,
+    38
+   ],
+   "min_foot_row": 786,
+   "min_frame": 33
+  },
+  {
+   "event": "player shooting arm extended (follow-through)",
+   "frames": [
+    24,
+    35
+   ]
+  },
+  {
+   "event": "player standing upright, arms down, feet on floor; only slight sway (pelvis x 805-809, bbox constant from ~frame 75)",
+   "frames": [
+    49,
+    130
+   ]
+  }
+ ],
+ "files": {
+  "tracks/ball.csv": "per-frame ball centre, bbox, fitted diameter, occlusion",
+  "tracks/player.csv": "per-frame player pelvis estimate, bbox, mask extents",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts"
+ }
+}

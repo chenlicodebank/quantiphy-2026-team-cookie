@@ -1,0 +1,57 @@
+{
+  "video": "simulation_0093.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 38,
+  "duration_s": 1.5833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "units": "pixels and seconds; image x to the right, y downward; no metric scale",
+  "background": "uniform dark grey (RGB ~80,81,88), no ground, horizon or markings; no static objects",
+  "camera": {
+    "motion": "static (background uniform, corner pixels identical in all frames; no shift measurable or present)",
+    "perspective_notes": "Rendered with a perspective camera: the plane shows only one engine near image centre (frame 0) but both engines when at the left (frame 20); the car's mask length grows from 91 px to 98 px as it moves from x~899 to x~1624. Motion is horizontal in a plane facing the camera; treat as planar (one scale) unless a question says otherwise."
+  },
+  "objects": {
+    "plane": {
+      "description": "white Air China passenger jet (A320-type airliner, red phoenix logo on tail), side view, nose pointing left; upper object",
+      "moves": true,
+      "direction": "leftward (-x), purely horizontal (y constant)",
+      "visible_frames": "0-34 (fully visible 0-18; nose cut by left border from frame 19; only a sliver at 34; gone 35-37)",
+      "track": "tracks/plane.csv",
+      "reference_point": "tail-fin centroid + (-260.0 px) offset in every frame (offset = median bbox-centre minus fin-centroid over frames 0-18, where the plane is fully visible); frames 33-34 (fin cut off) extrapolated with the constant step -40.36 px/frame",
+      "pixel_size_at_frame_0": {"length_nose_to_tail_px": 612, "height_fin_top_to_engine_bottom_px": 181, "bbox": [722, 370, 1333, 550]},
+      "pixel_length_frames_0_18_px": "606-612 (median 608 for x1-x0)",
+      "per_frame_step_px": "0 between frames 0 and 1; then -40.0 to -41.0, mean -40.36 px/frame (constant velocity, no acceleration detectable)",
+      "ref_position_frame_0": [1024.5, 460.0],
+      "ref_note": "bbox centre at frame 0 is 1027.5; the CSV ref uses fin centroid + median offset in every frame for consistency (<=3 px from bbox centre)"
+    },
+    "car": {
+      "description": "small white angular pickup (Tesla Cybertruck-like), side view, below the plane; lower object",
+      "moves": true,
+      "direction": "rightward (+x), purely horizontal",
+      "visible_frames": "0-37 (always fully visible, never occluded)",
+      "track": "tracks/car.csv",
+      "reference_point": "bbox centre",
+      "pixel_size_at_frame_0": {"length_px": 91, "height_px": 30, "bbox": [854, 605, 944, 634]},
+      "pixel_length_range_px": "91 (frame 0) growing slowly to 98 (frame 37) (perspective/viewing-angle change)",
+      "per_frame_step_px": "0 between frames 0 and 1; then 19.5-21.0, mean 20.13 px/frame (column-centroid steps 19.7-20.4; constant velocity)",
+      "ref_position_frame_0": [899.0, 619.5]
+    }
+  },
+  "relations": {
+    "plane_minus_car_frame_0_px": {"dx": 125.5, "dy": -159.5, "dist": 203.0},
+    "vertical_offset_plane_ref_above_car_ref_px": 159.5,
+    "note": "objects move in opposite directions and never overlap; horizontal separation grows by ~60.5 px/frame from frame 2 on; per-frame distances follow from the two track CSVs (same frame rows)"
+  },
+  "events": [
+    {"event": "both objects stationary (frames 0 and 1 identical)", "frame": 0, "time_s": 0.0},
+    {"event": "motion start of plane and car (first displacement between frames 1 and 2)", "frame": 2, "time_s": 0.0833},
+    {"event": "plane nose reaches left image border (first clipped frame)", "frame": 19, "time_s": 0.7917},
+    {"event": "plane last visible (sliver of tail tip)", "frame": 34, "time_s": 1.4167},
+    {"event": "plane fully out of frame", "frame": 35, "time_s": 1.4583},
+    {"event": "car still moving at end of clip", "frame": 37, "time_s": 1.5417}
+  ],
+  "static_objects": []
+}

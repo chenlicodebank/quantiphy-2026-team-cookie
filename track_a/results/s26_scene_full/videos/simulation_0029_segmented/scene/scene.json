@@ -1,0 +1,63 @@
+{
+  "video": "simulation_0029_segmented.mp4",
+  "source": "segmentation (Blender simulation render with background replaced by plain white)",
+  "scene_type": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "image_size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (assumed: background is uniform white so no background shift can be measured; the boat's waterline/bottom row stays at y 678-683 and its vertical centroid at 641-643 px for the whole clip, consistent with a fixed camera)",
+    "perspective_cues": "none in the image (no ground, water, horizon or vanishing lines survive the segmentation). The boat's apparent length grows from 159.6 px (frames 0-4) to 176.4 px (frames 70-74), +10.5 %, so it moves toward the camera while moving left. The bird's apparent size shows no systematic trend (it changes only with the wingbeat).",
+    "principal_point_assumed": [480, 480]
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red-and-white fishing boat (red hull with white stripe and the name 'AH805' on its side, white cabin with red roof and three windows, white railing at the stern, thin mast with dark upper segment above the cabin). Seen roughly side-on, bow pointing LEFT. The only large object.",
+      "moves": true,
+      "visible_frames": "0-74 (always fully in view)",
+      "motion": "translates left (bow first) through the whole clip, at a nearly constant ~2.6 px/frame in image x; its image grows ~10.5 % (approaching the camera); no vertical image motion",
+      "track_file": "tracks/boat.csv",
+      "reference_point": "No origin is visible. Candidates in the CSV: body bbox centre (body_cx, body_cy; cabin+hull without mast), mask centroid of cabin+hull (centroid_x, centroid_y), full bbox incl. mast. A Blender boat's origin is most likely near the hull centre; use body_cx (x) and centroid_y or body_cy (y). All candidates move almost identically in x.",
+      "extents_px": {
+        "hull_length_bow_to_stern": {"frame0": 160, "frame74": 177, "column": "body_len_px", "note": "horizontal mask extent of cabin+hull = bow tip to stern"},
+        "body_height_cabin_top_to_keel": {"frame0": 97, "frame74": 105, "columns": "body_y1 - cabin_top_y + 1"},
+        "full_height_keel_to_mast_tip": {"frames0-4_mean": 176, "frames70-74_mean": 174, "median": 170, "column": "full_height_px", "note": "unreliable to +-8 px: the faint white tip of the mast flickers in the segmentation (tip y between 488 and 512; frame 52 lost the mast almost completely)"},
+        "mast_dark_segment_top_y": "about 513-516 every frame (mast_top_y, except frames 0-6, 24, 52)",
+        "width_across": "not visible (side view)"
+      }
+    },
+    {
+      "name": "bird",
+      "description": "small dark (black/grey) flying bird, seen from the side/back, flapping its wings ('V'/'check-mark' silhouette). The only other object.",
+      "moves": true,
+      "visible_frames": "0-74 (always in view; overlaps the boat's mast in the image at frames 47-50, partly hidden/merged at 48-49)",
+      "motion": "flies to the RIGHT the whole clip, from x~41 px (frame 0) to x~581 px (frame 74), ~7.3 px/frame on average; small vertical undulation y 518-540 px (centroid y: 519 at frame 0, low points ~535 at frames 10-11, ~536 at frame 37, ~540 at frames 60-62; high points ~522 at frames 23-25, ~528 at frames 47-51, ~532 at frames 71-74)",
+      "track_file": "tracks/bird.csv",
+      "reference_point": "mask centroid (cx_best, cy_best); bbox centre also given. Centroid jitters by a few px with wing phase.",
+      "extents_px": {
+        "bbox_w_range": [15, 30],
+        "max_wingspan_like_extent_px": "30 (bbox_w at frame 31), 29 (frame 4); main_axis_len max 29",
+        "bbox_h_range": [5, 22],
+        "note": "wingbeat changes the silhouette strongly; bbox_h minima (wings level) at frames ~5, 17-18, 32, 42, 57, 65-66"
+      }
+    }
+  ],
+  "static_objects": "none visible: the background is plain white (segmentation). No ground, water, buildings or markings.",
+  "events": [
+    {"event": "both objects already moving at frame 0 and still moving at frame 74; no start/stop, release, bounce, impact or direction change", "frame": null},
+    {"event": "bird begins to overlap the boat's mast in the image (2D crossing only, no contact)", "frame": 47, "t": 1.88},
+    {"event": "bird centre crosses the mast pole x (pole x ~ 413-415)", "frame": 48.5, "t": 1.94},
+    {"event": "bird clear of the mast on its right side", "frame": 50, "t": 2.0},
+    {"event": "bird centroid passes above the boat's bow x (~ frame 41) and past the stern x (~ frame 59) in the image", "frame": [41, 59]}
+  ],
+  "files": {
+    "tracks/boat.csv": "per-frame boat track (75 rows)",
+    "tracks/bird.csv": "per-frame bird track (75 rows)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "track.py (segmentation+tracking), postprocess.py, overlay.py/crops.py (visual checks), probe*.py (exploration)"
+  }
+}

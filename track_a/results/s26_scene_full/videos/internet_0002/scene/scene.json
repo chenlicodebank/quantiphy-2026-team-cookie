@@ -1,0 +1,287 @@
+{
+ "video": "internet_0002.mp4",
+ "source": "internet",
+ "scene": "2D",
+ "fps": 19.612613,
+ "frames": 36,
+ "width": 3840,
+ "height": 2160,
+ "time_convention": "t = frame / fps, frame 0 at t = 0",
+ "view": "near-nadir (top-down) drone view of a multi-lane highway; traffic flows left -> right along +x; lanes run horizontally",
+ "camera": {
+  "static": true,
+  "max_background_shift_px": 1.82,
+  "note": "phase correlation vs frame 0: drift < 0.6 px in x and < 2 px in y over the clip (negligible); see camera_shift.csv",
+  "perspective": "near-orthographic top-down; lane-divider spacing is ~306-330 px everywhere, dashes ~293-304 px long across the full width, so one px scale applies (planar). Car apparent sizes are constant along the track (template match residual stays small)."
+ },
+ "moving_objects": {
+  "red_pickup": {
+   "description": "red pickup truck with grey tonneau (bed) cover, lane 4 from top (between dash rows y~989 and y~1310), drifts steadily downward in the image (towards / onto the divider at y~1310, i.e. a slow lane change towards the lane of silver_pickup); casts the large shadow to its upper-left",
+   "moves": true,
+   "direction": "left -> right (+x), nearly horizontal",
+   "track_file": "tracks/red_pickup.csv",
+   "frames_tracked": [
+    0,
+    33
+   ],
+   "frames_fully_in_view": [
+    0,
+    29
+   ],
+   "length_px_bumper_to_bumper": 532,
+   "width_px_side_to_side": 180,
+   "size_measured_at_frame": 15,
+   "size_box_at_ref_frame": [
+    1760,
+    1142,
+    2292,
+    1322
+   ],
+   "height_px": "not observable (top-down view)",
+   "y_centre_first_last": [
+    1159.04,
+    1312.47
+   ]
+  },
+  "gray_sedan": {
+   "description": "blue-grey sedan in the top lane (y~180) at the start, ahead (right) of the others; leaves through the right edge",
+   "moves": true,
+   "direction": "left -> right (+x), nearly horizontal",
+   "track_file": "tracks/gray_sedan.csv",
+   "frames_tracked": [
+    0,
+    12
+   ],
+   "frames_fully_in_view": [
+    0,
+    9
+   ],
+   "length_px_bumper_to_bumper": 430,
+   "width_px_side_to_side": 146,
+   "size_measured_at_frame": 0,
+   "size_box_at_ref_frame": [
+    2150,
+    107,
+    2580,
+    253
+   ],
+   "height_px": "not observable (top-down view)",
+   "y_centre_first_last": [
+    180.02,
+    168.24
+   ]
+  },
+  "white_car": {
+   "description": "white / silver-white sedan with dark sunroof in the top lane (y~150-190); enters from the left edge at frame 7, behind gray_sedan",
+   "moves": true,
+   "direction": "left -> right (+x), nearly horizontal",
+   "track_file": "tracks/white_car.csv",
+   "frames_tracked": [
+    7,
+    35
+   ],
+   "frames_fully_in_view": [
+    11,
+    35
+   ],
+   "length_px_bumper_to_bumper": 462,
+   "width_px_side_to_side": 172,
+   "size_measured_at_frame": 25,
+   "size_box_at_ref_frame": [
+    1873,
+    104,
+    2335,
+    276
+   ],
+   "height_px": "not observable (top-down view)",
+   "y_centre_first_last": [
+    152.13,
+    188.3
+   ]
+  },
+  "silver_pickup": {
+   "description": "pickup truck with silver/light-grey cab and black bed cover, lane 5 (between dash rows y~1310 and y~1616), enters from the left edge at frame 20",
+   "moves": true,
+   "direction": "left -> right (+x), nearly horizontal",
+   "track_file": "tracks/silver_pickup.csv",
+   "frames_tracked": [
+    20,
+    35
+   ],
+   "frames_fully_in_view": [
+    24,
+    35
+   ],
+   "length_px_bumper_to_bumper": 505,
+   "width_px_side_to_side": 180,
+   "size_measured_at_frame": 35,
+   "size_box_at_ref_frame": [
+    1395,
+    1375,
+    1900,
+    1555
+   ],
+   "height_px": "not observable (top-down view)",
+   "y_centre_first_last": [
+    1418.55,
+    1465.0
+   ]
+  },
+  "dark_car": {
+   "description": "dark charcoal sedan in the top lane (y~145-156), enters from the left edge at frame 27, behind white_car; heavy motion blur",
+   "moves": true,
+   "direction": "left -> right (+x), nearly horizontal",
+   "track_file": "tracks/dark_car.csv",
+   "frames_tracked": [
+    27,
+    35
+   ],
+   "frames_fully_in_view": [
+    31,
+    35
+   ],
+   "length_px_bumper_to_bumper": 485,
+   "width_px_side_to_side": 172,
+   "size_measured_at_frame": 35,
+   "size_box_at_ref_frame": [
+    600,
+    70,
+    1085,
+    242
+   ],
+   "height_px": "not observable (top-down view)",
+   "y_centre_first_last": [
+    143.99,
+    156.01
+   ]
+  }
+ },
+ "static_objects": {
+  "lane_dashes": {
+   "description": "white dashed lane dividers, 6 rows, see static_markings.json for every dash",
+   "mean_dash_length_px": 296.9,
+   "dash_thickness_px": "~10-14",
+   "typical_gap_between_dashes_px": "836-866 (one gap 1114 in row y~1616)",
+   "typical_dash_period_px": "~1140-1160",
+   "row_mean_y_px": [
+    354.9,
+    663.2,
+    989.0,
+    1309.8,
+    1615.8,
+    1945.3
+   ],
+   "lane_width_px_between_rows": [
+    308.3,
+    325.8,
+    320.8,
+    306.0,
+    329.5
+   ],
+   "note": "rows slope slightly (y grows ~+8..+17 px from left to right edge)"
+  },
+  "top_solid_lines": {
+   "description": "two continuous white lines along the top edge (road edge / barrier), full width",
+   "rows": [
+    {
+     "y_top": 4,
+     "y_bottom": 36,
+     "x0": 0,
+     "x1": 3840,
+     "thickness_px": 18.2
+    },
+    {
+     "y_top": 42,
+     "y_bottom": 76,
+     "x0": 0,
+     "x1": 3840,
+     "thickness_px": 18.6
+    }
+   ]
+  },
+  "top_lane": {
+   "description": "lane between top solid line (y~76) and first dash row (y~355): width ~280 px; gray_sedan, white_car, dark_car use it"
+  },
+  "raised_markers": {
+   "description": "small white raised pavement markers between dashes on each divider row (a few px)"
+  },
+  "road_stains": {
+   "description": "dark oil stains near x 80-260, y 920-950 (left edge, lane 3)"
+  }
+ },
+ "events": [
+  {
+   "object": "white_car",
+   "event": "front bumper crosses left image edge (car enters; extrapolated)",
+   "frame": 6.35,
+   "t": 0.324
+  },
+  {
+   "object": "gray_sedan",
+   "event": "front bumper crosses right image edge (car starts leaving)",
+   "frame": 9.76,
+   "t": 0.4976
+  },
+  {
+   "object": "white_car",
+   "event": "rear bumper crosses left image edge (car fully in view)",
+   "frame": 10.28,
+   "t": 0.5242
+  },
+  {
+   "object": "gray_sedan",
+   "event": "rear bumper reaches right image edge (car gone); extrapolated from frames 0-12",
+   "frame": 13.0,
+   "t": 0.6628
+  },
+  {
+   "object": "silver_pickup",
+   "event": "front bumper crosses left image edge (car enters; extrapolated)",
+   "frame": 19.04,
+   "t": 0.9708
+  },
+  {
+   "object": "silver_pickup",
+   "event": "rear bumper crosses left image edge (car fully in view)",
+   "frame": 23.33,
+   "t": 1.1895
+  },
+  {
+   "object": "dark_car",
+   "event": "front bumper crosses left image edge (car enters; extrapolated)",
+   "frame": 26.21,
+   "t": 1.3361
+  },
+  {
+   "object": "red_pickup",
+   "event": "front bumper crosses right image edge (car starts leaving)",
+   "frame": 29.46,
+   "t": 1.5021
+  },
+  {
+   "object": "dark_car",
+   "event": "rear bumper crosses left image edge (car fully in view)",
+   "frame": 30.18,
+   "t": 1.5388
+  },
+  {
+   "object": "red_pickup",
+   "event": "rear bumper reaches right image edge (car gone); extrapolated, frame 34 shows only a ~40 px sliver of its tail",
+   "frame": 34.4,
+   "t": 1.754
+  },
+  {
+   "object": "all vehicles",
+   "event": "no starts/stops, contacts, collisions or reversals; every vehicle moves continuously rightward for the whole clip",
+   "frame": null,
+   "t": null
+  }
+ ],
+ "files": {
+  "tracks": "tracks/<object>.csv",
+  "camera": "camera_shift.csv",
+  "static": "static_markings.json",
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

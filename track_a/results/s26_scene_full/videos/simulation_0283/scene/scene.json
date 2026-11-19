@@ -1,0 +1,221 @@
+{
+ "video": "simulation_0283.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame / 24; frame = round(t * 24)",
+ "units": "pixels and seconds; image coords x right, y down, origin top-left of the 2560x1440 frame",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation vs empty background (frames 62-71): shift < 0.02 px in all tested frames; frames 64-71 identical to the background to within noise",
+  "background_shift_px_per_frame": [
+   0.0,
+   0.0
+  ]
+ },
+ "objects": [
+  {
+   "name": "dragon",
+   "moves": true,
+   "description": "single dark-grey winged dragon (bat-like wings, long tail, horns), the only moving object; flies right-to-left across the frame in front of the cliff, flapping, dipping twice toward the beach/water and leaving through the left edge",
+   "visible_frames": [
+    0,
+    62
+   ],
+   "fully_in_frame_frames": [
+    0,
+    49
+   ],
+   "partly_out_of_frame_frames": [
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62
+   ],
+   "absent_frames": [
+    63,
+    71
+   ],
+   "track_file": "tracks/dragon.csv",
+   "reference_point": "cx,cy = centroid of the silhouette mask (wings included). The Blender origin is not visible; it is near the body/pelvis, typically within ~30-60 px of the centroid; the centroid swings with the wingbeat (wings up -> centroid moves up). bbox_cx,bbox_cy also given.",
+   "pixel_extents_full_view_frames_0_49": {
+    "bbox_width_px (wingspan-ish horizontal extent)": {
+     "min": 517.0,
+     "min_frame": 24,
+     "max": 837.0,
+     "max_frame": 32,
+     "median": 602.0
+    },
+    "bbox_height_px": {
+     "min": 247.0,
+     "min_frame": 13,
+     "max": 598.0,
+     "max_frame": 29,
+     "median": 449.5
+    },
+    "main_axis_len_px": {
+     "min": 437.6,
+     "min_frame": 15,
+     "max": 885.1,
+     "max_frame": 30,
+     "median": 649.35
+    },
+    "cross_width_px": {
+     "min": 211.6,
+     "min_frame": 37,
+     "max": 555.2,
+     "max_frame": 15,
+     "median": 457.20000000000005
+    },
+    "mask_area_px": {
+     "min": 51237.0,
+     "min_frame": 13,
+     "max": 133867.0,
+     "max_frame": 31,
+     "median": 100715.0
+    }
+   },
+   "pixel_extents_excluding_water_line_frames": {
+    "bbox_width_px": {
+     "min": 517.0,
+     "min_frame": 24,
+     "max": 837.0,
+     "max_frame": 32,
+     "median": 670.5
+    },
+    "bbox_height_px": {
+     "min": 247.0,
+     "min_frame": 13,
+     "max": 598.0,
+     "max_frame": 29,
+     "median": 463.0
+    }
+   },
+   "wingbeat": "bbox height/area peak (wings raised) near frames 5 and 29-31, trough (wings level/down, silhouette flattest) near frames 13, 21-22 and 37; period ~24 frames (~1.0 s)"
+  },
+  {
+   "name": "dragon_shadow",
+   "moves": true,
+   "description": "dark cast shadow of the dragon on the sand beach / shore rocks below it (e.g. frame 14 at x 1300-1650, y 1080-1150; frame 38 on the rocks x 550-800, y 1020-1190). Excluded from the dragon mask. Not tracked."
+  },
+  {
+   "name": "dragon_reflection",
+   "moves": true,
+   "description": "mirror reflection of the dragon in the water pool below the water line (y > ~1150-1200). Excluded from the dragon mask. Not tracked."
+  },
+  {
+   "name": "cliff",
+   "moves": false,
+   "description": "large white/brown eroded rock cliff filling the background; top edge from y~45 (x~2300) to y~360 (x~0); base meets the beach at y~880-1000 (x 1100-2560) and ~y 1100-1190 at the left behind shore rocks"
+  },
+  {
+   "name": "sky_and_distant_hills",
+   "moves": false,
+   "description": "blue-grey sky and blurred grey hills at the top-left, y < ~380 at x=0 and y < ~60 at x~1700"
+  },
+  {
+   "name": "sand_beach",
+   "moves": false,
+   "description": "pale sand/snow slope between cliff base and water, x ~900-2560, y ~880-1150"
+  },
+  {
+   "name": "water_pool",
+   "moves": false,
+   "description": "shallow reflecting water across the bottom of the frame; first water row (water line used to cut reflections): (x,y) = (0,1200) (250,1200) (300,1192) (820,1192) (900,1150) (1500,1150) (1600,1160) (2560,1175); visual edge uncertain by ~30 px"
+  },
+  {
+   "name": "shore_rocks_left",
+   "moves": false,
+   "description": "cluster of boulders at the left shore, x ~0-830, y ~1000-1200; the large dark boulder x~690-820, y~1050-1160; a tall pale rock spire at the far left x 0-140, y 850-1300"
+  },
+  {
+   "name": "dark_spot_on_sand",
+   "moves": false,
+   "description": "small dark static patch on the sand at about (1960, 945), ~80x15 px; part of the background, not the dragon shadow"
+  }
+ ],
+ "events": [
+  {
+   "event": "first frame duplicated / motion start",
+   "frames": [
+    0,
+    1
+   ],
+   "note": "frames 0 and 1 are effectively identical (centroid/bbox equal within 0.1 px); motion is visible from frame 2 on. Backward-difference speed at frame 1 is 0 in pixels."
+  },
+  {
+   "event": "first descent toward the beach/water",
+   "frames": [
+    9,
+    16
+   ],
+   "note": "centroid y rises from ~604 (f9) to ~945 (f16); lowest point of the first dip around frame 15-16"
+  },
+  {
+   "event": "lowest point / possible touch of the water surface",
+   "frames": [
+    15,
+    19
+   ],
+   "note": "a wing tip / foot reaches the water line (y~1150) in frames 15-19; with the reflection directly underneath, actual contact is ambiguous"
+  },
+  {
+   "event": "climb",
+   "frames": [
+    16,
+    29
+   ],
+   "note": "centroid y decreases from ~945 to ~556 (minimum near frame 29)"
+  },
+  {
+   "event": "second descent",
+   "frames": [
+    30,
+    40
+   ],
+   "note": "centroid y increases to ~954 at frame 40 (lowest of second dip); lower wing reaches near the water line around frames 39-41"
+  },
+  {
+   "event": "second climb toward the left edge",
+   "frames": [
+    40,
+    50
+   ]
+  },
+  {
+   "event": "dragon starts leaving through the left frame edge",
+   "frames": [
+    50
+   ],
+   "note": "bbox_x0 = 0 from frame 50; tracks after that are truncated"
+  },
+  {
+   "event": "dragon fully out of frame",
+   "frames": [
+    63
+   ],
+   "note": "last pixels visible at frame 62"
+  },
+  {
+   "event": "horizontal direction",
+   "note": "centroid x moves right-to-left monotonically except small wingbeat wobbles (e.g. frames 37-38, 39-40); no reversal of travel direction"
+  }
+ ],
+ "files": {
+  "tracks/dragon.csv": "per-frame dragon silhouette measurements (all 72 frames, visible=0 when absent)",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts"
+ }
+}

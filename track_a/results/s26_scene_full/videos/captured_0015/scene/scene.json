@@ -1,0 +1,73 @@
+{
+  "video": "captured_0015.mp4",
+  "source": "lab",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "duration_s": 3.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation of background vs frame 0: |dx| <= 0.04 px, |dy| <= 0.5 px; see tracks/camera_shift.csv)",
+    "intrinsics_from_benchmark": "Orbbec Femto Mega RGB, HFOV 80 deg: f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+    "note": "Background is artificially blurred (watermark 'Modified with Segment Anything 2 Demo' bottom-right); person and toy are sharp.",
+    "perspective": "Room corner: back wall/floor junction runs from about (0,560) up-right to (450,490) then right to (1080,590) (blurred). Person stands roughly fronto-parallel; toy motion is near vertical in a plane roughly facing the camera."
+  },
+  "objects": {
+    "toy": {
+      "description": "Brown/orange plush toy (red-panda/raccoon-like, white face, paws and striped tail), about 55-61 px wide x 98-107 px tall when free in the air. The only object that is thrown.",
+      "moves": true,
+      "visible_frames": "0-72 (all)",
+      "track": "tracks/toy.csv",
+      "reference_point": "best_cx, best_cy = centre of the visible toy mask (see notes for method per frame)",
+      "free_flight_size_px": {
+        "toss1_frames_17_21": {"bbox_w": "49-61 (tail sticks out to the left at 18-21)", "bbox_h": "98-102", "mask_len_main_axis": "~100"},
+        "toss2_frames_53_58": {"bbox_w": "53-58", "bbox_h": "101-107", "mask_len_main_axis": "~105"},
+        "recommended_height_px": 103,
+        "recommended_width_px": 57
+      }
+    },
+    "person": {
+      "description": "Woman (face blurred) in grey T-shirt, dark navy baggy trousers, white sneakers with black stripes; stands in place at left of image and tosses the toy up twice, catching it each time.",
+      "moves": "body static (feet fixed); arms move during tosses",
+      "visible_frames": "0-72",
+      "track": "tracks/person.csv",
+      "standing_extent_px": {"head_top_y": 134.5, "feet_bottom_y": 641, "height_px": 507, "height_std_px": 1.1,
+                              "body_x_range": "about 285-405 (torso/trousers), shoes about 305-400",
+                              "approx_centre_px": [350, 388]},
+      "pelvis_approx_px": [350, 345]
+    },
+    "static_objects_approx_px_frame0": {
+      "tv_or_dark_screen": {"bbox": [585, 0, 848, 195], "note": "black rectangle on back wall top centre, top cut by image edge; blurred"},
+      "light_stand_left": {"pole_x": 470, "top_y": 175, "legs_span_x": [400, 560], "feet_y": 490, "note": "dark tripod stand behind the person, blurred"},
+      "light_stand_right": {"pole_x": 975, "top_y": 115, "legs_span_x": [870, 1080], "feet_y": 590, "note": "blurred"},
+      "foreground_partition_right": {"x_range": [1090, 1280], "y_range": [0, 720], "note": "large grey panel at right edge, blurred"},
+      "wall_panels": "grey partition panels along the back walls",
+      "floor": "grey carpet, lower part of image"
+    }
+  },
+  "events": [
+    {"name": "toy held still at waist (both hands)", "frames": "0-8", "t": "0-0.333"},
+    {"name": "toss 1 lift begins (toy starts rising)", "frame": 9, "t": 0.375},
+    {"name": "toss 1 release (last hand contact)", "frame": 15, "t": 0.625, "uncertainty_frames": 1},
+    {"name": "toss 1 free flight", "frames": "16-22", "t": "0.667-0.917"},
+    {"name": "toss 1 apex (min image y of toy centre 175.7)", "frame": 19, "t": 0.792},
+    {"name": "toss 1 catch (hands contact)", "frame": 23, "t": 0.958, "uncertainty_frames": 1},
+    {"name": "toy brought down to waist, lowest y", "frame": 31, "t": 1.292},
+    {"name": "small bob at waist (toy rises ~30 px)", "frames": "33-41"},
+    {"name": "toss 2 lift begins", "frame": 43, "t": 1.792},
+    {"name": "toss 2 release (last hand contact)", "frame": 50, "t": 2.083, "uncertainty_frames": 1},
+    {"name": "toss 2 free flight", "frames": "51-59", "t": "2.125-2.458"},
+    {"name": "toss 2 apex (min y 149.1 at 55, 149.5 at 54)", "frame": 55, "t": 2.292},
+    {"name": "toss 2 catch", "frame": 60, "t": 2.5, "uncertainty_frames": 1},
+    {"name": "toy back at waist, settled", "frames": "66-72"}
+  ],
+  "files": {
+    "tracks/toy.csv": "per-frame toy track (all 73 frames)",
+    "tracks/toy_flight_diffmask.csv": "raw background-difference masks for frames 14-23, 48-60 (merged_with_arm flag)",
+    "tracks/person.csv": "per-frame person measurements",
+    "tracks/camera_shift.csv": "per-frame background shift vs frame 0",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

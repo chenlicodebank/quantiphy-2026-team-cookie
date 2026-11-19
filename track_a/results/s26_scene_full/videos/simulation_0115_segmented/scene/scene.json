@@ -1,0 +1,54 @@
+{
+  "video": "simulation_0115_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by white)",
+  "scene_type": "2D",
+  "view": "top-down (bird's-eye) orthographic-looking view of a water scene; background is plain white",
+  "fps": 24.0,
+  "frames": 37,
+  "duration_s": 1.5417,
+  "image_size_px": [1920, 1080],
+  "units": "pixels and seconds; image x to the right, y downward; t = frame/24",
+  "camera": {
+    "motion": "static (dock centroid constant within 0.7 px over all 37 frames, see tracks/dock_check.csv)",
+    "perspective": "none visible; 2D scene, boat and dock treated as one plane at one scale"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "small rowing boat / dinghy seen from above: lens/leaf-shaped hull, grey-blue rim, light planked interior; pointed end on the right (+x), rounded end on the left (-x)",
+      "distinguishing": "the only moving object; lies just below (larger y than) the dock",
+      "moves": true,
+      "visible_frames": "0-36 (all), never occluded, never leaves frame",
+      "track_file": "tracks/boat.csv",
+      "reference_point": "mask centroid (top view => approximates object origin/centre)",
+      "size_px_clear_frame0": {"length_along_axis": 225.9, "width_across_axis": 88.8, "bbox_w": 225, "bbox_h": 88, "axis_angle_deg": -3.4},
+      "size_px_range_all_frames": {"length": [216.0, 227.0], "width": [87.0, 90.1]},
+      "size_note": "mask length decreases slowly 226 -> 216 px as the boat speeds up (likely edge softening / motion blur of the faint pointed tip); frame 0-8 values (~225-227) are the best estimate of true length. Median over all frames: length ~221, width ~88.8.",
+      "position_frame0_px": [1452.53, 642.96],
+      "position_frame36_px": [1150.61, 643.31],
+      "motion_summary": "translates straight to the LEFT (-x) parallel to the dock, y constant at 643 +/- 0.5 px, no rotation (axis angle -3.2 +/- 0.3 deg). Already moving at frame 0 (~3.5 px/frame) and speeding up steadily to ~12 px/frame by frame 36. Net displacement frame 0->36 = 301.9 px."
+    },
+    {
+      "name": "dock",
+      "description": "long rectangular wooden pier / jetty / pontoon, pinkish-brown planks running across it, dark posts/shadows along both long edges",
+      "distinguishing": "large static elongated rectangle above the boat",
+      "moves": false,
+      "visible_frames": "0-36 (all)",
+      "centroid_px": [1201.5, 539.5],
+      "bbox_px": {"x0": 913, "y0": 487, "x1": 1486, "y1": 590},
+      "size_px": {"length_along_axis": 574, "width_across_axis": 97, "axis_angle_deg": -1.05, "bbox_w": 574, "bbox_h": 104},
+      "notes": "slightly tilted (right end higher by ~10 px). Boat-hull to dock gap ~9 px (boat top y~600, dock bottom y~590)."
+    }
+  ],
+  "relations": {
+    "boat_minus_dock_centroid_frame0_px": [251.0, 103.4],
+    "boat_minus_dock_centroid_frame36_px": [-50.9, 103.8],
+    "boat_x_passes_dock_centroid_x": "between frames 31 (1211.7) and 32 (1199.0), t ~1.30-1.33 s",
+    "boat_fully_alongside_dock": "boat bbox right edge x1 reaches the dock's right end x1=1486 at frame 14 (t=0.583 s) and is inside the dock's x-range after that; boat left edge stays inside the dock x-range (>=913) in all frames"
+  },
+  "events": [
+    {"event": "boat already in motion at first frame (no start of motion visible)", "frame": 0, "time_s": 0.0},
+    {"event": "boat centre passes dock centre in x", "frame": 32, "time_s": 1.333, "note": "between frames 31 and 32"},
+    {"event": "boat still moving and accelerating at last frame (no stop, no contact, no bounce)", "frame": 36, "time_s": 1.5}
+  ]
+}

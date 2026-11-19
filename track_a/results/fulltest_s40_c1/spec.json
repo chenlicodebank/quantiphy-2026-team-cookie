@@ -1,0 +1,6 @@
+{
+ "name": "track_a_s40_c1.csv",
+ "base": {"S2": "results/fulltest_s39_f1/track_a_s39_f1.csv", "D2": "results/fulltest_s39_f3/track_a_s39_f3.csv",
+          "S3": "results/fulltest_s39_f2/track_a_s39_f2.csv", "D3": "results/fulltest_s39_f2/track_a_s39_f2.csv"},
+ "snap": {"near": 0.40, "lab": 0.25, "far": 0.12, "window": 12, "kinds": ["val_label", "val_prior"], "skip_facts": false}
+}

@@ -1,0 +1,45 @@
+{
+  "video": "simulation_0263.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "view": "top-down (bird's-eye) camera looking straight down at a plain light-grey floor; one dark-grey sports car seen from above, nose pointing LEFT (-x), driving left along image row y~718",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of car-free bands (y 50-400, 1000-1400) vs frame 0: shift <= 0.08 px, mean |diff| <= 0.08 grey levels in all frames",
+    "perspective_cues": "none usable: featureless floor with a radial lighting vignette (darker toward the corners). Apparent car length shrinks slightly as it moves right->left (see objects.car.size_px), probably mild perspective of body parts at different heights; treat as 2D with one px scale."
+  },
+  "objects": {
+    "car": {
+      "description": "dark-grey/black sports car (top view), light-grey windscreen/cockpit glass, white rear plate area; the only object in the scene",
+      "moves": true,
+      "visible_frames": "0-71 (fully inside frame 0-60; front leaves the left edge at frame 61; frames 61-71 truncated by left image edge, rear end still visible at frame 71 with rear bumper at x~118)",
+      "track_file": "tracks/car.csv",
+      "reference_point": "ref_x, ref_y in car.csv = car centre (approx. vehicle root in top view). ref_x = 1596.5 + rigid template shift of the rear end (sub-pixel, valid in all 72 frames incl. truncated ones); ref_y = 718.0 constant (no vertical motion, template dy = 0 every frame)",
+      "motion": "rest at frames 0-1 (identical positions), then moves monotonically in -x (leftward) with steadily increasing per-frame steps: ~1.3 px (1->2), ~10 px (11->12), ~26.6 px (29->30), ~45 px (47->48), ~63.4 px (70->71). No turning (body axis angle within +-0.5 deg), no vertical motion.",
+      "positions_px": {"frame0_ref": [2001.5, 718.0], "frame30_ref": [1596.5, 718.0], "frame40_ref": [1281.8, 718.0], "frame60_ref": [382.0, 718.0], "frame71_ref": [-265.3, 718.0]},
+      "net_displacement_f0_to_f71_px": 2266.8,
+      "size_px": {
+        "length_along_motion_x": "body mask (car without shadow): 788 px at frames 0-9 (car at rest/slow, right side of image), 776 at f30, 767 at f40 (centred near image centre x=1280), 742-744 at f58-60. Recommended single value: 776 +- 15 px (median of frames 0-60 is ~776). Including the faint grey fringe in front of the nose (likely shadow) adds ~15 px.",
+        "width_across_y": "366 px (body mask y 536-901), constant in every frame",
+        "full_mask_with_shadow": "y 498-903 (406 px); shadow is the mid-grey band ~38 px above the car's top (image-top) side and ~15 px ahead of the nose",
+        "height": "not observable (top view)"
+      },
+      "occlusion": "none; truncated by left image edge from frame 61"
+    },
+    "car_shadow": {"description": "mid-grey cast shadow offset toward image top (and slightly left) of the car; moves with car; not part of the car's size", "moves": true},
+    "floor": {"description": "plain light-grey ground plane filling the whole image, no markings, lines or texture; radial brightness vignette (centre ~220 grey, corners ~170-200)", "moves": false}
+  },
+  "events": [
+    {"event": "car at rest", "frames": "0-1", "t_s": "0.000-0.042"},
+    {"event": "car starts moving (first nonzero step)", "frame": 2, "t_s": 0.083, "note": "step 1->2 = 1.3 px; motion onset between frame 1 and 2"},
+    {"event": "car centre passes image centre x=1280", "frame": "~40 (ref_x 1281.8 at f40)", "t_s": 1.667},
+    {"event": "car nose reaches left image edge", "frame": 61, "t_s": 2.542},
+    {"event": "video ends with car partly out of frame (only rear ~118 px visible)", "frame": 71, "t_s": 2.958}
+  ],
+  "files": {"tracks": ["tracks/car.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

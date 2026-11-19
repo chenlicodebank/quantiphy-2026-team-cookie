@@ -1,0 +1,62 @@
+{
+  "video": "captured_0022s.mp4",
+  "source": "lab (real Orbbec Femto Mega recording, background replaced by Segment Anything 2 - sky-blue synthetic backdrop)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (board and leg identical in all frames apart from SAM2 mask-edge flicker; background is a static replaced image)",
+    "intrinsics_for_lab_videos": {"fx_fy_px": 763.0, "cx_px": 640, "cy_px": 360, "hfov_deg": 80, "note": "from task conventions: f = 0.5959 x 1280"},
+    "perspective": "Camera looks down onto a table top that slopes down toward the camera. Far board edge is near image y~365-416, near edge y~516-619; the board's left/right edges converge upward (far edge 315 px wide vs near edge 455 px wide). The ball rolls from the far edge toward the camera, so its apparent diameter grows from ~17 px to ~24 px."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ball (only white object; ping-pong-ball-like). Starts at rest on the far (upper-image) edge of the board, rolls down the sloping board toward the camera, rolls off the near front edge and falls.",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track_file": "tracks/ball.csv",
+      "reference_point": "visible centre of the ball (x_ref, y_ref)",
+      "apparent_diameter_px": {"frame_0_to_11_at_rest": 17, "frame_20": 19, "frame_30": 21, "frame_40": 24, "frame_45": 24, "note": "width of white core; true edge maybe +1-2 px (soft grey rim)"},
+      "image_position_at_rest_px": [437.0, 380.0]
+    },
+    {
+      "name": "board",
+      "description": "wooden (light-brown wood-grain) rectangular table top / inclined board, single dark-grey leg underneath; ball rolls on it",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "corners_px_from_median_frame": {"far_left": [290, 416], "far_right": [599, 364], "near_right": [671, 516], "near_left": [228, 619]},
+      "note_corners": "near_left/near_right are the bottom of the ~10 px thick front edge; top surface front lip is ~10 px higher",
+      "edge_lengths_px": {"far_edge": 313, "near_edge": 455, "left_edge": 212, "right_edge": 168},
+      "bbox_px": [228, 364, 671, 623],
+      "front_edge_thickness_px": 10,
+      "ball_path_on_board_px": "from far edge (437,380 ball centre at rest) to front lip (~392,560 ball centre at departure): ~185 px in image"
+    },
+    {
+      "name": "leg",
+      "description": "dark grey cylindrical table leg/post under the board, slightly right of centre",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "bbox_px_visible_part": [462, 568, 509, 691],
+      "visible_length_px": 123,
+      "width_px": "about 25-30"
+    },
+    {
+      "name": "watermark",
+      "description": "text box 'Modified with Segment Anything 2 Demo' bottom-right (1030-1280, 690-720); not a physical object",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball at rest on far edge of board", "frames": [0, 11], "t_s": [0.0, 0.4583]},
+    {"event": "release / start of motion (first displacement between frames 11 and 12)", "frame": 12, "t_s": 0.5},
+    {"event": "ball rolls down board toward camera, path in image almost straight, slightly leftward (direction ~ 104 deg from +x, i.e. down-left)", "frames": [12, 45]},
+    {"event": "possible irregular step: ball moves ~12 px between frames 35 and 36 vs ~5-7 px neighbouring steps (both detectors agree; maybe a dropped frame in capture)", "frames": [35, 36]},
+    {"event": "ball reaches front edge of board and leaves it (last on-board frame 45, first frame clearly beyond the lip 46)", "frame": 45.5, "t_s": 1.896},
+    {"event": "free fall off the front edge, strong vertical motion blur; video ends before landing", "frames": [46, 48]}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/ball.csv"], "scripts": "scripts/"}
+}

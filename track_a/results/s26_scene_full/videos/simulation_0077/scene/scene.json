@@ -1,0 +1,72 @@
+{
+ "video": "simulation_0077.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "image_size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 is t = 0",
+ "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+ "view": "camera looks straight down (top-down / bird's-eye) on a uniform grey floor; the people walk on the floor plane, which faces the camera. Perspective camera: heads (closer to the camera) shift outward from the image centre relative to the torso, so the head point and the torso point differ by up to about 60 px near the frame edges.",
+ "camera": {
+  "motion": "static",
+  "evidence": "frames 0 and 1 differ by a mean of 0.02 grey levels (nothing moves); background corner f0 vs f71 mean abs diff 0.8 (noise); phase correlation of the bottom background strip f0 vs f71 = (0.06, -0.06) px",
+  "per_frame_background_shift_px": [0, 0]
+ },
+ "objects": [
+  {
+   "name": "person_black",
+   "description": "man in a BLACK t-shirt, blue jeans, brown hair; starts in the upper one of the two (torso about (1006,418) at frame 0) and walks to the RIGHT along y of about 405-420",
+   "moves": true,
+   "visible_frames": [0, 71],
+   "fully_in_frame": "all 72 frames",
+   "track_file": "tracks/person_black.csv",
+   "reference_point": "torso_x/torso_y = centroid of the black-shirt pixels (the best stand-in for the pelvis seen from above); head_x/head_y = centroid of the hair blob (also given)",
+   "per_frame_step_px_torso": {"mean_frames_1_to_71": 11.32, "median": 11.41, "range_while_walking": [10.6, 12.6]},
+   "mean_velocity_px_per_frame_frames2_60": [11.46, -0.09],
+   "torso_position": {"frame0": [1006.2, 418.2], "frame71": [1808.9, 417.6]},
+   "extents_px_untruncated": {
+    "bbox_w_along_walk_x": {"min": 114, "median": 216, "max": 255},
+    "bbox_h_across_walk_y": {"min": 139, "median": 146.5, "max": 152},
+    "head_hair_blob_w_x_h": [62, 48]
+   }
+  },
+  {
+   "name": "person_white",
+   "description": "man in a WHITE/light-grey t-shirt, blue jeans, brown hair; starts in the lower one of the two (torso about (1014,610) at frame 0) and walks to the LEFT along y of about 600-612; leaves through the left edge at the end",
+   "moves": true,
+   "visible_frames": [0, 71],
+   "fully_in_frame": "frames 0-61; cut by the left image edge from frame 62 on (head cut from 63, only shoulder/legs visible at 67-71)",
+   "track_file": "tracks/person_white.csv",
+   "reference_point": "torso_x/torso_y = centroid of the white-shirt pixels (pelvis stand-in); head_x/head_y = hair blob centroid (blank once the head is cut by the edge)",
+   "per_frame_step_px_torso": {"mean_frames_2_to_61": 15.18, "median": 14.97, "range_while_walking": [12.9, 18.0]},
+   "mean_velocity_px_per_frame_frames2_60": [-15.17, -0.03],
+   "torso_position": {"frame0": [1014.1, 609.5], "frame61": [104.9, 607.3]},
+   "extents_px_untruncated": {
+    "bbox_w_along_walk_x": {"min": 111, "median": 216, "max": 295},
+    "bbox_h_across_walk_y": {"min": 138, "median": 146, "max": 150},
+    "head_hair_blob_w_x_h": [60, 44]
+   }
+  },
+  {
+   "name": "floor",
+   "description": "plain uniform grey floor filling the whole frame, no markings, no texture features; soft, diffuse shadows under each person",
+   "moves": false,
+   "visible_frames": [0, 71]
+  }
+ ],
+ "static_objects_note": "no furniture, props, markings or other static objects; only the floor",
+ "events": [
+  {"event": "both people stand still (frames 0 and 1 are identical)", "frames": [0, 1], "t_s": [0.0, 0.0417]},
+  {"event": "both start walking (first movement between frame 1 and 2), at once at near-steady speed; they walk in opposite directions", "frame": 2, "t_s": 0.0833},
+  {"event": "closest torso-to-torso distance (start, side by side vertically)", "frame": 0, "distance_px": 191.5},
+  {"event": "stride cycle: bbox_w peaks (legs apart) at frames about 7, 25, 44, 61 for both; minima (legs together) about 18, 34, 52; so about 18 frames per stride", "frames": [7, 18, 25, 34, 44, 52, 61]},
+  {"event": "person_white touches the left image edge", "frame": 62, "t_s": 2.583},
+  {"event": "person_black still fully in frame at the last frame, torso x = 1809", "frame": 71, "t_s": 2.958},
+  {"event": "no direction changes, contacts or collisions; both paths are straight and horizontal", "frames": null}
+ ],
+ "inter_person_torso_distance_px": {"0": 191.5, "6": 233.6, "12": 346.8, "18": 489.7, "24": 646.1, "30": 788.8, "36": 945.3, "42": 1104.1, "48": 1260.9, "54": 1420.8, "60": 1575.1, "66": 1730.2, "71": 1810.3},
+ "perspective": "2D scene: both walk on the same floor plane facing the camera, so one px-to-metre scale applies to both. Apparent head size stays constant (black 60-64 px, white 56-67 px), so there is no depth change. Small parallax: points higher above the floor (head) are pushed outward from the image centre (around 960,540) more than the torso is.",
+ "summary_file": "summary_px.json"
+}

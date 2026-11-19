@@ -1,0 +1,70 @@
+{
+  "video": "simulation_0189.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 120.0,
+  "frames": 401,
+  "duration_s": 3.3417,
+  "image_size": [1920, 1080],
+  "time_convention": "t = frame / 120; frame 0 at t = 0",
+  "units": "pixels, image coordinates (x right, y down), seconds",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of a hangar-window patch (x1520-1700, y30-200) vs frame 0: |shift| < 0.3 px all frames; truck cab template shift < 0.01 px",
+    "view": "side view of the truck, orthogonal-looking; motion is vertical in the image plane"
+  },
+  "objects": [
+    {
+      "name": "cardboard_box",
+      "description": "brown cardboard box with 'FRAGAIL' handling symbols, on top of the white cargo body, left-centre (x 530-938)",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "track": "tracks/cardboard_box.csv",
+      "frame0_bbox_px": {"x0": 530, "y0": 181, "x1": 938, "y1": 368, "note": "box body; an open flap on top-right rises to y=164 (x 826-937)"},
+      "extent_px": {"length_horizontal": 408, "height": 187, "height_incl_flap": 204},
+      "reference_point": "bbox centre of the box body (flap excluded); frame 0 (734.0, 274.5)",
+      "motion": "rises vertically, near-constant pixel velocity ~0.16 px/frame (64.0 px total over 400 frames); no horizontal motion (|dx| < 0.06 px)"
+    },
+    {
+      "name": "cargo_body",
+      "description": "large white catering-truck container (cargo box) lifted by a scissor lift; includes the tall front post at x~1465 which rises with it",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "track": "tracks/cargo_body.csv",
+      "frame0_bbox_px": {"x0": 128, "y0": 368, "x1": 1457, "y1": 804},
+      "extent_px": {"length_horizontal": 1329, "height": 436},
+      "reference_point": "bbox centre of the white container; frame 0 (792.5, 586.0)",
+      "motion": "rises vertically with increasing speed (starts ~frame 4-5 from rest; ~0.07 px/frame over frames 0-40, ~0.245 px/frame over frames 360-400); total rise 67.6 px; acceleration not constant (velocity increase slows)"
+    },
+    {
+      "name": "scissor_lift",
+      "description": "black/yellow-black striped scissor mechanism between chassis and cargo body; becomes visible as the body rises",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "note": "not tracked separately; its top follows cargo_body bottom edge"
+    },
+    {
+      "name": "truck_chassis_cab",
+      "description": "white truck cab (right) + black chassis, wheels, stabilizer legs; static",
+      "moves": false,
+      "frame0_extent_px": {"overall_x": [122, 1840], "cab_x": [1480, 1812], "cab_roof_y": 535, "ground_contact_y": 1025, "overall_length_px": 1718, "height_ground_to_cargo_roof_frame0": 657},
+      "wheels": {"rear_centre": [705, 945], "front_centre": [1582, 945], "diameter_px_approx": 162, "wheelbase_px": 877},
+      "stabilizer_legs_x": [487, 1282],
+      "front_platform_railing": {"x": [1480, 1830], "y": [308, 520], "moves": false}
+    },
+    {
+      "name": "hangar_background",
+      "description": "grey hangar wall with vertical ribs and a dark window grid (x 1235-1920, y 0-300); concrete floor below y~700",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "box starts rising", "frame": 1, "t": 0.0083},
+    {"event": "cargo body starts rising (shift > 0.05 px)", "frame": 5, "t": 0.0417},
+    {"event": "box bottom separates from cargo roof (box floats above roof, gap grows)", "frame": 1, "t": 0.0083},
+    {"event": "maximum gap between box bottom and roof, ~8.2 px", "frame": 163, "t": 1.358},
+    {"event": "roof catches up with box bottom (gap 0); afterwards box bottom is hidden behind roof edge (overlap 3.6 px at end)", "frame": 359, "t": 2.992},
+    {"event": "end of clip, both still moving", "frame": 400, "t": 3.333}
+  ],
+  "per_frame_tracks_columns": "frame,t,cx,cy,bbox_x0,bbox_y0,bbox_x1,bbox_y1,length_px,width_px(blank: 2D),height_px,shift_x,shift_y,occluded"
+}

@@ -1,0 +1,64 @@
+{
+  "video": "simulation_0132.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 120.0,
+  "frames": 300,
+  "duration_s": 2.5,
+  "image_size_px": [1080, 1920],
+  "time_convention": "t = frame / 120; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y DOWN, origin at top-left pixel centre; all values in pixels and seconds",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation vs frame 0 over all 300 frames: max shift 0.006 px (upper image) and 0.031 px (lower-right); no zoom",
+    "perspective_note": "Labelled 2D, but the render is a real 3D kitchen seen nearly front-on. The apple's path is roughly in one plane; its apparent diameter stays constant (fit radius 30.5 -> 30.0 px, box 62-63 x 64-65 px) through the whole clip, so one pixel scale for the whole trajectory is appropriate.",
+    "ground_lines_px": {"floor_wall_junction_y_left_of_counter": 1478, "apple_resting_bottom_on_floor_y": 1773, "counter_top_front_edge_y": 1165, "counter_left_edge_x": 352}
+  },
+  "objects": [
+    {
+      "name": "apple",
+      "aka": ["moving apple", "peach", "fruit", "ball"],
+      "distinguish": "the ONLY moving object; red-orange apple/peach, ~62 px across, starts at left end of the kitchen island/counter at (689,1072), left of the static peach pair on the plate",
+      "moves": true,
+      "visible_frames": [0, 288],
+      "fully_visible_frames": [0, 262],
+      "track_file": "tracks/apple.csv",
+      "reference_point": "ref_x, ref_y = centre of a circle fitted to the apple outline (= rigid-body centre / origin)",
+      "size_px": {"diameter_circle_fit": 60.6, "bbox_width_median": 62, "bbox_height_median": 65, "note": "mask includes 1-2 px anti-aliased rim; apple is slightly lumpy, so width/height wobble +/-2 px as it rotates"},
+      "phases": [
+        {"frames": [0, 7], "what": "at rest on the counter (centre ~ (689.0, 1072.1))"},
+        {"frames": [8, 141], "what": "rolls left along the counter top, accelerating from rest; centre drops slowly from y 1072 to ~1104 (counter/board slopes toward camera-left), x 689 -> 369; about -3.7 px/frame horizontally by frames 120-141"},
+        {"frames": [141, 191], "what": "rolls off the counter's left edge (~x 352-370) and falls in a projectile arc to the floor; horizontal ~ -3.7 px/frame stays nearly constant, vertical increases ~0.42 px/frame per frame"},
+        {"frames": [191, 192], "what": "impact on the floor (lowest centre y 1744.3 at frame 192; contact between frames 191 and 192)"},
+        {"frames": [192, 204], "what": "small bounce: apex y ~1734.5 at frames 198-200 (~10 px above impact), lands again ~frame 204-205"},
+        {"frames": [205, 288], "what": "rolls left on the floor at centre y ~1740-1745, ~ -2.0 to -2.5 px/frame, exits the left image edge (cut from frame 263, gone after frame 288)"}
+      ]
+    },
+    {"name": "kitchen_island_counter", "moves": false, "desc": "grey stone island the apple starts on; left edge x 352, top surface y ~1125-1165 (front edge 1165), front face from 1165 down past image bottom; right part continues off-image", "bbox_px": [352, 1125, 1079, 1919]},
+    {"name": "cutting_board", "moves": false, "desc": "long thin wooden board lying diagonally on the counter, from ~(495,1135) to ~(790,1095)", "bbox_px": [495, 1090, 790, 1140]},
+    {"name": "peach_pair_on_plate", "moves": false, "desc": "two static fruits (red peach left, yellow-orange right) on a white plate right of start position", "fruits_bbox_px": [793, 1050, 888, 1111], "red_fruit_width_px": 52, "plate_bbox_px": [742, 1103, 910, 1140]},
+    {"name": "green_bowl", "moves": false, "desc": "teal/green mixing bowl at right edge of counter with wooden spoon", "bbox_px": [900, 1073, 1079, 1160], "note": "cut by right image edge"},
+    {"name": "cooking_pot", "moves": false, "desc": "steel pot with lid on the back worktop", "bbox_px": [905, 985, 1070, 1060]},
+    {"name": "milk_jug", "moves": false, "desc": "white plastic milk jug with green cap on the stool seat", "bbox_px": [530, 1228, 680, 1500], "height_px": 272, "width_px": 150, "cap_bbox_px": [608, 1228, 669, 1250]},
+    {"name": "flour_bag", "moves": false, "desc": "orange/green 'Allinson's' paper bag on the stool seat next to the jug", "bbox_px": [680, 1230, 917, 1500], "height_px": 270, "width_px": 237},
+    {"name": "egg_carton", "moves": false, "desc": "beige egg carton on the second stool at right edge", "bbox_px": [967, 1437, 1079, 1500], "note": "cut by right edge"},
+    {"name": "bar_stool_front", "moves": false, "desc": "black stool holding jug and bag; seat top y ~1495, seat x 510-928, legs run past image bottom", "seat_bbox_px": [510, 1495, 928, 1590]},
+    {"name": "bar_stool_right", "moves": false, "desc": "second black stool at right edge, partly visible", "bbox_px": [965, 1490, 1079, 1919]},
+    {"name": "pendant_lamp", "moves": false, "desc": "glass pendant lamp hanging from ceiling on a rod", "shade_bbox_px": [553, 338, 713, 508], "shade_width_px": 160, "shade_height_px": 170, "rod_x": 633, "rod_y_range": [40, 338]},
+    {"name": "wall_oven_right", "moves": false, "desc": "white built-in oven with 00:00 display and sticky notes on glass", "bbox_px": [260, 748, 570, 1058], "width_px": 310, "height_px": 310},
+    {"name": "wall_oven_left", "moves": false, "desc": "second oven at left edge, partly visible", "bbox_px": [0, 748, 215, 1058]},
+    {"name": "utensil_rail", "moves": false, "desc": "rail with fork, whisk, ladle, spatula and a towel on the backsplash", "bbox_px": [600, 780, 950, 975]},
+    {"name": "floor", "moves": false, "desc": "light glossy floor visible left of the island (x 0-352, y >~1478); apple lands on it", "apple_contact_y_px": 1773}
+  ],
+  "events": [
+    {"event": "apple starts moving (gradual roll from rest)", "frame": 8, "t": 0.0667, "note": "first sustained displacement; <0.3 px/frame until ~frame 15"},
+    {"event": "apple leaves the counter edge, free fall begins", "frame": 141, "t": 1.175, "note": "+/-1 frame"},
+    {"event": "apple hits the floor", "frame": 192, "t": 1.6, "note": "contact between frames 191 and 192; lowest centre"},
+    {"event": "bounce apex", "frame": 199, "t": 1.6583, "note": "flat over 198-200"},
+    {"event": "second floor contact, rolling begins", "frame": 205, "t": 1.7083},
+    {"event": "apple starts leaving the frame (touches left edge)", "frame": 263, "t": 2.1917},
+    {"event": "apple last detected", "frame": 288, "t": 2.4},
+    {"event": "apple fully out of frame", "frame": 290, "t": 2.4167}
+  ],
+  "files": {"track": "tracks/apple.csv", "raw_track": "tracks/apple_raw.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

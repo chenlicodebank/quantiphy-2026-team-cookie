@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0019_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S3MX",
+ "fps": 33.0,
+ "frames": 97,
+ "duration_s": 2.9394,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1663,
+  "question": "What is the width of the freestanding art display panel in meters?",
+  "prior": "height of the person = 1.87m",
+  "depth_info": "t=0s, distance_human_camera = 6.84m\nt=1s, distance_human_camera = 6.49m\ndistance_the_nearest_freestanding_art_display_panel = 11.042m\ndistance_the_pedestal_of_the_central_sculpture_and_camera = 5.085m\ndistance_the central_sculpture_camera = 5.085m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 33.0
+ }
+}

@@ -1,0 +1,167 @@
+{
+ "video": "simulation_0290.mp4",
+ "source": "simulation",
+ "scene_type": "2D (top-down view)",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (no pan/shake detected; background is an animated caustic water/seabed texture, no fixed landmarks)",
+  "view": "looking straight down on a shallow seabed; shark swims parallel to image plane",
+  "perspective_cue": "the shark's black shadow on the seabed is offset toward the image centre (left of the shark when the shark is right of centre, right of it when left of centre) -> shark is some height above the seabed, slight perspective; treat as 2D plane"
+ },
+ "duplicate_frames": {
+  "0_and_1": "frames 0 and 1 are pixel-identical (whole image)",
+  "70_and_71": "shark does not move between 70 and 71 (water still animates)"
+ },
+ "objects": [
+  {
+   "name": "shark",
+   "role": "only moving object",
+   "description": "shark seen from above, head pointing left (-x), pale/blue-grey body with green patch on the head, dark tail; a flat grey translucent wedge (snout) ahead of the textured head",
+   "moves": true,
+   "visible_frames": "0-71 (tail tip outside right image edge in frames 0-~6)",
+   "track_file": "tracks/shark.csv",
+   "reference_points": {
+    "ref_x/ref_y": "template-tracked body point on the head/pectoral region (frame 50: (1080,750)), ~178 px behind the snout tip along the body; sub-pixel, most reliable point for motion",
+    "mid_x/mid_y": "midpoint of snout tip and tail tip (estimate of a body-centre origin); depends on manual tips, +-5 px",
+    "snout_x/y, tail_x/y": "snout (front of grey wedge) and caudal-fin tip; manual at sampled frames, interpolated in body frame elsewhere"
+   },
+   "manual_keypoint_frames": [
+    10,
+    18,
+    26,
+    34,
+    42,
+    50,
+    58,
+    66,
+    70
+   ],
+   "extents_px_manual": {
+    "10": {
+     "length_snout_to_tail": 711.8,
+     "width_fin_to_fin": 224.6,
+     "bbox_w": 711.2,
+     "bbox_h": 224.0
+    },
+    "18": {
+     "length_snout_to_tail": 712.6,
+     "width_fin_to_fin": 236.4,
+     "bbox_w": 712.1,
+     "bbox_h": 236.0
+    },
+    "26": {
+     "length_snout_to_tail": 713.2,
+     "width_fin_to_fin": 256.0,
+     "bbox_w": 713.0,
+     "bbox_h": 256.0
+    },
+    "34": {
+     "length_snout_to_tail": 613.6,
+     "width_fin_to_fin": 259.6,
+     "bbox_w": 612.0,
+     "bbox_h": 258.0
+    },
+    "42": {
+     "length_snout_to_tail": 638.0,
+     "width_fin_to_fin": 244.1,
+     "bbox_w": 638.0,
+     "bbox_h": 244.0
+    },
+    "50": {
+     "length_snout_to_tail": 647.5,
+     "width_fin_to_fin": 224.8,
+     "bbox_w": 642.0,
+     "bbox_h": 222.0
+    },
+    "58": {
+     "length_snout_to_tail": 636.6,
+     "width_fin_to_fin": 230.7,
+     "bbox_w": 632.0,
+     "bbox_h": 230.0
+    },
+    "66": {
+     "length_snout_to_tail": 654.8,
+     "width_fin_to_fin": 236.1,
+     "bbox_w": 652.0,
+     "bbox_h": 236.0
+    },
+    "70": {
+     "length_snout_to_tail": 625.0,
+     "width_fin_to_fin": 236.1,
+     "bbox_w": 624.0,
+     "bbox_h": 236.0
+    }
+   },
+   "extents_summary": {
+    "length_px_frames_42_70_mean": 640.4,
+    "length_px_all_manual_range": [
+     613.6,
+     713.2
+    ],
+    "length_px_textured_body_only(pale head front->tail)_frames_34_70": "~564-604 (wedge excluded)",
+    "width_px_pectoral_fin_tips": "225-260 (fins move), typical 236",
+    "height": "not observable (top view)"
+   },
+   "motion_summary_px": {
+    "ref_path_start_f1": [
+     2238.14,
+     757.86
+    ],
+    "ref_path_end_f70": [
+     610.2,
+     751.06
+    ],
+    "per_frame_step_px_mean_f1_to_f70": 23.65,
+    "per_frame_step_px_min_max_f1_to_f70": [
+     21.07,
+     26.53
+    ],
+    "direction": "leftward (-x), small y drift (y 758 -> 795 at f24 -> 747 at f60), heading yaws +-12 deg"
+   }
+  },
+  {
+   "name": "shark_shadow",
+   "role": "black silhouette of the shark on the seabed (same outline: pectoral fins, tail)",
+   "moves": true,
+   "note": "offset from the shark by ~-150..-250 px in x early (in front of / overlapping the head, frames 0-30), ~0 near frame 35-45, ~+80..+170 px late (behind/over the tail, frames 54-71); NOT part of the shark's extent"
+  },
+  {
+   "name": "seabed/water",
+   "role": "background",
+   "moves": false,
+   "note": "animated caustics and diagonal light bands; no static props, markings or other objects"
+  }
+ ],
+ "events": [
+  {
+   "event": "motion start",
+   "frame": 1,
+   "t": 0.041666666666666664,
+   "note": "frames 0 and 1 identical; shark first displaced at frame 2"
+  },
+  {
+   "event": "steady leftward swimming",
+   "frames": "1-70",
+   "note": "near-constant per-frame step ~23.6 px"
+  },
+  {
+   "event": "heading (yaw) extremes",
+   "frames": {
+    "most CCW (tail up)": 10,
+    "most CW (tail down)": 34,
+    "back CCW": 71
+   },
+   "note": "rot_deg column; positive = rotated clockwise on screen vs frame 50"
+  },
+  {
+   "event": "motion end",
+   "frame": 70,
+   "t": 2.9166666666666665,
+   "note": "shark identical position in frames 70 and 71"
+  }
+ ]
+}

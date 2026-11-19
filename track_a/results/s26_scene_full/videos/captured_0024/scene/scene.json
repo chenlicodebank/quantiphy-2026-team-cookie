@@ -1,0 +1,89 @@
+{
+  "video": "captured_0024.mp4",
+  "source": "lab (captured, real recording; background around the table blurred/replaced, person behind table blurred; 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t=0",
+  "camera": {
+    "motion": "static (phase-correlation shift of background <= 0.1 px over all frames)",
+    "intrinsics_from_benchmark_convention": {"fx_px": 762.8, "fy_px": 762.8, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "view": "slightly elevated, looking down onto a table top at a shallow angle; table top recedes away from camera (back edge y~450, front corner y~610)"
+  },
+  "objects": [
+    {
+      "name": "blue_notebook",
+      "aka": ["notebook", "book", "block", "box", "light-blue book"],
+      "description": "small light-blue (cyan cover) notebook/thin book with white page edges; the only object that moves. Starts lying on the upper end of the white inclined board, slides down it, lands on the table and slides left a little before stopping.",
+      "moves": true,
+      "visible_frames": "0-48",
+      "track_file": "tracks/blue_notebook.csv",
+      "reference_point": "cx,cy = centroid of full-object mask (cover + page edges) = visible centre",
+      "start_rest": {"frames": "0-18", "centre_px": [787.8, 369.4], "bbox_px": [718, 330, 852, 396], "long_side_px": 135, "note": "seen obliquely on the ramp; long axis roughly horizontal in image"},
+      "end_rest": {"frames": "36-48", "centre_px": [572.7, 476.7], "bbox_px_mask": [502, 461, 648, 493], "bbox_px_visual": [496, 462, 647, 499], "long_side_px": 151, "thickness_plus_top_px_vertical": 37, "note": "lies flat on table, long axis nearly horizontal in image (~7 deg)"},
+      "net_image_displacement_px": 240.6
+    },
+    {
+      "name": "white_ramp_board",
+      "aka": ["ramp", "incline", "slope", "white board", "inclined plane"],
+      "description": "flat white board leaning from table top (lower edge, front-left) up onto the book stack (upper edge, back-right); the notebook slides down it",
+      "moves": false,
+      "visible_frames": "0-48",
+      "corners_px_frame48": {"upper_right": [858, 361], "upper_left": [757, 360], "lower_left": [611, 468], "lower_right_front": [700, 490]},
+      "edge_lengths_px": {"left_slope_edge": 182, "right_slope_edge": 204, "lower_edge": 92, "upper_edge": 101},
+      "image_slope_angle_deg": {"left_edge": 36, "right_edge": 39, "notebook_path_on_ramp": 33},
+      "note": "upper corners partly hidden by the notebook in frames 0-18; lower-left corner hidden by notebook in frames 29-34"
+    },
+    {
+      "name": "book_stack",
+      "aka": ["books", "support", "dark green book"],
+      "description": "support under the upper end of the ramp: a dark green/teal hardcover book (bottom) with a lighter thin book on top, right of the ramp",
+      "moves": false,
+      "visible_frames": "0-48",
+      "bbox_px_frame48": {"dark_book": [747, 451, 853, 487], "light_top_book": [785, 436, 834, 451]},
+      "note": "left part hidden behind ramp; dark book visible length ~106 px, thickness ~36 px (spine face)"
+    },
+    {
+      "name": "table",
+      "description": "wooden (light brown) square-ish table top on a single dark pedestal",
+      "moves": false,
+      "visible_frames": "0-48",
+      "corners_px": {"left": [413, 467], "front": [640, 610], "right": [1140, 505], "back_edge_y": 450},
+      "pedestal_px": {"x": [745, 800], "y": [600, 720]},
+      "top_thickness_px": 20
+    },
+    {
+      "name": "person",
+      "description": "seated person behind/right of the table, heavily blurred (privacy), arm raised near the upper end of the ramp; face region blurred",
+      "moves": "slightly (arm/hand near the notebook at the start; no clear contact visible)",
+      "visible_frames": "0-48",
+      "bbox_px_approx": [870, 300, 1180, 720]
+    },
+    {
+      "name": "tripod_and_light",
+      "description": "background tripod (legs x~600-760, y 60-450) with lamp head at (~690,70); bright softbox/light at top centre; dark panel with light at top right",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "notebook at rest on top of ramp", "frames": "0-18", "t_s": "0-0.750"},
+    {"event": "motion start (release)", "frame": 19, "t_s": 0.792, "note": "first displacement (~1 px) at frame 19, clear by frame 20 (2.7 px). No visible hand contact; release cause unclear (person blurred)"},
+    {"event": "sliding down ramp", "frames": "19-30", "t_s": "0.792-1.250"},
+    {"event": "front of notebook reaches table / leaves ramp foot", "frame": 30, "t_s": 1.25, "uncertainty_frames": 1},
+    {"event": "sliding on table, decelerating", "frames": "31-36", "t_s": "1.292-1.500"},
+    {"event": "motion end (comes to rest on table)", "frame": 36, "t_s": 1.5, "note": "frame diff drops at 37; centroid identical 36->48"}
+  ],
+  "perspective": {
+    "ground_plane": "table top (horizontal); viewed obliquely from slightly above",
+    "horizon": "not directly visible; table edges converge to the right/back",
+    "apparent_size_of_moving_object": "notebook long side ~135 px on the ramp (top, frames 0-18), ~147-151 px on table (frames 35-48); mask height drops from ~66 px (seen face-on-ish on ramp) to ~32-37 px (flat on table) because of orientation, not depth. Depth change is small (moves from ~x788 to ~x573, toward the image left and slightly down/forward)."
+  },
+  "files": {
+    "tracks/blue_notebook.csv": "main per-frame track (full-mask centroid, bbox, extents, cover-only centroid)",
+    "tracks/blue_block_raw.csv": "colour-only (cyan cover) mask track, cross-check",
+    "track_overlay.jpg": "trajectory overlay (red = full-mask centroid, blue = cover centroid)",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

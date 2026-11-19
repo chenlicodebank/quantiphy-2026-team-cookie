@@ -1,0 +1,71 @@
+{
+  "video": "internet_0053.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 81,
+  "duration_s": 2.7,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left of the 1920x1080 frame) and seconds; no metric scale guessed",
+  "summary": "Static (tripod-like, tiny drift) side view of a sunny tennis-court path. One person (white long-sleeve top, light cap, khaki cargo trousers, face blurred/greyed by anonymisation) rides a black two-wheel electric kick scooter from left to right along the asphalt path in front of the green-screened court fence. Rider stands on the deck the whole clip (no kicking seen). Starts fully visible at x~385-590 (frame 0), leaves the right image edge at the end (front wheel clipped at frame 74, gone from 75; body cut by the edge from ~75; rear wheel still visible at frame 80).",
+  "camera": {
+    "motion": "static; small slow drift measured by phase correlation of the ground strip y=760..1080 vs frame 0: dx from 0 to +2.1 px (max near frame 55-60, back to -0.35 at 80), dy from 0 to -3.6 px (frame 80). Per-frame values: cam_dx/cam_dy columns in tracks/rider_scooter.csv. Negligible against the rider's ~15-20 px/frame motion; not subtracted in the track columns.",
+    "zoom": "none detected"
+  },
+  "perspective": {
+    "note": "Labelled 2D, but the rider's path is slightly oblique: the scooter's apparent size shrinks and its wheels rise in the image as it moves right, i.e. it moves slightly away from the camera.",
+    "wheel_bottom_y_px": {"frame0_x490": 719.5, "frame40_x1255": 713.75, "frame72_x1800": 707.5},
+    "scooter_wheelbase_px": {"frame0": 161.5, "frame40": 152.0, "frame72": 142.5},
+    "scooter_outer_length_px": {"frame0": 207.0, "frame40": 192.5, "frame72": 180.5, "how": "hand-read rear-of-rear-wheel to front-of-front-wheel at frames 0/40/72; per-frame estimate = 1.267 x wheelbase in the track"},
+    "rider_total_height_px_cap_top_to_wheel_bottom": {"frame0": 340.9, "frame40": 326.9, "frame72": 323.0},
+    "ground_plane": "asphalt path y~700-760 (fence-base edge ~y 700), light concrete sidewalk y~760-850 with an expansion joint near x~840, wood-chip mulch y>850 in the foreground; all edges nearly horizontal."
+  },
+  "objects": [
+    {
+      "name": "rider_scooter",
+      "description": "person standing on a black electric kick scooter (two small black wheels, black stem and handlebar); white top, light cap, khaki trousers, light/pink shoes. Treated as one moving unit; the rider's feet stay on the deck.",
+      "moves": true,
+      "visible_frames": "0-80 (fully visible 0-73; front wheel touches right edge at 74; front part out of frame 75-80)",
+      "track_file": "tracks/rider_scooter.csv",
+      "reference_points": {
+        "scooter_cx": "midpoint between rear and front wheel centres (recommended 'visible centre' of the scooter / rider-on-scooter horizontal position)",
+        "rear_wheel_cx": "most directly measured point (every frame 0-80)",
+        "front_wheel_cx": "frames 0-73",
+        "bbox_cx/bbox_cy": "centre of the box head-top .. wheel bottom, rear-wheel back .. front-wheel front (clipped at x=1919 after frame 74)",
+        "upper_body_x/y": "chained template track of the rider's body (independent check; x anchored to 1335 at frame 45)"
+      },
+      "sizes_px_at_frame_40": {
+        "scooter_outer_length_wheel_to_wheel": 192.5,
+        "wheelbase": 152.0,
+        "wheel_diameter": 41.5,
+        "rider_plus_scooter_height_cap_top_to_ground": 327.0,
+        "rider_standing_height_cap_top_to_shoe_sole_on_deck": "about 304 (cap top 386, soles ~690 at frame 40); frame 0: 379 to ~694 -> ~315",
+        "rider_body_depth_at_chest": "about 46 px (white top, x 1211-1258 at y~470, frame 40); ~70 px including the forward arm",
+        "handlebar_top_above_ground": "about 200 px (handlebar top ~y 512 at frame 40, ground 713.75)"
+      }
+    }
+  ],
+  "static_objects": [
+    {"name": "bench", "description": "wooden slatted park bench, right side, in front of the fence; rider passes in front of it (frames ~45-66)", "frame": 0, "bbox_px": [1343, 552, 1656, 701], "length_px": 313, "height_px": 149, "seat_y_px": "~637-647"},
+    {"name": "fire_hydrant", "description": "white/grey hydrant at far right, partly hidden by the rider in the last frames", "frame": 0, "bbox_px": [1821, 559, 1879, 685], "width_px_incl_nozzles": 58, "barrel_width_px": 40, "height_px": 126},
+    {"name": "lamp_post", "description": "black street lamp with lantern head, left-centre; rider passes in front of it around frames 0-5", "frame": 80, "bbox_px": [503, 135, 568, 688], "height_px": 553, "pole_width_px": 20, "base_width_px": 42},
+    {"name": "trash_can", "description": "tan/terracotta cylindrical bin at far left", "frame": 80, "bbox_px": [37, 570, 167, 695], "width_px": 130, "height_px": 125},
+    {"name": "quiet_hours_sign", "description": "free-standing white sign board 'QUIET HOURS' right of the gate", "frame": 0, "bbox_px": [1063, 575, 1129, 684], "width_px": 66, "height_px": 109},
+    {"name": "no_animals_sign", "description": "small sign on the right gate post", "frame": 0, "bbox_px": [1030, 481, 1061, 526]},
+    {"name": "court_gate", "description": "open gate in the court fence; posts at x~877 and x~1018, top bar y~462", "frame": 0, "opening_width_px": 140},
+    {"name": "court_fence", "description": "chain-link fence with green wind screen spanning the whole width, top ~y 380, base ~y 690-700"},
+    {"name": "trees", "description": "two large shade trees; trunks at x~400-460 (left) and x~1440-1500 (behind the bench)"},
+    {"name": "path_and_sidewalk", "description": "asphalt path (y~700-760) the scooter rides on; concrete sidewalk y~760-850 with joint near x~840; mulch below; a dry leaf on the mulch near (1070,1035)"}
+  ],
+  "events": [
+    {"event": "rider already moving at frame 0 (no start of motion in clip)", "frame": 0, "t": 0.0},
+    {"event": "rider passes in front of lamp post", "frame": "0-4", "t": "0-0.13"},
+    {"event": "rider passes the open gate / sunlit background", "frame": "~18-32", "t": "0.6-1.07"},
+    {"event": "rider passes in front of the bench", "frame": "~45-66", "t": "1.5-2.2"},
+    {"event": "front wheel reaches right image edge (clipped)", "frame": 74, "t": 2.467},
+    {"event": "front wheel out of frame; scooter/rider partly out of frame until end", "frame": 75, "t": 2.5},
+    {"event": "clip ends, rear wheel still visible at x~1855", "frame": 80, "t": 2.667}
+  ],
+  "motion_notes": "Rightward the whole clip, nearly horizontal (wheels rise ~12 px over ~1450 px). Per-frame wheel step decreases smoothly from ~19.5 px/frame at the start to ~15 px/frame at the end (gradual slow-down; part of this is the perspective shrink of ~12%). No stops, bounces or reversals."
+}

@@ -1,0 +1,116 @@
+{
+  "video": "captured_0052.mp4",
+  "source": "lab (captured, Orbbec Femto Mega RGB)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds only; no metric scale assumed",
+  "camera": {
+    "motion": "static (phase-correlation shift of the static upper-wall region vs frame 0 < 0.1 px in every frame; see camera_check.json)",
+    "intrinsics_from_benchmark_convention": {"hfov_deg": 80, "focal_px": 763, "principal_point_px": [640, 360], "note": "lab convention 0.5959 x width; not measured here"},
+    "timing_anomaly": "no duplicated frames; frame 35->36 has about 2x the normal inter-frame change and the ball moves about 2x its neighbouring steps, so one camera frame was probably dropped between frames 35 and 36",
+    "perspective_cues": {
+      "floor_wall_lines_approx_px": {
+        "left_wall_base": [[50, 590], [300, 530], [440, 495]],
+        "back_wall_base": [[450, 490], [680, 505], [860, 525]],
+        "right_wall_base": [[860, 525], [1090, 580]]
+      },
+      "room_corners_vertical_x_px": {"left_back_corner": 450, "right_back_corner": 860},
+      "note": "approximate, read off a 50 px grid at frame 0; camera looks slightly down at the floor; the horizon is above the back-wall base. Wide lens: straight edges near the image border look slightly curved"
+    }
+  },
+  "objects": {
+    "exercise_ball": {
+      "description": "large dark grey/purple-blue inflatable exercise (gym) ball, the only big grey sphere; starts on the floor in front of the crouching person, just left of the blue bin",
+      "moves": true,
+      "visible_frames": [0, 44],
+      "partially_out_of_frame_frames": [33, 44],
+      "track": "tracks/exercise_ball.csv",
+      "reference_point": "visible centre = centre of the fitted circle (frames 0-31: circle fitted to the full edge; 32-44: circle fitted to the upper rim, because the bottom is cut off by the frame and merges with the shadow)",
+      "apparent_diameter_px": {"rest_frames_0_18": "130-136 (mean ~133)", "f22": 138, "f26": 158, "f31": 189, "f35": 214, "f38": 265, "f41": 319, "f43": 349},
+      "motion_summary": "at rest (hands on it, slight rocking of +-3 px) frames 0-18; pushed and rolls toward the camera and to the left, leaving through the lower-left image corner; growing apparent size = approaching the camera"
+    },
+    "person": {
+      "description": "one person in dark (black) clothes, face blurred to a grey patch, crouching behind the ball and to the left of the blue bin; pushes the ball, then throws the arms up and stays crouched",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track": "tracks/person.csv",
+      "reference_point": "centroid of the dark-clothing/hair mask (bare arms/hands not included)",
+      "note": "crouching the whole clip; no standing height visible. Lower body hidden behind the ball in frames 0-~21. Crouched bbox height 183-203 px (frames 22-48), head top y 345-363, centroid x moves from ~655 to ~624 (shifts left while reaching to the floor)"
+    },
+    "basketball": {
+      "description": "orange basketball on the floor, lower centre-right of the image",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "bbox_px": [756, 624, 847, 709],
+      "centre_px": [800.6, 667.4],
+      "diameter_px": {"horizontal": 92, "vertical": 86, "ellipse_major_minor": [92, 86.6]},
+      "note": "bottom edge close to the image bottom; identical at frames 0, 24, 47"
+    },
+    "recycling_bin": {
+      "description": "blue rectangular recycling bin with yellow pattern and white recycle logo, right of the person",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "bbox_px": [680, 483, 775, 591],
+      "width_px": 95,
+      "height_px": 108,
+      "centre_px": [729, 524],
+      "note": "front face seen roughly head-on; partly occluded (left edge) by the person's arm/ball in frames 0-21"
+    },
+    "shoe": {
+      "description": "single white sneaker with black stripes lying on the floor, lower left",
+      "moves": false,
+      "visible_frames": "0-48, occluded by the passing ball in about frames 36-41",
+      "bbox_px": [256, 625, 318, 676],
+      "length_along_axis_px": 71,
+      "width_px": 27,
+      "axis_angle_deg": "about 40-45 (toe at lower left, heel at upper right)",
+      "centre_px": [284.3, 653.5]
+    },
+    "tripod_left": {
+      "description": "black camera tripod in the back-left corner (head near x 475, y 180)",
+      "moves": false,
+      "head_px": [475, 175],
+      "feet_approx_px": [[397, 500], [465, 495], [550, 495]],
+      "height_px_approx": "325 (head top y 175 to feet y ~500); +-10"
+    },
+    "tripod_right": {
+      "description": "black camera tripod near the right wall (head near x 975, y 120)",
+      "moves": false,
+      "head_px": [977, 119],
+      "feet_approx_px": [[863, 526], [1090, 583], "third foot unclear, near (1050, 615)"],
+      "height_px_approx": "465 (head top to the lowest clear foot y 583); +-15"
+    },
+    "tv_screen": {
+      "description": "black wall-mounted TV/monitor on the back wall, top centre",
+      "moves": false,
+      "bbox_px_approx": [585, 15, 850, 185],
+      "width_px_approx": 265,
+      "height_px_approx": 170
+    },
+    "room": {"description": "grey padded acoustic wall panels, grey striped carpet, red cable on the floor along the left wall base", "moves": false}
+  },
+  "events": [
+    {"event": "ball at rest under the person's hands (slight rocking, cx 614-621 px)", "frames": [0, 18], "t": [0.0, 0.75]},
+    {"event": "push / ball starts rolling (centre starts moving left-down)", "frame": 19, "t": 0.792, "uncertainty_frames": 1},
+    {"event": "release: hands leave the ball, arms thrown up", "frame": 22, "t": 0.917, "uncertainty_frames": 1},
+    {"event": "ball rolls toward the camera and left; direction roughly constant (image direction down-left, steepening)", "frames": [20, 44]},
+    {"event": "ball bottom first touches the lower image border", "frame": 32, "t": 1.333},
+    {"event": "probable dropped camera frame (double-size step)", "between_frames": [35, 36]},
+    {"event": "ball passes in front of the shoe (occludes it; shoe does not move)", "frames": [36, 41]},
+    {"event": "ball last visible (small cap at the lower-left corner)", "frame": 44, "t": 1.833},
+    {"event": "ball fully out of frame", "frame": 45, "t": 1.875},
+    {"event": "person stays crouched, hands to the floor", "frames": [36, 48]}
+  ],
+  "files": {
+    "tracks/exercise_ball.csv": "final ball track (use this)",
+    "tracks/exercise_ball_raw.csv": "raw edge-circle fits for all frames 0-44 (good only for 0-31)",
+    "tracks/person.csv": "person mask track",
+    "static_measure.json": "colour-mask measurements of basketball, bin, shoe at frames 0, 24, 47",
+    "camera_check.json": "per-frame mean abs difference and background shift",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

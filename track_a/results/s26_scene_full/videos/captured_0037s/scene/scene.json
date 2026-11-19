@@ -1,0 +1,53 @@
+{
+ "video": "captured_0037s.mp4",
+ "source": "lab (captured, Orbbec Femto Mega RGB; background replaced by green via Segment Anything 2 - watermark bottom right)",
+ "scene": "3D",
+ "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (median-background difference shows only the ball in every frame; table and objects do not shift)",
+  "intrinsics_from_benchmark": "f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+  "perspective_cues": "table top seen obliquely from slightly above; front table edge runs from (208,540) left corner to (1139,590) right corner, back edge higher (~y 450-470) behind the objects; table converges toward the back. Ball moves right->left and toward the camera: its apparent diameter grows from ~23 px to ~39 px."
+ },
+ "objects": {
+  "ball": {
+   "desc": "small white ball (table-tennis-ball like), the only moving object; looks capsule-shaped in flight frames due to motion blur",
+   "moves": true, "visible_frames": "0-48 (all)",
+   "track": "tracks/ball.csv",
+   "reference_point": "centroid of the white mask (visible centre)",
+   "apparent_diameter_px": {"frames_0_8_at_rest": 23.0, "frames_12_18": 23.3, "frames_21_27": 27.7, "frames_29_34": 30.0, "frames_37_41": 34.4, "frames_44_48": 39.6,
+     "note": "diam_est_px = mask width across the blur direction; +-2 px; apparent size ~ 1/depth so the ball approaches the camera by a factor ~1.7 over the clip"}
+  },
+  "white_cup": {"desc": "tall white tumbler/cup, rightmost object on table; ball starts on its right rim", "moves": false,
+    "bbox_xyxy": [738, 376, 813, 503], "width_px": 76, "height_px": 128, "centre": [775, 439], "rim_y": 378},
+  "glass_jar": {"desc": "clear glass jar with metal lid, leftmost object on table", "moves": false,
+    "bbox_xyxy": [440, 408, 503, 483], "width_px": 64, "height_px": 76, "centre": [469, 443]},
+  "tape_roll": {"desc": "wide translucent yellowish tape roll lying flat, between jar and cards", "moves": false,
+    "bbox_xyxy": [522, 430, 592, 474], "width_px": 71, "height_px": 45, "note": "bottom edge set by eye (y~474), segmentation merged it with the table"},
+  "card_pyramid": {"desc": "two playing cards leaned into an A-frame (tent), left of the cup", "moves": false,
+    "bbox_xyxy": [670, 416, 719, 501], "width_px": 50, "height_px": 86},
+  "flat_cards": {"desc": "playing cards lying flat in front of the card pyramid", "moves": false,
+    "bbox_xyxy": [644, 496, 749, 519], "width_px": 106, "height_px": 24},
+  "dark_card_on_table": {"desc": "dark blue card/wallet with yellow sticker, lying flat near the front edge", "moves": false,
+    "bbox_xyxy": [512, 528, 611, 551], "width_px": 100, "height_px": 24},
+  "table": {"desc": "wooden table top on a single black pedestal leg", "moves": false,
+    "top_bbox_xyxy": [208, 430, 1139, 621], "front_edge": "left corner (208,540)-(212,570), right corner (1139,590)-(1137,620); edge thickness ~30 px",
+    "front_edge_length_px": 934, "leg": "black column x ~ 628-690 below y ~ 600 to bottom of frame"}
+ },
+ "events": [
+  {"name": "ball at rest on right rim of white cup", "frames": "0-6", "t": "0.000-0.250"},
+  {"name": "ball sinks slightly behind cup rim (pre-launch)", "frames": "7-11", "t": "0.292-0.458", "note": "cy 378 -> 388"},
+  {"name": "launch / release (start of flight)", "frame": 12, "t": 0.5, "note": "between frames 11 and 12; ball jumps 17 px left, 19 px up"},
+  {"name": "apex 1", "frame": 15, "t": 0.625, "cy": 341},
+  {"name": "bounce 1 on table behind card pyramid (occluded)", "frame": 19, "t": 0.792, "note": "lowest visible at 19-20, contact ~19.5"},
+  {"name": "apex 2", "frame": 24, "t": 1.0, "cy": 350},
+  {"name": "bounce 2 on table at tape roll (ball in front of tape)", "frame": 28, "t": 1.167, "cy": 441},
+  {"name": "apex 3", "frame": 32, "t": 1.333, "cy": 361},
+  {"name": "bounce 3 on table in front of glass jar", "frame": 36, "t": 1.5, "cy": 442},
+  {"name": "apex 4", "frame": 40, "t": 1.667, "cy": 371},
+  {"name": "bounce 4 on table (shadow visible), left of jar", "frame": 43, "t": 1.792, "cy": 459},
+  {"name": "apex 5", "frame": 47, "t": 1.958, "cy": 382},
+  {"name": "clip ends, ball in flight moving left", "frame": 48, "t": 2.0}
+ ],
+ "files": {"ball_track": "tracks/ball.csv", "static_raw": "statics_raw.json", "scripts": "scripts/", "notes": "notes.md"}
+}

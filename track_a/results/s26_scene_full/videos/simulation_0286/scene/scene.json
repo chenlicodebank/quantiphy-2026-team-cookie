@@ -1,0 +1,213 @@
+{
+ "video": "simulation_0286.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "image_size": [
+  2560,
+  1440
+ ],
+ "content_rows": [
+  80,
+  1359
+ ],
+ "letterbox": "black bars rows 0-79 and 1360-1439",
+ "pixel_convention": "x right, y down, full-resolution pixels; t = frame/24",
+ "view": "top-down (nadir) view of snowy ground; jet flies over three parked tanks, right to left",
+ "camera": {
+  "static": true,
+  "evidence": "phase correlation of background strip vs frame 0: |shift| < 0.02 px all frames"
+ },
+ "objects": {
+  "jet": {
+   "desc": "grey swept-wing jet aircraft seen from above, two underwing missiles/pods each side, nose pointing left (-x)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "fully_in_frame": [
+    0,
+    56
+   ],
+   "partially_out_left": [
+    57,
+    71
+   ],
+   "reference_point": "bbox centre (assumed origin) ref_x = bbox centre x, ref_y = 729.0",
+   "size_px": {
+    "length_along_x_nose_to_tail": 562,
+    "wingspan_along_y": 720,
+    "bbox_frame24": [
+     1116,
+     369,
+     1678,
+     1089
+    ]
+   },
+   "size_note": "length includes the missile tips that protrude ahead of the nose (missile tip x=1116 at f24; tail-cone tip x=1678). Size constant over clip (no altitude change).",
+   "motion": "pure translation along -x, y constant (dy=0 +-1 px), no rotation; frames 0 and 1 are identical; motion starts frame 1->2",
+   "ref_point_leaves_frame": 65,
+   "track": "tracks/jet.csv",
+   "over_tanks_frames": {
+    "tank_upper_left": [
+     18,
+     41
+    ],
+    "tank_middle_right": [
+     2,
+     25
+    ],
+    "tank_lower": [
+     12,
+     35
+    ]
+   }
+  },
+  "shell": {
+   "desc": "small dark elongated projectile/shell on or above the ground, left of the lower tank, ~same row as its gun barrel (y~983)",
+   "moves": "only between frames 1 and 2 (blurred streak centred x~838 in frames 0-1, sharp at x~797 from frame 2 on)",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "size_px": {
+    "length": 50,
+    "width": 12
+   },
+   "track": "tracks/shell.csv"
+  }
+ },
+ "static_objects": {
+  "tank_upper_left": {
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "mask_bbox_incl_barrel": [
+    1088,
+    518,
+    1337,
+    683
+   ],
+   "hull_x": [
+    1090,
+    1335
+   ],
+   "hull_y": [
+    524,
+    639
+   ],
+   "hull_length_px_along_x": 246,
+   "hull_width_px_along_y": 116,
+   "hull_center": [
+    1212.5,
+    581.5
+   ],
+   "mask_centroid": [
+    1213.4,
+    588.4
+   ],
+   "desc": "dark slate tank, upper-left of the three; hull axis along x; turret rotated, gun barrel points up-left (tip ~ (1130,425), not in mask)",
+   "overall_length_incl_barrel_px": null
+  },
+  "tank_middle_right": {
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "mask_bbox_incl_barrel": [
+    1576,
+    670,
+    1883,
+    797
+   ],
+   "hull_x": [
+    1634,
+    1881
+   ],
+   "hull_y": [
+    674,
+    785
+   ],
+   "hull_length_px_along_x": 248,
+   "hull_width_px_along_y": 112,
+   "hull_center": [
+    1757.5,
+    729.5
+   ],
+   "mask_centroid": [
+    1755.2,
+    730.3
+   ],
+   "desc": "dark slate tank, middle/right of the three (at jet fuselage row); hull along x; barrel points left (-x), barrel tip x=1576",
+   "overall_length_incl_barrel_px": 308
+  },
+  "tank_lower": {
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "mask_bbox_incl_barrel": [
+    1235,
+    919,
+    1543,
+    1037
+   ],
+   "hull_x": [
+    1297,
+    1541
+   ],
+   "hull_y": [
+    925,
+    1035
+   ],
+   "hull_length_px_along_x": 245,
+   "hull_width_px_along_y": 111,
+   "hull_center": [
+    1419.0,
+    980.0
+   ],
+   "mask_centroid": [
+    1415.4,
+    979.6
+   ],
+   "desc": "dark slate tank, lowest of the three; hull along x; barrel points left (-x), barrel tip x=1235, in line with the shell",
+   "overall_length_incl_barrel_px": 309
+  },
+  "tank_height": "not measurable (top-down view)"
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "frames 0 and 1 identical (jet and shell not yet moved)"
+  },
+  {
+   "frame": 2,
+   "t": 0.0833,
+   "event": "first motion: jet starts moving left (step frame1->2 ~34 px); shell jumps ~41 px left and then stays still"
+  },
+  {
+   "frame": 57,
+   "t": 2.375,
+   "event": "jet front (missile tips) reaches left image edge"
+  },
+  {
+   "frame": 65,
+   "t": 2.7083,
+   "event": "jet reference point (bbox centre) leaves the image"
+  },
+  {
+   "frame": 71,
+   "t": 2.9583,
+   "event": "last frame: only jet tail-cone tip visible at the left edge; jet still moving"
+  }
+ ],
+ "ground_features": "snow patches (bright bluish) and dark brown vegetation/earth; a lighter diagonal snow band from upper right through lower middle; no road markings"
+}

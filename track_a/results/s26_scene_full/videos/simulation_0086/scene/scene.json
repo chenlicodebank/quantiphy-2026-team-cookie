@@ -1,0 +1,70 @@
+{
+  "video": "simulation_0086.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "view": "straight top-down (orthographic-looking) view of a flat uniform grey ground plane (grey level 140). Motion is horizontal in the image (along x). No perspective cues; one px scale applies to both objects (same ground plane, objects at similar height).",
+  "camera": {"motion": "static", "evidence": "background is uniform; frame 71 is empty and matches the background of all other frames outside the objects (difference < 4 grey levels)", "per_frame_shift_px": [0, 0]},
+  "objects": [
+    {
+      "name": "car",
+      "description": "silver/white pickup-like car (Cybertruck-style: white front/hood on the left, dark glass roof, black tonneau/bed at the right), seen from above, lower object (y ~ 557-746)",
+      "moves": true,
+      "motion": "at rest in frames 0-1, then accelerates smoothly to the LEFT (-x) along y ~ 652; step per frame grows ~linearly by ~0.55 px/frame per frame (1 px at frame 2 -> ~31 px at frame 56 -> ~37 px at frame 68). No turn, no lateral motion.",
+      "visible_frames": [0, 69],
+      "fully_in_frame": [0, 56],
+      "track_file": "tracks/car.csv",
+      "reference_point": "ref_x, ref_y (estimated vehicle root = centre of the top-view footprint). Frames 0-56: front bumper x0 + 218.5; frames 57-69: rear x1 - 218.5 - 11 (blur offset).",
+      "size_px_at_rest_frame0": {
+        "length_along_x_bumper_to_bumper": 438,
+        "width_incl_mirrors": 189,
+        "body_width_without_mirrors": 155,
+        "width_at_front_wheels": 172,
+        "height": "not observable (top-down view)",
+        "bbox_frame0": [874, 558, 1311, 746],
+        "centre_frame0": [1092.5, 652.0]
+      },
+      "position_frame0_px": [1092.5, 651.75]
+    },
+    {
+      "name": "cyclist",
+      "description": "person riding a bicycle, seen from above (dark clothing, black bike with thin frame, cyan/teal detail near handlebars), upper object (y ~ 459-496), heading right",
+      "moves": true,
+      "motion": "frames 0 and 1 identical, then moves to the RIGHT (+x) at a constant ~16.0 px/frame (64 px per 4 frames) along y ~ 477 from frame 1->2 on (already at full speed; no visible acceleration).",
+      "visible_frames": [0, 65],
+      "fully_in_frame": [0, 57],
+      "track_file": "tracks/cyclist.csv",
+      "reference_point": "ref_x, ref_y = bicycle bbox centre (frames 0-57), rear-wheel x0 + 64 after clipping. Rider body (torso/pelvis blob) centre is in rider_cx, rider_cy: ~11 px behind (left of) the bbox centre at frame 0; for the human pelvis use rider_cx (approx.).",
+      "size_px_frame0": {
+        "bicycle_length_wheel_to_wheel": 129,
+        "width_across_incl_handlebars_and_arms": 38,
+        "rider_body_blob_x_extent": "about 918-965 (~48 px incl. arms reaching the handlebars)",
+        "height": "not observable (top-down view)",
+        "bbox_frame0": [884, 459, 1012, 496],
+        "centre_frame0": [948.0, 477.5]
+      },
+      "position_frame0_px": [948.0, 477.25]
+    }
+  ],
+  "static_objects": "none: plain uniform grey ground, no markings, no furniture. Only soft shadows under the car and cyclist.",
+  "relative_geometry": {
+    "vertical_offset_cyclist_to_car_ref_px": 174.5,
+    "frame0_centre_distance_px": "car (1092.5, 651.75) vs cyclist (948.0, 477.25): dx = 144.5, dy = 174.5, distance ~ 226.6",
+    "passing": "the two move in opposite directions on parallel lines; their x-centres are equal around frame 1-2 (cyclist starts left of car centre and passes it immediately). No contact."
+  },
+  "events": [
+    {"event": "frames 0 and 1 identical (both objects still)", "frame": 1, "time_s": 0.0417},
+    {"event": "cyclist starts moving right at ~16 px/frame (already at full speed)", "frame": 2, "time_s": 0.0833},
+    {"event": "car starts moving left from rest (step 1 px), accelerating", "frame": 2, "time_s": 0.0833},
+    {"event": "car front bumper reaches left image edge", "frame": 57, "time_s": 2.375},
+    {"event": "cyclist front wheel reaches right image edge", "frame": 58, "time_s": 2.4167},
+    {"event": "cyclist last visible", "frame": 65, "time_s": 2.7083},
+    {"event": "car last visible", "frame": 69, "time_s": 2.875},
+    {"event": "empty frames", "frame": [70, 71]}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/car.csv", "tracks/cyclist.csv"], "scripts": "scripts/"}
+}

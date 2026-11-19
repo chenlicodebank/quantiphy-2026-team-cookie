@@ -1,0 +1,55 @@
+{
+ "video": "captured_0039s.mp4",
+ "source": "lab (real Orbbec Femto Mega recording, background replaced by green via Segment Anything 2; watermark bottom-right)",
+ "scene": "3D",
+ "fps": 24.0, "frames": 49, "duration_s": 2.0417, "width": 1280, "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static: phase correlation of frames vs frame 0 on the static props/table region, max |shift| 0.09 px x, 0.07 px y (scene/camera_shift.json)",
+  "intrinsics_from_benchmark": "HFOV 80 deg, f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+  "view": "elevated oblique view looking down onto a table top; camera slightly to the right of the table centre line, table rotated so its front edge slopes down to the right in the image",
+  "perspective_cues": {
+   "table_top_corners_px": {"back_left": [440, 451], "back_right_approx": [915, 466], "front_left_top_edge": [210, 540], "front_right_top_edge": [1135, 584]},
+   "table_front_edge_bottom_px": {"left": [214, 569], "right": [1139, 619]},
+   "front_edge_thickness_px": "about 29 px at left end, 35 px at right end",
+   "horizon": "not visible (green background); table-top side edges converge upward",
+   "note": "corner pixels read by eye from frames/table_check.png and a grid frame; +-3 px"
+  }
+ },
+ "objects": {
+  "ball": {
+   "description": "small white ball (golf/ping-pong-like, with a dark red logo on it), the only moving object",
+   "moves": true,
+   "visible_frames": "0-44 (44 cut by bottom image edge); absent 45-48 (fell out of frame below)",
+   "track": "tracks/ball.csv",
+   "reference_point": "visible centre (circle fit to mask contour on table, frames 0-40; blur-streak bbox centre, frames 41-43; frame 44 estimated)",
+   "apparent_diameter_px": {"rest_frames_0_17": 20.7, "frame_25": 26.6, "frame_30": 31.2, "frame_35": 35.5, "frame_40": 42.3, "falling_41_44_bbox_width": "49-51 (includes horizontal blur / mask bleed; less reliable)"},
+   "rest_position_px": [564.95, 437.95]
+  },
+  "pink_bottle": {"description": "tall pink insulated bottle/thermos with a lighter cap band, back-centre of table, left of the white cup", "moves": false, "frame": 48,
+   "bbox_px": [642, 331, 690, 477], "width_px": 48, "height_px": 146, "centre_px": [666, 404], "cap_band_px": "y 345-362"},
+  "white_cup": {"description": "white tapered tumbler/cup with a metallic rim, right of the pink bottle", "moves": false, "frame": 48,
+   "bbox_px": [724, 375, 795, 498], "top_width_px": 71, "bottom_width_px": 55, "height_px": 122, "centre_px": [759, 437]},
+  "leaning_cards": {"description": "two playing cards leaning against each other / the pink bottle in front of it (front card white face with blue-grey back pattern, rear card pink-ish)", "moves": false, "frame": 48,
+   "front_card_px": "top edge ~ (675-700, 418), bottom ~ (695-712, 497); about 22 px wide, ~80 px long along its tilted axis",
+   "bbox_px": [655, 416, 712, 500]},
+  "flat_card": {"description": "playing card lying flat on the table in front of the bottle/cup", "moves": false, "frame": 48,
+   "bbox_px": [642, 500, 750, 517], "length_px": 108, "depth_extent_px": 17},
+  "black_card_phone": {"description": "small black flat object (phone/card holder) with a yellow sticker, near the front edge left of centre", "moves": false, "frame": 48,
+   "bbox_px": [520, 532, 621, 550], "length_px": 101, "yellow_sticker_px": [588, 535, 617, 541]},
+  "table": {"description": "square/rectangular wooden table top (brown wood grain) on a single dark pedestal", "moves": false, "frame": 48,
+   "top_slab_bbox_px": [210, 441, 1139, 627], "front_edge_length_px": "top front edge from (210,540) to (1135,584): 926 px",
+   "left_side_edge_px": "from (210,540) to (440,451): 247 px", "pedestal_visible_px": [630, 641, 685, 719], "pedestal_width_px": 56}
+ },
+ "events": [
+  {"event": "ball at rest", "frames": "0-17", "t": "0.000-0.708 s"},
+  {"event": "ball starts rolling (first sub-pixel shift at 18, clear motion at 19); pushed/released from rest out of view, direction toward camera and left (image down-left)", "frame": 18, "t": 0.75},
+  {"event": "possible dropped capture frame: displacement 35->36 is about twice its neighbours", "frame": 36, "t": 1.5},
+  {"event": "ball rolls off the front table edge (last on-table frame 40, first falling frame 41)", "frame": 41, "t": 1.708},
+  {"event": "ball falling past the table edge, strong vertical motion blur", "frames": "41-44"},
+  {"event": "ball leaves the image through the bottom edge", "frame": 45, "t": 1.875}
+ ],
+ "files": {"tracks/ball.csv": "final ball track", "tracks/ball_raw.csv": "raw mask stats incl. centroid, ellipse and circle fits",
+  "camera_shift.json": "per-frame [frame, dx, dy] vs frame 0", "frame_diffs.json": "consecutive-frame mean abs diffs",
+  "static_auto.json / table_auto.json": "automatic mask extents (bottle bbox there includes the pink card; prefer values above)"}
+}

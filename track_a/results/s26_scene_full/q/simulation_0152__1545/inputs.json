@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0152.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 42,
+ "duration_s": 1.75,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1545,
+  "question": "What is the acceleration of the blue car at time 1s in m/s^2?",
+  "prior": "diameter of the tire of the yellow car = 0.764m\ndiameter of the tire of the blue car = 0.369m",
+  "depth_info": "t=1s, distance_blueCarRightFrontTire_camera = 9.312m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

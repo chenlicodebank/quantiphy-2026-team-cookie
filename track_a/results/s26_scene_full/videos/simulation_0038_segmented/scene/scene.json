@@ -1,0 +1,60 @@
+{
+ "video": "simulation_0038_segmented.mp4",
+ "source": "segmentation (Blender simulation, background replaced by white)",
+ "scene_type": "3D",
+ "fps": 25.0, "frames": 75, "duration_s": 3.0, "width": 1536, "height": 1536,
+ "time_convention": "t = frame / 25; frame 0 at t = 0; frame i = round(t * 25)",
+ "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+ "camera": {
+  "motion": "static (rock mask centroid varies < 2 px, bbox edges <= 1 px over all 75 frames)",
+  "view": "high, steeply downward-looking oblique view: the person is seen from above (head/shoulders and white shirt visible, legs below); no horizon, ground plane or vanishing points visible because the background is removed",
+  "perspective_cues": "none usable besides the objects themselves; image-down = toward the camera along the ground (for a downward-tilted camera). Person's apparent size is nearly constant (body height ~40 px early, ~39 px late), i.e. depth change during the clip is small compared with the camera distance.",
+  "focal_length": "unknown; estimate from given depth_info + a known size"
+ },
+ "objects": [
+  {
+   "name": "human",
+   "aka": ["person", "pedestrian", "man walking"],
+   "description": "small single walking person, white shirt/top, grey-dark trousers, at lower-left of image (x ~483-500, y ~785-905); casts a long dark shadow (~92 px) toward the upper right that is attached at the feet",
+   "moves": true,
+   "visible_frames": [0, 74],
+   "occlusion": "never occluded; shadow is attached to the feet and was excluded from the body box",
+   "track_file": "tracks/human.csv",
+   "reference_point": "pelvis estimate: x = mean x of body pixels, y = head top + 0.55 * median body height (39 px); see notes",
+   "motion_summary_px": {
+    "direction": "steadily down the image with a slight rightward drift (walking roughly toward the camera)",
+    "pelvis_linear_fit_px_per_frame": {"dx": 0.077, "dy": 1.331, "magnitude": 1.333},
+    "net_displacement_f0_to_f74_px_from_fit": {"dx": 5.7, "dy": 98.5},
+    "raw_pelvis_f0": [492.5, 800.45], "raw_pelvis_f74": [498.49, 898.45],
+    "speed_pattern": "uniform within noise (no start/stop, no acceleration visible)"
+   },
+   "apparent_size_px": {
+    "body_height_head_top_to_lowest_foot": {"median": 39, "min": 33, "max": 44, "note": "oscillates with the gait: max (~43-44) at full stride, min (~33-35) when legs pass; minima near frames 0, 18, 35, 53, 70"},
+    "torso_width": {"median": 16, "first15_mean": 16.3, "last15_mean": 15.9},
+    "body_bbox_width_band": 18,
+    "shadow_length_from_feet_px": "90-96"
+   }
+  },
+  {
+   "name": "rock",
+   "aka": ["boulder", "large rock", "stone", "mountain/hill-shaped rock mesh"],
+   "description": "very large textured rock occupying the top centre/right of the frame, beige/white lit left side, dark shadowed right side",
+   "moves": false,
+   "visible_frames": [0, 74],
+   "static_file": "tracks/rock_static.json",
+   "frame0_px": {"bbox_x0y0x1y1": [556, 18, 1256, 642], "bbox_w": 701, "bbox_h": 625, "mask_centroid": [887.1, 292.8],
+                 "length_along_major_axis": 779.3, "major_axis_angle_deg_from_image_x": 142.9, "width_across": 576.0, "area": 317053},
+   "note": "seen from above; vertical (height) extent cannot be separated from horizontal extent in this view. The rock's origin is assumed near its 3D centre; the mask centroid is its visible centre."
+  }
+ ],
+ "events": [
+  {"event": "human walking throughout", "frames": [0, 74], "t_s": [0.0, 2.96], "note": "already walking at frame 0 and still walking at frame 74; no start/stop"},
+  {"event": "gait: shortest apparent body (legs together)", "frames": [0, 18, 35, 53, 70], "note": "approximate, from body-height minima; step period ~17.5 frames (0.7 s)"},
+  {"event": "no contact between human and rock", "note": "human stays > 250 px from the rock outline; human moves away from the rock (down the image)"}
+ ],
+ "pairwise_image_distances_px": {
+  "human_pelvis_to_rock_centroid_f0": 643.0,
+  "human_pelvis_to_rock_centroid_f74": 719.6,
+  "note": "2D image distances only; 3D distances need depth_info and a focal length"
+ }
+}

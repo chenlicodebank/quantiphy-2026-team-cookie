@@ -1,0 +1,44 @@
+{
+  "video": "simulation_0243_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by white; one tree region kept)",
+  "scene": "2D",
+  "fps": 30.0, "frames": 75, "duration_s": 2.5, "width": 1080, "height": 1920,
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y down",
+  "camera": {"static": true,
+             "evidence": "phase correlation of tree region between frames 0/20/40/60 and 74: |shift| < 0.06 px; tree pixels identical (MAD 0.3-1.3 grey levels where not touched by the animal)"},
+  "objects": [
+    {"name": "animal",
+     "description": "dark brown/blue-grey quadruped (horse/goat-like creature) with one large curved back-swept horn/crest from the head, pale whitish muzzle, long thin tail with tuft; only animal in the video",
+     "moves": true, "visible_frames": "0-74 (whole clip, fully in frame)",
+     "track": "tracks/animal.csv",
+     "motion": "walks steadily to the RIGHT (+x), side view, facing right; no vertical drift of body (feet at y 1544-1549 every frame)",
+     "recommended_reference_point": "torso_cx (x) with cy_centroid or torso band y~1365 (y); cx_centroid also given",
+     "displacement_px_frame0_to_74": {"torso_cx": 476.5, "cx_centroid": 471.1, "muzzle_tip_x": 484.0, "bbox_cx": 443.5},
+     "mean_step_px_per_frame": {"torso_cx": 6.44, "cx_centroid": 6.37, "muzzle_tip_x": 6.54, "linear_fit_slope_torso_cx": 6.55, "linear_fit_slope_centroid": 6.45},
+     "pixel_sizes": {
+       "bbox_width_tail_tuft_to_muzzle": {"min": 412, "max": 508, "median": 481, "note": "varies with tail swing and leg stride"},
+       "bbox_height_horn_top_to_hooves": {"min": 403, "max": 420, "median": 411},
+       "body_length_rump_to_muzzle_no_tail": {"min": 330, "max": 352, "median": 344},
+       "torso_length_chest_to_rump_at_y1340_1390": {"min": 260, "max": 274, "median": 268},
+       "top_of_horn_y": {"min": 1128, "max": 1144},
+       "hoof_bottom_y": {"min": 1544, "max": 1549},
+       "belly_bottom_y_median": 1377,
+       "muzzle_tip_x_frame0": 556, "muzzle_tip_x_frame74": 1040,
+       "mask_area_px_median": 62243
+     }},
+    {"name": "tree",
+     "description": "conifer (pine/fir) crown at left edge, cut off by the left image border; small dark trunk stub hangs below the crown at x~60-95",
+     "moves": false, "visible_frames": "0-74",
+     "pixel_extents_frame74": {"x0": 0, "x1": 498, "y_top_spire": 367, "y_bottom_trunk_stub": 1367, "visible_height_px": 1001,
+                               "visible_width_px": 499, "note": "width truncated by image edge; right edge x at y=400..1300: 114,226,287,387,417,424,442,458,481,490"},
+     "note": "segmentation artefact: the visible tree area changes (white halo around the animal while it is in front of the tree; crown area grows to x~498 as the animal leaves). The tree itself does not move."}
+  ],
+  "ground": "no ground plane drawn (white background); hoof line y~1546 is the animal's ground contact level",
+  "events": [
+    {"event": "animal already walking at first frame", "frame": 0, "time_s": 0.0},
+    {"event": "animal still walking at last frame (no stop, no direction change)", "frame": 74, "time_s": 2.4667},
+    {"event": "animal passes in front of the tree (overlap with tree region)", "frames": "0 to ~45", "note": "its back/horn overlaps the tree; no occlusion of the animal"}
+  ],
+  "files": {"tracks": ["tracks/animal.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

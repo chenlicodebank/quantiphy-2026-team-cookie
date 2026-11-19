@@ -1,0 +1,97 @@
+{
+ "video": "simulation_0312.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.008,
+ "frames": 72,
+ "width": 1080,
+ "height": 1080,
+ "time_of_frame": "i / 24.008",
+ "camera": {
+  "motion": "static (plain background; corner-region mean brightness std < 0.03 grey levels over all frames)",
+  "perspective_cues": "none usable: uniform beige background/ground, no horizon, no markings, no shadow. Only cue is the apparent size of the object, which shrinks as it recedes.",
+  "principal_point_assumed_px": [
+   540,
+   540
+  ]
+ },
+ "objects": [
+  {
+   "name": "star",
+   "description": "red/orange flat five-pointed star shape (cookie/toy-like, has visible thickness), the only object in the scene",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded_frames": [],
+   "track": "tracks/star.csv",
+   "reference_point": "centroid of the full silhouette mask (cx, cy); proxy for the object origin (centre of a rigid symmetric star)",
+   "image_path": "starts lower-left-centre (427,818) at frame 0, moves right and up the image while receding; horizontal motion slows, stops at about frame 51 (x max 939.0 px), then drifts back left while still rising; ends at (895.1,447.6) at frame 71. Curved (hook-shaped) image path.",
+   "apparent_size_px": {
+    "frame0": {
+     "bbox_w": 30,
+     "bbox_h": 58,
+     "len_main_axis": 59.04,
+     "equiv_diam": 36.14,
+     "note": "star seen partly edge-on at start (tilted), so area underestimates face size"
+    },
+    "frame24": {
+     "bbox_w": 33,
+     "bbox_h": 47,
+     "len_main_axis": 48.03,
+     "equiv_diam": 35.09
+    },
+    "frame48": {
+     "bbox_w": 28,
+     "bbox_h": 38,
+     "len_main_axis": 39.07,
+     "equiv_diam": 29.36
+    },
+    "frame71": {
+     "bbox_w": 23,
+     "bbox_h": 31,
+     "len_main_axis": 31.65,
+     "equiv_diam": 24.57
+    },
+    "trend": "apparent size decreases monotonically from ~frame 10 on (bbox_h 58->31 px, equiv diameter 37->24.6 px over the clip): object moves away from the camera; depth roughly scales as 1/size."
+   }
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "background/ground",
+   "description": "uniform beige (RGB ~196,186,155) surface filling the frame; faint render noise near the bottom edge only; no markings or edges"
+  }
+ ],
+ "events": [
+  {
+   "event": "motion already in progress at frame 0 (no start/release seen)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "star turns from tilted/edge-on to face-on view (rotation), mostly done by ~frame 15",
+   "frames": [
+    0,
+    15
+   ]
+  },
+  {
+   "event": "horizontal image motion reverses (rightward -> leftward); vertical image motion stays upward",
+   "frame": 51,
+   "t": 2.1243
+  },
+  {
+   "event": "clip ends with object still moving; no impact/bounce/contact observed",
+   "frame": 71,
+   "t": 2.9573
+  }
+ ],
+ "per_frame_pixel_step_px": {
+  "first": 23.019081215374392,
+  "frame24": 12.174699174928348,
+  "frame48": 4.972444067055986,
+  "last": 5.068027229603205
+ }
+}

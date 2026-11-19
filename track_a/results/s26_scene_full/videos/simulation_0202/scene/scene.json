@@ -1,0 +1,49 @@
+{
+  "video": "simulation_0202.mp4",
+  "source": "simulation",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 30,
+  "duration_s": 1.25,
+  "width": 2124,
+  "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left of the 2124x1080 frame",
+  "camera": {
+    "motion": "static (frame-to-frame difference outside the falling object is only scattered render noise; frames 25-29 identical)",
+    "view": "elevated, looking slightly down at a desk; ground plane = desk top / floor",
+    "horizon_estimate_y": "near the top edge (about y = 0-30): the horizontal lens ring of the falling glass is seen almost edge-on at y~20 (minor/major ratio 0.11) and opens up as it falls (0.22 at y~660)",
+    "desk_top_edges_px": {"front_left_corner": [475, 690], "front_right_corner": [1995, 645], "back_right_corner": [1900, 530], "front_edge_near_point": [700, 890], "note": "approximate, read off a 100 px grid at frame 29"}
+  },
+  "objects": [
+    {"name": "magnifying_glass", "moves": true, "track": "tracks/magnifying_glass.csv",
+     "description": "silver/chrome-rimmed round magnifying glass with a long brown/wooden handle pointing right; the only moving object. Falls from the top of the frame (lens left, handle right, horizontal) onto the green leather desk top between the typewriter and the revolver, bounces/rocks and comes to rest.",
+     "visible_frames": "0-29 (fully in frame throughout; top of bbox at y=9 in frame 0)",
+     "start_bbox_f0": [1263, 9, 1450, 30], "rest_bbox_f29": [1249, 655, 1423, 701],
+     "apparent_size_px": {"f0_len": 187, "f0_thick": 21, "f11_len": 175, "f29_len": 174.5, "f29_height": 47,
+                          "lens_ring_diameter_horizontal_f0": 82, "lens_ring_diameter_horizontal_f29": 84,
+                          "note": "length = full extent lens rim to handle end along the main axis"}},
+    {"name": "desk", "moves": false, "description": "large dark-wood writing desk with green leather inlaid top, drawers with brass handles; occupies the centre/bottom of the frame", "bbox_px_f29": [467, 530, 1995, 1080], "top_front_edge_length_px": "from (475,690) to (1995,645) along the left/right extent of the top; legs cut off by bottom edge"},
+    {"name": "typewriter", "moves": false, "description": "black vintage typewriter with a sheet of handwritten paper, centre-left of desk", "bbox_px_f29": [860, 590, 1160, 755], "paper_sheet_bbox": [882, 505, 985, 630]},
+    {"name": "desk_lamp", "moves": false, "description": "banker's lamp with green glass shade and brass base, standing on the book stack at left", "bbox_px_f29": [655, 302, 865, 640]},
+    {"name": "book_stack", "moves": false, "description": "two/three old leather books under the lamp plus one tilted red-brown book behind", "bbox_px_f29": [615, 525, 870, 735]},
+    {"name": "alarm_clock", "moves": false, "description": "red twin-bell alarm clock, back of desk", "bbox_px_f29": [1233, 488, 1318, 600]},
+    {"name": "photo_frame", "moves": false, "description": "small gold picture frame with portrait, right of alarm clock", "bbox_px_f29": [1335, 490, 1410, 582]},
+    {"name": "telephone", "moves": false, "description": "black rotary-dial telephone with coiled cord, back right of desk", "bbox_px_f29": [1430, 442, 1610, 595]},
+    {"name": "brass_stand", "moves": false, "description": "thin brass stand/pen holder with round foot in front of the telephone", "bbox_px_f29": [1545, 460, 1612, 622]},
+    {"name": "revolver", "moves": false, "description": "black revolver with brown grip lying on a paper card, right of the glass's landing spot", "bbox_px_f29": [1355, 602, 1505, 645]},
+    {"name": "keys_scissors", "moves": false, "description": "keys / small metal tool lying on a paper card behind-right of the typewriter", "bbox_px_f29": [1095, 610, 1215, 645]},
+    {"name": "papers", "moves": false, "description": "loose cream papers: one right-front of typewriter [1120,670,1260,742], one behind [1100,600,1230,630], card under revolver [1320,612,1460,645]"},
+    {"name": "ashtray", "moves": false, "description": "small round metal ashtray in front-left of typewriter", "bbox_px_f29": [818, 710, 888, 752]},
+    {"name": "chair_left", "moves": false, "description": "dark wooden spindle-back chair with patterned seat, left foreground", "bbox_px_f29": [133, 377, 510, 1080]},
+    {"name": "chair_back", "moves": false, "description": "second spindle-back chair behind the desk (only the back visible)", "bbox_px_f29": [985, 302, 1290, 595]},
+    {"name": "partial_objects_edges", "moves": false, "description": "out-of-focus orange/brown objects cut by the frame: right edge around (2060-2124, 870-1000) and bottom centre around (1380-1540, 1030-1080); unidentified"}
+  ],
+  "events": [
+    {"event": "motion_start / release", "frame": 0, "t": 0.0, "note": "glass already falling from frame 0 (dy 6 px from f0 to f1, then increments ~+10-11 px/frame each frame: consistent with release from rest at about frame 0)"},
+    {"event": "impact on desk top", "frame": 11, "t": 0.4583, "note": "frame 11 is the first frame lying on the desk (bbox bottom 675); between f10 (bbox y 530-573, falling) and f11"},
+    {"event": "bounce / tilt", "frames": "12-17", "t": "0.500-0.708", "note": "glass tilts and rebounds: bbox top rises to y=613 at f15 (highest rebound), mask rotated by ~15-25 deg in image"},
+    {"event": "second contact / settling", "frames": "18-23", "note": "lies flat again at f18, small rocking/sliding of a few px"},
+    {"event": "at rest", "frame": 24, "t": 1.0, "note": "bbox and centroid constant from frame 24 to 29"}
+  ]
+}

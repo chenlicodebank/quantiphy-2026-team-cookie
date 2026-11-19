@@ -1,0 +1,54 @@
+{
+  "video": "captured_0022x.mp4",
+  "source": "lab (captured; background replaced: 'Modified with Segment Anything 2 Demo' watermark, black background)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 49, "duration_s": 2.0417, "width": 1280, "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation between consecutive frames |shift| <= 0.2 px on every frame)",
+    "intrinsics_from_benchmark": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "view": "oblique, looking down onto a table top from above/front; the ball rolls from the far (back) edge toward the camera (front edge), i.e. mostly in depth, image direction down and slightly left"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ball (looks like a ping-pong ball); the only moving object",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre (mask centroid cx,cy; alternative cx_box,cy_box)",
+      "apparent_diameter_px": {"at_rest_back_edge_f0_11": 18.5, "mid_table_f20_30": 18.5, "near_front_edge_f40_45": 21.5, "note": "width of bbox (x1-x0+1); horizontal extent is the most reliable size measure; grows as ball approaches camera"},
+      "image_position_f0": [437.6, 380.1],
+      "image_position_f45": [393.1, 560.5]
+    },
+    {
+      "name": "table_top",
+      "description": "light-brown wooden rectangular table top (slab ~10-12 px thick at the front edge), static",
+      "moves": false,
+      "visible_frames": "0-48",
+      "top_surface_corners_px": {"back_left": [285, 418], "back_right": [597, 362], "front_right": [671, 514], "front_left": [227, 618]},
+      "front_edge_underside_corners_px": {"front_right": [665, 526], "front_left": [238, 624]},
+      "edge_lengths_px": {"back_edge": 317, "front_edge": 456, "left_edge": 210, "right_edge": 168},
+      "bbox_px": [226, 362, 671, 624],
+      "mask_area_px": 72212,
+      "note": "long axis runs left-right (back and front edges); ball rolls across the short axis (back edge -> front edge). Perspective: front edge longer than back edge (closer). Table may be tilted (ball accelerates from rest) - not measurable from pixels alone."
+    },
+    {
+      "name": "table_leg",
+      "description": "single grey/metal post under the table top, right of centre, partly visible below the front edge",
+      "moves": false,
+      "bbox_px": [464, 572, 510, 689],
+      "centroid_px": [488.6, 630.0],
+      "visible_length_px": 120, "width_px": 31, "axis_deg_from_x": 79.5
+    }
+  ],
+  "events": [
+    {"event": "ball at rest on back edge of table", "frames": "0-11", "t_s": "0.000-0.458", "position_px": [437.6, 380.1]},
+    {"event": "ball starts rolling (release)", "frame": 12, "t_s": 0.500, "note": "first displacement between frame 11 and 12 (4 px); motion start within (0.458, 0.5] s"},
+    {"event": "anomalous double step (likely dropped capture frame)", "frame": 36, "t_s": 1.500, "note": "step 35->36 is ~12 px vs ~5-6 px neighbours"},
+    {"event": "ball reaches front edge / leaves table top", "frame": 46, "t_s": 1.917, "note": "frame 45 last frame fully on top surface; 46 at the edge; 47-48 below the edge, falling, motion-blurred"},
+    {"event": "ball falling below table front edge", "frames": "47-48", "t_s": "1.958-2.000"}
+  ],
+  "per_frame_step_px_summary": "rolling: ~4 px/frame at f12-20, ~5 px/frame f25-35, ~6-8 px/frame f37-45, ~11-23 px/frame f46-48 (fall)",
+  "files": {"ball_track": "tracks/ball.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

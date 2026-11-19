@@ -1,0 +1,62 @@
+{
+  "video": "simulation_0104.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 31,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (image x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (mean abs pixel difference of empty background between frame 0 and 30 = 0.04 grey levels)",
+    "view": "side elevation, plain blue-grey backdrop, no ground plane / horizon visible; motion is vertical in the image plane"
+  },
+  "objects": [
+    {
+      "name": "phone",
+      "description": "smartphone lying flat, seen edge-on (side view, buttons/ports visible), resting on the lift head; widest object, x 689-1256",
+      "moves": true,
+      "visible_frames": "0-30",
+      "track": "tracks/phone.csv",
+      "reference_point": "centre of phone body (cx, cy)",
+      "extents_px": {"length_horizontal": 568, "thickness_vertical_body": 22.9, "thickness_incl_camera_bump": 27, "camera_bump_x_range": [1100, 1222]},
+      "image_position_frame0": {"cx": 973.0, "cy": 966.5, "top_y": 955.0},
+      "image_position_frame30": {"cx": 973.25, "cy": 344.0, "top_y": 332.1}
+    },
+    {
+      "name": "lift_head",
+      "description": "moving top of the pedestal/lift: light-grey disc (x 800-1117, ~33 px tall) directly under the phone, with a dark-grey cylindrical band (x 819-1099, 42 px tall) beneath it",
+      "moves": true,
+      "moves_with": "phone (identical per-frame displacement)",
+      "visible_frames": "0-30 (band lower part hidden behind base disc in frames 0-2)",
+      "track": "tracks/lift_head.csv",
+      "extents_px": {"disc_width": 318, "disc_height": 33, "band_width": 281, "band_height": 42, "total_height_disc_plus_band": 75}
+    },
+    {
+      "name": "column_shaft",
+      "description": "light-grey vertical shaft (x 881-1037, width 157 px) that extends out of the base as the head rises; its top moves with the head, its bottom stays at the base disc (y~1018)",
+      "moves": "extends (top end moves, bottom fixed)",
+      "visible_frames": "3-30 (hidden inside base in frames 0-2)",
+      "track": "tracks/column_shaft.csv",
+      "extents_px": {"width": 157, "visible_length_frame30": 587}
+    },
+    {
+      "name": "base",
+      "description": "static pedestal base at bottom of frame: light flange disc y 1020-1037 (x 787-1131, width 345), grey sleeve y 1038-1062 (x 820-1098, width 279), lower post y 1063-1079+ (x 877-1041, width 165, cut by image bottom)",
+      "moves": false,
+      "visible_frames": "0-30",
+      "extents_px": {"flange_width": 345, "flange_height": 18, "sleeve_width": 279, "sleeve_height": 25, "lower_post_width": 165, "total_visible_height_from_flange_top": 60}
+    }
+  ],
+  "events": [
+    {"event": "at rest (phone + head)", "frames": "0-1", "times_s": [0.0, 0.0417]},
+    {"event": "start of upward motion", "frame": 1, "time_s": 0.0417, "note": "first displacement between frame 1 and 2 already full (23.9 px); abrupt start"},
+    {"event": "uniform upward motion", "frames": "1-27", "rate_px_per_frame": 23.96, "note": "every frame-to-frame step 23.9-24.1 px; no horizontal motion"},
+    {"event": "end of motion / stop", "frame": 27, "time_s": 1.125, "note": "frames 27-30 stationary (drift < 1 px is compression noise); abrupt stop"},
+    {"event": "column shaft first visible above base", "frame": 3, "time_s": 0.125}
+  ],
+  "summary_motion_px": {
+    "phone_top_y_frame1": 954.98, "phone_top_y_frame27": 332.07, "net_vertical_rise_px": 622.9,
+    "head_band_top_frame0": 1011, "head_band_top_frame27": 389, "head_rise_px": 622
+  }
+}

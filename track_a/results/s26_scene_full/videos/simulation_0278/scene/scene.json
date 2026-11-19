@@ -1,0 +1,104 @@
+{
+ "video": "simulation_0278.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "units": "pixels and seconds; no metric scale recorded",
+ "camera": {
+  "static": true,
+  "view": "top-down (whale seen from above/dorsal side), orthographic-looking, plain grey backdrop with radial vignette; no ground markings",
+  "evidence": "background vignette identical in all frames; blowhole y constant to +-0.1 px"
+ },
+ "objects": [
+  {
+   "name": "whale",
+   "description": "grey humpback-like whale seen from above, head pointing left (-x), long pectoral fins up and down, tail fluke at right. Only object in the scene.",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": false,
+   "track_file": "tracks/whale.csv",
+   "reference_point": "blowhole_x/blowhole_y = template-tracked body-fixed blowhole marking on the head (best proxy for the rig origin's motion; the body translates rigidly). cx_mask/cy_mask = mask centroid (noisier, shadow-affected in frames with edge_closed=0). bbox_cx/bbox_cy = centre of the silhouette bbox (moves with tail and fin flapping).",
+   "motion": {
+    "direction": "-x (leftward), purely horizontal in image; y of blowhole constant at 765.0 +-0.1 px",
+    "frames_0_1_identical": "no motion between frame 0 and frame 1 (blowhole 1055.00 -> 1054.98)",
+    "blowhole_step_px_per_frame_from_frame2": {
+     "mean": 5.87,
+     "min": 5.64,
+     "max": 6.1
+    },
+    "linear_fit_frames_1_71": {
+     "x_px": "1060.91 + (-5.8709)*frame",
+     "max_resid_px": 0.14
+    },
+    "blowhole_x_frame0": 1055.0,
+    "blowhole_x_frame71": 644.1,
+    "net_displacement_px_0_to_71": 410.9,
+    "path_length_px_0_to_71": 410.91,
+    "snout_x_frame0": 745.0,
+    "snout_x_frame71": 343.0
+   },
+   "extents_px": {
+    "length_snout_to_fluke_tip": {
+     "frame0": 1568.0,
+     "min": 1422.0,
+     "min_frame": 26,
+     "max": 1599.0,
+     "max_frame": 55,
+     "mean": 1519.0,
+     "note": "varies with the up/down tail beat (fluke foreshortened from above)"
+    },
+    "span_y_fin_tip_to_fin_tip": {
+     "frame0": 643.0,
+     "min": 639.0,
+     "min_frame": 71,
+     "max": 783.0,
+     "max_frame": 24,
+     "mean": 725.2,
+     "note": "pectoral fins flap; this is the image-y extent (width across the body axis)"
+    },
+    "body_width_without_fins_frame0": "about 320 px (y 605..925 at x~1400)",
+    "fluke_span_y_frame0": "about 410 px (y ~560..970 at x~2300)"
+   }
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "backdrop",
+   "description": "uniform light-grey background with dark vignette at corners, no features"
+  }
+ ],
+ "events": [
+  {
+   "event": "whale still (frames 0 and 1 identical)",
+   "frame": 0,
+   "time_s": 0.0
+  },
+  {
+   "event": "steady leftward swimming starts (first displacement frame 1->2)",
+   "frame": 2,
+   "time_s": 0.0833
+  },
+  {
+   "event": "tail/fin beat: length minimum (fluke most foreshortened)",
+   "frame": 26,
+   "time_s": 1.0833
+  },
+  {
+   "event": "fin span maximum",
+   "frame": 24,
+   "time_s": 1.0
+  },
+  {
+   "event": "end of clip, still swimming",
+   "frame": 71,
+   "time_s": 2.9583
+  }
+ ]
+}

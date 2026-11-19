@@ -1,0 +1,82 @@
+{
+  "video": "simulation_0124.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_coords": "x right, y down, origin top-left pixel, units px",
+  "view": "top-down (nadir) aerial view of a winding two-lane asphalt road through grass and trees; two cars drive along the road from the top edge to the bottom edge",
+  "camera": {
+    "motion": "static",
+    "evidence": "median background vs car-free frames: mean abs diff 0.13 grey levels; frames 61-71 differ from each other by <0.05; no shift of road/kerb/trees",
+    "per_frame_background_shift_px": 0.0,
+    "perspective": "nadir view, no visible perspective: one px scale applies to the whole ground plane (2D scene). Cars are rendered from straight above, their top-view outline is the world footprint."
+  },
+  "moving_objects": {
+    "silver_car": {
+      "description": "silver/white sports car with two red racing stripes over roof and bonnet; the FOLLOWING (rear) car; at frame 0 it is the left one of the two cars at the top edge",
+      "track_file": "tracks/silver_car.csv",
+      "visible_frames": [0, 60],
+      "fully_in_frame": [4, 55],
+      "partly_out_of_frame": "frames 0-3 (top edge, 32% out at f0-1) and 56-60 (bottom edge, 84% out at f60); gone from frame 61",
+      "body_length_px": 122,
+      "body_width_px": 47,
+      "size_uncertainty_px": "length +-2, width +-2 (width includes the door mirrors only partly; with mirrors ~51-53)",
+      "reference_point": "centre of the top-view body outline (template centre corrected with stripe symmetry and outline edges on an average of 52 aligned crops)",
+      "moves": true
+    },
+    "dark_car": {
+      "description": "dark blue-black sports car (no stripes, amber headlights); the LEADING car; at frame 0 it is the right one of the two cars at the top edge, side by side with the silver car",
+      "track_file": "tracks/dark_car.csv",
+      "visible_frames": [0, 49],
+      "fully_in_frame": [3, 45],
+      "partly_out_of_frame": "frames 0-2 (top edge, 30% out at f0-1) and 46-49 (bottom edge, 89% out at f49); gone from frame 50",
+      "tree_occlusion": "frames 31-35 (overhanging tree canopy covers part of its front/right side; up to ~20% by the green-pixel count, visually ~40% at frame 32)",
+      "body_length_px": 117,
+      "body_width_px": 46,
+      "size_uncertainty_px": "length +-4, width +-4 (dark body against dark road and shadow; measured on an average of 43 aligned crops)",
+      "reference_point": "centre of the top-view body outline (two templates reconciled, corrected with outline/headlight symmetry on the averaged crop)",
+      "moves": true
+    }
+  },
+  "per_frame_motion_summary_px": {
+    "note": "only to show track quality; answering sessions should compute from the track files",
+    "silver_car_step_px_per_frame": "22.25 +-0.2 for every frame from 2 to 55 (0 between frames 0 and 1)",
+    "dark_car_step_px_per_frame": "26.95 +-0.3 for every frame from 2 to 45 (0 between frames 0 and 1)",
+    "centre_separation_px": "90.6 at f0, 113.8 at f10 (max early), 103.4 at f20 (min), then increasing to 198.8 at f45 and ~222 at f49"
+  },
+  "events": [
+    {"frame": 0, "time_s": 0.0, "event": "first frame; both cars at the top edge side by side (silver left/behind, dark right/ahead), partly out of frame"},
+    {"frame": 1, "time_s": 0.0417, "event": "frame 1 is a duplicate of frame 0 (mean diff 0.02): both cars have not moved yet"},
+    {"frame": 2, "time_s": 0.0833, "event": "start of motion: both cars jump straight to their full, constant per-frame step (instant start, no visible acceleration phase)"},
+    {"frame": 3, "time_s": 0.125, "event": "dark car fully inside the frame"},
+    {"frame": 4, "time_s": 0.1667, "event": "silver car fully inside the frame"},
+    {"frame": 16, "time_s": 0.6667, "event": "both cars round the right-hand bend at the top right; heading passes 90 deg (straight down) at about f18 for silver, f15 for dark"},
+    {"frame": 31, "time_s": 1.2917, "event": "dark car starts passing under the overhanging tree canopy (until f35)"},
+    {"frame": 46, "time_s": 1.9167, "event": "dark car starts leaving through the bottom edge"},
+    {"frame": 49, "time_s": 2.0417, "event": "last frame with any part of the dark car visible"},
+    {"frame": 56, "time_s": 2.3333, "event": "silver car starts leaving through the bottom edge"},
+    {"frame": 60, "time_s": 2.5, "event": "last frame with any part of the silver car visible; frames 61-71 show the empty road"}
+  ],
+  "static_objects": {
+    "road": {
+      "description": "two-lane asphalt road forming an S: enters at the top (x~350-700 at y=0), right-hand bend at top right (outer edge reaches x~867 at y~300), then runs down-left and leaves at the bottom (x~265-470 at y=1079)",
+      "width_px": "~180-196 between the white edge lines measured perpendicular to the road (approx., +-10)",
+      "markings": "white solid edge lines on both sides; yellow dashed centre line",
+      "kerb": "white/dark striped kerb just outside the right (outer) white line along the bend and down the right side"
+    },
+    "trees": {
+      "description": "clumps of trees on the right side of the road (top right, x 780-1080 y 0-280; right middle x 870-1080 y 390-660; lower right cluster x 585-870 y 665-890 that overhangs the road and covers the dark car in f31-35; bottom right x 540-1080 y 800-1080) and two at top left (x 0-280, y 0-200)"
+    },
+    "grass_field": "large dry-grass field left of the road (inside the bend) with darker patches/shadows",
+    "background_image": "scripts/bg.png (median of the car-free pixels, same 1080x1080 coordinates)"
+  },
+  "files": {
+    "tracks/<car>.csv": "frame,time_s,cx,cy (reference point px),heading_deg (direction of the car front, image angle: 0 = +x right, 90 = +y down),bbox_* (axis-aligned box of the rotated body rectangle, may extend outside the image),bbox_vis_* (clipped to the image),length_px,width_px (rigid body size),mask_len_px,mask_wid_px (per-frame background-difference mask extents, only where clean),visible_frac,partly_out_of_frame,occluded,match_score,method,reliability,frac_out_of_frame,frac_tree_occluded",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts and intermediate files"
+  }
+}

@@ -1,0 +1,156 @@
+{
+ "video": "simulation_0225.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24; frame 0 = t 0",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of facade/curb/loungers vs frame 0: max shift <0.13 px over all 50 frames (scripts/camera_check.py)",
+  "view": "near-frontal side view of a house terrace; deck front edge (curb top) runs horizontally at y~925; ground plane recedes upward (slight downward look); cat walks parallel to image x axis"
+ },
+ "objects": {
+  "cat": {
+   "desc": "black-and-white (tuxedo) cat, white paws/chest/muzzle, tail raised; the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded": "never",
+   "track": "tracks/cat.csv",
+   "reference_point": "cx_mask,cy_mask = mask centroid (proxy for the rig origin; origin itself not visible). bbox_cx is the alternative.",
+   "motion": "walks left->right (+x) along the deck in front of the loungers, constant-looking gait, whole clip",
+   "pos_frame0_px": [
+    569.76,
+    890.05
+   ],
+   "pos_frame49_px": [
+    838.79,
+    888.78
+   ],
+   "net_dx_px_0_49": 269.03,
+   "mean_dx_per_frame_px": 5.490408163265306,
+   "linear_fit_px_per_frame": 5.454572388955584,
+   "size_px": {
+    "bbox_width_median": 105.0,
+    "bbox_width_range": [
+     103.0,
+     113.0
+    ],
+    "bbox_height_median": 75.0,
+    "bbox_height_range": [
+     66.0,
+     78.0
+    ],
+    "note": "bbox width = nose-to-rump/tail-base horizontal length incl. raised tail root and stride; height = tail tip/ear top to paw bottom (tail tip ~ ear level or above)"
+   }
+  },
+  "loungers_front": {
+   "desc": "3 wooden sun loungers, front row, pinkish-beige slats, raised backrest at the rear (top of image), seat toward camera",
+   "moves": false,
+   "items_px_frame0": {
+    "front_1 (left)": {
+     "x": [
+      764,
+      947
+     ],
+     "y": [
+      735,
+      900
+     ]
+    },
+    "front_2 (middle)": {
+     "x": [
+      1004,
+      1189
+     ],
+     "y": [
+      735,
+      900
+     ]
+    },
+    "front_3 (right)": {
+     "x": [
+      1215,
+      1432
+     ],
+     "y": [
+      733,
+      900
+     ]
+    }
+   },
+   "note": "x extents = full horizontal extent incl. backrest; y from backrest top to leg feet; read from 2x zoom grid, +-4 px"
+  },
+  "loungers_back": {
+   "desc": "3 more loungers behind/left of front row (only backrests and left one fully visible)",
+   "moves": false,
+   "items_px_frame0": {
+    "back_1 (left, fully visible)": {
+     "x": [
+      652,
+      826
+     ],
+     "y": [
+      713,
+      858
+     ]
+    },
+    "back_2": {
+     "x": [
+      874,
+      1016
+     ],
+     "y_top": 713
+    },
+    "back_3": {
+     "x": [
+      1062,
+      1206
+     ],
+     "y_top": 713
+    }
+   }
+  },
+  "deck_curb": {
+   "desc": "stone deck edge / curb along water, top edge y~925, face down to y~975, joints every ~150 px",
+   "moves": false
+  },
+  "deck_tiles": {
+   "desc": "large grey stone pavers on terrace; diagonal joint lines receding",
+   "moves": false
+  },
+  "water": {
+   "desc": "rippling water at bottom of frame y>975 (animated texture, not an object track)",
+   "moves": "texture only"
+  },
+  "house": {
+   "desc": "modern house: frosted glass upper box x 563-975 y 0-358, dark timber box x 975-1730, glass walls with curtains below",
+   "moves": false
+  },
+  "trees": {
+   "desc": "pine trunks at left (largest trunk x~305-385), many trees behind",
+   "moves": false
+  },
+  "grass": {
+   "desc": "ornamental grass bed lower left, x 0-650, y 730-960; cat starts right next to it",
+   "moves": false
+  }
+ },
+ "events": [
+  {
+   "event": "cat walking at clip start (already in motion)",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "cat still walking at clip end; no stop, turn or contact",
+   "frame": 49,
+   "time": 2.0416666666666665
+  }
+ ]
+}

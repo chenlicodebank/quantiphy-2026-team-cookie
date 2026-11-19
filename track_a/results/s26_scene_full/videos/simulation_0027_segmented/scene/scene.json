@@ -1,0 +1,49 @@
+{
+  "video": "simulation_0027_segmented.mp4",
+  "source": "segmentation (Blender render with background replaced by white)",
+  "scene": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "width": 960,
+  "height": 960,
+  "time_convention": "t = frame / 25; frame = round(t * 25); frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (rock mask bbox identical in every frame: x 328-959, y 25-309; no other background)",
+    "perspective_cues": "none usable: background is uniform white, no ground plane, horizon or vanishing lines. Camera appears to look obliquely down (top surface of rock visible, human seen slightly from above).",
+    "focal_length": "unknown; must be estimated from a question's depth_info + known size"
+  },
+  "objects": [
+    {
+      "name": "human",
+      "description": "single small walking person (adult male figure), white/pale shirt, dark grey trousers, very pale head (head barely distinguishable from white background); the only moving object",
+      "moves": true,
+      "visible_frames": "0-74 (all), never occluded",
+      "track_file": "tracks/human.csv",
+      "reference_point": "pelvis estimate = (pelvis_x, pelvis_y); pelvis_y = foot_y - 0.53 * height_px; pelvis_x = mean mask x in rows +-3 px of pelvis_y. Smoothed version in pelvis_*_smooth (Savitzky-Golay, 11 frames, linear)",
+      "pixel_position_frame0": [406.2, 363.2],
+      "pixel_position_frame74": [441.7, 408.7],
+      "image_motion": "straight line down-right in the image, direction ~52 deg below +x axis; net ~56 px over 74 frames (~0.77 px/frame mean, roughly uniform; ~0.86 px/frame first 10 frames, ~0.61 last 10 per smoothed track - edge effects of smoothing make this uncertain)",
+      "apparent_height_px": {"median": 58, "range_raw": [54, 63], "smoothed_first": 58.6, "smoothed_last": 58.3, "note": "constant within noise -> camera distance roughly constant over clip; raw per-frame values jitter +-3 px from faint head pixels and stride"},
+      "apparent_width_px": {"median": 19, "note": "side-on-ish body width incl. arms/legs swing, range 17-20"},
+      "pixel_bbox_frame0": [397, 336, 415, 395],
+      "pixel_bbox_frame74": [433, 382, 450, 440]
+    },
+    {
+      "name": "rock",
+      "description": "large pale/white rock or boulder (mountain-like, with brown/dark eroded faces on its right side), upper part of the frame, to the upper right of the human",
+      "moves": false,
+      "visible_frames": "0-74",
+      "pixel_bbox": [328, 25, 959, 309],
+      "pixel_extent_px": {"length_horizontal": 632, "height_vertical": 285},
+      "pixel_centroid_filled_mask": [640.8, 166.7],
+      "mask_area_px": 123266,
+      "note": "right tip reaches x = 959 (image edge) so horizontal extent may be truncated by a few px; leftmost point x=328 at y~170; top y=25 near x~530; bottom y=309 near x~690. Bottom-centre of rock outline ~ (690, 309)."
+    }
+  ],
+  "events": [
+    {"event": "human walking throughout", "start_frame": 0, "end_frame": 74, "note": "already in motion at frame 0, still walking at frame 74; no stops, no direction change"}
+  ],
+  "notes_file": "notes.md"
+}

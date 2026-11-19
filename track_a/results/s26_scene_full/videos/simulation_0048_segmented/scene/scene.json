@@ -1,0 +1,249 @@
+{
+ "video": "simulation_0048_segmented.mp4",
+ "source": "segmentation (Blender render, background replaced by white)",
+ "scene": "3D",
+ "fps": 33.0,
+ "frames": 99,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 766,
+ "time_convention": "t = frame/33; frame = round(t*33)",
+ "camera": {
+  "motion": "static (kiosk pixels identical across all 99 frames up to edge-compression noise)",
+  "view": "elevated, pitched down; people walk/ride roughly toward the camera (downwards in image, slightly leftwards)",
+  "vertical_vanishing_point_px": [
+   1031,
+   6509
+  ],
+  "vertical_vp_note": "from kiosk left/right vertical edges (frame 0); far below image (y~6500) -> moderate downward pitch; rough (+-30%)",
+  "horizon": "above the image (not visible); no ground texture (background removed)"
+ },
+ "objects": {
+  "pedestrian": {
+   "desc": "man walking, light-grey T-shirt, dark jeans, white blurred face; left of cyclist, just right of kiosk",
+   "moves": true,
+   "visible_frames": [
+    0,
+    98
+   ],
+   "track": "tracks/pedestrian.csv",
+   "reference_point": "pelvis ~ mask centroid (belt/hip line)",
+   "motion": "walks slowly toward camera and slightly left the whole clip (image: down-left)",
+   "pixel_height_bbox": {
+    "frame0": 185,
+    "frame98": 232,
+    "min": 185,
+    "max": 233
+   },
+   "samples": {
+    "0": {
+     "pelvis_x": "1543.82",
+     "pelvis_y": "320.76",
+     "bbox_x0": "1514",
+     "bbox_y0": "233",
+     "bbox_x1": "1574",
+     "bbox_y1": "417",
+     "bbox_h": "185",
+     "bbox_w": "61",
+     "occluded": "0"
+    },
+    "33": {
+     "pelvis_x": "1529.48",
+     "pelvis_y": "346.1",
+     "bbox_x0": "1499",
+     "bbox_y0": "252",
+     "bbox_x1": "1562",
+     "bbox_y1": "451",
+     "bbox_h": "200",
+     "bbox_w": "64",
+     "occluded": "0"
+    },
+    "66": {
+     "pelvis_x": "1513.46",
+     "pelvis_y": "370.74",
+     "bbox_x0": "1480",
+     "bbox_y0": "275",
+     "bbox_x1": "1546",
+     "bbox_y1": "486",
+     "bbox_h": "212",
+     "bbox_w": "67",
+     "occluded": "0"
+    },
+    "98": {
+     "pelvis_x": "1496.81",
+     "pelvis_y": "404.97",
+     "bbox_x0": "1465",
+     "bbox_y0": "298",
+     "bbox_x1": "1532",
+     "bbox_y1": "529",
+     "bbox_h": "232",
+     "bbox_w": "68",
+     "occluded": "0"
+    }
+   }
+  },
+  "cyclist": {
+   "desc": "person in dark navy jacket/blue shirt riding a bicycle toward camera; right-most object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    91
+   ],
+   "fully_visible_frames": [
+    0,
+    59
+   ],
+   "track": "tracks/cyclist.csv",
+   "reference_point": "pelvis estimate (hidden under torso): head_top+0.35*bbox_h for frames 0-59; head_top+1.172*bbox_w afterwards (extrapolated)",
+   "pelvis_leaves_image_frame": 83,
+   "motion": "rides toward camera, accelerating in image (apparent growth), leaves through the bottom edge",
+   "samples": {
+    "0": {
+     "pelvis_x": "1737.0",
+     "pelvis_y": "302.6",
+     "bbox_x0": "1711",
+     "bbox_y0": "240",
+     "bbox_x1": "1763",
+     "bbox_y1": "418",
+     "bbox_h": "179",
+     "bbox_w": "53",
+     "occluded": "0"
+    },
+    "20": {
+     "pelvis_x": "1731.0",
+     "pelvis_y": "361.8",
+     "bbox_x0": "1700",
+     "bbox_y0": "289",
+     "bbox_x1": "1762",
+     "bbox_y1": "496",
+     "bbox_h": "208",
+     "bbox_w": "63",
+     "occluded": "0"
+    },
+    "40": {
+     "pelvis_x": "1723.5",
+     "pelvis_y": "444.8",
+     "bbox_x0": "1687",
+     "bbox_y0": "358",
+     "bbox_x1": "1760",
+     "bbox_y1": "605",
+     "bbox_h": "248",
+     "bbox_w": "74",
+     "occluded": "0"
+    },
+    "59": {
+     "pelvis_x": "1711.5",
+     "pelvis_y": "556.8",
+     "bbox_x0": "1666",
+     "bbox_y0": "449",
+     "bbox_x1": "1757",
+     "bbox_y1": "756",
+     "bbox_h": "308",
+     "bbox_w": "92",
+     "occluded": "0"
+    },
+    "70": {
+     "pelvis_x": "1702.5",
+     "pelvis_y": "647.9",
+     "bbox_x0": "1651",
+     "bbox_y0": "526",
+     "bbox_x1": "1754",
+     "bbox_y1": "765",
+     "bbox_h": "240",
+     "bbox_w": "104",
+     "occluded": "1"
+    },
+    "80": {
+     "pelvis_x": "1691.0",
+     "pelvis_y": "742.4",
+     "bbox_x0": "1638",
+     "bbox_y0": "617",
+     "bbox_x1": "1744",
+     "bbox_y1": "765",
+     "bbox_h": "149",
+     "bbox_w": "107",
+     "occluded": "1"
+    },
+    "91": {
+     "pelvis_x": "1684.0",
+     "pelvis_y": "805.8",
+     "bbox_x0": "1662",
+     "bbox_y0": "753",
+     "bbox_x1": "1706",
+     "bbox_y1": "765",
+     "bbox_h": "13",
+     "bbox_w": "45",
+     "occluded": "1"
+    }
+   }
+  },
+  "bicycle": {
+   "desc": "bicycle ridden by the cyclist, moves with them; part of cyclist mask (front wheel = bbox bottom in frames 0-59)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    91
+   ]
+  },
+  "kiosk": {
+   "desc": "large grey box / kiosk / cabinet with light-grey flat top, dark front panel, graffiti-poster right side; centre-right, foreground; bottom cut by image edge",
+   "moves": false,
+   "visible_frames": [
+    0,
+    98
+   ],
+   "mask_bbox_frame0": [
+    1103,
+    329,
+    1467,
+    765
+   ],
+   "top_face_corners_px_approx": {
+    "back_left": [
+     1200,
+     329
+    ],
+    "back_right": [
+     1466,
+     350
+    ],
+    "front_left": [
+     1104,
+     388
+    ],
+    "front_right": [
+     1467,
+     400
+    ]
+   },
+   "front_top_edge_width_px": 363,
+   "visible_height_px": ">=365 (front-top edge y~400 to image bottom 765; base not visible)",
+   "left_vertical_edge": "x = -0.0127*y + 1113.5",
+   "right_vertical_edge": "x = -0.0707*y + 1491.0"
+  }
+ },
+ "events": {
+  "start_of_clip": {
+   "frame": 0,
+   "t": 0.0,
+   "note": "both people already moving"
+  },
+  "cyclist_starts_cut_by_bottom_edge": {
+   "frame": 60,
+   "t": 1.8182
+  },
+  "cyclist_pelvis_estimate_leaves_image": {
+   "frame": 83,
+   "t": 2.5152
+  },
+  "cyclist_last_visible": {
+   "frame": 91,
+   "t": 2.7576
+  },
+  "pedestrian_arm_overlaps_kiosk_edge_from": {
+   "frame": 84,
+   "t": 2.5455
+  },
+  "no_contacts_or_collisions": true
+ }
+}

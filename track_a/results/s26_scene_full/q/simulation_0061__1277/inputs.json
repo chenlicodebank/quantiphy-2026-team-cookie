@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0061.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1277,
+  "question": "What is the average speed of the walking pedestrian from the beginning to the end in m/s?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 33.4337m\nt=1.58s, distance_human_camera = 32.4161m\nt=0.58s, distance_yellow_car_camera = 40.1000m\nt=1.58s, distance_yellow_car_camera = 36.4347m\nt=0.58s, distance_white_car_camera = 45.5234m\nt=1.58s, distance_white_car_camera = 43.9499m\nt=0.58s, distance_bike_camera = 41.9010m\nt=1.58s, distance_bike_camera = 40.3415m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

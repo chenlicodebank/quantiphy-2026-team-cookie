@@ -1,0 +1,51 @@
+{
+  "video": "captured_0032x.mp4",
+  "source": "lab (captured; background removed by Segment Anything 2 -> black background, watermark text bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (background phase-correlation shift < 1 px all frames, see camera_check.csv)",
+    "intrinsics_from_benchmark": {"focal_px": 763.0, "hfov_deg": 80, "principal_point_px": [640, 360], "note": "focal = 0.5959 x 1280"},
+    "roll": "table front edge drops ~12 px over 500 px left->right (~1.4 deg apparent tilt; table or camera slightly rolled)",
+    "table_side_edges_vanishing_point_px": [715, 347],
+    "horizon_note": "table depth edges converge near (715,347), ~13 px above image centre -> camera roughly level, slightly above table-top height, looking very slightly down; rough (+-20 px)"
+  },
+  "objects": [
+    {"name": "yellow_ball", "desc": "yellow (tennis-ball-like, slightly irregular) ball, the larger ball; starts on the far/right part of the table top", "moves": true,
+     "visible_frames": "0-47 (47 partly below the image bottom; gone at 48)",
+     "track": "tracks/yellow_ball.csv",
+     "apparent_diameter_px": {"frame0_rest": 32.5, "frame30": 36, "frame35": 44, "frame41": 49, "falling_43_47_across_blur": "50-56"},
+     "rest_centre_px_f0_21": [775.7, 413.8]},
+    {"name": "white_ball", "desc": "small white ball (ping-pong-like), starts at the far edge of the table, left of the yellow ball", "moves": true,
+     "visible_frames": "0-48 (frames 30-32 partly/mostly hidden behind the yellow ball; 31 not detected; 32 only a sliver)",
+     "track": "tracks/white_ball.csv",
+     "apparent_diameter_px": {"frame0_rest": 20.5, "frame40": 26, "frame48": 32},
+     "rest_centre_px_f0_28": [648.0, 416.5]},
+    {"name": "table_top", "desc": "brown wooden rectangular table top seen from the front, slightly from above", "moves": false,
+     "image_corners_px": {"back_left": [568, 427], "back_right": [850, 428], "front_left_top": [463, 484], "front_right_top": [964, 496]},
+     "far_edge_length_px": 282, "front_edge_length_px": 501,
+     "front_face_thickness_px": {"x500": 22, "x700": 22, "x900": 23},
+     "front_face_bottom_y_px": {"x500": 506, "x700": 510, "x900": 517},
+     "top_surface_vertical_extent_px": "y 427 (far edge) to ~484-496 (front edge)"},
+    {"name": "table_pole", "desc": "dark grey cylindrical single pedestal leg under the table centre", "moves": false,
+     "image_x_px": [710, 747], "width_px": 37, "y_range_px": [518, 720], "note": "cut off by the image bottom; foot not visible"}
+  ],
+  "events": [
+    {"frame": 21, "t": 0.875, "event": "last frame with yellow ball at rest (both balls static frames 0-21)"},
+    {"frame": 22, "t": 0.9167, "event": "yellow ball starts moving left (already displaced ~6 px; launched between 21 and 22, pusher not visible)"},
+    {"frame": 29, "t": 1.2083, "event": "last frame before contact: balls still ~20 px apart in the image, white at rest"},
+    {"frame": 30, "t": 1.25, "event": "contact/impact: yellow ball (nearer the camera) overlaps and strikes the white ball; white left edge already shifted ~5 px; white occluded 30-32"},
+    {"frame": 33, "t": 1.375, "event": "white ball emerges right of the yellow ball, rolls right/toward camera until end"},
+    {"frame": 36, "t": 1.5, "event": "probable dropped frame between 35 and 36 (both balls jump ~2x their usual per-frame step)"},
+    {"frame": 42, "t": 1.75, "event": "yellow ball at the left edge of the table top (last frame on table); leaves table between 42 and 43"},
+    {"frame": 43, "t": 1.7917, "event": "yellow ball in free fall left of the table, strongly motion blurred"},
+    {"frame": 47, "t": 1.9583, "event": "yellow ball reaching bottom image border (partly out of frame)"},
+    {"frame": 48, "t": 2.0, "event": "yellow ball out of view; white ball still rolling"}
+  ],
+  "files": {"tracks": ["tracks/yellow_ball.csv", "tracks/white_ball.csv", "tracks/*_raw.csv (unfiltered mask stats)"],
+            "camera_check": "camera_check.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

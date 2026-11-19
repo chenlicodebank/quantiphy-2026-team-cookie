@@ -1,0 +1,62 @@
+{
+  "video": "simulation_0100_segmented.mp4",
+  "source": "segmentation (Blender simulation, background replaced by white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 58,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y downward",
+  "camera": {
+    "motion": "static (white segmented background, no background features; both objects move at constant, steady pixel velocity with no common jitter)",
+    "perspective": "none visible; side view, motion is pure horizontal translation in the image plane; boat and shark keep constant pixel size (boat full length 856 px, shark 277-278 px every frame)"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red fishing boat with purple/navy lower hull, white wheelhouse with two windows, tall mast, grey cargo rail on the aft deck, yellow lettering 'AH805' near the bow; upper half of the frame; bow points right",
+      "moves": true,
+      "visible_frames": "0-57 (stern off the left edge in frames 0-20; mast top cut by the top edge in all frames)",
+      "track": "tracks/boat.csv",
+      "reference_point": "centre of full horizontal extent (stern..bow tip) and vertical centre of the hull (bow top y=352 .. keel y=645 at frame 57); origin is not visible, any rigid point gives the same motion (pure translation)",
+      "size_px": {
+        "length_stern_to_bow_tip": 856,
+        "hull_height_bow_top_to_keel": 294,
+        "hull_height_stern_gunwale_to_keel": 190,
+        "visible_height_keel_to_frame_top": 646,
+        "full_height": "unknown (mast leaves the frame at y=0)",
+        "wheelhouse_w_x_h": [174, 214],
+        "mast_width": 22
+      },
+      "frame57_positions_px": {
+        "full_bbox_x0_x1": [666, 1521], "keel_bottom_y": 645, "bow_tip": [1521, 360],
+        "stern_x": 666, "wheelhouse_x": [1078, 1251], "wheelhouse_y": [222, 436], "mast_x": [1135, 1159],
+        "ref_point": [1093.5, 498.5]
+      },
+      "motion_summary_px": "frames 0-1 identical (at rest); from frame 1->2 on, rightward +17.86 px/frame mean (per-frame 17.1-18.5, template-match noise ~0.3 px), vertical drift < 1 px; total shift frame 1->57 = 1000.1 px"
+    },
+    {
+      "name": "shark",
+      "description": "grey-blue shark with white belly, lower part of the frame (y 853-955), head pointing left, swimming left",
+      "moves": true,
+      "visible_frames": "0-57, always fully in frame",
+      "track": "tracks/shark.csv",
+      "reference_point": "bbox centre of full body (nose..tail-fin tip, dorsal-fin top..pectoral-fin bottom); mask centroid also given (it lies ~23 px left of the bbox centre because the body mass is toward the head)",
+      "size_px": {"length_nose_to_tail_tip": 278, "height_incl_fins": 103, "body_depth_without_fins_approx": 55},
+      "frame57_positions_px": {"bbox": [918, 853, 1195, 955], "ref_point": [1056.5, 904.0], "mask_centroid": [1033.0, 905.8]},
+      "motion_summary_px": "frames 0-1 identical (at rest); from frame 1->2 on, leftward -10.76 px/frame mean (per-frame 10.1-11.3), vertical drift < 0.5 px; shape essentially rigid (no visible tail beat); total shift frame 1->57 = 602.5 px"
+    }
+  ],
+  "static_objects": "none - background is plain white (segmentation); no ground, water line or markings",
+  "events": [
+    {"event": "both objects at rest (frames 0 and 1 identical)", "frame": "0-1", "t_s": "0.000-0.042"},
+    {"event": "start of motion of boat (right) and shark (left)", "frame": 2, "t_s": 0.0833, "note": "first non-zero displacement between frames 1 and 2"},
+    {"event": "boat stern enters the frame (boat fully visible horizontally from here)", "frame": 21, "t_s": 0.875},
+    {"event": "grey cargo rail on boat's aft deck appears in the segmentation mask (segmentation artifact, boat itself unchanged)", "frame": 30, "t_s": 1.25},
+    {"event": "boat ref point passes horizontally over shark ref point (ref_x equal)", "frame": "between 55 and 56", "t_s": "about 2.31"},
+    {"event": "video ends, both still moving at constant speed", "frame": 57, "t_s": 2.375}
+  ],
+  "files": {"tracks/boat.csv": "final boat track", "tracks/shark.csv": "final shark track",
+            "tracks/*_raw.csv": "raw per-frame mask statistics", "tracks/shifts.json": "template-match shift vs frame 57 per frame [frame, dx, dy, score]",
+            "notes.md": "method and reliability"}
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0051.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 30.0,
+ "frames": 50,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3128,
+  "question": "What is the distance between the brown and green car in meters?",
+  "prior": "average speed of the person riding scooter = 2.07 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0049.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 30.0,
+ "frames": 283,
+ "duration_s": 9.4333,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3115,
+  "question": "What is the height of the canopy in meters?",
+  "prior": "average speed of the person riding scooter = 3.8 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

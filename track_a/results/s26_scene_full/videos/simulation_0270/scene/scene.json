@@ -1,0 +1,62 @@
+{
+  "video": "simulation_0270.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "background pixels in empty corners differ by <0.2 grey levels between frame 0 and 71; background = per-pixel median of 12 frames is clean",
+    "perspective": "plain grey seamless cyclorama (studio backdrop). Wall-to-floor bend (brightening ramp) centred near y=1062 (ramp y~950-1150); no lines, no horizon, no vanishing points. Bird flies parallel to the image plane (2D clip); shadow on floor at y~1200-1250 stays at constant image height, consistent with constant depth."
+  },
+  "objects": [
+    {
+      "name": "phoenix",
+      "description": "the only moving object: a colourful fantasy bird (phoenix) - green head/neck/torso with yellow beak, purple/pink/red flapping wings, long orange-red tail plumes with peacock-eye spots ending in a yellow-green flame-shaped tip; a faint translucent flame/smoke wisp in front of the beak",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "occluded": "never occluded by anything else; fully inside frame in all frames (self-occlusion of head/torso by wings in some frames)",
+      "motion": "flies right-to-left, roughly horizontally, speeding up; flaps wings with ~25-frame period. Body x ~1541 (frame 0) -> ~315 (frame 71); body y stays 667-731 (bobbing with wingbeat).",
+      "track_file": "tracks/phoenix.csv",
+      "reference_point_recommended": "body_s_x, body_s_y (smoothed green-torso centroid, best proxy for the rig root/origin); alternatives: body_x/y (raw), head_x/y (head, rigid feature, valid where head_ok=1), centroid_x/y (whole-mask centroid, wing-biased), bbox_cx/cy",
+      "size_px": {
+        "bbox_width_range": [536, 624],
+        "bbox_height_range": [252, 463],
+        "bbox_height_min_frame": 71,
+        "bbox_height_max_frame": 37,
+        "main_axis_length_range": [460.3, 660.6],
+        "frame0_bbox": [1434, 372, 1999, 775],
+        "frame0_bbox_wh": [566, 404],
+        "note": "horizontal extent is beak-wisp to tail tip; vertical extent is dominated by the wings (wings up or down = tall, wings level = short ~252-260 px)"
+      }
+    },
+    {
+      "name": "phoenix_shadow",
+      "description": "dark grey shadow of the phoenix on the light floor directly below it",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/phoenix_shadow.csv",
+      "note": "image y ~1195-1260; follows bird's x (offset slightly, shadow mask centroid cx is ~+175 px right of body x at frame 0, shrinking to ~-20 px at frame 71; it is the whole-bird shadow incl. tail, so it relates to centroid_x rather than body_x)"
+    },
+    {
+      "name": "backdrop",
+      "description": "seamless grey studio cyclorama: darker grey wall (grey ~95-108) curving into light floor (grey ~215-221)",
+      "moves": false,
+      "visible_frames": [0, 71],
+      "size_px": {"wall_floor_bend_y": 1062, "bend_ramp_y": [950, 1150], "floor_region_y": [1150, 1440]}
+    }
+  ],
+  "events": [
+    {"event": "phoenix at rest/hover (no change frame 0->1)", "frame": 0, "time": 0.0},
+    {"event": "motion starts (first displacement of body/head)", "frame": 2, "time": 0.0833},
+    {"event": "wings fully up (min bbox_y0)", "frames": [2, 26, 52], "times": [0.083, 1.083, 2.167], "approx": "+-1 frame"},
+    {"event": "wings fully down (max bbox_y1)", "frames": [12, 37, 62], "times": [0.5, 1.542, 2.583], "approx": "+-1 frame"},
+    {"event": "wings level, minimal bbox height", "frames": [9, 21, 34, 46, 59, 71], "times": [0.375, 0.875, 1.417, 1.917, 2.458, 2.958]},
+    {"event": "wingbeat period", "value_frames": 25, "value_s": 1.04},
+    {"event": "no contact, impacts or direction reversals; bird keeps flying left for whole clip; clip ends with bird still in frame", "frame": 71, "time": 2.958}
+  ]
+}

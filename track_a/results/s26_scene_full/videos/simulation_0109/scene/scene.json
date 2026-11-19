@@ -1,0 +1,220 @@
+{
+ "video": "simulation_0109.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.008,
+ "frames": 72,
+ "width": 1080,
+ "height": 1080,
+ "time_convention": "t = frame / 24.008; frame = round(t*24.008)",
+ "camera": {
+  "motion": "static (background constant gray 204 in all corners, all frames; no texture to shift)",
+  "principal_point_assumed_px": [
+   540,
+   540
+  ],
+  "perspective_cues": "none usable: plain uniform light-gray backdrop, no visible ground plane, horizon or shadows (only sub-gray-level noise in rows ~900-1080 and below the spheres). Depth must come from depth_info / apparent sphere size."
+ },
+ "objects": [
+  {
+   "name": "sphere_left",
+   "aka": [
+    "left red ball",
+    "ball 1"
+   ],
+   "moves": true,
+   "distinguish": "red sphere that starts on the LEFT (x~523,y~818 at f0); drifts up-left",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "clipped_by_top_edge_from": 64,
+   "track": "tracks/sphere_left.csv",
+   "reference_point": "fitted circle centre (ref_x, ref_y) = projected sphere centre",
+   "first_clipped_frame": 64,
+   "diam_px_frame0": 118.86,
+   "diam_px_last_unclipped": 101.51,
+   "last_unclipped_frame": 63,
+   "pos_frame0": [
+    523.17,
+    817.68
+   ],
+   "pos_frame71": [
+    336.29,
+    -24.89
+   ],
+   "image_step_px_per_frame_first5": [
+    14.59,
+    14.59,
+    14.54,
+    14.52,
+    14.23
+   ],
+   "image_step_px_per_frame_last5": [
+    10.11,
+    10.18,
+    10.65,
+    9.28,
+    9.22
+   ]
+  },
+  {
+   "name": "sphere_right",
+   "aka": [
+    "right red ball",
+    "ball 2"
+   ],
+   "moves": true,
+   "distinguish": "red sphere that starts on the RIGHT (x~653,y~815 at f0); goes almost straight up (x 653->662)",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "clipped_by_top_edge_from": 63,
+   "track": "tracks/sphere_right.csv",
+   "reference_point": "fitted circle centre (ref_x, ref_y)",
+   "first_clipped_frame": 63,
+   "diam_px_frame0": 119.71,
+   "diam_px_last_unclipped": 100.21,
+   "last_unclipped_frame": 62,
+   "pos_frame0": [
+    653.17,
+    815.0
+   ],
+   "pos_frame71": [
+    660.03,
+    -33.93
+   ],
+   "image_step_px_per_frame_first5": [
+    14.34,
+    14.48,
+    14.08,
+    14.09,
+    14.0
+   ],
+   "image_step_px_per_frame_last5": [
+    10.38,
+    11.09,
+    10.59,
+    11.58,
+    9.52
+   ]
+  },
+  {
+   "name": "backdrop",
+   "moves": false,
+   "distinguish": "uniform light-gray (RGB ~204) background, fills frame"
+  }
+ ],
+ "pair": {
+  "centre_separation_px_per_frame": [
+   130.03,
+   133.55,
+   136.81,
+   140.08,
+   143.56,
+   146.77,
+   149.97,
+   153.46,
+   156.79,
+   159.74,
+   162.86,
+   166.1,
+   169.29,
+   172.43,
+   175.47,
+   178.49,
+   181.58,
+   184.67,
+   187.62,
+   190.77,
+   193.64,
+   196.83,
+   199.74,
+   202.68,
+   205.54,
+   208.49,
+   211.49,
+   214.36,
+   217.01,
+   219.89,
+   222.9,
+   48.08,
+   228.42,
+   231.26,
+   234.09,
+   236.82,
+   239.58,
+   242.38,
+   245.2,
+   247.96,
+   250.44,
+   253.26,
+   255.92,
+   258.68,
+   261.25,
+   263.92,
+   266.6,
+   269.18,
+   271.7,
+   274.5,
+   276.95,
+   279.5,
+   281.85,
+   284.57,
+   287.39,
+   289.67,
+   292.2,
+   294.71,
+   297.18,
+   299.58,
+   302.0,
+   304.57,
+   307.08,
+   309.47,
+   311.71,
+   313.85,
+   315.51,
+   317.1,
+   318.72,
+   320.45,
+   322.16,
+   323.87
+  ],
+  "surface_gap_px_frame0": 10.7,
+  "note": "spheres are close (gap ~11 px) but never touch; no collision."
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time": 0.0,
+   "what": "both spheres already moving upward at frame 0 (no visible start/launch)"
+  },
+  {
+   "frame": 0,
+   "time": 0.0,
+   "what": "faint pink glow around spheres fading out over frames 0-5"
+  },
+  {
+   "frame": 31,
+   "time": 1.2912,
+   "what": "pink glow/halo switches on abruptly around both spheres (render effect; mask unaffected; no change in trajectory)"
+  },
+  {
+   "frame": 63,
+   "time": 2.6241,
+   "what": "right sphere starts leaving through top edge"
+  },
+  {
+   "frame": 64,
+   "time": 2.6658,
+   "what": "left sphere starts leaving through top edge"
+  },
+  {
+   "frame": 71,
+   "time": 2.9573,
+   "what": "end of clip, both spheres mostly out of frame (top)"
+  }
+ ],
+ "apparent_size_trend": "both spheres shrink steadily (diam ~119-120 px at f0 -> ~100-102 px at f60), i.e. they move away from the camera while rising; image-plane step shrinks from ~14 px/frame to ~10.5 px/frame."
+}

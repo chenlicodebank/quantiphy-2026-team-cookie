@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0021_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S3MX",
+ "fps": 29.0,
+ "frames": 89,
+ "duration_s": 3.069,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1665,
+  "question": "What is the average walking speed of the person in m/s?",
+  "prior": "height of the person = 1.87m",
+  "depth_info": "t=0s, distance_human_camera = 13.882m\nt=1s, distance_human_camera = 13.768m\ndistance_fire_hydrant_camera = 12.565m\ndistance_streetlight_camera = 12.325m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

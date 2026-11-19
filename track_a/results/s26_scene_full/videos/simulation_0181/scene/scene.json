@@ -1,0 +1,72 @@
+{
+  "video": "simulation_0181.mp4",
+  "source": "simulation",
+  "scene_type": "2D (per inputs.json; rendered 3D-looking warehouse, but camera faces the wall / motion plane)",
+  "fps": 24.0,
+  "frames": 40,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (background identical in all frames; difference vs frame-39 background is zero outside the box)",
+    "background_shift_px_per_frame": [0, 0],
+    "perspective": "single wall plane facing the camera; slight perspective on props (box's top/side faces visible at start). Box moves in a plane parallel to the image; one px->m scale is appropriate."
+  },
+  "objects": [
+    {
+      "name": "box",
+      "description": "brown cardboard box with open/torn lid flaps; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 39],
+      "fully_visible_frames": [0, 29],
+      "partly_occluded_frames": [30, 39],
+      "occluder": "orange 'China Food' crates (bottom right) in front of the box from frame ~30",
+      "track": "tracks/box.csv",
+      "reference_point": "x_ref,y_ref = image centre of the box (mask centroid frames 0-29; rigid template shift frames 30-39)",
+      "start_position_px": [542.7, 330.2],
+      "last_position_px": [1359.3, 928.8],
+      "pixel_size": {
+        "free_fall_frames_0_7_axis_aligned": {
+          "bbox_w": 327, "bbox_h": 235,
+          "note": "silhouette incl. visible left side face (~27 px, x 378-405) and lid flaps on top (~20 px). Front face alone ~300 x ~213 px (x 405-705, y 228-441 at frame 0)."
+        },
+        "sliding_frames_20_29_tilted": {
+          "length_main_axis": 279.5, "width_across": 186.0, "spread": "+-3 px",
+          "tilt_deg": 28.8,
+          "note": "minimum-area rectangle of the silhouette; box has also turned about the vertical axis on landing so its silhouette differs from the free-fall one"
+        },
+        "mask_area_px": "69100 at frame 0, ~50800 while sliding"
+      }
+    },
+    {"name": "blue_ramp", "description": "blue roller/conveyor ramp from the shelf down to the crates, sloping down to the right", "moves": false,
+     "image_extent_px": {"x": [320, 1190], "y": [535, 1065]},
+     "slope_deg_in_image": 28.8, "slope_note": "slope from the sliding box's tilt (constant 28.6-29.0 deg) and the ramp edge",
+     "length_along_slope_px": 990, "length_note": "visible upper end x~320 to where it passes behind the crates x~1190; approximate +-20 px",
+     "front_face_thickness_px": 110},
+    {"name": "pizza_topping_crate", "description": "large orange cardboard box 'Pizza Topping Hot and Spicy 8 x 500 ml' top-left on the shelf", "moves": false,
+     "image_extent_px": {"x": [0, 290], "y": [0, 530]}, "note": "cut by left/top frame edge; side face visible to x~345"},
+    {"name": "seedless_jaffas_box", "description": "small white/red box 'Seedless Jaffas' next to the pizza crate", "moves": false,
+     "image_extent_px": {"x": [285, 405], "y": [325, 535]}},
+    {"name": "shelf_top", "description": "wooden shelf board under the top-left crates", "moves": false, "image_extent_px": {"x": [0, 405], "y": [530, 595]}},
+    {"name": "blue_post", "description": "dark blue vertical shelf post", "moves": false, "image_extent_px": {"x": [265, 335], "y": [590, 1080]}},
+    {"name": "orange_frame", "description": "orange-red U/hand-truck-like frame bottom-left", "moves": false, "image_extent_px": {"x": [0, 220], "y": [620, 1080]}},
+    {"name": "warning_sign", "description": "orange sign 'TAKE CARE WHEN STACKING CRATES' on the wall", "moves": false,
+     "image_extent_px": {"x": [1295, 1483], "y": [575, 762]}, "size_px": [188, 187]},
+    {"name": "china_food_crates", "description": "stack of orange 'China Food' crates bottom-right at the foot of the ramp; occludes the box at the end", "moves": false,
+     "image_extent_px": {"x": [1170, 1685], "y": [880, 1080]}, "top_crate_top_edge_y": 885},
+    {"name": "wall_vent", "description": "grey ventilation grille on the wall, right", "moves": false, "image_extent_px": {"x": [1670, 1858], "y": [857, 947]}, "size_px": [188, 90]},
+    {"name": "wall_bricks", "description": "grey breeze-block wall; blocks ~100 px wide x ~100 px tall (mortar rows near y 100, 200, 300, 400, 495, 590, 690, 790, 890)", "moves": false},
+    {"name": "floor", "description": "light wooden floor visible bottom-right (y > ~945, x > ~1550)", "moves": false}
+  ],
+  "events": [
+    {"event": "release / start of fall", "frame": 0, "time_s": 0.0, "note": "box already moving between 0 and 1 (2.1 px), consistent with release from rest at t=0"},
+    {"event": "free fall (vertical, no rotation)", "frames": [0, 7]},
+    {"event": "impact on ramp (lands on upper end of the blue ramp)", "frame": 8, "time_s": 0.333, "note": "contact between frames 7 and 8; at 8 the box starts to tilt and its vertical drop slows"},
+    {"event": "tilting to the ramp angle", "frames": [8, 12], "note": "tilt 0 -> 29 deg; settled by frame 12 (t=0.5 s)"},
+    {"event": "slides down ramp, accelerating", "frames": [12, 39], "direction": "down-right along 28.8 deg slope"},
+    {"event": "starts to pass behind the China Food crates (lower edge occluded)", "frame": 30, "time_s": 1.25},
+    {"event": "end of video, box still sliding, mostly hidden", "frame": 39, "time_s": 1.625}
+  ],
+  "files": {"track": "tracks/box.csv", "raw_mask_track": "tracks/box_raw.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

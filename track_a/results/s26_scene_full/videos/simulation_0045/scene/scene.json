@@ -1,0 +1,72 @@
+{
+  "video": "simulation_0045.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 33.0,
+  "frames": 99,
+  "duration_s": 3.0,
+  "image_size_px": {"width": 1920, "height": 766},
+  "time_convention": "t = frame / 33; frame = round(t * 33); frame 0 at t = 0",
+  "units": "pixels (image coords, x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (phase correlation of the building facade vs frame 0: max |shift| 0.015 px over all 99 frames; no background change outside the two movers)",
+    "view": "eye-level-ish view down a city street that runs away from the camera; road climbs to a crest near y~350 (sky above)",
+    "street_vanishing_point_px": {"x": 585, "y": 200, "uncertainty_px": 25,
+      "from": ["curb lines (left road edge and right curb) intersect near (586,194)",
+               "cyclist head-top path extrapolated to zero size: (580,208)",
+               "pedestrian head-top path extrapolated to zero size: (609,215)"]},
+    "verticals": "building edges and phone booth edges appear vertical -> little camera roll/tilt",
+    "horizon_note": "true horizon not visible (road crest at y~350 blocks it); the street VP above is the VP of the street direction, which rises slightly uphill",
+    "focal_length": "unknown; estimate from given depth_info + a known size (see notes.md)"
+  },
+  "moving_objects": {
+    "cyclist": {
+      "description": "man in dark grey/black jacket and light-blue jeans riding a blue bicycle on the road, seen from behind, riding straight away from the camera up the street (left of centre)",
+      "distinguish": "the only person on a bicycle and the only one on the road; dark jacket; the other person (pedestrian) wears a white T-shirt and walks on the right sidewalk",
+      "moves": true,
+      "visible_frames": "0-98 (all); bottom of the rear wheel cut by the image bottom edge in frames 0-4",
+      "track_file": "tracks/cyclist.csv",
+      "reference_point": "ref_x/ref_y = estimated rider pelvis on the saddle (torso centre line x, head_top_y + 0.44*height_smooth). A bicycle rig root would be at about ground_x/ground_y (wheel contact) or between the wheels; rider+bike are one rigid-looking unit moving together, so all these points move almost identically in direction",
+      "apparent_height_px": {"frame0_est_untruncated": 468, "frame0_visible": 437, "frame33": 285, "frame66": 196, "frame98": 146, "shrink_factor_0_to_98": 3.2},
+      "apparent_width_px": {"frame5": 123, "frame33": 79, "frame66": 56, "frame98": 45},
+      "image_path": "ref (982,535) at f0 -> (812,404) f33 -> (739,343) f66 -> (700,310) f98; ground point (wheel bottom) y 765(cut) -> 563 -> 452 -> 391"
+    },
+    "pedestrian": {
+      "description": "man in white T-shirt and light-blue jeans walking on the right-hand sidewalk away from the camera, beside the stoops / Photo Lab shop",
+      "distinguish": "white T-shirt, on the sidewalk, walking (not cycling); right of the cyclist throughout",
+      "moves": true,
+      "visible_frames": "0-98 (all), never occluded",
+      "track_file": "tracks/pedestrian.csv",
+      "reference_point": "ref_x/ref_y = estimated pelvis (hip-joint level): torso centre-line x, head_top_y + 0.47*height_smooth",
+      "apparent_height_px": {"frame0": 350, "frame33": 315, "frame66": 283, "frame98": 257, "smooth_frame0": 353, "smooth_frame98": 251, "shrink_factor_0_to_98": 1.41, "note": "height_px = head top to lowest foot, oscillates +-10 px with the gait"},
+      "shoulder_width_px": {"frame0": 86, "frame33": 79, "frame66": 72, "frame98": 67},
+      "image_path": "ref (1233,432) f0 -> (1156,406) f33 -> (1096,388) f66 -> (1046,373) f98; lowest foot y 615 -> 572 -> 538 -> 511"
+    }
+  },
+  "static_objects": {
+    "parked_bicycle": {"description": "cream/pink ladies' bicycle with a wicker front basket parked on the LEFT sidewalk, front wheel towards camera", "bbox_px": [38, 370, 165, 580], "height_px": 210, "width_px": 127, "note": "seen almost head-on; handlebar width ~ 38..150 px (~110 px); front tyre bottom at y~580, x~120"},
+    "telephone_booth": {"description": "white 'TELEPHONE' booth with cracked glass at the far end of the right sidewalk", "bbox_px": [795, 114, 913, 402], "height_px": 288, "width_px": 118},
+    "manhole_near": {"description": "round manhole cover in the road nearest the camera (bottom centre)", "outer_ring_x_px": [568, 835], "top_y_px": 701, "note": "cut by bottom image edge; horizontal diameter ~267 px"},
+    "manhole_far": {"description": "second manhole cover farther up the road", "x_px": [563, 665], "y_px": [401, 414], "horizontal_diameter_px": 102},
+    "tree": {"description": "leafy street tree on the left sidewalk", "bbox_px": [0, 0, 605, 460], "trunk_base_px": [270, 450]},
+    "photo_lab_shop": {"description": "shop front with 'PHOTO LAB' sign, shelves of goods and a blue door with a Coca-Cola poster", "sign_bbox_px": [985, 0, 1215, 90], "door_bbox_px": [1115, 85, 1215, 385]},
+    "stoops": {"description": "stone stairs with railings and newel posts on the right (two big stoops in the foreground right, x 1300-1800)"},
+    "railing_hedge": {"description": "low iron railing with green hedge right of the sidewalk", "bbox_px": [1150, 385, 1310, 520]},
+    "right_curb": {"description": "curb between road and right sidewalk", "line_points_px": [[790, 385], [1180, 750]]},
+    "left_curb": {"description": "edge of the left sidewalk", "line_points_px": [[380, 368], [60, 640]]},
+    "road": {"description": "cobbled/asphalt street running away from the camera, cresting near y~350"},
+    "sidewalks": {"description": "light grey paved sidewalks on both sides; pedestrian walks on the right one"}
+  },
+  "events": [
+    {"event": "both movers already moving at frame 0 and keep moving through frame 98 (no start/stop, no contact between them, no direction reversal)", "frame": 0, "time": 0.0},
+    {"event": "cyclist rear wheel fully inside the image from this frame on", "frame": 5, "time": 0.1515},
+    {"event": "pedestrian step transitions (lowest foot jumps down-image, new trailing foot); approximate, ~every 17 frames", "frames": [9, 26, 43, 61, 78, 95], "note": "26 is interpolated (weak signal)"}
+  ],
+  "files": {
+    "tracks/cyclist.csv": "final per-frame track of the cyclist",
+    "tracks/pedestrian.csv": "final per-frame track of the pedestrian",
+    "tracks/*_mask.csv": "raw mask statistics the final tracks are built from",
+    "bg.jpg": "median background (movers removed), JPEG copy",
+    "scripts/": "all measurement scripts"
+  }
+}

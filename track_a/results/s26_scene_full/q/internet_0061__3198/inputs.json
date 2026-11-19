@@ -1,0 +1,18 @@
+{
+ "video": "internet_0061.mp4",
+ "video_source": "internet",
+ "video_type": "A2SS",
+ "fps": 30.012937,
+ "frames": 116,
+ "duration_s": 3.865,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3198,
+  "question": "What is the distance between the bottom of the acorn and the chair surface at 1.40s in cm?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

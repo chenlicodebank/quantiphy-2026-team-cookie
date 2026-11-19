@@ -1,0 +1,57 @@
+{
+ "video": "simulation_0022_segmented.mp4",
+ "source": "segmentation (Blender simulation, background replaced by plain white)",
+ "scene": "3D",
+ "fps": 25.0, "frames": 75, "duration_s": 3.0, "width": 960, "height": 960,
+ "time_convention": "t = frame / 25; frame 0 at t = 0",
+ "camera": {
+  "static": true,
+  "evidence": "phase correlation of the island region vs frame 0: |shift| <= 0.12 px in all frames (columns bg_shift_x/y in tracks/boat.csv)",
+  "perspective_cues": "none usable: background is uniform white (segmented); no ground plane, horizon or vanishing lines. Only cues: boat is drawn in front of the island's right tip (boat nearer the camera there) and the boat's apparent size grows ~4% over the clip (approaching the camera slightly)."
+ },
+ "objects": [
+  {
+   "name": "boat",
+   "description": "red-hulled fishing boat with white wheelhouse, white railings, tall mast; hull lettering 'AH805'. The only moving object.",
+   "moves": true,
+   "visible_frames": [0, 74],
+   "partially_out_of_frame_frames": [0, 34],
+   "fully_visible_frames": [35, 74],
+   "overlaps_island_frames": [63, 74],
+   "track_files": ["tracks/boat.csv", "tracks/boat_template.csv"],
+   "motion": "translates leftward (-x) across the image at a nearly constant ~4.6-4.9 px/frame (template shift 232.1 px at f0 -> -105.4 px at f72); vertical image drift < 5 px; no rotation visible (hull axis ~4-8 deg throughout, the boat is seen broadside, bow pointing left)",
+   "apparent_size_px": {
+    "f35_full_bbox": {"w": 286, "h": 283},
+    "f50_full_bbox": {"w": 289, "h": 292, "x0": 600, "x1": 888, "y0": 396, "y1": 687},
+    "f74_full_bbox": {"w": 296, "h": 292, "x0": 484, "x1": 779, "y0": 396, "y1": 687},
+    "f74_hull": {"bow_x": 486, "stern_x": 774, "length": 289, "gunwale_y": 586, "keel_y": 681, "height": 96},
+    "f74_mast_top_y": 396,
+    "template_scale_vs_f50": "0.98 at f0 -> 1.00 at ~f30 -> 1.02 at f72 (see boat_template.csv, +/-0.01 noise)"
+   },
+   "reference_point_note": "Blender origin of the boat is not visible; best proxies: hull bbox centre (hull_bbox_cx, ~y 633-640) or full bbox centre (bbox_cx, bbox_cy). For frames 0-34 use est_bbox_cx / est_hull_cx from boat_template.csv (mask bbox is truncated by the image edge)."
+  },
+  {
+   "name": "island",
+   "description": "pale sand/rock island (low elongated mound, beige/white with darker brown cliff at its right tip), left half of the image",
+   "moves": false,
+   "visible_frames": [0, 74],
+   "extents_px_frame0": {"x_left": 31, "x_right": 557, "width": 527, "top_y": 529, "peak_x": 250,
+                         "base_y_left": 627, "base_y_right": 655, "base_y_under_peak": 639,
+                         "height_peak_above_base": 111, "bbox_h": 127, "centroid": [273.3, 594.7], "main_axis_deg": 4.9},
+   "occlusion": "right tip (x ~484-557) is covered by the boat's bow from frame 63 on"
+  }
+ ],
+ "events": [
+  {"event": "boat already moving at first frame (no start of motion in clip)", "frame": 0, "t": 0.0},
+  {"event": "boat stern leaves right image edge -> boat fully in view", "frame": 35, "t": 1.4},
+  {"event": "boat bow reaches/overlaps island right tip in image (boat in front; image overlap, not necessarily 3D contact)", "frame": 63, "t": 2.52},
+  {"event": "boat still moving at last frame (no stop)", "frame": 74, "t": 2.96}
+ ],
+ "files": {
+  "tracks/boat.csv": "per-frame mask measurements of the boat",
+  "tracks/boat_template.csv": "per-frame template-matching position/scale (edge-independent)",
+  "island_extents.json": "static island geometry (frame 0)",
+  "island_mask_f0.npy": "packed bits of the island mask (960x960)",
+  "notes.md": "methods, reliability, ambiguities"
+ }
+}

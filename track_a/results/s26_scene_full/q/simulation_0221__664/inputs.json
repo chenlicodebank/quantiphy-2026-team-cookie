@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0221.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 80,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 664,
+  "question": "What is the acceleration of the vacuum cleaner at time 2s in m/s^2?",
+  "prior": "diameter of the vacuum cleaner = 0.438m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

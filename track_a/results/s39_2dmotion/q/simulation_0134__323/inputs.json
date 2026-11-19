@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0134.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1080,
+ "height": 1920,
+ "question": {
+  "id": 323,
+  "question": "What is the acceleration of the bread slice at time1.75 s, in m/s^2?",
+  "prior": "height of the toaster = 0.166m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

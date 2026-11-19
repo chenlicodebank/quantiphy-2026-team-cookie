@@ -1,0 +1,40 @@
+{
+  "video": "simulation_0035_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by plain white)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 72, "width": 1080, "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {"motion": "static (white background, no features; segmented video of a fixed-camera render)",
+             "perspective_cues": "none visible (no ground, horizon or vanishing lines). Principal point assumed at image centre (540, 540). Focal length unknown; estimate from depth_info + a known size.",
+             "image_centre_px": [540, 540]},
+  "objects": [
+    {"name": "bird", "description": "small black flying bird (only black object), upper object at y ~572-614; flaps wings (V shape <-> flat arc)",
+     "moves": true, "visible_frames": [0, 71], "track": "tracks/bird.csv",
+     "reference_point": "ref_x, ref_y = centroid of the thick body core of the mask (distance transform >= 50% of max); bbox_cx/cy and centroid also given",
+     "motion_summary_px": {"ref_x": [54.84, 651.79], "ref_y_range": [584.7, 606.0],
+                           "direction": "left -> right, nearly horizontal, ~8.5 px/frame, ref_y bobs +-10 px with flapping",
+                           "frames_0_1_identical": "bird mask identical in frames 0 and 1 (first frame duplicated / motion starts at frame 1)"},
+     "size_px": {"bbox_width_range": [19, 31], "bbox_height_range": [6, 25],
+                 "max_width_frames": "29-31 px at frames 5-6, 29-31, 52-54 (wings spread flat)",
+                 "min_width_frames": "19-20 px at frames 11, 21-22, 46, 69-71 (wings raised V)",
+                 "apparent_size_trend": "no systematic change over the clip -> roughly constant depth"}},
+    {"name": "human", "description": "small walking person, light/white top, grey trousers, below and left of the bird (x 124-208, y 705-751)",
+     "moves": true, "visible_frames": [0, 71], "track": "tracks/human.csv",
+     "reference_point": "pelvis estimate: ref_x = mask centroid x, ref_y = lowest-foot y - 0.53 * 40.5 px",
+     "motion_summary_px": {"ref_x": [128.36, 202.31], "feet_y": [745, 751],
+                           "direction": "walking right (slightly down in the image), ~1.04 px/frame"},
+     "size_px": {"full_height_frames_0_64": {"median": 40.5, "range": [39, 42]},
+                 "frames_65_71": "head clipped by segmentation mask, bbox height 32-36 px (NOT full height)",
+                 "bbox_width_range": [10, 18], "apparent_size_trend": "constant (~40-41 px) -> roughly constant depth"}}
+  ],
+  "static_objects": "none (pure white background; no ground, furniture or markings)",
+  "events": [
+    {"event": "bird motion starts", "frame": 1, "time": 0.0417, "note": "frames 0 and 1 identical for the bird"},
+    {"event": "bird wings flat / spread (bbox height minimum)", "frames": [5, 31, 54, 63]},
+    {"event": "bird wings up V (bbox height maximum)", "frames": [0, 22, 26, 47, 69]},
+    {"event": "human stride widest (legs apart)", "frames": [6, 24, 41, 60]},
+    {"event": "human legs together (narrowest)", "frames": [0, 16, 36, 51]},
+    {"event": "human head clipped by mask", "frames": [65, 71]},
+    {"event": "both objects move through the whole clip; no contact, impact or direction reversal", "frames": [0, 71]}
+  ]
+}

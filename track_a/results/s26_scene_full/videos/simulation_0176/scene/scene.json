@@ -1,0 +1,133 @@
+{
+ "video": "simulation_0176.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 40,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "max_bg_shift_px": 0.01,
+  "method": "phase correlation of rock region vs frame 0, all 40 frames",
+  "horizon": {
+   "fit": "y = 0.0244*x + 867.0",
+   "y_at_x0": 867.0,
+   "y_at_x1919": 913.8,
+   "tilt_deg": 1.396,
+   "note": "sea/sky boundary (far sea horizon); right side lower -> slight camera roll ~1.4 deg; camera looks roughly level (horizon at ~0.82 of image height means camera pitched slightly up or horizon below centre)"
+  },
+  "principal_point_assumed": [
+   960,
+   540
+  ]
+ },
+ "objects": [
+  {
+   "name": "airplane",
+   "desc": "white twin-engine business/regional jet (T-tail, rear-mounted engines, landing gear down), only moving object; seen side-on, flies right-to-left across the upper sky",
+   "moves": true,
+   "visible_frames": "0-38 (enters at right edge frame 0, fully in frame 7-30, exits left edge, gone at 39)",
+   "fully_visible_frames": "7-30",
+   "track": "tracks/airplane.csv",
+   "reference_point": "use cx_bbox,cy_bbox (mask bbox centre) or cx_centroid,cy_centroid as origin proxy; only frames 7-30 are uncut",
+   "apparent_size_px": {
+    "frame7_axis_len": 501.1,
+    "frame30_axis_len": 424.6,
+    "frame16": {
+     "axis_len": 456.0,
+     "bbox_w": 453,
+     "bbox_h": 100
+    },
+    "note": "nose-to-tail mask length shrinks ~501->425 px over frames 7-30 (ratio ~0.85): plane recedes from camera; part of early length is motion blur (~60 px/frame displacement)"
+   }
+  },
+  {
+   "name": "airplane_shadow",
+   "desc": "dark blurry shadow of the plane on the sea, lower right, moves right-to-left",
+   "moves": true,
+   "visible_frames": "~15-33 (reliable 16-25)",
+   "track": "tracks/airplane_shadow.csv"
+  },
+  {
+   "name": "rock_island",
+   "desc": "tall grey rock sea-stack covered with green trees/shrubs, centre-left; with a lower tree-covered ledge on its left",
+   "moves": false,
+   "visible_frames": "0-39",
+   "extents_px_frame16": {
+    "whole_incl_trees": {
+     "x0": 510,
+     "x1": 1075,
+     "y_top": 522,
+     "y_bottom": 1020,
+     "width": 565,
+     "height": 498
+    },
+    "bare_rock_tower": {
+     "x0": 695,
+     "x1": 1050,
+     "y_top": 600,
+     "y_bottom": 1020
+    },
+    "note": "manual reading from grid image frames/f16.png, +-10 px"
+   }
+  },
+  {
+   "name": "sandbar_beach",
+   "desc": "pale pink-white sand spit around the rock base, extends to bottom edge and to the right",
+   "moves": false,
+   "visible_frames": "0-39",
+   "extents_px": {
+    "x0": 344,
+    "x1_approx": 1300,
+    "y0": 956,
+    "y1": 1079,
+    "note": "approx; cut by bottom edge; right tip ~x1300"
+   }
+  },
+  {
+   "name": "sea",
+   "desc": "turquoise sea with small whitecaps, animated waves (not an object that translates)",
+   "moves": false,
+   "visible_frames": "0-39"
+  },
+  {
+   "name": "sky",
+   "desc": "blue sky, hazy near horizon, no clouds/birds",
+   "moves": false,
+   "visible_frames": "0-39"
+  }
+ ],
+ "events": [
+  {
+   "event": "plane nose enters at right edge",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "plane fully inside frame (tail fin in)",
+   "frame": 7,
+   "time": 0.2917
+  },
+  {
+   "event": "plane nose reaches left edge",
+   "frame": 31,
+   "time": 1.2917
+  },
+  {
+   "event": "plane last visible (tail at left edge)",
+   "frame": 38,
+   "time": 1.5833
+  },
+  {
+   "event": "plane gone",
+   "frame": 39,
+   "time": 1.625
+  },
+  {
+   "event": "plane motion: steady leftward and slightly downward in image throughout; no direction change, no contact/impact",
+   "frame": null
+  }
+ ]
+}

@@ -1,0 +1,75 @@
+{
+  "video": "simulation_0172.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 80,
+  "duration_s": 3.3333,
+  "image_size_px": [2304, 1296],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; time t -> frame round(t*24)",
+  "pixel_convention": "full-resolution pixels, x right, y down, origin top-left",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of a ground strip, frame 0 vs frame 79: shift (-0.08, +0.03) px, response 0.93; stars and terrain unchanged",
+    "per_frame_background_shift_px": [0, 0],
+    "letterbox": "black bar from row 1195 to 1295 (not part of the scene)",
+    "focal_length": "unknown (estimate from given depth_info plus a known size)"
+  },
+  "perspective_cues": {
+    "ground": "grey lunar regolith plane seen at a shallow angle, from the ridge line down to row ~1194",
+    "ridge_line_first_ground_row_by_x": {"0": 1042, "128": 1033, "256": 1022, "384": 1012, "512": 999, "640": 991, "768": 989, "896": 987, "1024": 992, "1152": 992, "1280": 991, "1408": 991, "1536": 992, "1664": 993, "1792": 996, "1920": 1000, "2048": 1003, "2176": 1008},
+    "ridge_note": "the sky/ground edge is a nearby terrain ridge, not the true horizon. It is gently curved (lowest row ~987 at x~900); the true horizon is above it and was not measured",
+    "astronaut_depth_trend": "the astronaut moves left->right and slightly toward the camera: shadow centroid y 1024 (f0) -> 1047 (f79), feet-on-ground y ~1023 (f17) -> ~1055-1063 (f60-79); apparent size grows ~1.2x (sqrt(mask area) ratio f79/f0 = 1.205; bbox height 340-345 px in the first hop vs 400-440 px later, pose-dependent)"
+  },
+  "objects": [
+    {
+      "name": "astronaut",
+      "description": "the only person/moving object: white spacesuit with a backpack (PLSS) on the left/back side, gold-dark visor, red stripes on legs and arms; faces and moves to the right (+x)",
+      "moves": true,
+      "visible_frames": [0, 79],
+      "occlusion": "never occluded; always fully inside the image",
+      "track_file": "tracks/astronaut.csv",
+      "reference_point": "cx, cy = mask centroid (proxy for the pelvis/root; the backpack pulls it slightly up and back, so the pelvis is roughly at or a little below/right of it). bbox_cx, y1 = bottom of the feet",
+      "size_px_examples": {
+        "frame_0_in_air_knees_bent": {"bbox_w": 219, "bbox_h": 345},
+        "frame_17_crouched_landing": {"bbox_w": 177, "bbox_h": 349},
+        "frame_36_apex_legs_spread": {"bbox_w": 236, "bbox_h": 413},
+        "frame_79_standing_walking": {"bbox_w": 213, "bbox_h": 438}
+      }
+    },
+    {
+      "name": "astronaut_shadow",
+      "description": "dark cast shadow of the astronaut on the ground, offset left of the feet (light from upper right). Shows where the astronaut is over the ground",
+      "moves": true,
+      "visible_frames": [0, 79],
+      "track_file": "tracks/astronaut_shadow.csv"
+    },
+    {
+      "name": "lunar_ground",
+      "description": "grey regolith ground plane with faint craters/texture; static",
+      "moves": false,
+      "image_extent_px": {"x": [0, 2303], "y": ["ridge line ~987-1042", 1194]}
+    },
+    {
+      "name": "black_sky_with_stars",
+      "description": "black sky with tiny faint stars; static",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "video starts with the astronaut in the air, coming down (end of a previous hop)", "frame": 0, "time_s": 0.0, "note": "feet 77 px above the shadow top; centroid moving down"},
+    {"event": "first ground contact (landing of hop 1)", "frame": 16, "time_s": 0.667, "note": "feet-to-shadow gap 3 px at f15, 1 at f16, 0 at f17-18; frames 15-18 = stance"},
+    {"event": "lowest centroid (crouch) during stance", "frame": 15, "time_s": 0.625, "note": "cy max 843.0"},
+    {"event": "take-off of hop 2", "frame": 19, "time_s": 0.792, "note": "gap 4 px at f19, 10 at f20, then increases"},
+    {"event": "apex of hop 2", "frame": 36, "time_s": 1.5, "note": "centroid cy min 695.3 at f35 (695.5 at f36); helmet top y0 min 507 at f35-37; feet-shadow gap max 102 px at f35-37"},
+    {"event": "landing of hop 2 (ground contact)", "frame": 58, "time_s": 2.417, "note": "gap 6 at f57, 1 at f58, <=0 from f59; the leading foot is planted in front of the shadow by f60"},
+    {"event": "on the ground walking/stepping, slowing down", "frame_range": [59, 79], "time_s": [2.458, 3.292], "note": "centroid x speed falls from ~15 to ~6 px/frame; centroid y rises 834 -> ~817 (f70) then back to ~832"},
+    {"event": "horizontal direction", "note": "always moving right (+x) with no reversal; x speed (centroid) ~10 px/frame f0-14, ~20-30 px/frame f15-28 (push-off), ~15 px/frame f30-58, decreasing f59-79"}
+  ],
+  "files": {
+    "tracks/astronaut.csv": "per frame: frame, time, cx, cy (mask centroid), bbox_cx, bbox_cy, x0, y0, x1, y1, bbox_w, bbox_h, main_axis_len, across_width (PCA extents of the mask), main_axis_deg, area, occluded",
+    "tracks/astronaut_shadow.csv": "per frame: frame, time, cx, cy, x0, y0, x1, y1, area of the cast-shadow core, gap_feet_to_shadow_top_px = shadow y0 - astronaut y1 (<=~3 means feet touching the ground; negative once a foot is planted in front of the shadow)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "bg.py (median background, camera check), track.py (segmentation and tracks), static_and_overlay.py (ridge line, overlay), probe.py (pixel probes/table printer)"
+  }
+}

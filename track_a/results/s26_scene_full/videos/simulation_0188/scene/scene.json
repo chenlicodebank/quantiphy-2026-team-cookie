@@ -1,0 +1,347 @@
+{
+ "video": {
+  "video": "simulation_0188.mp4",
+  "video_source": "simulation",
+  "scene": "3D",
+  "fps": 30.0,
+  "frames": 60,
+  "duration_s": 2.0,
+  "width": 1920,
+  "height": 1080
+ },
+ "units": "pixels (x right, y down, origin top-left of 1920x1080 frame), seconds; t = frame/30",
+ "camera": {
+  "motion": "static (phase correlation of background wall patch: |shift| <= 0.04 px over all 60 frames)",
+  "horizon_y_px": 543,
+  "horizon_note": "from vanishing point of the truck long axis (two parallel side lines) = (-3400..-3640, 542..548) over frames 33-46, and convergence of the straight image trajectories of the truck points at (~-3200, 539); horizon ~ image centre row -> camera pitch ~ 0, roll ~ 0. Principal point assumed image centre (960, 540).",
+  "truck_axis_vanishing_point_px": {
+   "33": [
+    -3409.3,
+    543.6
+   ],
+   "34": [
+    -3415.4,
+    541.8
+   ],
+   "35": [
+    -3391.8,
+    544.6
+   ],
+   "36": [
+    -3443.5,
+    543.4
+   ],
+   "37": [
+    -3444.3,
+    543.8
+   ],
+   "38": [
+    -3456.6,
+    545.8
+   ],
+   "39": [
+    -3461.8,
+    546.2
+   ],
+   "40": [
+    -3490.0,
+    545.6
+   ],
+   "41": [
+    -3510.2,
+    545.2
+   ],
+   "42": [
+    -3499.2,
+    547.1
+   ],
+   "43": [
+    -3534.7,
+    547.6
+   ],
+   "44": [
+    -3551.2,
+    546.8
+   ],
+   "45": [
+    -3606.6,
+    548.4
+   ],
+   "46": [
+    -3640.0,
+    547.8
+   ]
+  },
+  "truck_motion_vanishing_point_px": [
+   -3200,
+   539
+  ],
+  "ground_plane": "flat grey hangar floor; back wall/floor boundary y(x) on frame 59 = {\"50\": 642, \"150\": 646, \"250\": 653, \"350\": 656, \"450\": 660, \"550\": 663, \"650\": 666, \"750\": 670, \"850\": 673, \"950\": 672, \"1050\": 675, \"1150\": 679, \"1250\": 687, \"1350\": 685, \"1450\": 688, \"1550\": 692, \"1650\": 701, \"1750\": 705, \"1850\": 701} (wall bottom line extrapolates to the horizon near x ~ -3000, i.e. the truck drives roughly parallel to the back wall)."
+ },
+ "objects": [
+  {
+   "name": "truck",
+   "type": "vehicle - white airport catering / high-loader truck (MAN-style cab, large white box body, folding platform with railings above the cab, black chassis, yellow block on front bumper, rear tail-lift bracket)",
+   "distinguish": "the only moving object; only vehicle in the scene",
+   "moves": true,
+   "visible_frames": "0-58 (partly out of frame on the left 0-32, whole truck in frame 33-43, partly out on the right 44-58; frame 58 only a few-pixel sliver; frame 59 gone)",
+   "track_file": "tracks/truck.csv",
+   "reference_point_note": "Blender root of the truck is not visible. body_centre_x/y = centre of the full image bbox (frame-40 bbox centre (932.5, 650)) carried to every frame with the tracked keypoints and apparent scale; ground_centre_x/y = point on the tyre-contact line below it (root of a vehicle rig is usually on the ground between the axles). Both are proxies, +-15 px near frame 40, worse (+-40 px) when extrapolated off-screen.",
+   "extent_frame40_px": {
+    "rear_edge_x": 298,
+    "front_bumper_x": 1567,
+    "railing_top_y": 332,
+    "box_top_y_rear": 422,
+    "box_top_y_front": 395,
+    "front_tyre_bottom_y": 968,
+    "rear_tyre_bottom_y": 912,
+    "image_length_px": 1269,
+    "image_height_px_at_front_axle": 636,
+    "front_wheel_hub": [
+     1220,
+     900
+    ],
+    "rear_wheel_hub": [
+     622,
+     855
+    ],
+    "wheelbase_image_px": 600,
+    "front_tyre_radius_px": "~62 (horizontal) / ~68 (vertical)",
+    "rear_tyre_radius_px": "~57",
+    "box_height_at_rear_px": "light 442 -> box bottom ~750: ~310",
+    "note": "oblique view (front face + left side visible); lengths are foreshortened image lengths, not along-axis lengths"
+   },
+   "apparent_scale_vs_frame40": {
+    "0": "0.7253",
+    "1": "0.7253",
+    "2": "0.7256",
+    "3": "0.7259",
+    "4": "0.7277",
+    "5": "0.729",
+    "6": "0.7305",
+    "7": "0.7317",
+    "8": "0.7338",
+    "9": "0.7363",
+    "10": "0.7443",
+    "11": "0.7468",
+    "12": "0.7496",
+    "13": "0.7525",
+    "14": "0.7567",
+    "15": "0.7603",
+    "16": "0.7645",
+    "17": "0.7681",
+    "18": "0.7737",
+    "19": "0.7786",
+    "20": "0.7845",
+    "21": "0.7897",
+    "22": "0.7963",
+    "23": "0.8028",
+    "24": "0.8098",
+    "25": "0.817",
+    "26": "0.8306",
+    "27": "0.8388",
+    "28": "0.8476",
+    "29": "0.8563",
+    "30": "0.8661",
+    "31": "0.8764",
+    "32": "0.8871",
+    "33": "0.9035",
+    "34": "0.915",
+    "35": "0.927",
+    "36": "0.9403",
+    "37": "0.9538",
+    "38": "0.9682",
+    "39": "0.9836",
+    "40": "1.0",
+    "41": "1.0174",
+    "42": "1.0353",
+    "43": "1.0548",
+    "44": "1.0753",
+    "45": "1.0975",
+    "46": "1.121",
+    "47": "1.1356",
+    "48": "1.1598",
+    "49": "1.1844",
+    "50": "1.2061",
+    "51": "1.2348",
+    "52": "1.2658",
+    "53": "1.2979",
+    "54": "1.3166",
+    "55": "1.3513",
+    "56": "1.3886",
+    "57": "1.4283"
+   }
+  },
+  {
+   "name": "cast shadows of truck",
+   "moves": true,
+   "distinguish": "large soft dark area on the floor under/behind the truck, shadow of the railings on the floor ahead of the cab (frames ~15-30), and a sharp dark quadrilateral on the floor at y~720-775 left of the truck rear (frames ~50-58). Not objects; excluded from masks/bboxes."
+  },
+  {
+   "name": "hangar back wall with roller doors",
+   "moves": false,
+   "distinguish": "light grey wall of large sectional doors with a row of 3 small dark windows each at y~576-604; vertical steel columns at x~850, ~1010, ~1210-1270, ~1470-1500, ~1720-1800",
+   "door_windows_px_frame59": [
+    {
+     "x0": 0,
+     "y0": 560,
+     "w": 81,
+     "h": 70
+    },
+    {
+     "x0": 83,
+     "y0": 560,
+     "w": 94,
+     "h": 70
+    },
+    {
+     "x0": 179,
+     "y0": 560,
+     "w": 20,
+     "h": 70
+    },
+    {
+     "x0": 215,
+     "y0": 560,
+     "w": 14,
+     "h": 34
+    },
+    {
+     "x0": 503,
+     "y0": 560,
+     "w": 12,
+     "h": 38
+    },
+    {
+     "x0": 503,
+     "y0": 604,
+     "w": 14,
+     "h": 26
+    },
+    {
+     "x0": 846,
+     "y0": 560,
+     "w": 9,
+     "h": 44
+    },
+    {
+     "x0": 877,
+     "y0": 576,
+     "w": 30,
+     "h": 25
+    },
+    {
+     "x0": 919,
+     "y0": 576,
+     "w": 32,
+     "h": 25
+    },
+    {
+     "x0": 964,
+     "y0": 577,
+     "w": 33,
+     "h": 25
+    },
+    {
+     "x0": 1103,
+     "y0": 580,
+     "w": 35,
+     "h": 24
+    },
+    {
+     "x0": 1152,
+     "y0": 579,
+     "w": 36,
+     "h": 23
+    }
+   ],
+   "wall_floor_boundary_y_px": {
+    "50": 642,
+    "150": 646,
+    "250": 653,
+    "350": 656,
+    "450": 660,
+    "550": 663,
+    "650": 666,
+    "750": 670,
+    "850": 673,
+    "950": 672,
+    "1050": 675,
+    "1150": 679,
+    "1250": 687,
+    "1350": 685,
+    "1450": 688,
+    "1550": 692,
+    "1650": 701,
+    "1750": 705,
+    "1850": 701
+   }
+  },
+  {
+   "name": "left hangar section with large windows",
+   "moves": false,
+   "distinguish": "left part of image x 0-830, receding side bays with tall gridded windows (x 240-470 and 530-800, y 140-380)"
+  },
+  {
+   "name": "ceiling lamps",
+   "moves": false,
+   "distinguish": "pendant lamps at about (130,15), (175,130), (495,90), (880,45) on frame 59"
+  },
+  {
+   "name": "floor",
+   "moves": false,
+   "distinguish": "flat concrete floor, y > ~640-705 (boundary sloping down to the right)"
+  }
+ ],
+ "events": [
+  {
+   "frame": 0,
+   "time": 0.0,
+   "event": "truck already rolling slowly to the right at the first frame (front hub moves 0.5 px 0->1, then steadily more each frame); no stationary phase seen, so motion starts at or just before frame 0"
+  },
+  {
+   "frame": "0-58",
+   "event": "continuous acceleration to the right and slightly toward the camera along a straight line; no stop, reversal, bounce, turn or contact with anything"
+  },
+  {
+   "frame": 26,
+   "time": 0.8667,
+   "event": "rear wheel hub enters the image at the left"
+  },
+  {
+   "frame": 33,
+   "time": 1.1,
+   "event": "rear edge of the box enters the image (x~4): whole truck in frame from 33 to 43"
+  },
+  {
+   "frame": 44,
+   "time": 1.4667,
+   "event": "front bumper reaches the right image edge (front partly out from 44)"
+  },
+  {
+   "frame": 46,
+   "time": 1.5333,
+   "event": "last frame with the front wheel hub in view"
+  },
+  {
+   "frame": 53,
+   "time": 1.7667,
+   "event": "last frame with the rear wheel hub in view"
+  },
+  {
+   "frame": 57,
+   "time": 1.9,
+   "event": "last frame with the rear box edge clearly in view (x~1780)"
+  },
+  {
+   "frame": 59,
+   "time": 1.9667,
+   "event": "truck has left the image (frame 58 only a sliver at the right edge)"
+  }
+ ],
+ "files": {
+  "tracks/truck.csv": "per-frame truck track (see notes.md)",
+  "notes.md": "methods and reliability",
+  "scripts/": "all measurement scripts; _tm.json = raw template-matching keypoints with NCC"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0188.mp4",
+ "video_source": "simulation",
+ "video_type": "A3SS",
+ "fps": 30.0,
+ "frames": 60,
+ "duration_s": 2.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1444,
+  "question": "What is the width of the truck in meters?",
+  "prior": "acceleration of the truck = 10.757m/s^2",
+  "depth_info": "t=0.5s, distance_center_of _the_truck_camera = 22.532m   \nt =1s, distance_center_of _the_truck_camera = 19.525m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

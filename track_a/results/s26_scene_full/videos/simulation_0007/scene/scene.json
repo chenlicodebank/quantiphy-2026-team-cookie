@@ -1,0 +1,98 @@
+{
+  "video": "simulation_0007.mp4",
+  "source": "simulation",
+  "scene_type": "2D (top-down view of a pond/lake shore; motion on the water plane, facing the camera)",
+  "fps": 24.0,
+  "frames": 74,
+  "duration_s": 3.0833,
+  "size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the land region (rows 0-450) vs frame 0: |shift| <= 0.003 px in every frame (scene/scripts/camera_shift.json)",
+    "view": "orthographic-like overhead (nadir) view; no horizon; single metres-per-pixel scale is appropriate for the water plane"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "aliases": ["rowboat", "wooden boat", "dinghy"],
+      "distinguishing": "only moving object; white/grey wooden rowboat with blue-grey interior and dark seats (thwarts), on the green water in the lower-right half",
+      "moves": true,
+      "visible_frames": [0, 73],
+      "occluded_frames": [],
+      "track_file": "tracks/boat.csv",
+      "reference_point": "mask centroid (cx, cy) = proxy for the rigid object's origin/centre",
+      "frame0": {"centre": [843.2, 703.6], "bbox": [746, 660, 943, 749]},
+      "frame73": {"centre": [622.3, 788.9], "bbox": [528, 746, 719, 833]},
+      "size_px": {
+        "length_along_axis": "203.5-209.7 (median ~205); 209.7 at frame 0 including small stern tip, ~203.5 late when tip is in shadow; hull ~204-206",
+        "width_across_axis": 70.7,
+        "axis_angle_deg_image": -22.1,
+        "axis_aligned_bbox_w_h_frame0": [198, 90],
+        "height": "not observable (top-down)"
+      },
+      "motion_summary_px": {
+        "net_displacement_0_to_73": [-220.93, 85.25],
+        "net_displacement_len": 236.81,
+        "path_length": 236.83,
+        "heading_deg_image_y_down": 158.9,
+        "per_frame_step_mean": 3.244,
+        "per_frame_step_std": 0.132,
+        "note": "straight line, constant pixel velocity (linear fit vx=-3.031, vy=+1.169 px/frame; quadratic terms ~0), moves along its own long axis toward the lower-left (the end with the small protruding stick/rudder leads). No rotation (axis angle -21.6 to -22.2 deg)."
+      }
+    },
+    {
+      "name": "dock",
+      "aliases": ["pier", "wooden jetty", "boardwalk"],
+      "distinguishing": "grey wooden plank pier from the bank (upper-left, near x~420,y~380) into the water, ending near (540,670); dark posts/bolts visible on it",
+      "moves": false,
+      "visible_frames": [0, 73],
+      "frame0_minAreaRect": {"centre": [485.7, 518.2], "length_px": 324.5, "width_px": 94.3, "angle_deg": -22.4},
+      "size_px_notes": "minAreaRect slightly overestimates width (shadowed right edge); plank deck width ~85-94 px, length ~320-325 px; dock long axis runs from the bank (upper-left) to the water end (lower-right), ~67-68 deg below +x (i.e. 22 deg from vertical) - roughly perpendicular to the boat's long axis. Water end of the dock at about (510-580, 650-685)."
+    },
+    {
+      "name": "shack",
+      "aliases": ["wooden house", "cabin", "boathouse"],
+      "distinguishing": "weathered wooden building at top-left with a barred window and steps down toward the grass",
+      "moves": false,
+      "visible_frames": [0, 73],
+      "frame0_bbox_approx": [65, 0, 520, 290],
+      "notes": "cut off by the top image edge; steps at about x 290-400, y 190-290"
+    },
+    {
+      "name": "rocks",
+      "aliases": ["boulders", "stones"],
+      "distinguishing": "tan/beige boulder cluster on the right bank",
+      "moves": false,
+      "visible_frames": [0, 73],
+      "frame0_bbox_approx": [790, 315, 1078, 485]
+    },
+    {
+      "name": "trees_bushes",
+      "distinguishing": "foliage at top-centre/right (x 650-1000, y 0-120) and left edge (x 0-200, y 100-540)",
+      "moves": false,
+      "visible_frames": [0, 73]
+    },
+    {
+      "name": "water",
+      "distinguishing": "green pond water filling the lower ~half (shoreline about y 500-560), with long diagonal tree shadows; dark wedge at the lower-right corner (x>1000, y>830)",
+      "moves": false
+    },
+    {
+      "name": "bank_grass",
+      "distinguishing": "grassy shore between shack and water, y ~ 100-520",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "boat already moving at frame 0 (no start observed)", "frame": 0, "time_s": 0.0},
+    {"event": "boat still moving at last frame (no stop observed)", "frame": 73, "time_s": 3.0417},
+    {"event": "no contacts, bounces or direction changes; boat passes below/right of the dock end without touching (at frame 73 the boat bbox top y=746 is ~60 px below the dock end y~685)", "frame": null}
+  ],
+  "files": {
+    "tracks/boat.csv": "per-frame boat track",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

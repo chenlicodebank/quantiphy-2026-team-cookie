@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0117.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MS",
+ "fps": 24.020228,
+ "frames": 19,
+ "duration_s": 0.791,
+ "width": 1920,
+ "height": 1920,
+ "question": {
+  "id": 245,
+  "question": "What is the width of the electronic lock in meters?",
+  "prior": "gravity acc = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

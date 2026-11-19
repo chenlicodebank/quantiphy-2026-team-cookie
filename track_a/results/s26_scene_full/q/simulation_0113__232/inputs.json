@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0113.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 24.0048,
+ "frames": 120,
+ "duration_s": 4.999,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 232,
+  "question": "What is the side length of the pool in meters?",
+  "prior": "diameter of the swim ring = 1m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,72 @@
+{
+  "video": "internet_0049.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 283,
+  "size_px": [3840, 2160],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (full 3840x2160 resolution) and seconds; no metric scale assumed",
+  "summary": "Static-ish handheld/tripod shot of a vine-covered wooden pergola with picnic tables in front of an outdoor basketball court and a peach building. One person (light-grey shirt, khaki trousers, grey cap) rides a black electric kick-scooter from LEFT to RIGHT across the scene, behind the front row of posts/tables, frames ~132-264. Nothing else moves except leaves and dappled shadows.",
+  "camera": {
+    "motion": "slow drift, not a pan: relative to frame 0 the background shifts smoothly to dx = -60 px, dy = +105 px by the last frame, with ~0.65 deg roll and ~1-1.5% apparent scale change (partly parallax). Per-frame values in camera_motion.csv.",
+    "during_rider_pass_frames_132_264": "background dx changes from about -31 px to -56 px (~0.2 px/frame horizontally), dy from ~+74 to +106 px",
+    "file": "scene/camera_motion.csv (columns dx_px, dy_px = displacement of the image-centre point vs frame 0; m00..m12 = 2x3 similarity mapping frame-0 pixel -> frame-i pixel)",
+    "perspective": "camera roughly level, looking horizontally; ground is the concrete slab under the pergola. The rider travels nearly parallel to the image plane: apparent height stays ~440-450 px across the whole frame. Ground contact line of the rider drifts from y~1470 (left, x~100) to y~1510 (x~1400) to y~1540 (x~2800) — slight tilt/roll plus camera dy drift, not a size change."
+  },
+  "objects": [
+    {
+      "name": "rider_scooter",
+      "description": "Person riding a black electric kick-scooter (two small black wheels, tall stem with handlebar). Rider: grey cap, light-grey/white long-sleeve top, khaki/olive trousers, light shoes. Only moving object.",
+      "moves": true,
+      "direction": "left -> right (+x), nearly horizontal",
+      "visible_frames": "132-266 (scooter front enters at 132, torso fully visible from ~143, torso leaves right edge after ~260; tracked to 264; gone from 267). Lower body hidden by front tables/benches much of the time and by bushes at the far right (~frames 250-266).",
+      "track_file": "scene/tracks/rider_scooter.csv",
+      "reference_point": "x_px,y_px = centroid of the moving-mask pixels of the torso (between shoulders and hips) - the visible body centre; about 167 px below the cap top",
+      "size_px_clear_frames": {
+        "frame_190": {"cap_top_y": 1060, "wheel_bottom_y": 1510, "total_height_rider_plus_scooter": 450, "rider_height_cap_top_to_shoe_sole": 420,
+                       "scooter_length_rear_wheel_back_to_front_wheel_front": 263, "rear_wheel_x": [1297, 1350], "front_wheel_x": [1500, 1560],
+                       "wheelbase_centre_to_centre": 207, "wheel_diameter": "53-60", "handlebar_top_y": 1230, "scooter_height_ground_to_handlebar": 280,
+                       "rider_body_depth_back_to_front_x": [1395, 1490], "torso_centroid_x": 1440.5},
+        "frame_147": {"cap_top_y": 1020, "wheel_bottom_y": 1470, "total_height": 450, "rear_wheel_x": [82, 137], "front_wheel_front_x_approx": 345, "scooter_length_approx": 263, "torso_centroid_x": 225.2},
+        "frame_233": {"cap_top_y": 1100, "wheel_bottom_y": 1540, "total_height": 440, "rear_wheel_x": [2715, 2770], "front_wheel_x": [2920, 2980], "scooter_length_approx": 265, "wheelbase_approx": 208, "torso_centroid_x": 2842.8}
+      },
+      "bbox_model": "bbox_x0 = x_px - 138, bbox_x1 = x_px + 126 (scooter rear wheel back to front wheel front, 264 px), bbox_y0 = cap top, bbox_y1 = cap top + 450",
+      "reliability": "torso x within ~3-5 px on unflagged frames; manual size readings +-5 px (scooter in deep shade, partly behind benches)"
+    },
+    {"name": "pergola_front_left_post", "moves": false, "description": "large brown wooden post, front row, left of centre (nearest to camera, occludes rider ~frames 177-182)", "frame0_x": [1100, 1195], "width_px": 95, "bottom_y": 1490, "top_y_at_beam": 650, "visible_height_px": 840},
+    {"name": "pergola_front_right_post", "moves": false, "description": "large brown wooden post, front row, right of centre (occludes rider ~frames 224-228)", "frame0_x": [2615, 2710], "width_px": 95, "bottom_y": 1495, "top_y_at_beam": 650, "visible_height_px": 845},
+    {"name": "pergola_back_posts", "moves": false, "description": "thinner posts of the rear rows (further away); frame-0 x ranges and bottom y", "posts": [
+      {"x": [140, 225], "bottom_y": 1370}, {"x": [1305, 1372], "bottom_y": 1380}, {"x": [1420, 1475], "bottom_y": 1320},
+      {"x": [2310, 2365], "bottom_y": 1325}, {"x": [2425, 2490], "bottom_y": 1390}, {"x": [3550, 3630], "bottom_y": 1380}]},
+    {"name": "pergola_roof", "moves": false, "description": "dark beams with vine-covered lattice", "frame0_y_beams": [640, 820], "spans_x": [0, 3840]},
+    {"name": "grey_metal_picnic_table", "moves": false, "description": "grey metal table with grey benches, front left (in front of rider path at frames ~140-165)", "frame0_top_x": [295, 740], "top_length_px": 445, "top_y": [1262, 1285], "bench_x": [185, 830], "legs_bottom_y": 1495, "height_ground_to_top_px": 220},
+    {"name": "brown_picnic_table_front_centre", "moves": false, "description": "wooden-top table with benches, centre front (occludes rider's legs ~frames 195-225)", "frame0_top_x": [1709, 2406], "top_length_px": 697, "top_y": [1248, 1275], "front_bench_y": 1360, "legs_bottom_y": 1490},
+    {"name": "brown_picnic_table_front_right", "moves": false, "description": "wooden-top table with benches, right front (occludes rider's legs ~frames 238-262)", "frame0_top_x": [3070, 3650], "top_length_px": 580, "top_y": [1255, 1305], "bench_x": [2970, 3770], "legs_bottom_y": 1525},
+    {"name": "brown_picnic_tables_back", "moves": false, "description": "several more wooden picnic tables behind the rider path (centre-left x 515-1100 top y~1205; centre x 1550-1950 y~1185-1270; right x 2765-3380 y~1205-1240)"},
+    {"name": "water_bottles", "moves": false, "description": "two clear bottles on the back-right table", "frame0_x": [2740, 2790], "y": [1150, 1195]},
+    {"name": "basketball_hoops", "moves": false, "description": "backboards in background", "items": [
+      {"x": [815, 870], "y": [830, 935], "note": "left, white backboard with red rim at y~920"},
+      {"x": [1195, 1215], "y": [920, 985], "note": "small, centre-left"},
+      {"x": [2845, 2880], "y": [930, 995]},
+      {"x": [3360, 3435], "y": [845, 950], "note": "right, largest visible"}]},
+    {"name": "basketball_court", "moves": false, "description": "green court surface behind the pergola, visible y ~1150-1280"},
+    {"name": "building", "moves": false, "description": "peach multi-storey building in background, x 0-1930, roofline y~810"},
+    {"name": "ground_slab", "moves": false, "description": "beige concrete slab with control joints converging toward the centre; dappled shadows from the lattice"}
+  ],
+  "events": [
+    {"event": "rider_scooter enters at left edge (scooter front first visible)", "frame": 132, "t": 4.400},
+    {"event": "rider torso fully inside frame", "frame": 143, "t": 4.767},
+    {"event": "rider passes behind front-left post (torso hidden 179-180)", "frames": "177-182", "t": "5.90-6.07"},
+    {"event": "rider passes behind front-right post (torso hidden 225-227)", "frames": "224-229", "t": "7.47-7.63"},
+    {"event": "rider torso starts leaving right edge", "frame": 260, "t": 8.667},
+    {"event": "rider gone: last sliver of the rider at the right edge in frame 265-266 (flow track ends 264)", "frame": 267, "t": 8.900},
+    {"event": "no stop, no direction change; horizontal step of torso centroid (linear fits): 25.8 px/frame (143-160), 27.9 (160-176), 31.7 (183-200), 32.4 (200-217), 33.3 (230-255) - the rider speeds up; apparent size is constant so this is not perspective", "frames": "143-255"}
+  ],
+  "files": {
+    "tracks": ["scene/tracks/rider_scooter.csv"],
+    "camera": "scene/camera_motion.csv",
+    "notes": "scene/notes.md",
+    "scripts": "scene/scripts/"
+  }
+}

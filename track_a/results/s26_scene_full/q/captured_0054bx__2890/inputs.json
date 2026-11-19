@@ -1,0 +1,18 @@
+{
+ "video": "captured_0054bx.mp4",
+ "video_source": "lab",
+ "video_type": "V3MX",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2890,
+  "question": "What is the orange ball's displacement between 0.5s and 1.0s in meters?",
+  "prior": "velocity of the orange ball at 0.5s = 2.21m/s",
+  "depth_info": "t=0.5s, distance_orange_ball_camera = 2.2400m\nt=1.0s, distance_orange_ball_camera = 1.8100m\nt=1.0s, distance_white_ball_camera = 1.2350m\nt=1.0s, distance_green_ball_camera = 1.3310m\nt=2.0s, distance_soccer_ball_camera = 3.2540m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

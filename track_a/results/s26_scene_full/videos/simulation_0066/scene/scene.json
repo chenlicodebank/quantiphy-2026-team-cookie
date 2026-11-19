@@ -1,0 +1,81 @@
+{
+  "video": "simulation_0066.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2160, 1080],
+  "units": "pixels in the original 2160x1080 frame (x right, y down, origin top-left); time_s = frame / 24",
+  "camera": {
+    "motion": "static (phase correlation of background strips vs frame 0: |shift| < 0.01 px over all frames)",
+    "view": "elevated view looking down onto a street intersection; horizon near the top of the frame",
+    "perspective_cues_approx": {
+      "note": "ROUGH: curb lines read by eye from a 100-px grid, error maybe +-10 px at the points, large at the vanishing points",
+      "road_A_receding_up_left": {"curb_left_px": [[653, 140], [805, 427]], "curb_right_px": [[756, 137], [1274, 356]],
+                                   "vanishing_point_px": [621, 80]},
+      "road_B_left_right": {"far_curb_left_part_px": [[0, 578], [805, 448]], "far_curb_right_part_px": [[1296, 367], [2160, 232]],
+                            "near_curb_right_corner_px": [[1793, 589], [2160, 443]], "vanishing_point_px": [3033, 96]},
+      "horizon": "line through the two vanishing points, about y = 80-96 px (nearly level)",
+      "focal_estimate_px": "about 830 px IF the two roads are perpendicular and the principal point is the image centre (HFOV about 104 deg) - very rough; prefer depth_info + a known size"
+    }
+  },
+  "moving_objects": {
+    "taxi": {
+      "description": "yellow NYC-style taxi sedan (roof sign)", "track": "tracks/taxi.csv", "frames": [0, 71],
+      "motion": "starts at the far side of the intersection (image ~[841,330]-[960,426]) facing the camera, drives toward the camera and turns to its right (image left), ending side-on at the left, just above the parked purple car",
+      "ref_point": "mask centroid of the visible body (shadow mostly removed)",
+      "apparent_size_px": {"f0": {"bbox_wh": [120, 106], "len": 129}, "f24": {"bbox_wh": [176, 135], "len": 196}, "f48": {"bbox_wh": [365, 157], "len": 371}, "f71": {"bbox_wh": [466, 175], "len": 478}},
+      "size_note": "growth is mostly the change from front view to side view (turn), plus approach",
+      "occlusion": "frames ~24-50: the near traffic-light pole / sign plate crosses the taxi (thin strip hidden, both sides of the pole are in the mask); f0-1 touches cyclist in the image"
+    },
+    "van": {
+      "description": "white Chevrolet-style passenger van (brown-tinted windows)", "track": "tracks/van.csv", "frames": [0, 71],
+      "motion": "parked/nearly still at the far side next to the taxi until ~f6-8, then drives toward the camera and to the right (image heading ~30 deg below horizontal), growing strongly; at f71 it fills the lower right [1399,511]-[2092,1025]",
+      "ref_point": "mask centroid (white body + bumpers/wheels; cast shadow removed)",
+      "apparent_size_px": {"f0": {"bbox_wh": [142, 128], "len": 170}, "f24": {"bbox_wh": [161, 141], "len": 188}, "f48": {"bbox_wh": [239, 199], "len": 272}, "f60": {"bbox_wh": [360, 288], "len": 389}, "f71": {"bbox_wh": [694, 515], "len": 740}},
+      "occlusion": "cyclist rides along its left/front side the whole clip (overlap in image every frame); it stays inside the frame (f71 bottom y=1025)"
+    },
+    "cyclist": {
+      "description": "man in dark jacket and grey trousers riding a black city bicycle", "track": "tracks/cyclist.csv", "frames": [0, 71],
+      "motion": "starts beside the van's left front (f0 box [964,329]-[993,400]), rides toward the camera / right, staying just in front-left of the van, ends at [1444,727]-[1597,916]",
+      "ref_point": "centre of the hand-read full box (rider+bike); bottom_cx/bottom_y = wheel contact level",
+      "apparent_size_px": {"f0": {"bbox_wh": [30, 72]}, "f24": {"bbox_wh": [41, 105]}, "f48": {"bbox_wh": [70, 126]}, "f71": {"bbox_wh": [154, 190]}},
+      "occlusion": "overlaps the van in the image in all frames (in front of it)"
+    },
+    "pedestrian": {
+      "description": "man in white T-shirt and grey jeans walking on the far-left sidewalk", "track": "tracks/pedestrian.csv", "frames": [0, 71],
+      "motion": "walks steadily toward image left along the sidewalk, from x~480 to x~250, at a nearly constant depth (box height ~95-110 px all clip)",
+      "ref_point": "pelvis estimate = head top + 0.47 x 103 px (103 = median unoccluded box height)",
+      "apparent_size_px": {"median_unoccluded_bbox_h": 103, "range_unoccluded_h": [95, 110]},
+      "occlusion": "f0-~20 behind the green trash can (lower legs hidden); ~f40-60 behind the left lamp post (thin strip)"
+    }
+  },
+  "static_objects": {
+    "purple_car": {"description": "parked dark-purple sedan, near left foreground, facing right", "bbox_px": [0, 652, 598, 897], "clipped": "rear touches/leaves left frame edge", "wheel_centres_px": {"front": [510, 777], "rear": [160, 870]}, "wheelbase_px": 362, "orientation": "long axis from rear (lower-left) to front (upper-right), ~15 deg above horizontal in image"},
+    "green_car": {"description": "parked teal/green coupe on far side of road B, right of centre, front pointing left", "bbox_px": [1441, 334, 1627, 414], "wheel_centres_px": {"front": [1517, 401], "rear": [1598, 386]}, "wheelbase_px": 82},
+    "trash_can": {"description": "green slatted trash can on far-left sidewalk", "bbox_px": [438, 437, 481, 487], "auto_bbox_body_px": [440, 444, 477, 485]},
+    "lamp_post_left": {"description": "street lamp with twin heads on far-left sidewalk, leaning", "bbox_px": [265, 308, 378, 502], "base_px": [367, 499]},
+    "lamp_posts_far": {"description": "three lamp posts on far sidewalk to the right", "bboxes_px": [[1512, 205, 1555, 324], [1852, 178, 1912, 272], [2079, 160, 2133, 240]]},
+    "traffic_light_near": {"description": "large traffic-light assembly on near corner, foreground centre (occludes taxi ~f24-50)", "bbox_px": [691, 475, 929, 1080]},
+    "traffic_light_far_left": {"description": "pedestrian-sign traffic light (green lamp lit) at far-left corner", "bbox_px": [697, 184, 761, 437]},
+    "traffic_light_far_mid": {"description": "traffic light at far corner centre", "bbox_px": [1280, 162, 1328, 362]},
+    "traffic_light_right": {"description": "traffic-light assembly with red pedestrian signal on right corner", "bbox_px": [1922, 254, 2084, 605]},
+    "mats": {"description": "red-brown tactile/grate mats on sidewalks", "left_far_corner": [590, 412, 697, 461], "far_mid": [1324, 319, 1419, 343], "right_corner": [1946, 520, 2159, 609], "far_right_small": [[1750, 261, 1831, 275], [2003, 229, 2079, 238]]},
+    "sidewalks": "far-left corner sidewalk (with lamp post, trash can, pedestrian), far sidewalk along road B (right), right corner sidewalk, near corner sidewalk bottom centre"
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip start: taxi, van, cyclist close together at far side; pedestrian beside trash can"},
+    {"frame": 1, "t": 0.042, "event": "taxi starts moving (step 0.4 px at f1, 2-3 px/frame from f2)"},
+    {"frame": 7, "t": 0.292, "event": "van starts moving (steps < 0.6 px f1-6, ~1 px f7, rising steadily; rear edge fixed at x=957 until f8)"},
+    {"frame": 14, "t": 0.583, "event": "taxi turning: image heading changes from ~120 deg (toward camera) to ~155-170 deg (leftward) over f14-f25; heading ~170 deg after f55"},
+    {"frame": 24, "t": 1.0, "event": "taxi begins passing behind near traffic light / sign plate (to ~f50)"},
+    {"frame": 0, "t": 0.0, "event": "cyclist and pedestrian are moving from the first frame to the last (no start/stop observed)"},
+    {"frame": 71, "t": 2.958, "event": "clip end: all four still moving; van largest (694x515 px box)"}
+  ],
+  "files": {
+    "tracks": "tracks/taxi.csv, tracks/van.csv, tracks/cyclist.csv, tracks/pedestrian.csv",
+    "background": "bg.png (clean background, median of frames with van ghost patched from f71)",
+    "notes": "notes.md", "scripts": "scripts/"
+  }
+}

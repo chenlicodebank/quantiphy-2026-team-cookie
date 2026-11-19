@@ -1,0 +1,81 @@
+{
+  "video": "internet_0037.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down drone view of a swimming pool, camera looking straight down)",
+  "fps": 22.521385,
+  "frames": 164,
+  "duration_s": 7.282,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels (full 3840x2160 resolution) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "near-static (hovering drone). Slow drift relative to frame 0: dx 0 -> about +10..+15 px (max ~+17 near f78) then back to about -4 px at f163; dy 0 -> about +16 px (f100-f140) then +11 px at f163. Content shift sign: + = scene content moves right/down in the image.",
+    "per_frame_file": "tracks/camera.csv (raw) ; smoothed columns cam_dx_smooth / cam_dy_smooth in tracks/swimmer.csv",
+    "magnitude_vs_motion": "drift <= ~17 px vs swimmer travel ~1180 px over the clip (about 1.5%); subtract it (use *_camcomp columns) for best accuracy",
+    "rotation_zoom": "none detected (deck tile joints keep their spacing, wall edge stays horizontal)"
+  },
+  "perspective": "Nadir (straight-down) view: pool wall edge horizontal at y~187, deck tile joints evenly spaced (~134 px) across the full width -> uniform scale, planar assumption valid. Swimmer at water surface; pool floor fixtures ~1-2 m deeper (slightly smaller scale, refraction) - do not mix floor and surface scales unless a question requires it.",
+  "objects": [
+    {
+      "name": "swimmer",
+      "description": "the only person: woman swimming breaststroke left -> right along the pool (+x), dark hair, light patterned swimsuit, face covered by a grey privacy-blur patch",
+      "moves": true,
+      "visible_frames": [0, 163],
+      "track_file": "tracks/swimmer.csv",
+      "reference_point": "ref_x/ref_y = centroid of the visible body mask (skin + hair + blur patch). Alternatives: trunk_x/y (centroid of eroded mask, torso/hips), head_hair_x/y (centroid of dark hair blob = head)",
+      "motion": "moves +x (right) throughout, nearly horizontal (y drifts 918 -> 985, i.e. ~+65 px down over the clip, about 3 degrees). Net displacement f0->f163 (camera-compensated): mask centroid ~+1188 px, head (hair) ~+1179 px. Average ~7.3 px/frame; surging speed within each stroke cycle.",
+      "size_px": {
+        "head_to_toe_length_along_x": "median 658 px over all frames (p10 588, p90 710; legs bend during kick). In streamlined glide frames: f29 686, f60 708, f123 ~716-730 (checked by eye: toes x~1715, top of head x~2445), f138 698. Best stretched-body length ~700-730 px.",
+        "fingertip_to_toe_length_arms_forward": "glide frames f29 948, f82 928, f123 962 (eye check: toes 1715 -> fingertips 2685 = 970), f162 884 px",
+        "width_across_body_arms_wide": "bbox height at arm-sweep frames f0 702, f43 704, f95 518, f138 504 px",
+        "torso_width": "~120-150 px (shoulders, by eye at f123)",
+        "head_hair_blob": "~110-130 px long"
+      }
+    },
+    {
+      "name": "pool_light_far_left",
+      "description": "round pale-cyan fixture on the pool floor, left, partly under splash",
+      "moves": false, "position_px_f0": [355, 1165], "diameter_px": "~50"
+    },
+    {
+      "name": "pool_light_middle",
+      "description": "round pale-cyan fixture on the pool floor, middle; swimmer passes over it (~f35-f135 often hidden)",
+      "moves": false, "position_px_f0": [1845, 1178], "diameter_px": "~50-55"
+    },
+    {
+      "name": "pool_light_right",
+      "description": "round pale-cyan fixture on the pool floor, right; always visible",
+      "moves": false, "position_px_f0": [2909, 1183], "diameter_px": "~50-55 (width 49-55, height 47-55)",
+      "spacing_note": "light_middle -> light_right distance ~1064 px; far_left -> middle ~1490 px"
+    },
+    {
+      "name": "pool_wall_top_edge / deck (coping)",
+      "description": "grey stone deck along the top of the frame with white vertical tile joints; water edge (wall) at y~187 (frame 0), horizontal across the full width",
+      "moves": false,
+      "position_px_f0": "deck y 0..187, wall edge y 186.9",
+      "deck_tile_joint_spacing_px": "mean 133.9 px (28 joints from x=163 to x=3779; individual spacings 126-139)",
+      "deck_joint_x_f0": [163, 290, 423, 555, 690, 820, 954, 1080, 1218, 1353, 1485, 1617, 1752, 1884, 2020, 2153, 2285, 2418, 2557, 2696, 2826, 2961, 3097, 3233, 3371, 3503, 3641, 3779]
+    },
+    {
+      "name": "bottom_shadow_band_and_far_wall",
+      "description": "dark shaded water band along the bottom (edge wavy, y~1840-1900) and the opposite wall / coping at y~2085-2100 (partly out of frame), with strong sun glints around x 2100-3000",
+      "moves": false,
+      "position_px_f0": "shadow edge y~1880; far wall edge y~2090",
+      "pool_width_visible_px": "~1900 px between top wall edge (187) and bottom wall edge (~2090) - uncertain which line is the true water/wall boundary at the bottom"
+    },
+    {
+      "name": "pool_floor_tiles",
+      "description": "dark green mosaic tiles on the pool floor, rectangular tiles, seen through rippling water",
+      "moves": false, "size_px": "approx 100-140 px blocks (refraction-distorted, unreliable)"
+    }
+  ],
+  "events": [
+    {"event": "swimmer already moving at first frame (no start of motion in clip)", "frame": 0, "t_s": 0.0},
+    {"event": "arms swept wide (out-sweep / pull, bbox height max)", "frames": [0, 43, 95, 138], "t_s": [0.0, 1.909, 4.218, 6.128]},
+    {"event": "arms fully extended forward (glide, bbox length max)", "frames": [29, 82, 123, 162], "t_s": [1.288, 3.641, 5.462, 7.193]},
+    {"event": "head forward-surge maxima (local max of head x-velocity)", "frames": [12, 51, 83, 107, 148], "t_s": [0.533, 2.265, 3.685, 4.751, 6.572]},
+    {"event": "head surge minima", "frames": [18, 45, 75, 130, 155], "t_s": [0.799, 1.998, 3.330, 5.772, 6.882]},
+    {"event": "stroke period", "value": "~46-48 frames (~2.1 s) between successive arm sweeps / glides"},
+    {"event": "swimmer still moving at last frame; no turn, no wall contact", "frame": 163, "t_s": 7.238}
+  ]
+}

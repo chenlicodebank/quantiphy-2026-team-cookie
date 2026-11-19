@@ -1,0 +1,41 @@
+{
+  "video": "simulation_0299.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "units": "pixels and seconds; no metric scale guessed",
+  "camera": {
+    "motion": "static (uniform light-blue backdrop with no texture; the only background structure is a faint shading gradient, which stays fixed. No pan or shake is visible)",
+    "perspective_cues": "No visible ground texture, horizon or markings. The ground is the same colour as the sky (seamless backdrop); a very faint soft shadow lies under the forklift. The camera looks down at the forklift from above and behind it. The forklift drives away from the camera, up and to the left in the image, and its apparent size shrinks steadily. The apparent-size ratio (sqrt_area or bbox height) is roughly proportional to 1/depth.",
+    "focal_length": "unknown; estimate from the given depth_info and a known size (see notes.md)"
+  },
+  "objects": [
+    {
+      "name": "forklift",
+      "description": "Yellow and dark-grey counterbalance forklift (Toyota label on the mast) with a cab roof, a mast and two forks at the front. It is the only object in the scene. The view is from behind and to the right, with the forks pointing left and away.",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "cut_by_bottom_frame_edge_frames": [0, 14],
+      "track_file": "tracks/forklift.csv",
+      "reference_point_note": "The vehicle root is not visible. The track gives the mask centroid (mask_cx, mask_cy), the bbox centre, and the lowest mask point (bottom_x, bottom_y = rear-wheel ground contact). In frames 0-14, the bbox bottom, bbox_h, centroid and area are biased because the image bottom clips the forklift; the top (bbox_y0) and the left and right edges are unclipped there.",
+      "size_px_examples": {
+        "frame_15_first_fully_visible": {"bbox_w": 677, "bbox_h": 720, "sqrt_area": 521.0, "pca_len": null},
+        "frame_36": {"bbox_w": 590, "bbox_h": 647, "sqrt_area": 465.4, "pca_len": 704.0, "pca_wid": 559.4},
+        "frame_71": {"bbox_w": 400, "bbox_h": 471, "sqrt_area": 335.1, "pca_len": 515.2, "pca_wid": 387.2}
+      }
+    }
+  ],
+  "static_objects": "None: a seamless uniform blue backdrop and ground, with no furniture or markings.",
+  "events": [
+    {"event": "at rest", "frames": [0, 1], "times_s": [0.0, 0.042]},
+    {"event": "start of motion (first 1-px shift)", "frame": 2, "time_s": 0.083},
+    {"event": "speeds up: image displacement per frame grows from ~1 px to ~18 px (bbox right edge)", "frames": [2, 50]},
+    {"event": "nearly constant image displacement (~18 px/frame in x, ~7 px/frame in y at the bbox top-right). It is still receding and shrinking.", "frames": [50, 71]},
+    {"event": "fully inside the frame from here on", "frame": 15, "time_s": 0.625},
+    {"event": "the video ends while the forklift is still moving; no stop, turn, impact or lift action seen", "frame": 71, "time_s": 2.958}
+  ],
+  "direction_of_motion_image": "up-left. Mask-centroid displacement from frame 15 to 71: dx=-757, dy=-456 px. The heading looks constant (a straight line); the PCA angle drifts from 57 to 66 deg only because of the changing view."
+}

@@ -1,0 +1,50 @@
+frame,t,cx,cy,bbox_x0,bbox_y0,bbox_x1,bbox_y1,bbox_w,bbox_h,len_major,width_minor,ell_major,ell_minor,occluded_or_in_hand,source,note
+0,0.0,317.5,544.5,254,490,381,599,127,109,129.4,104.8,134.4,115.4,1,held_mask,"held in both hands, lower edge partly behind fingers"
+1,0.0417,320.5,540.5,257,486,384,595,127,109,129.7,105.0,135.5,116.3,1,held_mask,"held in both hands, lower edge partly behind fingers"
+2,0.0833,323.5,537.5,260,483,387,592,127,109,130.8,105.1,134.6,115.4,1,held_mask,"held in both hands, lower edge partly behind fingers"
+3,0.125,325.5,535.5,262,481,389,590,127,109,130.9,104.9,134.2,114.8,1,held_mask,"held in both hands, lower edge partly behind fingers"
+4,0.1667,326.5,534.5,263,480,390,589,127,109,126.5,104.6,133.0,114.6,1,held_mask,"held in both hands, lower edge partly behind fingers"
+5,0.2083,326.5,533.5,263,478,390,589,127,111,126.4,104.4,133.1,114.5,1,held_mask,"held in both hands, lower edge partly behind fingers"
+6,0.25,326.5,533.5,263,478,390,589,127,111,126.4,104.4,133.1,114.5,1,held_mask,"held in both hands, lower edge partly behind fingers"
+7,0.2917,328.0,533.0,265,478,391,588,126,110,125.0,103.9,132.1,113.3,1,held_mask,"held in both hands, lower edge partly behind fingers"
+8,0.3333,328.0,531.0,265,477,391,585,126,108,125.3,104.1,130.8,114.4,1,held_mask,"held in both hands, lower edge partly behind fingers"
+9,0.375,330.0,529.0,268,475,392,583,124,108,124.5,103.8,131.1,113.9,1,held_mask,"held in both hands, lower edge partly behind fingers"
+10,0.4167,331.0,526.5,269,472,393,581,124,109,129.3,104.4,132.1,114.0,1,held_mask,"held in both hands, lower edge partly behind fingers"
+11,0.4583,332.0,523.0,270,469,394,577,124,108,124.2,107.4,132.4,114.1,1,held_mask,"held in both hands, lower edge partly behind fingers"
+12,0.5,334.0,519.5,272,465,396,574,124,109,124.0,109.0,133.8,114.4,1,held_mask,"held in both hands, lower edge partly behind fingers"
+13,0.5417,334.5,518.5,272,464,397,573,125,109,129.2,104.4,133.4,114.0,1,held_mask,"held in both hands, lower edge partly behind fingers"
+14,0.5833,334.0,518.5,272,464,396,573,124,109,128.6,103.6,133.2,113.6,1,held_mask,"held in both hands, lower edge partly behind fingers"
+15,0.625,332.5,519.0,270,464,395,574,125,110,125.1,109.5,133.3,115.3,1,held_mask,"held in both hands, lower edge partly behind fingers"
+16,0.6667,330.0,523.5,268,470,392,577,124,107,128.0,103.0,132.3,113.0,1,held_mask,"held in both hands, lower edge partly behind fingers"
+17,0.7083,325.5,530.5,264,476,387,585,123,109,126.8,103.5,131.3,111.5,1,held_mask,"held in both hands, lower edge partly behind fingers"
+18,0.75,317.5,540.0,256,486,379,594,123,108,127.2,102.7,133.8,110.9,1,held_mask,"held in both hands, lower edge partly behind fingers"
+19,0.7917,303.0,553.5,237,499,369,608,132,109,132.6,103.3,140.0,111.2,1,held_mask,"wind-up swing (moving down-left), held, motion blur, lower/left edge near hands and dark trousers (+-4 px)"
+20,0.8333,292.5,568.0,227,512,358,624,131,112,131.7,106.8,139.1,112.8,1,held_mask,"wind-up swing (moving down-left), held, motion blur, lower/left edge near hands and dark trousers (+-4 px)"
+21,0.875,284.5,578.5,221,525,348,632,127,107,132.1,91.7,135.0,111.3,1,held_mask,"wind-up swing (moving down-left), held, motion blur, lower/left edge near hands and dark trousers (+-4 px)"
+22,0.9167,278.5,589.0,217,537,340,641,123,104,122.1,103.1,127.6,116.1,1,held_mask,"wind-up swing (moving down-left), held, motion blur, lower/left edge near hands and dark trousers (+-4 px)"
+23,0.9583,273.0,598.0,214,546,332,650,118,104,119.1,101.0,122.5,115.9,1,held_mask,"wind-up swing (moving down-left), held, motion blur, lower/left edge near hands and dark trousers (+-4 px)"
+24,1.0,272.5,601.5,213,550,332,653,119,103,119.5,98.5,122.3,114.6,1,held_mask,"wind-up swing (moving down-left), held, motion blur, lower/left edge near hands and dark trousers (+-4 px)"
+25,1.0417,274.5,597.5,215,548,334,647,119,99,120.5,94.5,123.7,112.1,1,held_mask,"wind-up swing (moving down-left), held, motion blur, lower/left edge near hands and dark trousers (+-4 px)"
+26,1.0833,284.3,585.8,223,539,345,620,122,81,122.6,76.8,129.1,96.9,1,held_mask,forward swing starts; ball occluded by hands and blurred; centre rough (+-6 px)
+27,1.125,312.0,550.0,244,500,380,600,136,100,135.5,99.0,144.5,114.5,1,flight_mask,forward swing in hand; strong motion blur; extents include blur streak
+28,1.1667,358.0,512.0,285,461,431,563,146,102,172.7,98.7,186.9,108.1,1,flight_mask,"in hand, strong blur; mask touched the forearm, left/bottom edge set manually"
+29,1.2083,415.0,452.5,342,394,488,511,146,117,160.6,94.8,168.3,99.9,1,flight_mask,leaving the hand (fingers at lower-left edge); streak
+30,1.25,476.5,384.0,411,321,542,447,131,126,152.5,95.8,158.8,100.0,1,flight_mask,release frame (hand last touches ball ~29-30); streak
+31,1.2917,531.5,318.5,467,254,596,383,129,129,155.9,89.7,163.8,92.6,0,flight_mask,"free flight; motion-blur streak, length along motion includes blur"
+32,1.3333,586.5,246.0,522,192,651,300,129,108,116.0,89.4,138.8,93.2,0,flight_mask,"free flight; motion-blur streak, length along motion includes blur"
+33,1.375,638.5,187.5,574,133,703,242,129,109,116.7,95.8,131.3,100.8,0,flight_mask,"free flight; motion-blur streak, length along motion includes blur"
+34,1.4167,687.5,146.5,619,90,756,203,137,113,125.5,107.0,136.7,111.4,0,flight_mask,"free flight; motion-blur streak, length along motion includes blur"
+35,1.4583,728.5,118.0,664,62,793,174,129,112,119.1,113.0,130.9,109.3,0,flight_mask,"free flight; motion-blur streak, length along motion includes blur"
+36,1.5,809.5,71.5,754,27,865,116,111,89,98.9,84.6,112.7,88.1,0,flight_mask,free flight; mild blur
+37,1.5417,843.0,71.5,791,24,895,119,104,95,98.1,84.4,106.5,96.4,0,flight_mask,free flight; mild blur
+38,1.5833,871.5,72.0,823,24,920,120,97,96,94.0,82.6,100.8,95.2,0,flight_mask,free flight; mild blur
+39,1.625,895.5,78.5,850,32,941,125,91,93,88.7,79.6,94.1,92.1,0,flight_mask,free flight; mild blur
+40,1.6667,914.5,90.0,872,46,957,134,85,88,76.2,74.3,84.0,71.0,0,flight_mask,"free flight; mask missed the lower black panel, bottom edge set manually"
+41,1.7083,929.5,109.5,887,66,972,153,85,87,88.9,72.7,91.1,81.5,0,flight_mask,free flight; mild blur
+42,1.75,945.0,123.0,899,90,991,156,92,66,90.0,64.7,98.9,68.1,0,flight_mask,free flight; mild blur
+43,1.7917,950.5,150.0,908,118,993,182,85,64,79.7,63.6,88.5,64.2,1,flight_mask,receiver forearm touches ball (catch contact); right edge near arm
+44,1.8333,948.5,178.0,912,143,985,213,73,70,83.1,59.9,86.6,62.6,1,flight_mask,caught: ball between receiver forearms/hands
+45,1.875,949.5,186.0,914,156,985,216,71,60,65.4,64.8,80.3,58.4,1,flight_mask,"held by receiver, partly behind hand"
+46,1.9167,947.0,200.5,915,169,979,232,64,63,64.0,63.0,83.3,57.8,1,flight_mask,"held by receiver, partly behind hand"
+47,1.9583,955.0,212.0,923,179,987,245,64,66,72.7,54.1,79.9,57.7,1,flight_mask,"held by receiver, partly behind hand"
+48,2.0,971.0,221.5,934,188,1008,255,74,67,73.7,58.5,80.2,63.3,1,flight_mask,"held by receiver, partly behind hand"

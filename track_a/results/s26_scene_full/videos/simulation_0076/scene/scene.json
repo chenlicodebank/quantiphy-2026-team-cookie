@@ -1,0 +1,41 @@
+{
+  "video": "simulation_0076.mp4",
+  "source": "simulation",
+  "scene_type": "2D (rendered; camera looks straight down at a flat grey floor)",
+  "fps": 24.0, "frames": 72, "duration_s": 3.0, "width": 1920, "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; no metric scale guessed",
+  "camera": {
+    "motion": "assumed static: the floor is untextured uniform grey (~136/255), so no background features exist to measure a shift; nothing indicates panning (both walkers move smoothly in straight lines, the median background is clean).",
+    "view": "top-down (nadir) perspective view of a ground plane. Image x = walking direction (people move toward -x, right to left); image y = sideways on the floor.",
+    "perspective": "Visible radial parallax: a walker's head is displaced away from the image centre relative to the body (head right of torso at x~1350, centred at x~960, left of torso at x~300). Head-track path is ~8-9% longer than mask-centroid path. Apparent body size is constant (head diameter ~43 px, shoulder span ~145 px throughout), i.e. both people stay at the same depth; no horizon or vanishing points."
+  },
+  "objects": [
+    {"name": "man_black_shirt", "type": "human (adult male, walking)",
+     "distinguish": "black T-shirt, maroon/dark-red trousers, brown hair; the UPPER walker (image y ~405-415 for the head)",
+     "moves": true, "visible_frames": "0-71 (whole clip, never occluded)",
+     "track": "tracks/man_black_shirt.csv",
+     "motion": "walks in a straight line toward -x (right to left) along image row y~410; head x 1363.9 -> 511.0 (net 852.9 px, path 858.0 px); mask centroid net 784.8 px; mean head step 12.25 px/frame (frames 2-71)",
+     "pixel_size": {"shoulder_arm_span_across_walk_bbox_h_px": [140, 154], "bbox_w_along_walk_px_range_with_stride": [105, 241], "head_diameter_px_median": 43.9, "mask_area_px_range": [9775, 14524], "height": "not observable (top-down view)"}},
+    {"name": "man_white_shirt", "type": "human (adult male, walking)",
+     "distinguish": "white/light-grey T-shirt, blue jeans, brown hair; the LOWER walker (head y ~600-612); the faster of the two",
+     "moves": true, "visible_frames": "0-71 (whole clip, never occluded)",
+     "track": "tracks/man_white_shirt.csv",
+     "motion": "walks in a straight line toward -x along image row y~605; head x 1355.5 -> 249.3 (net 1106.2 px, path 1108.4 px); mask centroid net 1018.5 px; mean head step 15.83 px/frame (frames 2-71)",
+     "pixel_size": {"shoulder_arm_span_across_walk_bbox_h_px": [138, 152], "bbox_w_along_walk_px_range_with_stride": [100, 241], "head_diameter_px_median": 43.2, "mask_area_px_range": [9172, 15237], "height": "not observable (top-down view)"}},
+    {"name": "floor", "type": "ground plane", "distinguish": "uniform grey, no markings or texture", "moves": false, "visible_frames": "0-71"},
+    {"name": "soft_shadows", "type": "shading", "distinguish": "faint circular dark halo (radius ~150-200 px) around each walker, moves with them; NOT part of the masks", "moves": true}
+  ],
+  "static_objects": "none besides the featureless floor",
+  "events": [
+    {"event": "both walkers stationary/identical pose between frame 0 and frame 1 (head step < 1 px)", "frame": 1, "time": 0.0417},
+    {"event": "walking motion visible from frame 1 -> 2 onward for both, continuing to the last frame (no stop, no turn, no contact)", "frame": 2, "time": 0.0833},
+    {"event": "walkers side by side at start (heads 198.6 px apart, x nearly equal); white-shirt man pulls ahead steadily; separation 328.3 px at frame 71", "frame": 71, "time": 2.9583},
+    {"event": "walkers cross the image centre column x=960: black-shirt head ~frame 33, white-shirt head ~frame 25 (parallax sign flips there)"}
+  ],
+  "pair_distance_px": {"frames": [0, 12, 24, 36, 48, 60, 71],
+    "head": [198.6, 204.4, 215.6, 240.3, 266.7, 299.2, 328.3],
+    "centroid": [181.2, 188.1, 199.3, 219.1, 248.3, 273.3, 303.7],
+    "pelvis_est": [186.7, 192.1, 202.7, 225.9, 250.7, 281.3, 308.6]},
+  "recommended_reference_point": "pelvis_est_x/y (head projected 6% toward the image centre) or mask centroid cx/cy; see notes.md"
+}

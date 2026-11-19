@@ -1,0 +1,58 @@
+{
+  "video": "internet_0010_segmented.mp4",
+  "source": "segmentation (internet footage, background replaced by white)",
+  "scene": "2D",
+  "fps": 30.0003,
+  "frames": 97,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels (x right, y down, origin top-left of the 1280x720 frame) and seconds",
+  "camera": {
+    "motion": "cannot be measured directly (background removed, no static reference visible). Indirect: player's feet stay at y 585-593 and x ~372-445 all clip, consistent with a static or nearly static camera. Treat as static.",
+    "per_frame_background_shift_px": "unavailable"
+  },
+  "objects": {
+    "ball": {
+      "description": "basketball, brown/orange, ~17 px diameter; the only ball. Dribbled once, held, then shot in a jump shot in an arc to the right toward an (invisible, segmented-out) hoop near x~800, y~380",
+      "moves": true,
+      "visible_separately_frames": "0-11 (frame 0 touching hand), 46-96 (93-96 clipped); frames 12-44 held and merged with player mask; frame 45 manual estimate in hands",
+      "track": "tracks/ball.csv",
+      "reference_point": "mask centroid (cx, cy); bbox centre also given",
+      "diameter_px": {"median_bbox_width": 17.0, "median_bbox_height": 16.0, "median_equal_area_diameter": 16.6, "median_main_axis_length": 17.8, "recommended": 17.0, "range_clean_frames": "15-20"}
+    },
+    "player": {
+      "description": "the shooter: man with glasses, grey sleeveless top with white print, black shorts, dark shoes; the only person",
+      "moves": true,
+      "visible_frames": "0-96 (full mask 0-84; from 85 the segmentation progressively loses him, frames 91-96 only a leg/foot remains)",
+      "track": "tracks/player.csv",
+      "reference_point": "mask centroid (cx, cy); feet_y = lowest mask pixel",
+      "height_px": {"standing_frames_0_11_median": 112, "range_0_11": [111, 113], "note": "head top to shoe sole, standing upright before the shot; frames 31-60 heights 117-142 include raised arms and ball, not body height"},
+      "width_px_standing": 34,
+      "horizontal_position": "centroid x 387 (frame 0) drifting to ~415 by frame 30 (steps/turns), then ~414-420 until 84"
+    },
+    "floor": {
+      "description": "court floor (not visible; inferred): player's soles at y ~586-590 and the ball's lowest point at the bounce (frame 9) y_bottom 586",
+      "moves": false,
+      "floor_line_y_px": 588
+    },
+    "hoop": {
+      "description": "not visible (removed by segmentation). Inferred from ball path: ball reverses horizontal direction at frame 83 at centre (799, 384), right edge x 807 -> contact with rim/backboard around x~800-810, y~380-395",
+      "moves": false
+    }
+  },
+  "events": [
+    {"name": "dribble: ball leaves hand (moving down)", "frame": 0, "t": 0.0, "note": "ball already in hand moving down at frame 0; separates by frame 1"},
+    {"name": "ball bounces on floor", "frame": 9, "t": 0.3, "ball_centre": [422.7, 580.1], "ball_bottom_y": 586},
+    {"name": "ball caught (merges with player)", "frame": 12, "t": 0.4},
+    {"name": "player crouch/gather, ball raised overhead", "frames": "30-44", "t": "1.0-1.467"},
+    {"name": "player feet leave floor (jump)", "frame": 45, "t": 1.5, "note": "feet_y 586 -> 581 at frames 47-48, small jump ~7 px; approximate"},
+    {"name": "ball release", "frame": 46, "t": 1.5333, "note": "first frame with ball separate from hands (centre 438.7, 436.1); frame 45 ball still on fingertips at ~ (431, 450)"},
+    {"name": "player lands", "frame": 55, "t": 1.8333, "note": "feet_y back to 586 from frame 55; approximate"},
+    {"name": "ball apex", "frame": 66, "t": 2.2, "note": "centre y flat ~295-298 over frames 63-69 (min 295.4 at frame 67); apex frame 66 +/- 1, apex centre y ~296"},
+    {"name": "ball hits rim/backboard (horizontal direction reverses)", "frame": 83, "t": 2.7666, "ball_centre": [798.8, 384.4]},
+    {"name": "ball falls down-left after contact (rebound / through hoop)", "frames": "84-92", "t": "2.8-3.0666"},
+    {"name": "ball mask clipped, stationary-looking sliver at (729, 499)", "frames": "93-96", "note": "unreliable, segmentation artifact"}
+  ],
+  "notes_file": "notes.md"
+}

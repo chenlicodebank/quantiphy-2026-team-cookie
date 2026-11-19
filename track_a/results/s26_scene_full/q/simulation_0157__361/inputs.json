@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0157.mp4",
+ "video_source": "simulation",
+ "video_type": "A2SS",
+ "fps": 24.0,
+ "frames": 48,
+ "duration_s": 2.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 361,
+  "question": "What is the length of the turtle in meters?",
+  "prior": "acceleration of the turtle = 2.639 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

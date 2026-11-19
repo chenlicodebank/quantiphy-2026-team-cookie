@@ -1,0 +1,59 @@
+{
+ "video": "captured_0052x.mp4",
+ "source": "lab (captured; this copy is a SAM2 segmentation: background replaced by flat green, face masked green, watermark 'Modified with Segment Anything 2 Demo' bottom-right x>=1030,y>=690)",
+ "scene": "3D",
+ "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels and seconds; image coords x right, y down, origin top-left",
+ "camera": {
+  "motion": "static (no background exists, but the three static objects stay fixed: basketball centre std 0.04/0.08 px over 49 frames; bin and shoe std 1-5 px only from occlusion by person/ball)",
+  "intrinsics_from_benchmark_convention": {"f_px": 762.8, "cx": 640, "cy": 360, "note": "f = 0.5959 x 1280 (80 deg HFOV Orbbec Femto Mega)"},
+  "perspective_cues": "Camera looks forward and somewhat down at the floor; objects lower in the image are closer. Floor objects: bin (~y 589 base), shoe (y~687 bottom), basketball (bottom cut at y 719). No visible floor plane/horizon (background removed). The exercise ball rolls toward the camera and to the left; its apparent diameter grows 130 -> ~207 px (frames 0 -> 32) and it leaves through the bottom-left image edge."
+ },
+ "objects": {
+  "exercise_ball": {
+   "description": "large dark-grey gym/exercise ball with light specular highlights; the only grey sphere",
+   "moves": true, "visible_frames": [0, 44], "fully_visible_frames": [0, 32],
+   "track": "tracks/exercise_ball.csv",
+   "reference_point": "centre of least-squares circle fitted to the ball's free silhouette edge (cx, cy); diam = circle diameter",
+   "apparent_diameter_px": {"frames_0_17_rest": "129-134 (mean ~132)", "f20": 143, "f24": 152, "f28": 179, "f32": 207, "f35": 222, "f38": 271},
+   "notes": "Frames 0-19 held against the person's body/hands (left edge and bottom free). Frames 33-44 cut by the bottom image edge; circle fit from the upper arc only, and the SAM mask is flattened/irregular there, so cx,cy,diam less reliable (diam can be off by 10-30%)."
+  },
+  "person": {
+   "description": "person in black clothes with long dark hair, face masked green, crouching behind the ball, left of the blue bin; pushes the ball with both hands then stays crouched",
+   "moves": true, "visible_frames": [0, 48],
+   "track": "tracks/person.csv",
+   "reference_point": "centroid of the visible person mask (cx, cy); lower body partly hidden by ball (frames 0-28) and bin (all frames); bottom limited by y=585 (bin top/feet)",
+   "notes": "Crouching the whole clip; never stands. Visible mask height ~214-242 px (head top y 344-374 to y~585). Arms flung outward/upward after release (frames 22-30)."
+  },
+  "recycling_bin": {
+   "description": "blue plastic recycling bin with white recycling symbol and yellow stickers, right of the person",
+   "moves": false, "visible_frames": [0, 48],
+   "bbox_px": [676, 486, 773, 589], "width_px": 98, "height_px": 104, "center_px": [729.0, 533.7],
+   "notes": "top rim y~486 (rim is an ellipse seen from above), base y~589; the person's arm overlaps its left top in some frames"
+  },
+  "basketball": {
+   "description": "orange-brown basketball on the floor at the bottom centre-right",
+   "moves": false, "visible_frames": [0, 48],
+   "bbox_px": [756, 624, 847, 719], "width_px": 92, "height_px": "96 (cut by bottom image edge at y=719; true diameter ~92 px from width)", "center_px": [801.7, 671.9],
+   "notes": "bottom few px may be cut by the frame edge; use width 92 px as its apparent diameter"
+  },
+  "shoe": {
+   "description": "single white sneaker with black stripes (Adidas-like) on the floor at bottom-left, toe pointing up-right",
+   "moves": false, "visible_frames": "0-35 and 42-48 (36-41 hidden behind the rolling exercise ball; partly hidden 35, 42-44)",
+   "bbox_px": [250, 626, 318, 687], "width_px": 69, "height_px": 62, "center_px": [285.7, 658.3],
+   "length_along_axis_px": "~78 (diagonal heel-to-toe, lower-left to upper-right)"
+  }
+ },
+ "events": [
+  {"frame": 0, "t": 0.0, "event": "ball at rest held by the person (cx 617, cy 507, diam 130)"},
+  {"frame": 10, "t": 0.417, "event": "person begins to rise/lean forward (head top y 374 -> 354 by frame 14); ball only jitters +-4 px"},
+  {"frame": 18, "t": 0.75, "event": "push starts: ball centre begins to move steadily down-left (start of ball motion, +-1 frame)"},
+  {"frame": 21, "t": 0.875, "event": "release: hands leave the ball (arms swing outward); ball still brushing the person's knees until ~frame 26"},
+  {"frame": 26, "t": 1.083, "event": "ball clearly separated from the person"},
+  {"frame": 33, "t": 1.375, "event": "ball bottom reaches the bottom image edge (partially out of frame from here)"},
+  {"frame": 36, "t": 1.5, "event": "ball passes in front of the shoe (shoe hidden 36-41)"},
+  {"frame": 44, "t": 1.833, "event": "last frame with the ball visible (small sliver bottom-left); gone from frame 45"}
+ ],
+ "files": {"tracks": ["tracks/exercise_ball.csv", "tracks/person.csv"], "static_raw": "static_objects_raw.json", "notes": "notes.md", "scripts": "scripts/"}
+}

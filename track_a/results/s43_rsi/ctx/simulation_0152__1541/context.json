@@ -1,0 +1,65 @@
+{
+ "id": 1541,
+ "video": "simulation_0152",
+ "submitted": 0.790563,
+ "submitted_is": "a fixed-rule blend exp(0.5 ln A + 0.5 ln B) of the Claude line's answer A = 0.753 and an earlier DeepSeek median B = 0.83; the rule blends every row of its population where the two differ by less than about 50 pct, so it is no judgement about this question",
+ "deepseek_median": 0.95,
+ "candidates": [
+  {
+   "name": "C1",
+   "kind": "claude",
+   "answer": 0.753,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "kind": "claude",
+   "answer": 0.755,
+   "who": "Claude Opus 5.5 (Claude Code agent), 30_x adjudication, 30_3 S3 adjudication (DeepSeek differs 25 pct to 2x)",
+   "source": "s30_adj_s3 attempt 1"
+  },
+  {
+   "name": "C3",
+   "kind": "claude",
+   "answer": 0.73,
+   "who": "Claude Opus 5.5 (Claude Code agent), 40_5 fresh per-question run",
+   "source": "s40_third attempt 1"
+  },
+  {
+   "name": "C4",
+   "kind": "deepseek",
+   "answer": 0.66,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r1",
+   "source": "s37_test_repeats r1"
+  },
+  {
+   "name": "C5",
+   "kind": "deepseek",
+   "answer": 1.0,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r2",
+   "source": "s37_test_repeats r2"
+  },
+  {
+   "name": "C6",
+   "kind": "deepseek",
+   "answer": 0.95,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r3",
+   "source": "s37_test_repeats r3"
+  },
+  {
+   "name": "C7",
+   "kind": "deepseek",
+   "answer": 1.1,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r4",
+   "source": "s37_test_repeats r4"
+  },
+  {
+   "name": "C8",
+   "kind": "deepseek",
+   "answer": 0.85,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r5",
+   "source": "s37_test_repeats r5"
+  }
+ ]
+}

@@ -1,0 +1,191 @@
+{
+ "video": "simulation_0205.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 30,
+ "duration_s": 1.25,
+ "width": 2124,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (mean abs diff of a static corner region vs frame 0 <= 0.2 grey levels over all frames)",
+  "view": "elevated 3/4 view looking down onto a desk top; desk front-left corner nearest the camera; no horizon visible (plain blue-grey wall/backdrop)",
+  "perspective_cues": {
+   "desk_top_corners_px_frame0": {
+    "left_back": [
+     460,
+     695
+    ],
+    "front_left_near": [
+     700,
+     890
+    ],
+    "front_right": [
+     1995,
+     655
+    ],
+    "back_right": [
+     1600,
+     525
+    ]
+   },
+   "desk_long_front_edge_px": "front_left_near -> front_right, ~1316 px, image slope ~ -10 deg (rises to the right)",
+   "desk_long_back_edge_px": "left_back -> back_right, ~1153 px (shorter than the front edge => receding)",
+   "desk_side_edge_px": "left_back -> front_left_near, ~309 px",
+   "note": "long edges converge to the right/up; vanishing point of the long edges lies far to the upper right off-image; corners +-5 px (bevelled edges, blur)"
+  }
+ },
+ "objects": {
+  "magnifying_glass": {
+   "description": "round metal-rimmed magnifying glass with silver ferrule and light-brown wooden handle; the only moving object",
+   "distinguish": "only object in the air; falls from the top edge (handle pointing right) onto the green leather desk top, landing left of the paper card/revolver and right of the typewriter",
+   "moves": true,
+   "visible_frames": [
+    0,
+    29
+   ],
+   "track": "tracks/magnifying_glass.csv",
+   "apparent_size_px": {
+    "len_main_axis_frame0": 183,
+    "len_main_axis_frame11": 175,
+    "len_main_axis_rest": 174,
+    "lens_ring_outer_diameter_rest_horizontal": 80,
+    "lens_ring_diameter_falling_horizontal": 77,
+    "bbox_rest_frames19_29": [
+     1255,
+     658,
+     1429,
+     703
+    ]
+   },
+   "rest_position_px": {
+    "ref_bbox_centre": [
+     1342,
+     680.5
+    ],
+    "lens_centre_est": [
+     1295,
+     677
+    ],
+    "handle_tip": [
+     1429,
+     693
+    ]
+   }
+  },
+  "desk": {
+   "description": "dark wooden writing desk with green leather inlay and gold-tooled border, drawers below",
+   "moves": false,
+   "visible_frames": [
+    0,
+    29
+   ],
+   "extents_px": {
+    "top_front_edge_len": 1316,
+    "top_side_edge_len": 309,
+    "top_bbox": [
+     460,
+     525,
+     1995,
+     890
+    ]
+   },
+   "note": "legs run off the bottom of the frame: full desk height not visible (top to frame bottom >= 190 px at the front-left corner)"
+  },
+  "typewriter": {
+   "description": "black vintage typewriter with cream round keys, on the left part of the desk top",
+   "moves": false,
+   "visible_frames": [
+    0,
+    29
+   ],
+   "bbox_px": [
+    858,
+    573,
+    1150,
+    753
+   ],
+   "extents_px": {
+    "width_left_right": 292,
+    "height_image": 180,
+    "keyboard_front_edge_len": "~250"
+   }
+  },
+  "revolver": {
+   "description": "dark revolver with brown wooden grip lying on the desk, right of centre, behind (beyond) the magnifier landing spot",
+   "moves": false,
+   "visible_frames": [
+    0,
+    29
+   ],
+   "bbox_px": [
+    1354,
+    605,
+    1507,
+    642
+   ],
+   "length_px": 153
+  },
+  "paper_card": {
+   "description": "small beige paper card / envelope under the revolver barrel",
+   "moves": false,
+   "visible_frames": [
+    0,
+    29
+   ],
+   "bbox_px": [
+    1332,
+    620,
+    1412,
+    641
+   ],
+   "length_px": 80
+  }
+ },
+ "events": [
+  {
+   "event": "magnifier visible and already falling (no release seen)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "falling, top of mask y 10 -> 637 px (frames 0-11), nearly level, small leftward drift (bbox x0 1264 -> 1252)",
+   "frames": [
+    0,
+    11
+   ]
+  },
+  {
+   "event": "impact with desk top (first contact)",
+   "frame": 12,
+   "t": 0.5,
+   "note": "contact occurs between frame 11 (still ~20 px above rest level) and 12"
+  },
+  {
+   "event": "lens-ring end rebounds / tilts up off the desk, highest at frame 14 (bbox top 616)",
+   "frames": [
+    12,
+    16
+   ]
+  },
+  {
+   "event": "ring end comes back down; second contact / settling",
+   "frame": 18,
+   "t": 0.75
+  },
+  {
+   "event": "at rest (frames 19-29 identical)",
+   "frame": 19,
+   "t": 0.7917
+  }
+ ],
+ "files": {
+  "notes": "notes.md",
+  "tracks": [
+   "tracks/magnifying_glass.csv",
+   "tracks/magnifying_glass_raw.csv"
+  ],
+  "scripts": "scripts/"
+ }
+}

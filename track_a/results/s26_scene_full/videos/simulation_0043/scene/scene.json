@@ -1,0 +1,73 @@
+{
+  "video": "simulation_0043.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "pixel_convention": "x right, y down, origin top-left of the 1080x1080 frame",
+  "camera": {
+    "motion": "static (phase correlation of the top 700 rows vs frame 0: |shift| <= 0.002 px in all frames; see tracks/camera_shift.csv)",
+    "view": "high aerial view looking steeply down (near top-down, slightly oblique: the boat's port side and the islet's slopes are visible). Ground plane = flat water/sand surface. No horizon or vanishing point in frame.",
+    "focal_length": "unknown (estimate from depth_info + known size if a question gives them)"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "small fishing boat: white hull with red waterline stripe, red-roofed white wheelhouse, white mast with rigging, light-teal deck hatch; the only moving object. Bow points left/up-left, stern right/down-right.",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/boat.csv",
+      "reference_point": "cx,cy = centroid of the mast-free body mask (hull + wheelhouse), proxy for the object origin",
+      "pixel_size_frame0": {"length_bow_to_stern_px": 216.9, "width_across_px": 87.2, "bbox_body_px": [337, 894, 538, 1001], "bbox_with_mast_px": [331, 860, 539, 1001], "main_axis_deg": 20.3},
+      "pixel_size_frame71": {"length_bow_to_stern_px": 213.4, "width_across_px": 87.0, "bbox_body_px": [91, 819, 289, 929], "bbox_with_mast_px": [86, 787, 290, 931], "main_axis_deg": 21.4},
+      "pixel_size_mean": {"length_px": 215.1, "width_px": 87.1},
+      "apparent_size_trend": "body length shrinks slowly and steadily 217 -> 213 px (about -0.055 px/frame, -1.6% over the clip): the boat recedes slightly from the camera as it moves left; width ~87 px constant within noise",
+      "motion_summary_px": {
+        "start_centroid": [440.1, 948.6],
+        "end_centroid": [192.3, 876.3],
+        "net_displacement_px": 258.1,
+        "direction_deg_image": -163.7,
+        "path_length_px": 259.2,
+        "mean_step_px_per_frame_frames2to71": 3.70,
+        "note": "frames 0 and 1 are identical (boat at rest); it moves from frame 2 on at nearly constant pixel speed (~3.7 px/frame, per-frame jitter +-0.5 px from segmentation), straight line, along its own bow direction (heading forwards)"
+      }
+    },
+    {
+      "name": "boat_shadow",
+      "description": "dark shadow of the boat and its mast on the water, up-right of the boat; moves with the boat. Not part of the boat.",
+      "moves": true,
+      "visible_frames": [0, 71]
+    },
+    {
+      "name": "rock_islet",
+      "description": "large white/grey rocky outcrop with dark shadowed right flank, top-centre/right of the frame, on the sand",
+      "moves": false,
+      "visible_frames": [0, 71],
+      "centroid_px": [626.0, 204.1],
+      "bbox_px": [398, 12, 885, 450],
+      "length_px_main_axis": 538.3,
+      "width_px_across": 390.4,
+      "main_axis_deg": 144.5,
+      "outline_polygon_px": [[400, 170], [430, 95], [520, 40], [580, 15], [680, 12], [870, 30], [885, 100], [870, 160], [800, 265], [700, 380], [600, 450], [540, 440], [460, 380], [410, 300], [398, 220]],
+      "reliability": "hand-clicked outline, +-10-15 px; its top edge touches the frame top (may be slightly cut)"
+    },
+    {
+      "name": "sand_beach",
+      "description": "beige sand spit surrounding the islet, occupying the upper-left; its lowest tip (pointing down toward the boat) is at about (370, 775); shoreline runs diagonally from upper-right (~900, 100) to the tip and from the tip up-left to (0, ~500)",
+      "moves": false
+    },
+    {
+      "name": "water",
+      "description": "dark green sea filling the lower and right parts; static texture (no wave animation measurable, frame diff ~0.02 grey levels)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "boat at rest (frames 0 and 1 identical)", "frame": 0, "t": 0.0},
+    {"event": "boat motion starts (first displacement between frame 1 and 2)", "frame": 2, "t": 0.0833},
+    {"event": "boat still moving at end of clip, no stop / turn / contact", "frame": 71, "t": 2.9583}
+  ]
+}

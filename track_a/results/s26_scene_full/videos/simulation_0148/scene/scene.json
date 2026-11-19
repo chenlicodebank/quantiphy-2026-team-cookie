@@ -1,0 +1,50 @@
+{
+  "video": "simulation_0148.mp4",
+  "source": "simulation",
+  "scene_type_declared": "2D",
+  "fps": 24.0,
+  "frames": 26,
+  "time_of_frame_i": "t = i / 24 s",
+  "image_size_px": [1920, 1080],
+  "units": "pixels, seconds; x to the right, y down; no metric scale assumed",
+  "camera": {
+    "motion": "static (frame 0 vs frame 25 mean |diff| 0.73 grey levels, max 27 = compression/lighting noise; background features do not shift)",
+    "view": "side view through a large brick/wood arch onto a subway track; train moves right-to-left across the image, parallel to the image plane",
+    "perspective_note": "Train passes very close to the camera, so its near side wall and its far side (seen through the windows, and the end faces) move at clearly different pixel rates: far/near pixel scale ratio = 0.72 (Z_near/Z_far, from matched features: 249.6/347, 254.6/353.4, 276.9/386.0). The train's origin (body centre, mid-depth) has pixel scale K = 0.837 x near-side scale (assuming origin halfway between near and far side). Principal point assumed at x=960 for the end-corner perspective model; checked: predicted end-face edges agree with observed edges to within ~10-15 px in frames 2,3,4,19,20."
+  },
+  "objects": [
+    {
+      "name": "train",
+      "description": "dark subway car / train with rounded silver-framed windows, door with two narrow windows; graffiti (blue 'otm' tag, red/white sticker, 'NOT AGAIN', white 'AKC') visible through the windows on the far side; front end face graffiti-covered silver panel lit by the lamp (frames 3-4)",
+      "moves": true,
+      "direction": "right to left (-x)",
+      "visible_frames": [2, 20],
+      "fully_inside_view": false,
+      "track_file": "tracks/train.csv",
+      "near_side_length_px": 4768,
+      "far_side_length_px": 3433,
+      "mid_depth_origin_plane_length_px": 3992,
+      "length_note": "length front-to-rear corner of the near side wall from front corner (f4 x=1511, f6 x=810) and rear corner (f17 x=1479; f19 x~700 gives 4775) plus integrated near-side shifts; longer than the image width (never fully visible). Pair the length and the shifts of the SAME layer: length/shift ratio is layer independent.",
+      "near_side_shift_px_per_frame": "353.4 (frame 6) rising linearly to 391.1 (frame 18); straight-line fit d(i) = 334.10 + 3.199 i (rms 0.8 px), i = frame index, d(i) = x(i-1) - x(i)",
+      "visible_vertical_extent_px": "clipped by the arch: visible from y~330-450 (depends on x, arch curve) down to the arch's lower beam y~865; window band y 455-740 (big windows), door windows y 505-747; roof and wheels not visible",
+      "big_window_size_near_px": "about 345 wide x 285 high (e.g. frame 6 x 1280-1625, y 455-740)",
+      "reference_point": "origin = body centre; never visible (off-screen or mid-train); listed in track as near_centre_x (near-side layer) and origin_x_mid_depth (projected at mid depth)"
+    },
+    {"name": "arch", "description": "large dark brown semicircular arch frame in the foreground through which the track is seen", "moves": false, "image_extent_px": "outer ring x~100-1920+, opening from x~310 (left at window height) to beyond right edge; top of opening y~200; lower beam y~865-900", "visible_frames": "all"},
+    {"name": "central_pillar", "description": "vertical brown post in the middle of the arch (foreground, occludes the train)", "moves": false, "image_extent_px": {"x0": 1105, "x1": 1205, "y0": 200, "y1": 870}, "visible_frames": "all"},
+    {"name": "lamp", "description": "small glowing yellow lamp on the left part of the arch", "moves": false, "image_center_px": [736, 344], "size_px": "~60 x 25"},
+    {"name": "traffic_cone", "description": "yellow cone on the far platform, behind the track", "moves": false, "image_extent_px": {"x0": 1302, "x1": 1332, "y0": 660, "y1": 772}, "visible_frames": "0-3 and 19-25 (hidden by train 4-18)"},
+    {"name": "far_platform_and_fence", "description": "platform behind the track with a grid fence/tiled wall, a red sign/box at x~740-790, y~545-650, and a dark green post at x~1600-1660, y~460-800; platform edge y~760-800", "moves": false},
+    {"name": "train_headlight_glow", "description": "lighting change on the background ahead of the train in frames 2-6 and floor lighting changes (y 870-1050) while the train passes - not an object", "moves": true}
+  ],
+  "events": [
+    {"event": "train first visible (front end face enters at right edge)", "frame": 2, "time_s": 0.0833},
+    {"event": "front end face (lit, graffiti) visible", "frames": [3, 4]},
+    {"event": "near-side front corner reaches pillar / arch left edge", "frames": "5 (x~1162, behind pillar) / 7 (x~453) / leaves view at frame 8"},
+    {"event": "near-side rear corner enters at right edge", "frame": 16, "x": 1867},
+    {"event": "near-side rear corner leaves view (arch left edge)", "frame": 20, "time_s": 0.8333},
+    {"event": "train completely gone", "frame": 21, "time_s": 0.875},
+    {"event": "train motion", "description": "moving throughout its visible interval (already moving at frame 2), speeding up steadily; no stops, bounces or direction changes"}
+  ],
+  "files": {"tracks": ["tracks/train.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

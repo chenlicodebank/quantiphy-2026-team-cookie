@@ -1,0 +1,18 @@
+{
+ "video": "internet_0041.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 23.979144,
+ "frames": 52,
+ "duration_s": 2.1686,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3059,
+  "question": "What is the height of the arches on the second floor in cm?",
+  "prior": "size of the middle duck = 66 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

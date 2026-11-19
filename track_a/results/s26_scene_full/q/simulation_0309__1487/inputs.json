@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0309.mp4",
+ "video_source": "simulation",
+ "video_type": "V3SC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2880,
+ "height": 1440,
+ "question": {
+  "id": 1487,
+  "question": "What is the displacement of the dragon from 0.5 s to 1.0 s, in meters?",
+  "prior": "speed of the dragon = 1.29m/s",
+  "depth_info": "t = 1.0s, distance_dragon_camera = 5.2108 m\nt = 2.0s, distance_dragon_camera = 6.3261 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

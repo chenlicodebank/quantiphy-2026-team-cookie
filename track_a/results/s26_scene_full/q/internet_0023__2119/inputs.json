@@ -1,0 +1,18 @@
+{
+ "video": "internet_0023.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 26.636204,
+ "frames": 130,
+ "duration_s": 4.8806,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 2119,
+  "question": "What is the average velocity of the swimmer in m/s?",
+  "prior": "height of the swimmer = 1.8m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,91 @@
+{
+  "video": "simulation_0178.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "units": "pixels (x right, y down, full 1920x1080 resolution) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the left tree-trunk strip vs frame 0: max shift < 0.02 px over all 60 frames (scene/scripts/bg.py)",
+    "perspective": "2D side view; both elephants walk left-to-right parallel to the image plane on the same ground line (feet at y~693-695 for both), so one metres-per-pixel scale applies to both. Horizon / sea line y~640; grass edge y~690-700."
+  },
+  "objects": [
+    {
+      "name": "elephant_big",
+      "description": "larger adult elephant, the one in front (right) walking right; grey-brown, large ears, curled trunk, tusks",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "track": "tracks/elephant_big.csv",
+      "reference_point_recommended": "centroid_x, centroid_y (mask centroid; proxy for the rig root/body centre)",
+      "position_f0_px": [817.4, 574.7],
+      "position_f59_px": [1228.5, 583.4],
+      "net_displacement_px": [411.1, 8.7],
+      "path_length_centroid_px": 412.7,
+      "mean_step_px_per_frame": 6.99,
+      "linear_fit_dx_px_per_frame": 6.88,
+      "extents_px": {
+        "full_length_tail_to_trunk_or_tusk": {"median": 403.5, "min": 353, "max": 428},
+        "full_height_top_of_head_or_back_to_feet": {"median": 230, "min": 221, "max": 236},
+        "body_length_without_tail_trunk_tusks": {"median": 320.5, "min": 275, "max": 335},
+        "body_height": {"median": 228, "min": 210, "max": 234},
+        "frame0_bbox_x0_y0_x1_y1": [627, 465, 1025, 695],
+        "frame59_bbox_x0_y0_x1_y1": [1044, 474, 1445, 694]
+      },
+      "occlusion": "none (in front of all trees); top edge lies against dark foliage, segmentation slightly less reliable there"
+    },
+    {
+      "name": "elephant_small",
+      "description": "smaller (juvenile / younger) elephant, behind (left of) the big one, walking right; tusks, trunk curled",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "track": "tracks/elephant_small.csv",
+      "reference_point_recommended": "centroid_x, centroid_y",
+      "position_f0_px": [473.0, 616.1],
+      "position_f59_px": [833.3, 611.3],
+      "net_displacement_px": [360.4, -4.8],
+      "path_length_centroid_px": 361.8,
+      "mean_step_px_per_frame": 6.13,
+      "linear_fit_dx_px_per_frame": 6.13,
+      "extents_px": {
+        "full_length_tail_to_trunk_or_tusk": {"median": 272, "min": 254, "max": 291},
+        "full_height": {"median": 156, "min": 147, "max": 161},
+        "body_length_without_tail_trunk_tusks": {"median": 211, "min": 208, "max": 226},
+        "body_height": {"median": 149, "min": 139, "max": 159},
+        "frame0_bbox_x0_y0_x1_y1": [350, 542, 615, 696],
+        "frame59_bbox_x0_y0_x1_y1": [701, 541, 975, 692]
+      },
+      "occlusion": "none"
+    },
+    {
+      "name": "tree_trunk_left",
+      "description": "thick dark tree trunk at the far left foreground edge, full height of the upper image",
+      "moves": false,
+      "position_px": "x ~65-205 (width ~140 px at y=500-650), from top of frame down to ground at y~720",
+      "extents_px": {"width": 140}
+    },
+    {
+      "name": "tree_trunk_right",
+      "description": "thinner dark tree trunk in the background at right",
+      "moves": false,
+      "position_px": "x ~1444-1510 (width ~65 px), y from ~120 to ground ~670",
+      "extents_px": {"width": 65},
+      "reliability": "low-contrast against foliage; +-5 px"
+    },
+    {"name": "trees_foliage", "description": "large leafy trees behind the elephants (centre/right), static", "moves": false},
+    {"name": "sea_horizon", "description": "flat sea/water line behind the elephants", "moves": false, "position_px": "y ~640 across the image"},
+    {"name": "grass_ground", "description": "grass meadow foreground with grey rocky patches; elephants walk along its back edge (feet y~693-696)", "moves": false}
+  ],
+  "separation": {
+    "centroid_dx_f0": 344.4, "centroid_dx_f59": 395.1,
+    "bbox_gap_small_front_to_big_rear_f0": 12, "bbox_gap_f59": 69,
+    "note": "the big elephant walks slightly faster, so the gap grows"
+  },
+  "events": [
+    {"event": "both elephants walking (already in motion at frame 0, still walking at frame 59)", "frame_start": 0, "frame_end": 59, "time_s": [0.0, 2.4583]},
+    {"event": "no starts, stops, contacts, impacts or direction changes; both move steadily rightwards with gait oscillation of the centroid step (dips in step size around frames 10-12, 31-33, 55-58 for the small elephant)"}
+  ]
+}

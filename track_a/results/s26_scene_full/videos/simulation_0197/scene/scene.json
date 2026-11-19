@@ -1,0 +1,94 @@
+{
+  "video": "simulation_0197.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 50,
+  "duration_s": 1.6667,
+  "image_size_px": [2560, 2560],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "pixel_coords": "x right, y down, full-resolution pixels of the 2560x2560 video",
+  "description": "Product close-up render (Blender): a white rubber-bulb dropper cap with a glass pipette is held tilted (tip lower-left, bulb upper-right) above an open frosted amber 'NOVA / RADIANCE / VITAMIN B' serum bottle. The pipette is partly filled with amber serum; a single air bubble inside the liquid slides down the pipette toward the tip. A drop of serum hangs from the pipette tip and does not detach. Everything except the bubble is static.",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the upper-right background/cap region between frames 0 and 49: shift (0.002, -0.008) px; per-frame shifts < 0.01 px. Small global mean change at frames 17-18 is render-noise only (no shift).",
+    "perspective": "2D scene; close-up product shot viewed slightly from below. No ground plane or horizon visible. Bubble moves along the pipette axis, which is a straight line in the image."
+  },
+  "moving_objects": {
+    "bubble": {
+      "description": "Single round air bubble inside the amber liquid column of the glass pipette (the only bubble). Clear/bright with refracted highlights, ~100 px diameter.",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "track_file": "tracks/bubble.csv",
+      "reference_point": "centroid of the convex-hull bubble mask (approximates the bubble's centre/origin)",
+      "start_px": [841.6, 1333.9],
+      "end_px": [490.6, 1546.9],
+      "net_displacement_px": 410.6,
+      "path_length_px": 413.3,
+      "motion_direction": "down-left along the pipette axis, unit vector (-0.855, 0.519), 31.25 deg below horizontal",
+      "apparent_size_px": "diameter ~104-110 px along axis, ~88-100 px across axis (mask includes refraction rim); essentially constant; mean area ~8300 px^2 (equivalent circle diameter ~103 px)"
+    }
+  },
+  "static_objects": {
+    "pipette_glass_tube": {
+      "description": "Clear glass dropper tube, axis ~31 deg below horizontal; from tip (lower-left) into the white cap (upper-right)",
+      "tip_end_px": [205, 1700],
+      "cap_entry_px": [1380, 980],
+      "visible_length_px": 1378,
+      "outer_diameter_px": 145,
+      "inner_liquid_column_width_px": 128,
+      "taper": "narrows to a bulbous tip region x 205-330, y 1640-1830",
+      "reliability": "edges read off a 50 px grid, +-10 px"
+    },
+    "liquid_column_in_pipette": {
+      "description": "Amber serum inside the pipette, from the tip up to an upper meniscus",
+      "upper_meniscus_px": [920, 1330],
+      "lower_end": "continuous to the tip and into the hanging drop",
+      "length_along_axis_px": 830,
+      "moves": "no visible change of the meniscus over the clip"
+    },
+    "hanging_drop": {
+      "description": "Teardrop of serum hanging from the pipette tip; stays attached, no falling in frames 0-49",
+      "bbox_px": [200, 1810, 310, 2035],
+      "height_px": 225,
+      "max_width_px": 105,
+      "moves": false
+    },
+    "dropper_cap": {
+      "description": "White matte rubber bulb + collar cap, open end facing down-left toward the bottle; axis parallel to the pipette",
+      "open_end_ellipse_px": "centre ~(1510, 1000), major axis ~730 px from (1310, 690) to (1710, 1300)",
+      "bulb_end_px": [2445, 475],
+      "length_along_axis_px": 1070,
+      "bulb_narrow_diameter_px": 330,
+      "bbox_px": [1300, 380, 2450, 1310],
+      "reliability": "+-20 px (soft, low-contrast edges against the wall)"
+    },
+    "bottle": {
+      "description": "Frosted glass bottle filled with amber serum, clear threaded neck, open (cap removed). Bottom out of frame.",
+      "neck_threads_bbox_px": [1180, 1220, 1960, 1610],
+      "neck_outer_width_px": 780,
+      "rim_top_y_px": 1220,
+      "shoulder_y_range_px": [1610, 1800],
+      "body_x_range_px": [1000, 2160],
+      "body_width_px": 1160,
+      "liquid_level_y_px": 1820,
+      "visible_bbox_px": [1000, 1220, 2160, 2560],
+      "label_text": {
+        "NOVA (vertical, rotated)": [1080, 2030, 1190, 2560],
+        "RADIANCE": [1410, 2210, 1910, 2280],
+        "VITAMIN B": [1390, 2410, 1950, 2500]
+      }
+    },
+    "background_wall": {
+      "description": "Light beige backdrop with diagonal soft shadow stripes (window-blind light pattern); static"
+    }
+  },
+  "events": [
+    {"event": "bubble at rest / starts moving", "frame": 1, "t_s": 0.033, "note": "displacement < 2 px/frame for frames 1-3; clearly moving from frame 4"},
+    {"event": "bubble accelerating", "frames": [2, 17], "note": "per-frame displacement grows from ~2 to ~12 px"},
+    {"event": "bubble near-steady motion", "frames": [17, 31], "note": "~11-14 px/frame"},
+    {"event": "bubble decelerating as it enters the tapered tip region", "frames": [32, 47]},
+    {"event": "bubble essentially stopped", "frame": 47, "t_s": 1.567, "note": "<= 1.7 px/frame for frames 47-49; final centre (490.6, 1546.9)"},
+    {"event": "hanging drop: no release, no fall", "frames": [0, 49]}
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "video": "internet_0017.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down view of a desk)",
+  "fps": 22.368421,
+  "frames": 28,
+  "duration_s": 1.2518,
+  "image_size_px": [4096, 2160],
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "units": "pixels (full 4096x2160 resolution) and seconds; no metric scale",
+  "camera": {
+    "motion": "static (overhead, looking straight down at a white desk)",
+    "measured_background_shift_px": "phase correlation of 4 static patches vs frame 0: |shift| < 1 px in every frame (compression jitter); see camera_shift.json",
+    "perspective": "near-orthographic top-down view; desk plane roughly parallel to the image; objects lie on the desk except the hands/held card which are a few cm above it"
+  },
+  "moving_objects": {
+    "right_hand": {
+      "description": "right hand + forearm entering from the bottom (x~2900-3500), typing on the keyboard; the larger mover",
+      "track": "tracks/right_hand.csv",
+      "visible_frames": "0-27 (forearm cut by bottom image edge, occluded=1 means arm truncated by frame edge)",
+      "motion": "hand lifts and slides up-left over the keyboard frames 6-12, holds near keys frames 12-16, slides back down-right frames 17-23, then rests/types at the original spot 23-27",
+      "ref_point": "ref_x/ref_y = centroid of the hand part of the skin mask (skin pixels within 450 px of the fingertip extreme along the arm direction (0.25,-1)); tip_x/tip_y = fingertip extreme",
+      "extent_ranges_px": {"hand_len": [453, 547], "hand_width": [311, 368], "ref_x": [3053, 3297], "ref_y": [1215, 1499], "tip_y": [947, 1254]}
+    },
+    "left_hand": {
+      "description": "left hand + forearm from bottom-left (x~1520 at bottom edge), holding the black Visa card between thumb and fingers",
+      "track": "tracks/left_hand.csv",
+      "visible_frames": "0-27 (forearm truncated at bottom edge)",
+      "motion": "almost static; drifts ~18 px up-left frames 8-11 and back ~8 px frames 18-25",
+      "ref_point": "centroid of skin pixels within 450 px of the fingertip extreme along (0.6,-0.8)",
+      "extent_ranges_px": {"hand_len": [452, 455], "hand_width": [323, 326], "ref_x": [2388, 2409], "ref_y": [1275, 1282]}
+    },
+    "visa_card": {
+      "description": "black Visa card held by the left hand (VISA logo bottom-right, name 'ALEXANDRA TISHKOVA'), above the wallet",
+      "track": "tracks/visa_card.csv",
+      "visible_frames": "0-27, left end partly covered by thumb/fingers",
+      "motion": "moves with the left hand: ~15 px up-left frames 8-11, small return frames 20-25",
+      "ref_point": "centre of the min-area rectangle of the convex hull of the dark card mask",
+      "size_px": {"length": "353.6-355.4 (long side, axis ~155-157 deg i.e. tilted ~24 deg, rising to the right)", "width": "193-204 (short side; affected by finger occlusion and tilt of the card out of the desk plane)"}
+    }
+  },
+  "static_objects": {
+    "keyboard": {"description": "white/silver Apple wireless keyboard, right-centre, rotated ~37 deg (long axis down-right)", "corners_px": {"top(back-left)": [2882, 505], "right(back-right)": [3805, 1190], "bottom(front-right)": [3500, 1595], "left(front-left)": [2578, 925]}, "length_px": 1145, "width_px": 512, "center_px": [3191, 1054], "notes": "manual corners +-8 px; length = long side incl. battery bar ends; partially covered by right hand"},
+    "mouse": {"description": "white Apple Magic Mouse, bottom-right, long axis ~56 deg from horizontal (top end to the upper right)", "center_px": [3700, 1880], "length_px": 487, "width_px": "~250 (edge hull incl. shadow gives 293)", "bbox_px": [3481, 1647, 3893, 2109], "notes": "low-contrast white on white; length +-12 px"},
+    "wallet": {"description": "black zippered leather wallet / coin purse below the Visa card, with zipper tab and round gold charm at its bottom", "bbox_px": [2443, 1421, 2940, 1975], "body_center_px": [2697, 1683], "body_length_px": 467, "body_width_px": 336, "body_axis_deg": 47, "notes": "body from dark mask with the thin zipper tab removed (+-25 px); full dark mask incl. tab: bbox above, centroid [2694,1688]"},
+    "second_card": {"description": "second black card lying on the desk under the right wrist (text 'grind.co.uk'), right of the wallet", "corners_px": {"right": [3365, 1760], "bottom": [3250, 1925], "bottom-left (rounded, seen at frame 0/27)": [2978, 1730]}, "length_px": 335, "width_px": 201, "notes": "middle always hidden by the right forearm; length from extrapolated edges +-12 px; best visible frames 12-16"},
+    "pin_tin": {"description": "round metal tin of pins/clips, top-right", "center_px": [3674, 420], "diameter_px": 417, "notes": "outer rim, left 3465 / right 3882 / top 211"},
+    "plant": {"description": "green potted plant (leaves) top-left, pot hidden under leaves, cut by top image edge", "bbox_px": [306, 0, 1337, 701], "centroid_px": [831, 307], "notes": "green leaf mask; extends past top edge"},
+    "clipboard": {"description": "wooden clipboard with white paper and black metal clip, bottom-left, rotated 45 deg; runs off the left and bottom image edges", "visible_corners_px": {"top": [502, 1110], "right": [1362, 1977]}, "top_right_edge_length_px": 1221, "clip_px": "black clip from about (40,1600) to (380,1290), ~420 px along the board edge", "notes": "only one full edge visible"},
+    "pen": {"description": "transparent pen with dark ink tube lying on the clipboard paper", "ends_px": {"cap_end": [522, 1365], "tip": [890, 1812]}, "length_px": 578, "width_px": "~32", "axis_deg_below_horizontal": 50.5},
+    "desk": {"description": "white desk surface filling the frame"}
+  },
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "start: right fingers on keyboard (typing pose), left hand holds Visa card"},
+    {"frame": 6, "time": 0.268, "event": "right hand starts moving up-left across keyboard"},
+    {"frame": 12, "time": 0.537, "event": "right hand reaches upper-left position (fingertips near number row, tip_y ~947)"},
+    {"frame": 16, "time": 0.715, "event": "right hand starts returning down-right"},
+    {"frame": 23, "time": 1.028, "event": "right hand back at original position (motion ends ~frame 24)"},
+    {"frame": 8, "time": 0.358, "event": "left hand + card start a small (~15-18 px) up-left shift, ending frame 11"}
+  ],
+  "files": {"tracks": ["tracks/right_hand.csv", "tracks/left_hand.csv", "tracks/visa_card.csv"], "camera_shift": "camera_shift.json", "static_auto": "static_auto.json", "mouse_auto": "mouse_auto.json", "notes": "notes.md", "scripts": "scripts/"}
+}

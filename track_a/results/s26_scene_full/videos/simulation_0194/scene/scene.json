@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0194.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 100,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 = t 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (background patches constant to 0.01 grey level over all 100 frames; planet centre std 0.1 px)",
+    "view": "2D: motion plane faces the camera; dark space-like background with a soft radial glow toward the lower right"
+  },
+  "objects": [
+    {
+      "name": "planet",
+      "description": "large tan/brown textured sphere (rendered as a disk) near image centre; the only large object",
+      "moves": false,
+      "visible_frames": [0, 99],
+      "reference_point_px": [958.3, 544.6],
+      "reference_point_note": "centre of least-squares circle fitted to the disk outline, mean over 100 frames (std 0.07 / 0.11 px)",
+      "diameter_px": 167.5,
+      "diameter_note": "circle-fit diameter 167.3-167.9 px; mask bbox 170-172 wide x 167-168 high (includes 1-2 px anti-aliased rim); equal-area diameter 167.2-167.8",
+      "bbox_px_frame0": [873, 461, 1043, 628],
+      "track_file": "tracks/planet.csv",
+      "appearance_change": "at frame 87 (t=2.900 s) the planet's shading/texture switches abruptly (mean disk brightness 77 -> 55, looks blurrier); size and position unchanged. Render artifact, not motion."
+    },
+    {
+      "name": "moon",
+      "description": "small grey sphere (about 12.5 px across) lower right of the planet; orbits the planet",
+      "moves": true,
+      "visible_frames": [0, 99],
+      "occluded_frames": [],
+      "reference_point": "intensity-weighted centroid of the background-subtracted blob (columns cx_w, cy_w); plain mask centroid cx, cy agrees within ~0.2 px",
+      "position_frame0_px": [1131.08, 919.20],
+      "position_frame99_px": [1286.82, 794.89],
+      "diameter_px": 12.5,
+      "diameter_note": "equal-area diameter 12.3-12.9 px; bbox 13-15 x 11-13 px; constant over the clip (no depth change)",
+      "track_file": "tracks/moon.csv",
+      "motion_summary": {
+        "path": "circular arc around the planet centre, counter-clockwise as seen on screen (moving up and to the right)",
+        "distance_to_planet_centre_px": "412.5 - 413.2 (mean 412.7); free circle fit to path: centre (957.6, 542.0), R 415.2, rms 0.08 px",
+        "polar_angle_deg_image_coords": "65.24 at frame 0 -> 37.30 at frame 99 (about -0.282 deg/frame, steady)",
+        "per_frame_step_px": "1.81 - 2.30, mean 2.036 (steady speed within measurement noise)",
+        "path_length_px_frames_0_99": 201.5,
+        "net_displacement_px_frames_0_99": 199.3
+      }
+    }
+  ],
+  "static_objects": [
+    {"name": "background", "description": "near-black uniform backdrop with soft radial glow toward lower right; no ground, markings or other props"}
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip starts; moon already moving (no start of motion visible)"},
+    {"frame": 87, "t": 2.9, "event": "planet appearance (shading/texture) changes abruptly; no motion change"},
+    {"frame": 99, "t": 3.3, "event": "clip ends; moon still moving"}
+  ],
+  "no_events": "no release, bounce, impact, contact or direction reversal; moon direction rotates smoothly with the orbit",
+  "scale_notes": "2D scene: one metres-per-pixel scale from the prior object applies to everything (planet diameter 167.5 px, moon diameter 12.5 px, orbit radius 412.7 px, moon speed ~2.04 px/frame = ~61 px/s)."
+}

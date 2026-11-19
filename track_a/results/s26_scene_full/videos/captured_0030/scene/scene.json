@@ -1,0 +1,225 @@
+{
+ "video": "captured_0030.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame": "t = frame / 24",
+ "camera": {
+  "motion": "static (background phase-correlation shift vs frame 0 < 0.1 px every frame)",
+  "intrinsics_lab_convention": {
+   "fx_px": 763,
+   "cx_px": 640,
+   "cy_px": 360,
+   "note": "f = 0.5959*1280 (80 deg HFOV) from the task conventions; not measured here"
+  },
+  "perspective": {
+   "ground_plane": "horizontal table top",
+   "table_side_edges_vanishing_point_px": [
+    600,
+    328
+   ],
+   "horizon_y_px_approx": 328,
+   "note": "camera looks slightly downward at table; side edges of the table top converge to ~(600,328)"
+  }
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "desc": "small red/orange ball (looks like a red ball/toy, slightly lumpy, with a white specular highlight) on the end of a thin light-coloured stick/string held by the person; swung around in a horizontal loop just above the table top",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/ball.csv",
+   "ref_point": "centroid of colour mask (visible centre)",
+   "apparent_size_px": {
+    "minor_axis_min": [
+     30.56,
+     18
+    ],
+    "minor_axis_max": [
+     74.79,
+     25
+    ],
+    "equiv_diam_min": [
+     35.11,
+     18
+    ],
+    "equiv_diam_max": [
+     76.35,
+     30
+    ],
+    "bbox_h_min": [
+     29,
+     18
+    ],
+    "bbox_h_max": [
+     71,
+     30
+    ],
+    "note": "[value, frame]. Use wid_minor / bbox_h for diameter: along-motion length is inflated by motion blur at the near side of the loop (frames 0-5, 25-31)."
+   },
+   "path_summary": "image-plane loop: near side (low in image, y~495-515, large ~70 px) moving LEFT; far side (y~421-435, small ~35-45 px) moving RIGHT. Viewed from above the ball circles anticlockwise as seen in image terms: near->left->far->right->near. About 1.8 laps in 2 s."
+  },
+  {
+   "name": "person",
+   "desc": "person in black top and light-blue denim overalls, left of image, face blurred; right arm extended holding the stick/string",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "note": "body nearly static (x~150-420, y 0-720, cropped by frame top and bottom); hand moves in a small circle driving the ball: hand approx (575,380) at f6, (640,360) at f22; not tracked frame by frame (blurred)."
+  },
+  {
+   "name": "stick_or_string",
+   "desc": "thin light/white line from the person's hand to the ball (pendulum string or thin stick)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "note": "apparent length ~150-250 px depending on orientation (e.g. f22 from fingers ~(665,400) to ball centre (853,455)); faint, not tracked"
+  },
+  {
+   "name": "table",
+   "desc": "wooden table, brown top, single dark central pedestal, centre-bottom of image",
+   "moves": false,
+   "image_extents_px_frame16": {
+    "top_far_edge_y": 440,
+    "top_far_edge_x": [
+     380,
+     805
+    ],
+    "top_front_edge_y": 532,
+    "top_front_edge_x": [
+     210,
+     955
+    ],
+    "front_apron_bottom_y_approx": 558,
+    "front_edge_length_px": 745,
+    "far_edge_length_px_approx": 425,
+    "apparent_depth_extent_px_vertical": 92,
+    "pedestal_x": [
+     575,
+     615
+    ],
+    "pedestal_y": [
+     560,
+     720
+    ],
+    "note": "+-5 px; far-left corner partly behind the person / ball"
+   }
+  },
+  {
+   "name": "tripod",
+   "desc": "dark grey tripod / light stand with a blue-white light on top, centre background, behind the table",
+   "moves": false,
+   "image_extents_px": {
+    "top_xy": [
+     690,
+     65
+    ],
+    "legs_bottom_y": 700,
+    "x_range": [
+     600,
+     840
+    ]
+   }
+  },
+  {
+   "name": "tv_screen",
+   "desc": "black wall-mounted screen with a bright reflection, top right corner",
+   "moves": false,
+   "image_extents_px": {
+    "x": [
+     1010,
+     1280
+    ],
+    "y": [
+     0,
+     130
+    ]
+   }
+  },
+  {
+   "name": "wall_panels",
+   "desc": "grey acoustic wall panels and floor with orange/red lines, background (blurred)",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "ball in motion for the whole clip (already moving at frame 0, still moving at frame 48)",
+   "frames": [
+    0,
+    48
+   ]
+  },
+  {
+   "event": "ball leftmost turn (x min)",
+   "frame": 8,
+   "t": 0.3333333333333333,
+   "x": 416.8
+  },
+  {
+   "event": "ball farthest from camera (smallest image, ~35-37 px)",
+   "frames": [
+    16,
+    18
+   ],
+   "t": [
+    0.6666666666666666,
+    0.75
+   ]
+  },
+  {
+   "event": "ball rightmost turn (x max)",
+   "frame": 23,
+   "t": 0.9583333333333334,
+   "x": 862.3
+  },
+  {
+   "event": "ball nearest the camera (largest, lowest in image, y max 516)",
+   "frames": [
+    27,
+    29
+   ],
+   "t": [
+    1.125,
+    1.2083333333333333
+   ]
+  },
+  {
+   "event": "ball leftmost turn (x min)",
+   "frame": 33,
+   "t": 1.375,
+   "x": 399.4
+  },
+  {
+   "event": "ball far side again (smallest ~42 px)",
+   "frames": [
+    41,
+    42
+   ]
+  },
+  {
+   "event": "possible frame irregularity: x step 11->12 is 51 px vs ~15 and ~31 px for neighbours",
+   "frames": [
+    11,
+    12
+   ]
+  }
+ ],
+ "files": {
+  "tracks": [
+   "tracks/ball.csv"
+  ],
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

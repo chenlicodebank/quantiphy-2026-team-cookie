@@ -1,0 +1,255 @@
+{
+ "video": "captured_0034bs.mp4",
+ "source": "lab (captured, background replaced by Segment Anything 2 demo)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "evidence": "mean abs frame diff in the table region 0.03-0.5 grey levels while nothing moves (frames 1-24); table outline fixed",
+  "intrinsics_lab_convention": {
+   "fx_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "note": "focal = 0.5959 x 1280 per benchmark convention"
+  },
+  "perspective": "camera looks down at ~30-40 deg onto a table top; table top is a trapezoid narrower at the back (top edge ~y 244, ~320-340 px wide) than at the front (y ~415-437, ~420 px wide) -> back of table farther from camera. Image y increasing = toward camera on the table plane."
+ },
+ "objects": {
+  "tennis_ball_left": {
+   "id": "A",
+   "desc": "yellow-green tennis ball, starts at the LEFT corner of the table (x~468,y~287); rolls right, passes behind the top of the soccer ball, hits the other tennis ball at frame 38, rebounds back left/up and ends mostly hidden behind the top of the soccer ball",
+   "moves": true,
+   "visible_frames": "0-48 (partially hidden 31-48, mostly hidden 35-37)",
+   "track": "tracks/tennis_ball_left.csv",
+   "start_pos_px": {
+    "cx": 468.2,
+    "cy": 288.0,
+    "diameter_px": 31.3
+   },
+   "end_pos_px": {
+    "cx": 605.7,
+    "cy": 270.6,
+    "diameter_px": 30.0
+   },
+   "apparent_diameter_px_unoccluded_25_30": 32.2
+  },
+  "tennis_ball_right": {
+   "id": "B",
+   "desc": "yellow-green tennis ball, starts at the BACK-RIGHT corner of the table (x~819,y~257); rolls left and slightly toward camera, hits the left ball at frame 38, then rolls toward the camera and slightly right (down-right in image), still moving at the end",
+   "moves": true,
+   "visible_frames": "0-48 (fully visible; touching the other ball 38-39)",
+   "track": "tracks/tennis_ball_right.csv",
+   "start_pos_px": {
+    "cx": 818.9,
+    "cy": 257.0,
+    "diameter_px": 30.1
+   },
+   "end_pos_px": {
+    "cx": 677.0,
+    "cy": 303.5,
+    "diameter_px": 30.7
+   },
+   "apparent_diameter_px_mean": 30.4
+  },
+  "soccer_ball": {
+   "desc": "black-and-white football on the table, left of centre",
+   "moves": false,
+   "visible_frames": "0-48",
+   "centre_px": [
+    601.2,
+    318.6
+   ],
+   "diameter_px": 104.9,
+   "bbox": [
+    555,
+    270,
+    653,
+    367
+   ],
+   "note": "occludes the left tennis ball from frame ~31 on"
+  },
+  "pencil_case": {
+   "desc": "orange-yellow elongated pencil case / sponge, lying diagonally right of the soccer ball",
+   "moves": false,
+   "visible_frames": "0-48",
+   "centre_px": [
+    693.8,
+    355.8
+   ],
+   "bbox": [
+    644,
+    327,
+    737,
+    381
+   ],
+   "length_px_along_axis": 99.4,
+   "width_px": 26.2,
+   "axis_angle_deg_image": -23.0,
+   "note": "axis rises to the right (~23 deg from horizontal); left end ~(648,380), right end ~(738,330)"
+  },
+  "table": {
+   "desc": "wooden table top with single dark central leg/pedestal",
+   "moves": false,
+   "visible_frames": "0-48",
+   "top_corners_px_approx": {
+    "back_left": [
+     496,
+     244
+    ],
+    "back_right": [
+     833,
+     247
+    ],
+    "front_left": [
+     434,
+     415
+    ],
+    "front_right": [
+     853,
+     432
+    ]
+   },
+   "top_width_px_back_edge": 337,
+   "top_width_px_front_edge": 419,
+   "top_depth_px_left_side_image": 171,
+   "front_edge_thickness_px": "~20 (y 415-437 at left, 432-440 at right)",
+   "row_extents": {
+    "245": [
+     496,
+     835
+    ],
+    "260": [
+     492,
+     835
+    ],
+    "275": [
+     456,
+     815
+    ],
+    "290": [
+     448,
+     823
+    ],
+    "305": [
+     474,
+     825
+    ],
+    "320": [
+     468,
+     827
+    ],
+    "335": [
+     464,
+     829
+    ],
+    "350": [
+     458,
+     835
+    ],
+    "365": [
+     450,
+     839
+    ],
+    "380": [
+     444,
+     843
+    ],
+    "395": [
+     440,
+     847
+    ],
+    "410": [
+     434,
+     851
+    ],
+    "425": [
+     496,
+     853
+    ]
+   },
+   "note": "segmentation trims some table edges (notch at right edge near y 270-290 in later frames, left corner where ball A starts)"
+  },
+  "table_leg": {
+   "desc": "dark grey leg below the table centre",
+   "moves": false,
+   "bbox": [
+    634,
+    445,
+    657,
+    527
+   ],
+   "width_px": 22,
+   "visible_height_px": 83
+  }
+ },
+ "events": [
+  {
+   "event": "both balls at rest",
+   "frames": "0-23"
+  },
+  {
+   "event": "motion start tennis_ball_left",
+   "frame": 24,
+   "time_s": 1.0,
+   "note": "first clear displacement at frame 25 (+4 px); launched by an unseen push (hand not in segmented video)"
+  },
+  {
+   "event": "motion start tennis_ball_right",
+   "frame": 24,
+   "time_s": 1.0,
+   "note": "first clear displacement at frame 25 (-5 px)"
+  },
+  {
+   "event": "left ball starts passing behind soccer ball",
+   "frame": 31,
+   "time_s": 1.2917
+  },
+  {
+   "event": "dropped capture frame (double step for both balls)",
+   "frame": 36,
+   "time_s": 1.5,
+   "note": "displacement 35->36 is ~2x neighbours for both balls although timestamps are uniform"
+  },
+  {
+   "event": "collision of the two tennis balls",
+   "frame": 38,
+   "time_s": 1.5833,
+   "note": "centre separation 50 px at 37, ~30.5 px at 38 (= sum of radii), both reverse direction afterwards"
+  },
+  {
+   "event": "after collision: left ball moves back left/up slowly, right ball moves down-right",
+   "frames": "39-48"
+  },
+  {
+   "event": "video ends with both balls still moving slowly",
+   "frame": 48,
+   "time_s": 2.0
+  }
+ ],
+ "ball_centre_separation_px": {
+  "30": 215.0,
+  "31": 194.4,
+  "32": 173.3,
+  "33": 152.3,
+  "34": 131.2,
+  "35": 111.5,
+  "36": 70.5,
+  "37": 49.9,
+  "38": 30.5,
+  "39": 39.9,
+  "40": 48.3,
+  "41": 53.1,
+  "42": 57.1,
+  "43": 60.2,
+  "44": 64.1,
+  "45": 67.7,
+  "46": 71.3,
+  "47": 75.1,
+  "48": 78.5
+ },
+ "apparent_size_vs_time": "tennis ball diameters stay ~30-33 px all clip (A ~31-33, B ~29.5-32); no clear trend -> depth changes are small. Ball B moves toward the camera after the collision (y increasing)."
+}

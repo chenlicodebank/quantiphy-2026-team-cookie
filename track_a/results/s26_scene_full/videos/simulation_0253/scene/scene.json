@@ -1,0 +1,119 @@
+{
+ "video": "simulation_0253.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 45,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t=0",
+ "units": "pixels and seconds; no metric scale recorded",
+ "camera": {
+  "static": true,
+  "evidence": "phase correlation of a box-free region (x1450-1900,y50-700) vs frame 0: |shift| <= 0.14 px x, 0.51 px y (noise), mean abs grey diff <= 0.16"
+ },
+ "objects": [
+  {
+   "name": "box",
+   "description": "small tan/brown cardboard box with tape (only moving object), slides down the inclined ramp from upper-left to lower-right",
+   "moves": true,
+   "visible_frames": [
+    5,
+    44
+   ],
+   "fully_in_frame_frames": [
+    15,
+    44
+   ],
+   "track": "tracks/box.csv",
+   "reference_point": "mask centroid (cx, cy) ~ box centre/origin",
+   "apparent_size_px": {
+    "note": "minAreaRect of the visible silhouette (top + side faces); rect_len along slope, rect_wid across slope",
+    "frames15_35_median_len_along_slope": 107.5,
+    "frames15_35_median_wid_across": 87.7,
+    "frames15_35_median_bbox_w": 119.0,
+    "frames15_35_median_bbox_h": 116.0,
+    "frames15_35_median_area": 7959.0,
+    "frames38_44_median_len_along_slope (motion blur inflates)": 121.7,
+    "frames38_44_median_wid_across": 77.9
+   }
+  },
+  {
+   "name": "ramp",
+   "description": "long straight inclined plank/slope; seen as a darker grey diagonal band from top edge (x~260-330,y=0) down to floor near (1360-1390,1000-1080); box slides on its upper surface",
+   "moves": false,
+   "visible_frames": [
+    0,
+    44
+   ],
+   "band_upper_edge": {
+    "slope_dy_dx": 0.9675,
+    "intercept": -313.1,
+    "fit_maxres_px": 57.8
+   },
+   "band_lower_edge": {
+    "slope_dy_dx": 0.9697,
+    "intercept": -249.3,
+    "fit_maxres_px": 0.7
+   },
+   "incline_angle_in_image_deg": 44.1,
+   "band_perpendicular_width_px": 46,
+   "visible_length_px": "from (260,0) at top frame edge to lower end ~ (1360,1000): ~1490 px along the band (top end cut by frame edge)"
+  },
+  {
+   "name": "wedge_face",
+   "description": "large light-grey planar face left of/below the ramp band (side face of the incline block)",
+   "moves": false
+  },
+  {
+   "name": "dark_corner",
+   "description": "dark wedge in bottom-left corner (x 0-240, y 860-1080), shadow/side of the incline block",
+   "moves": false
+  },
+  {
+   "name": "floor_and_wall",
+   "description": "plain grey background; floor/wall junction near y~1000 at right (soft)",
+   "moves": false
+  }
+ ],
+ "path": {
+  "direction_angle_deg_below_horizontal": 44.36,
+  "unit_vector_xy": [
+   0.715,
+   0.6991
+  ],
+  "max_perp_deviation_px": 1.41,
+  "s_along_path_origin": "centroid at frame 15"
+ },
+ "events": [
+  {
+   "event": "box absent",
+   "frames": [
+    0,
+    3
+   ]
+  },
+  {
+   "event": "box enters at top edge (already moving down the slope)",
+   "frame": 5,
+   "time": 0.2083
+  },
+  {
+   "event": "box fully inside frame",
+   "frame": 15,
+   "time": 0.625
+  },
+  {
+   "event": "duplicated video frames (identical to previous; zero image step, next step doubled)",
+   "frames": [
+    11,
+    28
+   ]
+  },
+  {
+   "event": "box still sliding on slope, accelerating, at last frame; no impact/bounce/stop",
+   "frame": 44,
+   "time": 1.8333
+  }
+ ]
+}

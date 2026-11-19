@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0027.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MS",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "question": {
+  "id": 1116,
+  "question": "What is the speed of the person from 1.0s to 2.0s in m/s?",
+  "prior": "height of the person = 1.75m",
+  "depth_info": "t=1s, distance_human_camera = 100.5638m\nt=2s, distance_human_camera = 100.5996m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "221": {
+  "file": "track_b_s37_b10mix.csv",
+  "build": "results/fulltest_s37_b10mix",
+  "sha256": "30ba599f434987871261f7c457bbdea25bc75f8496bfc922bbea3a5c06898d25",
+  "submission_id": "d1ac996d-62e0-4988-b79a-571c28ec92af",
+  "submitted_utc": "2026-10-26T00:05:57",
+  "mra": "0.8269",
+  "S2": "0.8265",
+  "D2": "0.8745",
+  "S3": "0.8031",
+  "D3": "0.8037",
+  "created_at_portal": "2026-10-26T00:05:57.419114+00:00",
+  "role": "entry: strictly per question, open weights only"
+ },
+ "222": {
+  "file": "track_b_s43_k3.csv",
+  "build": "results/fulltest_s43_k3",
+  "sha256": "605421dc24a6cae9984148b85d5aa0d1fb910945d9f2ab53d5a6f22fd7524e25",
+  "submission_id": "bb9d428e-340a-47e0-b868-16e6797965b4",
+  "submitted_utc": "2026-10-26T00:12:30",
+  "mra": "0.8381",
+  "S2": "0.8298",
+  "D2": "0.876",
+  "S3": "0.8207",
+  "D3": "0.8257",
+  "created_at_portal": "2026-10-26T00:12:30.571085+00:00",
+  "role": "alternative, only if the organisers allow its two lookup steps (STATEMENT.md)"
+ },
+ "intermediates": {
+  "results/fulltest_s37_b9lat/track_b_s33_b9lat.csv": "8ca2a2442810f95633a9686a0014838af6fa4bf529758fc475c4caa149935986",
+  "results/fulltest_s37_b9const/track_b_s33_b9const.csv": "6215a760e865862a21fb8b39eb074e61f6242d1d61f6f42824cfd83f77ecbb7a"
+ }
+}

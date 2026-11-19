@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0172.mp4",
+ "video_source": "simulation",
+ "video_type": "S3SS",
+ "fps": 24.0,
+ "frames": 80,
+ "duration_s": 3.3333,
+ "width": 2304,
+ "height": 1296,
+ "question": {
+  "id": 1414,
+  "question": "What is the acceleration of the astronaut at time 3s in m/s^2?",
+  "prior": "height of the astronaut = 2.2m",
+  "depth_info": "t=1s, distance_astronaut_camera = 18.147m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

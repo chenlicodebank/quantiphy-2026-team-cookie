@@ -1,0 +1,18 @@
+{
+ "video": "internet_0067.mp4",
+ "video_source": "internet",
+ "video_type": "S2SS",
+ "fps": 30.0,
+ "frames": 12,
+ "duration_s": 0.4,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3239,
+  "question": "What is the acceleration of the acorn at 0.17s in m/s^2?",
+  "prior": "height of the acorn = 8 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

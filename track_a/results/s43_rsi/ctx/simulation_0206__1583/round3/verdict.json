@@ -1,0 +1,5 @@
+{"answer": 0.139, "decision": "new", "follows": null,
+ "crux": "camera pitch (desk-plane tilt), which sets the foreshortening of the slip's receding L-F side; with the pitch tied to f by the measured vertical VP, what remains is f (2650-2840)",
+ "fault_found": "C2 solved the pitch (11.6 deg) by putting the 5.009 m point at desk-top height; that implies VPy y~14020, which the LSD verticals reject (residual 0.39 vs 0.14 deg, measured VPy 11981); at C2's own f with the measured pitch its corners give 0.128-0.134, not 0.147",
+ "closure_pct": -0.7, "confidence": "medium", "verified_previous": true,
+ "lesson": "When a fall fit's free initial velocity equals half of g times one physics step of the renderer's default rate, it is the integrator's offset rather than a real push, so prefer the free-velocity fit over a from-rest fit when calibrating the focal length."}

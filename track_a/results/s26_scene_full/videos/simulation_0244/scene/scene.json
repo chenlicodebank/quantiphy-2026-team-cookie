@@ -1,0 +1,276 @@
+{
+ "video": "simulation_0244.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 30.0,
+ "frames": 75,
+ "width": 1080,
+ "height": 1920,
+ "time_of_frame": "t = frame / 30",
+ "camera": {
+  "static": true,
+  "evidence": "phase correlation frame0 vs frame74 on y<1000: shift (-0.002,-0.001) px; background diff in sky median 2 grey levels"
+ },
+ "units": "pixels (x right, y down, origin top-left of 1080x1920 frame) and seconds",
+ "objects": [
+  {
+   "name": "creature",
+   "aka": "large horned deer/ibex-like fantasy animal (brown body, white chest mane, long ridged backward-curving horns, long tufted tail)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "motion": "walks left->right across the road, parallel to the image plane, constant pace",
+   "track": "tracks/creature.csv (mask bbox/centroid), tracks/creature_landmarks.csv (hip, body_mid, shoulder patch tracks - best reference points)",
+   "summary": {
+    "creature_bbox_length_px": {
+     "median": 486.0,
+     "p10": 413.4,
+     "p90": 520.6,
+     "min": 389.0,
+     "max": 563.0
+    },
+    "creature_bbox_height_px": {
+     "median": 421.0,
+     "p10": 410.2,
+     "p90": 425.6,
+     "min": 401.0,
+     "max": 428.0
+    },
+    "creature_top_y": {
+     "median": 1126.0,
+     "p10": 1123.0,
+     "p90": 1136.0,
+     "min": 1122.0,
+     "max": 1139.0
+    },
+    "creature_hoof_bottom_y": {
+     "median": 1547.0,
+     "p10": 1544.0,
+     "p90": 1552.0,
+     "min": 1525.0,
+     "max": 1552.0
+    },
+    "creature_shoulder_dx_per_frame": {
+     "median": 6.6,
+     "p10": 6.1,
+     "p90": 7.0,
+     "min": 5.8,
+     "max": 7.4
+    },
+    "creature_hip_dx_per_frame": {
+     "median": 6.8,
+     "p10": 4.9,
+     "p90": 8.6,
+     "min": 2.5,
+     "max": 10.9
+    },
+    "creature_shoulder_x_f0_f74": [
+     425.0,
+     913.63
+    ],
+    "creature_hip_x_f0_f74": [
+     260.0,
+     758.04
+    ]
+   }
+  },
+  {
+   "name": "rabbit",
+   "aka": "small orange-brown hare/rabbit hopping on the road in front of the creature",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "fully_in_frame": [
+    0,
+    69
+   ],
+   "partially_out_right_edge": [
+    70,
+    74
+   ],
+   "motion": "hops left->right along the road at nearly constant y (~1517)",
+   "track": "tracks/rabbit.csv",
+   "summary": {
+    "rabbit_length_px(frames0-69)": {
+     "median": 73.0,
+     "p10": 69.0,
+     "p90": 79.0,
+     "min": 67.0,
+     "max": 84.0
+    },
+    "rabbit_height_px(frames0-69)": {
+     "median": 61.5,
+     "p10": 51.0,
+     "p90": 67.1,
+     "min": 48.0,
+     "max": 70.0
+    },
+    "rabbit_cy": {
+     "median": 1517.1,
+     "p10": 1515.7,
+     "p90": 1519.3,
+     "min": 1514.5,
+     "max": 1526.5
+    },
+    "rabbit_cx_dx_per_frame(0-69)": {
+     "median": 6.3,
+     "p10": 4.9,
+     "p90": 8.9,
+     "min": 4.2,
+     "max": 10.6
+    },
+    "rabbit_cx_f0_f69_f74": [
+     578.0,
+     1035.3,
+     1061.4
+    ]
+   }
+  },
+  {
+   "name": "road",
+   "moves": false,
+   "aka": "asphalt road receding toward the mountain; white centre line (from ~(640,1470) down to ~(500,1920)), yellow line at left (~x 420-460,y 1430-1520)",
+   "image_position": "surface y > ~1400; vanishing near (530,1400)"
+  },
+  {
+   "name": "puddles",
+   "moves": false,
+   "aka": "water puddles on the road reflecting the animals",
+   "image_position": "dark reflective band y ~1580-1880 plus small puddle at (~650,1490)"
+  },
+  {
+   "name": "left_conifer",
+   "moves": false,
+   "image_position": "x 0-~470, top ~y 370 (x~120), base ~y 1350"
+  },
+  {
+   "name": "right_conifer",
+   "moves": false,
+   "image_position": "x ~620-1080, top ~y 400 (x~1000), base ~y 1300"
+  },
+  {
+   "name": "mountain",
+   "moves": false,
+   "image_position": "snowy peak at (~565,600), visible base y~1380, x ~400-710"
+  },
+  {
+   "name": "bushes",
+   "moves": false,
+   "image_position": "left x 0-370 y 1300-1560; right x 650-1080 y 1280-1530"
+  },
+  {
+   "name": "blue_pole",
+   "moves": false,
+   "image_position": "thin blue vertical pole/trunk at x~60-90, y ~1000-1370"
+  }
+ ],
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "both animals already moving right at clip start (no start of motion seen)"
+  },
+  {
+   "frame": 70,
+   "t": 2.333,
+   "what": "rabbit starts leaving the frame at the right edge (x1 hits 1079 at frame 71)"
+  },
+  {
+   "frame": 74,
+   "t": 2.467,
+   "what": "clip ends; creature still walking, rabbit mostly out of view"
+  },
+  {
+   "what": "no impacts, contacts or direction changes; the two animals never overlap in the image"
+  }
+ ],
+ "summary_stats": {
+  "creature_bbox_length_px": {
+   "median": 486.0,
+   "p10": 413.4,
+   "p90": 520.6,
+   "min": 389.0,
+   "max": 563.0
+  },
+  "creature_bbox_height_px": {
+   "median": 421.0,
+   "p10": 410.2,
+   "p90": 425.6,
+   "min": 401.0,
+   "max": 428.0
+  },
+  "creature_top_y": {
+   "median": 1126.0,
+   "p10": 1123.0,
+   "p90": 1136.0,
+   "min": 1122.0,
+   "max": 1139.0
+  },
+  "creature_hoof_bottom_y": {
+   "median": 1547.0,
+   "p10": 1544.0,
+   "p90": 1552.0,
+   "min": 1525.0,
+   "max": 1552.0
+  },
+  "rabbit_length_px(frames0-69)": {
+   "median": 73.0,
+   "p10": 69.0,
+   "p90": 79.0,
+   "min": 67.0,
+   "max": 84.0
+  },
+  "rabbit_height_px(frames0-69)": {
+   "median": 61.5,
+   "p10": 51.0,
+   "p90": 67.1,
+   "min": 48.0,
+   "max": 70.0
+  },
+  "rabbit_cy": {
+   "median": 1517.1,
+   "p10": 1515.7,
+   "p90": 1519.3,
+   "min": 1514.5,
+   "max": 1526.5
+  },
+  "creature_shoulder_dx_per_frame": {
+   "median": 6.6,
+   "p10": 6.1,
+   "p90": 7.0,
+   "min": 5.8,
+   "max": 7.4
+  },
+  "creature_hip_dx_per_frame": {
+   "median": 6.8,
+   "p10": 4.9,
+   "p90": 8.6,
+   "min": 2.5,
+   "max": 10.9
+  },
+  "rabbit_cx_dx_per_frame(0-69)": {
+   "median": 6.3,
+   "p10": 4.9,
+   "p90": 8.9,
+   "min": 4.2,
+   "max": 10.6
+  },
+  "creature_shoulder_x_f0_f74": [
+   425.0,
+   913.63
+  ],
+  "creature_hip_x_f0_f74": [
+   260.0,
+   758.04
+  ],
+  "rabbit_cx_f0_f69_f74": [
+   578.0,
+   1035.3,
+   1061.4
+  ]
+ }
+}

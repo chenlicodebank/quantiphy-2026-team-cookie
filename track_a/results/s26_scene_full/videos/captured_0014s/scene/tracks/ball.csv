@@ -1,0 +1,50 @@
+frame,t_s,visible,ref_x,ref_y,bbox_cx,bbox_cy,x0,y0,x1,y1,len_major_px,wid_minor_px,height_px,area_px,equiv_diam_px,occlusion,phase,reliability
+0,0.0,1,544.7,295.9,544.5,295.5,531,281,558,310,29.0,27.0,30,659,29.0,none,at_rest_top_of_board,good(+-1px)
+1,0.0417,1,544.1,296.2,544.5,295.5,531,281,558,310,29.0,27.0,30,676,29.3,none,at_rest_top_of_board,good(+-1px)
+2,0.0833,1,545.0,296.1,545.5,295.5,532,281,559,310,29.0,27.0,30,668,29.2,none,at_rest_top_of_board,good(+-1px)
+3,0.125,1,544.4,296.4,544.5,295.5,531,281,558,310,30.4,25.7,30,665,29.1,none,at_rest_top_of_board,good(+-1px)
+4,0.1667,1,544.9,296.5,545.5,296.0,532,281,559,311,30.0,27.0,31,682,29.5,none,at_rest_top_of_board,good(+-1px)
+5,0.2083,1,544.5,297.6,542.0,297.0,526,282,558,312,31.6,30.3,31,687,29.6,none,at_rest_top_of_board,good(+-1px)
+6,0.25,1,544.8,297.5,545.0,297.0,531,282,559,312,30.6,27.4,31,684,29.5,none,at_rest_top_of_board,good(+-1px)
+7,0.2917,1,543.1,297.3,543.0,297.0,528,281,558,313,32.0,30.0,33,809,32.1,none,at_rest_top_of_board,good(+-1px)
+8,0.3333,1,542.7,298.2,542.5,298.5,528,283,557,314,31.0,29.0,32,770,31.3,none,rolling_down_board,good(+-1px)
+9,0.375,1,543.1,299.7,543.0,300.0,529,284,557,316,32.0,28.0,33,779,31.5,none,rolling_down_board,good(+-1px)
+10,0.4167,1,543.3,303.2,543.5,303.5,530,288,557,319,31.0,27.0,32,749,30.9,none,rolling_down_board,good(+-1px)
+11,0.4583,1,544.2,308.0,543.5,308.5,530,292,557,325,33.0,27.0,34,779,31.5,none,rolling_down_board,good(+-1px)
+12,0.5,1,545.7,329.5,545.0,330.5,532,316,558,345,27.9,26.7,30,606,27.8,none,rolling_down_board,good(+-1px)
+13,0.5417,1,546.6,340.7,546.0,342.0,533,328,559,356,28.0,26.0,29,613,27.9,none,rolling_down_board,good(+-1px)
+14,0.5833,1,547.7,354.0,547.0,355.0,534,341,560,369,28.0,26.0,29,630,28.3,none,rolling_down_board,good(+-1px)
+15,0.625,1,548.2,369.8,548.0,370.5,535,357,561,384,27.0,26.0,28,627,28.3,none,rolling_down_board,good(+-1px)
+16,0.6667,1,549.4,388.7,549.0,389.5,536,376,562,403,27.0,26.0,28,633,28.4,none,rolling_down_board,good(+-1px)
+17,0.7083,1,551.1,409.0,551.0,409.5,537,396,565,423,28.0,27.0,28,647,28.7,none,crossing_board_bottom_edge_onto_table,poor(+-6px y; shadow/low contrast at board edge)
+18,0.75,1,550.8,415.5,551.0,417.0,536,403,566,431,30.0,28.0,29,594,27.5,none,crossing_board_bottom_edge_onto_table,poor(+-6px y; shadow/low contrast at board edge)
+19,0.7917,1,549.3,417.7,549.0,417.5,534,409,564,426,30.0,16.5,18,412,22.9,none,crossing_board_bottom_edge_onto_table,poor(+-6px y; shadow/low contrast at board edge)
+20,0.8333,1,547.9,428.8,547.0,429.0,532,418,562,440,30.0,22.0,23,591,27.4,none,rolling_on_table,"fair(+-3px; lower half low contrast vs wood, dark shadow excluded)"
+21,0.875,1,548.2,446.6,548.5,446.0,533,433,564,459,31.1,25.7,27,672,29.3,none,rolling_on_table,"fair(+-3px; lower half low contrast vs wood, dark shadow excluded)"
+22,0.9167,1,546.4,456.2,546.0,455.5,530,443,562,468,32.0,25.0,26,671,29.2,none,rolling_on_table,"fair(+-3px; lower half low contrast vs wood, dark shadow excluded)"
+23,0.9583,1,544.8,476.5,545.0,476.5,528,456,562,497,41.0,34.0,42,1167,38.5,none,rolling_on_table,"fair(motion-blur streak; centre=streak centre, +-3px)"
+24,1.0,1,544.1,498.8,543.0,497.5,523,474,563,521,47.8,39.2,48,1475,43.3,none,falling_off_front_edge,"fair(motion-blur streak; centre=streak centre, +-3px)"
+25,1.0417,1,544.0,530.2,544.0,529.5,526,500,562,559,59.0,36.0,60,1938,49.7,none,falling_off_front_edge,"fair(motion-blur streak; centre=streak centre, +-3px)"
+26,1.0833,1,545.0,569.1,545.0,569.0,527,537,563,601,64.0,36.0,65,2015,50.7,none,falling_off_front_edge,"fair(motion-blur streak; centre=streak centre, +-3px)"
+27,1.125,1,547.2,616.7,548.5,616.5,528,582,569,651,69.0,41.0,70,2307,54.2,none,falling_off_front_edge,"fair(motion-blur streak; centre=streak centre, +-3px)"
+28,1.1667,1,549.6,668.7,549.5,667.0,531,638,568,696,57.8,36.4,59,1855,48.6,none,falling_off_front_edge,"fair(motion-blur streak; centre=streak centre, +-3px)"
+29,1.2083,1,557.9,716.1,556.0,715.5,544,712,568,719,24.0,7.0,8,156,14.1,partial(bottom image edge),falling_off_front_edge,poor(only top sliver visible at image bottom)
+30,1.25,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+31,1.2917,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+32,1.3333,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+33,1.375,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+34,1.4167,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+35,1.4583,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+36,1.5,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+37,1.5417,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+38,1.5833,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+39,1.625,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+40,1.6667,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+41,1.7083,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+42,1.75,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+43,1.7917,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+44,1.8333,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+45,1.875,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+46,1.9167,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+47,1.9583,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,
+48,2.0,0,,,,,,,,,,,,,,out_of_frame,out_of_frame,

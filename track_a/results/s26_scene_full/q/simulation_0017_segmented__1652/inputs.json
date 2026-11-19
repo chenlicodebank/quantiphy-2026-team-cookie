@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0017_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V3MX",
+ "fps": 33.0,
+ "frames": 101,
+ "duration_s": 3.0606,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1652,
+  "question": "What is the width of the pedestal (square base) of the central sculpture in meters?",
+  "prior": "speed of the person = 1.3m/s",
+  "depth_info": "t=0s, distance_human_camera = 5.424m\nt=1s, distance_human_camera = 4.886m\ndistance_bench_camera = 2.267m\ndistance_the_pedestal_of_the_central _sculpture_and_camera = 5.963m\ndistance_the central_sculpture_camera = 5.962m\ndistance_the_freestanding_art_display_panel = 4.223m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 33.0
+ }
+}

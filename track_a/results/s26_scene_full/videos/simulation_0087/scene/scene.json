@@ -1,0 +1,108 @@
+{
+ "video": "simulation_0087.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 54,
+ "size_px": [
+  1920,
+  1080
+ ],
+ "time_convention": "t = frame/24; frame 0 = t 0",
+ "view": "orthographic-looking top-down view of a flat uniform grey ground (RGB ~140); x right, y down (px)",
+ "camera": {
+  "static": true,
+  "evidence": "background uniform grey 139-140 everywhere, no texture; nothing static to shift; no zoom (object pixel sizes constant)"
+ },
+ "frame_note": "frames 0 and 1 are identical (mean |diff| 0.008); motion starts between frame 1 and 2",
+ "objects": {
+  "cyclist": {
+   "desc": "person riding a bicycle seen from above (dark clothing, teal/cyan bike frame accents), upper lane y~405-453, moving +x (right)",
+   "moves": true,
+   "visible_frames": "0-53 (frames 0-6 cut by left image edge; 0-1 only front wheel tip)",
+   "size_px": {
+    "length_x_bike_tip_to_tip": 171,
+    "width_y_incl_rider_shoulders_and_handlebar": 49,
+    "rider_body_blob_x_extent": "~45-60",
+    "note": "length 173 at f7-14 shrinking to 169 at f53 (+-2 px, pedalling/blur)"
+   },
+   "ref_point": "bbox centre (approx. saddle/pelvis); rider_cx/cy columns = dark torso blob centroid, typically 10-20 px behind bbox centre",
+   "motion_px_per_frame": "about +21.1 px/frame in x, constant from frame 1->2 to end; y drifts 426-430 (rider sway)",
+   "track": "tracks/cyclist.csv"
+  },
+  "car": {
+   "desc": "white/silver angular pickup (Cybertruck-like), seen from above, front (light grey hood) facing left, dark tonneau/bed at rear (right); lower lane y~564-813",
+   "moves": true,
+   "visible_frames": "0-53 (frames 0-36 cut by right image edge; fully visible 37-53)",
+   "size_px": {
+    "length_x_bumper_to_bumper": 583,
+    "length_range": "577-589 (588 at f37-41, 577 at f53; edge blur/antialias)",
+    "width_y_incl_mirrors": 250,
+    "width_y_body_without_mirrors": 214,
+    "body_y_range": [
+     579,
+     792
+    ],
+    "mirror_y_range": [
+     564,
+     813
+    ],
+    "mirror_x_from_front": "~170-190 px behind front edge",
+    "wheel_arches_x_at_f53": "front ~850-960, rear ~1200-1310 (dark arcs at body sides)"
+   },
+   "ref_point": "vehicle root assumed at bbox centre (ref_x/ref_y columns); centre for frames 0-36 extrapolated from the front edge",
+   "motion_px_per_frame": "starts from rest (front edge 1787 at f0-1), speeds up steadily: ~-1 px/f at f2, ~-14 at f20, ~-23 at f35, ~-37 at f53 (roughly uniform acceleration ~0.7 px/frame^2)",
+   "track": "tracks/car.csv"
+  },
+  "ground": {
+   "desc": "featureless flat grey plane, no markings",
+   "moves": false
+  },
+  "shadows": {
+   "desc": "soft dark shadows around car and cyclist (darkening to ~105-125 right next to the car); not included in masks",
+   "moves": true
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time": 0.0,
+   "what": "frames 0 and 1 identical; both objects at rest/start position"
+  },
+  {
+   "frame": 2,
+   "time": 0.0833,
+   "what": "cyclist moving at full constant speed from first moving frame (~21 px/frame); car begins to creep left (front edge -1 px)"
+  },
+  {
+   "frame": 7,
+   "time": 0.2917,
+   "what": "cyclist fully inside frame"
+  },
+  {
+   "frame": 14,
+   "time": 0.5833,
+   "what": "car side mirrors enter view (y extent grows to 564-813 by f15)"
+  },
+  {
+   "frame": 37,
+   "time": 1.5417,
+   "what": "car fully inside frame (rear leaves right edge)"
+  },
+  {
+   "frame": 47,
+   "time": 1.9583,
+   "what": "x ranges of car and cyclist first overlap (car front x0 1027 < cyclist front tip x1 1030); they pass in separate lanes, no contact. Centres not yet crossed by f53 (car 1101 vs cyclist 1072); would cross ~1 frame after the clip"
+  },
+  {
+   "frame": 53,
+   "time": 2.2083,
+   "what": "last frame; objects moving in opposite directions, no contact (lanes ~259 px apart in y between centres)"
+  }
+ ],
+ "lane_separation_px": {
+  "cyclist_centre_y": 429.0,
+  "car_centre_y": 688.5,
+  "dy": 259.5
+ }
+}

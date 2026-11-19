@@ -1,0 +1,72 @@
+{
+  "video": "captured_0029s.mp4",
+  "source": "lab (real Orbbec Femto Mega recording; background replaced by Segment Anything 2 - only table and ball kept)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "frame_time_rule": "t = frame / 24; frame = round(t * 24); t=0 is frame 0, last frame 48 = 2.000 s",
+  "image_size_px": [1280, 720],
+  "camera": {
+    "motion": "static (table mask shift vs frame 0 < 1 px in every frame; no pan or shake)",
+    "intrinsics_from_benchmark": {"focal_px": 763, "hfov_deg": 80, "principal_point_px": [640, 360], "note": "f = 0.5959 x 1280; principal point assumed at image centre"},
+    "view": "slightly elevated view looking at a table from its long front side; table top seen in perspective as a trapezoid (front edge long and low, back edge short and higher). No horizon visible (background replaced)."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "yellow-green tennis ball; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track_file": "tracks/ball.csv",
+      "reference_point": "cx, cy = centroid of the colour mask (visible centre)",
+      "apparent_diameter_px": {
+        "frames_0_16_held_near_camera": "tangential ~95 (radial ~115, stretched by off-axis perspective, ball at ~35 deg off-axis)",
+        "frame_29_31_farthest": "~43-46",
+        "frame_48": "~54",
+        "best_size_column": "diam_tangential_px (perspective-robust); diam_radial_px is inflated by off-axis stretch and, in frames 17-22, by motion blur"
+      },
+      "image_position": {"frame_0": [1175, 563], "frame_30": [708, 438], "frame_48": [515, 454]}
+    },
+    {
+      "name": "table",
+      "description": "brown wood-grain rectangular table top on a single dark central pedestal leg; static",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "note": "front-right corner hidden behind the ball in frames 0-18; fully visible from frame 20",
+      "top_surface_corners_px_frame48": {
+        "back_left": [447, 453],
+        "back_right": [915, 469],
+        "front_left_top": [208, 541],
+        "front_right_top": [1141, 590]
+      },
+      "front_edge_bottom_corners_px": {"front_left_bottom": [211, 571], "front_right_bottom": [1138, 624]},
+      "extents_px": {
+        "front_edge_length": 933,
+        "back_edge_length": 468,
+        "left_side_length_image": 255,
+        "right_side_length_image": 256,
+        "edge_thickness_front_left": 30,
+        "edge_thickness_front_right": 34,
+        "bbox_top_and_edge": [208, 452, 1141, 624]
+      }
+    },
+    {
+      "name": "table_leg",
+      "description": "dark grey pedestal column under the table centre with a black mounting bracket",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "bracket_px": {"x": [605, 701], "y": [592, 615]},
+      "column_px": {"x": [629, 688], "y_top": 615, "y_bottom": "720 (cut by image bottom)"}
+    }
+  ],
+  "events": [
+    {"event": "ball held/resting near the camera at the table's front-right corner, small jitter only (<= 6 px)", "frames": [0, 16], "time_s": [0.0, 0.667]},
+    {"event": "start of motion (release/push) - ball starts moving up-left", "frame": 17, "time_s": 0.708, "note": "slow drift left from frame ~13 (steps 2, 4, 6 px at 13->14, 14->15, 15->16), 9 px at 16->17, then 44 px at 17->18; onset range frames 13-17"},
+    {"event": "fast phase with motion blur, ball passes over the table's front-right corner onto the table top", "frames": [18, 22], "time_s": [0.75, 0.917]},
+    {"event": "ball recedes (shrinks) diagonally toward the back of the table", "frames": [17, 30]},
+    {"event": "direction change: farthest point / smallest apparent size; image motion turns from up-left to left and slightly down, size starts growing (ball comes back toward the camera). Likely rebound off something at the back (erased by the background replacement) or curve", "frame": 30, "time_s": 1.25, "range_frames": [29, 31]},
+    {"event": "probable dropped capture frame: image step 35->36 is ~20.5 px vs ~10.5 px for neighbours (timestamps in file are uniform)", "frames": [35, 36], "time_s": [1.458, 1.5]},
+    {"event": "ball still rolling left along the back of the table at the end of the clip (~10 px/frame)", "frame": 48, "time_s": 2.0}
+  ],
+  "files": {"track": "tracks/ball.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

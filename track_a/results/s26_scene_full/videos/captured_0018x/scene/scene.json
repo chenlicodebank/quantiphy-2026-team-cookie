@@ -1,0 +1,84 @@
+{
+  "video": "captured_0018x.mp4",
+  "source": "lab (captured, SAM2-segmented: background replaced by white, watermark 'Modified with Segment Anything 2 Demo' bottom-right)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (person bboxes and foot rows constant to <=1 px over all 49 frames; white replaced background, so no texture to measure shift)",
+    "intrinsics_from_benchmark": "Orbbec Femto Mega, HFOV 80 deg: f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+    "perspective_cues": "no visible floor/horizon (background removed). Floor-contact image rows give depth ordering: left person feet y=577, soccer ball lowest bottom y=577, white box on floor y~602-609, tennis ball lowest bottom y=616, yellow plush lowest bottom y=697, right person feet y=719 (bottom edge of image). Larger y = nearer the camera (camera above floor looking slightly down)."
+  },
+  "coordinates": "image pixels, x right, y down, origin top-left; centres are bbox centres (bbox_cx, bbox_cy) and mask centroids (cx, cy)",
+  "objects": {
+    "soccer_ball": {
+      "description": "black-and-white soccer ball held in the RIGHT hand (image right side) of the left (farther, white top, dark trousers) person; dropped",
+      "moves": true, "visible_frames": "0-48", "track": "tracks/soccer_ball.csv",
+      "size_px": {"diameter": 45, "range": "44-47 (horizontal width, unblurred: frame 0 bbox 47x45, frames 43-46 width 45-47)", "note": "vertical bbox height inflated by motion blur during fall (up to 68 px at frame 39)"},
+      "image_pos_frame0": [540.0, 265.0],
+      "events": {
+        "held_until_frame": 28, "release_frame": 29, "release_time_s": 1.208,
+        "floor_impact_frame": 39, "floor_impact_time_s": 1.625, "lowest_bottom_y": 577,
+        "rebound": "rises after frame 39; still rising (slowly, dy -3 px) at last frame 48, apex at or just after frame 48 (cy ~407)"
+      }
+    },
+    "white_box": {
+      "description": "white rectangular carton/box with printed label (pinkish end visible after landing), held upright in the LEFT hand of the left person, left of the soccer ball; dropped",
+      "moves": true, "visible_frames": "0-48", "track": "tracks/white_box.csv",
+      "size_px": {"held_frame0_bbox": [26, 54], "on_floor_frames_40_48_long_axis": "56-63 (incl. some motion blur while sliding)", "short_axis": "26-30", "note": "top end partly covered by fingers while held; fall bbox heights 72-83 are motion-blurred"},
+      "image_pos_frame0": [480.5, 266.4],
+      "events": {
+        "held_until_frame": 28, "release_frame": 29, "release_time_s": 1.208,
+        "floor_impact_frame": 39, "floor_impact_time_s": 1.625, "lowest_bottom_y": 602,
+        "after_impact": "small rebound (frames 40-42), tips over toward image-left and slides/rolls left (cx 482 -> 418.5 at frame 48), lying horizontally at frames 47-48 (bottom y ~609)"
+      }
+    },
+    "tennis_ball": {
+      "description": "small yellow-green tennis ball held in the outstretched LEFT hand (image-left end) of the right (nearer, black top, long hair) person; dropped",
+      "moves": true, "visible_frames": "0-48", "track": "tracks/tennis_ball.csv",
+      "size_px": {"diameter": 20.5, "range": "20-21 (frames 43-46 near rebound apex, little blur; frame 0 ~20 high)", "note": "fall bbox heights 30-49 are motion-blurred"},
+      "image_pos_frame0": [769.5, 256.0],
+      "events": {
+        "arm_raise": "frames 0-25 the arm slowly rises (ball cy 256 -> 249)",
+        "release_frame": 26, "release_time_s": 1.083, "note_release": "first downward motion at frame 26 (dy 2.7), clearly free from frame 27/28",
+        "floor_impact_frame": 36, "floor_impact_time_s": 1.5, "lowest_bottom_y": 616,
+        "rebound_apex_frame": 45, "rebound_apex_time_s": 1.875, "rebound_apex_cy": 421.5,
+        "after_apex": "falling again frames 46-48"
+      }
+    },
+    "yellow_plush": {
+      "description": "yellow plush toy with dark-green leaves on top (corn/banana-like), held in the RIGHT hand (near the body) of the right person; dropped",
+      "moves": true, "visible_frames": "0-48", "track": "tracks/yellow_plush.csv",
+      "size_px": {"length_with_leaves": "55-60 (frame 0 held: 60 incl. leaves; free frames 41-42: 54-57)", "width": "27-31", "note": "partly hidden by the hand while held; fall lengths 70-78 are motion-blurred; end-on views (frames 40, 43) give 29-31"},
+      "image_pos_frame0": [876.5, 248.0],
+      "events": {
+        "held_until_frame": 27, "release_frame": 28, "release_time_s": 1.167,
+        "floor_impact_frame": 36, "floor_impact_time_s": 1.5, "lowest_bottom_y": 697,
+        "after_impact": "rebounds and tumbles (leaves visible frames 41-42); cy 670 at 36 -> ~595 at 41-42, then hovers cy 596-612 to the end with no clear second contact (possible depth motion; ambiguous)"
+      }
+    },
+    "person_left": {
+      "description": "woman farther from camera, white tank top, dark grey cargo trousers, white sneakers; arms outstretched holding the box (left hand) and soccer ball (right hand); stays in place, only arms move",
+      "moves": "arms only", "visible_frames": "0-48", "track": "tracks/person_left.csv",
+      "size_px": {"height_head_to_feet": 404, "bbox_frame0": [336, 174, 492, 578]}
+    },
+    "person_right": {
+      "description": "woman nearer to camera, long dark hair, black oversized shirt, black trousers, white sneakers; holds tennis ball (outstretched left hand) and yellow plush (right hand); stays in place, arms move",
+      "moves": "arms only", "visible_frames": "0-48", "track": "tracks/person_right.csv",
+      "size_px": {"height_head_to_feet": "613-618 (top of hair y~102 to feet y 719 at bottom image edge; feet may be slightly cut by the frame)", "bbox_frame0": [781, 102, 1078, 719]}
+    }
+  },
+  "events_global": [
+    {"frame": 26, "t": 1.083, "event": "tennis ball released (first downward motion)"},
+    {"frame": 28, "t": 1.167, "event": "yellow plush released"},
+    {"frame": 29, "t": 1.208, "event": "soccer ball and white box released (first downward motion)"},
+    {"frame": 36, "t": 1.5, "event": "tennis ball and yellow plush hit the floor"},
+    {"frame": 39, "t": 1.625, "event": "soccer ball and white box hit the floor"},
+    {"frame": 45, "t": 1.875, "event": "tennis ball rebound apex"},
+    {"frame": 48, "t": 2.0, "event": "soccer ball near rebound apex (still rising slowly); box lying on floor"}
+  ],
+  "timing_anomaly": "between frames 35 and 36 all falling objects jump much further than in neighbouring intervals (ball 62 px vs 26/40, box 70 vs 30/40, plush 115 vs 53) - likely a dropped capture frame; per-frame speeds across 35->36 are unreliable"
+}

@@ -1,0 +1,66 @@
+{
+  "video": "simulation_0008.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 22.802381,
+  "frames": 66,
+  "frame_range": [0, 65],
+  "duration_s": 2.8944,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / fps; frame = round(t * fps); t=0 is frame 0",
+  "pixel_convention": "x right, y down, origin top-left of the 1080x1080 frame, full resolution",
+  "camera": {
+    "motion": "static (phase correlation on the boathouse: shift < 0.02 px for all frames; mean abs diff of the sky/land area < 0.3 grey levels)",
+    "per_frame_shift_px": "0 for all frames",
+    "view": "eye-level view across a small lake toward a wooden boathouse; camera just above the water, looking roughly horizontally",
+    "perspective_cues": {
+      "water_plane": "lake surface fills y > ~600 (near shore line y~600-650 behind the boat); water is a horizontal plane, objects further away have their waterline higher in the image",
+      "waterlines_px_y": {"rowboat": "751-760 (see tracks/boat.csv waterline_y)", "jetty_legs": "~680", "far_shore/boathouse_base": "~590-600"},
+      "horizon": "not visible (hills and trees block it); far shoreline/hill foot at y~450-530, so the horizon is roughly y~450-500 at most (camera nearly level)",
+      "principal_point_assumed": [540, 540]
+    }
+  },
+  "objects": [
+    {
+      "name": "rowboat",
+      "description": "white/light-grey wooden rowboat with dark blue interior and a vertical stem post at the bow; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 65],
+      "fully_visible_frames": [55, 65],
+      "partial": "frames 0-54: stern beyond the right image edge (only the bow part visible; at frame 0 only x 990-1079)",
+      "motion": "translates right-to-left (bow leading, bow points left) along a line roughly parallel to the image plane, in front of (closer than) the jetty; apparent size constant within ~2-3%",
+      "track_file": "tracks/boat.csv",
+      "reference_point": "ref_x/ref_y = centre of the full-boat image box (bow_x .. bow_x+length, top_y .. waterline_y); ref_x for frames 0-54 uses the extrapolated length 647.9 px. bow_x (stem tip) is the most precise point.",
+      "size_px_fully_visible": {
+        "length_bow_to_stern_px": "639-649 (frames 55-65; 649 @55, 646 @60, 639 @65)",
+        "height_top_of_stem_or_stern_post_to_waterline_px": "~133-138",
+        "hull_height_gunwale_to_waterline_at_bow+100px": "~88",
+        "width_beam": "not measurable (boat seen side-on)"
+      },
+      "reflection": "mirror image in the water below y~757 is NOT part of the boat; excluded from masks"
+    },
+    {"name": "boathouse", "description": "grey wooden cabin on stilts with gabled roof, centre background, with a railed deck extending right", "moves": false,
+     "bbox_px_frame0": {"x0": 418, "y0": 330, "x1": 750, "y1": 525},
+     "parts": {"cabin_with_roof": "x 422-682 (roof eaves), ridge top y 330, body bottom y ~525; width ~260 px, height ~195 px", "deck_railing": "x 418-750, y ~465-525", "stilts_and_steps_below": "y 525-590, x ~487-597"}},
+    {"name": "jetty", "description": "small grey wooden dock/platform at the water's edge below the boathouse, on legs in the water; boat passes in front of it (frames ~34-52 bow crosses it)", "moves": false,
+     "bbox_px_frame0": {"x0": 460, "y0": 592, "x1": 638, "y1": 680},
+     "dims": "top deck width ~178 px (x 460-638), deck top y~592, front face bottom y~645, legs to water y~680"},
+    {"name": "left_conifer_tree", "description": "large conifer at left foreground on the bank", "moves": false,
+     "bbox_px_frame0": {"x0": 45, "y0": 0, "x1": 425, "y1": 578}, "notes": "top cut by the image; trunk x ~255-275, trunk base y ~578"},
+    {"name": "far_left_tree", "description": "second conifer partly behind the left tree at the left image edge", "moves": false, "bbox_px_frame0": {"x0": 0, "y0": 0, "x1": 120, "y1": 480}},
+    {"name": "right_tree", "description": "broadleaf tree at the right edge, behind the lake", "moves": false,
+     "bbox_px_frame0": {"x0": 785, "y0": 0, "x1": 1079, "y1": 532}, "notes": "crown cut by top/right edges; trunk x ~990-1012, base y ~532"},
+    {"name": "rock", "description": "light brown boulder on the left bank", "moves": false, "bbox_px_frame0": {"x0": 72, "y0": 515, "x1": 165, "y1": 572}},
+    {"name": "hills_mountains", "description": "grey rocky hills/mountain behind the house (snowy peak at x~400-500, y~310-450; rocky slope right of house y~445-530)", "moves": false},
+    {"name": "lake", "description": "calm water in the foreground (y > ~600), mirror reflections; wake ripples behind the boat", "moves": false},
+    {"name": "grass_bank", "description": "grassy shore between lake and house, y ~480-650", "moves": false}
+  ],
+  "events": [
+    {"frame": 0, "time_s": 0.0, "event": "boat already moving left; bow at x~990, rest of boat beyond right edge"},
+    {"frame": 34, "time_s": 1.491, "event": "bow reaches the right edge of the jetty (x~638); boat passes in front of the jetty frames ~34-65"},
+    {"frame": 43, "time_s": 1.886, "event": "bow crosses the image centre x=540"},
+    {"frame": 55, "time_s": 2.412, "event": "stern enters the image: boat fully visible from here on (stern x 1068)"},
+    {"frame": 65, "time_s": 2.851, "event": "last frame; boat still moving left (no stop, no turn, no direction change in the clip)"}
+  ],
+  "files": {"boat_track": "tracks/boat.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

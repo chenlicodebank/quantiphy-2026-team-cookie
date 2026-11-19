@@ -1,0 +1,65 @@
+{
+ "id": 1583,
+ "video": "simulation_0206",
+ "submitted": 0.148,
+ "submitted_is": "the Claude line's answer 0.148, unchanged",
+ "deepseek_median": 0.28,
+ "candidates": [
+  {
+   "name": "C1",
+   "kind": "claude",
+   "answer": 0.11,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "kind": "claude",
+   "answer": 0.148,
+   "who": "Claude Opus 5.5 (Claude Code agent), 27_9 gravity-prior re-ask",
+   "source": "s27_gravity attempt 1"
+  },
+  {
+   "name": "C3",
+   "kind": "claude",
+   "answer": 0.13,
+   "who": "Claude Opus 5.5 (Claude Code agent), 30_x adjudication, 30_9b D3 adjudication batch 2 (DeepSeek+SAM 3 differs >25 pct)",
+   "source": "s30_adj_d3 attempt 1"
+  },
+  {
+   "name": "C4",
+   "kind": "deepseek",
+   "answer": 0.2,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r1",
+   "source": "s37_test_repeats r1"
+  },
+  {
+   "name": "C5",
+   "kind": "deepseek",
+   "answer": 0.29,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r2",
+   "source": "s37_test_repeats r2"
+  },
+  {
+   "name": "C6",
+   "kind": "deepseek",
+   "answer": 0.28,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r3",
+   "source": "s37_test_repeats r3"
+  },
+  {
+   "name": "C7",
+   "kind": "deepseek",
+   "answer": 0.3,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r4",
+   "source": "s37_test_repeats r4"
+  },
+  {
+   "name": "C8",
+   "kind": "deepseek",
+   "answer": 0.12,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r5",
+   "source": "s37_test_repeats r5"
+  }
+ ]
+}

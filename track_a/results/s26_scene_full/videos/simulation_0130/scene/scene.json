@@ -1,0 +1,201 @@
+{
+ "video": "simulation_0130.mp4",
+ "source": "simulation",
+ "scene": "2D (top-down orthographic-looking view of an apron)",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 1920,
+ "height": 1080,
+ "time_of_frame": "t = frame/24",
+ "image_axes": "x right, y down (px). Motion is toward the top of the image (decreasing y).",
+ "camera": {
+  "static": true,
+  "max_mean_abs_change_on_empty_strip_x900_1100": 0.164,
+  "view": "looking straight down; no visible perspective (ground grid lines parallel, uniform spacing), so one px scale for the whole ground plane"
+ },
+ "frame_duplicates": {
+  "frame0_vs_frame1_mean_abs_diff": 0.0508,
+  "frame1_vs_frame2_mean_abs_diff": 0.1788,
+  "note": "frames 0 and 1 are identical: nothing moves between them; motion starts after frame 1"
+ },
+ "objects": {
+  "plane": {
+   "desc": "white twin-engine airliner (A320/737-like), nose pointing up, towed upward along the lead-in line of stand 01 (x~475)",
+   "moves": true,
+   "track": "tracks/plane.csv",
+   "visible_frames": "0-71 (tail/wings below the bottom edge before frame 50; fully in frame from frame 50)",
+   "extents_px_at_frame71": {
+    "length_nose_to_tail": 423.0,
+    "wingspan": 386.5,
+    "horizontal_stabilizer_span": 143.5,
+    "fuselage_width_approx": 48,
+    "nose_y": 543.0,
+    "tail_y": 966.0,
+    "left_wingtip_x": 281.0,
+    "right_wingtip_x": 667.5,
+    "wingtip_y": 792.0,
+    "axis_x": 474.5,
+    "uncertainty_px": 1.5
+   },
+   "ref_point": "bbox centre (x mid of wingtips, y mid of nose-tail) = (474.25, 754.5) at frame 71; origin of the model is not visible, any point on this rigid, non-rotating body moves identically",
+   "rotation": "none (heading constant, x drift < 0.2 px)"
+  },
+  "tug": {
+   "desc": "small dark/black aircraft tug (pushback/towing tractor) with yellow-orange trim and two orange front prongs, in front of the plane (above it in image), connected to the nose gear by a white two-rail towbar",
+   "moves": true,
+   "track": "tracks/tug.csv",
+   "visible_frames": "0-71",
+   "extents_px_at_frame71": {
+    "body_length": 48.5,
+    "width": 25.0,
+    "length_including_front_prongs": 71.0,
+    "body_y0": 407.5,
+    "body_y1": 456.0,
+    "x0": 462.5,
+    "x1": 487.5,
+    "uncertainty_px": 2
+   },
+   "ref_point": "centre of the dark body"
+  },
+  "towbar": {
+   "desc": "two thin white parallel rails between tug rear and plane nose",
+   "moves": true,
+   "length_px": "tug rear (y1) to plane nose = ~87 px, constant (moves with tug & plane)"
+  },
+  "helicopter": {
+   "desc": "camouflage (tan/brown) military helicopter with 5-blade dark main rotor, parked on stand 02 (right), nose up",
+   "moves": false,
+   "rotor_turning": false,
+   "visible_frames": "0-71",
+   "extents_px": {
+    "fuselage_nose_y": 205,
+    "tail_end_y": 600,
+    "fuselage_length": 395,
+    "axis_x": 1450,
+    "rotor_hub": [
+     1448,
+     330
+    ],
+    "rotor_tip_left": [
+     1285,
+     391
+    ],
+    "rotor_tip_right": [
+     1620,
+     399
+    ],
+    "rotor_tip_upper_left": [
+     1352,
+     198
+    ],
+    "rotor_tip_upper_right": [
+     1545,
+     205
+    ],
+    "rotor_overall_bbox_x": [
+     1285,
+     1620
+    ],
+    "rotor_bbox_width": 335,
+    "blade_lengths_from_hub_px": "158-186 (unequal: drooping/tilted blades)",
+    "tailplane_span": [
+     1408,
+     1502
+    ],
+    "stub_wing_pylons_x": [
+     1355,
+     1545
+    ],
+    "overall_bbox": [
+     1285,
+     198,
+     1620,
+     600
+    ],
+    "uncertainty_px": 5
+   }
+  },
+  "stand_01_marking": {
+   "desc": "left parking stand: rounded yellow-outlined rectangle with large yellow '01'",
+   "moves": false,
+   "outer_border_px": [
+    145,
+    110,
+    800,
+    505
+   ],
+   "outer_size_px": [
+    655,
+    395
+   ],
+   "digits_01_bbox": [
+    360,
+    230,
+    585,
+    410
+   ],
+   "uncertainty_px": 5
+  },
+  "stand_02_marking": {
+   "desc": "right parking stand, '02' (under the helicopter)",
+   "moves": false,
+   "outer_border_px": [
+    1118,
+    110,
+    1775,
+    505
+   ],
+   "outer_size_px": [
+    657,
+    395
+   ],
+   "uncertainty_px": 5
+  },
+  "lead_in_lines": {
+   "desc": "faint pale vertical guide lines below each stand: x~475 (stand 01, plane path) and x~1450 (stand 02)",
+   "moves": false
+  },
+  "centre_stripe": {
+   "desc": "light vertical double stripe between the stands, x~940-985",
+   "moves": false
+  },
+  "ground_grid": {
+   "desc": "concrete slab grid; dark lines about every 25 px (fine) - usable only as a relative check",
+   "moves": false
+  },
+  "side_walls": {
+   "desc": "dark vertical bands at x~40-70 and x~1845-1880 (building edges)",
+   "moves": false
+  },
+  "shadows": {
+   "desc": "diagonal stripe shadows (structure out of view) and the plane/tug shadows falling up-left; shadows are not part of the objects"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time_s": 0.0,
+   "event": "start; plane+tug at rest-looking position (frame 1 identical to frame 0)"
+  },
+  {
+   "frame": 1,
+   "time_s": 0.0417,
+   "event": "last frame before motion; from frame 2 on plane and tug move up ~5.24 px/frame at constant rate (no visible acceleration)"
+  },
+  {
+   "frame": 50,
+   "time_s": 2.0833,
+   "event": "plane tail fully inside image"
+  },
+  {
+   "frame": 71,
+   "time_s": 2.9583,
+   "event": "end of clip, still moving"
+  }
+ ],
+ "files": {
+  "tracks/plane.csv": "per-frame plane reference/bbox",
+  "tracks/tug.csv": "per-frame tug reference/bbox",
+  "notes.md": "method/reliability"
+ }
+}

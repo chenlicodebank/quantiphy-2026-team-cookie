@@ -1,0 +1,77 @@
+{
+  "video": "simulation_0295.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t*24); frame 0 = t 0",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of frame 35 and 71 vs frame 0: shift < 0.003 px",
+    "notes": "Low camera looking slightly up at a fantasy mushroom meadow; treated as a 2D scene (motion plane facing camera). The butterfly keeps an almost constant image height (body y ~652-660 px) and similar apparent size, so a single px scale is appropriate."
+  },
+  "moving_objects": [
+    {
+      "name": "butterfly",
+      "description": "the only moving object: a blue (morpho-like) butterfly with black body/legs/antennae, flapping its wings while flying right-to-left across the frame",
+      "track_file": "tracks/butterfly.csv",
+      "visible_frames": [0, 71],
+      "fully_in_frame_frames": [0, 63],
+      "edge_clipped_frames": [64, 71],
+      "occluded_frames": [],
+      "reference_point": "body_x_fit, body_y_fit (thorax/body, robust quadratic fit of the detected black body) = best proxy for the rig origin; cx,cy (wing-mask centroid) and bbox_cx,bbox_cy also given",
+      "body_path_px": {
+        "x_fit": "x(f) = 2308.84 - 29.734 f - 0.01485 f^2  (f = frame), i.e. ~ -29.7 px/frame at start to ~ -31.8 px/frame at the end",
+        "y_fit": "y(f) = 659.94 - 0.2048 f + 0.0014 f^2 (nearly constant, ~660 -> 652.5)",
+        "start_px_frame0": [2308.8, 659.9],
+        "end_px_frame71": [122.8, 652.5],
+        "net_displacement_px_0_to_71": 2186,
+        "fit_rms_px": 13.7,
+        "note": "measured body points scatter +-10-25 px about the fit because the body is partly hidden by the wings; mask centroid cx also advances ~-29 to -36 px/frame but oscillates with the wing beat"
+      },
+      "wing_extent_px": {
+        "wingspan_horizontal_bbox_w_unclipped_range": [389, 522],
+        "bbox_w_wings_flat_frames": {"0": 495, "18": 434, "39": 421, "60": 511, "63": 522},
+        "bbox_w_wings_up_frames": {"8": 411, "30": 389, "51": 399},
+        "bbox_h_range_unclipped": [65, 336],
+        "bbox_h_max_frames": {"8": 335, "30": 336, "51": 335},
+        "bbox_h_min_frames": {"18": 67, "39": 65, "60": 77}
+      },
+      "wing_beat": {
+        "wings_flat_edge_on_frames": [0, 1, 2, 18, 19, 39, 60, 61],
+        "wings_fully_up_frames": [8, 30, 51],
+        "period_frames_approx": 21,
+        "period_s_approx": 0.875
+      }
+    }
+  ],
+  "static_objects": [
+    {"name": "tall_red_mushroom_right", "description": "largest mushroom, red conical cap with white warts, thick pale stem, right of centre", "cap_x_px": [1550, 2500], "cap_y_px": [47, 533], "stem_x_px": [1850, 2125], "stem_bottom_y_px": 1083, "cap_width_px": 950, "total_height_px": 1036},
+    {"name": "round_red_mushroom_center", "description": "dome-shaped red cap at image centre; butterfly passes in front of it around frames 24-36", "cap_x_px": [1100, 1667], "cap_y_px": [567, 875], "stem_x_px": [1283, 1475], "stem_bottom_y_px": 1133, "cap_width_px": 567, "total_height_px": 566},
+    {"name": "small_red_warty_mushroom", "description": "red cap with white warts, right-below the central mushroom", "cap_x_px": [1525, 1892], "cap_y_px": [783, 1008], "stem_bottom_y_px": 1108, "cap_width_px": 367},
+    {"name": "dark_red_mushroom_behind", "description": "dark red cap with grey warts behind the central mushroom", "cap_x_px": [1425, 1842], "cap_y_px": [400, 650], "cap_width_px": 417},
+    {"name": "orange_speckled_mushroom_right", "description": "salmon/orange speckled tilted cap, right side", "cap_x_px": [2117, 2450], "cap_y_px": [725, 1000], "cap_width_px": 333},
+    {"name": "red_mushroom_left_edge", "description": "red cap cut by the left image edge", "cap_x_px": [0, 350], "cap_y_px": [383, 683]},
+    {"name": "pink_mushroom_left", "description": "magenta/pink cap with white rim, lower left", "cap_x_px": [117, 530], "cap_y_px": [697, 933], "cap_width_px": 413},
+    {"name": "orange_flat_cap_left", "description": "flat orange cap on thin tall stem, left of centre", "cap_x_px": [547, 875], "cap_y_px": [358, 558], "cap_width_px": 328},
+    {"name": "grey_gilled_cap_top_left", "description": "upper grey/orange gilled cap on the thin stems, top left", "cap_x_px": [537, 817], "cap_y_px": [200, 392]},
+    {"name": "blue_spotted_mushrooms_foreground", "description": "blue/teal mushrooms with orange dots, bottom-left and bottom-centre foreground", "x_px": [0, 2100], "y_px": [1000, 1440]},
+    {"name": "rocky_mountains", "description": "brown rock slopes in the background left and right"},
+    {"name": "grass_moss_ground", "description": "green grass and moss covering the lower third of the frame"},
+    {"name": "sky_sun", "description": "blue sky, sun glare top right"}
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "butterfly visible at right (body ~x 2309), wings flat; frames 0 and 1 are near-identical (mask centroid moves 0.1 px)"},
+    {"frame": 8, "t": 0.333, "event": "wings fully up (max bbox height)"},
+    {"frame": 18, "t": 0.75, "event": "wings flat / edge-on"},
+    {"frame": 30, "t": 1.25, "event": "wings fully up; butterfly in front of central round red mushroom (no contact)"},
+    {"frame": 39, "t": 1.625, "event": "wings flat"},
+    {"frame": 51, "t": 2.125, "event": "wings fully up"},
+    {"frame": 60, "t": 2.5, "event": "wings flat"},
+    {"frame": 64, "t": 2.667, "event": "left wingtip reaches left image edge; butterfly partly out of frame from here to the end"},
+    {"frame": 71, "t": 2.958, "event": "last frame, wings up, body ~x 123-147, still flying left"}
+  ],
+  "no_events": "no contacts, bounces or impacts; the butterfly flies steadily leftward (no direction reversal) at nearly constant image height for the whole clip"
+}

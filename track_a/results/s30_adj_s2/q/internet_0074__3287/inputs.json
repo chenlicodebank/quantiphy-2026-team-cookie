@@ -1,0 +1,18 @@
+{
+ "video": "internet_0074.mp4",
+ "video_source": "internet",
+ "video_type": "S2MS",
+ "fps": 23.976023,
+ "frames": 122,
+ "duration_s": 5.0884,
+ "width": 1440,
+ "height": 2560,
+ "question": {
+  "id": 3287,
+  "question": "What is the velocity of the ball at 3.00s in m/s?",
+  "prior": "width of the pickleball court = 6.1 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

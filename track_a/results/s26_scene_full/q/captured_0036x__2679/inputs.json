@@ -1,0 +1,18 @@
+{
+ "video": "captured_0036x.mp4",
+ "video_source": "lab",
+ "video_type": "S3SX",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2679,
+  "question": "What is the width of the table in the video in meters?",
+  "prior": "diameter of the ping pong ball = 4cm",
+  "depth_info": "t=0.9s, distance_ping_pong_ball_camera = 1.0100m\nt=1.4s, distance_ping_pong_ball_camera = 0.7160m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

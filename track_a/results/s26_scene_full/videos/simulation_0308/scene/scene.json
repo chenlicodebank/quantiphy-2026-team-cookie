@@ -1,0 +1,93 @@
+{
+  "video": "simulation_0308.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; last frame 71 at t = 2.958 s",
+  "units": "pixels (x right, y down, origin top-left of the 2560x1440 frame) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the top 300 rows vs frame 0: |shift| <= 0.16 px in all frames (tracks/camera_shift.csv). Large mean abs diff (~50 grey levels) is the animated water caustics + render noise, not camera motion.",
+    "view": "elevated oblique view looking down at a flat sea floor (sand with animated caustic light pattern); whale swims above the floor",
+    "horizon": "not visible; the floor fills the whole frame. Very top-right corner (x>2400, y<30) is slightly darker (distant floor/fog). Caustic texture compresses toward the top of the image => floor recedes upward (farther = higher in image).",
+    "focal_length": "unknown (estimate from given depth_info + a known size)"
+  },
+  "objects": [
+    {
+      "name": "whale",
+      "description": "large blue humpback-type whale, the only moving object; deep blue back, dark navy underside, pale/white undersides of fluke and pectoral fins; long left pectoral fin hangs down-left; a second (right) pectoral fin becomes visible under the body from ~frame 40",
+      "moves": true,
+      "visible_frames": "0-71 (whole clip)",
+      "partly_cut_frames": "8-39: tail/fluke extends below the bottom image edge (y=1439)",
+      "track_file": "tracks/whale.csv",
+      "reference_point_proxies": {
+        "head_top": "topmost mask pixel (top of head); smooth, nearly linear path (1180,390) at f0 -> (1000,298) at f71; best proxy for the body/root translation because it is not affected by tail beats",
+        "mask_centroid": "cx_px, cy_px: centroid of the colour mask; strongly influenced by tail motion and by the missed pale fluke, so it is NOT a clean origin",
+        "bbox_centre": "bbox_cx, bbox_cy"
+      },
+      "pixel_sizes": {
+        "frame0_head_top_to_fluke_tip_px": 1440.5,
+        "frame0_head_top": [1180, 390],
+        "frame0_fluke_tip": [2417, 1129],
+        "frame0_bbox": [956, 390, 2417, 1297],
+        "frame0_mask_major_axis_len_px": 1568,
+        "frame0_mask_minor_width_px": 742,
+        "note": "whale is seen obliquely (foreshortened) and bends its tail; pixel length varies with pose"
+      },
+      "manual_fluke_tip_px": {
+        "_note": "read by eye on 50-px grid crops (scripts/tailcrops.py), +-8 px; the colour mask misses the pale fluke in late frames",
+        "0": [2417, 1129],
+        "52": [2118, 893],
+        "58": [2093, 698],
+        "64": [2047, 519],
+        "68": [2002, 433],
+        "71": [1992, 381]
+      },
+      "frame71_head_top_to_manual_fluke_tip_px": 995
+    },
+    {
+      "name": "whale_shadow",
+      "description": "dark grey-brown whale-shaped cast shadow on the sea floor, below and to the lower right of the whale (light from upper left)",
+      "moves": true,
+      "visible_frames": "0-71; its tail runs off the bottom edge in frames 0-66",
+      "track_file": "tracks/whale_shadow.csv",
+      "note": "the shadow is on the floor plane; its offset from the whale relates to whale height above floor and sun direction. Pectoral-fin part of the shadow was partly missed in frames 9-33."
+    },
+    {
+      "name": "sea_floor",
+      "description": "flat sandy floor covering the whole image with an animated bright caustic pattern",
+      "moves": false,
+      "visible_frames": "0-71"
+    },
+    {
+      "name": "seabed_props",
+      "description": "small cluster of seabed decorations directly beneath the whale, only revealed as the whale rises/rolls (mostly hidden by the whale before ~frame 50); positions at frame 71",
+      "moves": false,
+      "visible_frames": "partly from ~48, clearly 60-71",
+      "items_frame71_px": {
+        "small_red_seaweed_patch": {"bbox": [1150, 690, 1185, 735]},
+        "green_seaweed_strands_left": {"bbox": [1210, 690, 1250, 750]},
+        "dark_branching_coral": {"bbox": [1262, 720, 1312, 775], "height_px": 55},
+        "spotted_rock_or_sponge": {"bbox": [1318, 728, 1400, 810], "width_px": 82, "height_px": 82},
+        "tall_seaweed_strand_right": {"bbox": [1368, 650, 1400, 822], "height_px": 170, "note": "top hidden behind whale fin/body, height is a lower bound"}
+      }
+    }
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "whale already swimming; head moving steadily up-left in image (away from camera / forward) during the whole clip"},
+    {"frame": 8, "t": 0.333, "event": "tail fluke reaches bottom image edge (cut until frame 39); tail beating downward"},
+    {"frame": 40, "t": 1.667, "event": "fluke re-enters frame; tail sweeps upward from here (fluke tip y 1130 -> 381 by frame 71)"},
+    {"frame": 50, "t": 2.083, "event": "approx: whale starts rolling, pale belly/fluke underside and right pectoral fin become visible; seabed props uncovered"},
+    {"frame": 71, "t": 2.958, "event": "end of clip, tail raised nearly horizontal to the right"}
+  ],
+  "apparent_size_trend": "head-top track moves ~205 px up-left over the clip (smooth) -> whale moving slightly farther from camera; mask area falls 385k -> 213k px but mostly due to tail pose/roll and missed pale parts, not depth",
+  "files": {
+    "tracks/whale.csv": "per-frame whale mask measures + head_top and far point",
+    "tracks/whale_shadow.csv": "per-frame shadow mask measures",
+    "tracks/camera_shift.csv": "per-frame background shift (camera check)",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

@@ -1,0 +1,137 @@
+{
+ "video": "captured_0008x.mp4",
+ "source": "lab (segmented: background replaced by white, SAM2 watermark bottom-right)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "evidence": "tabletop mask bbox constant (432-755 x, 377/378-624 y) over all 49 frames",
+  "intrinsics_lab": "f = 0.5959*1280 = 763 px, principal point ~(640,360)",
+  "view": "high viewpoint looking down and forward onto the table; tabletop seen obliquely (far edge at top y~381-416, near edge y~548-614)"
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "desc": "orange basketball with black seams (the only orange object)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/ball.csv",
+   "reference_point": "centre of circle fitted to the ball outline (cx, cy)",
+   "apparent_diameter_px": {
+    "held_frames_4_21": "~114 (r 56.7-57.2); frames 0-3 ~117 (hand edge biases fit)",
+    "near_table_frames_31_48": "~98-108 (r 49-54); smaller because farther from camera"
+   }
+  },
+  {
+   "name": "hand",
+   "desc": "person's fingers holding the ball at right side, mostly removed by segmentation; only fingertips visible frames 0-3, residue to ~21",
+   "moves": "barely (holds ball still, releases ~frame 21)",
+   "visible_frames": [
+    0,
+    21
+   ]
+  },
+  {
+   "name": "table",
+   "desc": "small square wooden (light brown) tabletop on a single dark grey metal pole leg",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "tabletop_corners_px_frame0": {
+    "far_left": [
+     479,
+     416
+    ],
+    "far_right": [
+     689,
+     381
+    ],
+    "near_right": [
+     753,
+     549
+    ],
+    "near_left": [
+     434,
+     607
+    ]
+   },
+   "tabletop_edges_px": {
+    "far_edge": 213,
+    "right_edge": 180,
+    "near_edge": 324,
+    "left_edge": 196
+   },
+   "tabletop_bbox_px": [
+    432,
+    378,
+    755,
+    624
+   ],
+   "tabletop_front_edge_thickness_px": "~10-12",
+   "leg": {
+    "x_range": [
+     615,
+     668
+    ],
+    "top_y": 575,
+    "bottom_y": "719 (cut by frame bottom)",
+    "width_px": "~27-30"
+   }
+  }
+ ],
+ "events": [
+  {
+   "event": "ball held still by hand",
+   "frames": [
+    0,
+    20
+   ]
+  },
+  {
+   "event": "release / start of fall",
+   "frame": 21,
+   "t": 0.875,
+   "note": "cy 96.0 (f20) -> 99.6 (f21) -> 111.7 (f22); release between f20 and f21"
+  },
+  {
+   "event": "first impact with tabletop (lowest point)",
+   "frame": 30,
+   "t": 1.25,
+   "cy": 421.0
+  },
+  {
+   "event": "first rebound apex",
+   "frame": 36,
+   "t": 1.5,
+   "cy": 306.2
+  },
+  {
+   "event": "second impact with tabletop",
+   "frame": 41,
+   "t": 1.7083,
+   "cy": 421.4
+  },
+  {
+   "event": "second rebound apex",
+   "frame": 46,
+   "t": 1.9167,
+   "cy": 374.5
+  },
+  {
+   "event": "video ends with ball descending",
+   "frame": 48,
+   "t": 2.0
+  }
+ ],
+ "motion_direction": "fall is down and slightly right in image (x 518->579 from f21 to f30); after bounce ball moves up-left (x 579->549) then down-right again",
+ "notes": "notes.md"
+}

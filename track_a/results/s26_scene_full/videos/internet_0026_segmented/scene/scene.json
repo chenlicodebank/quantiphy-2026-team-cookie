@@ -1,0 +1,65 @@
+{
+  "video": "internet_0026_segmented.mp4",
+  "source": "segmentation (internet footage, background replaced by white)",
+  "scene_type": "2D",
+  "fps": 30.0003,
+  "frames": 36,
+  "duration_s": 1.2,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; frame for time t = round(t * fps)",
+  "units": "pixels and seconds; x to the right, y downward; no metric scale",
+  "duplicate_frames": [[1, 2], [6, 7], [11, 12], [16, 17], [21, 22], [26, 27], [31, 32]],
+  "duplicate_frames_note": "every 5th frame repeats the previous one (25->30 fps conversion), so the frame-to-frame motion is 0 there and roughly 1.2x normal on the neighbouring steps",
+  "objects": {
+    "toy_truck": {
+      "description": "toy dump truck: blue cab (front, facing left) with a yellow toy driver, red dump bed, yellow chassis, 4 black wheels (2 visible). The only object that really moves",
+      "moves": true,
+      "visible_frames": [0, 35],
+      "track": "tracks/truck.csv",
+      "direction": "rolls right-to-left (-x), from the man toward the seated child",
+      "reference_point": "visible centre. Use bbox_cx/cy for frames 6-35. In frames 0-3 the rear is covered by the man's knee, so use cx_from_front = front bumper x + (207-1)/2 there",
+      "length_px_bumper_to_bumper": 207,
+      "length_px_range": [205, 210],
+      "height_px_top_of_bed_to_wheel_bottom": 170,
+      "height_px_range": [169, 173],
+      "wheel_diameter_px": 59,
+      "wheelbase_px_centre_to_centre": 103,
+      "image_displacement_front_bumper_f0_to_f35_px": -243,
+      "stabilised_displacement_front_bumper_f0_to_f35_px": -290,
+      "y_motion": "about 4-6 px drift in y over the clip (essentially horizontal motion)"
+    },
+    "man": {
+      "description": "adult man crouching at the right: black T-shirt, blue jeans, dark shoes. He pushes the truck (his hand rests on the rear top of the dump bed in frames 0-5). Otherwise he barely moves; his image drift comes from the camera",
+      "moves": "only small arm and hand movement; image drift is mostly camera pan/zoom",
+      "visible_frames": [0, 35],
+      "track": "tracks/man.csv",
+      "size_px_frame1": {"bbox_width": 296, "bbox_height_crouched_head_to_shoe": 444, "bbox": [804, 60, 1099, 503]},
+      "head_approx_px": {"width": 100, "height": 130, "note": "rough, from a grid view"}
+    },
+    "child": {
+      "description": "toddler sitting on the floor at the left, facing right, legs stretched toward the truck: dark navy T-shirt and shorts, black socks/shoes",
+      "moves": "small movement of the legs/feet; image drift is mostly camera",
+      "visible_frames": [0, 35],
+      "track": "tracks/child.csv",
+      "size_px_frame0": {"bbox_width_head_back_to_toes": 224, "bbox_height_seated_head_to_bottom": 194, "bbox": [184, 250, 407, 443]},
+      "head_approx_px": {"width": 78, "height": 80, "note": "rough"}
+    }
+  },
+  "static_objects": "none visible: the background, floor and any markings were replaced by white in the segmented video",
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "video starts with the truck already moving left (about 13 px/frame from frame 0 to 1); the man's hand is on the bed and his knee covers the truck's rear"},
+    {"frame": 4, "t": 0.1333, "event": "the truck's rear clears the man's knee; full truck visible from here"},
+    {"frame": 6, "t": 0.2, "event": "release: the man's fingertips have lost contact with the dump bed (contact last seen at frame 5, gap visible at frame 6). Uncertainty +-1 frame"},
+    {"frame": 31, "t": 1.0333, "event": "the truck front bumper is within 2 px (in x) of the child's right foot"},
+    {"frame": 33, "t": 1.1, "event": "the x-ranges of the truck front and the child's foot overlap: the truck reaches the child's feet (possible contact at frames 33-35). The truck is still moving about 5 px/frame at the end"},
+    {"frame": 35, "t": 1.1667, "event": "end of video; the truck is still rolling, no stop observed"}
+  ],
+  "camera": {
+    "type": "hand-held, pans to follow the truck plus a slight zoom-in",
+    "track": "tracks/camera.csv",
+    "model": "frame-0 coordinates -> frame i: x_i = scale*x_0 + tx, y_i = scale*y_0 + ty; inverse x_0 = (x_i - tx)/scale",
+    "frame35": {"scale": 1.0176, "tx": 40.42, "ty": -2.65},
+    "note": "With no background, this is estimated from patches on the child and man, assuming they stay still (fit rms about 1-2 px). The image content shifts by about +40 to +57 px in x over the clip (the camera turns left, following the truck), and the scale grows by about 1.8%"
+  },
+  "perspective": "side view, approximately planar motion parallel to the image; the truck's apparent size stays constant (length 205-210 px)"
+}

@@ -1,0 +1,54 @@
+{
+  "video": "captured_0020.mp4",
+  "source": "lab (real Orbbec Femto Mega RGB recording, shown as a 'Segment Anything 2 Demo' render: background blurred, people and objects sharp)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the blurred radiator/wall patch (x 840-1100, y 120-320) against frame 0: |shift| <= 0.2 px in every frame",
+    "intrinsics_lab_convention": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80, "note": "from the benchmark lab convention (f = 0.5959 x 1280); not measured here"},
+    "view": "elevated, looking down into the corner of a room at an oblique angle; right/far person ~ upper centre, left/near person at the left edge very close to the camera"
+  },
+  "perspective_cues": {
+    "wall_corner_vertical": "room corner (two grey walls meet) at x ~ 575-605 px, from image top down to the floor at ~ (605, 190)",
+    "right_wall_baseboard": "wall-floor line from the corner (605,190) to the right edge: points (780,226) (820,233) (860,242) (1060,283) (1100,291) (1140,298) (1180,306) (1220,314) (1260,323); y ~ 0.20 x + 70",
+    "left_wall_baseboard": "wall-floor line from the corner down-left: points (420,294) (450,277) (480,261) (510,244) (540,226) (570,211); y ~ 528 - 0.557 x; hidden behind the left person below ~x 250",
+    "floor": "grey carpet tiles fill the lower 2/3 of the image; no markings usable for scale (background is blurred)"
+  },
+  "objects": [
+    {"name": "white_ball", "desc": "small white crumpled ball (paper/tissue-like, roughly round, irregular outline)", "distinguish": "only white thrown object; thrown by left_person to right_person", "moves": true,
+     "visible_frames": "0-48 (all)", "held_by_left_person": "0-11", "free_flight": "12-26", "held_by_right_person": "27-48",
+     "track": "tracks/white_ball.csv",
+     "apparent_size_px": {"held_near_left_person_f0_11_eq_diam": "26-30 (fingers cover part)", "in_flight_sharpest_f21_25": "length 26-30, width 22-26, eq_diam 23-27", "in_flight_motion_blurred_f13_19": "length up to 50 (blur along motion)", "held_by_right_person_f28_48_eq_diam": "17-22 (hands cover part)"}},
+    {"name": "yellow_fruit", "desc": "pale-yellow fruit (lemon/mango-like) with a green stem/leaf end", "distinguish": "only yellow object; thrown by right_person to left_person", "moves": true,
+     "visible_frames": "0-3, 8-27, 37-48 (hidden 4-7 behind right_person's hand/leg during backswing; hidden 28-36 behind left_person's hands/hair after the catch)",
+     "held_by_right_person": "0-11", "free_flight": "12-25", "caught_by_left_person": "25-27", "held_by_left_person": "37-48",
+     "track": "tracks/yellow_fruit.csv",
+     "apparent_size_px": {"held_by_right_person_f0_1": "~44-46 x 25-26 (partly in the hand)", "in_flight_f13_17": "length 40-61 x width 35-39 (motion blurred, body+green tip)", "in_flight_f19_23": "length 56-79 x width 35-37 (blur grows with speed)", "held_by_left_person_f43_48": "length 58-67 x width 37-43, height 40-48 (closer to camera; hand covers part)"}},
+    {"name": "left_person", "desc": "person with long dark-brown hair, dark-grey short-sleeve T-shirt with white print, black trousers, white sneakers", "distinguish": "near the camera at the left edge, partly cut off by the left/bottom image border; throws the white ball and catches the yellow fruit", "moves": "stands in place; arms/torso move",
+     "visible_frames": "0-48", "track": "tracks/left_person.csv",
+     "extent_px": "hair/head from y ~115-150 at x 0-150; torso x ~0-300, y ~270-560; legs to the bottom edge; visible right sneaker centre ~ (366, 675), toe to x 390, y up to 708; feet/legs partly out of frame -> full height NOT measurable"},
+    {"name": "right_person", "desc": "person in light-grey fitted T-shirt, dark-navy jeans, white sneakers with black stripes, wristwatch on left wrist", "distinguish": "far person standing near the room corner; head cut off by the top image border; throws the yellow fruit and catches the white ball", "moves": "stands in place (feet fixed); arms swing, bends forward ~ frames 27-40",
+     "visible_frames": "0-48", "track": "tracks/right_person.csv",
+     "extent_px": "visible from image top (y 0, head cut off) to sneaker soles y ~267-269; body x ~ 640-760 (arms out to x ~590 at frames 16-22); jeans (waist to ankles) y ~ 55-83 -> 232-242, x ~ 669-756; sneakers x 703-753, centre (730, 256); full standing height NOT measurable (head out of frame)"},
+    {"name": "wall_radiator", "desc": "white wall-mounted heater/radiator panel with dark grille, on the right wall", "moves": false,
+     "extent_px": "bbox x 871-1055, y 137-296 (185 x 160 px, blurred edges); left side top 138 / bottom 253, middle top 153 / bottom 281; 3D box seen obliquely"},
+    {"name": "room_walls_floor", "desc": "two light-grey panelled walls meeting at a corner (x ~ 600) and a grey carpet-tile floor", "moves": false}
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "start: left_person holds white_ball low at (307,511); right_person holds yellow_fruit at hip (652,133)"},
+    {"frame": 4, "t": 0.1667, "event": "white_ball backswing low point (277,553), frames 4-5; yellow_fruit hidden behind right_person's hand/leg frames 4-7 (backswing)"},
+    {"frame": 12, "t": 0.5, "event": "both objects released (white_ball: frame 11 still in hand at (361,430), frame 12 free at (390,337); yellow_fruit: frame 11 at fingertips, frame 12 free/just leaving hand)"},
+    {"frame": 17, "t": 0.7083, "event": "yellow_fruit apex in image (cy min 75.7 px at f17; f18 occluded)"},
+    {"frame": 18, "t": 0.75, "event": "the two objects cross in the image: white_ball overlaps (in front of) yellow_fruit at ~(470,80); f19 side by side touching; no visible deflection of either path (likely pass at different depths)"},
+    {"frame": 22, "t": 0.9167, "event": "white_ball apex in image (cy min 37.1 px)"},
+    {"frame": 25, "t": 1.0417, "event": "yellow_fruit reaches left_person's hands (contact 25-26), caught by frame 27, then hidden 28-36"},
+    {"frame": 27, "t": 1.125, "event": "white_ball caught by right_person (in hands from 27; hands move down to frame 35-36 at (707,162), then raised to (652,71) by frame 48)"},
+    {"frame": 37, "t": 1.5417, "event": "yellow_fruit reappears in left_person's hand; brought forward/down to ~(265,313) by frame 48"}
+  ],
+  "files": {"tracks": ["tracks/white_ball.csv", "tracks/yellow_fruit.csv", "tracks/left_person.csv", "tracks/right_person.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

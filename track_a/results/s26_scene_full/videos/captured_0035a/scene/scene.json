@@ -1,0 +1,77 @@
+{
+  "video": "captured_0035a.mp4",
+  "source": "lab (real recording; background blurred by 'Segment Anything 2 Demo' editing, watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "image_size_px": [1280, 720],
+  "units": "pixels (image x right, y down) and seconds; no metric scale estimated",
+  "camera": {
+    "motion": "static (phase-correlation shift of floor/wall region vs frame 0 <= 0.46 px in x, <= 0.1 px in y over all frames; scene/camera_shift.csv)",
+    "intrinsics_from_benchmark_convention": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80, "note": "Orbbec Femto Mega RGB, f = 0.5959 * width"},
+    "view": "elevated, looking down-forward at an indoor floor; floor occupies most of the image, receding upward (farther = higher in image, smaller)",
+    "perspective_cues": {
+      "wall_floor_junction_line": "dark baseboard line from about (5,375) to (630,195) (left wall, runs away from camera toward upper-right)",
+      "floor_tape_marks": ["white strip lower-left from about (315,620) to (405,715)", "faint white strip mid-floor from about (610,425) to (680,475)", "small yellow mark near (195,375)"],
+      "apparent_size_vs_image_y": "basketball diameter 84 px at y=615 (frame 0) -> 72 px at y=465 (frame 48); soccer ball ~45 px at y=303 (frame 0) and ~42-47 px hull width at y=330-410"
+    },
+    "dropped_frames_suspected": [
+      {"between_frames": [11, 12], "evidence": "both balls jump ~1.6-1.8x their neighbouring per-frame steps (basketball 45.6 px vs ~20-29; soccer 37 px vs ~17-23)"},
+      {"between_frames": [35, 36], "evidence": "both balls step ~2x neighbours (basketball 10.3 px vs ~5; soccer 7.5 vs ~4.7)"}
+    ]
+  },
+  "objects": [
+    {"name": "soccer_ball", "aka": ["football", "white ball", "black-and-white ball"], "type": "ball",
+     "appearance": "white with black pentagon panels, smaller of the two balls",
+     "moves": true, "visible_frames": "0-48 (merged with person_A white shoes in 0-9 and touching them at 47-48)",
+     "track": "tracks/soccer_ball.csv",
+     "pixel_diameter": "~44-45 px at rest at frame 0 (bbox 331..376 x 283..324); 42-47 px hull width while isolated (frames 22-46); RANSAC circle fit gives 38-44 (slightly small because black panels on the rim)",
+     "role": "kicked by person_A toward person_B, collides with the basketball, rebounds back to person_A"},
+    {"name": "basketball", "aka": ["orange ball", "Wilson ball"], "type": "ball",
+     "appearance": "orange with black seams, 'Wilson' logo, larger ball",
+     "moves": true, "visible_frames": "0-48 (partly hidden by person_B leg/hand in 0-8)",
+     "track": "tracks/basketball.csv",
+     "pixel_diameter": "84 px at rest (frames 0-7, circle fit through occlusion), 76-80 px during kick (blur), 70-73 px frames 18-48",
+     "role": "kicked by person_B toward person_A, hit by soccer ball at frame ~19-20, then rolls slowly on to upper-left"},
+    {"name": "person_A", "aka": ["far person", "woman in light grey T-shirt", "kicker of the soccer ball"], "type": "person",
+     "appearance": "light-grey T-shirt, dark grey/blue jeans, white sneakers, watch on left wrist; head cut off by top image edge; stands in front of the grey wall top-left",
+     "moves": "small motions only (kick with right foot frames 5-9, steps, sways); stays at x~300-510, feet at y~280-305",
+     "visible_frames": "0-48 (always truncated at top edge)",
+     "track": "tracks/person_A.csv (low reliability)",
+     "key_positions": {"frame0_feet": "left shoe ~(322,290), right shoe ~(440,295); torso x 350-500", "frame12_feet": "both ~(395-415, 300)", "frame48_feet": "~(390,305) and ~(450,286); soccer ball touching right shoe"}},
+    {"name": "person_B", "aka": ["near person", "woman with long dark hair in dark-grey oversized T-shirt", "kicker of the basketball"], "type": "person",
+     "appearance": "long dark brown hair, dark-grey oversized T-shirt with print 'MAISON...', black trousers, white shoes; right edge of frame, truncated by right and bottom edges, face blurred",
+     "moves": "leans/sways; kicks the basketball with right leg frames ~8-12 (foot visible at ~(780-880, 560-640)), then leg returns; torso stays x~830-1280",
+     "visible_frames": "0-48 (always truncated)",
+     "track": "tracks/person_B.csv (low reliability)"},
+    {"name": "seated_people_background", "type": "people (static-ish, blurred)", "moves": "slight arm motion, blurred",
+     "position": "top-right, x~930-1200, y~20-350, behind table; faces blurred", "visible_frames": "0-48"},
+    {"name": "blue_white_object_background", "type": "blurred object (bag or ball) on floor", "moves": false,
+     "position": "bbox ~(700,185)-(770,265), centre ~(735,228)", "visible_frames": "0-48"},
+    {"name": "wooden_door_or_cabinet", "type": "furniture", "moves": false, "position": "bbox ~(720,0)-(870,210)"},
+    {"name": "metal_post", "type": "fixture", "moves": false, "position": "vertical, x~640-665, y~60-245"},
+    {"name": "grey_wall_cabinets", "type": "wall", "moves": false, "position": "left half top, base line (5,375)-(630,195)"},
+    {"name": "floor", "type": "ground plane", "moves": false, "position": "grey carpet/vinyl, below the wall line, whole lower image"}
+  ],
+  "events": [
+    {"event": "both balls at rest", "frames": "0-4 (soccer), 0-7 (basketball)", "t": "0-0.167 / 0-0.292"},
+    {"event": "person_A starts kicking soccer ball (start of soccer ball motion)", "frame": 5, "t": 0.2083},
+    {"event": "soccer ball leaves person_A's foot (release)", "frame": 9, "t": 0.375, "uncertainty": "+-1 frame"},
+    {"event": "person_B foot contacts basketball (start of basketball motion)", "frame": 8, "t": 0.3333},
+    {"event": "basketball leaves person_B's foot (release)", "frame": 11, "t": 0.4583, "uncertainty": "+-1 frame"},
+    {"event": "balls collide (contact; centres 63-65 px apart vs radii sum ~58-60 px; soccer ball reverses direction, basketball drops from ~17 to ~2-6 px/frame)", "frame": 20, "t": 0.8333, "uncertainty": "between frames 19 and 20"},
+    {"event": "soccer ball rolls back toward person_A, decelerating", "frames": "20-48"},
+    {"event": "basketball continues slowly to upper-left after collision (~5 px/frame, nearly constant)", "frames": "21-48"},
+    {"event": "soccer ball reaches person_A's right shoe (contact/stop)", "frame": 48, "t": 2.0, "uncertainty": "touching at 47-48; video ends"}
+  ],
+  "files": {
+    "tracks/soccer_ball.csv": "final soccer ball track",
+    "tracks/basketball.csv": "final basketball track",
+    "tracks/person_A.csv": "person A mask centroid/bbox (background subtraction, partial masks)",
+    "tracks/person_B.csv": "person B mask centroid/bbox (background subtraction, partial masks)",
+    "camera_shift.csv": "per-frame background shift vs frame 0",
+    "tracks/*_raw.csv, *_bgsub.csv, *_fit.csv, *_ransac.csv": "intermediate measurements (see notes.md)"
+  }
+}

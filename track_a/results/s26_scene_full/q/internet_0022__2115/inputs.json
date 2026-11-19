@@ -1,0 +1,18 @@
+{
+ "video": "internet_0022.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 16.666667,
+ "frames": 36,
+ "duration_s": 2.16,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2115,
+  "question": "What is average velocity of the man's moving hand from 0.40s to 1.00s in cm/s?",
+  "prior": "width of the mouse = 57mm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 25.0
+ }
+}

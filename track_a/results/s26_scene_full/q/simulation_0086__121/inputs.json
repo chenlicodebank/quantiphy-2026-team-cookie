@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0086.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 121,
+  "question": "What is the distance between the car and the bike at 2.0s in meters?",
+  "prior": "acceleration of the car = 4.03m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

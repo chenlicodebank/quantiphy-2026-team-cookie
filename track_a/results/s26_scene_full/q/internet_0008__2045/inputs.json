@@ -1,0 +1,18 @@
+{
+ "video": "internet_0008.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 30.0,
+ "frames": 529,
+ "duration_s": 17.6333,
+ "width": 960,
+ "height": 540,
+ "question": {
+  "id": 2045,
+  "question": "What is the average speed of the speedboat in m/s?",
+  "prior": "sailboat length = 12m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

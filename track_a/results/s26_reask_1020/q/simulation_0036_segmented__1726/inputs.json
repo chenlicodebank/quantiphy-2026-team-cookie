@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0036_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S3MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1726,
+  "question": "What is the height of the boat in meters?",
+  "prior": "length of the boat = 10m",
+  "depth_info": "t=1s, distance_boat_camera = 133.9572 m\nt=2s, distance_boat_camera = 131.2557 m\nt=1s, distance_human_camera = 139.1030m\nt=2s, distance_human_camera = 139.1044 m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

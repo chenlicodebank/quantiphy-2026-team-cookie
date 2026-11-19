@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0245_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 30.0,
+ "frames": 75,
+ "duration_s": 2.5,
+ "width": 1080,
+ "height": 1920,
+ "question": {
+  "id": 1984,
+  "question": "What is the length of the rabbit in meters?",
+  "prior": "speed of the deer = 1.277m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

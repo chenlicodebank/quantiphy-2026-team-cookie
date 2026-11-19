@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0041.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 11,
+  "question": "What is the length of the boat in meters?",
+  "prior": "height of the person = 1.75m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

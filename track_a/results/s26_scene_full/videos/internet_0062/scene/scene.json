@@ -1,0 +1,82 @@
+{
+  "video": "internet_0062.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 121,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "coordinates": "image pixels, x right, y down, origin top-left of the 1920x1080 frame",
+  "scene_description": "Video is rotated 90 deg: a white wall fills the left ~3/4 of the image, a black baseboard is the vertical strip x~1438-1581, and a light wood floor is at the right (x>1581). Gravity points to image +x (right). A hand at the left edge holds a black zippered pouch against/near the wall, releases it at frame ~66, the pouch falls rightward (pure translation, almost no rotation) to the baseboard/floor, contacts the baseboard at frame 81 and comes to rest on the floor by frame 91.",
+  "camera": {
+    "static": true,
+    "drift_px": "slow drift vs frame 0: dx -1.7..+2.1, dy 0..+5.6 px over the whole clip (phase correlation, tracks/pouch.csv bg_dx,bg_dy); during the fall (frames 66-80) change < 0.5 px total in x - negligible",
+    "cuts": "none detected"
+  },
+  "objects": [
+    {
+      "name": "pouch",
+      "description": "black leather zippered pouch/wallet with a metal ring at one corner; the only moving prop; the falling object",
+      "moves": true,
+      "visible_frames": "0-120 (frames 81-90 partly over the black baseboard, same colour -> only the wall-side part is segmented; 89-90 not segmented, motion-blurred over baseboard)",
+      "track_file": "tracks/pouch.csv",
+      "reference_point": "centroid of the dark-pixel mask (cx, cy)",
+      "size_px": {
+        "long_side_mask_len": 246.3,
+        "short_side_mask_wid": 155.0,
+        "note_size": "min-area-rectangle of mask, held still frames 0-17 and 49-65 (clean frames): 246 +- 1 x 155 +- 0.3 px; long axis tilted ~15 deg from image x (the fall direction)",
+        "extent_along_fall_direction_x_bbox": 259,
+        "extent_across_fall_y_bbox": 197,
+        "in_flight_frames_67_80": "mask_len 241-253 (mean 247), bbox_w 255-264 (mean 260), bbox_h 197-200; motion blur adds a few px along x in late frames",
+        "at_rest_on_floor_frames_95_120": "visible part 220.5 (along image y) x 97 px (cut at x=1588 by the baseboard edge; pouch seen at a different, foreshortened pose on the floor) - not the same face, do not use as size"
+      },
+      "key_positions_px": {
+        "held_frame_65": [158.8, 614.5],
+        "release_frame_66": [158.5, 614.3],
+        "frame_70": [250.4, 614.0],
+        "frame_75": [628.9, 612.3],
+        "frame_80_last_free": [1302.3, 609.7],
+        "rest_on_floor_frames_95_120": [1631.2, 659.2]
+      }
+    },
+    {
+      "name": "hand_arm",
+      "description": "person's hand/forearm (skin) entering at the left image edge; holds the pouch until frame ~66; arm sweeps into view at bottom-left near the end (frames ~115-120)",
+      "moves": true,
+      "visible_frames": "0-120 (left edge)",
+      "track_file": "tracks/hand.csv",
+      "note": "coarse skin-colour mask; bbox unreliable (wall shading sometimes merges, e.g. frames 72-86)"
+    },
+    {
+      "name": "white_wall",
+      "description": "white/grey wall surface, image x 0-1437, whole height; the pouch falls across it",
+      "moves": false,
+      "extent_px": {"x": [0, 1437], "y": [0, 1079]}
+    },
+    {
+      "name": "black_baseboard",
+      "description": "black vertical strip (baseboard / wall-floor trim) between wall and floor",
+      "moves": false,
+      "extent_px": {"x_left_edge": 1438, "x_right_edge": 1581, "width_px": 143, "y": [0, 1079]}
+    },
+    {
+      "name": "wood_floor",
+      "description": "light brown wood floor, image x 1582-1919; the pouch comes to rest on it",
+      "moves": false,
+      "extent_px": {"x": [1582, 1919], "y": [0, 1079]}
+    }
+  ],
+  "events": [
+    {"event": "pouch held still by the hand", "frames": "0-65", "t": "0.000-2.167"},
+    {"event": "release / start of fall", "frame": 66, "t": 2.200, "note": "cx 158.5 at 66, 164.7 at 67, 181.5 at 68; fit of free fall puts v=0 between 66 and 67"},
+    {"event": "free fall, pure translation along +x (gravity), y drifts only -4 px", "frames": "66-80", "t": "2.200-2.667"},
+    {"event": "pouch leading (right) edge reaches the baseboard edge x~1438 / impact with baseboard", "frame": 81, "t": 2.700, "note": "frame 80 right edge at x=1431 (still on the wall); by 81 it overlaps the baseboard"},
+    {"event": "pouch tumbles/slides along the baseboard toward the floor (rotates ~90 deg)", "frames": "81-90", "t": "2.700-3.000"},
+    {"event": "pouch lands and comes to rest on the floor", "frame": 91, "t": 3.033, "note": "stationary (cx within 1 px) frames 91-120"},
+    {"event": "arm swings into view bottom-left", "frames": "~114-120", "t": "3.8-4.0"}
+  ],
+  "fall_check_px": {
+    "note": "only a check of the track quality, not a model: per-frame dx of cx frames 67->80 = 16.8, 28.6, 40.3, 52.2, 64.0, 76.0, 87.3, 99.2, 110.1, 121.6, 134.1, 146.5, 161.1 px; second difference ~ 11.8 px/frame^2 nearly constant",
+    "fall_distance_cx_66_to_80_px": 1143.8
+  }
+}

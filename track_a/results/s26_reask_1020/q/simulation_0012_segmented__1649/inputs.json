@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0012_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 22.0,
+ "frames": 61,
+ "duration_s": 2.7727,
+ "width": 1920,
+ "height": 1954,
+ "question": {
+  "id": 1649,
+  "question": "What is the length of the bird in meters?",
+  "prior": "speed of the bird =6m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

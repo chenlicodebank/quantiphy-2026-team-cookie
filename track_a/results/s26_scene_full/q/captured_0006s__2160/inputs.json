@@ -1,0 +1,18 @@
+{
+ "video": "captured_0006s.mp4",
+ "video_source": "lab",
+ "video_type": "A3SS",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2160,
+  "question": "What is the velocity of the toy when hitting the desk for the first time in m/s?",
+  "prior": "acceleration = 9.8 m/s^2",
+  "depth_info": "t=1.0s, distance_ball_camera = 1.4020m\nt=1.2s, distance_ball_camera = 1.065m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

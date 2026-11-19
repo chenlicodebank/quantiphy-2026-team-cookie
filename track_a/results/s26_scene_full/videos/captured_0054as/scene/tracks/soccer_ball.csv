@@ -1,0 +1,42 @@
+frame,t,cx,cy,bcx,bcy,bx0,by0,bx1,by1,bw,bh,area,eq_diam,len_major,wid_minor,angle_deg,at_border,touch_person,occluded,note
+0,0.0,158.27,610.43,161.5,607.0,127,580,196,634,70,55,2132,52.1,73.93,47.89,164.19,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+1,0.0417,158.03,611.48,158.0,607.0,126,580,190,634,65,55,2097,51.67,67.83,50.03,164.74,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+2,0.0833,157.87,610.55,158.0,605.5,126,580,190,631,65,52,2023,50.75,67.72,47.52,165.81,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+3,0.125,157.94,610.0,158.0,604.5,126,580,190,629,65,50,1961,49.97,67.84,47.0,166.63,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+4,0.1667,158.12,607.87,158.0,603.0,126,575,190,631,65,57,2173,52.6,68.13,52.6,160.35,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+5,0.2083,158.04,607.99,158.5,603.0,127,575,190,631,64,57,2181,52.7,68.2,52.29,159.09,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+6,0.25,157.81,607.89,158.0,603.0,125,575,191,631,67,57,2209,53.03,68.68,52.24,161.61,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+7,0.2917,158.03,608.71,158.0,604.0,125,575,191,633,67,59,2276,53.83,68.03,55.58,161.19,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+8,0.3333,157.28,606.72,159.0,603.0,124,575,194,631,71,57,2350,54.7,71.83,53.94,166.56,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+9,0.375,157.57,610.73,158.0,606.5,126,580,190,633,65,54,2173,52.6,67.64,50.81,166.92,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+10,0.4167,157.04,607.63,158.0,604.0,126,575,190,633,65,59,2338,54.56,68.36,53.16,161.46,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+11,0.4583,156.84,608.58,157.0,604.0,124,575,190,633,67,59,2365,54.87,68.74,55.31,160.42,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+12,0.5,156.96,607.53,157.5,603.5,124,574,191,633,68,60,2337,54.55,69.92,57.14,161.08,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+13,0.5417,157.82,607.66,159.5,604.0,124,575,195,633,72,59,2298,54.09,74.13,56.03,162.56,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+14,0.5833,157.1,607.86,157.5,603.0,124,575,191,631,68,57,2260,53.64,69.4,54.04,162.43,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+15,0.625,156.31,607.14,157.5,603.5,124,574,191,633,68,60,2443,55.77,69.57,56.44,164.4,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+16,0.6667,156.39,605.99,157.5,602.5,124,574,191,631,68,58,2379,55.04,69.14,53.72,166.64,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+17,0.7083,157.45,607.2,159.5,603.5,125,573,194,634,70,62,2467,56.05,72.43,56.01,160.17,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+18,0.75,159.01,607.35,158.5,601.5,126,572,191,631,66,60,2382,55.07,68.56,54.63,158.96,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+19,0.7917,159.06,605.94,158.0,601.0,124,572,192,630,69,59,2479,56.18,68.28,55.53,162.82,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+20,0.8333,158.6,604.92,158.0,601.0,124,573,192,629,69,57,2379,55.04,68.02,51.66,167.53,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+21,0.875,160.45,604.31,164.5,601.5,130,573,199,630,70,58,2254,53.57,73.36,47.02,159.91,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+22,0.9167,158.52,605.46,160.0,601.0,126,573,194,629,69,57,2310,54.23,70.54,52.34,163.23,0,1,1,held: left-hand fingers cover the top of the ball (bbox top = fingers)
+23,0.9583,154.97,607.59,156.0,604.0,122,575,190,633,69,59,2461,55.98,68.38,54.18,161.75,0,1,1,hand releasing; motion blur; 25: bbox right edge may touch shoe
+24,1.0,150.37,609.74,153.0,607.5,116,577,190,638,75,62,2715,58.79,75.86,55.26,158.64,0,1,1,hand releasing; motion blur; 25: bbox right edge may touch shoe
+25,1.0417,145.74,613.79,149.5,613.0,109,584,190,642,82,59,3160,63.43,87.47,59.27,159.88,0,1,1,hand releasing; motion blur; 25: bbox right edge may touch shoe
+26,1.0833,133.57,622.11,138.0,620.0,103,589,173,651,71,63,2921,60.98,74.11,64.9,169.98,0,1,0,"rolling, motion blur"
+27,1.125,127.66,628.68,128.5,625.5,93,593,164,658,72,66,3196,63.79,76.84,64.68,149.95,0,1,0,"rolling, motion blur"
+28,1.1667,118.86,635.32,118.5,632.0,80,600,157,664,78,65,3471,66.48,87.7,61.87,153.78,0,1,0,"rolling, motion blur"
+29,1.2083,109.89,643.24,111.0,641.0,73,607,149,675,77,69,3543,67.16,81.4,63.24,157.97,0,0,0,"rolling, motion blur"
+30,1.25,101.92,648.59,103.0,646.0,64,614,142,678,79,65,3413,65.92,87.19,56.98,159.18,0,0,0,"rolling, motion blur"
+31,1.2917,94.87,655.8,95.0,652.0,55,621,135,683,81,63,3720,68.82,87.08,66.79,161.33,0,0,0,"rolling, motion blur"
+32,1.3333,85.26,665.77,85.0,664.5,43,629,127,700,85,72,4367,74.57,94.32,69.15,149.64,0,0,0,"rolling, motion blur"
+33,1.375,75.21,672.32,76.0,669.0,33,635,119,703,87,69,4178,72.94,94.04,65.99,158.13,0,0,0,"rolling, motion blur"
+34,1.4167,67.25,679.59,68.5,676.0,25,642,112,710,88,69,4331,74.26,96.08,68.31,159.74,0,0,0,"rolling, motion blur"
+35,1.4583,56.23,689.97,55.5,685.5,11,652,100,719,90,68,4364,74.54,98.09,70.57,161.52,1,0,1,cut by left/bottom border; visible part only
+36,1.5,43.61,698.63,41.5,693.5,0,668,83,719,84,52,3063,62.45,87.81,56.39,169.05,1,0,1,cut by left/bottom border; visible part only
+37,1.5417,39.37,701.62,37.0,698.5,0,678,74,719,75,42,2249,53.51,75.43,43.19,178.46,1,0,1,cut by left/bottom border; visible part only
+38,1.5833,31.15,703.33,32.0,703.5,0,688,64,719,65,32,1444,42.88,68.25,35.52,8.38,1,0,1,cut by left/bottom border; visible part only
+39,1.625,19.13,707.45,20.5,708.0,0,697,41,719,42,23,608,27.82,43.68,24.91,4.75,1,0,1,cut by left/bottom border; visible part only
+40,1.6667,16.42,712.9,16.0,713.5,0,708,32,719,33,12,248,17.77,34.21,10.96,13.16,1,0,1,cut by left/bottom border; visible part only

@@ -1,0 +1,444 @@
+{
+ "video": "internet_0055.mp4",
+ "source": "internet",
+ "scene_type": "2D",
+ "fps": 30.0,
+ "frames": 75,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 30; frame 0 at t = 0",
+ "units": "pixels (original 1920x1080 frame) and seconds; no metric scale anywhere",
+ "files": {
+  "notes": "scene/notes.md",
+  "camera": "scene/camera_transforms.json",
+  "tracks": {
+   "pedestrian": "scene/tracks/pedestrian.csv",
+   "white_car": "scene/tracks/white_car.csv",
+   "bus": "scene/tracks/bus.csv"
+  },
+  "scripts": "scene/scripts/"
+ },
+ "camera": {
+  "type": "handheld, nearly static: slow smooth drift (no pan sweep, no zoom)",
+  "drift_frame0_to_74_px": "background content moves about +5..+12 px in x and +11..+17 px in y in the image between frame 0 and frame 74 (roll about 0.27 deg, scale change < 0.2%)",
+  "per_frame": "camera_transforms.json: for each frame a 2x3 similarity matrix a mapping frame-i pixel -> frame-0 pixel; dx,dy = shift of the image centre (frame i -> frame 0)",
+  "parallax_check": "template-tracked static points (signs, bollard, path arrows, curb) fit the model within 2.3 px; no visible parallax",
+  "effect_on_motion": "pedestrian moves ~600 px; camera drift changes that by ~1-1.5%. stab_* columns in the tracks are in frame-0 (background-fixed) coordinates"
+ },
+ "perspective": {
+  "view": "eye-level view looking along a bike path into a roundabout; ground plane recedes upward in the image",
+  "horizon_y_approx": 455,
+  "notes": "pedestrian walks right-to-left across the far end of the bike path (just in front of the splitter island) and slightly toward the camera: her pixel height grows ~262 -> ~315 px (+20%) and her feet go from y~686 to y~733. The white car drives along the far side of the roundabout (much farther away). The bus is farther still, on the roundabout at right."
+ },
+ "inventory": [
+  {
+   "name": "pedestrian",
+   "what": "woman walking, light-pink cap, white long-sleeve top, khaki/olive cargo pants, pink/orange sneakers",
+   "moves": true,
+   "visible_frames": "0-74",
+   "direction": "right to left (image x decreasing), slightly toward camera",
+   "track": "tracks/pedestrian.csv"
+  },
+  {
+   "name": "white_car",
+   "what": "white compact SUV (Tesla Model Y-like) on the far side of the roundabout, upper-left background",
+   "moves": true,
+   "visible_frames": "0-59 (partly cut by the left image edge from frame 29; gone from frame 60)",
+   "direction": "right to left",
+   "track": "tracks/white_car.csv"
+  },
+  {
+   "name": "bus",
+   "what": "white/red Marguerite free-shuttle bus #3428 at the right image edge, always cut by the edge",
+   "moves": true,
+   "visible_frames": "0-74",
+   "direction": "frames 0-~45: rear view, rear moves right toward the image edge (decelerating); frames ~47-74: bus turning, its left side swings into view, front end moving left",
+   "track": "tracks/bus.csv"
+  },
+  {
+   "name": "bollard",
+   "what": "black cylindrical bollard with red no-pedestrian disc, centre-bottom foreground",
+   "moves": false
+  },
+  {
+   "name": "do_not_enter_sign",
+   "what": "red/white DO NOT ENTER sign on a black pole, upper left",
+   "moves": false
+  },
+  {
+   "name": "bicycle_warning_sign",
+   "what": "yellow diamond with bicycle + yellow arrow plaque below, centre, on black pole on splitter island",
+   "moves": false
+  },
+  {
+   "name": "yield_sign",
+   "what": "red/white YIELD triangle with TO TRAFFIC IN CIRCLE plaque below, right",
+   "moves": false
+  },
+  {
+   "name": "chevron_signs",
+   "what": "two small black/white double-chevron signs on the central roundabout island (left x~737, right x~1093)",
+   "moves": false
+  },
+  {
+   "name": "orange_delineators",
+   "what": "three orange traffic delineator posts on the central island, right of centre",
+   "moves": false
+  },
+  {
+   "name": "stanford_banner",
+   "what": "red banner with white tree logo on a light pole, top right",
+   "moves": false
+  },
+  {
+   "name": "splitter_island",
+   "what": "triangular raised island with brown mulch and concrete curb between the two bike-path lanes",
+   "moves": false
+  },
+  {
+   "name": "bike_path_markings",
+   "what": "white bicycle symbols and arrows on the bike path; yellow centre lines diverging around the bollard",
+   "moves": false
+  },
+  {
+   "name": "roundabout_central_island",
+   "what": "large central island with trees, cobble apron, chevrons and delineators",
+   "moves": false
+  },
+  {
+   "name": "parked_cars_background",
+   "what": "small distant parked cars at right behind the roundabout (y~450-470, x~1680-1820)",
+   "moves": false
+  }
+ ],
+ "pedestrian_summary": {
+  "reference_point": "visible centre = bbox centre (bbox_cx, bbox_cy); mask centroid (cx, cy) and head top (top_x, top_y) also given",
+  "bbox_cx_first_last": [
+   1222.5,
+   609.5
+  ],
+  "head_top_x_first_last": [
+   1204.4,
+   606.8
+  ],
+  "bbox_height_px": {
+   "frame0": 261.0,
+   "frame37": 294.0,
+   "frame74": 315.2,
+   "min": 261.0,
+   "max": 316.4
+  },
+  "height_at_midstance_frames": {
+   "4": 269.0,
+   "21": 283.0,
+   "35": 288.9,
+   "50": 302.8,
+   "67": 312.6
+  },
+  "stride_frames_feet_apart": [
+   {
+    "frame": 12,
+    "time_s": 0.4
+   },
+   {
+    "frame": 28,
+    "time_s": 0.9333
+   },
+   {
+    "frame": 43,
+    "time_s": 1.4333
+   },
+   {
+    "frame": 58,
+    "time_s": 1.9333
+   }
+  ],
+  "midstance_frames_legs_together": [
+   {
+    "frame": 4,
+    "time_s": 0.1333
+   },
+   {
+    "frame": 21,
+    "time_s": 0.7
+   },
+   {
+    "frame": 35,
+    "time_s": 1.1667
+   },
+   {
+    "frame": 50,
+    "time_s": 1.6667
+   },
+   {
+    "frame": 67,
+    "time_s": 2.2333
+   }
+  ],
+  "occluded_frames": "lower legs/feet partly behind the bollard where occluded=1 (frames 34-52; flag = bbox overlaps the bollard column below its top, so it is conservative); bbox_y1 there may be the bollard top, not the feet"
+ },
+ "white_car_summary": {
+  "reference_point": "mask centroid (cx, cy) and bbox; the car is a side view, nose pointing left",
+  "full_length_frames": "bumper-to-bumper bbox_w valid only where the whole car is visible: frames 0-17 (DO NOT ENTER pole crosses the body but the closing bridges it) and 21-28",
+  "bbox_w_px": {
+   "0": 167.0,
+   "8": 171.0,
+   "16": 173.0,
+   "22": 178.0,
+   "25": 181.0,
+   "28": 183.0
+  },
+  "bbox_h_px": {
+   "0": 62.0,
+   "16": 66.0,
+   "28": 68.9
+  },
+  "notes": "frames 18-20 rear end hidden behind the DO NOT ENTER pole (bbox_x1 stuck at ~233); frames 29-59 cut by the left image edge (front end x not measurable; use bbox_x1 = rear bumper)"
+ },
+ "bus_summary": {
+  "notes": "rear_left_edge_x = left edge of the white rear panel (rear corner); front_end_x = leftmost bus pixel from frame 47 on (side view). Bus is never fully visible; its length cannot be measured.",
+  "rear_left_edge_x_first_last": [
+   1753,
+   1890
+  ],
+  "rear_panel_height_px_frame0": 196
+ },
+ "events": [
+  {
+   "event": "pedestrian walking throughout (already moving at frame 0, still moving at frame 74); no start/stop",
+   "frame": 0,
+   "time_s": 0.0
+  },
+  {
+   "event": "pedestrian passes behind the bollard (feet partly hidden)",
+   "frames": "34-52"
+  },
+  {
+   "event": "pedestrian head passes the bicycle-sign pole (x~940)",
+   "frames": "~36-37"
+  },
+  {
+   "event": "white car rear hidden behind DO NOT ENTER pole",
+   "frames": "18-20"
+  },
+  {
+   "event": "white car front reaches the left image edge",
+   "frame": 29,
+   "time_s": 0.9667
+  },
+  {
+   "event": "white car fully out of frame",
+   "frame": 60,
+   "time_s": 2.0
+  },
+  {
+   "event": "bus rear motion to the right slows to ~0; bus starts turning, side becomes visible",
+   "frames": "~44-47"
+  },
+  {
+   "event": "bus front end first detected left of rear (side view)",
+   "frame": 47,
+   "time_s": 1.5667
+  }
+ ],
+ "static_objects_frame0_px": [
+  {
+   "name": "do_not_enter_sign_panel",
+   "x0": 157,
+   "y0": 142,
+   "x1": 309,
+   "y1": 291,
+   "w": 153,
+   "h": 150,
+   "cx": 231.3,
+   "cy": 216.6,
+   "area": 20664
+  },
+  {
+   "name": "do_not_enter_red_disc",
+   "x0": 161,
+   "y0": 149,
+   "x1": 304,
+   "y1": 283,
+   "w": 144,
+   "h": 135,
+   "cx": 232.1,
+   "cy": 215.8,
+   "area": 11795
+  },
+  {
+   "name": "bicycle_warning_diamond",
+   "x0": 871,
+   "y0": 108,
+   "x1": 1031,
+   "y1": 273,
+   "w": 161,
+   "h": 166,
+   "cx": 950.3,
+   "cy": 191.1,
+   "area": 14304
+  },
+  {
+   "name": "arrow_plaque_yellow",
+   "x0": 896,
+   "y0": 270,
+   "x1": 992,
+   "y1": 325,
+   "w": 97,
+   "h": 56,
+   "cx": 944.5,
+   "cy": 299.1,
+   "area": 4003
+  },
+  {
+   "name": "yield_sign_triangle",
+   "x0": 1569,
+   "y0": 242,
+   "x1": 1688,
+   "y1": 343,
+   "w": 120,
+   "h": 102,
+   "cx": 1628.1,
+   "cy": 279.8,
+   "area": 7041
+  },
+  {
+   "name": "to_traffic_in_circle_plaque",
+   "x0": 1582,
+   "y0": 340,
+   "x1": 1674,
+   "y1": 406,
+   "w": 93,
+   "h": 67,
+   "cx": 1625.5,
+   "cy": 374.8,
+   "area": 5179
+  },
+  {
+   "name": "red_stanford_banner",
+   "x0": 1855,
+   "y0": 251,
+   "x1": 1905,
+   "y1": 320,
+   "w": 51,
+   "h": 70,
+   "cx": 1882.5,
+   "cy": 282.8,
+   "area": 2308
+  },
+  {
+   "name": "chevron_sign_left",
+   "x0": 710,
+   "y0": 462,
+   "x1": 761,
+   "y1": 507,
+   "w": 52,
+   "h": 46,
+   "cx": 737.6,
+   "cy": 484.7,
+   "area": 1564
+  },
+  {
+   "name": "chevron_sign_right",
+   "x0": 1064,
+   "y0": 466,
+   "x1": 1119,
+   "y1": 512,
+   "w": 56,
+   "h": 47,
+   "cx": 1093.0,
+   "cy": 488.0,
+   "area": 1834
+  },
+  {
+   "name": "orange_delineator_1",
+   "x0": 1348,
+   "y0": 481,
+   "x1": 1360,
+   "y1": 540,
+   "w": 13,
+   "h": 60,
+   "cx": 1353.9,
+   "cy": 513.1,
+   "area": 534
+  },
+  {
+   "name": "orange_delineator_2",
+   "x0": 1371,
+   "y0": 492,
+   "x1": 1384,
+   "y1": 540,
+   "w": 14,
+   "h": 49,
+   "cx": 1377.1,
+   "cy": 514.7,
+   "area": 487
+  },
+  {
+   "name": "orange_delineator_3",
+   "x0": 1392,
+   "y0": 486,
+   "x1": 1416,
+   "y1": 540,
+   "w": 25,
+   "h": 55,
+   "cx": 1403.2,
+   "cy": 511.9,
+   "area": 641
+  },
+  {
+   "name": "bollard_black_post",
+   "x0": 856,
+   "y0": 791,
+   "x1": 934,
+   "y1": 1020,
+   "w": 79,
+   "h": 230,
+   "cx": 893.0,
+   "cy": 893.2,
+   "area": 10928
+  },
+  {
+   "name": "no_pedestrian_sign_on_bollard",
+   "x0": 838,
+   "y0": 706,
+   "x1": 933,
+   "y1": 800,
+   "w": 96,
+   "h": 95,
+   "cx": 885.3,
+   "cy": 752.7,
+   "area": 3899
+  },
+  {
+   "name": "bollard_full",
+   "x0": 857,
+   "y0": 655,
+   "x1": 923,
+   "y1": 1035,
+   "w": 66,
+   "h": 380,
+   "note": "black post incl. rounded top and base; read by eye on zoomed frame 0 (+-3 px)"
+  },
+  {
+   "name": "bicycle_sign_pole_base_to_diamond_top",
+   "note": "pole base on splitter island at about (928, 662); diamond top y=108 -> ~554 px total"
+  },
+  {
+   "name": "do_not_enter_pole",
+   "note": "pole x~238, panel bottom y=291, pole base hidden behind bushes at ~y 580"
+  },
+  {
+   "name": "yield_pole",
+   "note": "pole x~1622, plaque bottom y=406, base at ~y 580"
+  },
+  {
+   "name": "splitter_island",
+   "x0": 568,
+   "y0": 600,
+   "x1": 1242,
+   "y1": 695,
+   "note": "mulch island incl. curb, from frame 0; front tip near bollard top"
+  }
+ ]
+}

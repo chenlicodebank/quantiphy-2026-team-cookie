@@ -1,0 +1,87 @@
+{
+  "video": "simulation_0152.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 42,
+  "frame_time": "t = frame / 24 (frame 0 at t = 0)",
+  "image_size_px": [1920, 1080],
+  "units": "pixels and seconds; image x to the right, y down; no metric scale assumed",
+  "camera": {
+    "motion": "static (background composite of frame 0 / frame 41 matches all frames outside the vehicles; no pan/shake detected)",
+    "vanishing_point_px": [959.3, 539.1],
+    "vanishing_point_method": "intersection of line fits to the two ceiling light strips (rms 0.35 / 0.43 px)",
+    "horizon_y_px": 539,
+    "interpretation": "optical axis parallel to the corridor and level (zero pitch / roll), principal point at the image centre (960, 540). Vehicles move left->right ACROSS the corridor, i.e. parallel to the image plane: their image paths are horizontal and their apparent sizes (wheel radii, wheelbases) stay constant, so each vehicle stays at constant depth.",
+    "lens": "wide angle (strong perspective of the corridor; near the image edges the vehicles' front/back faces become visible)",
+    "focal_length": "unknown - estimate from given depths + known sizes. Useful: ground-contact rows below the horizon: car 890-539 = 351 px, cart 949-539 = 410 px (depth ratio of the near-side wheel contact lines car/cart ~ 1.17 if both on the same floor plane)."
+  },
+  "moving_objects": {
+    "car": {
+      "description": "yellow sports car (coupe with rear spoiler), the far vehicle of the two; drives left -> right across the corridor, behind the blue cart",
+      "track_file": "tracks/car.csv",
+      "visible_frames": [0, 40],
+      "visibility_notes": "never fully in view: front bumper visible frames 0-27 (leaves right image edge at ~28), rear bumper visible frames 28-39 (hidden behind the cart before ~28, partly seen through the open cart cabin), last sliver frame 40, gone frame 41",
+      "reference_point": "ref_x = midpoint of the two near-side wheel hubs (x), ref_y = hub row 797 (axle height). Raw hub detections frames 10-36; frames 0-8 and 37-39 extrapolated from the silhouette edge (low reliability)",
+      "near_side_wheelbase_px": 729.5,
+      "wheel_rim_radius_px": 63,
+      "tyre_outer_radius_px": 93,
+      "hub_row_y_px": 797,
+      "ground_contact_y_px": 890,
+      "top_y_px": 528,
+      "height_px_ground_to_roof": 362,
+      "length_px_bumper_to_bumper": 1136,
+      "length_note": "combined from front-edge-to-front-hub 164.5 px (frame 27) + wheelbase 729.5 + rear-hub-to-rear-edge 241.5 px (frame 28); car centre at x~1300 then. Apparent length varies a few % with image position (perspective of the car's end faces); +-15 px",
+      "apparent_size_vs_time": "constant: hub rim radius 63 +-1 px and wheelbase 728-730 px in all frames where both hubs visible (22-29) -> constant depth"
+    },
+    "cart": {
+      "description": "small light-blue open utility cart / buggy with roof canopy (forward-sloping visor at the back-top), white rear box, blue seat, black wheels; the near vehicle, drives left -> right in front of the car",
+      "track_file": "tracks/cart.csv",
+      "visible_frames": [3, 41],
+      "visibility_notes": "a few blue pixels of its front may touch the left edge already in frames 0-2 (below the car's front, x<10); front clearly enters frame 3-4, tracked from frame 5; fully in view from frame 22 (left visor tip at x=53); stays in view to the end (frame 41 at x 936-1488)",
+      "reference_point": "ref_x = midpoint of the two near-side wheel hubs, ref_y = hub row 893.5",
+      "near_side_wheelbase_px": 338.5,
+      "wheel_rim_radius_px": 36,
+      "tyre_outer_radius_px": 56,
+      "hub_row_y_px": 893.5,
+      "ground_contact_y_px": 949,
+      "top_y_px": 466,
+      "length_px": 549,
+      "length_note": "visor tip (back) to front tyre, frames 34-39 (549-551 px)",
+      "height_px": 485,
+      "height_note": "visor tip y 466 to tyre bottom 951 (bbox incl. contact shadow); canopy roof top ~500",
+      "apparent_size_vs_time": "constant: length 549-551 px frames 34-39, wheelbase 335-340 px frames 22-41, template scale 1.000 +-0.005 frames 6-41 -> constant depth"
+    }
+  },
+  "static_objects": {
+    "speed_sign_30_near": {"desc": "round red-rimmed '30' speed-limit sign on left pillar", "bbox_px": [303, 300, 408, 405], "diameter_px": 105},
+    "speed_sign_30_far": {"desc": "small '30' sign at far end, right of centre", "bbox_px": [1104, 477, 1130, 503], "diameter_px": 26},
+    "fire_extinguisher_left": {"desc": "red extinguisher on left wall", "bbox_px": [280, 478, 320, 598], "red_body_px": [296, 509, 22, 57]},
+    "fire_extinguisher_right": {"desc": "red extinguisher on right wall", "bbox_px": [1388, 497, 1416, 572], "red_body_px": [1390, 510, 20, 60]},
+    "fire_extinguishers_far": {"desc": "two small extinguishers far left (x~765, 808, y~540) and one far right (x~1128, y~543)"},
+    "B1_far_wall": {"desc": "yellow 'B1' painted on far end wall", "bbox_px": [910, 500, 985, 562]},
+    "B1_right_pillar": {"desc": "large yellow 'B1' on right pillar", "bbox_px": [1610, 405, 1658, 562]},
+    "B1_left_pillar": {"desc": "faint yellow 'B1' on left pillar", "bbox_px": [492, 450, 514, 558]},
+    "hazard_striped_posts": {"desc": "black/yellow striped pillar corners; nearest: left x 240-262, y 678-828; right x 1652-1672, y 678-828; more at x~355, 488, 606, 757, 1308, 1425, 1557"},
+    "floor_arrow_near": {"desc": "white forward arrow on corridor floor", "bbox_px": [948, 738, 1045, 785]},
+    "floor_arrows_far": {"desc": "two small far arrows", "bbox_px": [[925, 612, 980, 620], [958, 645, 1005, 660]]},
+    "ceiling_light_strips": {"desc": "two long fluorescent strips converging to the vanishing point", "left_line": "y = 0.4956 x + 63.7 (x 0-775)", "right_line": "y = -0.4416 x + 962.7 (x 1165-1920)"},
+    "corridor_floor": {"desc": "glossy grey floor with specular reflections; far end wall at y~600; green parking bays at both sides (left x<300, right x>1600, y 700-900)"},
+    "floor_reflections": {"desc": "bright light reflections on the floor (x~838-879 and 1027-1066 far; 649-776 and 1167-1309 near) - static; vehicles' mirror images on the floor below y~950 are NOT part of the vehicles"}
+  },
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "car front already in view at left edge (front x=142), essentially at rest: front edge moves 1 px from frame 0 to 1, then 11, 15, 20, 26 ... px/frame (accelerating from rest at ~frame 0-1)"},
+    {"frame": 3, "time": 0.125, "event": "cart front first appears at left image edge (already moving)"},
+    {"frame": 22, "time": 0.9167, "event": "cart fully inside the image from about here (left visor tip x=53)"},
+    {"frame": 28, "time": 1.1667, "event": "car front bumper leaves right image edge (front last measured frame 27 at x=1773); car rear emerges from behind the cart (rear x=742)"},
+    {"frame": 32, "time": 1.3333, "event": "cart and car no longer overlap in the image (cart front 1086 < car rear 1090)"},
+    {"frame": 40, "time": 1.6667, "event": "last sliver of the car at the right edge; frame 41 car gone"},
+    {"note": "no contact/collision: the two vehicles are at different depths (cart nearer, ground rows 949 vs 890); they overlap only in the image (frames ~3-31). Both move monotonically left->right; no reversals, no bounces. Pixel step of hubs: car rises from ~63 px/frame (frame 10) to ~105 (frames 28-32) then ~100 (36); cart rises from ~20 (frame 6) to ~49 (frames 27-31) then falls to ~43 (frame 41)."}
+  ],
+  "files": {
+    "tracks/car.csv": "per-frame car track",
+    "tracks/cart.csv": "per-frame cart track",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

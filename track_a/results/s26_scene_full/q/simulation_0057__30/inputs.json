@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0057.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MC",
+ "fps": 30.003297,
+ "frames": 91,
+ "duration_s": 3.033,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 30,
+  "question": "What is the length of the orange car in meters?",
+  "prior": "acceleration of the orange car = -2.86m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

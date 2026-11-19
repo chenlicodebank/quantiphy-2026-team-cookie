@@ -1,0 +1,201 @@
+{
+ "video": "simulation_0198.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 60.0,
+ "frames": 14,
+ "width": 2560,
+ "height": 2560,
+ "time_convention": "t = frame/60; frame 0 at t=0",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of left half vs frame 0: |shift| < 0.001 px all frames; frames 12-13 identical"
+ },
+ "units": "pixels (image x right, y down), seconds",
+ "objects": {
+  "drop": {
+   "desc": "single amber/clear teardrop of serum falling from the glass pipette tip; the only moving object",
+   "moves": true,
+   "visible_frames": "0-10 (leaves bottom of image between frames 10 and 11)",
+   "track": "tracks/drop.csv",
+   "reference_point": "mask centroid (cx_mask, cy_mask) = proxy for rigid object origin/centre",
+   "size_px": {
+    "width_x": "59-60 (frames 0-8; 58 at 9, 54 at 10 in dark region -> underestimated)",
+    "height_y": "91-92 (frames 0-9)",
+    "median_w": 59,
+    "median_h": 91,
+    "shape": "rigid teardrop, point up; shape constant, no deformation"
+   },
+   "per_frame_displacement_px": [
+    {
+     "from_frame": 0,
+     "to_frame": 1,
+     "dx": -0.05,
+     "dy": 17.13,
+     "dist": 17.13
+    },
+    {
+     "from_frame": 1,
+     "to_frame": 2,
+     "dx": -0.77,
+     "dy": 49.11,
+     "dist": 49.12
+    },
+    {
+     "from_frame": 2,
+     "to_frame": 3,
+     "dx": -1.45,
+     "dy": 80.86,
+     "dist": 80.87
+    },
+    {
+     "from_frame": 3,
+     "to_frame": 4,
+     "dx": -1.5,
+     "dy": 111.88,
+     "dist": 111.89
+    },
+    {
+     "from_frame": 4,
+     "to_frame": 5,
+     "dx": -2.1,
+     "dy": 143.78,
+     "dist": 143.8
+    },
+    {
+     "from_frame": 5,
+     "to_frame": 6,
+     "dx": -2.32,
+     "dy": 176.08,
+     "dist": 176.1
+    },
+    {
+     "from_frame": 6,
+     "to_frame": 7,
+     "dx": 0.0,
+     "dy": 0.0,
+     "dist": 0.0
+    },
+    {
+     "from_frame": 7,
+     "to_frame": 8,
+     "dx": -2.86,
+     "dy": 207.58,
+     "dist": 207.6
+    },
+    {
+     "from_frame": 8,
+     "to_frame": 9,
+     "dx": -7.95,
+     "dy": 510.01,
+     "dist": 510.07
+    },
+    {
+     "from_frame": 9,
+     "to_frame": 10,
+     "dx": -4.22,
+     "dy": 301.91,
+     "dist": 301.94
+    }
+   ]
+  },
+  "serum_bottle": {
+   "desc": "glass bottle with orange 'SKYNOVA / RADIANT VITAMIN B' label/liquid, standing on plinth, right of the drop path",
+   "moves": false,
+   "body_bbox_px": [
+    1702,
+    678,
+    2133,
+    1250
+   ],
+   "body_width_px": 431,
+   "body_height_px": 572,
+   "neck_threads_bbox_px": [
+    1772,
+    500,
+    2067,
+    656
+   ],
+   "neck_width_px": 295,
+   "total_height_px_neck_top_to_base": 750,
+   "orange_label_region_y": [
+    783,
+    1233
+   ],
+   "note": "glass edges soft, +-10 px"
+  },
+  "dropper": {
+   "desc": "glass pipette with white cap/bulb, held tilted above bottle; drop hangs from its lower-left open tip at frame 0",
+   "moves": false,
+   "tip_center_px": [
+    1455,
+    700
+   ],
+   "bulb_end_px": [
+    2244,
+    178
+   ],
+   "overall_length_px": 946,
+   "axis_angle_deg_above_horizontal": 33.5,
+   "cap_opening_center_px": [
+    1900,
+    389
+   ],
+   "cap_opening_diameter_px": 255,
+   "pipette_glass_tube_width_px": "~40",
+   "note": "static (no motion detected); extents +-15 px, partly transparent"
+  },
+  "plinth": {
+   "desc": "light grey rectangular block/pedestal the bottle stands on",
+   "moves": false,
+   "top_edge_y_px": 1240,
+   "left_edge_x_px": 1670,
+   "extends_to": "right and bottom image borders (x 1670-2560, y 1240-2560)"
+  },
+  "wall_and_shadows": {
+   "desc": "beige wall background with venetian-blind light stripes (diagonal bands) and dark vertical band at far left (x<~130)",
+   "moves": false
+  }
+ },
+ "events": [
+  {
+   "event": "drop hangs at pipette tip (attached / just releasing)",
+   "frame": 0,
+   "time_s": 0.0,
+   "pos_px": [
+    1449.0,
+    747.6
+   ]
+  },
+  {
+   "event": "drop visibly moving down (release between frame 0 and 1; displacement 17 px in first step)",
+   "frame": 1,
+   "time_s": 0.0167
+  },
+  {
+   "event": "duplicate frame: frame 7 is a near copy of frame 6 (drop did not move 6->7)",
+   "frame": 7,
+   "time_s": 0.1167
+  },
+  {
+   "event": "irregular step 8->9 = 510 px, about two normal steps; looks like a skipped render frame",
+   "frame": 9,
+   "time_s": 0.15
+  },
+  {
+   "event": "last frame drop visible",
+   "frame": 10,
+   "time_s": 0.1667,
+   "pos_px": [
+    1425.7,
+    2345.9
+   ]
+  },
+  {
+   "event": "drop out of frame (exits bottom edge)",
+   "frame": 11,
+   "time_s": 0.1833
+  }
+ ],
+ "no_impact": "drop never hits anything in view"
+}

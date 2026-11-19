@@ -1,0 +1,83 @@
+{
+  "video": "simulation_0208.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 30,
+  "duration_s": 1.25,
+  "image_size_px": [2124, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (wall noise p99 <= 2 grey levels between frame 0 and 29; mat edges unchanged)",
+    "per_frame_background_shift_px": [0, 0],
+    "view": "front view of a wall with a desk mat in the foreground, slightly elevated camera looking at the mat's top surface; the typewriter falls vertically in a plane roughly facing the camera"
+  },
+  "objects": {
+    "typewriter": {
+      "description": "black vintage typewriter with cream keys; the only moving object. Falls from the top-centre, lands on the desk mat, rocks/tips and comes to rest",
+      "moves": true,
+      "visible_frames": [0, 29],
+      "track_file": "tracks/typewriter.csv",
+      "reference_point": "cx_bbox, cy_bbox (centre of the 2D mask bounding box) = best proxy for the object origin; cx_mask/cy_mask (mask centroid) also given",
+      "pixel_size_airborne_frames_0_2": {
+        "length_x_px": 292,
+        "height_y_px": "125 (frame 0; frames 7-9 bbox heights 146-169 px are inflated by vertical motion blur)",
+        "note": "horizontal extent 292-293 px is stable during the whole fall (frames 0-10) and is the most reliable size measure"
+      },
+      "pixel_size_at_rest_frames_23_29": {
+        "bbox": [861, 848, 1192, 1023],
+        "width_x_px": 332,
+        "height_y_px": 176,
+        "note": "at rest it shows its front/top (keys, platen) under perspective, so width includes some depth foreshortening; right edge ~1192 measured by eye because the paper prop touches it (mask is clipped at x=1195)"
+      },
+      "positions_key": {
+        "frame0_bbox_centre": [981.0, 254.5],
+        "frame10_bbox_centre_last_airborne": [981.5, 887.5],
+        "rest_bbox_centre": [1026.5, 935.5]
+      }
+    },
+    "desk_mat": {
+      "description": "large rectangular desk mat / blotter with a reddish-brown border, lying on the floor/table at the bottom of the frame; the typewriter lands on it",
+      "moves": false,
+      "visible_frames": [0, 29],
+      "back_edge_y_px": 946,
+      "back_left_corner_px": [276, 946],
+      "back_right_corner_px": [1800, 946],
+      "back_edge_length_px": 1524,
+      "right_side_edge_points_px": [[1808, 952], [1860, 980], [1895, 1000], [1967, 1040], [2032, 1075]],
+      "front_edge": "below the bottom of the frame (not visible)",
+      "note": "corners +-5 px (left corner estimated visually; vignetting makes the left wall dark)"
+    },
+    "paper_card": {
+      "description": "small cream paper card on the mat to the right of the typewriter's landing spot, under the scissors",
+      "moves": false,
+      "bbox_px": [1191, 983, 1305, 1001],
+      "length_x_px": 114
+    },
+    "scissors": {
+      "description": "dark metal scissors lying on the paper card",
+      "moves": false,
+      "bbox_px": [1216, 968, 1330, 1003],
+      "length_x_px": 114
+    },
+    "small_dark_block": {
+      "description": "small dark brown block/stamp at the right end of the scissors",
+      "moves": false,
+      "bbox_px": [1325, 980, 1356, 1012]
+    },
+    "wall": {"description": "plain blue-grey backdrop wall", "moves": false}
+  },
+  "events": [
+    {"event": "start of fall / release", "frame": 0, "t": 0.0, "note": "already moving at frame 0 (frame0->1 drop 8 px); no hold frames"},
+    {"event": "last fully airborne frame", "frame": 10, "t": 0.4167, "note": "front-bottom edge at y~975-982, ~45 px above its resting contact line"},
+    {"event": "impact with desk mat", "frame": 11, "t": 0.4583, "note": "first frame in contact (bottom y=1028); impact lies between frames 10 and 11"},
+    {"event": "tips/rocks after impact", "frames": [11, 22], "note": "bbox top rises from y=853 (f11) to 793 (f15) then falls back to 853 (f19-21) while bottom stays at the mat (y~1011-1028): rocking rotation, not a free bounce"},
+    {"event": "comes to rest", "frame": 23, "t": 0.9583, "note": "mask unchanged within 1 px from frame 23 to 29"}
+  ],
+  "vertical_fall_px": {
+    "bbox_centre_y_frame0_to_frame10": 633.0,
+    "bbox_centre_y_frame0_to_rest": 681.0,
+    "bottom_y_frame0_to_rest": 706.0
+  }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0143.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 100,
+ "duration_s": 4.1667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1382,
+  "question": "What is the side length of the floor tile in meters?",
+  "prior": "height of the man = 1.8m",
+  "depth_info": "t=0s, distance_man_camera = 7.21m   \nt=0.5s, distance_man_camera = 7.91m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,104 @@
+{
+  "video": "simulation_0013.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 21.75,
+  "frames": 54,
+  "duration_s": 2.4828,
+  "image_size_px": {"width": 1920, "height": 1954},
+  "image_centre_px": [960, 977],
+  "time_convention": "t = frame / 21.75; frame = round(t * 21.75); frame 0 is t=0",
+  "units": "pixels and seconds; no metric scale recorded",
+  "camera": {
+    "motion": "static (no pan/shake): tree trunk, bush, cart and background identical in all 54 frames; a per-pixel median background subtracts cleanly everywhere except where objects move",
+    "per_frame_background_shift_px": 0,
+    "view": "roughly level view across a park lawn, looking slightly downward at the ground; tree trunk at the left edge in the foreground",
+    "perspective_cues": {
+      "far_edge_of_lawn_y_px": "about 1000-1045 (base of the background tree line)",
+      "horizon_estimate_y_px": "roughly 950-1000 (hidden by trees; distance haze); image centre row is 977",
+      "ground_plane": "lawn fills y > ~1000; objects on the ground lower in the image are closer to the camera (e.g. nest at rest at y~1590-1904 is much closer than the bush at y~1068)",
+      "note": "focal length unknown; estimate from the question's depth_info + a known size"
+    }
+  },
+  "objects": [
+    {
+      "name": "nest",
+      "description": "dark, hairy/twiggy bird's nest (near black). Starts resting on the left tree branch next to the trunk (upper left), slides off toward the camera, falls and tumbles down, lands on the lawn in the lower-left foreground and stays there",
+      "moves": true,
+      "visible_frames": "0-53 (all)",
+      "track": "tracks/nest.csv",
+      "reference_point": "bbox centre (bbox_cx, bbox_cy) ~ object origin; mask centroid also given",
+      "apparent_size_px": {
+        "frame0_in_tree": {"bbox_w": 393, "bbox_h": 220, "note": "left part overlaps the dark trunk; edge uncertain by ~20 px"},
+        "frames30_33_falling_ball_shape": {"bbox_w": "380-384", "bbox_h": "401-423"},
+        "frames41_53_at_rest_on_ground": {"bbox": [464, 1589, 877, 1903], "bbox_w": 414, "bbox_h": 315, "mask_len_main_axis": 446.6, "mask_width_across": 313.8, "note": "bottom few px include contact shadow on grass"}
+      },
+      "apparent_size_trend": "grows as it comes toward the camera: ~395x220 (frame 0) -> ~470x390 (frame 26-29) -> ~380x410 (30-33, ball shape fully right of trunk) -> squashed/blurred 37-40 -> 414x315 at rest"
+    },
+    {
+      "name": "bird",
+      "description": "black-and-white bird (magpie-like) flapping its wings, flying left-to-right in mid-air in front of the background trees, slightly upward in the image",
+      "moves": true,
+      "visible_frames": "0-53 (all)",
+      "track": "tracks/bird.csv",
+      "reference_point": "mask centroid (mask_cx, mask_cy) is the best body/origin proxy; bbox centre is biased by wing pose",
+      "apparent_size_px": {"body_plus_wings_len": "95-155 (varies with wingbeat)", "bbox_h": "48-120 (wing up/down)", "max_bbox_w_wingspan_like": 157, "min_bbox_w": 94},
+      "apparent_size_trend": "mean main-axis length ~115 px (frames 0-17), ~135 (18-35), ~145 (36-53): slight growth; its ground shadow drifts downward 1082->1103 px, i.e. the bird drifts slightly toward the camera"
+    },
+    {
+      "name": "bird_shadow",
+      "description": "thin dark ellipse on the sunlit lawn cast by the bird, moving left-to-right at y ~1080-1103",
+      "moves": true,
+      "visible_frames": "0-44 (lost after 44 when it enters the tree shadow / becomes too faint)",
+      "track": "tracks/bird_shadow.csv",
+      "note": "cast by the sun at an angle; not the point vertically below the bird"
+    },
+    {
+      "name": "tree_trunk",
+      "description": "large dark tree trunk at the left edge, foreground; its branch (with leaves) holds the nest at the start",
+      "moves": false,
+      "image_position_px": {"x_range": [0, 225], "y_range": [0, 1954], "note": "left side cut by the frame; visible width ~225 px at y 600-1800; right edge ~210-230"}
+    },
+    {
+      "name": "branch",
+      "description": "branch leaving the trunk to the upper right at about y 200-330 (left end ~x 230,y 330; goes up-right to ~x 900,y 130); nest sits on it at the start",
+      "moves": false
+    },
+    {
+      "name": "white_flower_bush",
+      "description": "small white-flowering bush on the lawn in the mid-distance, centre of the image",
+      "moves": false,
+      "image_position_px": {"bbox": [898, 1005, 975, 1068], "width": 77, "height": 63, "base_y": 1068, "centre_x": 936}
+    },
+    {
+      "name": "wooden_cart",
+      "description": "old wooden cart/wagon at the right edge (shaft pointing left, wheel cut by the frame edge)",
+      "moves": false,
+      "image_position_px": {"visible_x_range": [1552, 1920], "y_range": [965, 1140], "shaft_tip": [1552, 1125], "note": "partly outside the frame; lengths not measurable in full"}
+    },
+    {
+      "name": "background_trees",
+      "description": "round tree at left (x~300-590, base y~1040), tall central tree (x~600-1000), pink-flowered tree (x~1180-1400), trees at right; distance haze",
+      "moves": false
+    },
+    {
+      "name": "sunlit_patches",
+      "description": "yellow sunlit patches on the lawn: a large one at left-centre (y~1040-1360) and an oval at right (x~1200-1920, y~1230-1390); the rest of the lawn is in tree shadow",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "nest already moving slowly at the start (slides/sags on the branch; centroid creeps down ~1-2 px/frame from frame 0)", "frame": 0, "t_s": 0.0, "reliability": "motion at frames 0-10 is only 1-2 px/frame, near the noise level"},
+    {"event": "nest clearly falling / tipping off the branch (vertical motion accelerating)", "frame": 13, "t_s": 0.598, "reliability": "+-2 frames"},
+    {"event": "nest fully clear of the branch, free fall toward camera", "frame": 27, "t_s": 1.241, "reliability": "+-2 frames"},
+    {"event": "nest impact with the ground / comes to rest", "frame": 41, "t_s": 1.885, "reliability": "first frame at rest; contact between frame 40 and 41"},
+    {"event": "nest at rest", "frames": "41-53"},
+    {"event": "bird in flight entire clip, moving right; wing-up (largest bbox_h) at frames ~10, ~28, ~45; wings level/down (smallest bbox_h) at ~15, ~32, ~49", "frames": "0-53"},
+    {"event": "bird shadow no longer detectable", "frame": 45, "t_s": 2.069}
+  ],
+  "files": {
+    "tracks": ["tracks/nest.csv", "tracks/bird.csv", "tracks/bird_shadow.csv"],
+    "notes": "notes.md",
+    "scripts": "scripts/"
+  }
+}

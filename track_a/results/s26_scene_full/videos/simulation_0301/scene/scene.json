@@ -1,0 +1,203 @@
+{
+ "video": "simulation_0301.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame / 24; frame = round(t * 24)",
+ "pixel_convention": "full-resolution pixels, x right, y down, origin top-left",
+ "camera": {
+  "motion": "static (background top strip mean |diff| vs frame 0 <= 0.25 grey levels over the clip)",
+  "background": "uniform pale blue-grey; no visible ground texture, markings or horizon; only faint soft shadows under the objects reveal a ground plane",
+  "perspective_cues": "both vehicles recede from the camera towards the upper left and shrink: forklift bbox 696x728 (f0, amodal) -> 398x492 px (f71); car amodal 964x528 (f0) -> 359x197 (f71). Camera looks down on the scene (roofs visible). Straight-line image paths: forklift ref (1468,1092)->(689,596), car ref (2438,1346)->(551,381); if the two 3D paths are parallel, the lines meet near (-460,-140) px (rough vanishing point, unverified)."
+ },
+ "objects": {
+  "forklift": {
+   "description": "yellow-and-black counterbalance forklift (Toyota-style), mast/forks on its left side, overhead guard; nearer to camera of the two; seen from the rear-right",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "never_occluded": true,
+   "truncated_by_frame": "bottom edge (wheels) cut by image bottom in frames 0-12 (amodal bottom extrapolated, about 16 px below the image at f0)",
+   "track": "tracks/forklift.csv"
+  },
+  "red_car": {
+   "description": "red sports car (Ferrari LaFerrari-like), black roof/windows, seen from the rear-left; farther from camera than the forklift, passes behind it",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "truncated_by_frame": "right/bottom cut by image border in frames 0-20",
+   "first_frame_touching_forklift_in_image": 23,
+   "occluded_by_forklift_frames": [
+    38,
+    71
+   ],
+   "track": "tracks/red_car.csv"
+  },
+  "ground_plane": {
+   "description": "invisible ground (same colour as backdrop); only soft shadows under the vehicles",
+   "moves": false
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time_s": 0.0,
+   "event": "clip start: both vehicles at rest (frames 0 and 1 identical inside both object regions)"
+  },
+  {
+   "frame": 2,
+   "time_s": 0.0833,
+   "event": "both vehicles start moving between frame 1 and frame 2 (first non-zero frame difference); both then speed up (image step grows), both move away from the camera towards the upper left"
+  },
+  {
+   "frame": 23,
+   "time_s": 0.9583,
+   "event": "car silhouette first touches the forklift silhouette in the image (car is behind, no 3D contact seen)"
+  },
+  {
+   "frame": 38,
+   "time_s": 1.5833,
+   "event": "car starts being partly hidden behind the forklift (visible_fraction < 0.97)"
+  },
+  {
+   "frame": 71,
+   "time_s": 2.9583,
+   "event": "clip end: car partly hidden behind the forklift overhead guard, both still moving"
+  }
+ ],
+ "sizes_at_selected_frames_px": {
+  "forklift": {
+   "0": {
+    "ref_x": 1468.0,
+    "ref_y": 1092.2,
+    "amodal_w": 696.0,
+    "amodal_h": 728.4,
+    "bbox_w": 696.0,
+    "bbox_h": 712.0,
+    "mask_len_main_axis": 805.7,
+    "mask_width_across": 640.3,
+    "amodal_scale": 1.0331
+   },
+   "18": {
+    "ref_x": 1398.0,
+    "ref_y": 1052.0,
+    "amodal_w": 668.0,
+    "amodal_h": 712.0,
+    "bbox_w": 668.0,
+    "bbox_h": 712.0,
+    "mask_len_main_axis": 776.7,
+    "mask_width_across": 620.2,
+    "amodal_scale": 1.0
+   },
+   "36": {
+    "ref_x": 1210.0,
+    "ref_y": 932.0,
+    "amodal_w": 588.0,
+    "amodal_h": 644.0,
+    "bbox_w": 588.0,
+    "bbox_h": 644.0,
+    "mask_len_main_axis": 703.3,
+    "mask_width_across": 558.7,
+    "amodal_scale": 0.9071
+   },
+   "54": {
+    "ref_x": 953.0,
+    "ref_y": 770.0,
+    "amodal_w": 490.0,
+    "amodal_h": 556.0,
+    "bbox_w": 490.0,
+    "bbox_h": 556.0,
+    "mask_len_main_axis": 592.4,
+    "mask_width_across": 472.9,
+    "amodal_scale": 0.7891
+   },
+   "71": {
+    "ref_x": 689.0,
+    "ref_y": 596.0,
+    "amodal_w": 398.0,
+    "amodal_h": 492.0,
+    "bbox_w": 398.0,
+    "bbox_h": 492.0,
+    "mask_len_main_axis": 523.2,
+    "mask_width_across": 386.1,
+    "amodal_scale": 0.6814
+   }
+  },
+  "red_car": {
+   "0": {
+    "ref_x": 2438.0,
+    "ref_y": 1345.9,
+    "amodal_w": 964.2,
+    "amodal_h": 528.3,
+    "bbox_w": 604.0,
+    "bbox_h": 358.0,
+    "mask_len_main_axis": 652.8,
+    "mask_width_across": 372.4,
+    "amodal_scale": 1.2526
+   },
+   "24": {
+    "ref_x": 2031.2,
+    "ref_y": 1137.1,
+    "amodal_w": 795.2,
+    "amodal_h": 435.8,
+    "bbox_w": 792.0,
+    "bbox_h": 438.0,
+    "mask_len_main_axis": 825.8,
+    "mask_width_across": 396.2,
+    "amodal_scale": 1.0327
+   },
+   "26": {
+    "ref_x": 1971.4,
+    "ref_y": 1104.9,
+    "amodal_w": 770.0,
+    "amodal_h": 422.0,
+    "bbox_w": 770.0,
+    "bbox_h": 422.0,
+    "mask_len_main_axis": 803.2,
+    "mask_width_across": 386.8,
+    "amodal_scale": 1.0
+   },
+   "36": {
+    "ref_x": 1641.8,
+    "ref_y": 930.3,
+    "amodal_w": 642.5,
+    "amodal_h": 352.2,
+    "bbox_w": 656.0,
+    "bbox_h": 346.0,
+    "mask_len_main_axis": 673.3,
+    "mask_width_across": 338.0,
+    "amodal_scale": 0.8343
+   },
+   "54": {
+    "ref_x": 1031.0,
+    "ref_y": 623.5,
+    "amodal_w": 470.4,
+    "amodal_h": 258.0,
+    "bbox_w": 444.0,
+    "bbox_h": 232.0,
+    "mask_len_main_axis": 442.1,
+    "mask_width_across": 230.6,
+    "amodal_scale": 0.6104
+   },
+   "71": {
+    "ref_x": 545.7,
+    "ref_y": 372.2,
+    "amodal_w": 359.1,
+    "amodal_h": 197.1,
+    "bbox_w": 336.0,
+    "bbox_h": 162.0,
+    "mask_len_main_axis": 335.1,
+    "mask_width_across": 159.2,
+    "amodal_scale": 0.4657
+   }
+  }
+ },
+ "notes": "scene/notes.md"
+}

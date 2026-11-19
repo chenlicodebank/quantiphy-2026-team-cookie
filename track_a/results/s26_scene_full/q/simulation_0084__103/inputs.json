@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0084.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 103,
+  "question": "What is the width of the yellow car in meters?",
+  "prior": "speed of the yellow car = 5.07m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

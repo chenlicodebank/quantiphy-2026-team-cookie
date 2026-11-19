@@ -1,0 +1,203 @@
+{
+ "video": "simulation_0162.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 100,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame = round(t*24); frame 0 at t=0",
+ "units": "pixels (image coords, x right, y down) and seconds; no metric scale recorded",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of rows 200-560 (wall/rail, never crossed by the ball) vs frame 0: |shift| < 0.01 px in every frame",
+  "per_frame_shift_px": "columns cam_dx, cam_dy in tracks/ball.csv (all ~0)",
+  "perspective": "side view of a horizontal lane; all scene structures are horizontal bands with constant row over the full width (lane top edge at y=639 for every column) -> no visible horizontal perspective/tilt; camera looks slightly down onto the lane top (ball contact point y~688 lies inside the white lane band 640-737). Motion is a horizontal line at constant image row: treat as planar, one m/px scale."
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "description": "dark blue marbled sphere (sole moving object), rolls left to right on the white lane",
+   "moves": true,
+   "track": "tracks/ball.csv",
+   "visible_frames": [
+    9,
+    96
+   ],
+   "fully_visible_frames": [
+    19,
+    92
+   ],
+   "partially_visible_frames": "9-16 entering at left edge (frames 17-18 flagged because the trailing shadow touches x=0; ball itself is fully inside), 93-96 leaving at right edge (93 flagged by shadow/blur only)",
+   "reference_point": "centre of the fitted circle (cx, cy) = sphere centre = object origin",
+   "diameter_px": {
+    "median": 81.57,
+    "min": 80.16,
+    "max": 84.72,
+    "best_estimate": 81.5,
+    "uncertainty": 1.0,
+    "note": "circle fit to mask rim above the shadow (frames 19-92); mid-video frames 40-80 give 80.2-81.8; frames 19-33 and 82-92 fit up to 84-85 (texture/blur at rim). Vertical extent of the mask at frame 48: y 607..688 (~81-82 px). Edge-cut frames use fixed r=40.6."
+   },
+   "length_px": "= diameter (sphere): ~81 px; width and height likewise ~81 px",
+   "image_row_cy_px": {
+    "mean": 647.37,
+    "min": 646.04,
+    "max": 649.29,
+    "note": "cy wobbles +-1.5 px with ~10-frame period (rim texture of the rolling ball); real vertical motion is nil -> motion is purely horizontal"
+   },
+   "x_range_px": [
+    -33.26,
+    1950.54
+   ],
+   "per_frame_step_px": {
+    "frames_9_to_10": 8.13,
+    "frames_20_to_21": 15.13,
+    "frames_50_to_51": 25.23,
+    "frames_90_to_91": 28.39,
+    "note": "ball speeds up throughout: pixel step grows from ~8 px/frame (frame 10) to ~29 px/frame (frame 95); increase is fastest early and slows later. Per-frame noise of cx ~ +-1 px."
+   }
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "back_wall_upper",
+   "description": "light grey-blue wall",
+   "rows_y": [
+    0,
+    238
+   ],
+   "x": [
+    0,
+    1919
+   ]
+  },
+  {
+   "name": "back_wall_lower",
+   "description": "pinkish-beige wall section",
+   "rows_y": [
+    238,
+    490
+   ],
+   "x": [
+    0,
+    1919
+   ]
+  },
+  {
+   "name": "upper_rail",
+   "description": "thin beige rail/ledge with highlight at y~496",
+   "rows_y": [
+    490,
+    516
+   ],
+   "height_px": 26
+  },
+  {
+   "name": "upper_black_gap",
+   "description": "black stripe under upper rail",
+   "rows_y": [
+    517,
+    527
+   ],
+   "height_px": 11
+  },
+  {
+   "name": "back_ledge",
+   "description": "beige textured ledge behind the lane (bright line at y 528, highlight ~590)",
+   "rows_y": [
+    528,
+    619
+   ],
+   "height_px": 92
+  },
+  {
+   "name": "back_gutter",
+   "description": "black stripe directly behind the lane (top edge of lane)",
+   "rows_y": [
+    620,
+    639
+   ],
+   "height_px": 20
+  },
+  {
+   "name": "lane",
+   "description": "white/light-grey flat lane surface the ball rolls on; spans full image width (length >= 1920 px, ends not visible)",
+   "rows_y": [
+    640,
+    737
+   ],
+   "apparent_depth_band_px": 98,
+   "x": [
+    0,
+    1919
+   ]
+  },
+  {
+   "name": "front_ledge",
+   "description": "beige textured front ledge/bumper of the lane (highlight y~770)",
+   "rows_y": [
+    738,
+    817
+   ],
+   "height_px": 80
+  },
+  {
+   "name": "front_black_band",
+   "description": "black band under the front ledge",
+   "rows_y": [
+    818,
+    863
+   ],
+   "height_px": 46
+  },
+  {
+   "name": "floor",
+   "description": "light wooden plank floor (bright edge line y 864-869)",
+   "rows_y": [
+    864,
+    1079
+   ]
+  },
+  {
+   "name": "ball_shadow",
+   "description": "soft contact shadow of the ball on the lane, below/right of the ball (moves with it); excluded from the ball fit"
+  }
+ ],
+ "events": [
+  {
+   "event": "ball first visible (enters at left edge, already moving)",
+   "frame": 9,
+   "time_s": 0.375
+  },
+  {
+   "event": "ball fully in view",
+   "frame": 17,
+   "time_s": 0.7083
+  },
+  {
+   "event": "ball begins leaving at right edge",
+   "frame": 94,
+   "time_s": 3.9167
+  },
+  {
+   "event": "ball last visible",
+   "frame": 96,
+   "time_s": 4.0
+  },
+  {
+   "event": "no bounce, impact, contact with another object or direction change; ball moves monotonically +x at constant row while accelerating",
+   "frame": null
+  },
+  {
+   "event": "start of motion not seen (ball enters moving, ~8 px/frame); end of motion not seen (leaves at ~29 px/frame)",
+   "frame": null
+  }
+ ],
+ "files": {
+  "tracks": [
+   "tracks/ball.csv"
+  ],
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

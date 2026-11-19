@@ -1,0 +1,503 @@
+{
+ "video": "simulation_0066_segmented.mp4",
+ "source": "segmentation",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t=0",
+ "units": "pixels (x right, y down) and seconds; no metric scale",
+ "background": "pure white (segmentation video); only objects and some ground pieces are visible",
+ "camera": {
+  "static": true,
+  "evidence": "phase correlation of 3 static patches vs frame 0: |shift| <= 0.53 px all frames (camera_shift.csv)",
+  "perspective": "3D, camera looks down onto the ground; far objects higher in image (green sedan bottom y=415, ground patches y~270-345), near objects low (purple sedan, sidewalk). Horizon is above the frame top. Car long axes on the ground: purple sedan -15 deg, green sedan -7 deg, van 32-35 deg (image angles, y down). The van approaching the camera grows 4.5x in length (173->774 px), cyclist ~3x, taxi grows and rotates, pedestrian ~constant (bh 91->100 px)."
+ },
+ "objects": {
+  "pedestrian": {
+   "moving": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/pedestrian.csv",
+   "desc": "walking man, light-grey top, dark trousers; upper-left middle of frame, walks right-to-left (image), roughly parallel to the image plane, slightly toward camera",
+   "ref_point": "mask centroid cx,cy ~ pelvis/hip height (sim origin = pelvis); bbox y0 = head top, y1 = lowest foot",
+   "first": {
+    "cx": 478.0,
+    "cy": 422.5
+   },
+   "last": {
+    "cx": 250.7,
+    "cy": 452.8
+   },
+   "apparent_size_px": {
+    "0": {
+     "bw": 49.0,
+     "bh": 91.0,
+     "L": 98.5,
+     "Wd": 32.1
+    },
+    "12": {
+     "bw": 68.0,
+     "bh": 83.0,
+     "L": 101.6,
+     "Wd": 42.2
+    },
+    "24": {
+     "bw": 63.0,
+     "bh": 90.0,
+     "L": 102.8,
+     "Wd": 52.8
+    },
+    "36": {
+     "bw": 57.0,
+     "bh": 96.0,
+     "L": 102.9,
+     "Wd": 35.9
+    },
+    "48": {
+     "bw": 75.0,
+     "bh": 97.0,
+     "L": 103.9,
+     "Wd": 49.7
+    },
+    "60": {
+     "bw": 81.0,
+     "bh": 95.0,
+     "L": 114.5,
+     "Wd": 55.8
+    },
+    "66": {
+     "bw": 69.0,
+     "bh": 95.0,
+     "L": 105.7,
+     "Wd": 37.5
+    },
+    "71": {
+     "bw": 72.0,
+     "bh": 100.0,
+     "L": 111.9,
+     "Wd": 47.0
+    }
+   }
+  },
+  "taxi": {
+   "moving": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/taxi.csv",
+   "desc": "yellow taxi (roof sign), starts left of the van facing the camera, turns to its right (image: heads toward camera then leftward) and ends side-on above the purple sedan",
+   "ref_point": "mask centroid (vehicle root ~ centre of body); bbox, L = length along principal axis",
+   "first": {
+    "cx": 900.9,
+    "cy": 380.6
+   },
+   "last": {
+    "cx": 335.2,
+    "cy": 566.2
+   },
+   "apparent_size_px": {
+    "0": {
+     "bw": 128.0,
+     "bh": 104.0,
+     "L": 144.1,
+     "Wd": 98.5
+    },
+    "12": {
+     "bw": 111.0,
+     "bh": 118.0,
+     "L": 134.4,
+     "Wd": 109.0
+    },
+    "24": {
+     "bw": 181.0,
+     "bh": 134.0,
+     "L": 205.2,
+     "Wd": 123.8
+    },
+    "36": {
+     "bw": 303.0,
+     "bh": 152.0,
+     "L": 313.9,
+     "Wd": 118.8
+    },
+    "48": {
+     "bw": 368.0,
+     "bh": 157.0,
+     "L": 377.3,
+     "Wd": 122.4
+    },
+    "60": {
+     "bw": 421.0,
+     "bh": 166.0,
+     "L": 431.2,
+     "Wd": 133.4
+    },
+    "66": {
+     "bw": 448.0,
+     "bh": 171.0,
+     "L": 459.0,
+     "Wd": 137.2
+    },
+    "71": {
+     "bw": 472.0,
+     "bh": 176.0,
+     "L": 484.9,
+     "Wd": 140.6
+    }
+   }
+  },
+  "van": {
+   "moving": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/van.csv",
+   "desc": "white cargo van (Chevrolet-style, red-brown windows), starts top-centre, drives toward the camera down-right along image direction ~32 deg below +x, strongly growing (4.5x)",
+   "ref_point": "mask centroid of the van silhouette (cyclist pixels removed)",
+   "first": {
+    "cx": 1024.6,
+    "cy": 323.5
+   },
+   "last": {
+    "cx": 1755.1,
+    "cy": 773.8
+   },
+   "apparent_size_px": {
+    "0": {
+     "bw": 149.0,
+     "bh": 127.0,
+     "L": 172.6,
+     "Wd": 111.9
+    },
+    "12": {
+     "bw": 154.0,
+     "bh": 129.0,
+     "L": 179.8,
+     "Wd": 115.0
+    },
+    "24": {
+     "bw": 168.0,
+     "bh": 147.0,
+     "L": 192.6,
+     "Wd": 120.4
+    },
+    "36": {
+     "bw": 194.0,
+     "bh": 169.0,
+     "L": 222.4,
+     "Wd": 131.3
+    },
+    "48": {
+     "bw": 246.0,
+     "bh": 204.0,
+     "L": 280.6,
+     "Wd": 157.2
+    },
+    "60": {
+     "bw": 364.0,
+     "bh": 286.0,
+     "L": 409.3,
+     "Wd": 203.6
+    },
+    "66": {
+     "bw": 494.0,
+     "bh": 379.0,
+     "L": 548.5,
+     "Wd": 249.4
+    },
+    "71": {
+     "bw": 700.0,
+     "bh": 536.0,
+     "L": 774.5,
+     "Wd": 312.3
+    }
+   }
+  },
+  "cyclist": {
+   "moving": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/cyclist.csv",
+   "desc": "person in dark jacket and blue jeans on a black bicycle, rides alongside the van on its left (image: in front of the van lower-left corner), same direction as the van",
+   "ref_point": "mask centroid of bike+legs (head/shoulders often missing, see head_top_y); bottom_y = lowest wheel point",
+   "first": {
+    "cx": 977.0,
+    "cy": 374.9
+   },
+   "last": {
+    "cx": 1524.2,
+    "cy": 822.3
+   },
+   "apparent_size_px": {
+    "0": {
+     "bw": 30.0,
+     "bh": 52.0,
+     "L": 57.4,
+     "Wd": 29.6
+    },
+    "12": {
+     "bw": 35.0,
+     "bh": 57.0,
+     "L": 61.9,
+     "Wd": 31.7
+    },
+    "24": {
+     "bw": 41.0,
+     "bh": 73.0,
+     "L": 79.3,
+     "Wd": 42.7
+    },
+    "36": {
+     "bw": 53.0,
+     "bh": 91.0,
+     "L": 97.0,
+     "Wd": 52.9
+    },
+    "48": {
+     "bw": 75.0,
+     "bh": 121.0,
+     "L": 132.6,
+     "Wd": 69.0
+    },
+    "60": {
+     "bw": 101.0,
+     "bh": 139.0,
+     "L": 144.5,
+     "Wd": 85.6
+    },
+    "66": {
+     "bw": 128.0,
+     "bh": 155.0,
+     "L": 167.2,
+     "Wd": 105.3
+    },
+    "71": {
+     "bw": 152.0,
+     "bh": 175.0,
+     "L": 198.9,
+     "Wd": 119.0
+    }
+   },
+   "apparent_full_height_px_(head_top_to_wheel)": {
+    "0": 72.0,
+    "12": 77.4,
+    "24": 94.0,
+    "36": 105.3,
+    "48": 121.0,
+    "60": 161.7,
+    "66": 170.1,
+    "71": 191.0
+   }
+  },
+  "ground_patch_right": {
+   "moving": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "desc": "flat brown rectangular ground patch, far upper right",
+   "measured_on": "background (frame 0)",
+   "centroid": [
+    1789.0,
+    269.9
+   ],
+   "bbox": [
+    1746,
+    258,
+    1834,
+    281
+   ],
+   "bw": 89,
+   "bh": 24,
+   "L_principal": 88.9,
+   "W_across": 24.3,
+   "axis_deg": 5.2,
+   "area": 1286,
+   "lowest_point": [
+    1784.0,
+    281
+   ]
+  },
+  "ground_patch_left": {
+   "moving": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "desc": "flat brown/red rectangular ground patch (manhole/mat), left of the green sedan",
+   "measured_on": "background (frame 0)",
+   "centroid": [
+    1371.5,
+    330.2
+   ],
+   "bbox": [
+    1320,
+    316,
+    1419,
+    345
+   ],
+   "bw": 100,
+   "bh": 30,
+   "L_principal": 100.2,
+   "W_across": 30.5,
+   "axis_deg": 3.5,
+   "area": 1974,
+   "lowest_point": [
+    1370.5,
+    345
+   ]
+  },
+  "green_sedan": {
+   "moving": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "desc": "teal-green sedan, upper right (far), parked",
+   "measured_on": "background (frame 0)",
+   "centroid": [
+    1531.5,
+    373.6
+   ],
+   "bbox": [
+    1440,
+    333,
+    1626,
+    415
+   ],
+   "bw": 187,
+   "bh": 83,
+   "L_principal": 188.6,
+   "W_across": 80.5,
+   "axis_deg": -7.3,
+   "area": 10112,
+   "lowest_point": [
+    1510.0,
+    415
+   ]
+  },
+  "purple_sedan": {
+   "moving": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "desc": "large purple/violet sedan, lower-left foreground, parked, cut by the left image edge (x=3); a translucent grey human-like figure is rendered inside it near the windshield (x~380-450, y~650-760), static",
+   "measured_on": "background (frame 0)",
+   "centroid": [
+    294.1,
+    765.7
+   ],
+   "bbox": [
+    3,
+    648,
+    599,
+    903
+   ],
+   "bw": 597,
+   "bh": 256,
+   "L_principal": 628.8,
+   "W_across": 196.2,
+   "axis_deg": -15.0,
+   "area": 89476,
+   "lowest_point": [
+    16.5,
+    903
+   ]
+  },
+  "sidewalk_corner": {
+   "moving": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "desc": "beige paved sidewalk corner with a white line/slot, bottom centre, cut by the bottom edge",
+   "measured_on": "background (frame 0)",
+   "centroid": [
+    889.5,
+    1010.7
+   ],
+   "bbox": [
+    496,
+    896,
+    1143,
+    1076
+   ],
+   "bw": 648,
+   "bh": 181,
+   "L_principal": 644.3,
+   "W_across": 199.4,
+   "axis_deg": -6.8,
+   "area": 63935,
+   "lowest_point": [
+    820.0,
+    1076
+   ]
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "frames 0 and 1 are almost identical (all objects step <= 0.6 px); motion of every moving object starts between frame 1 and 2 (t=0.042-0.083 s)"
+  },
+  {
+   "frame": 1,
+   "t": 0.0417,
+   "what": "start of motion (all four moving objects)"
+  },
+  {
+   "frames": [
+    6,
+    36
+   ],
+   "what": "taxi turns: image direction of motion ~117-135 deg (toward camera, down-left) at frames 6-12, then 150-160 deg by frame 24-36 and ~170 deg (leftward) after frame 54; its principal axis rotates from +36 deg (seen nose-on) to -12 deg (side view)"
+  },
+  {
+   "frames": [
+    0,
+    71
+   ],
+   "what": "van: monotonically accelerating in image (centroid step 0.2 px/frame at f1 to 67 px/frame at f70), straight line ~32 deg"
+  },
+  {
+   "frames": [
+    0,
+    71
+   ],
+   "what": "cyclist: straight path ~37 deg, image speed 3-5 px/frame early to ~25 px/frame at end; moves from beside the van rear-left (f0) to ahead of its front-left wheel (f20+); overlaps the van in image every frame"
+  },
+  {
+   "frames": [
+    0,
+    71
+   ],
+   "what": "pedestrian walks steadily leftward, ~3.6 px/frame centroid (gait jitter +-1.5 px)"
+  },
+  {
+   "frames": [
+    56,
+    71
+   ],
+   "what": "pedestrian bbox touches taxi bbox in image (pedestrian feet just above taxi roof); masks stay separate; no contact"
+  },
+  {
+   "what": "no bounces, impacts or releases observed"
+  }
+ ],
+ "files": {
+  "tracks": "tracks/<object>.csv",
+  "camera": "camera_shift.csv",
+  "overlay": "check_overlay.jpg",
+  "scripts": "scripts/",
+  "notes": "notes.md"
+ }
+}

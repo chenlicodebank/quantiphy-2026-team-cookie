@@ -1,0 +1,18 @@
+{
+ "video": "internet_0009.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 59.826879,
+ "frames": 111,
+ "duration_s": 1.8554,
+ "width": 2160,
+ "height": 3840,
+ "question": {
+  "id": 2048,
+  "question": "What is the average velocity of the tennis ball flying across the net in m/s?",
+  "prior": "singles court width = 8.23m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 60.0
+ }
+}

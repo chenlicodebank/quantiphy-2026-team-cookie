@@ -1,0 +1,463 @@
+{
+ "video": "simulation_0024.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "size_px": [
+  960,
+  960
+ ],
+ "time_convention": "t = frame / 25; frame 0 = t 0",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of rock/sand region vs frame 0: shift <= 0.02 px beyond a constant 0.5 px estimator bias (also present at frame 0) over all 75 frames",
+  "view": "elevated oblique view looking down onto a beach/sea; no horizon or sky visible (top of frame is sand); deck of the boat visible from above",
+  "perspective_cues": "ground = sea surface (lower half) and sand beach (upper half); image y increases toward the camera. The boat drifts up the image (hull centre y 600.5 -> 582.5) while its pixel size shrinks ~2% (hull length 396 -> 388 px, full height 362 -> 353 px): it recedes slightly from the camera while travelling right-to-left. No vanishing points measurable (no straight parallel lines)."
+ },
+ "objects": {
+  "boat": {
+   "desc": "red-and-white fishing boat (red hull with white sheer stripe and name \"AH805\", white wheelhouse with red roof, white mast with black light/antenna, white stern rail, black post aft of wheelhouse). Only moving object.",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "clipped_frames": [
+    0,
+    1
+   ],
+   "heading": "bow points image-left; travels bow-first to the left, roughly broadside to the camera (port/starboard side with the name faces camera), slightly away from camera",
+   "track_file": "tracks/boat.csv",
+   "first_full_frame": {
+    "frame": 2,
+    "t": 0.08,
+    "hull_cx": 753.5,
+    "hull_cy": 599.5,
+    "hull_x0": 556,
+    "hull_x1": 951,
+    "hull_y0": 544,
+    "hull_y1": 655,
+    "hull_len_px": 396,
+    "hull_h_px": 112,
+    "bbox_x0": 556,
+    "bbox_y0": 306,
+    "bbox_x1": 956,
+    "bbox_y1": 666,
+    "bbox_w_px": 401,
+    "bbox_h_px": 361,
+    "mast_top_x": 733.5,
+    "mast_top_y": 306,
+    "keel_y": 666,
+    "bow_x": 556,
+    "bow_y": 546.5,
+    "stern_x": 951,
+    "stern_y": 619.5
+   },
+   "mid_frame": {
+    "frame": 37,
+    "t": 1.48,
+    "hull_cx": 527.5,
+    "hull_cy": 590.5,
+    "hull_x0": 332,
+    "hull_x1": 723,
+    "hull_y0": 536,
+    "hull_y1": 645,
+    "hull_len_px": 392,
+    "hull_h_px": 110,
+    "bbox_x0": 332,
+    "bbox_y0": 299,
+    "bbox_x1": 728,
+    "bbox_y1": 657,
+    "bbox_w_px": 397,
+    "bbox_h_px": 359,
+    "mast_top_x": 503.5,
+    "mast_top_y": 299,
+    "keel_y": 657,
+    "bow_x": 332,
+    "bow_y": 537.5,
+    "stern_x": 723,
+    "stern_y": 609.5
+   },
+   "last_frame": {
+    "frame": 74,
+    "t": 2.96,
+    "hull_cx": 291.5,
+    "hull_cy": 582.5,
+    "hull_x0": 98,
+    "hull_x1": 485,
+    "hull_y0": 528,
+    "hull_y1": 637,
+    "hull_len_px": 388,
+    "hull_h_px": 110,
+    "bbox_x0": 98,
+    "bbox_y0": 291,
+    "bbox_x1": 490,
+    "bbox_y1": 643,
+    "bbox_w_px": 393,
+    "bbox_h_px": 353,
+    "mast_top_x": 262.0,
+    "mast_top_y": 291,
+    "keel_y": 643,
+    "bow_x": 98,
+    "bow_y": 529.5,
+    "stern_x": 485,
+    "stern_y": 601.5
+   },
+   "apparent_size_trend": {
+    "2": {
+     "hull_len_px": 396,
+     "hull_h_px": 112,
+     "bbox_w_px": 401,
+     "bbox_h_px": 361
+    },
+    "20": {
+     "hull_len_px": 392,
+     "hull_h_px": 110,
+     "bbox_w_px": 397,
+     "bbox_h_px": 359
+    },
+    "37": {
+     "hull_len_px": 392,
+     "hull_h_px": 110,
+     "bbox_w_px": 397,
+     "bbox_h_px": 359
+    },
+    "55": {
+     "hull_len_px": 390,
+     "hull_h_px": 110,
+     "bbox_w_px": 395,
+     "bbox_h_px": 356
+    },
+    "74": {
+     "hull_len_px": 388,
+     "hull_h_px": 110,
+     "bbox_w_px": 393,
+     "bbox_h_px": 353
+    }
+   },
+   "part_offsets_px_at_frame37": {
+    "mast_top_minus_hull_cx_x": -24.0,
+    "roof_centre": [
+     493.3,
+     484.7
+    ]
+   }
+  },
+  "rock": {
+   "desc": "large pale boulder/rock outcrop on the sand, top-centre/right; lit white top, dark brown shaded right/front face",
+   "moves": false,
+   "bbox_px_visual": [
+    327,
+    25,
+    955,
+    308
+   ],
+   "width_px": 628,
+   "height_px": 283,
+   "auto_mask_convex_hull": {
+    "bbox": [
+     334,
+     26,
+     955,
+     276
+    ],
+    "width_px": 622,
+    "height_px": 251,
+    "centroid": [
+     643.0,
+     147.4
+    ],
+    "area_px": 105770,
+    "min_area_rect": {
+     "center": [
+      644.5,
+      148.2
+     ],
+     "size": [
+      211.4,
+      617.2
+     ],
+     "angle_deg": -80.5
+    }
+   },
+   "note": "auto mask (bright/dark pixels, convex hull) misses the shaded cliff foot (y 276-308); bbox_px_visual read from gridded frame 0, +-5 px. Right end near x 950 merges with sand/foam."
+  },
+  "sand_beach": {
+   "desc": "pink-beige sand covering the upper half; dry-sand edge meets shallow translucent water",
+   "moves": false,
+   "dry_sand_edge_px_visual": [
+    [
+     0,
+     435
+    ],
+    [
+     145,
+     470
+    ],
+    [
+     150,
+     500
+    ],
+    [
+     350,
+     525
+    ],
+    [
+     530,
+     530
+    ],
+    [
+     650,
+     495
+    ],
+    [
+     720,
+     470
+    ],
+    [
+     800,
+     430
+    ],
+    [
+     830,
+     375
+    ],
+    [
+     880,
+     350
+    ],
+    [
+     885,
+     300
+    ],
+    [
+     945,
+     240
+    ]
+   ],
+   "water_colour_onset_px_auto": [
+    [
+     0,
+     552
+    ],
+    [
+     20,
+     550
+    ],
+    [
+     40,
+     546
+    ],
+    [
+     60,
+     564
+    ],
+    [
+     80,
+     548
+    ],
+    [
+     100,
+     548
+    ],
+    [
+     120,
+     572
+    ],
+    [
+     140,
+     570
+    ],
+    [
+     160,
+     574
+    ],
+    [
+     180,
+     572
+    ],
+    [
+     200,
+     588
+    ],
+    [
+     220,
+     588
+    ],
+    [
+     240,
+     562
+    ],
+    [
+     260,
+     570
+    ],
+    [
+     280,
+     582
+    ],
+    [
+     300,
+     582
+    ],
+    [
+     320,
+     576
+    ],
+    [
+     340,
+     604
+    ],
+    [
+     360,
+     600
+    ],
+    [
+     380,
+     602
+    ],
+    [
+     400,
+     602
+    ],
+    [
+     420,
+     602
+    ],
+    [
+     440,
+     600
+    ],
+    [
+     460,
+     586
+    ],
+    [
+     480,
+     610
+    ],
+    [
+     500,
+     608
+    ],
+    [
+     520,
+     604
+    ],
+    [
+     540,
+     630
+    ],
+    [
+     560,
+     602
+    ],
+    [
+     580,
+     600
+    ],
+    [
+     600,
+     620
+    ],
+    [
+     620,
+     620
+    ],
+    [
+     640,
+     600
+    ],
+    [
+     660,
+     598
+    ],
+    [
+     680,
+     596
+    ],
+    [
+     700,
+     596
+    ],
+    [
+     720,
+     572
+    ],
+    [
+     740,
+     549
+    ],
+    [
+     760,
+     544
+    ],
+    [
+     780,
+     533
+    ],
+    [
+     800,
+     506
+    ],
+    [
+     820,
+     502
+    ],
+    [
+     840,
+     498
+    ],
+    [
+     860,
+     498
+    ],
+    [
+     880,
+     488
+    ],
+    [
+     900,
+     448
+    ],
+    [
+     920,
+     450
+    ],
+    [
+     940,
+     370
+    ]
+   ]
+  },
+  "sea": {
+   "desc": "green animated water (waves) covering the lower half; boat wake/shadow behind (right of) the stern",
+   "moves": "surface animated (not an object)"
+  }
+ },
+ "events": [
+  {
+   "event": "boat already moving at frame 0; enters fully into view (stern leaves the right image edge) at frame 2",
+   "frame": 2,
+   "t": 0.08
+  },
+  {
+   "event": "boat moves steadily left the whole clip; no start, stop, turn, contact or direction change observed",
+   "frames": [
+    0,
+    74
+   ]
+  },
+  {
+   "event": "boat still moving at last frame",
+   "frame": 74,
+   "t": 2.96
+  }
+ ],
+ "files": {
+  "tracks/boat.csv": "per-frame boat measurements",
+  "notes.md": "methods and reliability",
+  "scripts/": "all measurement scripts"
+ }
+}

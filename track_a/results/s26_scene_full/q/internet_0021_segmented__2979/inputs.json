@@ -1,0 +1,18 @@
+{
+ "video": "internet_0021_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2SS",
+ "fps": 29.970629,
+ "frames": 107,
+ "duration_s": 3.5702,
+ "width": 850,
+ "height": 478,
+ "question": {
+  "id": 2979,
+  "question": "What is the distance between the airplane and the roof top at 0s in meters?",
+  "prior": "length of the airplane = 40m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

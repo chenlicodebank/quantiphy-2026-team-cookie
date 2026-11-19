@@ -1,0 +1,50 @@
+{
+  "video": "simulation_0184.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 45,
+  "duration_s": 1.875,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame/24; frame = round(t*24)",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase-correlation shift of wall region vs frame 0 < 0.01 px for all frames; mean abs diff of untouched regions f0 vs f44 < 1.1 grey levels",
+    "perspective_cues": "Inside view of a block-wall warehouse corner. Blue roller conveyor ramp runs from upper-left (~x 255, y 535) down to lower-right where it meets a wooden floor/pallet (~x 1420-1920, y 985-1080). Ramp far (upper) edge has image slope ~0.58 (30.3 deg below horizontal; points (700,539),(1300,889)); near (lower) edge slope ~0.66 (33.4 deg; points (300,620),(1000,~1080)); edges diverge toward lower-right, so the ramp descends roughly toward the camera. Wall faces camera nearly frontally (horizontal mortar lines). No horizon visible. Focal length unknown."
+  },
+  "objects": [
+    {
+      "name": "box",
+      "aka": ["green-and-black case", "crate", "toolbox", "battery/equipment box"],
+      "description": "Rectangular case, black sides with a green lid/top, labels 'D5', a red light on the top front. The ONLY moving object.",
+      "moves": true,
+      "visible_frames": [0, 44],
+      "track_file": "tracks/box.csv",
+      "reference_point": "cx,cy = centroid of the filled (convex-hull) silhouette; approximates the projected rigid-body centre (origin)",
+      "summary_px": {
+        "frame0": {"centroid": [584.5, 337.4], "bbox": [416, 241, 751, 431], "bbox_wh": [336, 191], "minrect_len_wid": [335.2, 187.3]},
+        "frame44": {"centroid": [1217.0, 917.7], "bbox": [1025, 752, 1415, 1079], "bbox_wh": [391, 328], "minrect_len_wid": [364.2, 231.3], "angle_deg": 30.5}
+      },
+      "apparent_size_change": "long-axis length 335 px (frames 0-8, falling, level) -> ~340-346 px (frames 14-28) -> ~352-364 px (frames 34-44): grows ~9% overall, i.e. box ends ~8% closer to camera than at start (if size taken as proxy of 1/depth). Width across grows more because of tilt (top face becomes visible)."
+    },
+    {"name": "conveyor", "description": "Blue roller conveyor ramp (inclined), carries the box after landing", "moves": false,
+     "image_extent_px": "from top-left end ~ (255,535) at shelf edge to bottom-right end ~ (1430,1080) where it reaches wooden floor; visible width across (perpendicular in image) ~ 85 px at x=300 growing to ~190 px near x=1000 (top edge->bottom edge vertical span 84 px at x=300, 216 px at x=500, 283 px at x=600 includes side face)",
+     "far_edge_points": [[700, 539], [800, 586], [900, 652], [1000, 707], [1100, 769], [1200, 830], [1300, 889]],
+     "note": "upper-left part between x~300-700 is the flat/top area seen at y~536-543 (ramp starts near shelf); the far edge becomes the slope line from x~750"},
+    {"name": "conveyor_support_leg", "description": "Dark blue vertical post under upper end of conveyor", "moves": false, "image_extent_px": {"x": [210, 290], "y": [540, 1080]}},
+    {"name": "shelf_with_cardboard_boxes", "description": "Upper-left: cardboard boxes ('PRODUCT OF ROME ITALY', 'SEEDLESS JAFFAS ZIMBABWE ORANGES') on a wooden shelf/platform", "moves": false, "image_extent_px": {"x": [0, 320], "y": [0, 540]}},
+    {"name": "warning_sign", "description": "Orange sign 'TAKE CARE WHEN STACKING CRATES' on the wall, right side", "moves": false, "image_extent_px": {"x": [1462, 1677], "y": [578, 790], "w": 216, "h": 213}},
+    {"name": "wooden_floor", "description": "Light wooden floor/pallet at bottom right where conveyor ends", "moves": false, "image_extent_px": {"x": [1420, 1920], "y": [985, 1080]}},
+    {"name": "wall", "description": "Grey concrete block wall forming background (corner at left near x~0-100)", "moves": false}
+  ],
+  "events": [
+    {"event": "start (box already in mid-air, at rest or near rest)", "frame": 0, "t": 0.0, "note": "centroid y moves 2.1 px f0->f1, increasing ~4 px/frame each frame: free fall from rest at ~frame 0"},
+    {"event": "free fall, vertical in image, box level (angle ~ -1 deg)", "frames": [0, 8]},
+    {"event": "first contact with conveyor (lower-left/back edge touches ramp)", "frame": 8, "t": 0.333, "note": "bbox bottom 551 at f8, 575 at f9; tilt starts f8 (1.9 deg) -> f9 7.3 deg; uncertainty +-1 frame"},
+    {"event": "box tips/rotates to lie on the slope", "frames": [8, 14], "note": "angle 2 -> 32 deg; brief overshoot to ~34.5 deg f16-19"},
+    {"event": "impact settling / direction change: from falling to sliding along ramp", "frame": 13, "t": 0.542, "note": "centroid dy drops from ~22 px/frame (f12->13) to ~4 px/frame (f13->14)"},
+    {"event": "slides down the conveyor toward lower right, aligned with ramp (~30 deg), accelerating", "frames": [14, 44], "note": "centroid step grows from ~10 px/frame to ~34 px/frame"},
+    {"event": "end of video, box still sliding, near lower frame edge (bbox reaches y=1079 at f43-44)", "frame": 44, "t": 1.833}
+  ],
+  "files": {"track": "tracks/box.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

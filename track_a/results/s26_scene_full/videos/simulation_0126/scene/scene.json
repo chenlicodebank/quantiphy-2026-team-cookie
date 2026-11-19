@@ -1,0 +1,53 @@
+{
+ "video": "simulation_0126.mp4",
+ "source": "simulation",
+ "scene_type": "2D (top-down view of an air-hockey table; all motion in the table plane, which faces the camera)",
+ "fps": 24.0, "frames": 72, "duration_s": 3.0, "width": 1080, "height": 1790,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "pixel_coords": "x right, y down, origin top-left, full-resolution pixels",
+ "camera": {"motion": "static", "evidence": "background mean abs diff frame0 vs frame71 = 0.05 grey levels, phase-correlation shift (0.000, 0.001) px",
+            "perspective": "near-orthographic top-down; mallets (tall objects) show slight 3D shading of their handles but disk outlines are circular; one px scale applies to the whole table plane"},
+ "objects": {
+  "puck": {"desc": "orange disk, the only orange object", "moves": true, "visible_frames": "0-71",
+           "track": "tracks/puck.csv", "diameter_px": 63.5, "diameter_note": "mask bbox 63-64 px in every frame (no blur growth)",
+           "x_px": "constant 537.8 +- 0.1 (moves purely vertically in image)"},
+  "mallet_top": {"desc": "red mallet (striker) in the upper half, starts at (531.5, 534.5) above the puck", "moves": true, "visible_frames": "0-71",
+                 "track": "tracks/mallet_top.csv", "diameter_px": 113.5, "x_px": "constant 531.6"},
+  "mallet_bottom": {"desc": "red mallet in the lower half, right of centre, over the lower-right face-off circle", "moves": false, "visible_frames": "0-71",
+                    "track": "tracks/mallet_bottom.csv", "centre_px": [713.3, 1434.3], "diameter_px": 108,
+                    "diameter_note": "colour mask 106-110 px; rim on lower right is lighter so mask may be 2-5 px small; same physical size as mallet_top is likely (113 px)"},
+  "table_surface": {"desc": "light grey playing surface", "moves": false, "x_range_px": [102, 979], "y_range_px": [113, 1701],
+                    "width_px": 878, "length_px": 1588, "note": "x from blue-line extent (exact); y edges +-2 px (top edge from viewer, bottom edge 1700-1702)"},
+  "rails": {"desc": "black frame/rails around the table; bottom rail inner edge y~1701 is where the puck bounces", "moves": false},
+  "goal_top": {"desc": "light-blue semicircle at top edge", "bbox_px": [470, 115, 593, 153], "width_px": 124, "centre_x": 531.5},
+  "goal_bottom": {"desc": "light-blue semicircle at bottom edge (puck bounces just in front of it)", "bbox_px": [470, 1660, 593, 1700], "width_px": 124, "centre_x": 531.5},
+  "blue_line_top": {"y_px": 630.0, "thickness_px": 11, "x_range": [102, 979]},
+  "blue_line_bottom": {"y_px": 1183.0, "thickness_px": 11, "x_range": [102, 979]},
+  "blue_line_separation_px": 553.0,
+  "centre_red_dashed_line": {"y_px": 906.5, "thickness_px": 10},
+  "centre_circle": {"desc": "blue circle at table centre", "outer_bbox": [398, 780, 665, 1045], "outer_diameter_px": 267, "centre_px": [531.5, 912.5], "line_thickness_px": 5},
+  "left_half_circle": {"desc": "partial blue circle cut by left edge at y~906 (right edge x~175)"},
+  "faceoff_circles": {"desc": "4 red circles with hash marks; centres TL (313,298) TR (749,298) BL (313,1515) BR (749,1515)",
+                      "outer_diameter_px": 282, "line_thickness_px": 5,
+                      "centre_spacing_x_px": 436, "centre_spacing_y_px": 1217},
+  "neutral_zone_dots": {"desc": "4 red dots", "centres_px": [[314.2, 683.8], [749.3, 683.8], [314.1, 1129.2], [749.4, 1129.3]], "diameter_px": 18},
+  "scoreboard": {"desc": "small dark display on right rail around x 1005-1070, y 770-1050, digits '00 : 00' / '200'", "moves": false}
+ },
+ "events": [
+  {"frame": 0, "t": 0.0, "event": "all still (frames 0 and 1 identical)"},
+  {"frame": 1, "t": 0.0417, "event": "last still frame; puck and mallet_top both start moving between frames 1 and 2 (puck starts before any contact)"},
+  {"frame": 2, "t": 0.0833, "event": "first frame with motion: puck +24.6 px down, mallet_top +53.1 px down"},
+  {"frame": 5, "t": 0.2083, "event": "mallet_top reaches puck: centre gap 80.5 px < radii sum ~88.5 (frame 4 gap 94.6); contact frames 5-6; puck speed unchanged"},
+  {"frame": 6, "t": 0.25, "event": "mallet_top stops at (531.6, 753.3) and stays still to the end (decelerating frames 4-6: steps 53.2, 39.2, 15.1 px)"},
+  {"frame": 40, "t": 1.6667, "event": "puck lowest tracked position y=1672.6 (puck bottom edge 1703 = bottom rail)"},
+  {"frame": 40.55, "t": 1.690, "event": "estimated bounce on bottom rail between frames 40 and 41 (centre y~1686 at impact, by intersecting the in/out straight lines)"},
+  {"frame": 41, "t": 1.7083, "event": "first frame after bounce, puck moving up; steps ~9.4 px/frame afterwards (before: ~24.4 px/frame)"},
+  {"frame": 71, "t": 2.9583, "event": "end; puck at y=1383.2 still moving up"}
+ ],
+ "motion_summary_px": {
+  "puck_step_down_frames_2_40": "24.2-24.6 px/frame, mean 24.41 (constant velocity; 720.4 -> 1672.6 over 39 steps)",
+  "puck_step_up_frames_42_71": "9.1-9.6 px/frame, mean 9.34 (constant velocity; 1663.4 -> 1383.2 over 30 steps)",
+  "puck_step_frame_41": "9.19 px straight-line (frame 40 -> 41 spans the bounce; path length ~13.4 down + ~22.6 up = ~36 px)",
+  "mallet_top_steps": {"2": 53.08, "3": 58.26, "4": 53.20, "5": 39.22, "6": 15.13, "7+": 0}
+ }
+}

@@ -1,0 +1,5 @@
+{"answer": 1.75, "decision": "new", "follows": null,
+ "crux": "focal length (1000 px from the constant-Z depth pair vs 1075/1300 from treating Euclidean distance as Z) and stairs pixel extent (98 px members vs 108-110 px including jetty-aligned pale posts)",
+ "fault_found": "the blend's B input (C3) used f=1075 from Z=6.3 m (depth pair gives Z=5.85 m, f=1000) and averaged in the run; the A input (C1) counted pale posts centred on the jetty axis, 12 px off the stairs axis",
+ "closure_pct": -1.7, "confidence": "medium", "verified_previous": true,
+ "lesson": "When thin parts stand in front of the asked object, check whether they are centred on its axis or on a neighbouring object's axis before including them in its extent; a lateral offset that perspective cannot explain marks them as belonging to the other object."}

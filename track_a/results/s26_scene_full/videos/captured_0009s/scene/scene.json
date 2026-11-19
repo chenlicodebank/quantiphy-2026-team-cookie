@@ -1,0 +1,37 @@
+{
+  "video": "captured_0009s.mp4",
+  "source": "lab (captured; background replaced by a uniform green gradient with SAM2 - watermark 'Modified with Segment Anything 2 Demo' bottom-right, x 1030-1280, y 690-720)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0; container pts verified uniform (1/24 s steps)",
+  "camera": {
+    "motion": "static (background difference between consecutive frames < 0.5 grey levels; background is a synthetic replacement, so no real scene features remain)",
+    "intrinsics_lab": {"f_px": 762.8, "cx": 640, "cy": 360, "hfov_deg": 80, "note": "from benchmark convention f = 0.5959 x width"},
+    "perspective_cues": "No ground plane, horizon or vanishing points visible (background replaced). Only cue: ball apparent diameter shrinks from ~136 px (held, frame 0-27) to ~94-100 px at the bounce (frame 37-38), and grows back to ~110 px at the rebound apex (frame 46): the ball falls AWAY from the camera (camera looks down/forward at the floor)."
+  },
+  "objects": [
+    {
+      "name": "basketball",
+      "description": "orange basketball with black seams; the only object in the video. Held still (holder's hand removed by segmentation, leaving a cut-out 'bite' in the lower part of the ball), released, falls, bounces once off the (invisible) floor, rises to an apex and starts falling again.",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "partially_cut_frames": "0-31 (hand-removal mask cuts the lower part; frames 28-31 the ball is split into 2-3 pieces)",
+      "track": "tracks/basketball.csv",
+      "reference_point": "centre of a circle fitted to the outer ball contour (cx_fit, cy_fit) - the visible ball centre, robust to the cut-out",
+      "pixel_diameter": {"held_frames_0_26": 136.1, "range": "136 (held) -> 94-100 (bounce) -> 110 (apex frame 46-47)", "column": "diam_px_best"},
+      "depth_in_ball_diameters": {"held": 5.60, "bounce_f37": 8.1, "apex_f46": 6.96, "column": "Z_per_D / R_per_D (pinhole with f = 762.8 px; multiply by true diameter, or rescale with given depth_info)"}
+    }
+  ],
+  "static_objects": "none visible (background fully replaced; floor, holder and room are not visible). The floor is only implied by the bounce.",
+  "events": [
+    {"event": "ball held nearly still (slight drift up ~7 px between frames 0 and 26)", "frames": "0-26", "t": "0-1.083"},
+    {"event": "release / start of fall (last highest point is frame 26; frame 27 already 3.8 px lower; frame 28 +12 px)", "frame": 26, "t": 1.083, "uncertainty": "+-1 frame"},
+    {"event": "lowest image point / bounce off the floor (ball centre y = 657 px, bottom edge y = 713)", "frame": 37, "t": 1.542, "uncertainty": "contact between frames 36 and 38; frame 37 is the lowest sample"},
+    {"event": "rebound apex (minimum y = 481.3 px, max apparent size ~110 px)", "frame": 46, "t": 1.917},
+    {"event": "falling again", "frames": "47-48"}
+  ],
+  "anomalies": [
+    "Frame step 35->36 moves 114 px in y while neighbouring steps are ~57 px: probably a dropped camera frame in the capture (pts are uniform in the file). Treat per-frame speeds around frame 36 with caution.",
+    "Motion blur frames 33-37: mask elongated vertically; diam_px_best uses bbox width there."
+  ]
+}

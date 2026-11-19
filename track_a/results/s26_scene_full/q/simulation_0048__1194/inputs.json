@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0048.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 33.0,
+ "frames": 99,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 766,
+ "question": {
+  "id": 1194,
+  "question": "What is the height of the moving bicycle (from the handlebar to the ground, including below the wheel) in meters?",
+  "prior": "height of the walking person = 1.8m",
+  "depth_info": "t=1s, distance_bike_camera = 16.4919m\nt=2s, distance_bike_camera = 11.9277m\nt=1s, distance_human_camera = 11.9259m\nt=2s, distance_human_camera = 10.8165m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 33.0
+ }
+}

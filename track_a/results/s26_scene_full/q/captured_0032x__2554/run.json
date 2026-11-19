@@ -1,0 +1,59 @@
+{
+ "wall_s": 83,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 10,
+  "duration_ms": 56602,
+  "total_cost_usd": 0.27420079999999997,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 16,
+  "cache_creation_input_tokens": 18981,
+  "cache_read_input_tokens": 171744,
+  "output_tokens": 4397,
+  "output_tokens_details": {
+   "thinking_tokens": 567
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 18981,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 550,
+    "cache_read_input_tokens": 27579,
+    "cache_creation_input_tokens": 1296,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1296
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 9,
+  "flags": []
+ },
+ "video": "captured_0032x",
+ "ids": [
+  2554
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/captured_0032x__q2554.jsonl"
+}

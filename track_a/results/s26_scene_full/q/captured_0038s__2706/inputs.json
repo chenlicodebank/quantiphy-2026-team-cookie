@@ -1,0 +1,18 @@
+{
+ "video": "captured_0038s.mp4",
+ "video_source": "lab",
+ "video_type": "S3MS",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2706,
+  "question": "What is the height of the poker tower in cm?",
+  "prior": "length of the credit card = 85.6mm",
+  "depth_info": "t=1.4s, distance_white_ball_camera = 0.7160m\ndistance_credit_card_camera = 0.6867m\ndistance_poker_tower_camera = 0.9035m\ndistance_white_cup_camera = 0.8740m\ndistance_pink_bottle_camera = 0.9998m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0100_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MX",
+ "fps": 24.0,
+ "frames": 58,
+ "duration_s": 2.4167,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1793,
+  "question": "What is the average speed of the shark in m/s?",
+  "prior": "length of the boat = 10m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

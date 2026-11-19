@@ -1,0 +1,52 @@
+{
+  "video": "simulation_0131.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.00396,
+  "frames": 97,
+  "duration_s": 4.041,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / fps; frame 0 at t = 0; frame for time t = round(t * fps)",
+  "pixel_convention": "x right, y DOWN (image rows); all values in pixels at original resolution",
+  "camera": {
+    "motion": "static (uniform sky background RGB ~(137,168,196) at all frames; no background features, no shift possible/visible)",
+    "perspective": "2D scene; balloon seen side-on, no ground or horizon visible. Apparent width constant 358 px; apparent full height grows slightly 472 -> 479 px (+1.5%) over the clip, envelope top rises ~0.07 px/frame faster than basket bottom (likely slight view-angle/perspective change as it rises); treat as one plane"
+  },
+  "objects": [
+    {
+      "name": "balloon",
+      "description": "hot-air balloon: dark-blue envelope with a ring of coloured squares (purple/green/yellow/red) near the top and red/yellow/purple/green vertical gores below; burner flame at the neck; small brown wicker basket hung by ropes. Only object in the scene.",
+      "moves": true,
+      "visible_frames": [0, 96],
+      "occluded": "never; fully inside frame at all frames",
+      "track_file": "tracks/balloon.csv",
+      "reference_point_note": "Blender origin not visible. Recorded: mask_cx/mask_cy (area centroid of full silhouette), bbox_cx/bbox_cy (full bbox centre), env_* (same component, = full bbox here because ropes join basket to envelope), bbox_y1 = basket bottom (rigid, cleanest edge). All move identically within ~0.07 px/frame.",
+      "pixel_extents_frame0": {
+        "full_height_px (envelope top to basket bottom)": 472,
+        "max_width_px (envelope, at row 641)": 358,
+        "envelope_top_y": 504,
+        "envelope_widest_row_y": 641,
+        "envelope_neck_incl_burner_bottom_y": "~920",
+        "ropes_y": "~920-940",
+        "basket_top_y": "~941",
+        "basket_bottom_y": 975,
+        "basket_height_px": "~34",
+        "basket_width_px": "32 (x 524-555)",
+        "envelope_height_px (top to neck ~920)": "~416"
+      },
+      "pixel_extents_frame96": {"full_height_px": 479, "max_width_px": 358, "top_y": 113, "bottom_y": 591, "basket_height_px": "~28-29 (563-591)", "basket_width_px": 32},
+      "motion_summary_px": {
+        "direction": "straight up (−y); x constant at 539.55 +- 0.05",
+        "mask_cy_per_frame": "-4.020 mean, std 0.035 (linear fit slope -4.0203 px/frame, rms resid 0.17 px; quadratic term negligible -2.3e-4 px/frame^2)",
+        "basket_bottom_per_frame": "-4.000 mean (975 -> 591 over 96 frames, exactly 384 px)",
+        "envelope_top_per_frame": "-4.07 mean (504 -> 113)",
+        "net_displacement_frames_0_96": "centroid 685.43 -> 299.51 = 385.9 px up; bottom 384 px; top 391 px"
+      }
+    }
+  ],
+  "static_objects": "none (plain uniform sky, no ground, clouds or markings)",
+  "events": [
+    {"event": "motion already in progress at first frame; constant upward speed throughout", "frame": 0, "time_s": 0.0},
+    {"event": "clip ends, balloon still rising at same rate", "frame": 96, "time_s": 3.9993}
+  ]
+}

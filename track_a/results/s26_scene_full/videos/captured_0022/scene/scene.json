@@ -1,0 +1,78 @@
+{
+  "video": "captured_0022.mp4",
+  "source": "lab (real recording; background blurred by a 'Segment Anything 2' edit, watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation of the upper image vs frame 0: drift <= 0.16 px over the clip; frame timestamps regular, 512/12288 s apart)",
+    "intrinsics_per_benchmark": {"focal_px": 763.0, "principal_point_px": [640, 360], "hfov_deg": 80, "note": "Orbbec Femto Mega convention from the task statement, not measured here"},
+    "view": "looking obliquely down onto a tilted wooden board held in front of a person; board front (lower) edge is nearer the camera"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ball (only white object on the board); rests at the back (upper) edge of the board, rolls down the inclined board toward the camera / lower-left in the image, rolls off the front edge and starts falling at the end",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "visible centre = centroid of the white mask (whitish pixels that differ from the ball-free background)",
+      "apparent_diameter_px": {"frames_0_11_at_rest": "19 wide x ~17-18 tall (bottom shaded)", "frame_30": "~19-20", "frames_42_45": "~21-22", "frames_46_48": "elongated vertically by motion blur (27-36 px tall, ~21 px wide)"},
+      "image_position_start_px": [437.0, 378.4],
+      "image_position_last_on_board_px_frame45": [392.5, 559.2],
+      "image_position_last_frame48_px": [391.4, 610.7]
+    },
+    {
+      "name": "board",
+      "description": "rectangular light-brown wooden board / tabletop, tilted as a ramp (back edge high, front edge low and near the camera); held/supported by a person standing behind it",
+      "moves": false,
+      "visible_frames": "0-48",
+      "top_surface_corners_px": {"back_left": [275.0, 413.4], "back_right": [603.3, 356.8], "front_right": [675.4, 512.3], "front_left": [218.7, 615.1]},
+      "side_lengths_px": {"back_edge": 333.1, "right_edge": 171.4, "front_edge": 468.1, "left_edge": 209.4},
+      "front_edge_thickness_band_px": "about 8-10 (darker edge strip below the front edge of the top surface)",
+      "corner_accuracy": "+-4 px (rounded corners and a blurred halo from the background edit)",
+      "front_edge_line_y_at_x": "y = 615.1 - 0.2251*(x - 218.7)  (y ~ 576 at the ball's crossing x ~ 392)"
+    },
+    {
+      "name": "person",
+      "description": "person behind/under the board, heavily blurred: blue jeans and legs visible below the board (x 400-560, y 560-720), brown rounded blob (head) just behind the back edge at about (475, 350)",
+      "moves": false, "visible_frames": "0-48", "reliability": "low (blurred background)"
+    },
+    {
+      "name": "board_stand",
+      "description": "silver/grey metal frame or stand legs at the bottom of the image (x ~270-650, y 640-720), blurred",
+      "moves": false, "visible_frames": "0-48"
+    },
+    {
+      "name": "light_stand_tripod",
+      "description": "tripod / light stand on the right with a white round head at about (1040, 280); legs reach down to y ~700",
+      "moves": false, "visible_frames": "0-48", "reliability": "low (blurred)"
+    },
+    {
+      "name": "dark_equipment_right",
+      "description": "dark chair / bag / equipment pile at the right edge (x 1100-1280, y 300-560) with a light-blue item at about (1230, 590)",
+      "moves": false, "visible_frames": "0-48", "reliability": "low (blurred)"
+    },
+    {
+      "name": "room_corner_lines",
+      "description": "dark wall-floor boundary lines of the room: one running from the left edge (~0, 470) up to a corner at about (400, 295), another from that corner to the right toward (~1000, 420); grey wall panels above, grey carpet floor below",
+      "moves": false, "visible_frames": "0-48"
+    }
+  ],
+  "events": [
+    {"event": "ball at rest at the back edge of the board", "frames": "0-11", "t_s": "0.000-0.458"},
+    {"event": "ball starts rolling (release): first displacement between frame 11 and 12", "frame": 12, "t_s": 0.5, "note": "frame 11 identical to frames 0-10; frame 12 is ~4.6 px down"},
+    {"event": "irregular large step 35->36 (11.5 px vs ~6 px on neighbouring steps), visible in raw frames; likely a capture timing irregularity", "frame": 36, "t_s": 1.5},
+    {"event": "ball reaches the front edge of the board, last frame fully on the board", "frame": 45, "t_s": 1.875},
+    {"event": "ball rolls off the front edge (centre crosses edge line between frames 45 and 46-47), motion blur begins", "frame": 46, "t_s": 1.9167},
+    {"event": "ball falling below the front edge (heavy vertical motion blur), still visible at the last frame", "frames": "47-48", "t_s": "1.958-2.000"}
+  ],
+  "perspective": {
+    "ground_plane": "board top is a tilted plane; its image is a quadrilateral whose left and right sides converge upward (back edge 333 px vs front edge 468 px long) - the back is farther from the camera",
+    "ball_apparent_size": "grows from ~19 px (start, back edge) to ~21-22 px (front edge) as the ball approaches the camera"
+  },
+  "files": {"track": "tracks/ball.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

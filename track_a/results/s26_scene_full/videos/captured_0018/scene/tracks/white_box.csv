@@ -1,0 +1,50 @@
+frame,t,phase,source,cx,cy,mask_cx,mask_cy,bx0,by0,bx1,by1,bw,bh,len_major,len_minor,axis_deg,mask_area,occluded,notes
+0,0.0,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+1,0.0417,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+2,0.0833,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+3,0.125,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+4,0.1667,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+5,0.2083,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+6,0.25,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+7,0.2917,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+8,0.3333,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+9,0.375,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+10,0.4167,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+11,0.4583,held,template,481.5,267.0,,,469,238,494,296,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+12,0.5,held,template,480.5,266.0,,,468,237,493,295,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+13,0.5417,held,template,480.5,266.0,,,468,237,493,295,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+14,0.5833,held,template,480.5,265.0,,,468,236,493,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+15,0.625,held,template,480.5,265.0,,,468,236,493,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+16,0.6667,held,template,480.5,265.0,,,468,236,493,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+17,0.7083,held,template,480.5,265.0,,,468,236,493,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+18,0.75,held,template,480.5,265.0,,,468,236,493,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+19,0.7917,held,template,480.5,265.0,,,468,236,493,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+20,0.8333,held,template,480.5,265.0,,,468,236,493,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+21,0.875,held,template,481.5,265.0,,,469,236,494,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+22,0.9167,held,template,481.5,265.0,,,469,236,494,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+23,0.9583,held,template,481.5,265.0,,,469,236,494,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+24,1.0,held,template,481.5,265.0,,,469,236,494,294,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+25,1.0417,held,template,481.5,264.0,,,469,235,494,293,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+26,1.0833,held,template,481.5,264.0,,,469,235,494,293,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+27,1.125,held,template,481.5,264.0,,,469,235,494,293,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+28,1.1667,held,template,483.5,264.0,,,471,235,496,293,25,58,57,23,,,1,hand: gripped by right hand (fingers over upper-left)
+29,1.2083,free,manual,483.5,266.5,,,472,238,495,295,23,57,,,,,1,overlaps hand/arm
+30,1.25,free,manual,483.5,277.0,,,472,247,495,307,23,60,,,,,1,overlaps hand/arm
+31,1.2917,free,manual,485.0,288.5,,,473,257,497,320,24,63,,,,,1,overlaps hand/arm
+32,1.3333,free,manual,485.0,302.5,,,473,270,497,335,24,65,,,,,0,motion blur (14 px/frame)
+33,1.375,free,manual,486.5,324.0,,,472,287,501,361,29,74,,,,,0,motion blur (22 px/frame)
+34,1.4167,free,mask,488.5,354.0,487.55,352.3,475,320,502,388,27,68,68.0,26.8,90.4,1400,0,motion blur (30 px/frame)
+35,1.4583,free,mask,488.0,383.0,487.45,381.96,475,351,501,415,26,64,64.4,27.1,88.4,1336,0,motion blur (29 px/frame)
+36,1.5,free,mask,488.5,449.0,487.81,451.3,475,417,502,481,27,64,63.8,26.8,90.8,1314,0,motion blur (66 px/frame)
+37,1.5417,free,mask,487.5,493.5,486.87,495.0,474,460,501,527,27,67,67.0,26.5,93.9,1331,0,motion blur (45 px/frame)
+38,1.5833,free,mask,487.5,531.5,486.06,532.19,474,497,501,566,27,69,69.1,25.3,96.1,1138,0,motion blur (38 px/frame)
+39,1.625,free,mask,485.0,569.5,482.91,568.19,472,541,498,598,26,57,58.3,24.4,94.6,807,0,motion blur (38 px/frame)
+40,1.6667,free,mask,478.0,562.0,478.69,558.7,465,533,491,591,26,58,59.1,26.6,81.8,792,0,
+41,1.7083,free,mask,470.5,557.0,472.44,553.12,455,529,486,585,31,56,57.8,28.9,75.1,814,0,
+42,1.75,free,mask,463.5,556.5,464.85,552.82,445,529,482,584,37,55,57.8,26.0,63.3,757,0,
+43,1.7917,free,mask,456.5,558.0,457.47,554.56,435,531,478,585,43,54,56.7,30.1,55.8,693,0,
+44,1.8333,free,manual,448.0,566.5,,,423,540,473,593,50,53,,,,,0,motion blur (12 px/frame)
+45,1.875,free,manual,442.5,576.0,,,415,550,470,602,55,52,,,,,0,
+46,1.9167,free,mask,437.0,580.0,434.11,579.92,408,563,466,597,58,34,57.2,30.3,13.3,1193,0,
+47,1.9583,free,mask,429.5,590.0,427.61,588.81,402,576,457,604,55,28,58.1,26.4,171.3,1169,0,motion blur (12 px/frame)
+48,2.0,free,mask,423.0,593.5,420.56,592.63,395,579,451,608,56,29,57.7,26.2,168.5,1163,0,

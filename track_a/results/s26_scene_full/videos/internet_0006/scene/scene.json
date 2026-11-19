@@ -1,0 +1,482 @@
+{
+ "video": "internet_0006.mp4",
+ "fps": 29.678492,
+ "frames": 172,
+ "width": 1080,
+ "height": 1920,
+ "source": "internet",
+ "scene": "2D",
+ "time_convention": "t = frame / fps, frame 0 at t = 0",
+ "image_axes": "x right, y down, pixels of the full-resolution 1080x1920 frame",
+ "view": "top-down (nadir) drone shot of a straight two-lane country road running vertically through the frame; field on the left, woodland and a dirt path on the right; overcast, almost no shadows",
+ "camera": {
+  "motion": "static (hovering drone); background shift vs frame 0 <= 0.65 px in x and <= 1.7 px in y (slow drift, see camera_shift.csv); no compensation needed",
+  "perspective": "nadir view, ground plane ~ parallel to image; one px scale valid across frame to a few %. Wide-angle lens: the same car appears ~5-8% longer near the top/bottom of the frame than near the centre (white car 76 px at y~500-900, 79 px at y~1390, 82 px at y<200; dark car 68-69 px mid, 71-72 px at y>1750)."
+ },
+ "moving_objects": {
+  "white_car": {
+   "desc": "white/silver saloon car, left lane (x~536-543), driving UP the image (towards top), front at top",
+   "frames_visible": [
+    0,
+    163
+   ],
+   "track": "tracks/white_car.csv",
+   "pixel_size_clean": {
+    "length_along_road_bbox_h": 78.0,
+    "width_bbox_w": 37.0,
+    "length_at_frame0": 79,
+    "length_mid_frame_y500_900": 76,
+    "length_near_top": 82
+   },
+   "example_f0": {
+    "ref_x": "540.49",
+    "ref_y": "1386.0",
+    "x0": "521",
+    "y0": "1347",
+    "x1": "560",
+    "y1": "1425",
+    "bbox_w": "40",
+    "bbox_h": "79"
+   },
+   "example_f60": {
+    "ref_x": "541.49",
+    "ref_y": "871.5",
+    "x0": "524",
+    "y0": "834",
+    "x1": "559",
+    "y1": "909",
+    "bbox_w": "36",
+    "bbox_h": "76"
+   }
+  },
+  "dark_car": {
+   "desc": "dark blue/grey hatchback/estate car, left lane, behind the white car, also driving UP the image",
+   "frames_visible": [
+    0,
+    171
+   ],
+   "fully_visible_frames": [
+    0,
+    152
+   ],
+   "under_canopy_frames": [
+    153,
+    171
+   ],
+   "track": "tracks/dark_car.csv",
+   "pixel_size_clean": {
+    "length_along_road_bbox_h": 69.0,
+    "width_bbox_w": 36.0,
+    "length_at_frame0": 72
+   },
+   "example_f0": {
+    "ref_x": "529.5",
+    "ref_y": "1836.5",
+    "x0": "511",
+    "y0": "1801",
+    "x1": "548",
+    "y1": "1872",
+    "bbox_w": "38",
+    "bbox_h": "72"
+   },
+   "example_f60": {
+    "ref_x": "531.5",
+    "ref_y": "1355.5",
+    "x0": "514",
+    "y0": "1322",
+    "x1": "549",
+    "y1": "1389",
+    "bbox_w": "36",
+    "bbox_h": "68"
+   }
+  },
+  "cyclist": {
+   "desc": "cyclist (rider on bicycle, light top) in the right lane (x~570-575), riding DOWN the image (opposite direction to the cars)",
+   "frames_visible": [
+    0,
+    123
+   ],
+   "fully_visible_frames": [
+    0,
+    118
+   ],
+   "track": "tracks/cyclist.csv",
+   "pixel_size_clean": {
+    "length_bbox_h": 30.0,
+    "width_bbox_w": 16.0
+   },
+   "example_f0": {
+    "ref_x": "575.0",
+    "ref_y": "784.5",
+    "x0": "567",
+    "y0": "770",
+    "x1": "583",
+    "y1": "799",
+    "bbox_w": "17",
+    "bbox_h": "30"
+   }
+  },
+  "bird": {
+   "desc": "small white bird (gull/egret-like) flying from lower right (over the woods, x~982,y~1658) to the left, crossing the road at f57-68, exits the left edge at f139",
+   "frames_visible": [
+    0,
+    139
+   ],
+   "track": "tracks/bird.csv",
+   "pixel_size": {
+    "note": "wings flap: bbox 7-16 px; mask PCA length 11-21 px",
+    "bbox_h_median": 12.0,
+    "bbox_w_median": 11.0
+   }
+  }
+ },
+ "static_objects": {
+  "road": {
+   "desc": "straight asphalt road, vertical through the whole frame",
+   "asphalt_left_edge_x": [
+    519,
+    523
+   ],
+   "asphalt_right_edge_x": [
+    593.5,
+    598.5
+   ],
+   "asphalt_width_px": "75-77 (edge to edge at half-intensity of the dark kerb lines); ~87 incl. dark kerb/gutter lines (x~515-602)",
+   "per_row_saturation_based_edges": [
+    [
+     20,
+     520,
+     588,
+     69
+    ],
+    [
+     120,
+     519,
+     592,
+     74
+    ],
+    [
+     220,
+     520,
+     594,
+     75
+    ],
+    [
+     320,
+     540,
+     540,
+     1
+    ],
+    [
+     420,
+     540,
+     540,
+     1
+    ],
+    [
+     520,
+     540,
+     596,
+     57
+    ],
+    [
+     620,
+     524,
+     597,
+     74
+    ],
+    [
+     720,
+     524,
+     597,
+     74
+    ],
+    [
+     820,
+     524,
+     597,
+     74
+    ],
+    [
+     920,
+     526,
+     595,
+     70
+    ],
+    [
+     1020,
+     526,
+     597,
+     72
+    ],
+    [
+     1120,
+     526,
+     595,
+     70
+    ],
+    [
+     1220,
+     526,
+     568,
+     43
+    ],
+    [
+     1320,
+     525,
+     596,
+     72
+    ],
+    [
+     1420,
+     526,
+     597,
+     72
+    ],
+    [
+     1520,
+     524,
+     593,
+     70
+    ],
+    [
+     1620,
+     521,
+     595,
+     75
+    ],
+    [
+     1720,
+     522,
+     594,
+     73
+    ],
+    [
+     1820,
+     524,
+     593,
+     70
+    ]
+   ]
+  },
+  "centre_line_dashes": {
+   "x": 560,
+   "dashes_y0_y1_len": [
+    [
+     551,
+     633,
+     83
+    ],
+    [
+     677,
+     767,
+     91
+    ],
+    [
+     812,
+     902,
+     91
+    ],
+    [
+     947,
+     1035,
+     89
+    ],
+    [
+     1080,
+     1169,
+     90
+    ],
+    [
+     1214,
+     1302,
+     89
+    ],
+    [
+     1346,
+     1434,
+     89
+    ],
+    [
+     1478,
+     1564,
+     87
+    ],
+    [
+     1609,
+     1692,
+     84
+    ],
+    [
+     1740,
+     1812,
+     73
+    ],
+    [
+     1817,
+     1823,
+     7
+    ]
+   ],
+   "dash_length_px": "87-91 (y 670-1570), 83-84 near y~560-630 and y~1610-1690",
+   "dash_period_px": "131-135",
+   "note": "dashes above y~520 are partly under the canopy / near the top; same pattern continues"
+  },
+  "SLOW_marking": {
+   "desc": "white road text \"SLOW\" in the right lane (reads for traffic going down)",
+   "bbox": {
+    "x0": 565,
+    "x1": 599,
+    "y0": 1204,
+    "y1": 1243
+   },
+   "size_px": [
+    35,
+    40
+   ]
+  },
+  "big_willow_tree": {
+   "desc": "large pale-green/yellow tree left of road, canopy overhangs the left lane",
+   "approx_bbox": [
+    300,
+    260,
+    590,
+    560
+   ],
+   "overhang_over_road_y": [
+    270,
+    520
+   ]
+  },
+  "yellow_tree_upper": {
+   "desc": "bright yellow tree left of road below the big tree",
+   "approx_bbox": [
+    380,
+    600,
+    490,
+    740
+   ]
+  },
+  "yellow_tree_lower": {
+   "desc": "round bright yellow tree left of road",
+   "approx_bbox": [
+    356,
+    880,
+    500,
+    1040
+   ]
+  },
+  "side_path_left": {
+   "desc": "grey paved path curving in from the left edge in the field, lower left",
+   "approx_bbox": [
+    0,
+    1410,
+    340,
+    1560
+   ]
+  },
+  "dirt_path_right": {
+   "desc": "brown dirt footpath through the woods, roughly vertical",
+   "approx_x": [
+    880,
+    980
+   ],
+   "width_px": "~25 at y~1600 (x ~947-972)"
+  },
+  "fence_right": {
+   "desc": "thin fence line just right of the dirt path (x~983-993 at y~1550-1800)"
+  }
+ },
+ "events": [
+  {
+   "event": "white car and dark car move up the whole clip, cyclist moves down; no stops, no direction changes",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "white car passes cyclist (same image row, opposite directions)",
+   "frame": 33.77,
+   "t": 1.1379,
+   "y": 1103.6
+  },
+  {
+   "event": "bird crosses right road edge (x=600)",
+   "frame": 57.0,
+   "t": 1.9206
+  },
+  {
+   "event": "dark car passes cyclist",
+   "frame": 60.65,
+   "t": 2.0437,
+   "y": 1355.5
+  },
+  {
+   "event": "bird crosses centre line x=560",
+   "frame": 62.56,
+   "t": 2.1079
+  },
+  {
+   "event": "bird crosses left road edge x=520",
+   "frame": 68.12,
+   "t": 2.2953
+  },
+  {
+   "event": "white car under thin canopy branches of big tree (centre still tracked)",
+   "frame": [
+    104,
+    132
+   ],
+   "t": [
+    3.5042,
+    4.4477
+   ]
+  },
+  {
+   "event": "cyclist front reaches bottom edge",
+   "frame": 119,
+   "t": 4.0096
+  },
+  {
+   "event": "cyclist fully out of frame",
+   "frame": 124,
+   "t": 4.1781
+  },
+  {
+   "event": "dark car front enters canopy of big tree",
+   "frame": 153,
+   "t": 5.1552
+  },
+  {
+   "event": "white car front reaches top edge",
+   "frame": 155,
+   "t": 5.2226
+  },
+  {
+   "event": "white car fully out of frame",
+   "frame": 164,
+   "t": 5.5259
+  },
+  {
+   "event": "bird leaves left edge",
+   "frame": 139,
+   "t": 4.6835
+  },
+  {
+   "event": "dark car mostly hidden under canopy until end",
+   "frame": [
+    163,
+    171
+   ],
+   "t": [
+    5.4922,
+    5.7617
+   ]
+  }
+ ],
+ "files": {
+  "tracks": "tracks/<object>.csv",
+  "camera_shift": "camera_shift.csv",
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

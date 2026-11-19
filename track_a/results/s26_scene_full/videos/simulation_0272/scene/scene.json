@@ -1,0 +1,52 @@
+{
+  "video": "simulation_0272.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of top 300 rows vs frame 0: max |shift| 0.003 px over all 72 frames",
+    "view": "top-down (nadir) view of snowy mountain terrain; bird flies in a plane parallel to the image, apparent size constant (body length 420-456 px throughout, no trend)"
+  },
+  "objects": [
+    {
+      "name": "bird",
+      "description": "phoenix/peacock-like fantasy bird seen from above: green head, body and wings, long red-orange tail fan with eye-spot feathers and a long thin central green tail shaft; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "occluded": false,
+      "heading": "flies toward image left (-x), roughly along row y~715",
+      "track_file": "tracks/bird.csv",
+      "reference_point_recommended": "body_cx, body_cy (green body centroid near the beak row = proxy for the rig origin/body centre); beak_x is a crisp alternative for horizontal motion (same translation, offset ~ -110 px)",
+      "body_point_px": {"frame0": [1595.5, 720.4], "frame71": [542.8, 716.1]},
+      "beak_x_px": {"frame0": 1487, "frame71": 432},
+      "net_displacement_px": {"body_point_0_to_71": 1052.7, "beak_0_to_71": 1055},
+      "length_px_beak_to_tail_tip": {"median": 436, "range": [420, 456], "note": "bbox_w; tail fan/shaft tips flex a little"},
+      "wingspan_px": {
+        "max": 618, "max_frame": 71,
+        "other_maxima": {"21": 616, "46": 613, "10": 522, "35": 526, "60": 528},
+        "min": 118, "min_frames": [13, 38, 39, 63],
+        "note": "wing_span_px = vertical extent of the mask over columns beak..beak+220 (excludes tail fan). Wings upright/edge-on at the minimum. bbox_h (includes tail fan) min 231 at frame 37."
+      },
+      "flap_cycle": "wing-spread maxima at frames ~10, 21, 35, 46, 60, 71 (period ~12.5 frames ~0.52 s); minima at ~13-14, 38-39, 63-64"
+    },
+    {
+      "name": "terrain",
+      "description": "static snowy mountain ground seen from above: grey shaded rock ridge/cliff on the left (x ~0-900 px), snowfield in the centre with brown rock streaks, sunlit tan rock ridge on the right (x ~1950-2560 px, gully at x~2250-2300). No man-made objects or markings.",
+      "moves": false,
+      "visible_frames": [0, 71]
+    }
+  ],
+  "events": [
+    {"event": "bird stationary (frames 0 and 1 identical)", "frame": 0, "time_s": 0.0},
+    {"event": "bird starts moving left", "frame": 2, "time_s": 0.0833},
+    {"event": "bird accelerates: beak step ~3-4 px/frame at frames 2-6, ~4-8 px at 7-25, ~14-20 at 26-45, ~25-30 at 52-71 (speed pulses with wingbeats)", "frame": null},
+    {"event": "wings fully spread (max)", "frames": [10, 21, 35, 46, 60, 71]},
+    {"event": "bird still in view at end, no exit", "frame": 71, "time_s": 2.9583}
+  ],
+  "notes_file": "notes.md"
+}

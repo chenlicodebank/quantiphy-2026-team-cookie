@@ -1,0 +1,68 @@
+{
+ "wall_s": 1499,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 75,
+  "duration_ms": 1497542,
+  "total_cost_usd": 4.003662600000001,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 86,
+  "cache_creation_input_tokens": 154531,
+  "cache_read_input_tokens": 3479253,
+  "output_tokens": 103561,
+  "output_tokens_details": {
+   "thinking_tokens": 71309
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 154531,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 784,
+    "cache_read_input_tokens": 161179,
+    "cache_creation_input_tokens": 3246,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 3246
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 74,
+  "flags": [
+   {
+    "tool": "Bash",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0066-segmented-q-1765/a3c53191-dbbd-4cac-9496-72329c8f0d47/tasks/bxkbtexnx.output"
+    ],
+    "words": [],
+    "input": "{\"command\": \"~/miniforge3/envs/ml/bin/python -c \\\"import time; time.sleep(100)\\\"; cat /private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0066-segmented-q-1765/a3c53191-dbbd-4cac-9496-72329c8f0d47/tasks/bxkbtexnx.output\", \"timeout\": 200000}"
+   }
+  ]
+ },
+ "video": "simulation_0066_segmented",
+ "ids": [
+  1765
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0066_segmented__q1765.jsonl"
+}

@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0252.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 41,
+  "duration_s": 1.7083,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; time t -> frame round(t*24)",
+  "units": "pixels and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (frame 40 vs frame 0 outside the ball/shadow region: mean |diff| 0.13 grey levels; no pan, no shake)",
+    "per_frame_background_shift_px": 0.0,
+    "view": "fixed camera looking at a plain grey studio backdrop: a lighter band (wall/backdrop) above a horizontal edge at y ~148 px, then a uniform grey surface with soft radial vignetting. The ball's shadow falls directly above it (frames 5-20) and then up and to the right (later frames), so the ball moves in front of this grey surface, which is not a perspective ground plane with markings. One pixel scale applies to the whole motion: the ball's apparent size is constant."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "soccer-style ball: light grey body with black star-shaped patches, specular highlight lower-left of centre. It is the only object in the scene.",
+      "moves": true,
+      "visible_frames": "4-40 (frame 4 partly beyond the left image border; fully visible 5-40; frames 0-3 empty)",
+      "reference_point": "sphere centre (= object origin); track columns cx, cy",
+      "track_file": "tracks/ball.csv",
+      "size_px": {
+        "diameter_vertical": 66.0,
+        "diameter_vertical_uncertainty": 1.5,
+        "apparent_width_horizontal_with_motion_blur": 75.8,
+        "note": "The vertical diameter (top limb ~349.5, bottom limb ~415) is the true sphere diameter in pixels. Horizontally the sharp disc is also about 66 px across, but faint motion-blur smear widens the limb-to-limb extent to about 72-76 px. Use 66 px as the ball's pixel diameter (length = width = height for a sphere)."
+      },
+      "motion_summary_px": {
+        "direction": "left to right, horizontal; cy constant at 382.5 +/- 1 px (no vertical motion, no bounce)",
+        "cx_first_full_frame5": 68.5,
+        "cx_frame40": 1843.4,
+        "per_frame_step_px": "about 56-57 px/frame at frames 5-9, decreasing smoothly to about 45 px/frame at frames 36-40 (it slows down steadily); per-frame steps scatter +/-2 px",
+        "net_horizontal_displacement_frame4_to_40_px": 1830.9
+      },
+      "shadow": "large soft dark shadow attached to the top of the ball (y ~295-350), tilting up-right in later frames; it is not an object and was excluded from the ball's size"
+    },
+    {
+      "name": "backdrop_edge",
+      "description": "horizontal boundary between the lighter top band and the grey surface below",
+      "moves": false,
+      "visible_frames": "0-40",
+      "image_position_px": {"y": 148, "x_span": [0, 1919]},
+      "length_px": 1920,
+      "note": "spans the full width; it may be a wall/floor or backdrop fold. It is the only static feature; there are no markings or furniture."
+    }
+  ],
+  "events": [
+    {"event": "ball enters the frame at the left edge (already moving)", "frame": 4, "time_s": 0.1667},
+    {"event": "ball fully inside the frame", "frame": 5, "time_s": 0.2083},
+    {"event": "ball passes the image centre x = 960", "frame": 21.4, "time_s": 0.89, "note": "interpolated between frames 21 (cx 938.7) and 22 (cx 990.9)"},
+    {"event": "video ends with the ball still moving and fully visible (right limb ~1881 < 1919)", "frame": 40, "time_s": 1.6667}
+  ],
+  "no_events": "no release, bounce, impact, contact, stop or direction change is visible. Motion starts before frame 4 (off-screen) and continues past frame 40.",
+  "files": {
+    "tracks/ball.csv": "per-frame ball track, frames 4-40",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts (track_ball.py is the final tracker)"
+  }
+}

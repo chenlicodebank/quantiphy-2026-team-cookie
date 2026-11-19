@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0243_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 30.0,
+ "frames": 75,
+ "duration_s": 2.5,
+ "width": 1080,
+ "height": 1920,
+ "question": {
+  "id": 1979,
+  "question": "What is the height of the tree behind the deer in meters?",
+  "prior": "speed of the deer = 1.277m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

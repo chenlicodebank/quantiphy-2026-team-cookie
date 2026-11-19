@@ -1,0 +1,69 @@
+{
+ "video": "internet_0045.mp4",
+ "source": "internet",
+ "scene_type": "2D (real footage; the cylinder also moves slightly toward the camera, see notes)",
+ "fps": 30.013298,
+ "frames": 45,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t * fps)",
+ "units": "pixels of the original 1920x1080 frame, seconds; no metric scale anywhere",
+ "camera": {
+  "type": "handheld, nearly static: slow smooth drift, no pan",
+  "per_frame_file": "tracks/camera.csv",
+  "drift_total_px": "frame 0 -> frame 44: content moves about +8 px in x and -13 px in y (shift_x/shift_y = where the frame-44 image centre sits in frame i: -8.2, +13.0 at frame 0, 0 at frame 44)",
+  "drift_per_frame_px": "about 0.2 px in x, 0.3 px in y per frame; rotation under 0.27 deg; scale change under 0.25 percent",
+  "note": "drift is under 0.5 percent of the cylinder's per-frame motion (about 55-70 px per frame). tracks/cylinder.csv has raw image coordinates (cx_mask, cy_mask) and coordinates mapped into frame-44 background coordinates (cx_stab, cy_stab)"
+ },
+ "perspective": {
+  "view": "camera at desk height, looking horizontally across a light-wood desk; the desk front edge runs horizontally across the image at about y 980 (frame 44); the wall/monitor behind; no strong vanishing lines",
+  "depth_note": "the cylinder starts level with the kettle's front and finishes in front of the bowl, a little nearer the camera: its image bottom edge goes from y about 823 (frame 4) to about 956 (frame 30), and its vertical extent grows from about 215 px to about 270 px. Part of that growth comes from turning end-on, and part from coming closer (roughly 10-20 percent larger apparent size)"
+ },
+ "objects": {
+  "cylinder": {
+   "description": "white cylinder (paper or foam roll with a central hole in its end face) lying on its side and rolling across the desk from right to left. It is the ONLY moving object",
+   "distinguish": "only moving object; bluish-white; the other white object, the wavy bowl at the left, is static",
+   "moves": true,
+   "visible_frames": "0-34 (0-3 partly cut off by the right image edge as it enters; 4-30 fully in view; 31-33 cut off by the left edge; 34 only a thin blurred sliver at the left edge, not measured; 35-44 gone)",
+   "track_file": "tracks/cylinder.csv",
+   "reference_point": "visible centre = centroid of the silhouette mask (cx_mask_px, cy_mask_px). Leading (left) edge = bbox_x0",
+   "orientation": "frames 3-12: axis about 18-32 deg from horizontal in the image, side surface and lower-right end face both visible, silhouette about 300 x 186 px (length x width). From frame 13 on: end face points at the camera (axis roughly along the line of sight), silhouette about 230-250 px wide and 255-270 px high. The axis turns between frames 12 and 13",
+   "apparent_size_px": {
+    "frames_4_8_side_view": {"bbox_w": "286-306", "bbox_h": "215-221", "minAreaRect_length": "296-312", "minAreaRect_width_diameter": "183-187"},
+    "frames_20_28_end_on": {"bbox_w_mask": "216-233 (mask trailing edge 10-20 px short; by-eye width about 233 at frame 24 and 250 at frame 27)", "bbox_h": "250-268"},
+    "manual_checks_by_eye": {
+     "frame_6": {"x0": 1475, "x1": 1783, "y0": 612, "y1": 833, "width": 308, "height": 221},
+     "frame_24": {"x0": 492, "x1": 725, "y0": 658, "y1": 925, "width": 233, "height": 267},
+     "frame_27": {"x0": 276, "x1": 526, "y0": 671, "y1": 942, "width": 250, "height": 271}
+    }
+   }
+  },
+  "white_wavy_bowl": {"moves": false, "position": "left, x 156-580", "file": "static_objects.json"},
+  "tea_bottle_yellow_cap": {"moves": false, "position": "second from left, plastic bottle of iced tea, yellow cap, nutrition label facing camera", "file": "static_objects.json"},
+  "green_glass_bottle": {"moves": false, "position": "centre, tall dark-green wine-style bottle", "file": "static_objects.json"},
+  "red_kettle": {"moves": false, "position": "right of centre, red T-fal electric kettle, 0.8 L, handle on its right", "file": "static_objects.json"},
+  "black_monitor": {"moves": false, "position": "behind the bottles, top cut off by the frame", "file": "static_objects.json"},
+  "desk_lamp": {"moves": false, "position": "far right, black arm lamp with round base", "file": "static_objects.json"},
+  "power_strip_and_cables": {"moves": false, "position": "behind the bowl and tea bottle against the wall", "file": "static_objects.json"},
+  "desk": {"moves": false, "position": "light wood desk top, glossy (shows reflections), front edge at y about 980", "file": "static_objects.json"}
+ },
+ "events": [
+  {"event": "cylinder already moving left and entering from the right edge", "frame": 0, "t_s": 0.0},
+  {"event": "cylinder fully inside the frame (right edge clear)", "frame": 4, "t_s": 0.1333},
+  {"event": "cylinder passes in front of the red kettle", "frames": "6-14", "t_s": "0.20-0.47"},
+  {"event": "axis turns so the end face points at the camera (silhouette changes from elongated to near-square)", "frames": "12-13", "t_s": "0.40-0.43"},
+  {"event": "cylinder passes in front of the green bottle and then the tea bottle", "frames": "16-24", "t_s": "0.53-0.80"},
+  {"event": "cylinder passes in front of the lower part of the white bowl", "frames": "25-31", "t_s": "0.83-1.03"},
+  {"event": "leading edge reaches the left image edge", "frame": 31, "t_s": 1.0329},
+  {"event": "last frame with the cylinder visible (thin sliver)", "frame": 34, "t_s": 1.1328},
+  {"event": "cylinder gone, scene static", "frames": "35-44", "t_s": "1.166-1.466"},
+  {"note": "no release, bounce, impact or contact with another object is seen. The cylinder rolls continuously left and slightly down the image (toward the camera) with no reversal. Motion starts before frame 0 and ends after it leaves the frame"}
+ ],
+ "files": {
+  "tracks/cylinder.csv": "per-frame cylinder track (0-44; not_visible rows are empty)",
+  "tracks/camera.csv": "per-frame background registration to frame 44",
+  "static_objects.json": "pixel extents of the static objects at frame 44",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts (run from the scene_ws folder)"
+ }
+}

@@ -1,0 +1,8 @@
+Focal length from the blue cart's visible right-front tire (114 px at the given 9.312 m depth, dia 0.369 m) gives f=2877 px, independently confirmed by the yellow car's tire (205 px, ground-plane depth 10.77 m, dia 0.764 m) giving f=2889 px (0.4% agreement). The cart is perpendicular to the camera axis (circular wheels, constant wheelbase), so its width lies along the view axis and is only visible on the end faces: front-face apparent widths at frames 14/16/18 (68/62/58 px) give W = 1.04/1.06/1.14 m, and the canopy front face at frame 14 (83 px) gives 1.17 m; the two-wheel track at frame 14 gives 0.75 m (inset wheels). World AABB width taken as ~1.10 m (cart height 1.56 m, length 1.78 m for scale sanity).
+
+Final message:
+**Answer: 1.10 m** for the width of the blue car (question 1541).
+
+Method summary:
+- **Scale**: The cart drives left→right, so the visible side is its right side and the given 9.312 m depth belongs to the visible right-front tire. Its 114 px outer diameter with the 0.369 m prior gives f = 2877 px. An independent route — the yellow car's tire (205 px) with its depth from the ground plane (horizon at image centre, 10.77 m) and the 0.764 m prior — gives f = 2889 px. The 0.4 % agreement validates both the focal length and the near-tire depth assignment.
+- **Width**: The cart is perpendicular to the camera axis (circular wheels, constant 333–341 px wheelbase), so its width runs along the view axis and only shows on the end faces. Front-face apparent widths at frames 14/16/18 (68/62/58 px) give 1.04/1.06/1.14 m; the canopy's front light-bar face at frame 14 (83 px) gives 1.17 m; the two visible front wheels give a 0.75 m track (inset wheels). World AABB width ≈ 1.10 m, consistent with the measured height 1.56 m and length 1.78 m.

@@ -1,0 +1,36 @@
+{
+  "video": "simulation_0068_segmented.mp4",
+  "source": "segmentation (Blender simulation, background replaced by pure white)",
+  "scene": "2D",
+  "fps": 24.0, "frames": 72, "duration_s": 3.0, "width": 2160, "height": 1080,
+  "units": "pixels (x right, y down, origin top-left) and seconds; t = frame/24",
+  "view": "top-down (bird's-eye) view of two cars on a plane; no ground texture or markings (background pure white RGB 255)",
+  "camera": {"motion": "assumed static (simulation convention); background is blank so pan cannot be checked directly. Van heading stays at 90.0 +/- 0.3 deg and car heading settles at 0.0 deg, no rotation of the frame; both cars' sizes constant (no zoom).",
+             "perspective": "none usable; orthographic-looking top view, both cars at the same depth (same ground plane)"},
+  "objects": [
+    {"name": "white_van", "aliases": ["white car", "white minivan", "left car"],
+     "description": "white/light-grey van/minivan with dark-red windscreen and red side windows, left object, front pointing up (toward smaller y)",
+     "moves": true, "visible_frames": "0-71", "track": "tracks/white_van.csv",
+     "motion": "straight line upward (-y), x constant ~831.5; starts essentially at rest at frame 0 and speeds up steadily (step grows ~0.3 px/frame per frame, from ~0.5 px/frame to ~19.5 px/frame at frame 71)",
+     "size_px": {"length_along_axis_median": 240.0, "length_range": [236, 246], "width_median": 91.2,
+                 "note": "length is vertical (front-rear), width horizontal; top view so 'height' is not observable"},
+     "position_px": {"frame0_centroid": [831.5, 926.6], "frame71_centroid": [831.4, 201.9]},
+     "path_length_px_0_71": 725.6, "net_displacement_px_0_71": 724.7},
+    {"name": "beige_car", "aliases": ["beige/cream car", "pink-tan car", "right car", "turning car"],
+     "description": "beige / light pink-tan car with a rounded body, initially right of the van and slightly ahead (front up), turns right to face +x",
+     "moves": true, "visible_frames": "0-71", "track": "tracks/beige_car.csv",
+     "motion": "starts moving at frame 1, nearly constant speed (~6.8 px/frame, per-frame steps 5.8-7.8 from mask noise) along a clockwise (right-hand) quarter-circle turn: heading 90 deg (up) at frames 0-2 to 0 deg (right, +x) at ~frame 65, then straight to the right",
+     "size_px": {"length_along_axis_median": 223.1, "length_range": [217, 229], "width_median": 87.1},
+     "position_px": {"frame0_centroid": [991.6, 851.4], "frame71_centroid": [1371.4, 636.4]},
+     "path_length_px_0_71": 477.4, "net_displacement_px_0_71": 436.4}
+  ],
+  "static_objects": "none (no ground features, markings or props visible; background replaced)",
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "white_van at (near) rest, begins accelerating upward; first steps 0.2-1.5 px"},
+    {"frame": 1, "time": 0.0417, "event": "beige_car starts moving (step 0->1 = 0.5 px, step 1->2 = 5.7 px; full speed from frame 2)"},
+    {"frame": 3, "time": 0.125, "event": "beige_car begins turning right (heading leaves 90 deg)"},
+    {"frame": 29, "time": 1.208, "event": "beige_car heading 45 deg (mid-turn)"},
+    {"frame": 65, "time": 2.708, "event": "beige_car heading reaches ~0 deg (turn complete), continues straight in +x"},
+    {"frame": 71, "time": 2.958, "event": "last frame; no contact between the cars at any time (separate masks in all 72 frames)"}
+  ]
+}

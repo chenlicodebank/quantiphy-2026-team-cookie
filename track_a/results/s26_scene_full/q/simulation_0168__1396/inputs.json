@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0168.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 24.0,
+ "frames": 80,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1396,
+  "question": "What is the width of the road that the bike and the car are on in meters?",
+  "prior": "speed of the bike = 5.52m/s",
+  "depth_info": "t=0s, distance_bike_camera = 28.219m\nt=0.5s, distance_bike_camera = 25.554m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

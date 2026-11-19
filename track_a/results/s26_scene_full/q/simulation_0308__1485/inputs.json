@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0308.mp4",
+ "video_source": "simulation",
+ "video_type": "V3SC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 1485,
+  "question": "What is the displacement of the whale from 0.5 s to 1.0 s, in meters?",
+  "prior": "speed of the whale = 1.67m/s",
+  "depth_info": "t = 1.0s, distance_whale_camera = 33.7307 m\nt = 2.0s, distance_whale_camera = 35.1624 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

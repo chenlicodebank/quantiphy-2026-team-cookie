@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0230.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 731,
+  "question": "What is the speed of the paper airplane at time 1.25s in m/s?",
+  "prior": "length of the chalkboard = 5m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

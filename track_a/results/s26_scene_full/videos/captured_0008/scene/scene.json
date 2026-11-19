@@ -1,0 +1,164 @@
+{
+ "video": "captured_0008.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "camera": {
+  "motion": "static (phase-correlation shift of background and table patches vs frame 0 < 0.15 px all frames)",
+  "intrinsics_from_benchmark": {
+   "fx_px": 763.0,
+   "fy_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "view": "elevated, looking down obliquely at a table in front of the thrower; floor visible, no horizon in view",
+  "perspective_cues": "table top is a rectangle seen in perspective (near edge lower-left, far edge upper-right); floor plane below; wall/partition at back right"
+ },
+ "edit_note": "Background (incl. the seated person, monitors and the thrower except her hands) is blurred / faces masked; watermark \"Modified with Segment Anything 2 Demo\" bottom right. Sharp: ball, table top, thrower hands.",
+ "objects": {
+  "ball": {
+   "desc": "orange basketball (Wilson logo, black seams); the only orange object",
+   "moves": true,
+   "visible_frames": "0-48 (all)",
+   "track": "tracks/ball.csv",
+   "reference_point": "circle centre (cx, cy) of fitted ball outline",
+   "apparent_diameter_px": {
+    "held_frames_0_20_mean": 125.7,
+    "frame_24": 114.5,
+    "frame_30": 102.0,
+    "frame_36": 107.7,
+    "frame_41": 105.0,
+    "frames_44_48_mean": 109.0
+   },
+   "size_trend": "apparent diameter shrinks from ~126 px while held (closer to camera) to ~102-110 px near the table (farther); for a ball of true diameter D, camera distance ~ 763*D/diam_px"
+  },
+  "table": {
+   "desc": "small square wooden-top table (light wood, single central metal pole) in front of the thrower; the ball bounces on it",
+   "moves": false,
+   "visible_frames": "0-48",
+   "top_corners_px_frame0": {
+    "near_left": [
+     440,
+     605
+    ],
+    "left_back": [
+     477,
+     417
+    ],
+    "far_right": [
+     681,
+     384
+    ],
+    "near_right": [
+     755,
+     542
+    ]
+   },
+   "top_edge_lengths_px": {
+    "near_edge(near_left-near_right)": 323,
+    "left_edge(near_left-left_back)": 192,
+    "back_edge(left_back-far_right)": 207,
+    "right_edge(far_right-near_right)": 175
+   },
+   "top_bbox_px": [
+    437,
+    380,
+    757,
+    608
+   ],
+   "front_edge_thickness_px": 12,
+   "pole": "metal pole centre x~645, from y~610 to bottom of frame (720, cut off)",
+   "reliability": "corners +-4 px by eye on zoomed frame 0"
+  },
+  "thrower": {
+   "desc": "woman in blue denim overalls, dark top, ponytail, face masked; stands behind table right of centre; holds ball with right hand extended, releases it",
+   "moves": "arms only (arm extended holding ball until frame 23, then both arms move); body stays",
+   "visible_frames": "0-48",
+   "approx_extent_px_frame0": {
+    "head_top_y": 12,
+    "feet_y": 640,
+    "x_range": [
+     690,
+     820
+    ],
+    "standing_height_px": 628
+   },
+   "reliability": "body is blurred by the edit; extents +-10 px"
+  },
+  "seated_person": {
+   "desc": "blurred person in grey shirt seated at a desk/monitor, left-centre background",
+   "moves": "slightly (arms)",
+   "visible_frames": "0-48",
+   "approx_bbox_px": [
+    180,
+    130,
+    460,
+    480
+   ]
+  },
+  "background": {
+   "desc": "blurred: monitor (x~400-480,y~80-180), white shelf/fridge at left, tripod/stand at right (dark diagonal bar x~1050-1270), grey partition walls, carpeted floor"
+  }
+ },
+ "events": [
+  {
+   "event": "ball held still in right hand",
+   "frames": "0-20",
+   "t": "0-0.833",
+   "note": "centre jitters +-1.5 px"
+  },
+  {
+   "event": "motion start (hand begins lowering/opening)",
+   "frame": 21,
+   "t": 0.875
+  },
+  {
+   "event": "last visible finger contact / release",
+   "frame": 23,
+   "t": 0.958,
+   "note": "fingers touch ball edge in 22-23, ball free from 24; release ~23-24"
+  },
+  {
+   "event": "first impact on table top (lowest point)",
+   "frame": 30,
+   "t": 1.25,
+   "cy_px": 414.1
+  },
+  {
+   "event": "apex of first bounce",
+   "frame": 36,
+   "t": 1.5,
+   "cy_px": 305.0,
+   "note": "frames 35-36 nearly equal"
+  },
+  {
+   "event": "second impact on table top",
+   "frame": 41.5,
+   "t": 1.729,
+   "note": "between frames 41 and 42 (both at lowest y ~413)"
+  },
+  {
+   "event": "apex of second bounce",
+   "frame": 46,
+   "t": 1.917,
+   "cy_px": 371.2
+  },
+  {
+   "event": "video ends, ball descending",
+   "frame": 48,
+   "t": 2.0
+  }
+ ],
+ "files": {
+  "tracks/ball.csv": "final ball track",
+  "tracks/ball_fit.csv": "fit A (mask contour)",
+  "tracks/ball_edgefit.csv": "fit B (edge)",
+  "tracks/ball_raw.csv": "hull mask extents",
+  "notes.md": "method and reliability"
+ }
+}

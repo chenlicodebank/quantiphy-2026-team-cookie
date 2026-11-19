@@ -1,0 +1,18 @@
+{
+ "video": "internet_0010_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MC",
+ "fps": 30.0003,
+ "frames": 97,
+ "duration_s": 3.2333,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2964,
+  "question": "How tall is the shooter in cm?",
+  "prior": "basketball size = 24cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

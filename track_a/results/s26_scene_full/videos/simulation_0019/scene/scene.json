@@ -1,0 +1,123 @@
+{
+  "video": "simulation_0019.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 33.264746,
+  "frames": 97,
+  "duration_s": 2.916,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; frame for time t = round(t * fps)",
+  "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+  "image_orientation": "The render is rotated 90 deg: world UP points to image -x (people stand with head at left, feet at right). World vertical sizes are measured along image x; the walking direction (world horizontal, parallel to the back wall) is image +y (downward).",
+  "camera": {
+    "motion": "static (phase correlation of the wall region frame 0 vs 10/40/70/96: shift < 0.03 px)",
+    "view": "Looks at a coffered gallery wall (image left half, x < ~650) and the floor in front of it (image right, x > ~650), from slightly above (floor visible).",
+    "perspective_cues": {
+      "wall_columns_image_y_ranges_at_x60": [[164, 220], [384, 429], [600, 645], [807, 864], [1015, 1079]],
+      "wall_column_centre_spacing_px": [214, 215, 213, 222],
+      "wall_beams_image_x_ranges": [[0, 31], [172, 245], [415, 485]],
+      "note": "Beam x-ranges are identical at y=100..950 and column spacing is near-uniform, so the wall plane is nearly parallel to the image plane along the walking direction; no visible vanishing point. The person walks parallel to the wall at roughly constant camera distance (apparent height 246-261 px, no trend)."
+    },
+    "focal_length": "unknown (estimate from given depths + known size)"
+  },
+  "objects": {
+    "person": {
+      "kind": "human, adult man, white T-shirt, grey jeans, dark sneakers with white stripes, brown hair",
+      "moves": true,
+      "motion": "walks at steady pace along image +y (top to bottom), parallel to the wall, behind the large sculpture (farther from camera than the sculpture/pedestal)",
+      "track": "tracks/person.csv",
+      "reference_point": "pelvis estimate: x = head_x + 0.5*(feet_x - head_x), y = mean y of the mask in the torso/hip band",
+      "visible_frames": "0-50 fully; 51-58 partly (head and then most of body hidden by the sculpture); 59-77 fully hidden; 78-88 small parts (head through a gap at x~528-545, then legs); 89-93 head+torso, legs hidden by the pedestal; 94-96 nearly full (feet may be cut by pedestal edge)",
+      "pelvis_image_position": {"frame_0": [655.5, 197.7], "frame_50": [652.5, 471.2], "frame_96": [649.0, 735.7]},
+      "pelvis_y_rate_px_per_frame": {"linear_fit_all_measured": 5.60, "frames_0_50": 5.51, "rms_residual_px": 3.3, "note": "gait oscillation ~+-3 px about the line"},
+      "apparent_height_px": {"median": 255, "min": 243, "max": 261, "note": "head top to lowest foot along image x, frames 0-50; dips to ~246 at mid-stance/stride; standing height ~ 257-261 when legs straight"},
+      "stride_extent_px": {"min": 59, "max": 132, "note": "mask extent along walking direction (image y), toe-to-heel of both feet"},
+      "torso_width_px": "about 40-45 (shoulder band, side view)"
+    },
+    "sculpture_main": {
+      "kind": "large light-grey/beige abstract swirling sculpture with a horn-like point toward image left (world up)",
+      "moves": false,
+      "image_bbox_px": {"x0": 393, "x1": 701, "y0": 470, "y1": 705},
+      "world_height_px_along_x": 308,
+      "width_px_along_y": 235,
+      "centre_px": [547, 588],
+      "note": "sits on the pedestal; occludes the person in frames 51-93"
+    },
+    "pedestal": {
+      "kind": "plinth under the main sculpture: light stone upper block + dark charcoal lower box standing on the floor",
+      "moves": false,
+      "light_upper_block_bbox_px": {"x0": 701, "x1": 768, "y0": 467, "y1": 726},
+      "dark_lower_box_bbox_px": {"x0": 768, "x1": 895, "y0": 448, "y1": 748},
+      "total_height_px_along_x": 194,
+      "width_px_along_y": 300,
+      "note": "dark box front face spans y 448-748 (300 px) at its floor end; closer to camera than the person"
+    },
+    "painting_upper": {
+      "kind": "abstract painting (blue/orange/black splashes on white) on a dark display stand, image above the sculpture",
+      "moves": false,
+      "canvas_bbox_px": {"x0": 532, "x1": 654, "y0": 314, "y1": 404},
+      "canvas_height_px_along_x": 122, "canvas_width_px_along_y": 90,
+      "stand_bar_bbox_px": {"x0": 664, "x1": 685, "y0": 298, "y1": 417}
+    },
+    "painting_lower": {
+      "kind": "abstract painting (red circle, blue/orange on white) on a dark display stand, image below the sculpture",
+      "moves": false,
+      "canvas_bbox_px": {"x0": 531, "x1": 654, "y0": 719, "y1": 811},
+      "canvas_height_px_along_x": 123, "canvas_width_px_along_y": 92,
+      "stand_bar_bbox_px": {"x0": 664, "x1": 686, "y0": 704, "y1": 826}
+    },
+    "painting_middle": {
+      "kind": "mostly white painting on a stand directly behind the main sculpture",
+      "moves": false,
+      "visible_canvas_bbox_px": {"x0": 532, "x1": 657, "y0": 457, "y1": "hidden (>= ~520)"},
+      "note": "largely hidden by the sculpture; extents unreliable"
+    },
+    "sculpture_top": {
+      "kind": "second sculpture (bronze/wood ribbon shape) on a dark pedestal at the top image edge",
+      "moves": false,
+      "sculpture_bbox_px": {"x0": 547, "x1": 660, "y0": 0, "y1": 48},
+      "pedestal_bbox_px": {"x0": 660, "x1": 760, "y0": 0, "y1": 78},
+      "note": "cut by the top image edge; extents along y are lower bounds"
+    },
+    "black_panel": {
+      "kind": "black rectangular panel/screen on the wall near the top",
+      "moves": false,
+      "bbox_px": {"x0": 525, "x1": 633, "y0": 72, "y1": 122}
+    },
+    "small_dark_object_bottom": {
+      "kind": "small dark cylinder (bin or bollard) at the bottom image edge",
+      "moves": false,
+      "bbox_px": {"x0": 607, "x1": 657, "y0": 1056, "y1": 1079},
+      "note": "cut off by image edge"
+    },
+    "back_wall": {
+      "kind": "coffered concrete wall with dark/wood-lined recesses (image left half)",
+      "moves": false,
+      "note": "see camera.perspective_cues for beam/column positions"
+    },
+    "floor": {
+      "kind": "light marble floor (image right, x > ~650) with static sunlight patches and shadows",
+      "moves": false,
+      "note": "person's feet touch the floor at image x ~ 770-786"
+    },
+    "person_shadow": {
+      "kind": "person's cast shadow, a thin dark streak on the floor right of the feet (x ~ 785-815)",
+      "moves": true,
+      "note": "excluded from the person mask"
+    }
+  },
+  "events": [
+    {"event": "person walking throughout (already in motion at frame 0, still walking at frame 96); no start/stop", "frame": [0, 96]},
+    {"event": "person starts to be occluded by the sculpture (head hidden)", "frame": 51, "t": 1.533},
+    {"event": "person fully hidden behind sculpture/pedestal", "frame": [59, 77], "t": [1.774, 2.315]},
+    {"event": "person head+torso re-emerge (legs still behind pedestal)", "frame": 89, "t": 2.676},
+    {"event": "person nearly fully visible again", "frame": 94, "t": 2.826},
+    {"event": "gait: widest stride (max stride_extent) frames", "frame": [0, 15, 30, 47]},
+    {"event": "gait: feet together (min stride_extent) frames", "frame": [6, 22, 40]}
+  ],
+  "files": {
+    "tracks/person.csv": "per-frame person track",
+    "notes.md": "methods, reliability and ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

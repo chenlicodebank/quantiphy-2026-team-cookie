@@ -1,0 +1,15 @@
+{
+  "status": "prepared_not_run",
+  "rows": 3289,
+  "videos": 568,
+  "base_eval": "176",
+  "base_mra": "0.7428",
+  "new_api_cost_usd": 0,
+  "admission": "Requires a complete positive validation result and an affordable predeclared run cap. No automatic launch.",
+  "packs_sha256": "a9a60730e1499b83d3f66652213bb567e39a2a4476223f61f2280613b04c9d08",
+  "source_sha256": {
+    "results/fulltest_adopt_20261015_2/submission.csv": "3f002dbcbe2906b6cd9fbb391f0698b5315249407c2279d4d66440db9af78187",
+    "scripts/dsh_v5r_test_prepare_v2.py": "6217e334373a61e7218e9c0c45267886cec9837b431be4f9f9a6e58cf6e5085b",
+    "scripts/prepare_s26_test.py": "4abb9105d8d3b1c75e8ac1e95152cb0b1e6dcc39889b98becd95e7b11799faf9"
+  }
+}

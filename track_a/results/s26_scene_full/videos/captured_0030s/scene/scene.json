@@ -1,0 +1,204 @@
+{
+ "video": "captured_0030s.mp4",
+ "source": "lab (captured; background replaced by Segment Anything 2 demo, watermark bottom-right)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "evidence": "table outline rows/columns vary <=2 px over all 49 frames (static_table.py)",
+  "intrinsics_from_benchmark": "Orbbec Femto Mega, HFOV 80 deg: f = 0.5959*1280 = 763 px, principal point ~ (640,360)",
+  "view": "slightly elevated, looking a little down onto the tabletop; table front edge horizontal; side edges converge upward"
+ },
+ "objects": [
+  {
+   "name": "red_ball",
+   "moves": true,
+   "frames": [
+    0,
+    48
+   ],
+   "track": "tracks/red_ball.csv",
+   "description": "single red/orange-red sphere (glossy, white highlights), attached to a thin grey string/cord that trails toward the back; moves in a closed roughly elliptical loop low over the tabletop (pendulum-like swing), ~1 loop per 25 frames; apparent diameter varies ~37-80 px with depth",
+   "reference_point": "visible centre (circle fit to colour mask); use cy_corr for frames 12-17 (occluded bottom)",
+   "apparent_diameter_px": {
+    "far_min": "~41-45 (frames 11,18-19; 12-17 occluded), interp 42-45",
+    "near_max": "~70-80 (frames 25-29, motion-blurred; bbox_h 66-77)",
+    "clean_examples": {
+     "8": 50.8,
+     "23": 57.7,
+     "33": 54.4,
+     "40": 44.1,
+     "45": 40.1
+    }
+   }
+  },
+  {
+   "name": "grey_string",
+   "moves": true,
+   "frames": [
+    0,
+    48
+   ],
+   "track": null,
+   "description": "thin grey cord/stem attached to the ball, visible as a ~100-150 px grey streak trailing back/up from the ball, partly cut by segmentation; not tracked"
+  },
+  {
+   "name": "table",
+   "moves": false,
+   "frames": [
+    0,
+    48
+   ],
+   "description": "brown wooden rectangular tabletop on a single dark-grey central pedestal; long axis left-right (parallel to image x)",
+   "image_geometry_px": {
+    "top_surface_back_edge_y": 442,
+    "back_left_corner_approx": [
+     378,
+     443
+    ],
+    "back_right_corner_approx": [
+     810,
+     443
+    ],
+    "top_surface_front_edge_y": 530,
+    "front_left_corner": [
+     203,
+     531
+    ],
+    "front_right_corner": [
+     975,
+     531
+    ],
+    "front_face_rows": [
+     530,
+     559
+    ],
+    "front_face_thickness_px": 29,
+    "front_edge_length_px": 772,
+    "back_edge_length_px_approx": 432,
+    "top_depth_extent_in_image_px": 88,
+    "pedestal_x": [
+     572,
+     620
+    ],
+    "pedestal_width_px": 48,
+    "pedestal_visible_rows": [
+     559,
+     719
+    ],
+    "note": "pedestal runs off the bottom of the frame; floor not visible"
+   }
+  },
+  {
+   "name": "background",
+   "moves": false,
+   "description": "synthetic replaced background (blue-grey to white gradient with speckle) - not a real surface"
+  },
+  {
+   "name": "watermark",
+   "moves": false,
+   "description": "text 'Modified with Segment Anything 2 Demo', box x 1030-1280, y 690-720"
+  }
+ ],
+ "events": [
+  {
+   "event": "ball already moving at first frame (no start of motion in clip)",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "ball lowest in image (nearest part of its loop, in front of table front edge)",
+   "frame": 1,
+   "time": 0.0417,
+   "y": 493.84
+  },
+  {
+   "event": "ball reaches leftmost image x (horizontal direction reversal, left->right)",
+   "frame": 8,
+   "time": 0.3333,
+   "x": 415.32
+  },
+  {
+   "event": "ball partly hidden behind table back edge",
+   "frames": [
+    12,
+    17
+   ],
+   "times": [
+    0.5,
+    0.7083
+   ]
+  },
+  {
+   "event": "ball highest in image (farthest part of its loop)",
+   "frame": 14,
+   "time": 0.5833,
+   "y": 427.74
+  },
+  {
+   "event": "ball highest in image (farthest part of its loop)",
+   "frame": 18,
+   "time": 0.75,
+   "y": 418.29
+  },
+  {
+   "event": "ball reaches rightmost image x (horizontal direction reversal, right->left)",
+   "frame": 23,
+   "time": 0.9583,
+   "x": 860.81
+  },
+  {
+   "event": "ball overlaps table front face in image (passes in front of/below the front edge, y>530)",
+   "frames": [
+    25,
+    29
+   ]
+  },
+  {
+   "event": "ball lowest in image (nearest part of its loop, in front of table front edge)",
+   "frame": 28,
+   "time": 1.1667,
+   "y": 514.21
+  },
+  {
+   "event": "ball reaches leftmost image x (horizontal direction reversal, left->right)",
+   "frame": 33,
+   "time": 1.375,
+   "x": 397.89
+  },
+  {
+   "event": "ball highest in image (farthest part of its loop)",
+   "frame": 39,
+   "time": 1.625,
+   "y": 426.26
+  },
+  {
+   "event": "ball rendered pale pink/white (compositing artefact), same object",
+   "frames": [
+    47,
+    48
+   ]
+  },
+  {
+   "event": "ball still moving at last frame (no end of motion in clip)",
+   "frame": 48,
+   "time": 2.0
+  }
+ ],
+ "perspective": {
+  "ground_plane": "tabletop: front edge y~530 (x 203-975), back edge y~442 (x ~378-810); side edges converge upward -> vanishing point above the image centre near x~590",
+  "horizon": "above the table back edge (camera slightly above table height, looking slightly down); not directly visible",
+  "ball_size_vs_time": "see tracks/red_ball.csv circle_diam_px / bbox_h: ~67 px at f0, ~51 at f8, ~41-45 at f11-19 (farthest), ~58 at f23, ~70-80 at f25-29 (nearest), ~54 at f33, ~40-44 at f40-46, ~46 at f48"
+ },
+ "files": {
+  "track": "tracks/red_ball.csv",
+  "notes": "notes.md",
+  "static": "static_table.json",
+  "scripts": "scripts/"
+ }
+}

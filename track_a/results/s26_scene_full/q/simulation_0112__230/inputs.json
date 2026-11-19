@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0112.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 24.006983,
+ "frames": 55,
+ "duration_s": 2.291,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 230,
+  "question": "What is the length of the car in meters?",
+  "prior": "speed of the car = 6.66m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

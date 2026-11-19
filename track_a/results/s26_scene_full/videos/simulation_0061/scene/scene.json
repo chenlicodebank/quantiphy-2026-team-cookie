@@ -1,0 +1,275 @@
+{
+ "video": "simulation_0061.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "units": "pixels (full resolution, x right, y down) and seconds; no metric scale anywhere",
+ "camera": {
+  "motion": "static (phase correlation frame0 vs frame71 on ground region: shift < 0.01 px); no pan/shake/zoom",
+  "per_frame_background_shift_px": 0.0,
+  "principal_point_assumed": [
+   1080,
+   540
+  ],
+  "horizon_estimate_y": "~535 +-20 (vertical poles are vertical -> near-zero pitch/roll; vanishing of the right-hand lamp-post row bases/tops ~ (1700, 534))",
+  "ground_plane": "flat street: grey asphalt road running from lower-left/centre toward the far right; beige brick pavement on the right foreground; beige pavement on the left; far pavement band behind the road at y~575-590",
+  "perspective_notes": "cyclist rides parallel to the image plane (constant apparent size 86x92 px, bottom y ~627-633) -> roughly constant depth; van moves right and slightly toward the camera (length 281->345 px); taxi turns left toward the camera (side view -> front three-quarter view, bottom y 630->695); pedestrian walks left and slightly toward the camera (height 123->138 px)"
+ },
+ "objects": {
+  "taxi": {
+   "kind": "yellow sedan taxi (roof sign)",
+   "moves": true,
+   "visible_frames": "0-71",
+   "distinguish": "only yellow vehicle; starts in side view at left-centre (x 634-919), in front of the white van",
+   "track": "tracks/taxi.csv",
+   "reference_point": "bbox centre (cx,cy); bottom_cx/bottom_y = ground contact",
+   "apparent_bbox_w_px": {
+    "0": 273.0,
+    "12": 288.0,
+    "24": 247.0,
+    "36": 143.0,
+    "48": 174.0,
+    "60": 236.0,
+    "71": 255.0
+   },
+   "apparent_bbox_h_px": {
+    "0": 94.0,
+    "12": 99.0,
+    "24": 106.0,
+    "36": 120.0,
+    "48": 119.0,
+    "60": 127.0,
+    "71": 136.0
+   },
+   "notes": "image-x extent is NOT the car length after frame ~20 because the car rotates (turning toward camera). Side-view length (bumper-to-bumper) at frames 0-12 ~ 285-287 px; height (tyre bottom to roof sign) ~ 85-90 px."
+  },
+  "van": {
+   "kind": "white full-size van (cargo/passenger van, tan-tinted side windows)",
+   "moves": true,
+   "visible_frames": "0-71",
+   "distinguish": "only white vehicle; behind the taxi at start, exits right",
+   "track": "tracks/van.csv",
+   "reference_point": "bbox centre",
+   "apparent_len_px": {
+    "0": 281.3,
+    "12": 296.6,
+    "24": 281.3,
+    "36": 296.6,
+    "48": 306.9,
+    "60": 322.7,
+    "71": 345.0
+   },
+   "apparent_h_px": {
+    "0": 107.5,
+    "12": 109.3,
+    "24": 111.1,
+    "36": 112.9,
+    "48": 117.5,
+    "60": 122.0,
+    "71": 132.0
+   },
+   "notes": "side view throughout (length along image x). Frames 0-46 lower body hidden by taxi: bottom estimated as top+0.383*length (ratio measured frames 49-71)."
+  },
+  "cyclist": {
+   "kind": "man riding a bicycle (dark top, white-rimmed wheels)",
+   "moves": true,
+   "visible_frames": "0-71 (bike hidden behind taxi frames 0-~14; rider head/torso visible)",
+   "distinguish": "only cyclist; rides left->right in the far lane",
+   "track": "tracks/cyclist.csv",
+   "reference_point": "bbox centre (bike+rider); hip_x/hip_y = saddle/pelvis estimate",
+   "apparent_size_px": {
+    "w_wheel_to_wheel": 86,
+    "h_head_to_wheel_bottom": 92
+   },
+   "notes": "size constant -> moving at ~constant depth"
+  },
+  "pedestrian": {
+   "kind": "man walking (white t-shirt, jeans)",
+   "moves": true,
+   "visible_frames": "0-71",
+   "distinguish": "only pedestrian; left pavement, walks leftward",
+   "track": "tracks/pedestrian.csv",
+   "reference_point": "bbox centre; hip_*_est = bottom - 0.53*height",
+   "apparent_h_px": {
+    "0": 123.0,
+    "12": 125.0,
+    "24": 126.0,
+    "36": 130.0,
+    "48": 132.0,
+    "60": 134.0,
+    "71": 138.0
+   }
+  }
+ },
+ "static_objects": {
+  "metal_trash_can_foreground": {
+   "desc": "silver open-top bin standing on the road, lower-left foreground",
+   "bbox_xyxy": [
+    458,
+    836,
+    541,
+    942
+   ],
+   "w_px": 83,
+   "h_px": 106,
+   "note": "lid top read visually (836); body 461-537 x 855-942 by mask"
+  },
+  "green_trash_bin_left_pavement": {
+   "desc": "green slatted bin at left pavement corner next to lamp post A",
+   "bbox_xyxy": [
+    572,
+    609,
+    608,
+    664
+   ],
+   "w_px": 36,
+   "h_px": 55
+  },
+  "big_lamp_post_C": {
+   "desc": "tall double-lantern lamp post, centre-right foreground (closest street light)",
+   "pole_x": [
+    1302,
+    1314
+   ],
+   "top_y": 353,
+   "base_y": 1001,
+   "lantern_span_x": [
+    1187,
+    1441
+   ],
+   "h_px": 648
+  },
+  "lamp_post_D": {
+   "desc": "lamp post on right pavement right of C",
+   "pole_x": [
+    1481,
+    1489
+   ],
+   "top_y": 406,
+   "base_y": 794,
+   "h_px": 388
+  },
+  "lamp_post_E": {
+   "desc": "next lamp post further along right pavement",
+   "pole_x": [
+    1559,
+    1565
+   ],
+   "base_y": 703
+  },
+  "lamp_post_A": {
+   "desc": "double-lantern lamp post at left pavement corner (pedestrian passes behind it frames 0-~12)",
+   "pole_x": [
+    543,
+    548
+   ],
+   "top_y": 433,
+   "base_y": 676,
+   "lantern_span_x": [
+    502,
+    586
+   ],
+   "h_px": 243
+  },
+  "lamp_post_far_left": {
+   "desc": "double-lantern lamp post, far left of frame",
+   "pole_x": [
+    155,
+    162
+   ],
+   "top_y": 419,
+   "base_y": 737,
+   "h_px": 318
+  },
+  "traffic_light_B": {
+   "desc": "traffic light with two heads and triangular sign, left of centre, pole at x 742 (behind the taxi)",
+   "pole_x": [
+    742,
+    744
+   ],
+   "top_y": 352
+  },
+  "traffic_light_centre": {
+   "desc": "single traffic light with red light, centre (x~1022), far corner",
+   "pole_x": [
+    1019,
+    1025
+   ],
+   "base_y": 594
+  },
+  "traffic_light_right": {
+   "desc": "traffic light with pedestrian-crossing warning sign, right (x~1594)",
+   "top_y": 328,
+   "base_y": 661
+  },
+  "drain_grate_right_pavement": {
+   "desc": "rectangular red-framed drain grate on right pavement",
+   "bbox_xyxy": [
+    1809,
+    672,
+    1998,
+    701
+   ],
+   "w_px": 190,
+   "h_px": 30
+  },
+  "planters": {
+   "desc": "low red-bordered planter beds on pavements (left corner x~640-760 y~640-655; far side several)",
+   "measured": false
+  },
+  "road": {
+   "desc": "asphalt road from the lower-left/centre to the far right; far curb (behind the vehicles) at y~587 near x 640-1100"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "all four movers already in view; taxi already moving (~6 px/frame right)"
+  },
+  {
+   "frame": 1,
+   "t": 0.042,
+   "what": "van starts moving from (near) rest: rear edge 625 at frames 0-1, then accelerates steadily (image-x step 1 px/frame at f2 -> ~25 px/frame at f65-71)"
+  },
+  {
+   "frame": 1,
+   "t": 0.042,
+   "what": "cyclist moving at ~constant 11-13 px/frame to the right throughout (frame 0 step uncertain: occluded)"
+  },
+  {
+   "frame": 14,
+   "t": 0.583,
+   "what": "cyclist emerges in front of the taxi front (bike fully visible from ~14-17)"
+  },
+  {
+   "frame": 36,
+   "t": 1.5,
+   "what": "taxi image-x direction change: moving right until ~f36 then left (turning toward camera); y keeps increasing (approaching)"
+  },
+  {
+   "frame": 41,
+   "t": 1.708,
+   "what": "cyclist passes behind big lamp post C (frames 41-45)"
+  },
+  {
+   "frame": 47,
+   "t": 1.958,
+   "what": "van fully clear of the taxi (taxi right edge < van rear edge from ~f48-49)"
+  },
+  {
+   "frame": 52,
+   "t": 2.167,
+   "what": "van front reaches the cyclist (cyclist is in front of the van, nearer the camera); overlap continues to end"
+  },
+  {
+   "frame": 63,
+   "t": 2.625,
+   "what": "van rear passes behind lamp post C; f70 behind lamp post D"
+  }
+ ]
+}

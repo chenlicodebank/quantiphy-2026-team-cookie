@@ -1,0 +1,249 @@
+{
+ "video": "captured_0031.mp4",
+ "source": "lab (real recording)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame": "t = frame / 24",
+ "camera_intrinsics_lab_convention": {
+  "f_px": 763.0,
+  "cx": 640,
+  "cy": 360,
+  "note": "Orbbec Femto Mega RGB, HFOV 80 deg, f = 0.5959*width (from the task conventions, not measured)"
+ },
+ "camera": {
+  "motion": "static",
+  "max_background_shift_px": 0.12,
+  "per_frame_shift_file": "scene/camera_shift.json"
+ },
+ "pixel_units": "all positions/extents in pixels of the 1280x720 frame, origin top-left, y down",
+ "objects": {
+  "yellow_ball": {
+   "desc": "yellow-green tennis ball, starts on the RIGHT on the far edge of the table (behind it the seated person's right hand)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "scene/tracks/yellow_ball.csv",
+   "motion": "held/at rest frames 0-15, rolls toward the camera (and slightly left) across the table top, rolls off the near (front) table edge around frame 42-43, falls and leaves the bottom of the image after frame 47; not visible in frame 48",
+   "apparent_diameter_px": {
+    "frame0": 30.61,
+    "frame15": 29.85,
+    "frame30": 42.82,
+    "frame42": 55.86
+   },
+   "centre_px": {
+    "frame0": [
+     758.82,
+     413.23
+    ],
+    "frame42": [
+     730.21,
+     465.34
+    ]
+   }
+  },
+  "white_ball": {
+   "desc": "small white ball (ping-pong size), starts LEFT of the yellow ball on the far edge of the table (seated person's left hand behind it)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "scene/tracks/white_ball.csv",
+   "motion": "at rest frames 0-15, rolls toward the camera and to the left across the table top until the end of the clip (still rolling on the table at frame 48, does not reach the edge)",
+   "apparent_diameter_px": {
+    "frame0": 16.46,
+    "frame15": 15.59,
+    "frame30": 20.03,
+    "frame48": 29.65
+   },
+   "centre_px": {
+    "frame0": [
+     678.61,
+     415.96
+    ],
+    "frame48": [
+     641.62,
+     459.19
+    ]
+   }
+  },
+  "table": {
+   "desc": "rectangular wooden (brown) table top on a single dark-grey pedestal leg, centre of image",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "top_surface_corners_px": {
+    "back_left": [
+     577,
+     425
+    ],
+    "back_right": [
+     850,
+     428
+    ],
+    "front_left": [
+     463,
+     484
+    ],
+    "front_right": [
+     962,
+     497
+    ]
+   },
+   "front_edge_length_px": 499,
+   "back_edge_length_px": 273,
+   "front_face_thickness_px": 20,
+   "front_face_y_range_at_x720": [
+    489,
+    512
+   ],
+   "pedestal_leg_px": {
+    "x_range": [
+     705,
+     760
+    ],
+    "y_range": [
+     515,
+     720
+    ],
+    "width_px": 55
+   },
+   "accuracy": "+-3 px (corners read by eye on a 4x zoom grid, frame 48)"
+  },
+  "seated_person": {
+   "desc": "person sitting behind the table facing the camera, only top of head, hands/forearms and jeans (below the table) visible; launches the balls",
+   "moves": "slightly (hands withdraw after release)",
+   "visible_frames": [
+    0,
+    48
+   ],
+   "head_top_bbox_px": [
+    690,
+    407,
+    762,
+    425
+   ],
+   "hands": "at the balls in frames 0-15, then resting on the far table edge (left hand ~x 645-680, right hand ~x 760-790, y ~ 415-428)"
+  },
+  "tripod_with_camera": {
+   "desc": "black tripod behind the table with a second (Orbbec-like) camera on top, blue-lit",
+   "moves": false,
+   "camera_head_bbox_px": [
+    672,
+    66,
+    712,
+    98
+   ],
+   "tripod_feet_px": {
+    "left": [
+     515,
+     660
+    ],
+    "right": [
+     845,
+     700
+    ],
+    "apex": [
+     686,
+     120
+    ]
+   }
+  },
+  "left_tripod_leg": {
+   "desc": "black tripod leg at the far left edge of the image (another tripod near the camera)",
+   "moves": false,
+   "from_to_px": [
+    [
+     0,
+     300
+    ],
+    [
+     135,
+     700
+    ]
+   ]
+  },
+  "tv_screen": {
+   "desc": "black wall-mounted TV/monitor, top right corner",
+   "moves": false,
+   "bbox_px": [
+    1008,
+    0,
+    1280,
+    122
+   ]
+  },
+  "ceiling_light": {
+   "desc": "bright light reflected in TV / ceiling fixture at top right",
+   "moves": false,
+   "centre_px": [
+    1175,
+    50
+   ]
+  },
+  "wall_panels": {
+   "desc": "grey acoustic wall panels on back and right walls; room corner (wall-wall) vertical near x~820, top edge of panels meets ceiling in a V with apex ~ (820,152)",
+   "moves": false
+  },
+  "floor_cables": {
+   "desc": "red/orange and black cables lying on the carpet floor",
+   "moves": false,
+   "region_px": [
+    0,
+    560,
+    1280,
+    720
+   ]
+  }
+ },
+ "events": [
+  {
+   "event": "both balls at rest, held by the seated person's hands",
+   "frames": [
+    0,
+    15
+   ]
+  },
+  {
+   "event": "release / start of motion of yellow ball and white ball (centre starts moving down-screen)",
+   "frame": 15,
+   "t": 0.625,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "yellow ball reaches near table edge and rolls off (loses contact with the table top)",
+   "frame": 42.5,
+   "t": 1.7708333333333333,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "yellow ball in free fall in front of the table pedestal / person's jeans",
+   "frames": [
+    43,
+    47
+   ]
+  },
+  {
+   "event": "yellow ball leaves the bottom of the image",
+   "frame": 48,
+   "t": 2.0
+  },
+  {
+   "event": "white ball still rolling on the table at end of clip",
+   "frame": 48,
+   "t": 2.0
+  }
+ ],
+ "perspective": {
+  "ground_plane": "table top is a horizontal plane seen from slightly above (camera roughly at table height, looking slightly down); table back edge y~426, front edge y~484-497",
+  "motion_direction": "both balls roll mostly TOWARD the camera (depth decreases), so image displacement underestimates 3D motion; use apparent diameter or depth_info to recover depth",
+  "apparent_size_change": "yellow ball diameter 29.5 px (frames 0-15) -> 56 px (frame 42): about 1.9x closer; white ball 16.4 px -> 29.6 px (frame 48): about 1.8x closer. With f=763 px, Z = 763 * D_true / diam_px"
+ }
+}

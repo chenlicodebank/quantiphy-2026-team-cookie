@@ -1,0 +1,57 @@
+{
+  "video": "simulation_0207.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 30,
+  "duration_s": 1.25,
+  "image_size_px": [2124, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, original resolution) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (no pan/shake; background identical frame to frame, consecutive-frame difference ~0 once the typewriter is at rest, frames 25-29)",
+    "per_frame_background_shift_px": [0, 0],
+    "perspective": "Still-life desk scene viewed roughly front-on at about desk height. The falling typewriter moves vertically in the image plane; its pixel width stays 289-292 px through the whole fall (frames 0-10), i.e. constant depth -> a single px scale is valid for the fall. Its apparent height grows 113 -> 167 px during the fall because the camera sees its underside at the top of the frame and its top/keyboard when it is lower (viewing-angle change, not a depth change). Desk top recedes in perspective (front edge near bottom of frame, back edge y~945)."
+  },
+  "moving_objects": {
+    "typewriter": {
+      "description": "Black vintage portable typewriter (silver/white keys, carriage with two paper-guide plates on top). The only moving object.",
+      "moves": true,
+      "visible_frames": "0-29 (whole clip), never occluded",
+      "track_file": "tracks/typewriter.csv",
+      "reference_point": "bbox_cx, bbox_cy (centre of the mask bounding box) = best 2D estimate of the rigid-body origin/centre; centroid_x/y (mask pixel mean) also given",
+      "free_fall_extents_px": {"width_along_x": 291, "height_bbox_frame0": 113, "height_bbox_frame10": 167},
+      "rest_extents_px_frames_24_29": {"bbox": [860, 854, 1209, 1026], "width": 350, "height": 173, "visual_check_bbox_frame24": [867, 850, 1195, 1022], "visual_check_width": 328, "note": "rotated (yawed) after the tumble, so wider than in the fall; the mask's right edge includes ~10-15 px of contact shadow, zoomed visual reading gives width ~328 px, height ~172 px"},
+      "start_position_frame0": {"bbox": [836, 202, 1127, 314], "bbox_centre": [981.5, 258.0]},
+      "rest_position_frame24": {"bbox_centre": [1034.5, 940.0]}
+    }
+  },
+  "events": [
+    {"name": "release / start of fall", "frame": 0, "t": 0.0, "note": "already moving downward 0->1 (centre +8 px), so release is at or just before frame 0"},
+    {"name": "last frame fully in the air", "frame": 10, "t": 0.4167, "note": "bottom edge y=974, desk contact level ~1026-1031"},
+    {"name": "impact with desk", "frame": 11, "t": 0.4583, "note": "first frame touching desk (bottom edge 1031); impact occurs between frames 10 and 11 (t 0.417-0.458)"},
+    {"name": "tips up onto its front edge (rocks toward camera)", "frames": "11-15", "t": "0.458-0.625", "note": "top edge rises 862 -> 796; bbox centre moves up 946.5 -> 909.5 and right 1009 -> 1021"},
+    {"name": "highest point of tip-up / direction change", "frame": 15, "t": 0.625},
+    {"name": "falls back flat with a yaw turn", "frames": "16-19", "t": "0.667-0.792"},
+    {"name": "small settling rocks", "frames": "19-23", "t": "0.792-0.958"},
+    {"name": "comes to rest", "frame": 24, "t": 1.0, "note": "frames 24-29 identical"}
+  ],
+  "static_objects": {
+    "_note": "pixel boxes [x0, y0, x1, y1] at frame 0, read from a 100-px grid overlay; accuracy ~+-10 px",
+    "desk": {"desc": "dark wooden desk with green leather top spanning the bottom of frame", "back_edge_y": 945, "back_edge_x": [85, 1900], "front": "below image bottom", "typewriter_rest_contact_y": 1026},
+    "desk_lamp": {"desc": "banker's lamp, green glass shade, brass stem, left", "bbox": [305, 534, 579, 887], "shade": [308, 534, 579, 619]},
+    "book_stack": {"desc": "two-three old brown books under the lamp", "bbox": [338, 860, 579, 993]},
+    "standing_letter": {"desc": "cream handwritten letter leaning upright right of books", "bbox": [577, 781, 720, 995]},
+    "small_card": {"desc": "cream paper card flat on desk front", "bbox": [733, 998, 885, 1043]},
+    "eyeglasses": {"desc": "folded spectacles on desk where the typewriter later lands (hidden behind it afterwards)", "bbox": [913, 948, 1057, 982]},
+    "ashtray": {"desc": "small metal dish front-left", "bbox": [404, 977, 483, 1020]},
+    "alarm_clock": {"desc": "red twin-bell alarm clock with grey face, right of typewriter landing spot", "bbox": [1170, 828, 1262, 962], "face_diameter_px": 92},
+    "photo_frame": {"desc": "small gilt frame with silhouette portrait", "bbox": [1301, 842, 1391, 956]},
+    "telephone": {"desc": "black rotary candlestick/desk telephone, right", "bbox": [1434, 797, 1657, 998]},
+    "pen_in_stand": {"desc": "dip pen in brass stand in front of telephone", "bbox": [1487, 807, 1566, 1009]},
+    "white_card_scissors": {"desc": "white paper and small dark items (scissors/inkwell) right of landing spot", "bbox": [1190, 975, 1390, 1035]},
+    "chair_left": {"desc": "blurred dark wooden chair back behind desk, left", "bbox": [271, 696, 653, 945]},
+    "chair_right": {"desc": "blurred dark wooden chair back behind desk, right", "bbox": [1272, 696, 1657, 945]},
+    "wall": {"desc": "plain teal-blue wall background"}
+  }
+}

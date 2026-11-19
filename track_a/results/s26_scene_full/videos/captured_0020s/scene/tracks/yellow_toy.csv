@@ -1,0 +1,50 @@
+frame,t_s,cx,cy,bbox_x0,bbox_y0,bbox_x1,bbox_y1,bbox_w,bbox_h,mask_len_major,mask_wid_minor,major_axis_deg,mask_area,occluded,note
+0,0.0000,650.2,130.5,638,112,665,145,28,34,39.0,18.3,130,334,2,held by far person
+1,0.0417,652.0,134.1,642,118,667,147,26,30,35.9,15.2,126,262,2,held by far person
+2,0.0833,655.7,131.4,648,116,666,143,19,28,31.3,14.0,116,227,2,held by far person
+3,0.1250,659.4,128.2,652,116,667,139,16,24,27.3,12.1,115,177,2,held by far person
+4,0.1667,,,,,,,,,,,,,1,held by far person; hidden behind far person hand/leg; not visible
+5,0.2083,,,,,,,,,,,,,1,held by far person; hidden behind far person hand/leg; not visible
+6,0.2500,,,,,,,,,,,,,1,held by far person; hidden behind far person hand/leg; not visible
+7,0.2917,,,,,,,,,,,,,1,held by far person; hidden behind far person hand/leg; not visible
+8,0.3333,661.8,132.4,656,122,669,141,14,20,22.0,13.8,111,176,2,held by far person
+9,0.3750,658.2,139.3,650,128,666,149,17,22,27.3,14.4,121,213,2,held by far person
+10,0.4167,651.3,143.8,640,128,663,157,24,30,38.0,16.1,125,342,2,held by far person
+11,0.4583,640.6,146.4,628,132,653,159,26,28,37.7,19.9,129,419,2,held by far person
+12,0.5000,604.4,128.4,590,111,619,143,30,33,34.5,29.6,126,634,2,held by far person
+13,0.5417,584.7,112.4,566,96,605,127,40,32,43.8,30.3,137,672,2,held by far person
+14,0.5833,565.8,95.3,544,76,591,113,48,38,52.7,33.4,145,1083,0,free flight
+15,0.6250,544.9,84.0,522,66,573,103,52,38,54.4,34.0,143,1148,0,free flight
+16,0.6667,522.7,76.2,498,56,547,95,50,40,53.9,32.9,143,1213,0,free flight
+17,0.7083,499.5,73.0,474,52,525,91,52,40,59.3,31.9,144,1253,0,free flight
+18,0.7500,485.5,67.2,470,54,501,83,32,30,30.1,30.0,110,556,2,"free flight; crosses the white object in image (white in front at 18), partly hidden"
+19,0.7917,446.5,83.8,426,62,463,101,38,40,51.9,30.4,137,1002,2,"free flight; crosses the white object in image (white in front at 18), partly hidden"
+20,0.8333,422.9,96.1,398,72,445,117,48,46,61.8,30.7,135,1213,0,free flight
+21,0.8750,396.9,117.0,370,88,419,141,50,54,68.0,29.0,130,1287,0,free flight
+22,0.9167,370.5,147.5,344,116,391,175,48,60,74.0,29.9,125,1383,0,free flight
+23,0.9583,345.0,185.7,320,150,365,217,46,68,78.5,33.9,119,1511,0,free flight
+24,1.0000,315.6,235.7,288,198,341,271,54,74,87.8,45.6,124,1706,0,free flight
+25,1.0417,281.7,258.3,240,232,319,285,80,54,87.3,40.0,154,1892,0,free flight
+26,1.0833,249.9,270.9,202,248,289,294,88,47,95.7,33.7,161,1753,0,free flight
+27,1.1250,220.4,279.2,206,272,233,287,28,16,29.5,14.8,163,273,2,caught by near person (hand closing over it)
+28,1.1667,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+29,1.2083,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+30,1.2500,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+31,1.2917,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+32,1.3333,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+33,1.3750,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+34,1.4167,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+35,1.4583,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+36,1.5000,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+37,1.5417,,,,,,,,,,,,,1,hidden in near person hands/behind hair; not visible
+38,1.5833,195.0,284.5,170,272,223,321,54,50,46.9,52.0,169,329,2,held by near person (green leafy end to the right only partly in mask)
+39,1.6250,203.0,291.0,176,278,229,305,54,28,54.6,22.7,158,626,2,held by near person (green leafy end to the right only partly in mask)
+40,1.6667,213.8,298.9,188,280,247,319,60,40,60.4,31.0,153,971,2,held by near person (green leafy end to the right only partly in mask)
+41,1.7083,224.9,305.1,190,278,261,331,72,54,77.6,48.3,149,1409,2,held by near person (green leafy end to the right only partly in mask)
+42,1.7500,234.9,308.4,198,282,273,335,76,54,81.9,51.2,148,1245,2,held by near person (green leafy end to the right only partly in mask)
+43,1.7917,250.5,307.4,214,290,277,335,64,46,69.8,39.1,152,957,2,held by near person (green leafy end to the right only partly in mask)
+44,1.8333,253.0,310.9,212,292,281,335,70,44,77.8,36.6,147,884,2,held by near person (green leafy end to the right only partly in mask)
+45,1.8750,255.4,310.3,216,292,281,337,66,46,74.6,32.7,141,886,2,held by near person (green leafy end to the right only partly in mask)
+46,1.9167,257.0,311.3,218,292,281,348,64,57,76.1,38.7,139,930,2,held by near person (green leafy end to the right only partly in mask)
+47,1.9583,259.0,313.1,218,296,285,337,68,42,76.7,34.6,142,854,2,held by near person (green leafy end to the right only partly in mask)
+48,2.0000,261.5,315.2,222,298,285,343,64,46,71.6,28.2,139,834,2,held by near person (green leafy end to the right only partly in mask)

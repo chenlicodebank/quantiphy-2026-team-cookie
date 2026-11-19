@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0178_segmented.mp4",
+  "source": "segmentation (Blender simulation, background replaced by pure white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 = t 0",
+  "units": "pixels, frames, seconds; image x to the right, y downward",
+  "camera": {
+    "motion": "static assumed (simulation, fixed camera); background is blank white so camera motion cannot be measured directly. Feet bottoms stay at y 690-695 the whole clip, consistent with a static camera and flat ground.",
+    "ground_line_y_px": 694,
+    "perspective": "side view, both animals walk parallel to the image plane at the same ground line; no perspective cues (no background). One metres-per-pixel scale applies to both animals."
+  },
+  "objects": [
+    {
+      "name": "adult_elephant",
+      "track": "tracks/adult.csv",
+      "identify": "larger dark blue-grey elephant on the RIGHT (in front), light grey/white patch on its ear, faces right",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "motion": "walks steadily to the right the whole clip (never stops); mask centroid x 817.3 -> 1233.6 px (+416.3 px over 59 frames, mean 7.06 px/frame, per-frame 6.3-8.4 jitter from the leg swing); centroid y 568.7-576.7 (gait bob)",
+      "size_px": {
+        "length_bbox_tail_to_trunk": {"median": 404, "min": 371, "max": 424},
+        "height_bbox_feet_to_back": {"median": 228, "min": 220, "max": 233},
+        "body_span_at_centroid_row (rump to front of head/ear)": {"median": 310, "min": 305, "max": 317}
+      },
+      "occlusion": "none"
+    },
+    {
+      "name": "calf_elephant",
+      "track": "tracks/calf.csv",
+      "identify": "smaller elephant (baby) on the LEFT, following behind the adult, faces right, no light ear patch",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "motion": "walks to the right the whole clip; mask centroid x 471.2 -> 832.4 px (+361.2 px over 59 frames, mean 6.12 px/frame, per-frame 4.1-8.5 jitter from leg swing); centroid y 608.0-615.2",
+      "size_px": {
+        "length_bbox_tail_to_trunk": {"median": 262, "min": 229, "max": 283},
+        "height_bbox_feet_to_back": {"median": 153, "min": 148, "max": 158},
+        "body_span_at_centroid_row (rump to front of head/ear)": {"median": 213, "min": 203, "max": 224}
+      },
+      "occlusion": "none"
+    }
+  ],
+  "static_objects": "none visible (background replaced with white; no ground, markings or props)",
+  "pair_relations": {
+    "centroid_x_separation_adult_minus_calf_px": {"frame0": 346.1, "frame59": 401.2},
+    "empty_gap_between_masks_px": {"frame0": 37, "frame30": 43, "frame59": 97},
+    "note": "the adult is slightly faster, so the gap grows; the animals never touch or overlap"
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip starts with both elephants already walking right"},
+    {"frame": 59, "t": 2.458, "event": "clip ends, both still walking; no stops, turns, contacts or direction changes"}
+  ]
+}

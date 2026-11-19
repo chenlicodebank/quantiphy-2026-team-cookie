@@ -1,0 +1,53 @@
+{
+  "video": "captured_0014.mp4",
+  "source": "lab",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (background difference vs median of frames 36-48 is empty in every frame except where the ball / hand move)",
+    "intrinsics_from_benchmark": {"fx_fy_px": 763, "cx": 640, "cy": 360, "hfov_deg": 80},
+    "view": "elevated, looking obliquely down at a small square wooden table in the room corner; table top recedes upward in the image (back edge y~310-332, front edge y~456-500); floor visible below the table",
+    "image_processing": "video edited with 'Segment Anything 2 Demo': everything except the table and objects on it is heavily blurred (person, floor, walls, equipment). Watermark bottom right x1030-1280 y690-720. Ball becomes blurred once it leaves the table (frames >= 23)."
+  },
+  "objects": [
+    {"name": "ball", "moves": true, "frames_visible": "0-29 (29 only a sliver at the bottom edge)",
+     "description": "small beige / off-white ball, the only moving object; starts resting on the top edge of the white board next to the (blurred) person's hand, rolls straight down the tilted board toward the camera, onto the table top, over the table's front edge and falls to the floor, leaving the image at the bottom",
+     "track": "tracks/ball.csv",
+     "apparent_diameter_px": {"held_at_board_top_f0_7": 27, "rolling_on_board_f12_17_bbox_w": "24-28 (best ~26)", "on_table_f18_22": "30-35 wide incl. motion-blur trail", "falling_f23_28": "34-38 wide, 39-59 tall: inflated by background blur + vertical motion blur, not a true size"}},
+    {"name": "white_board", "moves": false, "description": "white rectangular board (whiteboard / clipboard-like slab) lying tilted on the table, centre-left; used as a ramp; its top edge is the higher end (at the back), bottom edge lower (front)",
+     "corners_px_f40": {"top_left": [502, 312], "top_right": [592, 303], "bottom_right": [609, 407], "bottom_left": [510, 422]},
+     "bbox_px": [500, 302, 609, 422], "centroid_px": [552.6, 362.4],
+     "side_lengths_px": {"top": 90, "bottom": 100, "left": 110, "right": 106}, "minrect_len_wid_px": [111.6, 102.3],
+     "ball_path_on_board_px": "from y~295 (top edge) to y~412 (bottom edge) at x~545-550, i.e. ~115 px along the image"},
+    {"name": "table", "moves": false, "description": "small square wooden (light brown) table with a single grey pedestal leg, in the middle of the image",
+     "top_corners_px_f40": {"back_left_blurred": [442, 332], "back_right": [658, 310], "front_right": [730, 456], "front_left": [426, 500]},
+     "front_edge_thickness_px": "10-12", "front_edge_y_at_ball_x545": 487,
+     "edge_lengths_px": {"front": 307, "back": 217, "left": 169, "right": 160},
+     "pedestal_leg": "grey column below table centre, x~575-610, y~505-700 (blurred)"},
+    {"name": "cup", "moves": false, "description": "white cylindrical cup / tumbler with clear lid, back-left of table, left of the board", "bbox_px": [450, 336, 491, 400], "width_px": 41, "height_px": 64},
+    {"name": "cookie", "moves": false, "description": "round chocolate-chip cookie leaning in front of the cup", "bbox_px": [469, 373, 505, 409], "diameter_px": 36},
+    {"name": "pen", "moves": false, "description": "black and silver pen lying horizontally at the left front of the table", "endpoints_px": [[435, 437], [503, 437]], "length_px": 68, "width_px": 7},
+    {"name": "notebook", "moves": false, "description": "light-blue (mint) small notebook with white page edges and a ribbon/pencil hanging out at the bottom, right of the board",
+     "corners_px_f40_outer": {"top_left": [626, 388], "top_right": [674, 385], "bottom_right": [682, 430], "bottom_left": [642, 436]},
+     "cover_only_corners": [[628, 392], [661, 388], [677, 425], [642, 431]], "length_px": 50, "width_px": 48},
+    {"name": "person", "moves": "slightly (hand near the ball until ~frame 8, then withdraws)", "description": "person standing behind the table, completely blurred by the edit (head/torso around x 440-640 y 230-330, legs/feet below table x 500-680 y 500-720). Their hand releases the ball; a flat skin-coloured masked patch appears at x~555-600 y~255-300 from frame 5 on. Not measurable", "frames_visible": "0-48"},
+    {"name": "background_equipment", "moves": false, "description": "blurred blue machine / stand with tripod at right (x~880-1280, y~260-600), light stands / poles on left, grey walls of a room corner, grey carpet floor with an orange cable at right"}
+  ],
+  "events": [
+    {"event": "ball resting/held at top edge of board", "frames": "0-7", "t": "0.000-0.292", "position_px": [545, 294.5]},
+    {"event": "release / start of motion (first 1-3 px shift)", "frame": 8, "t": 0.333, "note": "clear motion from frame 10 (t=0.417); uncertainty +-1 frame"},
+    {"event": "ball leaves bottom of board onto table (step down; per-frame image displacement drops from ~20 to ~5 px)", "frame": 17.5, "t": 0.729, "note": "between frames 17 and 18"},
+    {"event": "ball rolls across table top toward front edge", "frames": "18-22"},
+    {"event": "ball goes over table front edge (centre crosses edge y~487) and starts free fall", "frame": 23, "t": 0.958, "note": "+-1 frame; ball bottom reaches edge at frame 22-23"},
+    {"event": "ball falling in front of table/pedestal", "frames": "23-28"},
+    {"event": "ball exits bottom of image", "frame": 29, "t": 1.208, "note": "not visible frames 30-48; floor impact not seen"}
+  ],
+  "perspective": {
+    "ground_plane": "table top plane: front edge (426,500)-(730,456), back edge (442,332)-(658,310) - edges converge upward (table recedes from camera); floor below",
+    "ball_apparent_size_vs_time": "roughly constant ~26-28 px while on board (f0-17); apparent growth afterward is blur, not depth change",
+    "depth_note": "no depth given here; use depth_info from the question with f=763 px, principal point (640,360) to back-project ball centres"
+  }
+}

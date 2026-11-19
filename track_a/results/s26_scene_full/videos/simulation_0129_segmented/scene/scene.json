@@ -1,0 +1,115 @@
+{
+ "video": "simulation_0129_segmented.mp4",
+ "source": "segmentation (simulation render, background replaced by white)",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 40,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24; frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "evidence": "plain white background, no texture; object vertical position constant within ~2 px; treated as static"
+ },
+ "objects": [
+  {
+   "name": "forklift",
+   "track": "tracks/forklift.csv",
+   "moves": true,
+   "visible_frames": [
+    0,
+    39
+   ],
+   "description": "orange/black Toyota forklift seen side-on; counterweight (orange) at LEFT, mast and forks at RIGHT; drives to the right (forward), starting from rest and speeding up",
+   "reference_point": "bbox centre (cx_bbox, cy_bbox); mask centroid also given. Vehicle root not visible; horizontal displacements are identical for any rigid point",
+   "size_px": {
+    "length_bbox_median": 255.0,
+    "length_frame0": 257.0,
+    "length_frame39": 246.0,
+    "height_bbox_median": 194.0,
+    "note": "length shrinks 257->246 px from frame 0 to 39 because the view of the mast/fork tips changes slightly (perspective as it crosses the frame); frames 0-20 length 254-259 px"
+   },
+   "parts_px_frame0_approx": {
+    "rear_wheel_centre": [
+     73,
+     915
+    ],
+    "front_wheel_centre": [
+     231,
+     910
+    ],
+    "wheelbase": 158,
+    "front_wheel_diameter": 67,
+    "rear_wheel_diameter": 55,
+    "ground_contact_y": 927
+   },
+   "occlusion": "none; never touches frame edge"
+  }
+ ],
+ "static_objects": [],
+ "ground": "no visible ground; wheel bottoms at y=927-928 constant (horizontal line of motion)",
+ "events": [
+  {
+   "event": "at rest",
+   "frames": [
+    0,
+    2
+   ],
+   "note": "bbox centre moves <=1 px over frames 0-2"
+  },
+  {
+   "event": "start of motion",
+   "frame": 2,
+   "time_s": 0.0833,
+   "note": "first clear shift frame 2->3 (+2.5 px); per-frame displacement grows ~linearly afterwards (uniform acceleration look)"
+  },
+  {
+   "event": "still accelerating at end",
+   "frame": 39,
+   "time_s": 1.625
+  }
+ ],
+ "per_frame_bbox_centre_displacement_px": [
+  0.0,
+  0.5,
+  2.5,
+  4.0,
+  3.5,
+  6.0,
+  6.6,
+  7.0,
+  7.6,
+  8.5,
+  9.5,
+  11.0,
+  10.5,
+  12.5,
+  13.5,
+  14.5,
+  15.0,
+  16.0,
+  17.0,
+  17.5,
+  19.5,
+  19.0,
+  20.5,
+  21.0,
+  22.5,
+  24.0,
+  24.5,
+  24.5,
+  26.0,
+  27.0,
+  27.1,
+  30.5,
+  29.5,
+  31.5,
+  30.5,
+  31.0,
+  33.5,
+  33.5,
+  36.0
+ ],
+ "total_path_px_frame0_to_39": 695.1,
+ "net_x_px_frame0_to_39": 694.5
+}

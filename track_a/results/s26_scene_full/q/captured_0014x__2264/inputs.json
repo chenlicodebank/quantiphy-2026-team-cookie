@@ -1,0 +1,18 @@
+{
+ "video": "captured_0014x.mp4",
+ "video_source": "lab",
+ "video_type": "A3MX",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2264,
+  "question": "What is the width of the slope in cm?",
+  "prior": "t=0.6, ball acceleration = 4.6m/s^2",
+  "depth_info": "t=0s, distance_cookie_camera = 1.7355m\nt=0s, distance_ball_camera = 1.8180m\nt=0s, distance_cup_camera = 1.7270m\nt=0s, distance_pen_camera = 1.6725m\nt=0s, distance_book_camera = 1.6650m\nt=0.6s, distance_ball_camera = 1.7288m\nt=0s, distance_slope_far_camera = 1.8540m\nt=0s, distance_slope_near_camera = 1.7010m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

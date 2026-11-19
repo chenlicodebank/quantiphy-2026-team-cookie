@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0011.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1954,
+ "question": {
+  "id": 1062,
+  "question": "What is the body length of the bird in meters?",
+  "prior": "gravity acc = 9.8m/s^2",
+  "depth_info": "t=0s, distance_bird_camera = 46.654m\nt=1s, distance_bird_camera = 43.970m\nt=0s, distance_nest_camera = 17.268m\nt=1s, distance_nest_camera = 17.248m\ndistance_cart_camera = 33.235m\ndistance_house_camera = 63.603m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,77 @@
+{
+  "video": "simulation_0050.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 33.0,
+  "frames": 99,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 766],
+  "time_convention": "t = frame / 33; frame = round(t * 33); frame 0 = t 0",
+  "units": "pixels (x right, y down, origin top-left of the full-resolution frame) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the upper building band (rows 0-350) vs frame 0: max |shift| 0.016 px over all 99 frames",
+    "view": "street-level side view of a row of shop/house facades across a street; camera slightly yawed so the street direction recedes to the LEFT",
+    "perspective_cues": {
+      "sidewalk_back_edge_line": "y = 645 at x=300 -> y = 656 at x=860 (slope ~ +0.020 px/px)",
+      "sidewalk_front_curb_top_line": "y ~ 655 at x=700 -> y ~ 666 at x=1260 (slope ~ +0.020)",
+      "near_road_edge_lower_left": "y = 714 at x=20 -> y = 762 at x=940 (slope ~ +0.052)",
+      "street_vanishing_point_estimate_px": [-2200, 600],
+      "vanishing_point_reliability": "rough (+-800 px in x); lines converge to the left, outside the image, so objects moving left along the street move away from the camera",
+      "horizon": "not visible (sky not in frame); horizon row roughly y ~ 600 from the vanishing point estimate (uncertain)"
+    }
+  },
+  "moving_objects": {
+    "cyclist": {
+      "description": "adult man riding a dark-blue city bicycle with silver rims and a rear luggage rack; dark jacket, grey-blue jeans, dark hair, face blurred; nearest the camera of the two figures (rides along the road edge / curb, in front of the pedestrian)",
+      "moves": true,
+      "direction": "right -> left across the whole image and away from the camera (apparent size shrinks steadily)",
+      "visible_frames": "0-98 (entering: right part cut by the right image edge in frames 0-4; fully inside 5-93; leaving: front wheel cut by the left image edge in frames 94-98)",
+      "occlusion": "never occluded; it passes IN FRONT of the pedestrian in frames ~4-24",
+      "track_file": "tracks/cyclist.csv"
+    },
+    "pedestrian": {
+      "description": "man in white T-shirt, light-blue jeans and white sneakers walking on the sidewalk next to the facades",
+      "moves": true,
+      "direction": "right -> left, slowly, also slightly away from the camera (height ~290 px at frame 0 -> ~245 px at frame 98)",
+      "visible_frames": "0-98 (never leaves the image)",
+      "occlusion": "partly hidden behind the cyclist in frames 5-24 (heaviest ~11-17); box sizes interpolated there, torso x measured",
+      "track_file": "tracks/pedestrian.csv"
+    }
+  },
+  "static_objects_px": {
+    "_note": "image-axis extents in the median background image (frames/bg.png is NOT kept; any frame shows the same background). x0,x1,y0,y1 inclusive, approximate +-3 px",
+    "telephone_booth": {"desc": "white/grey phone booth labelled TELEPHONE at the left, cracked glass", "x0": 142, "x1": 335, "y0": 297, "y1": 640, "width": 193, "height": 343},
+    "photo_lab_sign": {"desc": "yellow 'PHOTO LAB'O LAB' shop sign band across the left shop", "x0": 205, "x1": 870, "y0": 185, "y1": 310},
+    "blue_shop_door": {"desc": "blue door with Coca-Cola poster under the Photo Lab sign", "x0": 443, "x1": 572, "y0": 340, "y1": 618, "width": 129, "height": 278},
+    "trash_can": {"desc": "small dark bin in front of the shop window", "x0": 730, "x1": 778, "y0": 540, "y1": 610},
+    "stoop_stairs_center": {"desc": "light stone stairs with two wooden banisters leading to the brown door of the green house", "x0": 835, "x1": 1125, "y0": 470, "y1": 645},
+    "brown_door_green_house": {"desc": "brown wooden door of the green clapboard house", "x0": 975, "x1": 1080, "y0": 265, "y1": 530, "width": 105, "height": 265},
+    "green_house_window_ground_floor": {"x0": 1195, "x1": 1310, "y0": 238, "y1": 470},
+    "hedge_and_iron_fence": {"desc": "low hedge behind a rusty iron railing on a stone base, right of the stoop", "x0": 1080, "x1": 1490, "y0": 515, "y1": 655, "hedge_y": [550, 615]},
+    "stone_pillar_left_of_arched_door": {"desc": "stone pillar with ball finial", "x0": 1482, "x1": 1550, "y0": 375, "y1": 660},
+    "stone_pillar_right_of_arched_door": {"x0": 1747, "x1": 1815, "y0": 375, "y1": 662},
+    "arched_wooden_door": {"desc": "tall arched dark-wood door at the right building", "x0": 1592, "x1": 1745, "y0": 190, "y1": 528, "width": 153, "height": 338},
+    "steps_to_arched_door": {"x0": 1550, "x1": 1760, "y0": 528, "y1": 660},
+    "manhole_cover_street": {"desc": "round manhole cover in the road, lower right (seen as a flat ellipse)", "x0": 1598, "x1": 1843, "y0": 721, "y1": 748, "center": [1720, 735]},
+    "manhole_cover_left_partial": {"x0": 0, "x1": 40, "y0": 660, "y1": 672},
+    "sidewalk": {"desc": "grey sidewalk between facades and curb; back edge y~640-656, curb top y~655-666 (rises slightly to the left)"},
+    "tree_foliage": {"desc": "leaves top-right corner", "x0": 1440, "x1": 1920, "y0": 0, "y1": 300}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "clip starts; both cyclist and pedestrian already moving left (no start of motion inside the clip)"},
+    {"frame": 0, "t": 0.0, "what": "cyclist entering: front wheel and rider visible, rear of bike cut by the right image edge (frames 0-4)"},
+    {"frame": 5, "t": 0.152, "what": "cyclist fully inside the image (bbox_x1 1899 < 1919); its box starts overlapping the pedestrian's box"},
+    {"frame": 14, "t": 0.424, "what": "cyclist passes the pedestrian: cyclist hub midpoint x crosses pedestrian torso x (~frame 14.1); cyclist is in front (closer to camera)"},
+    {"frame": 24, "t": 0.727, "what": "last frame with overlapping boxes; from frame 25 the cyclist is fully left of the pedestrian"},
+    {"frame": 93, "t": 2.818, "what": "cyclist front wheel reaches the left image edge (bbox_x0 ~ 0); frames 94-98 the front of the bike is cut off"},
+    {"frame": 98, "t": 2.97, "what": "clip ends; both still moving; pedestrian still fully visible"},
+    {"what": "no bounce, impact, release or contact; no reversal of direction for either object. Cyclist image-plane speed decreases smoothly (~32 px/frame at frame 1 -> ~12 px/frame at frame 98), mostly from receding along the converging street; pedestrian torso moves a steady ~5-6 px/frame"}
+  ],
+  "apparent_size_vs_time_px": {
+    "cyclist_height_head_to_ground": {"0": 321.5, "15": 303, "30": 279, "45": 255, "60": 235, "75": 222, "92": 205, "98": 196},
+    "cyclist_length_front_wheel_to_rear_wheel_or_rack": {"15": 300, "30": 251, "45": 214, "60": 185, "75": 163, "92": 139},
+    "cyclist_note": "length shrinks faster than height (bike is oblique to the image plane and foreshortens as it recedes to the left); height ratio 0->98 = 1.64",
+    "pedestrian_height_head_to_feet": "270-276 at frames 0-3, ~265 at 25-29, ~255-260 at 40-60, ~250-256 at 64-79, ~241-248 at 87-98 (gait makes it oscillate by ~5-10 px)"
+  }
+}

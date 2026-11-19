@@ -1,0 +1,132 @@
+{
+ "video": "internet_0038.mp4",
+ "source": "internet",
+ "scene": "2D (top-down view of a desk)",
+ "fps": 18.484888,
+ "frames": 15,
+ "duration_s": 0.8115,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame / fps, t=0 is frame 0",
+ "units": "pixels, seconds; image x right, y down",
+ "camera": {
+  "motion": "static",
+  "bg_shift_px_max": 0.2,
+  "note": "phase correlation of empty desk band y<200 vs frame 0: |shift| <= 0.15 px every frame"
+ },
+ "objects": {
+  "right_hand": {
+   "moves": true,
+   "frames": "0-14",
+   "track": "tracks/right_hand.csv",
+   "desc": "person's right hand (image right), grey sleeve; starts on the white mouse, slides left/up onto the keyboard",
+   "ref_point": "centroid of skin mask (hand + bare wrist down to sleeve cuff)"
+  },
+  "left_hand": {
+   "moves": "nearly static (typing finger motion only, centroid within ~6 px)",
+   "frames": "0-14",
+   "track": "tracks/left_hand.csv",
+   "desc": "person's left hand (image left) resting on left of keyboard/palm rest"
+  },
+  "mouse": {
+   "moves": false,
+   "frames": "0-14 (partly covered by right hand frames 0-3)",
+   "track": "tracks/mouse.csv",
+   "desc": "white Apple-style mouse right of laptop",
+   "bbox_xyxy": [
+    972,
+    413,
+    1040,
+    547
+   ],
+   "center": [
+    1005.8,
+    480.3
+   ],
+   "length_px_vertical": 134,
+   "width_px_horizontal": 69,
+   "note": "top edge y=413-414 identical in all frames and bbox constant frames 4-14 -> mouse not moved"
+  },
+  "laptop": {
+   "moves": false,
+   "frames": "0-14",
+   "desc": "silver/white open laptop seen from above, centre of frame",
+   "base_bbox_xyxy": [
+    436,
+    236,
+    862,
+    533
+   ],
+   "base_width_px_horizontal": 427,
+   "base_depth_px_vertical": 295,
+   "base_depth_note": "back edge ~236-242 (under lid hinge), front edge y=535 at x=450, 531 at x=700, 529 at x=840 (slight tilt ~0.8 deg)",
+   "lid_edge_line": {
+    "x0": 422,
+    "x1": 888,
+    "y": "229-242",
+    "length_px": 466,
+    "note": "opened screen seen edge-on: thin strip wider than the base"
+   },
+   "overall_bbox_xyxy": [
+    422,
+    229,
+    888,
+    536
+   ],
+   "keyboard_bbox_xyxy": [
+    483,
+    275,
+    812,
+    400
+   ],
+   "keyboard_width_px": 330,
+   "keyboard_depth_px": 126,
+   "trackpad_bbox_xyxy_approx": [
+    590,
+    425,
+    713,
+    513
+   ],
+   "key_pitch_px": 22.4
+  },
+  "sleeves": {
+   "moves": "right sleeve follows right hand",
+   "desc": "grey knit sleeves entering from bottom edge, cut by frame border (not tracked)"
+  },
+  "desk": {
+   "moves": false,
+   "desc": "uniform dark grey desk surface filling frame, no markings"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "clip starts with right hand on mouse already moving left (15 px to frame 1)"
+  },
+  {
+   "frame": 3,
+   "t": 0.1623,
+   "what": "right hand fully off mouse (mouse mask complete from frame 4)"
+  },
+  {
+   "frame": 5,
+   "t": 0.2705,
+   "what": "right hand bbox crosses laptop right edge x=862"
+  },
+  {
+   "frame": 7,
+   "t": 0.3787,
+   "what": "right hand peak per-frame centroid displacement ~26 px/frame around frames 5-9"
+  },
+  {
+   "frame": 14,
+   "t": 0.7574,
+   "what": "clip ends, right hand on keyboard, still slowing (~9 px last frame)"
+  }
+ ],
+ "right_hand_net_displacement_px_f0_f14": [
+  -275.0,
+  -97.1
+ ]
+}

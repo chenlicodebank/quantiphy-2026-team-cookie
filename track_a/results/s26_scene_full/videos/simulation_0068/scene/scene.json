@@ -1,0 +1,399 @@
+{
+ "video": "simulation_0068.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_of_frame": "t = frame / 24",
+ "view": "straight top-down (orthographic-looking) view of a 4-way street intersection; image up = \"north\" (vehicles drive on the ground plane, which faces the camera). No perspective visible: identical props (lamps, planters) have identical pixel sizes everywhere in the frame.",
+ "camera": {
+  "motion": "static",
+  "max_background_shift_px": [
+   0.006,
+   0.009
+  ],
+  "method": "phase correlation of three sidewalk patches vs frame 0 (scripts/check.py)"
+ },
+ "pixel_coords": "x right, y down, origin top-left of the 2160x1080 frame",
+ "moving_objects": {
+  "van": {
+   "description": "white van / minibus (long white roof, dark windshield at the top end), left (west) lane of the north-south road; drives straight north (image up)",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never; fully inside frame in all frames",
+   "track": "tracks/van.csv",
+   "reference_point": "ccx, ccy = centre of the min-area rectangle of the white-body colour mask",
+   "pixel_size_median": {
+    "length_along_heading": 234.0,
+    "width": 84.0,
+    "note": "white body only; background-difference mask gives ~234 x 87-88 (includes mirrors / soft shadow). Front grey bumper may add ~2-4 px."
+   },
+   "start_pos_px": [
+    831.0,
+    927.0
+   ],
+   "end_pos_px": [
+    831.5,
+    199.0
+   ],
+   "heading": "north (image up), axis vertical (90 deg) the whole clip, x constant at 831 +-0.5"
+  },
+  "sedan": {
+   "description": "tan / beige (light orange) sedan, starts in the right (east) lane of the north-south road next to the van, makes a right turn and ends driving east (image right) on the east-west road",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never; fully inside frame in all frames",
+   "track": "tracks/sedan.csv",
+   "reference_point": "ccx, ccy = centre of the min-area rectangle of the tan colour mask",
+   "pixel_size_median": {
+    "length_along_heading": 219.2,
+    "width": 81.1,
+    "note": "colour mask; difference mask gives ~219-221 x 83-87"
+   },
+   "start_pos_px": [
+    990.0,
+    850.5
+   ],
+   "end_pos_px": [
+    1372.5,
+    636.5
+   ],
+   "heading": "north at frames 0-2 (axis 90 deg), turning right through north-east (axis 135 deg at ~frame 29) to east (axis 0/180 deg) from ~frame 61"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "both vehicles at rest-looking start; frames 0 and 1 identical positions"
+  },
+  {
+   "frame": 2,
+   "t": 0.0833,
+   "what": "sedan starts moving (~6.9 px/frame immediately, then roughly constant px/frame for the whole clip); van starts creeping forward (frame-to-frame centre steps 1-2 px at frames 2-7, noisy +-1 px)"
+  },
+  {
+   "frame": 3,
+   "t": 0.125,
+   "what": "sedan heading begins to rotate (right turn)"
+  },
+  {
+   "frame": 29,
+   "t": 1.2083,
+   "what": "sedan heading ~45 deg (half-way through the turn)"
+  },
+  {
+   "frame": 61,
+   "t": 2.5417,
+   "what": "sedan heading reaches due east; turn complete (rotation slows gradually from ~frame 50, so the exact end is +-3 frames)"
+  },
+  {
+   "frame": 20,
+   "t": 0.8333,
+   "what": "van front edge (top of mask, y=750) crosses the line of the southern sidewalk edge (y~755) into the intersection box"
+  },
+  {
+   "frame": 71,
+   "t": 2.9583,
+   "what": "clip ends; van still accelerating (step ~20 px/frame), front at y=81; sedan front ~ x 1482"
+  },
+  {
+   "note": "van speeds up steadily over the whole clip (per-frame step grows from ~1 to ~20 px); no stop, no contact between vehicles; no bounce/impact events"
+  }
+ ],
+ "van_sedan_centre_distance_px": {
+  "frame0": 176.4,
+  "min": 176.4,
+  "min_frame": 0,
+  "frame71": 695.8
+ },
+ "static_objects": {
+  "road_layout": {
+   "north_south_road": "x 615-1081 (width ~466 px), full height",
+   "east_west_road": "y 287-755 (width ~468 px), full width",
+   "sidewalk_blocks": "four beige corner blocks: NW x0-615 y0-287, NE x1081-2160 y0-287, SW x0-615 y755-1080, SE x1081-2160 y755-1080; rounded corners; thin darker curb rim",
+   "lane_markings": "none visible"
+  },
+  "white_ball": {
+   "centre": [
+    2028.7,
+    432.5
+   ],
+   "diameter_px": 20,
+   "bbox": [
+    2019,
+    423,
+    2039,
+    442
+   ],
+   "where": "on the east-west road, right side of frame, north half",
+   "moves": false
+  },
+  "rock_pile": {
+   "centre": [
+    2065,
+    622
+   ],
+   "bbox": [
+    2026,
+    597,
+    2092,
+    650
+   ],
+   "extent_px": [
+    69,
+    44
+   ],
+   "where": "grey cluster of stones on the east-west road at right edge",
+   "moves": false
+  },
+  "street_lamps_3head": {
+   "note": "top view of lamp posts with 3 round heads (dark grey); 8 of them along the sidewalks",
+   "items": [
+    {
+     "id": "NW_lamp",
+     "centre": [
+      191.0,
+      219.5
+     ],
+     "bbox": [
+      167,
+      185,
+      237,
+      243
+     ]
+    },
+    {
+     "id": "NE_lamp1",
+     "centre": [
+      1416.3,
+      220.2
+     ],
+     "bbox": [
+      1394,
+      184,
+      1430,
+      242
+     ]
+    },
+    {
+     "id": "NE_lamp2",
+     "centre": [
+      1739.9,
+      219.5
+     ],
+     "bbox": [
+      1704,
+      185,
+      1760,
+      242
+     ]
+    },
+    {
+     "id": "NE_lamp3",
+     "centre": [
+      2063.7,
+      219.2
+     ],
+     "bbox": [
+      2014,
+      185,
+      2089,
+      242
+     ]
+    },
+    {
+     "id": "SW_lamp",
+     "centre": [
+      190.8,
+      807.9
+     ],
+     "bbox": [
+      166,
+      784,
+      237,
+      842
+     ]
+    },
+    {
+     "id": "SE_lamp1",
+     "centre": [
+      1416.6,
+      807.0
+     ],
+     "bbox": [
+      1395,
+      784,
+      1431,
+      842
+     ]
+    },
+    {
+     "id": "SE_lamp2",
+     "centre": [
+      1740.2,
+      807.8
+     ],
+     "bbox": [
+      1704,
+      784,
+      1760,
+      842
+     ]
+    },
+    {
+     "id": "SE_lamp3",
+     "centre": [
+      2064.0,
+      807.9
+     ],
+     "bbox": [
+      2014,
+      784,
+      2089,
+      842
+     ]
+    }
+   ],
+   "extent_px": "heads span ~57-75 x 57 px depending on arm orientation"
+  },
+  "hydrant_like_props": {
+   "note": "small dark grey/metal props near the sidewalk corners (fire hydrant or bollard seen from above)",
+   "items": [
+    {
+     "id": "NW",
+     "centre": [
+      539.7,
+      226.4
+     ],
+     "bbox": [
+      515,
+      196,
+      573,
+      252
+     ]
+    },
+    {
+     "id": "NE",
+     "centre": [
+      1164.8,
+      217.4
+     ],
+     "bbox": [
+      1140,
+      200,
+      1191,
+      240
+     ]
+    },
+    {
+     "id": "SW",
+     "centre": [
+      542.4,
+      806.7
+     ],
+     "bbox": [
+      508,
+      786,
+      576,
+      827
+     ]
+    },
+    {
+     "id": "SE",
+     "centre": [
+      1130.5,
+      827.0
+     ],
+     "bbox": [
+      1114,
+      801,
+      1146,
+      856
+     ]
+    }
+   ]
+  },
+  "planter_squares_brown": {
+   "note": "brownish square patches (tree pits / planters) on the sidewalk, ~82 x 80 px",
+   "items": [
+    {
+     "id": "NW",
+     "bbox": [
+      369,
+      182,
+      452,
+      261
+     ],
+     "centre": [
+      410,
+      221
+     ]
+    },
+    {
+     "id": "SW",
+     "bbox": [
+      369,
+      808,
+      452,
+      890
+     ],
+     "centre": [
+      410,
+      849
+     ]
+    },
+    {
+     "id": "SE",
+     "bbox": [
+      1177,
+      805,
+      1258,
+      886
+     ],
+     "centre": [
+      1217,
+      846
+     ]
+    }
+   ]
+  },
+  "dark_grate_square": {
+   "bbox": [
+    1234,
+    27,
+    1321,
+    117
+   ],
+   "centre": [
+    1277.8,
+    71.9
+   ],
+   "extent_px": [
+    88,
+    91
+   ],
+   "where": "NE sidewalk near top edge, dark grey square with reddish rim"
+  },
+  "small_teal_object": {
+   "centre": [
+    1342.5,
+    806.1
+   ],
+   "bbox": [
+    1331,
+    794,
+    1355,
+    818
+   ],
+   "diameter_px": 24,
+   "where": "SE sidewalk, just left of SE_lamp1 (small round bin / bollard top)"
+  }
+ }
+}

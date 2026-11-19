@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0075.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MS",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 63,
+  "question": "What is the width of the white car in meters?",
+  "prior": "length of the white car = 6m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

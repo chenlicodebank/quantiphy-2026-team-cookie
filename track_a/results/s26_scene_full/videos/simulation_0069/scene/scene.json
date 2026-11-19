@@ -1,0 +1,45 @@
+{
+  "video": "simulation_0069.mp4",
+  "source": "simulation",
+  "scene_type": "2D (top-down orthographic-looking view of a street intersection)",
+  "fps": 24.0, "frames": 72, "duration_s": 3.0, "width_px": 2160, "height_px": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_axes": "x right, y down (image coordinates, original resolution)",
+  "camera": {"motion": "static", "evidence": "phase correlation of static top-right sidewalk vs frame 0: max |shift| < 0.01 px over all frames",
+             "view": "straight down (nadir); no visible perspective - both roads have the same pixel width, lamp posts identical shape on both sides"},
+  "moving_objects": {
+    "car": {
+      "description": "white van/minivan (MPV) seen from above, windscreen toward top of image, the only vehicle",
+      "track_file": "tracks/car.csv", "visible_frames": "0-71 (fully inside frame in all frames)",
+      "reference_point": "cx,cy = centre of the top-down bounding box (cy = front edge y0 + (234-1)/2) ~ vehicle root/centre in plan",
+      "motion": "drives straight 'up' the image (toward -y) in the left-of-centre lane of the vertical road; x constant at ~832",
+      "size_px": {"length_along_motion_y": 234, "width_x": 87, "note": "median of per-frame mask bbox (range 232-237); includes side mirrors? mirrors are tiny, width 86-88"},
+      "position_frame0": [832.5, 929.0], "position_frame71": [832.0, 200.0]
+    },
+    "pedestrian": {
+      "description": "small person seen from above (white top / head), walking on the lower-right sidewalk just below the street lamp at x~1412",
+      "track_file": "tracks/pedestrian.csv", "visible_frames": "0-71",
+      "reference_point": "cx,cy = bbox centre of the person's blob (top view: head/shoulders above pelvis); centroid_x/y also given",
+      "motion": "walks to the right (+x) at roughly constant pace, y ~845 constant",
+      "size_px": {"top_view_extent": "~13-36 px along x (swings with stride), ~17-22 px along y; shoulder width ~ 13-18 px",
+                  "note": "standing height is NOT measurable in a top-down view"},
+      "position_frame0": [1330.0, 846.5], "position_frame71": [1473.0, 845.0]
+    }
+  },
+  "events": [
+    {"event": "car at rest", "frames": "0-2", "t": "0.000-0.083"},
+    {"event": "car starts moving (first displacement between frames 2 and 3)", "frame": 3, "t": 0.125},
+    {"event": "car accelerates steadily for the rest of the clip (per-frame step of front edge grows from ~1 px to ~20 px)", "frames": "3-71"},
+    {"event": "car front crosses the near (lower) edge of the horizontal road / enters the intersection area (front y0 crosses y=755)", "frame": 20, "t": 0.833},
+    {"event": "car front crosses the far (upper) edge of the horizontal road (y0 < 289)", "frame": 60, "t": 2.5},
+    {"event": "pedestrian walks right throughout; passes beneath (in image) the street lamp at x~1412 around frames 34-42 (no occlusion detected)", "frames": "0-71"},
+    {"event": "no contacts, bounces or direction changes"}
+  ],
+  "static_objects_frame0": "see static.json (pixel bboxes, centres, extents)",
+  "ground_features": {
+    "horizontal_road": {"y_from": 289, "y_to": 755, "width_px": 467, "spans_x": "0-2159"},
+    "vertical_road": {"x_from": 616, "x_to": 1081, "width_px": 466, "spans_y": "0-1079"},
+    "sidewalk_blocks": "four beige blocks at the corners (top-left, top-right, bottom-left, bottom-right), separated by the two roads; rounded corners at the intersection",
+    "lane_markings": "none clearly visible (faint lines only)"
+  }
+}

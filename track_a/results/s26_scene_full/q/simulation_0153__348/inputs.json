@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0153.mp4",
+ "video_source": "simulation",
+ "video_type": "S2SC",
+ "fps": 24.0,
+ "frames": 42,
+ "duration_s": 1.75,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 348,
+  "question": "What is the length of the blue car in meters (including the extending wire)?",
+  "prior": "diameter of the tire of the blue car = 0.369m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "video": "simulation_0222.mp4",
+ "source": "simulation",
+ "scene_type": "2D (top-down view of a living room; floor plane faces the camera)",
+ "fps": 24.0, "frames": 80, "width": 1920, "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels (x right, y down) and seconds; no metric scale",
+ "camera": {
+  "motion": "static (frame differencing shows change only on the robot path and its reflection in the glass table; no global shift)",
+  "view": "overhead, looking straight down at the floor; slight perspective: left/right/top walls visible as inner faces, so tall objects (lamp shade, glass side table top, sofa top) look slightly larger/displaced versus floor-level ones. Floor-level objects (robot, dock, rug) are all at about the same depth -> one px scale valid for the robot's motion on the floor.",
+  "floor_bounds_px": {"left_wall_base_x": 190, "right_wall_base_x": 1745, "top_wall_base_y": 125, "bottom": "beyond image (y>1080)"}
+ },
+ "moving_objects": {
+  "robot_vacuum": {
+   "description": "white round robot vacuum cleaner, the only moving object; starts docked at the charging dock on the right wall, drives left (slightly upward) past the lamp, turns gently and drives left-down, stops near the sofa's left arm",
+   "visible_frames": [0, 79],
+   "track_file": "tracks/robot_vacuum.csv",
+   "reference_point": "centre of a robust circle fit to the mask contour (columns x, y); for a disc this is its origin",
+   "size_px": {"diameter_circle_fit_median": 117.8, "diameter_bbox": 119, "note": "length = width = ~118-119 px (circular, top view); height not observable from overhead"},
+   "start_position_px": [1674.3, 423.6],
+   "end_position_px": [650.13, 500.15],
+   "path_length_px_frames_0_79": 1054.7,
+   "net_displacement_px": 1026.9,
+   "per_frame_step_px_peak": {"first_peak": [25, 20.55], "local_min_at_turn": [39, 15.3], "second_peak": [51, 23.1]}
+  }
+ },
+ "events": [
+  {"event": "robot at rest docked", "frames": [0, 1], "t": [0.0, 0.0417]},
+  {"event": "robot starts moving (leaves dock), speeding up", "frame": 1, "t": 0.0417, "note": "step 0->1 is ~0.5 px (noise level, dock overlap), 1->2 is 1.7 px; take motion start as frame 1 (+-1)"},
+  {"event": "first speed maximum ~20.5 px/frame", "frame": 25, "t": 1.0417},
+  {"event": "robot passes just below floor lamp / TV console (closest approach, mask top edge y~297, lamp shade bottom y~300)", "frames": [35, 41], "t": [1.458, 1.708]},
+  {"event": "direction change: heading turns from up-left (~173 deg) to down-left; topmost point of path (min y = 355.85)", "frame": 39, "t": 1.625},
+  {"event": "local speed minimum ~15.3 px/frame during the turn", "frame": 39, "t": 1.625},
+  {"event": "second speed maximum ~23.1 px/frame", "frame": 51, "t": 2.125},
+  {"event": "robot stops (decelerating from frame ~52)", "frame": 70, "t": 2.9167, "note": "last real step frame 68->69 = 0.9 px; frames 69-79 stationary at (650.1, 500.2)"}
+ ],
+ "static_objects": {
+  "charging_dock": {"desc": "small white dock on the right wall (two white blocks), robot's start", "bbox_px": [1700, 398, 1750, 452], "w": 50, "h": 54, "centre": [1725, 425]},
+  "floor_lamp": {"desc": "white pleated round lamp shade with dark centre/bulb, at right end of TV console", "bbox_px": [1120, 150, 1263, 300], "diameter_px": 145, "centre": [1192, 225], "note": "elevated -> appears larger than at floor level"},
+  "tv_console": {"desc": "dark grey low media console along top wall", "bbox_px": [710, 168, 1200, 292], "length_px": 490, "depth_px": 124, "note": "right end hidden under lamp shade; dark shadow above it up to y~100"},
+  "white_vase": {"desc": "small white patterned vase/pot on left end of the TV console", "bbox_px": [725, 207, 784, 268], "diameter_px": 60, "centre": [755, 243]},
+  "wood_slat_bench": {"desc": "orange-brown wooden slatted bench/crate, top-left", "bbox_px": [294, 172, 583, 291], "length_px": 290, "width_px": 120, "centre": [438, 230]},
+  "glass_side_table": {"desc": "transparent glass table with light wooden frame, top-right corner; shows a reflection of the robot frames ~13-26", "corners_px_approx": [[1415, 88], [1605, 88], [1510, 222], [1345, 222]], "note": "seen obliquely (tall object near image edge) - extents unreliable"},
+  "sofa": {"desc": "large cream curved (crescent) sofa, bottom centre, with two grey-blue cushions", "bbox_px": [568, 578, 1452, 1058], "length_px": 884, "height_in_image_px": 480},
+  "cushion_left": {"desc": "grey-blue pillow on left part of sofa", "bbox_px_approx": [630, 705, 858, 900]},
+  "cushion_right": {"desc": "grey-blue pillow on right part of sofa", "bbox_px_approx": [1133, 730, 1383, 925]},
+  "round_fur_rug": {"desc": "round white fluffy fur rug / pouf, bottom-left, partly under sofa's left arm", "bbox_px_approx": [195, 590, 640, 1078], "diameter_px_approx": 445},
+  "carpet_floor": {"desc": "beige carpet floor", "bbox_px": [190, 125, 1745, 1080]},
+  "walls": {"desc": "white walls left, top, right (inner faces visible due to perspective)"}
+ },
+ "static_auto_measure": "static_auto.json (threshold boxes at frame 79; only wood_slat_bench and white_vase are trustworthy there)"
+}

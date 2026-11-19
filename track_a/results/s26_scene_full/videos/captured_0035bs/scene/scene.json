@@ -1,0 +1,56 @@
+{
+  "video": "captured_0035bs.mp4",
+  "source": "lab (real Orbbec Femto Mega RGB recording; background replaced by a synthetic blue-to-white gradient with SAM2 - watermark 'Modified with Segment Anything 2 Demo' bottom right)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "frame_time": "t = frame / 24 (frame 0 at t = 0, last frame 48 at t = 2.0 s)",
+  "image_size_px": [1280, 720],
+  "camera": {
+    "motion": "static (phase-correlation shift of a background patch vs frame 0 < 0.1 px in every frame)",
+    "intrinsics_from_benchmark_convention": {"fx_fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80, "note": "given by the benchmark for this camera; not measured here"},
+    "back_projection": "ray = ((u-640)/763, (v-360)/763, 1); 3D centre = depth_info * ray/|ray| (depth_info = Euclidean distance camera->object centre)",
+    "perspective_cues": "none in the background (synthetic gradient replaces floor/walls; no ground plane, horizon or markings). Depth cues are only the apparent sizes of the balls and people. Both balls appear to move on/near the floor between the two people; the rear person's planted shoes are at image y ~ 322, the front person's shoes at y ~ 700-720.",
+    "frame_timing_anomaly": "frames 12 and 36 differ from their predecessors about twice as much as other frames and the basketball's image step doubles there (11->12: 29 px, 35->36: 26 px vs ~13 px), so a source frame was probably dropped before frame 12 and before frame 36. Times in the tracks are nominal frame/24."
+  },
+  "objects": [
+    {"name": "soccer_ball", "desc": "white football with black pentagons; starts at the front_person's right foot at bottom centre-left", "moves": true,
+     "visible_frames": "0-48", "track": "tracks/soccer_ball.csv",
+     "reference_point": "centre of a circle fitted to the ball outline",
+     "rest_position_frames_0_10": {"cx": 437.5, "cy": 682.5, "radius_px": 38.0, "diameter_px": 76.0, "note": "bottom of ball touches the bottom image edge (y~720)"},
+     "apparent_size": "diameter 76 px at rest (frames 0-10) -> shrinks to ~58-59 px at frames 24-26 (moving away) -> grows slowly to ~64 px by frame 48 (comes back toward the camera after the contact with the basketball). Per-frame radius noise ~ +-1.5 px; use radius_px_med5."},
+    {"name": "basketball", "desc": "orange basketball; starts at the rear_person's feet (upper right)", "moves": true,
+     "visible_frames": "0-48", "track": "tracks/basketball.csv",
+     "reference_point": "centre of a circle fitted to the orange outline",
+     "rest_position_frames_0_11": {"cx": 828.6, "cy": 280.0, "radius_px": 26.4, "diameter_px": 52.8},
+     "apparent_size": "diameter 52.8 px at rest -> grows steadily to ~72 px at frame 48 (approaching the camera)."},
+    {"name": "front_person", "desc": "person nearest the camera at the left: long brown hair (face blurred), dark grey T-shirt, black trousers, white shoes; kicks the soccer ball, later bends and catches the basketball", "moves": true,
+     "visible_frames": "0-48 (always cut by the bottom image edge; left edge at x=0 in frames ~11-33; appears strongly tilted because of the close range)", "track": "tracks/front_person.csv",
+     "reference_point": "mask bbox centre and mask centroid (pelvis not directly visible as a point; full body not in frame)"},
+    {"name": "rear_person", "desc": "person far from the camera at the upper right: light grey/white top, dark blue-grey baggy trousers, white sneakers, black watch on left wrist; head cut off by the top image edge; kicks the basketball", "moves": true,
+     "visible_frames": "0-48 (always cut by the top image edge: only from the chest down is visible)", "track": "tracks/rear_person.csv",
+     "reference_point": "mask bbox centre and mask centroid (truncated body)",
+     "static_extent": "visible part from y=0 to shoe soles y~322 (323 px tall) throughout; bbox width 98-166 px depending on leg pose; feet stay at y~320 (does not walk away)"},
+    {"name": "watermark", "desc": "grey text box 'Modified with Segment Anything 2 Demo'", "moves": false,
+     "visible_frames": "0-48", "bbox_px": [1030, 690, 1280, 720]}
+  ],
+  "events": [
+    {"name": "soccer_ball_at_rest", "frames": "0-10", "t": "0.000-0.417", "note": "image motion < 2 px/frame; front_person's kicking shoe next to it"},
+    {"name": "basketball_at_rest", "frames": "0-11", "t": "0.000-0.458", "note": "image motion < 0.5 px/frame; rear_person's kicking shoe reaches it at frames 10-12"},
+    {"name": "soccer_ball_kicked_starts_moving", "frame": 11, "t": 0.458, "note": "first displacement 7 px at frame 11, then 76 px 11->12 (kick + probable dropped frame), ~27 px/frame at 13-14, decelerating in the image afterwards"},
+    {"name": "basketball_kicked_starts_moving", "frame": 12, "t": 0.5, "note": "last rest frame 11; 29 px step 11->12 (probable dropped frame), then ~13-20 px/frame"},
+    {"name": "balls_overlap_in_image_and_probable_collision", "frames": "24-27", "t": "1.000-1.125",
+     "note": "centre distance 57.9/44.2/52.0/63.7 px vs sum of radii ~59-60 px at frames 24/25/26/27; the soccer ball is in front (it hides the lower right of the basketball). At frame 25 the soccer ball's image y-motion reverses (up -> down) and its apparent size stops shrinking and starts growing, i.e. it is deflected back toward the camera; the basketball's downward image step drops from ~8 to ~4-5 px/frame. Best estimate of contact: frame 25 (t=1.042 s)."},
+    {"name": "front_person_bends_to_catch", "frames": "38-48", "note": "front_person turns/bends and reaches down with the right hand"},
+    {"name": "hand_contacts_basketball", "frame": 45, "t": 1.875, "note": "hand first overlaps the ball at 45-46, covers it at 47-48; ball centre still moving ~13 px/frame to frame 48 (catch not finished at video end)"},
+    {"name": "soccer_ball_still_moving_at_end", "frame": 48, "note": "~2-6 px/frame image motion at frames 44-48"}
+  ],
+  "files": {
+    "tracks/soccer_ball.csv": "per frame: cx, cy, radius (circle fit), bbox of fitted circle, mask extents, occlusion flag + note",
+    "tracks/basketball.csv": "same columns",
+    "tracks/front_person.csv": "per frame: bbox, bbox centre, mask centroid, PCA main-axis length/width/angle, area, cut_by_frame_edge",
+    "tracks/rear_person.csv": "same columns",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

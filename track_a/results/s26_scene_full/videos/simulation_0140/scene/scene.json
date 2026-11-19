@@ -1,0 +1,269 @@
+{
+ "video": "simulation_0140.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 100,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "camera": {
+  "motion": "static (consecutive-frame mean abs diff of whole frame <= 0.05 grey levels; background identical every frame apart from the bird and its shadow)",
+  "background_shift_px": 0.0,
+  "perspective": "Background is a flat backdrop image of a building facade at night (rows of windows, neon sign BE DIFFERENT) seen frontally, with the vertical facade edges converging slightly (photo perspective, upward view). No ground plane or horizon visible. The bird flies in front of this backdrop; it casts a shadow on the backdrop at take-off, so it starts near the wall."
+ },
+ "objects": [
+  {
+   "name": "bird",
+   "moving": true,
+   "kind": "flying bird (dark, pigeon/crow-like, short beak, flapping wings)",
+   "identify": "the only moving object; near-black silhouette, faint red/orange highlights over dark windows",
+   "frames_visible": [
+    0,
+    99
+   ],
+   "track": "tracks/bird.csv",
+   "reference_point": "cx,cy = centroid of segmented mask (proxy for the rig root/body centre; wing flapping moves it by a few px)",
+   "path_summary": {
+    "start_px": [
+     216.2,
+     865.4
+    ],
+    "end_px": [
+     1674.5,
+     524.8
+    ],
+    "apex_frame_min_y": 64,
+    "apex_px": [
+     1116.3,
+     373.2
+    ],
+    "image_path_length_px": 1682.8,
+    "image_net_displacement_px": 1497.5
+   },
+   "apparent_size_trend_12frame_windows": [
+    {
+     "frames": [
+      0,
+      11
+     ],
+     "max_bbox_w": 53,
+     "max_bbox_h": 41,
+     "median_bbox_w": 46.0,
+     "p90_mask_area": 1057.4
+    },
+    {
+     "frames": [
+      12,
+      23
+     ],
+     "max_bbox_w": 54,
+     "max_bbox_h": 36,
+     "median_bbox_w": 44.5,
+     "p90_mask_area": 719.8
+    },
+    {
+     "frames": [
+      24,
+      35
+     ],
+     "max_bbox_w": 48,
+     "max_bbox_h": 37,
+     "median_bbox_w": 42.0,
+     "p90_mask_area": 746.5
+    },
+    {
+     "frames": [
+      36,
+      47
+     ],
+     "max_bbox_w": 48,
+     "max_bbox_h": 40,
+     "median_bbox_w": 42.5,
+     "p90_mask_area": 889.9
+    },
+    {
+     "frames": [
+      48,
+      59
+     ],
+     "max_bbox_w": 47,
+     "max_bbox_h": 40,
+     "median_bbox_w": 37.5,
+     "p90_mask_area": 611.5
+    },
+    {
+     "frames": [
+      60,
+      71
+     ],
+     "max_bbox_w": 49,
+     "max_bbox_h": 21,
+     "median_bbox_w": 45.0,
+     "p90_mask_area": 597.6
+    },
+    {
+     "frames": [
+      72,
+      83
+     ],
+     "max_bbox_w": 43,
+     "max_bbox_h": 23,
+     "median_bbox_w": 35.5,
+     "p90_mask_area": 504.5
+    },
+    {
+     "frames": [
+      84,
+      95
+     ],
+     "max_bbox_w": 48,
+     "max_bbox_h": 28,
+     "median_bbox_w": 37.5,
+     "p90_mask_area": 634.2
+    },
+    {
+     "frames": [
+      96,
+      99
+     ],
+     "max_bbox_w": 54,
+     "max_bbox_h": 36,
+     "median_bbox_w": 45.5,
+     "p90_mask_area": 941.4000000000001
+    }
+   ],
+   "wingbeat_bbox_h_peak_frames": [
+    5,
+    13,
+    17,
+    20,
+    27,
+    33,
+    39,
+    48,
+    97
+   ]
+  },
+  {
+   "name": "bird_shadow",
+   "moving": true,
+   "identify": "soft dark patch on the facade left of / below the bird, frames 0-~12, merges with bird frames 0-2, drifts up-left (x~180-200, y 800->690 then fades by x~130,y~650)",
+   "frames_visible": [
+    0,
+    12
+   ],
+   "track": null
+  },
+  {
+   "name": "neon_sign_BE_DIFFERENT_letters",
+   "bbox": [
+    642,
+    271,
+    1336,
+    351
+   ],
+   "width_px": 695,
+   "height_px": 81,
+   "centre": [
+    985.2,
+    310.9
+   ],
+   "area_px": 49501,
+   "moving": false,
+   "frames_visible": [
+    0,
+    99
+   ],
+   "measured_on": "temporal median background"
+  },
+  {
+   "name": "neon_sign_with_red_glow",
+   "bbox": [
+    628,
+    238,
+    1341,
+    374
+   ],
+   "width_px": 714,
+   "height_px": 137,
+   "centre": [
+    984.8,
+    309.1
+   ],
+   "area_px": 84076,
+   "moving": false,
+   "frames_visible": [
+    0,
+    99
+   ],
+   "measured_on": "temporal median background"
+  },
+  {
+   "name": "bright_white_lit_window_bottom",
+   "bbox": [
+    661,
+    856,
+    786,
+    1028
+   ],
+   "width_px": 126,
+   "height_px": 173,
+   "centre": [
+    723.9,
+    941.4
+   ],
+   "area_px": 20780,
+   "moving": false,
+   "frames_visible": [
+    0,
+    99
+   ],
+   "measured_on": "temporal median background"
+  },
+  {
+   "name": "building_facade_windows",
+   "moving": false,
+   "frames_visible": [
+    0,
+    99
+   ],
+   "identify": "backdrop: grid of dark rectangular windows with orange-lit wall; left part shows a side facade lit orange"
+  },
+  {
+   "name": "window_ledge_takeoff",
+   "moving": false,
+   "frames_visible": [
+    0,
+    99
+   ],
+   "identify": "sloped dark window sill where the bird first appears",
+   "position_px": [
+    212,
+    865
+   ]
+  }
+ ],
+ "events": [
+  {
+   "event": "bird first visible (head/beak at window ledge), take-off",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "bird separates from its wall shadow",
+   "frame": 3,
+   "t": 0.125
+  },
+  {
+   "event": "bird reaches top of its arc (min image y), flight turns from rising to descending",
+   "frame": 64,
+   "t": 2.6667
+  },
+  {
+   "event": "still flying at end of clip, not leaving frame",
+   "frame": 99,
+   "t": 4.125
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0015.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.781337,
+ "frames": 143,
+ "duration_s": 4.8017,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 2077,
+  "question": "What is the length of the motorcycle in meters?",
+  "prior": "lane width = 3.66m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

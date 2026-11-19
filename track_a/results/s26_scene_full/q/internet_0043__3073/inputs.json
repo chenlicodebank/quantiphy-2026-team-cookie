@@ -1,0 +1,18 @@
+{
+ "video": "internet_0043.mp4",
+ "video_source": "internet",
+ "video_type": "V2MS",
+ "fps": 30.0,
+ "frames": 61,
+ "duration_s": 2.0333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3073,
+  "question": "What is the distance between the cylinder and the plastic bottle in cm?",
+  "prior": "velocity of the white ball at 1.0s = 33.38 cm/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

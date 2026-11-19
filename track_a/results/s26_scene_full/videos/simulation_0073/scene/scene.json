@@ -1,0 +1,498 @@
+{
+ "video": "simulation_0073.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_of_frame_i": "i/24",
+ "view": "orthographic-looking top-down view of a 4-way street intersection; image up (-y) = direction of travel",
+ "camera": {
+  "static": true,
+  "background_shift_px": 0.0,
+  "evidence": "static props identical (diff<~3 grey levels) between frames 0 and 71; no pan/shake"
+ },
+ "pixel_conventions": "x right, y down, origin top-left pixel of the 2160x1080 frame",
+ "moving_objects": {
+  "van": {
+   "description": "white van / minivan (dark-red windscreen at its top end = front), driving up the vertical road, left lane x~833",
+   "track": "tracks/van.csv",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "moves": true,
+   "reference_point": "mask centroid (top-down => approx. vehicle root/centre in plane)",
+   "size_px": {
+    "length_along_travel_y": 245,
+    "length_range": [
+     242,
+     249
+    ],
+    "width_incl_mirrors_x": 101,
+    "width_body_without_mirrors_x_approx": 89
+   },
+   "motion": "starts essentially at rest at frame 0 and speeds up steadily straight up (-y); x constant 833+-1",
+   "centre_y_frame0": 924.1,
+   "centre_y_frame71": 202.6,
+   "net_displacement_px": 721.5,
+   "note_for_check_only": "quadratic fit y(i)=924.5-0.28 i-0.139 i^2 px, rms 0.53 px (uniform acceleration)"
+  },
+  "cyclist": {
+   "description": "person riding a bicycle (seen from above), to the right of the van at x~917, moving up",
+   "track": "tracks/cyclist.csv",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "moves": true,
+   "reference_point": "mask centroid of bike+rider (approx. rider pelvis / bike root)",
+   "size_px": {
+    "length_along_travel_y": 64,
+    "length_range": [
+     60,
+     67
+    ],
+    "width_x_handlebars": 21
+   },
+   "motion": "constant velocity straight up from frame 1 (frames 0 and 1 identical); ~8.9 px/frame",
+   "centre_y_frame0": 828.6,
+   "centre_y_frame71": 205.6,
+   "net_displacement_px": 623.0,
+   "note_for_check_only": "linear fit y(i)=836.7-8.88 i px, rms 1.1 px"
+  }
+ },
+ "static_objects": {
+  "dark_square_top": {
+   "description": "dark grey square slab/grate on top-right sidewalk, near top edge",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1277.5,
+    72.5
+   ],
+   "bbox": [
+    1235,
+    28,
+    1320,
+    117
+   ],
+   "width_x_px": 86,
+   "height_y_px": 90
+  },
+  "brown_square_TL": {
+   "description": "brown square tree pit / planter patch, top-left sidewalk",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    411.0,
+    222.5
+   ],
+   "bbox": [
+    370,
+    183,
+    452,
+    262
+   ],
+   "width_x_px": 83,
+   "height_y_px": 80
+  },
+  "brown_square_BL": {
+   "description": "brown square patch, bottom-left sidewalk",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    411.0,
+    849.0
+   ],
+   "bbox": [
+    370,
+    809,
+    452,
+    889
+   ],
+   "width_x_px": 83,
+   "height_y_px": 81
+  },
+  "brown_square_BR": {
+   "description": "brown square patch, bottom-right sidewalk",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1217.0,
+    845.5
+   ],
+   "bbox": [
+    1177,
+    806,
+    1257,
+    885
+   ],
+   "width_x_px": 81,
+   "height_y_px": 80
+  },
+  "lamp_TL": {
+   "description": "street lamp seen from above (3 round heads on arms), top-left sidewalk",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    202.0,
+    213.5
+   ],
+   "bbox": [
+    167,
+    185,
+    237,
+    242
+   ],
+   "width_x_px": 71,
+   "height_y_px": 58
+  },
+  "lamp_TR1": {
+   "description": "street lamp, top-right sidewalk, 1st from left (seen edge-on, narrow bbox)",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1412.5,
+    213.5
+   ],
+   "bbox": [
+    1395,
+    185,
+    1430,
+    242
+   ],
+   "width_x_px": 36,
+   "height_y_px": 58
+  },
+  "lamp_TR2": {
+   "description": "street lamp, top-right sidewalk, 2nd",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1732.0,
+    213.5
+   ],
+   "bbox": [
+    1704,
+    185,
+    1760,
+    242
+   ],
+   "width_x_px": 57,
+   "height_y_px": 58
+  },
+  "lamp_TR3": {
+   "description": "street lamp, top-right sidewalk, 3rd (rightmost)",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    2051.5,
+    213.5
+   ],
+   "bbox": [
+    2014,
+    185,
+    2089,
+    242
+   ],
+   "width_x_px": 76,
+   "height_y_px": 58
+  },
+  "lamp_BL": {
+   "description": "street lamp, bottom-left sidewalk",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    201.5,
+    812.5
+   ],
+   "bbox": [
+    167,
+    784,
+    236,
+    841
+   ],
+   "width_x_px": 70,
+   "height_y_px": 58
+  },
+  "lamp_BR1": {
+   "description": "street lamp, bottom-right sidewalk, 1st from left",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1412.5,
+    812.5
+   ],
+   "bbox": [
+    1395,
+    784,
+    1430,
+    841
+   ],
+   "width_x_px": 36,
+   "height_y_px": 58
+  },
+  "lamp_BR2": {
+   "description": "street lamp, bottom-right sidewalk, 2nd",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1731.5,
+    812.5
+   ],
+   "bbox": [
+    1704,
+    784,
+    1759,
+    841
+   ],
+   "width_x_px": 56,
+   "height_y_px": 58
+  },
+  "lamp_BR3": {
+   "description": "street lamp, bottom-right sidewalk, 3rd (rightmost)",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    2051.5,
+    812.5
+   ],
+   "bbox": [
+    2014,
+    784,
+    2089,
+    841
+   ],
+   "width_x_px": 76,
+   "height_y_px": 58
+  },
+  "seating_TL": {
+   "description": "small table with chairs / bench set, top-left sidewalk corner",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    544.5,
+    224.5
+   ],
+   "bbox": [
+    516,
+    197,
+    573,
+    252
+   ],
+   "width_x_px": 58,
+   "height_y_px": 56
+  },
+  "seating_TR": {
+   "description": "small table with chairs, top-right sidewalk corner",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1165.5,
+    220.0
+   ],
+   "bbox": [
+    1140,
+    201,
+    1191,
+    239
+   ],
+   "width_x_px": 52,
+   "height_y_px": 39
+  },
+  "seating_BL": {
+   "description": "small table with chairs, bottom-left sidewalk corner",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    542.0,
+    805.5
+   ],
+   "bbox": [
+    508,
+    786,
+    576,
+    825
+   ],
+   "width_x_px": 69,
+   "height_y_px": 40
+  },
+  "seating_BR": {
+   "description": "small table with chairs, bottom-right sidewalk corner",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1130.0,
+    828.0
+   ],
+   "bbox": [
+    1114,
+    801,
+    1146,
+    855
+   ],
+   "width_x_px": 33,
+   "height_y_px": 55
+  },
+  "round_bin_BR": {
+   "description": "small round green/teal object (bin or bollard top), bottom-right sidewalk",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    1342.0,
+    806.0
+   ],
+   "bbox": [
+    1331,
+    795,
+    1353,
+    817
+   ],
+   "width_x_px": 23,
+   "height_y_px": 23
+  },
+  "white_ball": {
+   "description": "small white sphere lying on the horizontal road, right side",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    2025.0,
+    432.5
+   ],
+   "bbox": [
+    2011,
+    423,
+    2039,
+    442
+   ],
+   "width_x_px": 29,
+   "height_y_px": 20
+  },
+  "rock_pile": {
+   "description": "cluster of grey rocks on the horizontal road, right side, below the ball",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "center_px": [
+    2059.5,
+    623.5
+   ],
+   "bbox": [
+    2027,
+    597,
+    2092,
+    650
+   ],
+   "width_x_px": 66,
+   "height_y_px": 54
+  }
+ },
+ "ground_features": {
+  "vertical_road": {
+   "asphalt_x_range_px": [
+    616,
+    1081
+   ],
+   "width_px": 466,
+   "measured_at_y": 150
+  },
+  "horizontal_road": {
+   "asphalt_y_range_px": [
+    290,
+    755
+   ],
+   "width_px": 466,
+   "measured_at_x": 1600
+  },
+  "sidewalks": "four beige corner blocks with rounded corners and darker curb edge",
+  "lane_markings": "none visible"
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "van at rest/just starting (step frame0->1 is 0.2 px); begins accelerating upward"
+  },
+  {
+   "frame": 1,
+   "t": 0.0417,
+   "what": "cyclist starts moving (frames 0 and 1 identical, then ~8.9 px/frame immediately)"
+  },
+  {
+   "frame": 32,
+   "t": 1.333,
+   "what": "van per-frame speed reaches the cyclist speed (~9 px/frame, frames ~29-33); centre y gap is largest here (~220 px, van behind)"
+  },
+  {
+   "frame": 62,
+   "t": 2.583,
+   "what": "van front bumper (bbox top) passes cyclist front (between frames 61 and 62)"
+  },
+  {
+   "frame": 71,
+   "t": 2.958,
+   "what": "van centre passes cyclist centre in y (between frames 70 and 71); clip ends, both still moving"
+  },
+  {
+   "note": "no collisions, bounces or direction changes; ball and rocks never move"
+  }
+ ]
+}

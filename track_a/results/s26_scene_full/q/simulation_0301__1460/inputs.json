@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0301.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 1460,
+  "question": "What is the length(from the fork tips to the rear bumper) of the forklift in meters?",
+  "prior": "acceleration of the forklift = 2m/s^2",
+  "depth_info": "t = 1.0s, distance_forklift_camera = 16.7953 m\nt = 2.0s, distance_forklift_camera = 19.0980 m\nt = 1.0s, distance_car_camera = 17.8278 m\nt = 2.0s, distance_car_camera = 23.1989 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

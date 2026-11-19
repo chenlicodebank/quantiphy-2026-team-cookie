@@ -1,0 +1,245 @@
+{
+ "video": "simulation_0064.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "pixel_convention": "original 2160x1080 pixels, x right, y down, origin top-left",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of 3 static regions vs frame 0: max |shift| 0.51 px over all frames",
+  "view": "elevated camera looking down a straight cobbled street across an intersection; street runs away from camera; roll ~0",
+  "principal_point_assumed": [
+   1080,
+   540
+  ],
+  "focal_length": "unknown (estimate from depth_info + prior)",
+  "vanishing_point_street_direction": {
+   "best_far_left_x_near_right": [
+    1087.2,
+    -121.0
+   ],
+   "far_curbs_pair": [
+    1075.3,
+    -102.8
+   ],
+   "near_curbs_pair": [
+    1018.2,
+    -186.6
+   ],
+   "uncertainty_px": "about +-50 x, +-40 y"
+  },
+  "horizon_y_est": -121.0,
+  "horizon_note": "horizon above the image top (camera pitched down). Cross-street curbs are horizontal in the image -> horizon ~ horizontal line y ~ -120.",
+  "curb_lines_x_eq_a_y_plus_b": {
+   "far_left_curb": {
+    "a": -0.6558307710665734,
+    "b": 1007.8709581978641,
+    "n": 68,
+    "rms": 1.2035557299041468
+   },
+   "far_right_curb": {
+    "a": 1.0960667297745952,
+    "b": 1188.017867775171,
+    "n": 90,
+    "rms": 15.085456464909088
+   },
+   "near_left_curb": {
+    "a": -0.5426882301858053,
+    "b": 916.9533081850445,
+    "n": 159,
+    "rms": 7.698702024831016
+   },
+   "near_right_curb": {
+    "a": 1.0518617744127352,
+    "b": 1214.4355659095322,
+    "n": 101,
+    "rms": 0.57293553799405
+   }
+  },
+  "street_width_px_by_row": {
+   "0": 206.6,
+   "100": 377.3,
+   "200": 548.1,
+   "300": 718.9,
+   "600": 1231.2,
+   "800": 1572.7,
+   "1000": 1914.3,
+   "1079": 2049.2
+  },
+  "street_width_rule": "carriageway width between curb lines ~ 1.708*(y+121) px: linear in row, zero at horizon -> a ground point at row y has distance-along-street proportional to 1/(y+121)",
+  "frame0_equals_frame1": "frame 1 is a near-duplicate of frame 0 (mean abs diff 0.015 grey levels); motion starts between frames 1 and 2"
+ },
+ "objects": {
+  "taxi": {
+   "desc": "yellow NYC-style taxi sedan (roof sign), the only yellow car",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "motion": "starts facing the camera just left of street centre (bbox centre ~(943,260) at f0), drives toward camera while turning to its right (image left) into the cross street, ends travelling right-to-left along the near side of the cross street, side-on; still moving at f71",
+   "ref_point": "bbox centre; bottom_y = lowest mask row (tyre contact, +~10 px ground shadow)",
+   "occlusion": "behind the left traffic-signal head/pole from f38 on (bbox still spans the car; rear upper part hidden)",
+   "track": "tracks/taxi.csv"
+  },
+  "van": {
+   "desc": "white/light-grey full-size passenger van (Chevrolet Express style), driver visible",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "motion": "drives straight toward the camera down the right-centre of the street the whole clip; apparent size grows ~2.1x (bbox w 130->274 px); image motion accelerates strongly in the last frames (top y +33 px between f70 and f71)",
+   "ref_point": "bbox centre; bottom_y = bottom of black region under bumper (= approx front-wheel ground line; true bumper edge 0-30 px higher)",
+   "track": "tracks/van.csv"
+  },
+  "cyclist": {
+   "desc": "person in dark clothes riding a bicycle toward the camera, between the taxi and van at start",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "motion": "rides toward the camera along the street, drifting slightly left (body x 1054 -> 1031); height 86 -> 169 px",
+   "ref_point": "x = centre of body column band; pelvis_est = wheel_bottom - 0.57*height (saddle, rough)",
+   "occlusion": "none, but rides through the van shadow (f29-f70): bbox width/edges noisy there; use smoothed head/wheel columns",
+   "track": "tracks/cyclist.csv"
+  },
+  "pedestrian": {
+   "desc": "man in white T-shirt and dark trousers walking on the far-left sidewalk (beyond the cross street)",
+   "moves": true,
+   "visible_frames": [
+    33,
+    71
+   ],
+   "hidden_frames": "0-32 behind the left signal head (only feet glimpsed: x~452,y~290 at f0; x~355 at f24)",
+   "motion": "walks right-to-left (image), roughly parallel to the image plane, at near-constant depth (feet y ~298-300)",
+   "ref_point": "x = mask centroid; pelvis_est = head_top + 0.47*Href, Href = median full height f36-52 = 103 px",
+   "occlusion": "legs/feet hidden behind the taxi from ~f53-57 on (feet_visible=0)",
+   "track": "tracks/pedestrian.csv"
+  }
+ },
+ "static_objects": {
+  "traffic_signal_near_left": {
+   "desc": "vehicle signal head (black, yellow border) on pole at near-left corner, with white warning sign above and green pedestrian signal below",
+   "head_bbox": [
+    337,
+    147,
+    473,
+    307
+   ],
+   "warning_sign_top_y": 67,
+   "ped_signal_bbox": [
+    393,
+    343,
+    445,
+    410
+   ],
+   "pole_x": 430,
+   "pole_base_y": 572,
+   "height_px_sign_top_to_base": 505
+  },
+  "traffic_signal_near_right": {
+   "desc": "signal head with green light, pedestrian-crossing sign above, pedestrian signal below, near-right corner",
+   "head_bbox_approx": [
+    1878,
+    150,
+    1955,
+    305
+   ],
+   "ped_signal_bbox_approx": [
+    1867,
+    340,
+    1940,
+    410
+   ],
+   "pole_base_approx": [
+    1890,
+    565
+   ]
+  },
+  "traffic_signal_far_left": {
+   "bbox_approx": [
+    700,
+    40,
+    760,
+    310
+   ],
+   "note": "far corner beyond cross street, green light"
+  },
+  "traffic_signal_far_right": {
+   "bbox_approx": [
+    1565,
+    40,
+    1625,
+    310
+   ],
+   "note": "far corner beyond cross street"
+  },
+  "trees": {
+   "far_left_trunk_x": 605,
+   "far_right_trunk_x": 1825,
+   "base_y_approx": 290,
+   "note": "trunks in square planters on the far sidewalks"
+  },
+  "street_far": {
+   "desc": "cobbled street continuing away from camera between far sidewalks",
+   "curbs": "far_left_curb / far_right_curb lines"
+  },
+  "cross_street": {
+   "desc": "sunlit cobbled cross street spanning full width",
+   "far_curb_y": {
+    "100": 318,
+    "300": 311,
+    "550": 307,
+    "1600": 320,
+    "1800": 320,
+    "2050": 320
+   },
+   "near_curb_y_approx": "545-590 (corners at ~(600,560) left and ~(1810,540) right)"
+  },
+  "street_near": {
+   "desc": "cobbled street toward camera (bottom of frame) between near sidewalks",
+   "curbs": "near_left_curb / near_right_curb lines"
+  },
+  "sidewalks": "grey paved corners near-left (x<600, y>550) and near-right (x>1810, y>540); far sidewalks y~150-310",
+  "grate": "dark grate/manhole at near-left sidewalk edge, bbox approx [0, 610, 110, 720]",
+  "shadows": "large tree/building shadows on the near road (static); van and taxi cast shadows toward image left"
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "start; frames 0 and 1 identical"
+  },
+  {
+   "frame": 2,
+   "t": 0.0833,
+   "what": "first visible motion of taxi, van, cyclist"
+  },
+  {
+   "frame": 33,
+   "t": 1.375,
+   "what": "pedestrian emerges from behind the left signal head"
+  },
+  {
+   "frame": 38,
+   "t": 1.5833,
+   "what": "taxi front reaches the left signal pole/head (partial occlusion begins)"
+  },
+  {
+   "frame": 57,
+   "t": 2.375,
+   "what": "taxi passes in front of pedestrian; pedestrian legs hidden from here"
+  },
+  {
+   "frame": 71,
+   "t": 2.9583,
+   "what": "end; all four still moving; no contact/collision anywhere"
+  }
+ ]
+}

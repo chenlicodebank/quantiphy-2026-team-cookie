@@ -1,0 +1,71 @@
+{
+  "video": "captured_0036s.mp4",
+  "source": "lab (real recording, background replaced by a synthetic snowy-sky image via Segment Anything 2; 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (background pixels change < 0.1% between any two consecutive frames; table outline fixed)",
+    "intrinsics_from_benchmark": {"focal_px": 762.8, "principal_point_px": [640, 360], "hfov_deg": 80},
+    "view": "slightly above table-top height, looking roughly horizontally at a table; the table top is seen as a trapezoid (back edge short and high in the image, front edge long and low), so image-down = toward the camera on the table plane",
+    "perspective_cues": "table-top trapezoid: back edge y~441-450 from x~403 to ~765 (length ~362 px), front edge y~590-598 from x~188 to ~997 (length ~809 px); the side edges converge upward to a vanishing point above the table (left edge back-left(403,442)->front-left(188,590), right edge back-right(765,450)->front-right(997,598)). Horizon is about at/above the back edge (camera only slightly higher than the table top)."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "the only moving object: small white/cream ball (looks like a ping-pong-size ball), white highlight on top, grey shading underneath, thin bright segmentation halo around it",
+      "moves": true,
+      "visible_frames": "0-39 fully/mostly (39 bottom cut by watermark box), 40 only a 3-px sliver above the watermark, 41-48 gone",
+      "reference_point": "centroid of the ball mask (cx, cy) = visible centre",
+      "track_file": "tracks/ball.csv",
+      "apparent_size_px": {
+        "frames_0_11_at_rest": "about 27-29 x 25-29 px (diameter ~27 px) at image (420,430)",
+        "frame_20": "height ~24-26 px (true ~26 incl. shaded bottom)",
+        "frame_30": "~52 x 41 px (blur along motion), height ~41",
+        "frame_35": "~67 x 46 px",
+        "frames_36_39_falling": "~77-84 px long x ~52-53 px across (strong motion blur)",
+        "note": "use width_across_main_axis or bbox_h (motion is mostly horizontal on the table) as the diameter proxy; the length along the motion direction includes motion blur"
+      }
+    },
+    {
+      "name": "table",
+      "description": "rectangular wooden table, brown wood-grain top, dark brown front edge band, single dark grey central pedestal leg",
+      "moves": false,
+      "visible_frames": "all",
+      "image_extents_px_frame48": {
+        "top_surface_corners_xy": {"back_left": [403, 442], "back_right": [765, 450], "front_left": [188, 590], "front_right": [997, 598]},
+        "back_edge_length_px": 362,
+        "front_edge_length_px": 809,
+        "left_side_edge_length_px": 262,
+        "right_side_edge_length_px": 275,
+        "top_surface_image_height_px": "~148-156 (y 442-598)",
+        "front_band_thickness_px": "~33-35 (y ~590-625 at left, ~598-628 at right)",
+        "overall_wood_bbox": [188, 440, 997, 625]
+      }
+    },
+    {
+      "name": "table_pedestal_leg",
+      "description": "dark grey column under the table centre, cut off by the bottom of the frame",
+      "moves": false,
+      "image_extents_px": {"x": [533, 590], "width_px": 57, "y": [622, 720], "visible_height_px": "98 (cut off by frame bottom)"}
+    },
+    {
+      "name": "watermark_box",
+      "description": "grey 'Modified with Segment Anything 2 Demo' label, x ~1028-1280, y ~690-720; occludes the falling ball in frames 39-40",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball at rest near the back-left corner of the table top", "frames": "0-11", "t_s": "0.000-0.458", "note": "centroid drifts ~5 px left (420 -> 415) between frames 4 and 10 - tiny wobble/creep, essentially at rest"},
+    {"event": "start of motion (rolling to the right / toward the camera)", "frame": 12, "t_s": 0.5, "note": "first clear step frame 12 (3.7 px), 10 px at frame 13"},
+    {"event": "ball rolls diagonally across the table top toward the front-right corner, image step growing from ~14-20 px/frame (frames 14-28) to ~32 px/frame (frame 34)", "frames": "12-35"},
+    {"event": "ball centre reaches the table's right edge (rolls off the right side, near the front-right corner)", "frame": 35, "t_s": 1.458},
+    {"event": "probable dropped frame in the recording: centroid step 35->36 is 76 px versus 31 px before and 42 px after", "frames": "35-36"},
+    {"event": "ball off the table, falling down beside the right/front-right edge", "frames": "36-40", "t_s": "1.500-1.667"},
+    {"event": "ball partly hidden by watermark (bottom)", "frame": 39, "t_s": 1.625},
+    {"event": "ball leaves the view (behind watermark / below frame)", "frame": 41, "t_s": 1.708}
+  ],
+  "files": {"tracks": ["tracks/ball.csv", "tracks/ball_raw.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

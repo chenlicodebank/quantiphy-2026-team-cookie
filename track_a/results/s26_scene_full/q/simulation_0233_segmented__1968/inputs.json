@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0233_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1968,
+  "question": "What is the length(vertical) of the chair next to the blackboard in meters?",
+  "prior": "speed of the black cat = 0.714m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

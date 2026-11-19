@@ -1,0 +1,76 @@
+{
+ "wall_s": 1297,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 48,
+  "duration_ms": 1296129,
+  "total_cost_usd": 2.1426398,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 60,
+  "cache_creation_input_tokens": 105478,
+  "cache_read_input_tokens": 1739179,
+  "output_tokens": 47537,
+  "output_tokens_details": {
+   "thinking_tokens": 30754
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 105478,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 790,
+    "cache_read_input_tokens": 110138,
+    "cache_creation_input_tokens": 5234,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 5234
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 43,
+  "flags": [
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0172-q-1407/03c79b3a-cab3-4e0c-83ce-26eccfca01fe/tasks/b21ns224x.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0172-q-1407/03c79b3a-cab3-4e0c-83ce-26eccfca01fe/tasks/b21ns224x.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0172-q-1407/03c79b3a-cab3-4e0c-83ce-26eccfca01fe/tasks/b21ns224x.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0172-q-1407/03c79b3a-cab3-4e0c-83ce-26eccfca01fe/tasks/b21ns224x.output\"}"
+   }
+  ]
+ },
+ "video": "simulation_0172",
+ "ids": [
+  1407
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0172__q1407.jsonl"
+}

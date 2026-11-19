@@ -1,0 +1,62 @@
+{
+  "video": "simulation_0261_segmented.mp4",
+  "source": "segmentation (Blender simulation, background replaced by white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "width": 1080,
+  "height": 1920,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, integer pixel indices; bbox x1/y1 inclusive",
+  "camera": {
+    "static": true,
+    "note": "Uniform white background, no visible features; no evidence of camera motion. The mug's x stays constant to within 1 px and its rest position stays constant over frames 24-49 (within 0.5 px), which fits a fixed camera."
+  },
+  "objects": [
+    {
+      "name": "mug",
+      "description": "Single beige/cream ceramic coffee mug with a brown handle on its RIGHT side, seen from the side. It is the only object in the video.",
+      "moves": true,
+      "visible_frames": "0-49 (every frame), never occluded",
+      "track_file": "tracks/mug.csv",
+      "reference_point": "cx_bbox, cy_bbox = centre of the full mask bbox (handle included). This is the best proxy for the rigid-body origin. For a vertical-only motion the choice of point changes only a constant x offset, not dy (but see the height wobble in notes).",
+      "extents_px": {
+        "width_with_handle": 111,
+        "body_width_without_handle": 77,
+        "handle_protrusion": 33,
+        "height_at_rest_frames_24_49": 96,
+        "height_frame_0": 110,
+        "height_range_during_motion": [87, 111],
+        "x_extent_px": [529, 639],
+        "body_x_extent_px": [530, 606]
+      },
+      "positions_px": {
+        "frame0_bbox_centre": [584.0, 78.5],
+        "frame0_bbox": [529, 24, 639, 133],
+        "rest_bbox_centre_frames_24_47": [584.0, 1622.5],
+        "rest_bbox": [529, 1575, 639, 1670],
+        "body_centre_x": 568.0
+      },
+      "motion": "Falls straight down from frame 0 (already released, starting almost from rest) and speeds up until first ground contact at frame 19. It then settles with a small rocking/bounce of its top edge (frames 19-23) while its bottom stays on the floor line (y≈1670). Fully at rest from frame 24."
+    },
+    {
+      "name": "ground_line (implicit)",
+      "description": "No floor is drawn (the background was removed). The floor the mug lands on is at image row y ≈ 1670 (the mug's bottom edge from frame 19 on).",
+      "moves": false,
+      "position_px": {"y": 1670}
+    }
+  ],
+  "events": [
+    {"event": "motion start / release", "frame": 0, "t": 0.0, "note": "The mug is already moving at frame 0 (f0 to f1 bottom moves 6 px; f1 to f2 13 px), so the drop starts at or just before frame 0"},
+    {"event": "first ground contact (impact)", "frame": 19, "t": 0.7917, "note": "bottom y1 = 1671 (the largest value); centre lowest at cy = 1625.5. Between f18 (bottom 1575) and f19 the bottom moves 96 px, while free fall would carry it about 165 px, so the impact happens between frames 18 and 19 (about frame 18.6)"},
+    {"event": "rebound / rocking", "frames": "20-22", "t": [0.8333, 0.9167], "note": "bottom stays at 1669-1670; top edge rises to 1559 (f21) and returns, so the bbox centre goes up to 1614.0 at f21. This is a tilt/rock or small bounce of the body, not a clear airborne bounce"},
+    {"event": "comes to rest", "frame": 24, "t": 1.0, "note": "bbox [529,1575,639,1670] constant from f24 to f47 (f48-49 change by 1 px)"},
+    {"event": "direction change (centre moving down to up)", "frame": 19, "t": 0.7917}
+  ],
+  "files": {
+    "tracks/mug.csv": "per-frame mask measurements",
+    "notes.md": "method, reliability, ambiguities",
+    "scripts/track.py": "segmentation + track",
+    "scripts/crops.py": "visual check montage"
+  }
+}

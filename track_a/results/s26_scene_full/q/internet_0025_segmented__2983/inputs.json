@@ -1,0 +1,18 @@
+{
+ "video": "internet_0025_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2SC",
+ "fps": 29.970629,
+ "frames": 305,
+ "duration_s": 10.1766,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2983,
+  "question": "What is the displacement of the canoe in the first 5 seconds in meters?",
+  "prior": "height of the boatman = 1.75m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

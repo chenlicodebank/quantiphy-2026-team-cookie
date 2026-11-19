@@ -1,0 +1,172 @@
+{
+ "video": "simulation_0289.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels (image coords, x right, y down) and seconds; no metric scale assumed",
+ "camera": {
+  "motion": "static (background median clean; no shift detected)",
+  "background_shift_px": 0,
+  "view": "side view of a koi swimming right-to-left parallel to the image plane; plain grey cyclorama (floor curving into back wall), no markings; fish shadow falls on floor near image bottom"
+ },
+ "objects": [
+  {
+   "name": "koi_fish",
+   "aka": [
+    "fish",
+    "koi",
+    "goldfish",
+    "carp"
+   ],
+   "moves": true,
+   "description": "single white/grey koi with orange-red patches, pinkish head, long pale fins; swims leftward horizontally at constant height (bbox centre y ~642 px)",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "fully_in_frame_frames": [
+    4,
+    71
+   ],
+   "note_partial": "frames 0-3 tail cut by right image edge (x1 = 2559)",
+   "track_file": "tracks/koi_fish.csv",
+   "reference_points": {
+    "cx_bbox,cy_bbox": "centre of the 2D mask bounding box (best proxy of the object origin / bbox centre; drifts ~ -0.7 px/frame relative to body because the tail/fins extend over the clip)",
+    "body_x,body_y": "rigid trunk texture patch (template match, subpixel) - best for rigid displacement",
+    "cx_mask,cy_mask": "mask centroid"
+   },
+   "extent_px_fully_visible": {
+    "bbox_w_snout_to_tailtip": {
+     "min": 589.0,
+     "max": 646.0,
+     "mean": 617.2,
+     "median": 613.5
+    },
+    "bbox_h_dorsal_to_lowest_fin": {
+     "min": 290.0,
+     "max": 292.0,
+     "mean": 291.0,
+     "median": 291.0
+    },
+    "axis_len_pca": {
+     "min": 582.1,
+     "max": 637.9,
+     "mean": 609.4,
+     "median": 606.3
+    },
+    "axis_angle_deg": {
+     "min": 5.1,
+     "max": 5.8,
+     "mean": 5.5,
+     "median": 5.5
+    },
+    "trend": "length grows ~589 px (frame 4-12) -> ~643 px (frame 62-71) as the tail fin extends; height constant 290-292 px",
+    "length_at_frames": {
+     "4": 593,
+     "12": 595,
+     "24": 608,
+     "36": 613,
+     "48": 624,
+     "60": 640,
+     "71": 643
+    }
+   },
+   "motion_summary_px": {
+    "direction": "leftward (-x), essentially horizontal (body_y range 638.0-640.1)",
+    "body_x_frame1_to_70": [
+     2269.4,
+     707.5
+    ],
+    "bbox_cx_frame1_to_70": [
+     2293.5,
+     779.5
+    ],
+    "per_frame_step_body_px": {
+     "frames_2_17": 22.05,
+     "frames_18_40_peak": 23.42,
+     "frames_41_70": 22.35,
+     "mean_frames_2_70": 22.64
+    },
+    "per_frame_step_bbox_centre_px_mean_frames_5_70": 22.33,
+    "path_length_body_frame1_70_px": 1561.9
+   }
+  },
+  {
+   "name": "fish_shadow",
+   "moves": true,
+   "description": "dark elongated shadow of the fish on the floor, y ~1330-1370 px, follows the fish horizontally (offset to the right by ~40-60 px)",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "fully_in_frame_frames": [
+    18,
+    71
+   ],
+   "note_partial": "frames 0-17 cut by right image edge",
+   "extent_px_fully_visible": {
+    "bbox_w": {
+     "min": 735.0,
+     "max": 824.0,
+     "mean": 780.8,
+     "median": 780.0
+    },
+    "bbox_h": {
+     "min": 37.0,
+     "max": 45.0,
+     "mean": 40.0,
+     "median": 38.0
+    },
+    "cy_bbox": {
+     "min": 1344.0,
+     "max": 1352.0,
+     "mean": 1347.5,
+     "median": 1347.2
+    }
+   },
+   "reliability": "soft penumbra; thin far-right tip is faint so length varies 735-824 px; not the fish",
+   "track_file": "tracks/fish_shadow.csv"
+  },
+  {
+   "name": "backdrop_floor",
+   "moves": false,
+   "description": "seamless light-grey cyclorama; floor/wall transition not sharp; brightest centre-bottom, dark vignette top corners. No measurable static objects."
+  }
+ ],
+ "events": [
+  {
+   "event": "fish static (frames 0 and 1 identical position)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "motion starts (first displacement)",
+   "frame": 2,
+   "t": 0.0833
+  },
+  {
+   "event": "tail fully enters frame",
+   "frame": 4,
+   "t": 0.1667
+  },
+  {
+   "event": "body step peaks ~24 px/frame (mild speed-up then back to ~22.3)",
+   "frame": 25,
+   "t": 1.0417
+  },
+  {
+   "event": "last motion frame",
+   "frame": 70,
+   "t": 2.9167
+  },
+  {
+   "event": "frame 71 duplicates frame 70 (no motion)",
+   "frame": 71,
+   "t": 2.9583
+  }
+ ]
+}

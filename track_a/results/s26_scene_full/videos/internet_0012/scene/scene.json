@@ -1,0 +1,395 @@
+{
+ "video": "internet_0012.mp4",
+ "source": "internet",
+ "scene_type": "2D (top-down drone view, nadir)",
+ "fps": 59.346597,
+ "frames": 108,
+ "size_wh": [
+  2160,
+  3840
+ ],
+ "time_convention": "t = frame / fps, frame 0 at t=0",
+ "description": "Straight-down aerial view of a long bridge/highway over water. Road runs vertically (tilted ~0.4 deg: x decreases ~7 px per 1000 px down). Left carriageway (x~690-1040) traffic moves DOWN the image; right carriageway (x~1080-1400) traffic moves UP. Four vehicles, all moving the whole clip at roughly constant pixel rates. Water both sides.",
+ "frame_duplication": {
+  "n_duplicate_frames": 46,
+  "n_unique_frames": 62,
+  "duplicate_frames": [
+   1,
+   4,
+   6,
+   8,
+   11,
+   13,
+   15,
+   18,
+   20,
+   22,
+   25,
+   27,
+   29,
+   32,
+   34,
+   36,
+   39,
+   41,
+   43,
+   46,
+   48,
+   50,
+   53,
+   55,
+   57,
+   60,
+   62,
+   64,
+   67,
+   69,
+   71,
+   74,
+   76,
+   78,
+   81,
+   83,
+   85,
+   88,
+   90,
+   92,
+   95,
+   97,
+   99,
+   102,
+   104,
+   106
+  ],
+  "note": "The 59.35 fps file repeats frames in a 7-frame pattern (3 of every 7 frames are copies of the previous one; effective ~33.9 distinct images/s). One-frame differences alternate 0 and ~1.75x the true per-frame motion; use differences over several frames (or only unique frames) for rates. See tracks/frame_duplicates.csv."
+ },
+ "camera": {
+  "motion": "static (no pan/zoom): lamp heads move <=2 px over the clip, top-bottom lamp separation constant within 0.5 px; phase-correlation drift of bridge strips <=1.1 px (tracks/camera_shift.csv). No background compensation needed.",
+  "view": "nadir (looking straight down); no horizon; road plane fills frame",
+  "scale_variation": "Lane-dash period (true constant spacing) is 392-397 px near image centre (y~1800-2200) and 403-406 px near top and bottom (y~200, ~3400): local vertical px scale varies ~+-1.7% (lens distortion), symmetric about the image centre. Car lengths follow it (white_car_lower 105.7->108.9 px moving from y 2620 to 3166). The benchmark convention is a single scale; this is just a caveat."
+ },
+ "objects": {
+  "white_car_upper": {
+   "description": "white sedan, left (southbound/downward) carriageway, inner lane x~868; starts upper-middle of frame (y~1462 at f0)",
+   "moves": true,
+   "motion": "moves down the image (+y)",
+   "visible_frames": [
+    0,
+    107
+   ],
+   "occlusion": "none",
+   "track_file": "tracks/white_car_upper.csv",
+   "ref_point": "centre of the physical body box (shadow excluded)",
+   "body_length_px_along_road": 121.5,
+   "body_width_px": 48,
+   "size_note": "L from half-max edges at f0/54/107: 121.3/121/121.3; per-frame edge_length 119.8-121.5",
+   "centre_f0": [
+    868.5,
+    1461.75
+   ],
+   "centre_f107": [
+    869.81,
+    2127.37
+   ],
+   "net_displacement_px_f0_to_f107": [
+    1.31,
+    665.62
+   ]
+  },
+  "white_car_lower": {
+   "description": "smaller white hatchback/sedan, left carriageway, lane x~829 (left of white_car_upper's lane); starts y~2620 at f0",
+   "moves": true,
+   "motion": "moves down the image (+y)",
+   "visible_frames": [
+    0,
+    107
+   ],
+   "occlusion": "none",
+   "track_file": "tracks/white_car_lower.csv",
+   "ref_point": "centre of the physical body box (shadow excluded)",
+   "body_length_px_along_road": 105.5,
+   "body_width_px": 46,
+   "size_note": "L grows 105.7 (y~2620) -> 108.9 (y~3166) with image position (lens/scale variation, see static)",
+   "centre_f0": [
+    829.0,
+    2620.25
+   ],
+   "centre_f107": [
+    819.84,
+    3166.25
+   ],
+   "net_displacement_px_f0_to_f107": [
+    -9.16,
+    546.0
+   ]
+  },
+  "dark_car": {
+   "description": "dark grey/black SUV, right carriageway, lane x~1200 (left of the truck); starts beside truck cab (y~3160 at f0)",
+   "moves": true,
+   "motion": "moves up the image (-y), overtakes the truck",
+   "visible_frames": [
+    0,
+    107
+   ],
+   "occlusion": "none",
+   "track_file": "tracks/dark_car.csv",
+   "ref_point": "centre of the physical body box (shadow excluded)",
+   "body_length_px_along_road": 127.0,
+   "body_width_px": 55,
+   "size_note": "L shrinks 131 (y~3160) -> 123 (y~2175); dark body + shadow make ends uncertain +-3 px",
+   "centre_f0": [
+    1200.5,
+    3159.7
+   ],
+   "centre_f107": [
+    1200.47,
+    2176.89
+   ],
+   "net_displacement_px_f0_to_f107": [
+    -0.03,
+    -982.81
+   ]
+  },
+  "truck": {
+   "description": "semi-trailer truck: yellow cab + long white box trailer, right carriageway, rightmost lane x~1321",
+   "moves": true,
+   "motion": "moves up the image (-y)",
+   "visible_frames": [
+    0,
+    107
+   ],
+   "occlusion": "thin overhead lamp arm (y~2977) crosses the trailer during frames 19-90 (flag in csv); negligible for tracking",
+   "track_file": "tracks/truck.csv",
+   "ref_point": "centre of the physical body box (shadow excluded)",
+   "body_length_px_along_road": 457.0,
+   "body_width_px": 72.7,
+   "size_note": "cab front bumper to trailer rear at f107 (truck centre y~2653); half-max width 72.7, outer incl. mirrors/edge ~77. per-frame edge length unreliable (front edge alternates between bumper and windshield)",
+   "centre_f0": [
+    1318.36,
+    3323.58
+   ],
+   "centre_f107": [
+    1320.96,
+    2653.01
+   ],
+   "net_displacement_px_f0_to_f107": [
+    2.6,
+    -670.57
+   ]
+  }
+ },
+ "static_objects": {
+  "lane_dashes": {
+   "description": "white dashed lane lines; length 159-170 px (median ~163; ~161 near centre, ~168 near top/bottom), period (dash start to next dash start) mean 400 px (392-406), gap ~237 px, width ~6-7 px",
+   "left_carriageway_dash_lines_x_at_top_bottom": [
+    [
+     859,
+     830
+    ],
+    [
+     956,
+     928
+    ]
+   ],
+   "right_carriageway_dash_lines_x_at_top_bottom": [
+    [
+     1196,
+     1172
+    ],
+    [
+     1292,
+     1268
+    ]
+   ],
+   "left_line_dash_y_ranges_x~850": [
+    [
+     143,
+     310
+    ],
+    [
+     549,
+     712
+    ],
+    [
+     952,
+     1114
+    ],
+    [
+     1349,
+     1510
+    ],
+    [
+     1746,
+     1906
+    ],
+    [
+     2138,
+     2300
+    ],
+    [
+     2534,
+     2695
+    ],
+    [
+     2935,
+     3098
+    ],
+    [
+     3339,
+     3506
+    ],
+    [
+     3745,
+     3839
+    ]
+   ],
+   "right_line_dash_y_ranges_x~1185": [
+    [
+     281,
+     443
+    ],
+    [
+     687,
+     848
+    ],
+    [
+     1089,
+     1249
+    ],
+    [
+     1487,
+     1646
+    ],
+    [
+     1883,
+     2040
+    ],
+    [
+     2277,
+     2436
+    ],
+    [
+     2676,
+     2837
+    ],
+    [
+     3079,
+     3241
+    ],
+    [
+     3486,
+     3649
+    ]
+   ]
+  },
+  "lane_width_px": "centre-to-centre of adjacent lane lines ~96-98 px (e.g. 859->956, 1196->1292 at top). Each carriageway: 3 lanes between solid edge lines.",
+  "solid_lines": "left carriageway outer edge line x~688-708 (near left railing); median edge lines x~1033 and x~1082 (median/barrier strip between ~1036 and ~1080); right carriageway outer edge line x~1372-1377 / railing ~1421-1473",
+  "lamp_posts": {
+   "description": "street lamps on both railings with arms over the outer lanes; heads (bright ~25x9 px) at y spacing ~711 px",
+   "left_heads_xy_f0": [
+    [
+     782.6,
+     118.7
+    ],
+    [
+     777.9,
+     835.2
+    ],
+    [
+     776.8,
+     1547.1
+    ],
+    [
+     774.0,
+     2242.6
+    ],
+    [
+     766.4,
+     2953.9
+    ],
+    [
+     759.7,
+     3675.9
+    ]
+   ],
+   "right_heads_xy_f0": [
+    [
+     1345.9,
+     129.5
+    ],
+    [
+     1343.3,
+     841.9
+    ],
+    [
+     1333.5,
+     1558.0
+    ],
+    [
+     1333.8,
+     2260.9
+    ],
+    [
+     1324.7,
+     2975.5
+    ],
+    [
+     1332.3,
+     3694.0
+    ]
+   ],
+   "spacing_px": "left 716,712,696,712,721; right 712,716,703,716,719 (mean ~711)"
+  },
+  "bridge_deck": "deck incl. railings spans x~600-1530 (~930 px); water (dark teal) x<600 and x>1530",
+  "median_strip": "concrete median x~1036-1080, ~45 px wide"
+ },
+ "events": [
+  {
+   "event": "dark_car front level with truck front",
+   "frame_interp": 1.22,
+   "frame": 1,
+   "t": 0.0205
+  },
+  {
+   "event": "dark_car centre level with truck front",
+   "frame_interp": 22.2,
+   "frame": 22,
+   "t": 0.3741
+  },
+  {
+   "event": "white_car_lower and dark_car centres level in y (pass each other, opposite directions)",
+   "frame_interp": 37.41,
+   "frame": 37,
+   "t": 0.6304
+  },
+  {
+   "event": "dark_car rear bumper level with truck front (dark car fully ahead of truck)",
+   "frame_interp": 43.24,
+   "frame": 43,
+   "t": 0.7286
+  },
+  {
+   "event": "white_car_lower and truck centres level in y (pass each other, opposite directions)",
+   "frame_interp": 62.31,
+   "frame": 62,
+   "t": 1.0499
+  },
+  {
+   "event": "all four vehicles in motion for the entire clip (no start/stop, no lane change)",
+   "frame": 0,
+   "t": 0.0
+  }
+ ],
+ "files": {
+  "tracks": [
+   "tracks/white_car_upper.csv",
+   "tracks/white_car_lower.csv",
+   "tracks/dark_car.csv",
+   "tracks/truck.csv",
+   "tracks/camera_shift.csv",
+   "tracks/frame_duplicates.csv"
+  ],
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

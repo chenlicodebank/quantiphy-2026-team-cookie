@@ -1,0 +1,18 @@
+{
+ "video": "internet_0033.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 19.293478,
+ "frames": 47,
+ "duration_s": 2.4361,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 3024,
+  "question": "What is the size of avocado in cm?",
+  "prior": "size of the fork = 20.3 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 25.0
+ }
+}

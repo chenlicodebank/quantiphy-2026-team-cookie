@@ -1,0 +1,82 @@
+{
+  "video": "internet_0071.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 24.097768,
+  "frames": 60,
+  "duration_s": 2.4899,
+  "width_px": 3840,
+  "height_px": 2160,
+  "time_convention": "t = frame / fps, frame 0 at t = 0; frame for time t = round(t * fps)",
+  "units": "pixels (full 3840x2160 resolution) and seconds; image x to the right, y downward",
+  "description": "Close-up of a white tiled bathroom wall with a white wall-mounted toilet-roll holder (suction cup + horizontal arm). A right hand brings a white toilet-paper roll in from the bottom-right corner, moves it up-left, then slides it leftwards onto the holder arm, lowers it onto the arm and stops at the suction cup. The hand still holds the roll at the end (no release).",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the top image band (y<600, never covered) against frame 0: |shift| <= 0.03 px in every frame (scene/scripts/camera_shift.json)",
+    "per_frame_background_shift_px": "0 (all frames)",
+    "perspective_cues": "Wall is nearly but not exactly fronto-parallel: tile height between the two horizontal grout lines is 1040 px at x=150 and 1091 px at x=3350 (~5% scale gradient, right side nearer). The roll and hand are ~10-15 cm in front of the wall. Annotator convention ignores perspective (single scale)."
+  },
+  "objects": [
+    {
+      "name": "toilet_roll",
+      "description": "white embossed toilet-paper roll, the only free-moving object; seen side-on with its axis horizontal (parallel to the holder arm) from frame ~14 on; in frames 0-13 tilted in 3D so its left end face / dark core hole is visible",
+      "moves": true,
+      "visible_frames": "0-59 (frames 0-4 partly cut off by the bottom/right image edge; lower-right part occluded by the hand's fingers in all frames)",
+      "track": "tracks/toilet_roll.csv",
+      "reference_point": "visible centre = centre of the roll's image bounding box (cx, cy)",
+      "size_px": {
+        "length_along_axis_horizontal": "585 (at rest, frames 56-59: 583.5-585.2); 588-606 while moving face-on (frames 20-35); varies +-15 with slight yaw",
+        "diameter_vertical": "698.6 (median of 24 frames with a clean bottom edge; 697-699 at rest)",
+        "note": "main motion direction is horizontal (leftwards) = the roll's axis direction, so 'length along motion' = length_along_axis"
+      }
+    },
+    {
+      "name": "hand",
+      "description": "person's right hand and forearm (bare skin, dark green/grey sleeve at frame edge) holding the roll from the right; enters from bottom-right",
+      "moves": true,
+      "visible_frames": "1-59 (always extends off the right/bottom edge)",
+      "track": "tracks/hand.csv",
+      "reference_point": "bbox and leftmost point (thumb/fingertip) only - the hand's true centre is off-frame"
+    },
+    {
+      "name": "toilet_roll_holder",
+      "description": "white plastic holder: round suction cup with an oval knob, a short vertical bracket under it, a horizontal arm pointing right ending in a small upturned tab",
+      "moves": false,
+      "visible_frames": "0-59 (progressively covered by the roll from frame ~10; at the end only the cup's upper-left rim and the arm tip/tab right of the roll are visible)",
+      "measured_in_frame": 0,
+      "suction_cup": {"x_range": [1445, 1742], "y_range": [900, 1200], "diameter_px": 297, "centre": [1594, 1050]},
+      "knob": {"x_range": [1536, 1622], "y_range": [950, 1133]},
+      "arm": {"x_left_bracket": 1517, "x_tip_tab": 2334, "length_px": 817, "y_top": 1292, "y_bottom": 1410, "thickness_px": 118},
+      "end_tab": {"x_range": [2324, 2344], "y_range": [1235, 1430], "height_px": 195},
+      "overall_bbox": [1445, 900, 2344, 1430],
+      "reliability": "edges +-5 px (cup bottom and arm bottom are soft shadows +-10 px)"
+    },
+    {
+      "name": "wall_tiles",
+      "description": "large white rectangular wall tiles in running bond with grey grout; three tile rows visible",
+      "moves": false,
+      "horizontal_grout_y": {"upper": "688 at x=150 -> 681 at x=3350", "lower": "1728 at x=150 -> 1772 at x=3350"},
+      "vertical_grout_x": {"top_row(y<685)": [264, 1812, 3441], "middle_row": [998, 2606], "bottom_row(y>1770)": [252, 1800, 3433]},
+      "tile_pitch_px": {"horizontal": "1548 (left tiles) / 1607 (middle row) / 1630 (right tiles)", "vertical_row_height": "1040 (left) to 1091 (right)"},
+      "reliability": "+-3 px"
+    }
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "roll (held by hand) already entering at bottom-right corner, mostly out of frame"},
+    {"frame": 6, "t": 0.249, "event": "roll entirely inside the frame from here (frames 0-5 cut by the bottom edge, 0-1 also by the right edge)"},
+    {"frame": 14, "t": 0.581, "event": "roll has turned face-on (axis horizontal); edge-based measurement reliable from here"},
+    {"frame": 17, "t": 0.705, "event": "highest point of the roll (top y 969.6, cy 1321.5): vertical motion changes from upward to downward"},
+    {"frame": 18, "t": 0.747, "event": "roll's left edge passes the holder arm tip (x~2334): roll starts sliding over the arm"},
+    {"frame": "24-41", "t": "1.00-1.70", "event": "roll moves left at near-constant height (cy 1356-1368), left edge ~-20 to -22 px/frame"},
+    {"frame": "42-50", "t": "1.74-2.07", "event": "roll lowered ~47 px onto the arm (cy 1363 -> 1414) while overlapping the suction cup; slight yaw/tilt"},
+    {"frame": "50-56", "t": "2.07-2.32", "event": "horizontal slowing (left edge steps -16, -15, -15, -15, -9, -8, -4 px)"},
+    {"frame": 56, "t": 2.324, "event": "roll motion ends (at rest on the holder, left edge 1616 +-1 px through frame 59)"},
+    {"frame": 59, "t": 2.448, "event": "clip ends; hand still holding the roll (no release)"}
+  ],
+  "files": {
+    "tracks/toilet_roll.csv": "per-frame roll centre, bbox, length/diameter, method and reliability",
+    "tracks/hand.csv": "per-frame hand bbox and leftmost point",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts and small intermediate JSONs"
+  }
+}

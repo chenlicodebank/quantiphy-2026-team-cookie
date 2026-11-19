@@ -1,0 +1,76 @@
+{
+  "video": "simulation_0173.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 40,
+  "width": 1920,
+  "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, full-resolution pixels; positions outside 0..1919 are extrapolated (object partly out of frame)",
+  "camera": {
+    "motion": "static (phase-correlation shift between consecutive frames < 0.01 px over all 39 pairs; frames 0 and 39 differ from the median background only by the plane)",
+    "horizon_y_px": 895,
+    "perspective_note": "2D-style shot: plane flies level, parallel to the image plane, in side view; its apparent size stays constant (459 x 95 px) throughout, so a single metres-per-pixel scale applies to the plane. Island/beach/sea are scenery far behind or below the plane path and are NOT at the plane's depth."
+  },
+  "objects": [
+    {
+      "name": "airplane",
+      "description": "white twin-engine regional jet (rear-mounted engines, T-tail, thin red/grey cheatline), side view, nose pointing left, landing gear down",
+      "moves": true,
+      "visible_frames": "1-39 (entering from right edge frames 1-7, fully in view 8-31, leaving at left edge 32-38, only tail-fin tip at frame 39)",
+      "track": "tracks/airplane.csv",
+      "reference_point": "centre of the full image bounding box (nose to tail-fin tip, tail-fin top to wheel bottom); at frame 18 = (1070.0, 138.0). Mask centroid is (1070.1, 142.3).",
+      "size_px": {
+        "length_bbox_nose_to_tailfin_tip": 459,
+        "height_bbox_tailfin_top_to_wheels": 95,
+        "fuselage_length_nose_to_tail_cone_approx": 415,
+        "fuselage_depth_approx": 33,
+        "note": "measured at frame 18 (bbox x 841-1299, y 91-185); constant in all fully visible frames (diff-mask extents 449-468 px long, noise from clouds)"
+      },
+      "motion_summary_px": "level straight flight right-to-left; cx = 2177.55 - 61.52*frame (px), cy = 138.0 +- 0.3 px; per-frame |dx| 61.0-62.5 px in fully visible frames (no detectable acceleration: quadratic term 0.0015 px/frame^2)"
+    },
+    {
+      "name": "plane_shadow",
+      "description": "faint dark shadow of the plane on the sea surface, right of the island",
+      "moves": true,
+      "visible_frames": "16-29 reliably (enters right edge at frame 16, reaches the island shadow/beach around frame 28-29); faint fragments to frame 33",
+      "track": "tracks/plane_shadow.csv",
+      "note": "coarse: centroid of darker-than-background blob, +-5 px; moves left ~56-58 px/frame at y ~970"
+    },
+    {
+      "name": "rock_island",
+      "description": "tall grey rock stack covered with green conifers, centre of frame",
+      "moves": false,
+      "visible_frames": "0-39",
+      "extent_px": {"x0": 627, "x1": 1222, "y_top_treetops": 522, "y_top_rock_plateau": 620, "y_base": 1015, "width": 595, "height": 493},
+      "note": "measured at frame 0; right edge excludes the rock's shadow on the sand (which extends to x ~1300)"
+    },
+    {
+      "name": "sand_beach",
+      "description": "white sand beach around the rock base, bottom centre",
+      "moves": false,
+      "visible_frames": "0-39",
+      "extent_px": {"x0": 462, "x1": 1400, "y_top": 970, "y_bottom": "1079 (cut by frame edge)"}
+    },
+    {
+      "name": "sea",
+      "description": "turquoise sea from horizon (y ~895) to bottom of frame",
+      "moves": false
+    },
+    {
+      "name": "sky_clouds",
+      "description": "blue sky with white cumulus clouds; static (no cloud motion detected)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "airplane nose enters frame at right edge", "frame": 1, "time_s": 0.0417},
+    {"event": "airplane fully inside frame (first)", "frame": 8, "time_s": 0.3333},
+    {"event": "airplane passes image centre x=960 (bbox centre)", "frame": 19.79, "time_s": 0.8247, "note": "interpolated from line fit"},
+    {"event": "airplane fully inside frame (last)", "frame": 31, "time_s": 1.2917},
+    {"event": "airplane last visible (tail-fin tip at left edge)", "frame": 39, "time_s": 1.625},
+    {"event": "plane shadow enters at right edge of sea", "frame": 16, "time_s": 0.6667},
+    {"event": "no start/stop, bounce, or direction change: constant velocity throughout"}
+  ]
+}

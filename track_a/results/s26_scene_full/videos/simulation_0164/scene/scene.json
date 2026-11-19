@@ -1,0 +1,66 @@
+{
+  "video": "simulation_0164.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 66,
+  "duration_s": 2.75,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (image x right, y down) and seconds; no metric scale assumed",
+  "summary": "Side view of a bowling alley. A dark-blue bowling ball enters at the left edge (frame 4), rolls straight down the lane away from the camera and to the right, strikes a rack of 10 white pins with red neck stripes at frame ~38, keeps rolling through the pin deck and disappears behind the right side wall of the pit after frame 54. Pins scatter and fall from frame 38 on. Camera is static.",
+  "camera": {
+    "motion": "static (frame-0 difference is ~0 px in background regions throughout; only ball, its shadow/reflection and pins change)",
+    "lane_direction_vanishing_point_px": [5680, 205],
+    "vanishing_point_note": "intersection of 3 fitted lane/floor edge lines and the ball path line, spread about +-70 px in x, +-10 px in y; the ball path (frames 6-37) is a straight line y = -0.08316 x + 678.64 (rms 0.9 px) that passes through the same point, so the ball rolls straight along the lane",
+    "horizon_estimate_y_px": 205,
+    "horizon_note": "only one vanishing point is visible (the lane direction); horizon y ~205 assumes zero camera roll. Principal point assumed at image centre (960,540) - the camera is pitched slightly down. Focal length unknown.",
+    "fitted_lines_frame0": {
+      "near_floor_edge_lower (cyan strip, front floor)": "y = -0.12700 x + 925.51 (x 0-1916)",
+      "far_lane_edge_upper (cyan strip, neighbouring lane)": "y = -0.05935 x + 543.60 (x 0-1096)",
+      "floor_edge_bottom (cyan strip, bottom right)": "y = -0.18404 x + 1254.65 (x 936-1836)"
+    }
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "dark blue marbled bowling ball, the only moving object before frame 38",
+      "moves": true,
+      "visible_frames": "4-54 (frame 4: a few-pixel sliver at the left edge, not tracked; 5: cut by left border; 51-54: increasingly hidden behind the right pit side wall)",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "centre of a circle fitted to the ball's outline (= sphere centre projection = object origin)",
+      "apparent_diameter_px": {"frame6": 88.5, "frame12": 82.1, "frame18": 76.1, "frame24": 73.0, "frame30": 68.7, "frame37": 64.4, "frames40-48": "63-64.5", "frame50": 60.6},
+      "apparent_size_note": "diameter shrinks smoothly as the ball rolls away from the camera (depth increases); roughly diameter is proportional to (cy - 205), i.e. inverse depth. Per-frame free-fit diameter has +-1.5 px noise from motion blur.",
+      "path_px": "centre from (22,678) at frame 5 to (1725,545) at frame 50, last estimate (1793,542) at frame 54"
+    },
+    {
+      "name": "pins",
+      "description": "10 white bowling pins with two red neck stripes, standing in a triangle on the pin deck at the right end of the ball's lane; seen from the side so they overlap into a cluster x 1463-1612, y 474-586 at frame 0",
+      "moves": "static until frame 38, then knocked over and scattered (frames 38-65)",
+      "visible_frames": "0-65",
+      "frame0_visible_pins_by_red_stripe_centre_x_px": [1488, 1509, 1529, 1562, 1597],
+      "rightmost_pin_frame0": {"x_centre": 1597, "top_y": 484, "base_y": 586, "height_px": 102, "belly_width_px": 30, "neck_width_px": 13},
+      "pin_cluster_frame0_bbox_px": [1463, 474, 1612, 586],
+      "track_file": "tracks/pins_region_change.csv (per-frame extent of change in the pin-deck region and of red-stripe pixels; not individual pin tracks)",
+      "note": "pins overlap heavily; individual pins are not tracked. Pin bases at y~585-586 match the ball bottom (cy+r ~ 587) at frame 38, i.e. the near pins are at about the ball's depth there."
+    },
+    {"name": "ball_lane", "description": "light grey/white lane surface the ball rolls on, running left-right and receding to the right", "moves": false,
+     "extent_px": "near-to-far edge (vertical image extent of the bright lane strip): x=100 y 656-766 (111 px), x=400 y 632-736 (105 px), x=700 y 611-705 (95 px); ends at the pin deck/pit x~1780"},
+    {"name": "gutters_and_capping", "description": "dark gutter channel above (far side of) the lane and a carpeted/stone capping rail below (near side); a second capping rail behind the far gutter", "moves": false},
+    {"name": "neighbouring_lane", "description": "the lane behind (further from camera), with its own pit opening/kickback at x~1110-1290, y 330-500; no pins on it", "moves": false},
+    {"name": "pit_and_kickback", "description": "dark pit area behind the pins (x 1478-1780, y 357-590) with a grey kickback/side wall at the right (x~1760-1800) that the ball disappears behind; black semicircular openings at x~1440 (y 495-545), x~1300-1340 (y 475-500), x~1070-1105 (y 437-480) and x~1775-1855 (y 557-600)", "moves": false},
+    {"name": "wooden_floor", "description": "light wooden plank floor in the foreground (approach area, y > ~700), bounded by bright cyan edge strips", "moves": false},
+    {"name": "wall_screens", "description": "black rectangular screens/panels on the back wall: x 938-1100 y 0-157, x 1272-1557 y 0-142, x ~1880-1920 y 0-118", "moves": false},
+    {"name": "ball_shadow", "description": "soft grey shadow on the lane below/left of the ball (light from upper right); moves with the ball; not part of the ball mask", "moves": true}
+  ],
+  "events": [
+    {"event": "ball enters view at left edge", "frame": 4, "t": 0.1667},
+    {"event": "ball fully in view", "frame": 6, "t": 0.25},
+    {"event": "ball already rolling at entry; no release/bounce seen; straight path along the lane frames 5-37", "frame": 5, "t": 0.2083},
+    {"event": "ball hits the pins (first pin motion, red-stripe pixels change; ball x-step drops from ~31 to ~24 px/frame)", "frame": 38, "t": 1.5833, "uncertainty_frames": 1},
+    {"event": "pins falling/scattering", "frames": "38-65"},
+    {"event": "ball begins to pass behind right pit side wall", "frame": 51, "t": 2.125},
+    {"event": "ball last visible (sliver)", "frame": 54, "t": 2.25},
+    {"event": "ball not visible", "frames": "55-65"}
+  ]
+}

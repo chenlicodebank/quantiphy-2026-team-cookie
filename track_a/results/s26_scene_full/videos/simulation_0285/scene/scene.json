@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0285.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of the top background strip between consecutive frames: |shift| <= 0.07 px every frame (scripts/dupcheck.py)",
+    "letterbox": "black bars rows ~0-80 and ~1360-1440 (part of the render, not objects)",
+    "perspective": "studio cyclorama (seamless curved white floor/grey backdrop, no markings, no horizon line). Camera looks roughly horizontally at the jet, slightly from below/side (jet underside visible); the jet's apparent bbox length changes 679-744 px across the frame purely from viewing angle, its height stays 224 px, so the jet stays at ~constant depth. Its ground shadow lies on the floor nearer the camera and moves faster in the image (~70 px/frame vs ~42 px/frame) - do NOT use the shadow for the jet's scale."
+  },
+  "objects": [
+    {
+      "name": "jet",
+      "description": "the only moving object: a grey/white fighter-jet-style aircraft (black canopy/intake panel, twin tail fins, landing gear down), flying nose-first from right to left at constant image height",
+      "moves": true,
+      "visible_frames": "0-71 (partly outside right edge 0-12, fully visible 13-55, partly outside left edge 56-71; frame 71 shows only the tail)",
+      "track": "tracks/jet.csv",
+      "reference_point": "ref_x, ref_y = bbox centre when fully visible; when truncated, estimated as visible nose x0 + 356.2 px (frames 0-12) or visible tail x1 - 370.7 px (frames 56-71), ref_y fixed at 417.5",
+      "image_y_of_centre_px": 417.5,
+      "full_extent_px": {
+        "bbox_length_horizontal_nose_to_tail": "bbox_w (inclusive) 678 (min, ~frame 27) to 745 (max, frame 55); mean over fully visible frames 13-55 = 707.1; see bbox_w per frame",
+        "bbox_height_fin_top_to_gear_bottom": "224 (rows 306-529), constant over frames 5-60",
+        "mask_width_across_main_axis_pca": "~223-231",
+        "main_axis_angle_deg": "-5 (frame 13) slowly to +0.1 (frame 55): nose slightly lower than tail at right, level at left (view-angle effect)"
+      },
+      "per_frame_step_px": "frame 0 and frame 1 are identical (jet not yet moving); from frame 1 on the reference point moves ~36-43 px/frame leftwards (~40 near the edges, ~42.5 in frames 26-55), ~0 px vertically; mean 41.9 px/frame over frames 13-55"
+    },
+    {
+      "name": "jet_shadow",
+      "description": "soft grey shadow of the jet on the white floor in the lower part of the image (rows ~965-1300); same shape as the jet seen from above",
+      "moves": true,
+      "visible_frames": "5-61 (fully inside frame 24-45)",
+      "track": "tracks/shadow.csv",
+      "full_extent_px": "bbox ~1015-1080 x 331 when fully visible (soft edges, threshold-dependent)"
+    },
+    {
+      "name": "cyclorama_background",
+      "description": "static studio backdrop: grey upper wall blending into bright white curved floor (bright dome-shaped falloff centred near x=1300); no markings, no other props",
+      "moves": false,
+      "visible_frames": "all"
+    }
+  ],
+  "events": [
+    {"event": "first frame; jet nose enters from right edge (nose at x=2267)", "frame": 0, "time_s": 0.0},
+    {"event": "frame 1 duplicates frame 0: jet has not moved; leftward motion visible from frame 1->2", "frame": 1, "time_s": 0.0417},
+    {"event": "shadow first appears at right edge", "frame": 5, "time_s": 0.2083},
+    {"event": "jet first fully inside the frame (tail at x=2514)", "frame": 13, "time_s": 0.5417},
+    {"event": "jet at image centre x=1280 (ref_x 1285.5 at frame 34, 1243.5 at 35)", "frame": 34, "time_s": 1.4167},
+    {"event": "jet last fully inside (nose at x=22)", "frame": 55, "time_s": 2.2917},
+    {"event": "shadow last visible", "frame": 61, "time_s": 2.5417},
+    {"event": "last frame; only the jet's tail visible (x 0-119)", "frame": 71, "time_s": 2.9583}
+  ],
+  "no_events": "no bounces, contacts, impacts or direction changes; the jet flies in a straight horizontal line"
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0261_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "A2SX",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1080,
+ "height": 1920,
+ "question": {
+  "id": 2008,
+  "question": "What is the speed of the mug at time 0.4s in m/s?",
+  "prior": "acceleration of the mug cup before 1s = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

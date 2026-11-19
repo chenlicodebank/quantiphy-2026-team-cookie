@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0194.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MS",
+ "fps": 30.0,
+ "frames": 100,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 491,
+  "question": "What is the diameter of the model of Callisto in meters?",
+  "prior": "Callisto's model speed(the outermost planet) = 0.627 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

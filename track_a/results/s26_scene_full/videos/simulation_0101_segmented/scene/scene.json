@@ -1,0 +1,62 @@
+{
+  "video": "simulation_0101_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by pure white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "duration_s": 3.0417,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, origin at top-left pixel",
+  "camera": {
+    "motion": "static (no background to check against; both objects keep constant image y and constant size, consistent with a fixed camera)",
+    "perspective": "2D side view; both objects move horizontally in a plane facing the camera; no ground plane/horizon visible. Apparent sizes are constant over the clip (boat length 856-862 px, shark length 277-283 px)."
+  },
+  "objects": {
+    "boat": {
+      "description": "Red fishing boat (trawler) with white wheelhouse/cabin, mast, grey rails at stern, yellow hull text 'AH805', dark-blue/purple lower hull. Upper object, bow pointing LEFT.",
+      "moves": true,
+      "visible_frames": [0, 72],
+      "partially_out_of_frame": "frames 0-25 the stern is cut by the right image edge; in ALL frames the top of the mast is cut by the top edge (y=0), so true height is not measurable",
+      "track_file": "tracks/boat.csv",
+      "reference_point": "ref_x = bow_x + 429 px (half of the full bbox length 859 px), i.e. horizontal bbox centre, valid also while the stern is off-screen. Vertical origin not observable (mast cut); use bow_y or keel_bottom_y as vertical reference (both ~constant).",
+      "size_px_frames_26_72": {
+        "overall_length_bbox": 859,
+        "overall_length_range": [856, 862],
+        "hull_length_rows_450_560": 831,
+        "keel_bottom_y": "641-647",
+        "bow_tip_y": "366-375",
+        "cabin_roof_y": "~237",
+        "visible_height_y0_to_keel": "~646 (truncated at top edge by the mast)",
+        "hull_height_bow_top_to_keel": "~290 (y 355 -> 645)"
+      },
+      "motion": "moves LEFT, near-constant ~17.9 px/frame (~429 px/s) from frame 1 on; no movement between frames 0 and 1. Vertical drift <= ~8 px (bow_y 367->375, keel 641->647).",
+      "position_frame0": {"bow_x": 1496, "ref_x": 1925.0},
+      "position_frame72": {"bow_x": 227, "stern_x": 1084, "ref_x": 656.0}
+    },
+    "shark": {
+      "description": "Grey/blue shark with white belly, lower object (y ~852-958), swimming LEFT (snout on the left), tail flaps.",
+      "moves": true,
+      "visible_frames": [0, 72],
+      "partially_out_of_frame": "never",
+      "track_file": "tracks/shark.csv",
+      "reference_point": "ref = bbox centre (origin assumed at body centre); mask centroid also given (less sensitive to tail flapping)",
+      "size_px": {
+        "length_snout_to_tail_tip_bbox": "279 median (277-283, varies with tail flap)",
+        "height_dorsal_tip_to_fin_bottom_bbox": "105 median (103-108)"
+      },
+      "motion": "moves LEFT and speeds up steadily: ~7.5 px/frame at frames 2-5, ~12 px/frame around frame 30, ~18 px/frame at frames 68-72. No movement between frames 0 and 1 (mask centroid shift -0.3 px). Vertical position constant (centroid y 905.4-905.8).",
+      "position_frame0": {"ref_x": 1670.0, "ref_y": 903.5, "mask_cx": 1643.6},
+      "position_frame72": {"ref_x": 767.5, "ref_y": 905.0, "mask_cx": 746.9}
+    }
+  },
+  "static_objects": "none (background is uniform white after segmentation)",
+  "events": [
+    {"frame": 0, "t_s": 0.0, "event": "both objects at rest relative to frame 1 (frame 0 and 1 identical positions)"},
+    {"frame": 1, "t_s": 0.0417, "event": "start of motion for boat and shark (first displacement occurs between frames 1 and 2)"},
+    {"frame": 26, "t_s": 1.0833, "event": "boat stern fully enters the frame (bbox no longer touches the right edge)"},
+    {"frame": 72, "t_s": 3.0, "event": "end of clip; both still moving left; boat is above-left of shark, shark snout x=628 vs boat bow x=228"}
+  ],
+  "relative_positions": "boat ref_x minus shark ref_x: frame 0 ~ +255 px, frame 72 ~ -110 px (the two reference x's coincide at about frame 32, t~1.33 s: boat 1373, shark 1373.5; after that the boat is further left). Vertical separation boat keel (y~643) to shark top (y~852) ~ 210 px.",
+  "notes_file": "notes.md"
+}

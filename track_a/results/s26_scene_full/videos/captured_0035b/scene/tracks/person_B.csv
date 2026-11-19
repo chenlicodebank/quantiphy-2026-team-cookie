@@ -1,0 +1,9 @@
+frame,t_s,bbox_x0,bbox_y0,bbox_x1,bbox_y1,bbox_w,bbox_h,ref_x_pelvis_est,ref_y_pelvis_est,head_top_x,head_top_y,truncated_by_border,note
+0,0.0000,870,0,965,322,96,323,915,75,,,top(head out of frame),"standing; left shoe ~(882,255), right shoe ~(908,305); head/shoulders out of frame"
+11,0.4583,850,0,965,320,116,321,912,75,,,top(head out of frame),"kick: left foot reaching basketball ~(865,270)"
+12,0.5000,835,0,965,320,131,321,905,75,,,top(head out of frame),"kick follow-through: foot ~(850,290)"
+18,0.7500,825,0,965,322,141,323,900,80,,,top(head out of frame),"feet ~(870,300) and (908,300)"
+24,1.0000,835,0,960,320,126,321,900,80,,,top(head out of frame),"one leg lifted (knee ~(850,200)), standing foot ~(908,300)"
+36,1.5000,820,0,950,320,131,321,895,80,,,top(head out of frame),"feet ~(840,290) and (908,300)"
+42,1.7500,820,0,935,320,116,321,880,80,,,top(head out of frame),"feet ~(840,290) and (908,300)"
+48,2.0000,790,0,930,320,141,321,870,80,,,top(head out of frame),"feet ~(840,290) and (908,300); arms swinging"

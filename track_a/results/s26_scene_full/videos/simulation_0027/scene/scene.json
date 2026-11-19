@@ -1,0 +1,81 @@
+{
+  "video": "simulation_0027.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "image_size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame 0 at t = 0; time t -> frame round(25 t)",
+  "units": "pixels and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the rock/sand region (x 320-960, y 20-320) vs frame 0: |shift| < 0.025 px in every frame (scripts/cam_check.py)",
+    "view": "high aerial oblique view looking down onto a beach; no horizon or sky in frame; image top = farther away, image bottom = nearer (sea)",
+    "focal_length": "unknown (estimate from depth_info + known size in the answering session)",
+    "principal_point_assumed": [480, 480]
+  },
+  "objects": [
+    {
+      "name": "person",
+      "aliases": ["human", "man", "walker", "pedestrian"],
+      "description": "the only person and only moving object: white short-sleeve shirt, grey trousers, dark shoes; skin-coloured head almost invisible against the sand; casts a long thin dark shadow toward the upper right",
+      "moves": true,
+      "visible_frames": [0, 74],
+      "occluded_frames": [],
+      "track_file": "tracks/person.csv",
+      "reference_point": "pelvis_x, pelvis_y (estimated hip: feet_y - 0.53*(feet_y - head_top_est_y); x = mean mask x near that row)",
+      "motion_summary_px": {
+        "pelvis_frame0": [407.4, 363.2],
+        "pelvis_frame74": [442.1, 410.6],
+        "net_image_displacement": [34.7, 47.4],
+        "direction": "walking steadily down-right in the image (toward the camera side / toward the sea), roughly straight, no stops",
+        "shoulder_top_y_frame0_to_74": [344, 390]
+      },
+      "apparent_size_px": {
+        "height_est_px_median": 61,
+        "height_est_px_range": [58, 64],
+        "height_note": "head top = shoulder_top - 9 px (median head offset); the walking jitter is about +-2 px; no clear size trend over the clip (depth change small)",
+        "shoulder_to_feet_px_median": 52,
+        "bbox_width_px_median": 16,
+        "shoulder_width_px_median": 13
+      }
+    },
+    {
+      "name": "person_shadow",
+      "description": "long thin dark cast shadow from the person's feet toward the upper right (image direction (0.90, -0.44)), about 70-80 px long; moves with the person; NOT part of the person's extent",
+      "moves": true,
+      "visible_frames": [0, 74]
+    },
+    {
+      "name": "rock_outcrop",
+      "aliases": ["rock", "cliff", "boulder", "island rock", "rock formation"],
+      "description": "large pale/white rock mass with brown eroded cliffs on its right/lower side, upper right of the image; the only rock",
+      "moves": false,
+      "image_bbox_px_visual": [325, 25, 955, 310],
+      "extent_px": {"horizontal": 630, "vertical": 285, "note": "left tip at about (325,160); top at about (510,25); bottom (cliff base) about y 300-310 at x 600-760; right side reaches nearly the image edge (x ~950). Main axis roughly horizontal, tilted down to the right by ~10 deg. Approximate (+-10 px): boundary with the sand is soft."}
+    },
+    {
+      "name": "beach_sand",
+      "description": "pale pink-beige sand terrace the person walks on; occupies the upper ~55% of the image around the rock",
+      "moves": false,
+      "edge_px_visual": "lower edge (pale sand to wet/translucent shallows): y~450 at x=0, step down to y~500 at x~150, lowest y~530 at x 350-520, y~495 at x 650, y~455 at x 780, y~370 at x 850, y~320 at x 890"
+    },
+    {
+      "name": "sea_water",
+      "description": "green-blue rippling water filling the lower ~40% of the image; ripples animate (not a static texture)",
+      "moves": "surface animates; no objects in it",
+      "edge_px": "first rows of solid green water (auto, scripts/static_out.json): y ~ 580-660 for x 0-720, rising to y~550 at x 760-800, ~500 at x 840-880, ~400 at x 920"
+    }
+  ],
+  "events": [
+    {"event": "person walking for the whole clip (already moving at frame 0, still moving at frame 74)", "frames": [0, 74], "t": [0.0, 2.96]},
+    {"event": "foot plants (feet_y plateaus = stance phases)", "approx_frames": [2, 8, 21, 37, 55, 72], "note": "feet_y steps at roughly frames 2-3, 8-9, 20-25, 36-38, 55-57, 72-74; plateaus at y 403-404 (f9-17), 414-415 (f25-36), 424-425 (f44-53), 436 (f61-70). Approx. one step every ~16-18 frames"}
+  ],
+  "perspective": {
+    "ground_plane": "sand plane seen obliquely from above; image y increases toward the camera",
+    "horizon": "not visible (above the top of the frame)",
+    "vanishing_points": "none measurable (no straight parallel lines)",
+    "moving_object_size_trend": "person apparent height ~61 px throughout (58-64 jitter), so the camera distance changes little over the clip"
+  }
+}

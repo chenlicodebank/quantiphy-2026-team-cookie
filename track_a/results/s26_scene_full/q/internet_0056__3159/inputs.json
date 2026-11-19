@@ -1,0 +1,18 @@
+{
+ "video": "internet_0056.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 30.0,
+ "frames": 58,
+ "duration_s": 1.9333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3159,
+  "question": "What is the height of the person riding scooter in meters?",
+  "prior": "average speed of the person riding scooter = 2.64 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

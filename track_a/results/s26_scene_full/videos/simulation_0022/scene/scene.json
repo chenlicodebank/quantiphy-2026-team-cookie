@@ -1,0 +1,58 @@
+{
+  "video": "simulation_0022.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (per inputs.json)",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "image_size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (sky/island pixel difference between frame 0 and frames 1..74 is compression noise only: mean |diff| ~2/765 per pixel; no background shift)",
+    "horizon_far_shore_y_px": "approx 614-626 (thin far sand/shore strip behind the boat, x ~576-960)",
+    "near_water_starts_y_px": "approx 626 at the right side; animated ripples below"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red/salmon fishing boat with white cabin (red roof trim), tall white mast with a black vertical element, white railing aft, registration 'AH805' on the hull; bow points left",
+      "moves": true,
+      "visible_frames": "0-74 (all); stern cut by right image edge in frames 0-34, fully in frame 35-74",
+      "track_file": "tracks/boat.csv",
+      "motion": "translates horizontally to the LEFT throughout, no vertical motion (hull top y=586 constant, mast top y~390-394), no stop/start inside the clip; already moving at frame 0 and still moving at frame 74",
+      "pixel_motion_summary": {
+        "bow_x_frame0": 832, "bow_x_frame74": 486,
+        "mast_x_frame0": 952, "mast_x_frame74": 612,
+        "mean_dx_per_frame_px": -4.6,
+        "dx_per_frame_by_segment_mast": {"0-24": -4.51, "24-49": -4.60, "49-74": -4.68},
+        "note": "pixel speed rises ~3.5% over the clip, in step with the ~3.5% growth of apparent length (282->292 px): consistent with constant world speed and the boat slowly getting nearer the camera, or a slight acceleration; cannot be told apart from pixels alone"
+      },
+      "size_px_at_frame48": {
+        "hull_length_bow_to_stern": 286, "full_bbox_x": [609, 895], "full_bbox_y": [390, 682],
+        "full_height_mast_top_to_keel": 293,
+        "hull_top_y_bow_gunwale": 586, "hull_bottom_y": "681-688 (waterline, +-4 px)",
+        "hull_depth_px": "~98 (586..684)",
+        "mast_x": 734, "mast_top_y": 390, "mast_offset_from_bow_px": 124
+      },
+      "apparent_length_px_vs_frame": "fully visible hull length 284 px (frame 36) -> 286 (48) -> 289 (60) -> 290 (72); linear fit L = 274.9 + 0.235*frame",
+      "reference_point": "est_center_x / hull_cy columns in boat.csv (centre of hull bow..stern); the Blender origin is presumably near the hull centre but is not visible; bow_x (hull_x0) and mast_x are the cleanest features for displacement"
+    }
+  ],
+  "static_objects": [
+    {"name": "rock_island", "description": "large beige/white dome-shaped rock on the left, on a sandy flat", "moves": false,
+     "bbox_px": {"x0": 30, "x1": 557, "y0": 528, "y1": 655}, "width_px": 527, "height_px": 127,
+     "note": "left edge ~24-35 near its base, right foot ~555 at y~650 (approx, +-5 px)"},
+    {"name": "sand_flat", "description": "pale sand flat/beach under the island along the water", "moves": false,
+     "bbox_px": {"x0": 0, "x1": 640, "y0": 615, "y1": 680}, "note": "soft edges, approximate"},
+    {"name": "far_shore", "description": "thin distant shore strip on the horizon right of the island", "moves": false,
+     "y_px": "614-626", "x_px": "576-960 (behind boat)"},
+    {"name": "water", "description": "sea in the lower part of the frame with animated ripples and the boat's red reflection", "moves": "surface animates only"},
+    {"name": "sky_clouds", "description": "sky with clouds and a blurred bright patch top-right (x~880,y~120)", "moves": false}
+  ],
+  "events": [
+    {"event": "boat already moving left at clip start", "frame": 0, "t": 0.0},
+    {"event": "boat stern fully enters the image (no longer clipped by right edge)", "frame": 35, "t": 1.4},
+    {"event": "boat still moving at clip end", "frame": 74, "t": 2.96}
+  ]
+}

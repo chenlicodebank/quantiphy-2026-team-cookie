@@ -1,0 +1,86 @@
+{
+  "video": "simulation_0190.mp4",
+  "source": "simulation",
+  "scene_type": "2D (label from inputs.json; small depth parallax visible, see notes)",
+  "fps": 120.0,
+  "frames": 401,
+  "duration_s": 3.3417,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 120; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left of 1920x1080 frame; dy < 0 means moving UP",
+  "camera": {
+    "motion": "static (background mean abs diff vs frame 0 < 0.6 grey levels; wall/floor line fixed at y=687.5; chassis tail lights fixed)",
+    "view": "straight behind the truck, level, looking at the rear face; wall/floor line (horizon-like) at y = 687.5 across the image"
+  },
+  "objects": [
+    {
+      "name": "cargo_body",
+      "description": "white box body (cargo box) of the truck, rear face with roller door (white upper / dark lower), yellow outline tape, red/white chevron markers, 'DOLL' labels; together with the yellow-black chevron underride bar below it. It is lifted straight UP relative to the chassis.",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "track": "tracks/cargo_body.csv",
+      "reference_point": "centre of the rear face bounding box (origin proxy)",
+      "frame0_bbox_px": {"x0": 658.5, "y0": 338.1, "x1": 1228.5, "y1": 858.5},
+      "frame0_centre_px": [943.5, 598.3],
+      "extent_px": {"width_horizontal": 570.0, "height_rear_face": 520.4},
+      "frame400_bbox_px": {"x0": 658.5, "y0": 258.2, "x1": 1228.5, "y1": 778.6},
+      "total_vertical_shift_px_f0_to_f400": -79.92,
+      "horizontal_shift_px": "none (|dx| < 0.03 px)",
+      "notes": "rigid translation; width constant 570 px (no change of depth)"
+    },
+    {
+      "name": "cardboard_box",
+      "description": "brown cardboard box sitting on/behind the top of the cargo body, open flap at top right (dark flap tip at x~945-1087)",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "track": "tracks/cardboard_box.csv",
+      "reference_point": "horizontal centre of visible box; vertical cy_top_based = top edge + 87.8 px (half of the frame-0 visible height); the true bottom is hidden behind the body's roof edge",
+      "frame0_bbox_px": {"x0": 806.0, "y0_top_edge": 163.4, "flap_tip_y": 147.6, "x1": 1087.5, "y1_visible_bottom": 338.1},
+      "frame0_centre_px": [946.75, 251.2],
+      "extent_px": {"width_horizontal": 281.5, "visible_height_frame0": 174.7, "visible_height_frame400": 162.1, "height_incl_flap_frame0": 190.5},
+      "total_vertical_shift_px_f0_to_f400": -66.92,
+      "horizontal_shift_px": "none (|dx| < 0.07 px)",
+      "notes": "moves up less than the body (lags at start, decelerates and stops at the end); bottom partly hidden"
+    },
+    {
+      "name": "truck_chassis",
+      "description": "black lower rear of the truck: frame rails, red tail lights left and right, two small white reverse lights, rear bumper bar, red reflectors at bottom",
+      "moves": false,
+      "frame0_extent_px": {"dark_chassis_x": [672, 1209], "rear_width_px": 537, "tail_light_left_bbox_approx": [683, 918, 765, 945], "tail_light_right_bbox_approx": [1110, 918, 1205, 945], "bumper_bar_y_approx": 1025, "bottom_reflectors_y_approx": 1040, "top_of_chassis_y_approx": 858},
+      "notes": "static whole clip; extends nearly to image bottom; wheels not visible"
+    },
+    {
+      "name": "chevron_underride_bar",
+      "description": "yellow/black diagonal-striped bar directly below the cargo body",
+      "moves": true,
+      "frame0_bbox_px": [802, 901, 1085, 923],
+      "notes": "moves up with the cargo body (about y 910 -> 830 by frame 400); use cargo_body track"
+    },
+    {
+      "name": "warehouse_wall",
+      "description": "grey panelled back wall with horizontal seams and vertical pillars, ceiling lamps at top edge (x~110, 640, 1250, 1790)",
+      "moves": false,
+      "notes": "wall/floor boundary at y = 687.5 (both sides)"
+    },
+    {
+      "name": "left_window_panel",
+      "description": "dark grey window/door panel at left of the wall",
+      "moves": false,
+      "frame0_bbox_px_approx": [0, 16, 192, 683]
+    },
+    {
+      "name": "floor",
+      "description": "light grey floor with soft shadows (truck shadow lower left)",
+      "moves": false,
+      "notes": "occupies y > 687.5"
+    }
+  ],
+  "events": [
+    {"event": "cargo_body starts rising", "frame": 1, "time_s": 0.008, "note": "moves from the start, very slowly (~0.07 px/frame over frames 0-10), speeding up throughout; still speeding up at the last frame (~0.30 px/frame over frames 390-400)"},
+    {"event": "cardboard_box starts rising", "frame": 12, "time_s": 0.1, "note": "approx +-5 frames; box stays still for first ~12 frames while body already moves"},
+    {"event": "cardboard_box decelerates", "frame": 385, "time_s": 3.208, "note": "per-frame step falls from ~0.22 to ~0"},
+    {"event": "cardboard_box stops", "frame": 397, "time_s": 3.308, "note": "dy constant -66.93 px for frames 397-400"},
+    {"event": "end of clip", "frame": 400, "time_s": 3.333}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/cargo_body.csv", "tracks/cardboard_box.csv"], "scripts": "scripts/"}
+}

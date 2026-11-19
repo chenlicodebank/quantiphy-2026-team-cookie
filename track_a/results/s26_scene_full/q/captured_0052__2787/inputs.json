@@ -1,0 +1,18 @@
+{
+ "video": "captured_0052.mp4",
+ "video_source": "lab",
+ "video_type": "V3MC",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2787,
+  "question": "What is the diameter of the basketball in cm?",
+  "prior": "velocity of the yoga ball at 1.0s = 2.19m/s",
+  "depth_info": "t=1.0s, distance_yoga_ball_camera = 2.6120m\ndistance_shoe_camera = 2.2310m\ndistance_trashbin_camera = 2.9770m\ndistance_basketball_camera = 1.9365m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "captured_0018s.mp4",
+ "video_source": "lab",
+ "video_type": "A3MS",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2327,
+  "question": "What is the distance between the box and the tennis ball in cm at 3.0s?",
+  "prior": "Gravity acc = 9.8m/s^2",
+  "depth_info": "distance_soccer_ball_camera =2.8000m\ndistance_near_person_camera = 2.002m\ndistance_far_person_camera = 3.130m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

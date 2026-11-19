@@ -1,0 +1,171 @@
+{
+ "video": "captured_0009.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame / 24 (frame 0 at t = 0)",
+ "pixel_convention": "x right, y down, origin top-left pixel, full 1280x720 resolution",
+ "camera": {
+  "motion": "static: background phase-correlation shift < 0.05 px over all frames (scripts/frame_check.py)",
+  "intrinsics_lab_convention": {
+   "fx_px": 763.0,
+   "fy_px": 763.0,
+   "cx_px": 640.0,
+   "cy_px": 360.0,
+   "note": "f = 0.5959 x 1280 (80 deg HFOV Orbbec Femto Mega), principal point assumed at image centre"
+  },
+  "view": "oblique, looking down at the floor; floor fills lower part of image, grey wall behind; no horizon visible",
+  "post_processing": "background blurred by Segment Anything 2 (watermark bottom-right); ball and person sharp",
+  "frame_timing": "PTS uniform (512 ticks/frame). Ball step 35->36 is ~2x the neighbouring steps (116 px vs 56 px) and its apparent diameter drops 8 px there vs ~4 px/frame elsewhere: probably one capture frame dropped between frames 35 and 36 (not corrected in the track)."
+ },
+ "objects": {
+  "ball": {
+   "desc": "orange basketball (black seams), the only orange object at left/centre; held in both hands, dropped, bounces",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/ball.csv",
+   "reference_point": "visible centre of the ball disc",
+   "apparent_diameter_px": {
+    "held_frames_0_26_mean": 145.5,
+    "frame_33": 115.3,
+    "frame_37_bounce": 96.0,
+    "frame_46_apex": 112.0,
+    "frame_48": 110.0
+   },
+   "occlusion": "frames 0-28 lower half covered by hands; frames 28-32 forearms/hands cross the ball; 33-48 unoccluded"
+  },
+  "person": {
+   "desc": "person in black tank top and light-blue denim overalls, face blurred, dark hair in ponytail; stands right of centre facing left, holds the ball out with both arms, releases it",
+   "moves": "body static (torso centroid within +-4 px); only the arms move (open/swing outward and up from frame ~27, arms stay raised to frame 48)",
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/person.csv",
+   "extent_px_frame0": {
+    "body_x": [
+     715,
+     965
+    ],
+    "top_of_head_y": "cut by top edge (y=0)",
+    "bottom": "cut by bottom edge (legs below ~knee not visible)",
+    "black_top_bbox": [
+     760,
+     274,
+     941,
+     437
+    ],
+    "arms_reach_left_x": 415
+   },
+   "note": "full standing height NOT measurable (head top and feet out of frame)"
+  },
+  "metal_frame": {
+   "desc": "black metal frame/rack (thin dark bars) at left: diagonal bar from ~(0,470) to ~(400,290), vertical bars near x 340-440 from top down to ~y 460, leg toward bottom-left (0,520)-(200,700)",
+   "moves": false,
+   "note": "blurred; positions +-10 px"
+  },
+  "tripod_device": {
+   "desc": "tripod with a small white-topped device (camera/sensor) at right, head ~ (1000-1090, 260-300), legs down to bottom edge, x ~ 950-1180",
+   "moves": false
+  },
+  "cart_with_items": {
+   "desc": "dark cart/table at far right with assorted items (white bottle, orange/red object, light-blue box ~ (1110-1220, 540-600)), x 1100-1280, y 300-720",
+   "moves": false,
+   "note": "orange item at ~ (1220, 325) is NOT the ball"
+  },
+  "floor_stripes": {
+   "desc": "light diagonal stripe markings on the grey floor, e.g. ~(160,580)-(290,490) and ~(480,690)-(570,610); orange cable on floor around (0-400, 400-500)",
+   "moves": false,
+   "note": "blurred background"
+  },
+  "wall": {
+   "desc": "grey panelled wall behind; floor/wall junction hidden behind the person and frame",
+   "moves": false
+  }
+ },
+ "events": {
+  "ball_held": {
+   "frames": [
+    0,
+    26
+   ],
+   "note": "ball held nearly still; centre drifts up ~7 px (cy 193 -> 186)"
+  },
+  "release_start_of_fall": {
+   "frame": 28,
+   "t_s": 1.1667,
+   "note": "first clear downward displacement at frame 28 (+10 px; frame 27 +2.6 px); hands open frames 27-29; +-1 frame"
+  },
+  "free_fall": {
+   "frames": [
+    29,
+    37
+   ]
+  },
+  "suspected_dropped_frame": {
+   "between_frames": [
+    35,
+    36
+   ]
+  },
+  "bounce_floor_contact": {
+   "frame": 37,
+   "t_s": 1.5417,
+   "ball_centre_px": [
+    547.5,
+    656.5
+   ],
+   "ball_bottom_y_px": 705,
+   "note": "lowest image position; ball moves up from frame 38"
+  },
+  "apex_after_bounce": {
+   "frame": 46,
+   "t_s": 1.9167,
+   "ball_centre_px": [
+    527.5,
+    479.5
+   ]
+  },
+  "ball_descending_again": {
+   "frames": [
+    47,
+    48
+   ]
+  },
+  "arms_raise": {
+   "frames": [
+    27,
+    33
+   ],
+   "note": "after release both forearms swing outward/upward; hands end near (450,250) and (560,185)"
+  }
+ },
+ "positions_px": {
+  "ball_centre_frame0": [
+   482.5,
+   193.3
+  ],
+  "ball_centre_frame28": [
+   483.5,
+   199.0
+  ],
+  "ball_centre_frame37": [
+   547.5,
+   656.5
+  ],
+  "ball_centre_frame46": [
+   527.5,
+   479.5
+  ],
+  "ball_centre_frame48": [
+   530.5,
+   490.5
+  ]
+ }
+}

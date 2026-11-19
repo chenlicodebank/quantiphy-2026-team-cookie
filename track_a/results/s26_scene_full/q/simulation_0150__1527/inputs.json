@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0150.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 42,
+ "duration_s": 1.75,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1527,
+  "question": "What is the height, in meters, of the black-and-white collision warning markings on the pillar?",
+  "prior": "diameter of the tire = 0.764m",
+  "depth_info": "t=0.5s, distance_yellowCarLeftFrontTire_camera = 11.38m,\ndistance_camera_B1sign = 23.44m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

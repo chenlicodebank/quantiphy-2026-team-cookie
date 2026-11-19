@@ -1,0 +1,63 @@
+{
+ "video": "simulation_0153_segmented.mp4",
+ "source": "segmentation (Blender simulation render with background replaced by pure white)",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 42,
+ "duration_s": 1.75,
+ "image_size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame 0 = t 0",
+ "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+ "camera": {
+  "motion": "static (background is uniform white, no reference texture; the cart's wheel-hub y stays at 894.5-895.1 px and its apparent size (wheelbase 334-340 px, tyre diameter ~112 px) is nearly constant, consistent with a fixed camera)",
+  "perspective_notes": "Perspective render: while the cart is near the left image edge (frames 0-16) its front face, both headlights and the far-side front wheel are visible; later (frames 30-41) its rear box becomes visible. The cart drives a straight horizontal line at constant depth (hub y constant, wheelbase changes < 2%). No ground plane, horizon or other scene features are visible."
+ },
+ "objects": [
+  {
+   "name": "cart",
+   "description": "Light-blue (teal) golf-cart-like utility vehicle, side view, facing right: flat roof on a rear pillar with a slanted thin roof extension sticking up-left at the rear, blue seat, grey sill with three small white squares (marker) between the wheels, grey rear box, black tyres with grey hubs. Only object in the video. Appears dark teal in early frames (lighting).",
+   "moves": true,
+   "motion": "translates horizontally left->right along image x (straight line, y constant); enters from the left edge",
+   "visible_frames": [0, 41],
+   "fully_in_frame_frames": [22, 41],
+   "partially_visible_frames": "0-21 cut by the left image edge (frame 0: only the front ~52 px; front wheel hub visible from frame 11; rear wheel hub from frame 20; whole body except roof extension tip from ~20; roof extension tip reaches x>0 at frame 21-22)",
+   "track_file": "tracks/cart.csv",
+   "reference_points": {
+    "wheel_mid": "midpoint of the two near-side wheel hubs (wheel_mid_x/y) - best proxy for the vehicle root (frames 20-41)",
+    "front_hub": "near-side front wheel hub centre (frames 11-41)",
+    "rear_hub": "near-side rear wheel hub centre (frames 20-41)",
+    "marker": "three white squares on the sill (frames 17-41)",
+    "bbox_centre": "mask bbox centre (only meaningful for frames 22-41)",
+    "front_chain_x_cum": "front-edge position obtained by chaining frame-to-frame template shifts of the front 220 px (frames 0-41; the only measure for frames 0-10, under-reads motion by ~2-3%)"
+   },
+   "sizes_px_fully_visible_frames_22_41": {
+    "bbox_length_incl_roof_extension": {"median": 546.5, "range": [535, 564]},
+    "body_length_below_roof_y600": {"median": 474.5, "range": [471, 507], "note": "rear box to front bumper, rows y>600"},
+    "bbox_height_incl_roof_extension_tip": {"median": 484, "range": [480, 485], "note": "ground (tyre bottom y~949) to top of slanted roof extension (y~466-470)"},
+    "height_ground_to_flat_roof_top": {"value": 451, "note": "flat roof top y~498 at frames 16-41 to tyre bottom y~949"},
+    "wheelbase_hub_to_hub": {"median": 337.2, "range": [334.2, 339.9], "trend": "339.9 at frame 20 -> 334.3 at frame 41"},
+    "tyre_diameter": {"value": 112, "note": "dark tyre run through front hub at frame 30: 113 px horizontal, 111 px vertical"},
+    "hub_centre_to_ground": 51.5
+   }
+  }
+ ],
+ "static_objects": "none - white background, no ground, markings or props",
+ "events": [
+  {"event": "cart already moving at frame 0 (front edge shift 1.5 px from frame 0 to 1), entering from the left edge", "frame": 0, "t": 0.0},
+  {"event": "acceleration phase: per-frame shift grows ~1.5 -> ~49.5 px/frame, increments ~+2.3 px/frame early, shrinking towards the peak", "frames": [0, 28]},
+  {"event": "front wheel hub enters view", "frame": 11, "t": 0.4583},
+  {"event": "rear wheel hub enters view", "frame": 20, "t": 0.8333},
+  {"event": "cart fully inside frame (incl. roof extension tip)", "frame": 22, "t": 0.9167},
+  {"event": "peak pixel speed plateau ~49.5-50 px/frame (hub and marker tracks)", "frames": [28, 32], "t": [1.1667, 1.3333]},
+  {"event": "deceleration phase: per-frame shift falls from ~49.5 to ~43 px/frame (about -1.1 px/frame per frame)", "frames": [32, 41]},
+  {"event": "video ends with cart still moving right, fully visible (front edge x~1488)", "frame": 41, "t": 1.7083}
+ ],
+ "files": {
+  "tracks/cart.csv": "merged per-frame track (main file)",
+  "tracks/cart_mask.csv": "raw mask measurements incl. Hough wheel circles (noisy, superseded)",
+  "tracks/cart_features.csv": "drift-free template-matched feature positions (marker, hubs) with match scores",
+  "tracks/cart_shift.csv": "chained frame-to-frame template shifts (front patch, whole body)",
+  "tracks/cart_sizes.json": "size statistics over frames 22-41",
+  "notes.md": "methods, reliability, ambiguities"
+ }
+}

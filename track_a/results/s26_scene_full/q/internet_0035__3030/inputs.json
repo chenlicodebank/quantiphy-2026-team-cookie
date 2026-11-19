@@ -1,0 +1,18 @@
+{
+ "video": "internet_0035.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 22.297248,
+ "frames": 36,
+ "duration_s": 1.6145,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3030,
+  "question": "What is the width of thumbnail in cm?",
+  "prior": "size of toilet paper core = 100 mm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

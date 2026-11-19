@@ -1,0 +1,73 @@
+{
+  "video": "simulation_0230.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left of full-resolution frame) and seconds",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of ceiling band frame 0 vs 10/25/49: shift < 0.13 px; only render noise (median abs diff 1 grey level)",
+    "per_frame_background_shift_px": [0, 0],
+    "perspective": "front view of a classroom wall (blackboard plane roughly parallel to the image plane). Ceiling tiles and desks show mild perspective but both moving objects move in planes roughly parallel to the wall; treat as 2D as stated in inputs.json."
+  },
+  "moving_objects": {
+    "paper_plane": {
+      "description": "white/cream folded paper airplane flying left to right across the blackboard, nose pointing right",
+      "track_file": "tracks/paper_plane.csv",
+      "visible_frames": "10-41 (10-11 faint against the light wall left of the blackboard; 12-33 clear; 34-37 low contrast over the pink wall right of the blackboard; 38-41 cut by the right image edge; gone from 42)",
+      "reference_point": "ref_x, ref_y = midpoint of nose and tail along the main axis (assumed origin = centre of the plane); fallbacks for partial frames, see ref_source column",
+      "pixel_size_clear_frames_13_33": {
+        "length_nose_to_tail_px_median": 141.8, "length_range": [137.1, 150.2],
+        "width_across_main_axis_px_median": 21.9, "width_range": [11.2, 25.4],
+        "bbox_w_median": 141, "bbox_h_median": 28,
+        "note": "segmentation mask includes ~2 px blur margin per side; plane appears as a thin side/edge-on silhouette, so 'width' is its projected vertical thickness, not wingspan"
+      },
+      "path_summary": "ref (182.6,603.1) at f11 -> rises to apex y ~342.7 at f23 (x ~1028) -> descends to (1871,615) at f38, leaves frame right edge at about f41-42",
+      "pitch_main_axis_deg_image": "from -9.5 (nose up) at f13 smoothly through 0 at ~f23-24 to +11 (nose down) at f33, ~+19 at f38"
+    },
+    "cat": {
+      "description": "grey cat walking left to right on the top of the teacher's desk / ledge directly below the blackboard (paws at y ~745), tail raised in a curve; very low contrast because it is seen through/behind the bright diagonal light shafts",
+      "track_file": "tracks/cat.csv",
+      "visible_frames": "0-49 (whole clip), partially washed out",
+      "reference_point": "ref_x = body centre estimate (rump_x + 81.5 or nose_x - 81.5, nose-to-rump length 163 px), ref_y = 677 constant (torso centre; cat walks on a level surface)",
+      "pixel_size": {
+        "nose_to_rump_length_px": 163, "nose_to_rump_range": [162, 165], "measured_frames": "11-15",
+        "length_including_raised_tail_horizontal_px": "~194 (tail tip x to nose x, frames 0-15)",
+        "height_paw_to_ear_tip_px": "~110 (paws y ~745, ear tips y ~635)",
+        "height_paw_to_back_px": "~93 (back line y ~652)",
+        "height_paw_to_tail_tip_px": "~148 (tail tip y ~597 in frames 0-10)",
+        "torso_band_y": [652, 703]
+      },
+      "motion_summary": "walks continuously the whole clip, no stops; ref_x 274.5 (f0) -> 713.5 (f49), roughly steady ~9 px/frame in x; no vertical motion of the body"
+    }
+  },
+  "static_objects": {
+    "blackboard": {"desc": "large dark olive-green board with light-brown wooden frame, centre of the wall",
+                   "green_surface_px": {"x0": 342, "x1": 1670, "y0": 315, "y1": 717, "width": 1328, "height": 402},
+                   "outer_frame_px": {"x0": 320, "x1": 1692, "y0": 298, "y1": 738, "width": 1372, "height": 440}},
+    "wall_clock": {"desc": "round wall clock with dark rim, upper right of the blackboard", "centre_px": [1763.5, 292.5], "outer_diameter_px": 112, "hough_radius_px": 51.2},
+    "teacher_desk_ledge": {"desc": "long light wooden desk/ledge under the left half of the blackboard on which the cat walks; top front edge y ~760-765", "x_extent_px": [80, 780], "walking_surface_y_px": 745},
+    "front_left_chair": {"desc": "orange student chair (back toward camera), front row centre-left, cut by bottom edge", "bbox_px": [660, 865, 925, 1080]},
+    "front_right_chair": {"desc": "orange student chair, front row centre-right, cut by bottom edge", "bbox_px": [1305, 885, 1620, 1080]},
+    "far_right_chair": {"desc": "lighter wooden chair against the right wall below the clock", "bbox_px": [1600, 735, 1795, 1000]},
+    "left_desk": {"desc": "student desk at far left edge, partly cut", "bbox_px": [0, 880, 255, 1080]},
+    "ceiling_lights": {"desc": "rectangular recessed ceiling light panels at the top (y ~50-90) at x ~40-230, 645-800, 1230-1390, 1800-1920"},
+    "light_shafts": {"desc": "bright diagonal volumetric sunbeams crossing the left half of the image from upper left to lower right (not objects; they reduce the contrast of the cat)"}
+  },
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "cat already walking (x ref 274.5); clip starts mid-motion"},
+    {"frame": 10, "time": 0.4167, "event": "paper plane first detectable (faint fragment near x 136-166, y ~630); plane is already in flight, rising toward upper right"},
+    {"frame": 11, "time": 0.4583, "event": "cat's head first detectable (nose x 454)"},
+    {"frame": 12, "time": 0.5, "event": "plane clearly visible"},
+    {"frame": 23, "time": 0.9583, "event": "plane apex: highest point of its path (ref_y ~342.7), from rising to descending; main axis passes horizontal ~f23-24"},
+    {"frame": 34, "time": 1.4167, "event": "plane passes the right edge of the blackboard (x ~1690) onto the pink wall, contrast drops"},
+    {"frame": 38, "time": 1.5833, "event": "plane nose reaches right image edge"},
+    {"frame": 42, "time": 1.75, "event": "plane fully out of frame (last pixels at f41)"},
+    {"frame": 49, "time": 2.0417, "event": "clip ends; cat still walking (ref_x 713.5)"}
+  ],
+  "no_contacts": "no collisions, bounces or contacts between objects; the plane passes just above the cat's raised tail in the image around f11-12 (plane y ~556-620, tail tip y ~600-605 at x ~270-300); no visible interaction"
+}

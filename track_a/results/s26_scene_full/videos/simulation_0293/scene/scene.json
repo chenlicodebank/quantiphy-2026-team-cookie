@@ -1,0 +1,78 @@
+{
+  "video": "simulation_0293.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "units": "pixels (x right, y down, origin top-left of the 2560x1440 frame) and seconds; t = frame/24",
+  "camera": {
+    "motion": "static (no pan/shake; background pixels identical between frames apart from the moving drone and lid)",
+    "notes": "2D scene, viewed side-on; drone rises vertically in the image plane. No metric scale known."
+  },
+  "objects": [
+    {
+      "name": "drone",
+      "description": "small black cylindrical drone (dark cylinder body with a light-grey round top plate and 4 arms with spinning rotors/blurred blades at the top). Starts nested in the top of the robot, rises straight up.",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "partially_occluded_frames": [0, 25],
+      "track_file": "tracks/drone.csv",
+      "reference_point": "ref_x,ref_y = centre of the drone's full image bbox (x = cylinder axis 1330.5; y = midpoint of top_y and bottom_y). For frames 0-25 the cylinder bottom is hidden inside the robot, bottom_y = top_y + 194 (rigid height).",
+      "size_px": {
+        "height_top_bar_to_cylinder_bottom": 194,
+        "cylinder_height": 173,
+        "cylinder_width": 81,
+        "arm_span_rigid": 231,
+        "blade_tip_span_with_blur": "231-280 (varies frame to frame because the rotors spin)",
+        "top_plate_band_height": "about 20 (top bar y=top..top+6, plate, arms to about top+28)"
+      },
+      "motion_summary_px": "top edge y: 940 (f0), 940 (f1), 933 (f2) ... 457 (f71); moves straight up at a steady rate from frame 1-2 to the end, x constant at 1330.5. Net rise 483 px over frames 1-71.",
+      "x_constant": 1330.5
+    },
+    {
+      "name": "robot",
+      "description": "black boxy wheeled delivery-type robot (the drone's carrier), centre-bottom of the image; chamfered top-left corner, white base with wheels at bottom; hatch lid on its top-left.",
+      "moves": false,
+      "visible_frames": [0, 71],
+      "image_position_px": {"bbox_x0": 1048, "bbox_y0": 985, "bbox_x1": 1442, "bbox_y1": 1392, "centre": [1245, 1188]},
+      "size_px": {
+        "body_width": 394,
+        "body_top_y": 985,
+        "body_bottom_y_above_wheels": 1308,
+        "body_height_without_wheels": 323,
+        "overall_height_to_wheel_bottom": 407,
+        "wheel_base_white_extents_x": [1000, 1531],
+        "note": "wheel bottoms partly hidden by ground ridge in front (y > ~1390); white wheels left about x 1035-1160, right about x 1380-1500"
+      }
+    },
+    {
+      "name": "lid",
+      "description": "hatch lid / flap on top of the robot, a tan panel with a dark curved handle, hinged near (1197, 992) at the robot's top-left. Open, tilted up-left, at the start; swings over to the right (closing) during the clip.",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/lid.csv",
+      "hinge_px": [1197, 992],
+      "length_px": "203 at rest (frames 0-21), apparent 187-199 later (tip feature/perspective)",
+      "angle_deg_convention": "angle of hinge->tip from image +x, counter-clockwise with y up (90 = vertical)"
+    },
+    {
+      "name": "background",
+      "description": "pink/red sandstone cliff with rock ledges, dry grass at top, reddish shallow water/mud and grey rocky ground at the bottom; static."
+    }
+  ],
+  "events": [
+    {"event": "drone starts rising", "frame": 1, "t": 0.0417, "note": "top y 940 at frames 0 and 1, 933 at frame 2; already moving at full steady rate between frames 1 and 2"},
+    {"event": "lid starts moving (closing swing begins)", "frame": 21, "t": 0.875, "note": "tip static frames 0-21, first change at frame 22"},
+    {"event": "drone cylinder bottom clears the robot top", "frame": 26, "t": 1.0833},
+    {"event": "lid passes vertical", "frame": 46, "t": 1.9167, "note": "angle 90.9 at f46, 87.1 at f47"},
+    {"event": "clip ends with drone still rising and lid still closing", "frame": 71, "t": 2.9583, "note": "lid angle 16.8 deg at f71"}
+  ],
+  "files": {
+    "tracks/drone.csv": "per-frame drone track",
+    "tracks/lid.csv": "per-frame lid tip / angle",
+    "notes.md": "methods and reliability",
+    "scripts/": "measurement scripts"
+  }
+}

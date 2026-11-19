@@ -1,0 +1,162 @@
+You are answering ONE question about one short video for a benchmark. Work only inside this folder:
+{ws}
+
+Files here:
+- inputs.json: the video file's frame rate (fps), size and source, and THE question: its id, its text, its own prior
+  (an exact fact about this video), its own depth_info (camera distances, when given) and the frame rate stated
+  with the question (question_fps).
+- {video}.mp4: the video at original resolution.
+- context/: this question's own context (CONTEXT.md and the earlier answers; see below).
+- LESSONS.md: the lessons library of this harness version (see below).
+- scene/: a measurement record of this video made before any question was known (scene.json, tracks/*.csv in pixels
+  and seconds, notes.md, scripts/). Read-only: copy a script out of it before changing it.
+Python with numpy, scipy, opencv (cv2), PIL and av: {py}
+Viewer helper (writes PNG files that you then look at with the Read tool):
+  {py} {tools}/framekit2.py info {video}.mp4
+  {py} {tools}/framekit2.py sheet {video}.mp4 --n 16 --out frames/sheet.png
+  {py} {tools}/framekit2.py frame {video}.mp4 --t 1.5 [--crop X0 Y0 X1 Y1] [--scale 3] [--grid 50] --out frames/f.png
+Write your own Python scripts for every measurement and keep them in this folder.
+
+Rules: do not read, list or search any path outside this folder (running the Python interpreter and the helper is
+fine); no web access; no other data. The only shell command you may run is the Python interpreter above, called by
+its full path (for example `{py} measure.py`); other commands are refused. Memory is shared with other jobs: decode
+frames inside your scripts as you need them, never hold a whole high-resolution video in memory, and keep scratch
+files small (no dumps of whole videos).
+
+Scoring: the answer is scored by its relative error - under 5 pct full credit, 10 pct about 0.9, 20 pct about 0.8,
+50 pct about 0.4, 100 pct or more zero. A careful measurement 3 pct off is worth far more than a quick estimate, so
+take the time to measure well.
+
+Answer from the video and this question's own prior and depth_info only: the metric scale must come from them. The
+record in scene/ is a starting point, not the truth: check that it covers the right object and the right frames,
+re-measure what the answer depends on, and correct the record where it is wrong (or measure from scratch if it is
+missing).
+
+How the reference answers were made (from the benchmark paper):
+- The given prior is exact, and the prior and depth_info set the scale. Most rendered scenes are built at real-world
+  scale: when the prior is a realistic value (a person walking at 1.3 m/s, a 1.8 m person, a 5 m car), the other
+  standard objects have their real sizes too. Use that as a hard check on your scale: if it makes an adult person
+  shorter than 1.5 m or taller than 2.0 m, a walking person slower than 0.9 or faster than 2.0 m/s, a car shorter than
+  3 m or longer than 7 m, or another everyday object implausible by more than about 40 pct, your geometry is wrong (a
+  focal length from an ill-conditioned route, a depth applied to the wrong point, an assumed direction of motion): find
+  and fix the error. If you cannot, take the scale from the standard object and say so in notes.md. A scene may be
+  scaled only when the prior itself is unrealistic (a 30 cm ice cube, a 0.05 m/s toy car) or its objects are models.
+- A prior can describe a motion the clip never shows (gravity for a ball that only rolls or slides): it then gives no
+  usable scale; take the scale from an object of known real size (a regulation ball, an adult person) and say so.
+- Time: t = 0 is the first frame; time t means frame round(t x question_fps).
+- simulation videos (Blender renders; 2D or 3D):
+  * Positions are the object's origin in world space: a rigid object's origin (usually its centre), a human's
+    pelvis/hip, a vehicle or other rig's root. Distances between objects are between these origins: the full 3D
+    distance in 3D videos unless the question says horizontal or vertical; in-plane distance in 2D videos.
+  * Speed at time t = |p(i) - p(i-1)| x fps at frame i = round(t x fps) (one-frame backward difference of the
+    origin). Acceleration at t = (speed(i) - speed(i-1)) x fps, the change of scalar speed (for a uniformly
+    accelerated object simply that constant). Average speed over an interval = mean of the per-frame speeds.
+    Displacement between two times = straight-line distance between the two positions; total
+    distance traveled = path length, the sum of the per-frame displacements (not the net displacement).
+  * Sizes are the world-space axis-aligned bounding box (length / width / height = its extents). Human height: the
+    question says which - rest standing height, or minimum / maximum height while walking; flying animals: minimum
+    or maximum wingspan / width during flight.
+  * depth_info = 3D Euclidean distance from the camera centre to the object's origin (not to its surface). The
+    camera is fixed within a clip; its focal length is unknown and differs between clips (horizontal field of view
+    anywhere from about 8 to 100 degrees), so estimate it: e.g. from the given depths plus a known size, or from
+    two objects whose depths are given, and check it by reproducing the given values.
+  * Animated characters (people, animals): depth_info is the distance to the character's object origin, which can stay
+    put while the body walks away from it. If a walking character's given distances barely change (under about
+    0.1 m/s) although its body visibly moves, that does not mean it walks across the view: take its direction of
+    motion from its path on the ground and its change of apparent size, and do not use that distance for the body at
+    other times.
+  * A road scene's "width of the lane", when the question names no particular lane, is the width of the road surface
+    the vehicles drive on, curb to curb.
+  * 2D videos: motion is in a plane facing the camera; one metres-per-pixel scale from the prior's object (its pixel
+    size, pixel speed or pixel acceleration), unless clear perspective shows the objects are at different depths.
+- segmentation videos are the same footage with the background replaced and have the original's answers.
+- captured (lab) videos: real recordings, 24 fps, Orbbec Femto Mega RGB camera with a horizontal field of view of
+  80 degrees: focal length = 0.5959 x image width in pixels (763 px at 1280 px width), principal point near the
+  image centre, no zoom. depth_info gives the measured camera distance to the object centre at the stated times.
+  Reference sizes were measured on the real objects with a ruler. Reference positions are object centres clicked in
+  the main camera and back-projected with the measured depth; velocity = forward difference of those 3D centres over
+  adjacent frames (smoothed over at least 5 frames), acceleration = second difference; total
+  distance traveled = the sum of the frame-to-frame 3D displacements of the centre (path length). The given acceleration
+  prior of a falling or rolling ball can be gravity or slope physics; still measure.
+- internet videos: real footage. The annotators measured in pixels: an object's pixel length along the main motion
+  direction (e.g. bumper to bumper for a car) and a reference point's pixel position frame by frame, velocity as the
+  forward difference and acceleration as the second difference, then converted EVERYTHING with ONE scale factor =
+  prior world value / prior pixel value (planar assumption, no perspective correction). Reproduce that convention:
+  a single scale from the prior, measured the same way. Check for camera motion before measuring motion; if the
+  camera pans, measure against the background.
+
+Named sizes (as in the validation answers): length is the object's longer horizontal extent and width
+the shorter horizontal extent across it. A car's length runs bumper to bumper and its width wheel to wheel; a 75 x 60
+cm table has length 75 and width 60; the width of a sofa, bed, desk, TV stand, bench or keyboard is its front-to-back
+depth, not its long side. Height is the vertical extent. For an upright flat object (a door, screen, painting, board or
+mirror) width is the horizontal extent across its face. If a name is still ambiguous, give the value under each
+reading in notes.md and answer with the reading above.
+
+For animals, vehicles, aircraft and boats, length runs along the body and the direction of travel (beak to tail,
+nose to tail, bow to stern) and width across it; a bird's, bat's, butterfly's or aircraft's wingspan is its width
+(or wingspan), never its length, even when it is longer than the body.
+
+Context of this question (context/): every earlier session that answered THIS question saw only this question, its
+video, its prior and depth_info, as you do. context/CONTEXT.md is the organised record of what is known so far: the
+question, the answer currently submitted, every earlier answer and who made it, and (after earlier rounds) what earlier
+investigators of this question established. context/C<k>/ holds each earlier session's notes.md and scripts;
+context/round<k>/ holds an earlier investigation round of this question. The answers disagree by more than 25 pct, so
+at least one of them is wrong - possibly all of them.
+
+Lessons (LESSONS.md): generic lessons about how answers to this benchmark go wrong, learned from investigating other
+questions; they hold no value of any question. Read them before you start and apply those that fit.
+
+Your job is to make this question's answer as accurate as possible and to leave its context better organised than you
+found it. Work in this order:
+1. Read inputs.json, context/CONTEXT.md and LESSONS.md; look at the video (a frame sheet, then zoomed frames at the
+   times the question and the prior name). Write down the measurements the answer depends on.
+2. Read every candidate's notes.md. Find the exact step where the answers part ways: which object or which part of it,
+   which dimension, which frame or time window, the reference point, the scale route (pixel scale, focal length, how
+   depth_info was used), the time base, a convention above, or arithmetic. Write this crux in one line.
+3. Re-measure that step yourself in code from the video by two independent routes (for example two frame windows, two
+   reference points, two scale routes, or a mask-based and an edge-based extent). Draw what you measure on frames and
+   look at the overlays.
+4. Recheck - all four are required; write each result in notes.md:
+   a. Closure: with the scale you use, re-derive this question's own prior from the video. It must come back within
+      about 5 pct; if it does not, your scale or geometry is wrong - fix it before going on.
+   b. Plausibility: every standard object in view (people, cars, doors, balls, furniture) must come out at a realistic
+      size or speed at your scale, as the conventions above describe.
+   c. Units and time base: the unit the question asks for; every time converted with question_fps.
+   d. Fault proof: for every candidate whose answer you do NOT follow, name the step it got wrong and show it (your
+      measurement of that step next to its value), or say that you cannot find one.
+5. Decide. The burden of proof is on change: the answer currently submitted stands unless step 4d shows a concrete
+   error in the way it was made AND your own value passes 4a-4c. Count no votes and never average answers: several
+   sessions agreeing is no evidence when they share a method, and a candidate that is internally consistent can still
+   rest on a wrong scale. If two readings of the question both survive the checks, keep the submitted answer.
+6. Write these files in your folder:
+   - answers.json: {{"<id>": <your final answer>}} (the submitted answer itself when you keep it);
+   - verdict.json: {{"answer": <number>, "decision": "keep" or "switch" or "new", "follows": "<candidate name or null>",
+     "crux": "<one line: the step where the answers part>", "fault_found": "<one line: the error you proved, or none>",
+     "closure_pct": <error in pct of the prior re-derived at your scale, or null>, "confidence": "high" or "medium" or
+     "low", "lesson": "<one generic sentence that would help an investigator of a DIFFERENT question of this benchmark:
+     no numbers, no object names, nothing specific to this video; empty if nothing new>"}}
+     ("switch" = you follow another earlier candidate; "new" = your own value, close to none of them);
+   - context_update.md: an organised addendum to this question's context for the next round - what is now established
+     and by which measurement, what was ruled out, what remains open (short, factual, with numbers);
+   - notes.md: your method, measurements, the four rechecks and the decision.
+
+Method:
+1. Read the question, its prior and depth_info. Find the asked object and the prior's object in scene/ and on frames
+   at every time the question or prior names (zoomed crops with --scale 2-4 and --grid to read coordinates).
+2. Measure in code rather than by eye, and draw masks and points on frames to confirm them.
+3. Scale: 2D -> metres per pixel from the prior; 3D -> pinhole geometry with depth_info, the focal length estimated
+   from at least two independent references and checked by reproducing the prior and the given distances.
+4. Follow the conventions above (light smoothing is fine; never fit across a bounce, impact or occlusion).
+5. Check the answer by a second independent route (another frame window, reference point or method); when routes
+   disagree, find out why before answering.
+6. Time base: use question_fps for every time and frame conversion, also when the file's fps differs: the reference
+   answers time every clip by question_fps. The times in scene/ were computed at the file's fps before question_fps
+   was known: use their frame column, not their seconds. When the two rates differ, note the file rate in notes.md.
+7. Lab method card (captured videos; the paper's camera, no fitted value): focal f = 0.5959 x image width in pixels.
+   A size = this question's depth_info distance to that object x its pixel extent along the asked dimension / f,
+   with the pixel extent measured in code on a clear frame near the stated time. A position = back-projection
+   ((u - cx) / f, (v - cy) / f, 1) x the depth at that time; distances and displacements are between such 3D points.
+8. The answer is a positive number in the unit the question asks for.
+
+Finish by writing the files the investigation steps above ask for (answers.json, verdict.json, context_update.md,
+notes.md). Then reply with the verdict JSON object.

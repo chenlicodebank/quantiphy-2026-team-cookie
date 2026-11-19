@@ -1,0 +1,189 @@
+{
+ "video": "internet_0046.mp4",
+ "source": "internet",
+ "scene_type": "2D",
+ "fps": 30.0,
+ "frames": 51,
+ "duration_s": 1.7,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 30; frame 0 at t = 0",
+ "camera": {
+  "static": true,
+  "evidence": "black end caps of the baseboard tube move <= 3 px over the clip (left cap x 446.7-452.4, right cap x 1718.6-1726.0, in opposite directions -> tiny focus breathing / shake, no pan). Negligible vs mug motion of 90-135 px/frame.",
+  "background_shift_px": "treat as 0 (|shift| <= ~3 px)"
+ },
+ "objects": [
+  {
+   "name": "mug",
+   "moves": true,
+   "description": "ceramic mug with dark (privacy-blurred) printed body and white handle on its right side; pulled to the right by a string tied to the handle; slides on the wooden floor from left image edge to right image edge",
+   "visible_frames": "19-43 (handle tip from 19, body from 21; body fully in frame 27-39; sliver at right edge in 43; gone from 44)",
+   "track": "tracks/mug.csv",
+   "reference_point": "ref_x/ref_y = centre of the visible mug body (handle excluded); centre_x_est_full_body adds an estimate for edge-cut frames",
+   "pixel_sizes_full_frames_27_39": {
+    "body_width_px_median": 483.1,
+    "body_width_px_range": [
+     465.1,
+     499.0
+    ],
+    "body_height_px_median": 570.0,
+    "body_height_px_range": [
+     568.0,
+     582.0
+    ],
+    "handle_extends_right_of_body_px": 179.6,
+    "length_incl_handle_px_approx": 662.7
+   }
+  },
+  {
+   "name": "string",
+   "moves": true,
+   "description": "thin tan/brown twine running from the right image edge, nearly horizontal at y~320-420, tied with a knot to the mug handle (knot just right of the handle outer edge, y~360-400); pulls the mug",
+   "visible_frames": "0-43 (frames 0-17 lies across the frame with its tied end off-screen left; knot enters at left edge at frame 18; leaves to the right with the mug)",
+   "track": "knot ~ handle_right_x + 0..30 px in tracks/mug.csv; no separate track"
+  },
+  {
+   "name": "mug_shadow",
+   "moves": true,
+   "description": "soft shadow of the mug on the floor to its lower-left (light from upper right); stays visible at right edge until ~frame 46. Not part of the mug extents."
+  },
+  {
+   "name": "baseboard_tube",
+   "moves": false,
+   "description": "long light-grey horizontal tube/cable cover lying along the wall-floor junction, black end caps",
+   "image_position_frame50": {
+    "left_cap_x": 452,
+    "right_cap_x": 1722,
+    "y_top": 497,
+    "y_bottom": 552
+   },
+   "length_px_cap_to_cap": 1270
+  },
+  {
+   "name": "baseboard_left_segment",
+   "moves": false,
+   "description": "shorter bluish-white strip left of the tube, x 0 to ~430, y ~485-540, with a black cap at the left image edge"
+  },
+  {
+   "name": "wall",
+   "moves": false,
+   "description": "plain light-grey wall, upper half of the image (y < ~495)"
+  },
+  {
+   "name": "floor",
+   "moves": false,
+   "description": "light wooden floor / table top (y > ~555); horizontal wood grain"
+  }
+ ],
+ "events": [
+  {
+   "event": "string already taut and moving slightly (camera-level view), mug off-screen left",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "string knot enters at left edge",
+   "frame": 18,
+   "t": 0.6
+  },
+  {
+   "event": "mug handle enters at left edge",
+   "frame": 19,
+   "t": 0.6333
+  },
+  {
+   "event": "mug body enters at left edge",
+   "frame": 21,
+   "t": 0.7
+  },
+  {
+   "event": "mug body fully in frame (first)",
+   "frame": 27,
+   "t": 0.9
+  },
+  {
+   "event": "mug body fully in frame (last)",
+   "frame": 39,
+   "t": 1.3
+  },
+  {
+   "event": "mug handle leaves at right edge (first frame handle not fully visible)",
+   "frame": 39,
+   "t": 1.3
+  },
+  {
+   "event": "mug body last visible (sliver at right edge)",
+   "frame": 43,
+   "t": 1.4333
+  },
+  {
+   "event": "mug fully out of frame",
+   "frame": 44,
+   "t": 1.4667
+  }
+ ],
+ "motion_summary_px": {
+  "direction": "left -> right (+x), nearly horizontal; mug drifts down ~20-30 px and grows ~2-3 % in height while crossing (moving slightly toward the camera)",
+  "body_centre_x_by_frame_full_frames": [
+   [
+    27,
+    251.3
+   ],
+   [
+    28,
+    345.6
+   ],
+   [
+    29,
+    440.2
+   ],
+   [
+    30,
+    540.3
+   ],
+   [
+    31,
+    643.0
+   ],
+   [
+    32,
+    751.0
+   ],
+   [
+    33,
+    862.6
+   ],
+   [
+    34,
+    977.7
+   ],
+   [
+    35,
+    1097.2
+   ],
+   [
+    36,
+    1220.8
+   ],
+   [
+    37,
+    1347.6
+   ],
+   [
+    38,
+    1476.6
+   ],
+   [
+    39,
+    1608.2
+   ]
+  ],
+  "note": "per-frame centre steps grow from ~94 px (frames 27-28) to ~132 px (frames 38-39): the mug is accelerating; fit as needed"
+ },
+ "files": {
+  "tracks/mug.csv": "per-frame mug track",
+  "notes.md": "methods and reliability",
+  "scripts/": "all measurement scripts"
+ }
+}

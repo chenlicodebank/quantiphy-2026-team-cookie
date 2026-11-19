@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0159.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MS",
+ "fps": 24.0,
+ "frames": 41,
+ "duration_s": 1.7083,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1546,
+  "question": "How long is the turtle in meters?",
+  "prior": "acceleration of the turtle = 2.639 m/s^2",
+  "depth_info": "t=0s, distance_turtle_camera = 15.232m   \nt=0.5s, distance_turtle_camera = 14.968m\nt=0s, distance_shark_camera = 16.474m\nt=0.5s, distance_shark_camera = 15.744m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

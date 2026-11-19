@@ -1,0 +1,691 @@
+{
+ "video": "simulation_0074.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_convention": "t = frame/24; frame 0 at t=0",
+ "pixel_convention": "original resolution pixels, x right, y down, origin top-left",
+ "camera": {
+  "static": true,
+  "max_abs_phase_corr_shift_px": 0.012,
+  "note": "phase correlation of two static regions vs frame 0 for all 72 frames; no pan/shake/zoom",
+  "view": "elevated oblique view looking down on a 4-way road junction; no horizon visible (white backdrop top centre); focal length unknown"
+ },
+ "perspective": {
+  "ground_plane": "flat grey road (no lane markings) with 4 beige paved sidewalk corners and kerbs",
+  "kerb_lines_px": {
+   "far_left_sidewalk_front_kerb": [
+    [
+     0,
+     32
+    ],
+    [
+     972,
+     254
+    ]
+   ],
+   "far_right_road_edge_kerb": [
+    [
+     1199,
+     308
+    ],
+    [
+     1998,
+     0
+    ]
+   ],
+   "left_corner_kerb_upper": [
+    [
+     0,
+     308
+    ],
+    [
+     497,
+     518
+    ]
+   ],
+   "left_corner_kerb_lower": [
+    [
+     540,
+     540
+    ],
+    [
+     0,
+     734
+    ]
+   ],
+   "right_corner_kerb_upper": [
+    [
+     1858,
+     486
+    ],
+    [
+     2160,
+     216
+    ]
+   ],
+   "right_corner_kerb_lower": [
+    [
+     1880,
+     497
+    ],
+    [
+     2160,
+     572
+    ]
+   ]
+  },
+  "kerb_lines_note": "approximate (visual, +-10 px) endpoints in frame 0; the two road directions run roughly lower-left<->upper-right and upper-left<->lower-right; objects lower in the image are nearer the camera",
+  "apparent_size": {
+   "taxi": {
+    "0": {
+     "bw": 236.0,
+     "bh": 130.0,
+     "main_len": 243.03,
+     "cross_w": 129.32,
+     "bbox_cx": 1319.5,
+     "by1": 359.0,
+     "area": 13896.0
+    },
+    "24": {
+     "bw": 322.0,
+     "bh": 116.0,
+     "main_len": 322.0,
+     "cross_w": 102.71,
+     "bbox_cx": 1110.5,
+     "by1": 365.0,
+     "area": 19562.0
+    },
+    "36": {
+     "bw": 323.0,
+     "bh": 104.0,
+     "main_len": 322.97,
+     "cross_w": 101.94,
+     "bbox_cx": 991.0,
+     "by1": 353.0,
+     "area": 20018.0
+    },
+    "48": {
+     "bw": 292.0,
+     "bh": 113.0,
+     "main_len": 293.14,
+     "cross_w": 105.25,
+     "bbox_cx": 885.5,
+     "by1": 353.0,
+     "area": 18265.0
+    },
+    "71": {
+     "bw": 246.0,
+     "bh": 106.0,
+     "main_len": 247.89,
+     "cross_w": 98.75,
+     "bbox_cx": 732.5,
+     "by1": 315.0,
+     "area": 14809.0
+    }
+   },
+   "van": {
+    "0": {
+     "bw": 265.0,
+     "bh": 203.0,
+     "main_len": 294.81,
+     "cross_w": 172.65,
+     "bbox_cx": 1576.0,
+     "by1": 389.0,
+     "area": 26043.0
+    },
+    "24": {
+     "bw": 275.0,
+     "bh": 218.0,
+     "main_len": 298.0,
+     "cross_w": 185.78,
+     "bbox_cx": 1521.0,
+     "by1": 426.0,
+     "area": 32198.0
+    },
+    "36": {
+     "bw": 302.0,
+     "bh": 239.0,
+     "main_len": 327.04,
+     "cross_w": 200.76,
+     "bbox_cx": 1440.5,
+     "by1": 478.0,
+     "area": 38030.0
+    },
+    "48": {
+     "bw": 347.0,
+     "bh": 271.0,
+     "main_len": 373.84,
+     "cross_w": 217.71,
+     "bbox_cx": 1309.0,
+     "by1": 559.0,
+     "area": 49231.0
+    },
+    "60": {
+     "bw": 430.0,
+     "bh": 326.0,
+     "main_len": 462.05,
+     "cross_w": 245.68,
+     "bbox_cx": 1092.5,
+     "by1": 692.0,
+     "area": 72800.0
+    },
+    "66": {
+     "bw": 497.0,
+     "bh": 366.0,
+     "main_len": 525.28,
+     "cross_w": 268.51,
+     "bbox_cx": 933.0,
+     "by1": 788.0,
+     "area": 94041.0
+    },
+    "71": {
+     "bw": 575.0,
+     "bh": 418.0,
+     "main_len": 605.98,
+     "cross_w": 293.79,
+     "bbox_cx": 759.0,
+     "by1": 901.0,
+     "area": 120750.0
+    }
+   },
+   "cyclist": {
+    "25": {
+     "bw": 76.0,
+     "bh": 114.0,
+     "main_len": 112.15,
+     "cross_w": 76.8,
+     "bbox_cx": 1194.5,
+     "by1": 434.0,
+     "area": 2386.0
+    },
+    "36": {
+     "bw": 64.0,
+     "bh": 114.0,
+     "main_len": 120.9,
+     "cross_w": 51.01,
+     "bbox_cx": 1095.5,
+     "by1": 485.0,
+     "area": 2694.0
+    },
+    "48": {
+     "bw": 79.0,
+     "bh": 124.0,
+     "main_len": 125.78,
+     "cross_w": 73.94,
+     "bbox_cx": 964.0,
+     "by1": 555.0,
+     "area": 3666.0
+    },
+    "60": {
+     "bw": 83.0,
+     "bh": 118.0,
+     "main_len": 128.49,
+     "cross_w": 73.85,
+     "bbox_cx": 800.0,
+     "by1": 624.0,
+     "area": 3451.0
+    }
+   },
+   "pedestrian": {
+    "0": {
+     "bw": 26.0,
+     "bh": 98.0,
+     "main_len": 98.0,
+     "cross_w": 26.0,
+     "bbox_cx": 957.5,
+     "by1": 256.0,
+     "area": 1511.0
+    },
+    "6": {
+     "bw": 39.0,
+     "bh": 98.0,
+     "main_len": 98.0,
+     "cross_w": 39.0,
+     "bbox_cx": 949.0,
+     "by1": 255.0,
+     "area": 1527.0
+    },
+    "47": {
+     "bw": 35.0,
+     "bh": 93.0,
+     "main_len": 93.0,
+     "cross_w": 35.0,
+     "bbox_cx": 883.0,
+     "by1": 236.0,
+     "area": 1393.0
+    },
+    "62": {
+     "bw": 34.0,
+     "bh": 97.0,
+     "main_len": 97.0,
+     "cross_w": 34.0,
+     "bbox_cx": 853.5,
+     "by1": 235.0,
+     "area": 1224.0
+    },
+    "71": {
+     "bw": 33.0,
+     "bh": 92.0,
+     "main_len": 92.0,
+     "cross_w": 33.0,
+     "bbox_cx": 837.0,
+     "by1": 227.0,
+     "area": 1437.0
+    }
+   },
+   "note": "van grows ~2.3x in bbox width 0->71 (approaching camera); taxi shrinks slightly (bbox includes cyclist at 0-20); pedestrian shrinks ~6% (moving away); cyclist grows"
+  }
+ },
+ "objects": {
+  "moving": {
+   "taxi": {
+    "desc": "yellow taxi sedan (roof sign), starts beside the cyclist just left of the white van at upper centre-right, drives left along the far road, ends upper-centre-left in front of the purple sedan",
+    "moves": true,
+    "frames": [
+     0,
+     71
+    ],
+    "direction": "image-left, slightly up (away/across)",
+    "occlusion": "frames 0-20 the cyclist is in front of its rear quarter (mask split by colour); otherwise unoccluded"
+   },
+   "van": {
+    "desc": "white cargo van (Chevrolet-style), starts at upper right of the far road, turns and drives toward the camera / lower-left, growing strongly in the image",
+    "moves": true,
+    "frames": [
+     0,
+     71
+    ],
+    "direction": "image-left and down (toward the camera); slow at start (~1-2 px/frame) then fast (~45 px/frame of bbox-centre/bottom at the end, largely perspective)",
+    "occlusion": "frames ~22-55 its lower right/rear part passes behind the near traffic-signal sign (x 1385-1529, y>416); at the end it hides the cyclist"
+   },
+   "cyclist": {
+    "desc": "person in dark blue on a bicycle, starts between taxi and van (in front of the taxi rear), rides diagonally down-left across the junction, ends hidden behind the van (lower centre-left)",
+    "moves": true,
+    "frames": [
+     0,
+     71
+    ],
+    "direction": "image-left and down",
+    "occlusion": "frames 0-~20 overlaps the taxi in the image (cyclist in front, mask = non-yellow pixels in a template-tracked box); frames ~62-71 progressively hidden behind the van (only head/upper body visible at 69-71)"
+   },
+   "pedestrian": {
+    "desc": "walking person (white top, jeans) on the far sidewalk near the green bin and the third far lamp post, walks image-left",
+    "moves": true,
+    "frames": [
+     0,
+     71
+    ],
+    "direction": "image-left, slightly up (away)",
+    "occlusion": "feet hidden behind the green bin ~19-33, 36-38, 43-46; crosses behind the thin lamp post ~49-71; frames 51,52,56,57 mask merged with taxi roof (bottom invalid)"
+   }
+  },
+  "static": {
+   "purple_sedan": {
+    "x0": 408,
+    "y0": 268,
+    "x1": 664,
+    "y1": 404,
+    "note": "parked dark-purple Mercedes-style sedan, left of centre on the far-left road, front facing image-right; auto box missed its grey roof",
+    "w": 257,
+    "h": 137,
+    "auto_mask_box": {
+     "x0": 412,
+     "y0": 312,
+     "x1": 663,
+     "y1": 407,
+     "w": 252,
+     "h": 96,
+     "cx": 545.4,
+     "cy": 358.4
+    }
+   },
+   "green_car_right_edge": {
+    "x0": 1893,
+    "y0": 555,
+    "x1": 2159,
+    "y1": 749,
+    "note": "green coupe at the right image edge, cut off by the frame (extent incomplete), static",
+    "w": 267,
+    "h": 195,
+    "auto_mask_box": {
+     "x0": 1893,
+     "y0": 555,
+     "x1": 2159,
+     "y1": 749,
+     "w": 267,
+     "h": 195,
+     "cx": 2043.8,
+     "cy": 651.4
+    }
+   },
+   "near_signal_with_crossing_sign": {
+    "x0": 1385,
+    "y0": 416,
+    "x1": 1529,
+    "y1": 999,
+    "note": "nearest traffic signal, lower centre-right, triangular pedestrian-crossing sign on top, pole base on the near sidewalk corner (~y 996)",
+    "w": 145,
+    "h": 584,
+    "auto_mask_box": {
+     "x0": 1385,
+     "y0": 416,
+     "x1": 1529,
+     "y1": 999,
+     "w": 145,
+     "h": 584,
+     "cx": 1458.4,
+     "cy": 664.6
+    }
+   },
+   "far_left_signal_with_crossing_sign": {
+    "x0": 312,
+    "y0": 150,
+    "x1": 409,
+    "y1": 538,
+    "note": "left signal with crossing sign",
+    "w": 98,
+    "h": 389,
+    "auto_mask_box": {
+     "x0": 312,
+     "y0": 165,
+     "x1": 409,
+     "y1": 538,
+     "w": 98,
+     "h": 374,
+     "cx": 361.4,
+     "cy": 311.2
+    }
+   },
+   "far_centre_signal": {
+    "x0": 1112,
+    "y0": 19,
+    "x1": 1161,
+    "y1": 302,
+    "note": "signal on the far corner, sign on top; taxi passes in front of its base",
+    "w": 50,
+    "h": 284,
+    "auto_mask_box": {
+     "x0": 1112,
+     "y0": 66,
+     "x1": 1160,
+     "y1": 153,
+     "w": 49,
+     "h": 88,
+     "cx": 1136.3,
+     "cy": 108.4
+    }
+   },
+   "right_signal": {
+    "x0": 1917,
+    "y0": 120,
+    "x1": 2033,
+    "y1": 494,
+    "note": "signal on the right sidewalk (sign on top)",
+    "w": 117,
+    "h": 375,
+    "auto_mask_box": {
+     "x0": 1917,
+     "y0": 190,
+     "x1": 2033,
+     "y1": 494,
+     "w": 117,
+     "h": 305,
+     "cx": 1964.9,
+     "cy": 279.3
+    }
+   },
+   "lamp_post_left_double": {
+    "x0": 68,
+    "y0": 200,
+    "x1": 174,
+    "y1": 437,
+    "note": "double-headed street lamp, left sidewalk",
+    "w": 107,
+    "h": 238,
+    "auto_mask_box": {
+     "x0": 108,
+     "y0": 204,
+     "x1": 174,
+     "y1": 435,
+     "w": 67,
+     "h": 232,
+     "cx": 142.1,
+     "cy": 313.6
+    }
+   },
+   "lamp_post_far_1": {
+    "x0": 387,
+    "y0": 5,
+    "x1": 434,
+    "y1": 144,
+    "note": "far sidewalk lamp, leftmost",
+    "w": 48,
+    "h": 140,
+    "auto_mask_box": {
+     "x0": 408,
+     "y0": 21,
+     "x1": 433,
+     "y1": 144,
+     "w": 26,
+     "h": 124,
+     "cx": 420.5,
+     "cy": 87.0
+    }
+   },
+   "lamp_post_far_2": {
+    "x0": 580,
+    "y0": 32,
+    "x1": 630,
+    "y1": 189,
+    "note": "far sidewalk lamp, middle",
+    "w": 51,
+    "h": 158,
+    "auto_mask_box": {
+     "x0": 601,
+     "y0": 53,
+     "x1": 625,
+     "y1": 189,
+     "w": 25,
+     "h": 137,
+     "cx": 612.6,
+     "cy": 124.1
+    }
+   },
+   "lamp_post_far_3": {
+    "x0": 823,
+    "y0": 70,
+    "x1": 875,
+    "y1": 247,
+    "note": "far sidewalk lamp next to the pedestrian path; pole x ~843-864",
+    "w": 53,
+    "h": 178
+   },
+   "green_bin": {
+    "x0": 904,
+    "y0": 214,
+    "x1": 929,
+    "y1": 259,
+    "note": "green litter bin on the far sidewalk, in front of the pedestrian path",
+    "w": 26,
+    "h": 46,
+    "auto_mask_box": {
+     "x0": 904,
+     "y0": 214,
+     "x1": 929,
+     "y1": 259,
+     "w": 26,
+     "h": 46,
+     "cx": 917.1,
+     "cy": 237.0
+    }
+   },
+   "grey_bins_top_left": {
+    "x0": 214,
+    "y0": 112,
+    "x1": 267,
+    "y1": 177,
+    "note": "cluster of grey bins/bollards top left",
+    "w": 54,
+    "h": 66,
+    "auto_mask_box": {
+     "x0": 214,
+     "y0": 112,
+     "x1": 267,
+     "y1": 177,
+     "w": 54,
+     "h": 66,
+     "cx": 241.7,
+     "cy": 148.5
+    }
+   },
+   "small_grey_box_far_left": {
+    "x0": 40,
+    "y0": 182,
+    "x1": 66,
+    "y1": 212,
+    "note": "small grey box/sign at far left (visual)",
+    "w": 27,
+    "h": 31
+   },
+   "red_grate_far_sidewalk": {
+    "x0": 999,
+    "y0": 245,
+    "x1": 1144,
+    "y1": 291,
+    "note": "red-brown grate/mat on far sidewalk",
+    "w": 146,
+    "h": 47,
+    "auto_mask_box": {
+     "x0": 999,
+     "y0": 245,
+     "x1": 1144,
+     "y1": 291,
+     "w": 146,
+     "h": 47,
+     "cx": 1071.8,
+     "cy": 268.1
+    }
+   },
+   "red_grate_left_edge": {
+    "x0": 0,
+    "y0": 525,
+    "x1": 88,
+    "y1": 605,
+    "note": "red-brown grate at left image edge (cut off)",
+    "w": 89,
+    "h": 81
+   }
+  }
+ },
+ "tracks": {
+  "taxi": "tracks/taxi.csv",
+  "van": "tracks/van.csv",
+  "cyclist": "tracks/cyclist.csv",
+  "pedestrian": "tracks/pedestrian.csv"
+ },
+ "events": [
+  {
+   "object": "taxi",
+   "event": "in motion at first frame",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "object": "taxi",
+   "event": "still moving at last frame (no stop observed)",
+   "frame": 71,
+   "t": 2.9583333333333335
+  },
+  {
+   "object": "van",
+   "event": "in motion at first frame",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "object": "van",
+   "event": "still moving at last frame (no stop observed)",
+   "frame": 71,
+   "t": 2.9583333333333335
+  },
+  {
+   "object": "cyclist",
+   "event": "in motion at first frame",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "object": "cyclist",
+   "event": "still moving at last frame (no stop observed)",
+   "frame": 71,
+   "t": 2.9583333333333335
+  },
+  {
+   "object": "pedestrian",
+   "event": "in motion at first frame",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "object": "pedestrian",
+   "event": "still moving at last frame (no stop observed)",
+   "frame": 71,
+   "t": 2.9583333333333335
+  },
+  {
+   "object": "van",
+   "event": "slow creep (bbox moves ~1-2 px/frame) then steady acceleration in image space",
+   "frame": 0,
+   "t": 0.0,
+   "note": "first frame-pair 0->1 ~0-4 px (mask growth); see van.csv"
+  },
+  {
+   "object": "cyclist",
+   "event": "template track gives ~0 px shift between frames 0 and 1 (may start moving at frame 1; low confidence)",
+   "frame": 1,
+   "t": 0.041666666666666664
+  },
+  {
+   "object": "cyclist",
+   "event": "separates from the taxi in the image",
+   "frame": 20,
+   "t": 0.8333333333333334
+  },
+  {
+   "object": "cyclist",
+   "event": "starts to be hidden behind the van",
+   "frame": 62,
+   "t": 2.5833333333333335
+  },
+  {
+   "object": "van",
+   "event": "passes behind the near signal sign (partial occlusion)",
+   "frame": 22,
+   "t": 0.9166666666666666,
+   "note": "until ~55"
+  },
+  {
+   "object": "pedestrian",
+   "event": "passes the green bin (feet hidden)",
+   "frame": 19,
+   "t": 0.7916666666666666,
+   "note": "until ~46"
+  },
+  {
+   "object": "pedestrian",
+   "event": "passes behind lamp_post_far_3",
+   "frame": 49,
+   "t": 2.0416666666666665
+  },
+  {
+   "object": "none",
+   "event": "no contacts/collisions between objects observed (image overlaps are depth overlaps only)",
+   "frame": null,
+   "t": null
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0228.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 714,
+  "question": "What is the speed of the swimming ring at time 0.5s in m/s?",
+  "prior": "speed of the black cat = 1.041m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

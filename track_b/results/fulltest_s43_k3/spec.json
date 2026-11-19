@@ -1,0 +1,6 @@
+{
+ "name": "track_b_s43_k3.csv",
+ "base": {"S2": "results/fulltest_s37_b10mix/track_b_s37_b10mix.csv", "D2": "results/fulltest_s37_b10mix/track_b_s37_b10mix.csv", "S3": "results/fulltest_s37_b9lat/track_b_s33_b9lat.csv", "D3": "results/fulltest_s37_b10mix/track_b_s37_b10mix.csv"},
+ "snap": {"near": 0.4, "lab": 0.25, "far": 0.12, "window": 12, "kinds": ["val_label", "val_prior"], "skip_facts": false},
+ "props": {"tol": 1.6}
+}

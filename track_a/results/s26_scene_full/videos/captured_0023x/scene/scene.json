@@ -1,0 +1,88 @@
+{
+  "video": "captured_0023x.mp4",
+  "source": "lab (captured, background replaced by black via Segment Anything 2; watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "camera": {
+    "motion": "static (phase-correlation shift of table edge + pedestal vs frame 0 is < 0.25 px every frame; see camcheck_raw.json)",
+    "intrinsics_per_benchmark": "lab camera: f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360), HFOV 80 deg",
+    "view": "front view of the table, slightly above table height looking slightly down; table top seen as a trapezoid (front edge y~530, back edge y~440)",
+    "perspective_cues": "table-top side edges converge upward (left edge from (280,540) to (452,440), right edge from (924,540) to (759,440)); white board top edge is narrower (142 px) than its bottom edge (181 px) -> board top is farther from camera (board leans back, its face is a ramp toward the camera)"
+  },
+  "objects": [
+    {
+      "name": "blue_book",
+      "aliases": ["book", "box", "light-blue object", "sliding object"],
+      "description": "flat rectangular object with a light-blue (pale teal) cover and a cream/white page-edge side, looks like a book or flat box; only moving object",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track_file": "tracks/blue_book.csv",
+      "reference_point": "centroid of the visible object mask (cx, cy); bbox centre also given",
+      "phases": {
+        "rest_on_top_of_white_board": [0, 20],
+        "sliding_down_board_face": [21, 30],
+        "tipping_off_board_bottom_onto_table": [30, 33],
+        "sliding_on_table": [33, 36],
+        "rest_on_table": [37, 48]
+      },
+      "apparent_size_px": {
+        "on_board_top_frames_3_19": {"length": 129, "height_on_screen": 37, "bbox": [525, 350, 655, 388], "note": "cover face seen foreshortened on the inclined board"},
+        "on_table_frames_37_48": {"length": 177, "height_on_screen": 33, "bbox": [477, 479, 655, 512], "note": "lying flat, seen nearly edge-on: blue cover top strip (~479-495) + cream page side (~495-511); 176-179 px long"},
+        "trend": "apparent length grows ~129 -> ~150 (frame 30, blurred/tilted) -> ~177 on table: object comes toward camera"
+      }
+    },
+    {
+      "name": "white_board",
+      "aliases": ["ramp", "slope", "inclined plane", "white box"],
+      "description": "white rectangular board/panel standing on the table, leaning back so its face is a ramp toward the camera; the book slides down its face",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "image_extents_px": {
+        "top_edge": {"y": 356, "x": [517, 659], "width": 142, "frame": 48},
+        "bottom_edge": {"y": 481, "x": [494, 675], "width": 181, "frame": 0},
+        "vertical_extent_px": 125,
+        "mid_row_y426_x": [504, 669],
+        "centre_approx": [585, 419]
+      }
+    },
+    {
+      "name": "table",
+      "aliases": ["wooden table", "desk"],
+      "description": "brown wood-grain table top on a single dark-grey pedestal leg",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "image_extents_px": {
+        "top_front_edge": {"y": 530, "x": [285, 923], "width": 638},
+        "front_face_thickness": {"y": [530, 558], "height": 28},
+        "back_edge_visible": {"y": 440, "x": [452, 759], "note": "back edge partly hidden by the board, and segmentation outline is ragged"},
+        "top_surface_rows": "see static_raw.json table_rows_frame0",
+        "pedestal_leg": {"x": [608, 649], "y": [560, 720], "note": "cut by frame bottom"}
+      }
+    },
+    {
+      "name": "thin_string",
+      "description": "thin whitish stick/string protruding from the left end of the book after it lands (x ~455-478, y ~488-500); attached to/part of the book (e.g. bookmark ribbon or cord); visible from ~frame 35",
+      "moves": "with the book only",
+      "visible_frames": [35, 48]
+    }
+  ],
+  "events": [
+    {"event": "book at rest on top of board", "frames": [0, 20], "t": [0.0, 0.833]},
+    {"event": "start of motion (book starts sliding down the board)", "frame": 21, "t": 0.875, "note": "cy 368.3 at f20 -> 369.7 at f21 -> 374.0 at f22; release is between f20 and f21"},
+    {"event": "book bottom reaches board bottom edge (y~481) / leaves the ramp, starts tipping", "frame": 30, "t": 1.25},
+    {"event": "contact with table / lands flat", "frame": 33, "t": 1.375, "note": "f31-32 tipping with motion blur; f33 flat on table edge-on"},
+    {"event": "slides on table toward camera and left", "frames": [33, 36], "t": [1.375, 1.5]},
+    {"event": "end of motion (at rest on table)", "frame": 37, "t": 1.542, "note": "centroid changes < 1 px after f37"}
+  ],
+  "files": {
+    "tracks/blue_book.csv": "per-frame track of the book",
+    "static_raw.json": "white board and table raw pixel extents",
+    "camcheck_raw.json": "per-frame camera shift and board rows at frame 0",
+    "notes.md": "method, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

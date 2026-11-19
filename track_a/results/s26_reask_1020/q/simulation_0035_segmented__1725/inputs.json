@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0035_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S3MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1725,
+  "question": "What is the length of the eagle in meters?",
+  "prior": "height of the person = 1.75m",
+  "depth_info": "t=1s, distance_human_camera = 139.1030m\nt=2s, distance_human_camera = 139.1044 m\nt=1s, distance_eagle_camera = 139.7035m\nt=2s, distance_eagle_camera = 147.1583m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

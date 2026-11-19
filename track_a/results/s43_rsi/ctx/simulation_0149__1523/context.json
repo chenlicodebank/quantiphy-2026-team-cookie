@@ -1,0 +1,86 @@
+{
+ "id": 1523,
+ "video": "simulation_0149",
+ "submitted": 8.81051,
+ "submitted_is": "a fixed-rule blend exp(0.5 ln A + 0.5 ln B) of the Claude line's answer A = 10.35 and an earlier DeepSeek median B = 7.5; the rule blends every row of its population where the two differ by less than about 50 pct, so it is no judgement about this question",
+ "deepseek_median": 5.5,
+ "candidates": [
+  {
+   "name": "C1",
+   "kind": "claude",
+   "answer": 10.35,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "kind": "claude",
+   "answer": 10.1,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_36 second run, spread test: a second independent answer on the kept scene record (26_36)",
+   "source": "s26_scene_spread attempt 1"
+  },
+  {
+   "name": "C3",
+   "kind": "claude",
+   "answer": 10.2,
+   "who": "Claude Sonnet 5.5 (Claude Code agent), 26_80 repeat, repeat run 2 of 3 (26_80, Sonnet 5.5 effort high, per-question median of three)",
+   "source": "s26_repeat_1021_b attempt 2"
+  },
+  {
+   "name": "C4",
+   "kind": "claude",
+   "answer": 7.2,
+   "who": "Claude Sonnet 5.5 (Claude Code agent), 26_80 repeat, repeat run 3 of 3 (26_80, Sonnet 5.5 effort high, per-question median of three)",
+   "source": "s26_repeat_1021_b attempt 3"
+  },
+  {
+   "name": "C5",
+   "kind": "claude",
+   "answer": 10.4,
+   "who": "Claude Opus 5.5 (Claude Code agent), 30_x adjudication, 30_6b S3 adjudication (DeepSeek differs >2x; Codex in the dossier)",
+   "source": "s30_adj_s3 attempt 1"
+  },
+  {
+   "name": "C6",
+   "kind": "deepseek",
+   "answer": 9.0,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r1",
+   "source": "s37_test_repeats r1"
+  },
+  {
+   "name": "C7",
+   "kind": "deepseek",
+   "answer": 6.0,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r2",
+   "source": "s37_test_repeats r2"
+  },
+  {
+   "name": "C8",
+   "kind": "deepseek",
+   "answer": 5.5,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r3",
+   "source": "s37_test_repeats r3"
+  },
+  {
+   "name": "C9",
+   "kind": "deepseek",
+   "answer": 4.3,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r4",
+   "source": "s37_test_repeats r4"
+  },
+  {
+   "name": "C10",
+   "kind": "deepseek",
+   "answer": 4.3,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r5",
+   "source": "s37_test_repeats r5"
+  },
+  {
+   "name": "C11",
+   "kind": "codex",
+   "answer": 10.25,
+   "who": "OpenAI GPT-6 Astra (Codex agent)",
+   "source": "s30_codex_test"
+  }
+ ]
+}

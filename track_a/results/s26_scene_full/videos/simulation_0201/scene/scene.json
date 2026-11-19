@@ -1,0 +1,76 @@
+{
+  "video": "simulation_0201.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 60.0,
+  "frames": 14,
+  "frame_times_s": "t = frame/60; frames 0..13, t 0 .. 0.2167 s",
+  "image_size_px": [2560, 2560],
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (mean |frame - frame13| on bottle and wall regions <= 0.2 grey levels in every frame; only the drop changes)",
+    "view": "close-up, looking down at a steep angle at a tilted bottle on a white pedestal against a grey backdrop",
+    "perspective_cues": [
+      "pedestal right vertical edge converges inwards going down (x ~980 at y 1400 -> x ~930 at y 2550): camera points downward, verticals converge to a vanishing point below the image",
+      "falling drop shrinks steadily (equiv. diameter 139 px at frame 0 -> 80 px at frame 9, factor ~0.58), so it moves away from the camera as it falls; the per-frame pixel step grows then levels off (~245 px/frame by frames 7-9) instead of growing linearly",
+      "no horizon or ground plane visible"
+    ],
+    "focal_length": "unknown; to be estimated from the question's depth_info plus a known size"
+  },
+  "objects": [
+    {
+      "name": "drop",
+      "aka": ["honey drop", "oil drop", "liquid drop", "droplet"],
+      "description": "single amber/clear teardrop-shaped liquid drop that falls from the glass dropper tip; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 9],
+      "track": "tracks/drop.csv",
+      "notes": "frame 0: top of the drop still touches the dropper tip (just pinching off); frame 1 onward clearly detached. Leaves through the bottom edge between frame 9 (centre y 2430) and frame 10 (absent). Also drifts slightly right (+73 px in x over frames 0-9). Pixel size: frame0 bbox 121x174 (w x h), frame9 76x98."
+    },
+    {
+      "name": "dropper",
+      "aka": ["glass pipette", "spout", "glass dropper"],
+      "description": "clear glass pipette leaning out of the bottle neck down to the right; its tip is the drop's release point",
+      "moves": false,
+      "visible_frames": [0, 13],
+      "image_position_frame12": {"tip_opening_centre_px": [1045, 765], "tip_opening_diameter_px": 85, "tube_runs_from_top_edge_near_x_620_y_0_to_tip": true},
+      "notes": "stem enters from the top edge (cut off); bulb/narrow neck around (930-1090, 520-790)"
+    },
+    {
+      "name": "bottle",
+      "aka": ["amber bottle", "jar", "serum bottle"],
+      "description": "frosted glass bottle with amber/orange liquid and a white vertical label text, tilted slightly (top leaning left), standing on the pedestal; neck with screw threads cut off by the top edge",
+      "moves": false,
+      "visible_frames": [0, 13],
+      "image_position_frame12": {
+        "body_left_edge_x": 80, "body_right_edge_x": 890,
+        "shoulder_y": 400, "bottom_y_at_centre": 1395,
+        "body_width_across_axis_px": 810, "visible_body_length_shoulder_to_base_px": 1000,
+        "base_centre_px": [560, 1380],
+        "neck_threads_y_range": [0, 360], "neck_x_range": [160, 700],
+        "axis_tilt_deg_from_vertical": "~10-15, top leaning left"
+      },
+      "notes": "partly cut off by top and left edges; extents +-20 px (soft frosted edges)"
+    },
+    {
+      "name": "pedestal",
+      "aka": ["white block", "stand", "plinth", "box"],
+      "description": "white rectangular block the bottle stands on; front-top edge around y 1395-1400, right vertical edge x ~980 (top) to ~930 (bottom of image)",
+      "moves": false,
+      "visible_frames": [0, 13],
+      "image_position_frame12": {"top_edge_y": 1398, "right_edge_x_top": 980, "right_edge_x_bottom": 930, "visible_height_px": 1160, "visible_width_px": 980},
+      "notes": "extends beyond left and bottom image edges; full size not measurable"
+    },
+    {
+      "name": "backdrop",
+      "description": "plain grey wall/backdrop filling the right part of the image; no markings",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "drop pinches off the dropper tip (release)", "frame": 0, "t_s": 0.0, "notes": "at frame 0 the drop's top still touches the tip; separated at frame 1 (top at y 769, tip lip ~y 770). Release is at or just before frame 0."},
+    {"event": "drop falls freely", "frames": [0, 9]},
+    {"event": "drop leaves the image through the bottom edge", "frame": 10, "t_s": 0.1667, "notes": "last seen frame 9 (t 0.15 s), centre y 2430; no impact visible"}
+  ],
+  "files": {"track": "tracks/drop.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

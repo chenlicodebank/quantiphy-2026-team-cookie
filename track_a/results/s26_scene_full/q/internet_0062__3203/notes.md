@@ -1,0 +1,7 @@
+# q3203 - wallet velocity at 2.50 s
+Clip is rotated 90 deg; gravity points to image +x. The black pouch (the wallet) is let go at frame 66 (t=2.20 s) and falls freely through frames 66-80. It hits the baseboard at frame 81. Camera is static (<0.5 px drift during the fall). Rates: fps = question_fps = 30, so t=2.50 s is frame 75.
+Re-measured in measure.py with a dark-pixel mask (V<70) and its largest connected component. My values match scene/tracks/pouch.csv to within 0.3 px for frames 68-80.
+Scale from the prior: I fitted a quadratic to x(frame) over frames 68-80. Acceleration = 11.77 px/frame^2 (centroid); 11.75 from the bbox midpoint, 11.74 from the leading edge x1. Second differences are steady around 11-12.5. Scale = 9.8/(11.76*900) = 9.26e-4 m/px.
+Velocity, forward difference (the annotators' convention): centroid x(76)-x(75) = 738.98-628.85 = 110.1 px/frame. That is 3303 px/s, or 3.06 m/s. The bbox midpoint gives 3.07 m/s and the leading edge x1 gives 3.03 m/s.
+Check: the instantaneous velocity from the quadratic fit at frame 75 is 2.92 m/s, and g*(2.50-2.202) = 2.92 m/s. The fit at frame 75.5, the forward-difference midpoint, gives 3.08 m/s, which agrees with the forward difference.
+Answer 3.06 m/s, using the forward-difference convention. Confidence good. The only real uncertainty is whether the reference used the forward difference (3.06) or the instantaneous value (2.92), about 5% apart.

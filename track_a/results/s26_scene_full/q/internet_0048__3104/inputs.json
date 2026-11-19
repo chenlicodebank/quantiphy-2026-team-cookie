@@ -1,0 +1,18 @@
+{
+ "video": "internet_0048.mp4",
+ "video_source": "internet",
+ "video_type": "A2SS",
+ "fps": 30.0,
+ "frames": 109,
+ "duration_s": 3.6333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3104,
+  "question": "What is the height of the height of the wall pads in cm?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

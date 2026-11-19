@@ -1,0 +1,317 @@
+{
+ "video": "internet_0047.mp4",
+ "source": "internet",
+ "scene_type": "2D (top-down view of a gym floor)",
+ "fps": 30.0,
+ "frames": 30,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/30, frame 0 at t=0",
+ "units": "pixels and seconds; no metric scale anywhere in this record",
+ "description": "Camera looks straight down at a wooden basketball-court floor. A basketball rolls from the left edge to the right edge along/just below a maroon court line, at nearly constant speed, and leaves the frame. Two shoe toes of the (static) camera operator are at the bottom edge.",
+ "objects": [
+  {
+   "name": "basketball",
+   "moves": true,
+   "identify": "the only ball; orange-brown with black seams, ~225 px diameter, rolling left->right",
+   "visible_frames": "0-25 (frame 0 partly cut by left edge; 1-21 fully visible; 22-25 increasingly cut by right edge; gone from 26)",
+   "track": "tracks/basketball.csv",
+   "reference_point": "centre of the fitted (motion-blurred) disk = visible centre",
+   "diameter_px_median_frames1to21": 225.1,
+   "diameter_px_range": [
+    222.0,
+    230.5
+   ],
+   "diameter_trend": "grows slightly left->right: ~223-225 px at frames 1-12, ~226-231 px at frames 17-23 (ball nearer the camera on the right side, or camera slightly lowered/tilted)",
+   "extent_x_blurred_px_median": 251.3,
+   "per_frame_image_step_px_frames1to21": {
+    "median": 78.0,
+    "min": 72.6,
+    "max": 81.4
+   },
+   "direction": "rightwards and slightly up in the image: dy/dx ~ -5/78 px per frame (~ -3.7 deg)"
+  },
+  {
+   "name": "maroon_court_line_horizontal",
+   "moves": false,
+   "identify": "dark maroon painted line crossing the image near y~445-530, rising slightly to the right; the ball rolls along/just below it",
+   "frame29_position": "top edge y=487 at x=300 -> y=445 at x=1800; bottom edge y=529 at x=300 -> y=489 at x=1800 (slope ~ -0.028)",
+   "thickness_px": "43-44 (vertical)",
+   "extent": "runs from x~211 (meets left vertical line) to beyond the right image edge"
+  },
+  {
+   "name": "maroon_court_line_left_vertical",
+   "moves": false,
+   "identify": "maroon line going down from the horizontal line at x~211-260 (left side), forms a corner with it",
+   "frame29_position": "x=217-260 at y=550; x=211-255 at y=750; x=203-230 near y=1050 (partly overexposed by a floor reflection near y~850-950)",
+   "thickness_px": "~44-45",
+   "length_visible_px": "from y~487 (corner) to the bottom edge 1080 = ~590"
+  },
+  {
+   "name": "maroon_court_line_right_vertical",
+   "moves": false,
+   "identify": "maroon line going down from the horizontal line at the right, x~1713-1800",
+   "frame29_position": "x=1713-1759 at y=550; x=1729-1775 at y=750; x=1752-1800 at y=1050",
+   "thickness_px": "~46-47",
+   "length_visible_px": "from y~492 to 1080 = ~590"
+  },
+  {
+   "name": "blue_stripe",
+   "moves": false,
+   "identify": "light-blue/white painted stripe, vertical, between the two maroon vertical lines",
+   "frame29_position": "x=1172-1218 at y=550; x=1194-1241 at y=1050; top end y~507 (touches the maroon line), runs to the bottom edge",
+   "width_px": "~46-47",
+   "length_visible_px": "~573"
+  },
+  {
+   "name": "inner_rectangle_spacing",
+   "moves": false,
+   "identify": "distance between the two maroon vertical lines",
+   "frame29_values_px": {
+    "inner_edges_at_y550": 1453,
+    "outer_edges_at_y550": 1542,
+    "centrelines_at_y550": 1497,
+    "centrelines_at_y1050": 1560
+   }
+  },
+  {
+   "name": "operator_shoes",
+   "moves": false,
+   "identify": "two grey-blue shoe toes at the bottom edge (camera operator); left shoe x~905-1000, right shoe x~1125-1175",
+   "frame29_position": "left toe top y~1048 (y~1030 in frame 0, due to camera shake); right toe top ~1075, mostly out of frame"
+  },
+  {
+   "name": "floor_reflections",
+   "moves": false,
+   "identify": "bright light reflections on the floor at about (560,855) and (1300,850) in frame 10, and a whitish streak near x~110, y~430-900",
+   "note": "not objects; ignore"
+  },
+  {
+   "name": "floorboards",
+   "moves": false,
+   "identify": "wooden boards running vertically in the image, ~50-100 px wide",
+   "note": "used only for camera registration"
+  }
+ ],
+ "events": [
+  {
+   "event": "ball already rolling at frame 0, entering from the left edge (centre x~78, partly out of frame)",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "ball first fully inside the frame",
+   "frame": 1,
+   "time": 0.0333
+  },
+  {
+   "event": "ball crosses the left maroon vertical line (centre x~230)",
+   "frame": 2,
+   "time": 0.0667
+  },
+  {
+   "event": "ball passes over the blue stripe (centre x~1195)",
+   "frame": "13-14 (centre x 1087->1163)",
+   "time": "0.433-0.467"
+  },
+  {
+   "event": "ball crosses the right maroon vertical line (centre x~1740)",
+   "frame": 21,
+   "time": 0.7
+  },
+  {
+   "event": "last frame fully visible",
+   "frame": 21,
+   "time": 0.7
+  },
+  {
+   "event": "ball centre leaves the image (x=1920)",
+   "frame": "between 23 (x~1872) and 24 (fit x~1922, unreliable)",
+   "time": "~0.78"
+  },
+  {
+   "event": "last frame with any ball pixels",
+   "frame": 25,
+   "time": 0.8333
+  },
+  {
+   "event": "no bounce, no impact, no direction change; rolling at nearly constant image speed throughout",
+   "frame": null,
+   "time": null
+  }
+ ],
+ "camera": {
+  "type": "handheld, looking down; small smooth drift, no zoom",
+  "shift_definition": "cam_dx, cam_dy = image translation of the floor in frame i relative to frame 29 (floor point at (x,y) in frame 29 appears at (x+cam_dx, y+cam_dy) in frame i); phase correlation on floor strips y 0-350 and 650-1000, averaged",
+  "range_px": {
+   "dx": [
+    -2.3,
+    1.0
+   ],
+   "dy": [
+    -22.3,
+    1.8
+   ]
+  },
+  "per_frame": [
+   {
+    "frame": 0,
+    "dx": -2.27,
+    "dy": -17.73
+   },
+   {
+    "frame": 1,
+    "dx": -2.31,
+    "dy": -18.89
+   },
+   {
+    "frame": 2,
+    "dx": -2.04,
+    "dy": -20.14
+   },
+   {
+    "frame": 3,
+    "dx": -1.72,
+    "dy": -21.02
+   },
+   {
+    "frame": 4,
+    "dx": -1.57,
+    "dy": -21.8
+   },
+   {
+    "frame": 5,
+    "dx": -1.37,
+    "dy": -22.27
+   },
+   {
+    "frame": 6,
+    "dx": -1.0,
+    "dy": -22.28
+   },
+   {
+    "frame": 7,
+    "dx": -0.76,
+    "dy": -21.66
+   },
+   {
+    "frame": 8,
+    "dx": -0.88,
+    "dy": -20.45
+   },
+   {
+    "frame": 9,
+    "dx": -0.65,
+    "dy": -18.81
+   },
+   {
+    "frame": 10,
+    "dx": -0.62,
+    "dy": -16.86
+   },
+   {
+    "frame": 11,
+    "dx": -0.51,
+    "dy": -14.68
+   },
+   {
+    "frame": 12,
+    "dx": -0.35,
+    "dy": -12.46
+   },
+   {
+    "frame": 13,
+    "dx": -0.23,
+    "dy": -10.38
+   },
+   {
+    "frame": 14,
+    "dx": -0.06,
+    "dy": -8.4
+   },
+   {
+    "frame": 15,
+    "dx": -0.02,
+    "dy": -6.6
+   },
+   {
+    "frame": 16,
+    "dx": 0.26,
+    "dy": -4.96
+   },
+   {
+    "frame": 17,
+    "dx": 0.43,
+    "dy": -3.54
+   },
+   {
+    "frame": 18,
+    "dx": 0.66,
+    "dy": -2.25
+   },
+   {
+    "frame": 19,
+    "dx": 0.8,
+    "dy": -1.39
+   },
+   {
+    "frame": 20,
+    "dx": 0.84,
+    "dy": -0.36
+   },
+   {
+    "frame": 21,
+    "dx": 0.97,
+    "dy": 0.44
+   },
+   {
+    "frame": 22,
+    "dx": 0.98,
+    "dy": 1.1
+   },
+   {
+    "frame": 23,
+    "dx": 1.0,
+    "dy": 1.56
+   },
+   {
+    "frame": 24,
+    "dx": 0.98,
+    "dy": 1.81
+   },
+   {
+    "frame": 25,
+    "dx": 0.89,
+    "dy": 1.67
+   },
+   {
+    "frame": 26,
+    "dx": 0.8,
+    "dy": 1.15
+   },
+   {
+    "frame": 27,
+    "dx": 0.66,
+    "dy": 0.6
+   },
+   {
+    "frame": 28,
+    "dx": 0.23,
+    "dy": 0.43
+   },
+   {
+    "frame": 29,
+    "dx": 0.0,
+    "dy": -0.0
+   }
+  ],
+  "note": "top and bottom strips differ in dx by up to ~1.5 px (tiny rotation); vertical drift up to ~1.3 px/frame vs ball ~78 px/frame, so camera motion is a <2% effect on the ball's speed"
+ },
+ "perspective": "2D: top-down view, floor roughly parallel to the image plane. The court lines are slightly non-parallel (left vertical line nearly vertical, right one tilted; spacing between them grows from 1497 px at y=550 to 1560 px at y=1050), so the scale varies by a few % across the image. Ball apparent diameter grows ~3% from left to right.",
+ "files": {
+  "track": "tracks/basketball.csv",
+  "camera_shift": "camera_shift.json",
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

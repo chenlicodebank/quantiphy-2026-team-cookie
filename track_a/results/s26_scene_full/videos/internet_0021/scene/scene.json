@@ -1,0 +1,54 @@
+{
+ "video": "internet_0021.mp4",
+ "source": "internet",
+ "scene_type": "2D",
+ "fps": 29.553957,
+ "frames": 107,
+ "duration_s": 3.6205,
+ "image_size_px": [3840, 2160],
+ "time_convention": "t = frame / fps, frame 0 = t 0; frame = round(t * fps)",
+ "description": "Sunset sky over city apartment buildings (Lisbon-like, red metro 'M' sign). A single twin-engine narrow-body airliner (B737-type silhouette, dark against the sky, landing gear down) flies left-to-right in side view across the upper-middle of the frame, slightly climbing in the image, and leaves through the right edge. Hand-held camera with a slow smooth pan right/tilt up; no zoom.",
+ "units": "pixels and seconds; no metric scale is assumed",
+ "objects": [
+  {
+   "name": "airplane",
+   "moves": true,
+   "distinguish": "only aircraft / only moving object; dark silhouette against the sky; nose points right, gear down, near-side wing drawn up-left above the fuselage",
+   "visible_frames": [0, 105],
+   "fully_in_frame": [0, 88],
+   "cut_by_right_edge": [89, 105],
+   "track_file": "tracks/airplane.csv",
+   "reference_point": "bbox centre (cx_bbox, cy_bbox) while fully visible (0-88); tail tip x0 is valid all frames 0-105; nose tip x1 valid only 0-88",
+   "pixel_length_nose_to_tail_bbox_w": {"frame_0": 328, "frame_30": 349, "frame_45": 364, "frame_60": 379, "frame_88": 406},
+   "pixel_height_bbox_h": {"frame_0": 98, "frame_45": 111, "frame_88": 119},
+   "apparent_size_change": "bbox length grows ~24% (328 -> 406 px) over frames 0-88, roughly linearly (~0.9 px/frame); the plane is approaching the camera / getting closer as it passes",
+   "motion_direction": "rightwards, main axis a few degrees from horizontal (nose slightly up); bbox centre moves from (1757,866) at f0 to (3602,837) at f88 in raw image coords"
+  },
+  {"name": "dark_glass_apartment_block", "moves": false, "distinguish": "large dark modern block with glass balconies, centre-left", "image_x_range_f30": [902, 1930], "width_px": 1028, "roofline_y_f30": 1425, "bottom": "continues below frame bottom / behind trees"},
+  {"name": "left_grey_building", "moves": false, "distinguish": "light-grey older block left of the dark block, antennas and satellite dish on roof", "image_x_range_f30": [374, 902], "width_px": 528, "roofline_y_f30": 1339, "highest_point_y": 1217},
+  {"name": "far_left_building_and_brick_tower", "moves": false, "distinguish": "building at far left edge with reddish-brick chimney/tower in front at bottom-left", "image_x_range_f30": [0, 374], "brick_tower_x_range": [0, 180], "brick_tower_top_y": 1615},
+  {"name": "low_pale_houses_pitched_roof", "moves": false, "distinguish": "lower pale houses with pitched roofs in the gap between building groups, centre-right", "image_x_range_f30": [1930, 2678], "roofline_y_median_f30": 1719, "highest_point_y": 1660},
+  {"name": "right_building_with_lattice_tower", "moves": false, "distinguish": "large building on the right with a lattice (antenna) tower on the roof and a 'HOTEL ...' sign at the far right", "image_x_range_f30": [2678, 3840], "roofline_y_median_f30": 1508, "tower_top_y": 1301},
+  {"name": "red_M_metro_sign", "moves": false, "distinguish": "red 'M' metro sign on a dark pole in front of the right building", "bbox_f30": [3242, 1660, 3357, 1773], "width_px": 115, "height_px": 113, "M_letter_bbox_f30": [3242, 1675, 3310, 1772], "pole_x": [3290, 3305], "measured": "by eye on a 2x zoom crop, +-5 px"},
+  {"name": "trees", "moves": false, "distinguish": "dark tree canopy silhouettes along bottom edge", "image_y_range": [2000, 2160]},
+  {"name": "sky", "moves": false, "distinguish": "clear sunset sky, blue-grey at top to yellow near skyline; no clouds or birds detected"}
+ ],
+ "events": [
+  {"event": "airplane in flight at start (already moving)", "frame": 0, "t": 0.0},
+  {"event": "airplane nose reaches right image edge", "frame": 89, "t": 3.0114},
+  {"event": "airplane last visible (tail only, ~21 px)", "frame": 105, "t": 3.5528},
+  {"event": "airplane gone from frame", "frame": 106, "t": 3.5867}
+ ],
+ "camera": {
+  "type": "hand-held, slow smooth pan right and tilt up; no zoom (scale 0.998-1.000), rotation <0.26 deg",
+  "per_frame_shift_file": "tracks/camera_shift.csv",
+  "background_shift_total": "background content moves dx -67.5 px, dy +18..+27 px (frame 106 vs frame 0)",
+  "sign_convention": "bg_dx/bg_dy = displacement of building content in frame i relative to frame 0; background-compensated object position = raw position - (bg_dx, bg_dy)"
+ },
+ "files": {
+  "tracks/airplane.csv": "per-frame airplane track",
+  "tracks/camera_shift.csv": "per-frame background shift",
+  "static_measure.json": "automatic skyline/sign measurements at frame 30",
+  "notes.md": "method and reliability"
+ }
+}

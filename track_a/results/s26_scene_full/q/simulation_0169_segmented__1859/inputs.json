@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0169_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2SX",
+ "fps": 24.0,
+ "frames": 80,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1859,
+  "question": "What is the acceleration of the astronaut at time 0.5s in m/s^2?",
+  "prior": "height of the astronaut = 2.2m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

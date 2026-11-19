@@ -1,0 +1,547 @@
+{
+ "video": "captured_0014x.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "status": "static",
+  "max_background_shift_px": [
+   0.15,
+   0.62
+  ],
+  "method": "phase correlation vs frame 40 on table regions away from ball",
+  "intrinsics_lab_convention": {
+   "fx_px": 763,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "perspective": "camera looks down at ~45 deg onto a tabletop; table edges converge (front edge 301 px vs back edge 222 px); board and table top are near-horizontal surfaces receding upward in the image; background replaced with white (segmented)"
+ },
+ "objects": {
+  "ball": {
+   "desc": "single light beige/pink ball (only moving object)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    29
+   ],
+   "track": "tracks/ball.csv",
+   "diameter_px_clear": 30,
+   "reference_point": "visible centre (ref_x, ref_y)",
+   "apparent_size_px": {
+    "frames_0_8_at_rest": "~30 (lower part hidden by board edge)",
+    "frames_9_16_on_board": 30,
+    "frames_21_22_on_table": "31-33 wide",
+    "frames_23_28_falling": "38-44 wide (closer to camera + blur halo)"
+   }
+  },
+  "white_board": {
+   "desc": "white rectangular board (clipboard/whiteboard, used as the ramp the ball rolls down) on the back-middle of the table",
+   "corners_px": {
+    "top_left": [
+     501,
+     308
+    ],
+    "top_right": [
+     595,
+     303
+    ],
+    "bottom_right": [
+     610,
+     410
+    ],
+    "bottom_left": [
+     508,
+     423
+    ]
+   },
+   "top_edge_px": 94,
+   "bottom_edge_px": 103,
+   "left_side_px": 115,
+   "right_side_px": 108,
+   "centre_px": [
+    554,
+    361
+   ],
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ]
+  },
+  "table_top": {
+   "desc": "light wooden table top (single central dark-grey leg); front edge faces camera",
+   "corners_px": {
+    "front_left": [
+     430,
+     502
+    ],
+    "front_right": [
+     728,
+     457
+    ],
+    "back_right": [
+     663,
+     313
+    ],
+    "back_left": [
+     443,
+     341
+    ]
+   },
+   "front_edge_px": 301,
+   "right_edge_px": 158,
+   "left_edge_px": 161,
+   "back_edge_px": 222,
+   "front_face_thickness_px": 5,
+   "front_edge_y_at_ball_x547": 481,
+   "bbox_px": [
+    425,
+    310,
+    729,
+    507
+   ],
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ]
+  },
+  "table_leg": {
+   "desc": "dark grey single pedestal leg under table, centre-front",
+   "bbox_px": [
+    580,
+    496,
+    618,
+    616
+   ],
+   "visible_length_px": 122,
+   "width_px": 28,
+   "centre_px": [
+    599,
+    555
+   ],
+   "tilt_deg_from_vertical": 6,
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ]
+  },
+  "notebook": {
+   "desc": "light blue/turquoise closed notebook, right side of table, ribbon bookmark hanging at front",
+   "corners_px": {
+    "top_left": [
+     627,
+     388
+    ],
+    "top_right": [
+     660,
+     384
+    ],
+    "bottom_right": [
+     682,
+     432
+    ],
+    "bottom_left": [
+     643,
+     437
+    ]
+   },
+   "long_side_px": 50,
+   "short_side_px": 36,
+   "centre_px": [
+    653,
+    410
+   ],
+   "ribbon_end_px": [
+    648,
+    448
+   ],
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ]
+  },
+  "cup": {
+   "desc": "white cylindrical tumbler/cup with dark lid opening, back-left of table, partly hidden by cookie",
+   "bbox_px": [
+    450,
+    340,
+    488,
+    398
+   ],
+   "diameter_px": 38,
+   "visible_height_px": 58,
+   "centre_px": [
+    469,
+    369
+   ],
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ]
+  },
+  "cookie": {
+   "desc": "round chocolate-chip cookie standing in front of the cup, left of board",
+   "bbox_px": [
+    470,
+    373,
+    502,
+    408
+   ],
+   "width_px": 32,
+   "height_px": 35,
+   "centre_px": [
+    486,
+    391
+   ],
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ]
+  },
+  "pen": {
+   "desc": "black/silver pen lying on table front-left, roughly horizontal",
+   "ends_px": [
+    [
+     440,
+     438
+    ],
+    [
+     500,
+     435
+    ]
+   ],
+   "length_px": 60,
+   "thickness_px": 5,
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ]
+  }
+ },
+ "events": [
+  {
+   "name": "ball at rest at top edge of white board",
+   "frames": [
+    0,
+    8
+   ],
+   "t": [
+    0.0,
+    0.333
+   ]
+  },
+  {
+   "name": "motion start / release",
+   "frame": 9,
+   "t": 0.375,
+   "note": "first clear displacement (cy 298.9 -> 300.2 -> 304.0); onset between frames 8 and 9"
+  },
+  {
+   "name": "ball rolls down board (image direction: down, slightly right)",
+   "frames": [
+    9,
+    17
+   ]
+  },
+  {
+   "name": "ball leaves board onto table (direction/speed change, ghosted frames)",
+   "frames": [
+    17,
+    20
+   ],
+   "t": [
+    0.708,
+    0.833
+   ]
+  },
+  {
+   "name": "ball rolls across table toward front edge",
+   "frames": [
+    20,
+    22
+   ]
+  },
+  {
+   "name": "ball leaves table front edge (centre crosses edge y~481)",
+   "frame": 23,
+   "t": 0.958,
+   "note": "between frames 22 and 23"
+  },
+  {
+   "name": "free fall in front of table",
+   "frames": [
+    23,
+    29
+   ],
+   "t": [
+    0.958,
+    1.208
+   ]
+  },
+  {
+   "name": "ball exits bottom of image",
+   "frame": 30,
+   "t": 1.25,
+   "note": "frame 29 only top of ball visible at y 711-719"
+  }
+ ],
+ "camera_shift_per_frame": [
+  [
+   0,
+   -0.15,
+   0.36
+  ],
+  [
+   1,
+   0.13,
+   0.58
+  ],
+  [
+   2,
+   0.06,
+   0.51
+  ],
+  [
+   3,
+   0.08,
+   0.54
+  ],
+  [
+   4,
+   0.05,
+   0.54
+  ],
+  [
+   5,
+   0.01,
+   0.48
+  ],
+  [
+   6,
+   0.01,
+   0.49
+  ],
+  [
+   7,
+   -0.1,
+   0.45
+  ],
+  [
+   8,
+   -0.08,
+   0.45
+  ],
+  [
+   9,
+   -0.05,
+   0.46
+  ],
+  [
+   10,
+   -0.02,
+   0.49
+  ],
+  [
+   11,
+   -0.01,
+   0.47
+  ],
+  [
+   12,
+   -0.08,
+   0.49
+  ],
+  [
+   13,
+   -0.06,
+   0.52
+  ],
+  [
+   14,
+   -0.08,
+   0.55
+  ],
+  [
+   15,
+   -0.07,
+   0.54
+  ],
+  [
+   16,
+   -0.04,
+   0.58
+  ],
+  [
+   17,
+   -0.09,
+   0.54
+  ],
+  [
+   18,
+   -0.09,
+   0.53
+  ],
+  [
+   19,
+   -0.08,
+   0.51
+  ],
+  [
+   20,
+   -0.1,
+   0.52
+  ],
+  [
+   21,
+   -0.08,
+   0.52
+  ],
+  [
+   22,
+   -0.07,
+   0.51
+  ],
+  [
+   23,
+   -0.08,
+   0.51
+  ],
+  [
+   24,
+   -0.03,
+   0.61
+  ],
+  [
+   25,
+   -0.04,
+   0.6
+  ],
+  [
+   26,
+   -0.04,
+   0.56
+  ],
+  [
+   27,
+   -0.04,
+   0.56
+  ],
+  [
+   28,
+   -0.02,
+   0.62
+  ],
+  [
+   29,
+   -0.01,
+   0.47
+  ],
+  [
+   30,
+   -0.01,
+   0.49
+  ],
+  [
+   31,
+   -0.01,
+   0.5
+  ],
+  [
+   32,
+   -0.01,
+   0.5
+  ],
+  [
+   33,
+   -0.02,
+   0.48
+  ],
+  [
+   34,
+   -0.0,
+   0.5
+  ],
+  [
+   35,
+   0.01,
+   0.5
+  ],
+  [
+   36,
+   0.0,
+   0.45
+  ],
+  [
+   37,
+   0.0,
+   0.47
+  ],
+  [
+   38,
+   -0.02,
+   0.46
+  ],
+  [
+   39,
+   -0.03,
+   0.47
+  ],
+  [
+   40,
+   0.0,
+   0.5
+  ],
+  [
+   41,
+   0.02,
+   0.51
+  ],
+  [
+   42,
+   0.0,
+   0.48
+  ],
+  [
+   43,
+   -0.01,
+   0.51
+  ],
+  [
+   44,
+   -0.0,
+   0.51
+  ],
+  [
+   45,
+   0.0,
+   0.54
+  ],
+  [
+   46,
+   0.02,
+   0.52
+  ],
+  [
+   47,
+   -0.02,
+   0.51
+  ],
+  [
+   48,
+   -0.02,
+   0.51
+  ]
+ ]
+}

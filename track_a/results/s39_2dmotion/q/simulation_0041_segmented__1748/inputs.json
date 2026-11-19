@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0041_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1748,
+  "question": "What is the average speed of the person in m/s?",
+  "prior": "height of the person = 1.75m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

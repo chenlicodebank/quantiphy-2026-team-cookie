@@ -1,0 +1,53 @@
+{
+  "video": "captured_0010s.mp4",
+  "source": "lab (real recording; background looks replaced by uniform green, watermark 'Modified with Segment Anything 2 Demo' bottom-right)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_of_frame": "t = frame / 24",
+  "camera": {
+    "motion": "static (no background texture to register against; pendulum pivot stays at a fixed image point within ~3-6 px; phase correlation of the background region gives a constant ~0 shift)",
+    "intrinsics_from_benchmark": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "perspective_cues": "No ground plane, horizon or furniture visible. The pendulum swings mostly along the camera's line of sight: at the far end of the swing the ball is high in the image (y~301) and small (~27.5 px), the string strongly foreshortened (visible length ~30-45 px); at the near end the ball is lower (y~378-392) and larger (~37.5 px), string visible length ~135-145 px, tilted ~15 deg from image vertical."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "red/orange pendulum bob (sphere), the only coloured object; hangs from a light grey string",
+      "moves": true,
+      "visible_frames": "0-48 (all), never occluded",
+      "reference_point": "centroid of the red mask (visible centre)",
+      "track": "tracks/ball.csv",
+      "apparent_diameter_px": {"min": 27.5, "min_frame": 32, "max": 37.6, "max_frame": 17, "note": "equiv_diam = 2*sqrt(area/pi); size change is from depth change (ratio ~1.37 => far/near depth ratio ~1.37)"},
+      "image_position_range": {"cx": [636.4, 680.1], "cy": [300.95, 391.9]}
+    },
+    {
+      "name": "string",
+      "description": "thin light-grey pendulum string from the pivot (top, ~ (637, 229)) to the ball",
+      "moves": true,
+      "visible_frames": "1-48 detected (frame 0 motion-blurred, not detected; upper part faint at the far end of the swing)",
+      "track": "tracks/string.csv",
+      "note": "visible length is the 2D projection (foreshortened), not the true length"
+    },
+    {
+      "name": "pivot",
+      "description": "top end of the visible string (suspension point; the support itself is not visible, cut by segmentation)",
+      "moves": false,
+      "image_position_px": [637, 229],
+      "note": "string top x reads 638-641 in frames 1-28 and 633-636 in frames 29-48 (possible small pivot drift or detection noise); y = 227-232 whenever the string is fully visible"
+    }
+  ],
+  "events": [
+    {"event": "video starts with the ball already swinging, moving up/away toward the far end", "frame": 0, "t": 0.0},
+    {"event": "far turning point 1 (ball highest in image, smallest)", "frame": 3, "t": 0.125, "ball_px": [637.4, 301.0]},
+    {"event": "ball reaches lowest image y on the approach", "frame": 12, "t": 0.5, "ball_px": [674.6, 391.9]},
+    {"event": "near turning point 1 (largest ball, max string tilt -15.6 deg, local min of image y)", "frame": 17, "t": 0.7083, "ball_px": [680.1, 378.0]},
+    {"event": "ball again at lowest image y on the return", "frame": 22, "t": 0.9167, "ball_px": [672.7, 391.4]},
+    {"event": "far turning point 2 (smallest ball, area 594 px)", "frame": 32, "t": 1.3333, "ball_px": [636.4, 301.5], "note": "true extreme between frames 32 and 33"},
+    {"event": "near turning point 2 (image y local min 380.2 at f46, string tilt max at f47)", "frame": 46, "t": 1.9167, "ball_px": [670.2, 380.2], "note": "between 46 and 47"},
+    {"event": "swing period from turning points", "value_frames": 29.5, "value_s": 1.229}
+  ],
+  "files": {"notes": "notes.md", "scripts": "scripts/track.py"}
+}

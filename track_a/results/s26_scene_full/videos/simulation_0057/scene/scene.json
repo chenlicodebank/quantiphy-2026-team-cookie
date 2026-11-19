@@ -1,0 +1,197 @@
+{
+ "video": "simulation_0057.mp4",
+ "source": "simulation",
+ "scene_type": "2D (top-down orthographic-looking view of a street)",
+ "fps": 30.003297,
+ "frames": 91,
+ "size_px": [
+  1080,
+  1080
+ ],
+ "time_of_frame_i": "i / fps",
+ "image_axes": "x right, y down; car drives toward +y (down the image)",
+ "camera": {
+  "static": true,
+  "max_background_shift_px": [
+   0.5,
+   0.01
+  ],
+  "method": "phase correlation of the right sidewalk strip (x 860-1079) vs frame 0"
+ },
+ "moving_objects": {
+  "orange_car": {
+   "description": "orange sports car seen from above, front (headlights) pointing down the image, in the left lane next to the left curb. Only vehicle and only moving object.",
+   "track_file": "tracks/orange_car.csv",
+   "visible_frames": [
+    0,
+    90
+   ],
+   "fully_in_frame_frames": [
+    17,
+    90
+   ],
+   "clipped_by_top_edge_frames": [
+    0,
+    16
+   ],
+   "reference_point": "cx_best_px, cy_best_px = centre of car body bounding box (vehicle root assumed at body centre, top view)",
+   "size_px": {
+    "length_along_motion_vertical": 288,
+    "length_note": "median of unclipped frames 17-90 (286-293; larger values in early frames include motion blur)",
+    "width_across": 110,
+    "width_note": "body width ~108-112 px (mirrors excluded/dark); height not observable (top view)"
+   },
+   "position_examples_px": {
+    "0": [
+     "",
+     -132.57
+    ],
+    "10": [
+     "355.81",
+     "47.4"
+    ],
+    "30": [
+     "352.7",
+     "371.97"
+    ],
+    "45": [
+     "350.95",
+     "567.73"
+    ],
+    "60": [
+     "349.51",
+     "722.5"
+    ],
+    "75": [
+     "348.52",
+     "836.19"
+    ],
+    "90": [
+     "347.91",
+     "909.09"
+    ]
+   },
+   "motion_summary_px": "straight down the lane; per-frame step decreases smoothly from ~18.6 px (frame 8) to ~3.5 px (frame 90); slight leftward drift x 356 -> 348 over the clip"
+  }
+ },
+ "static_objects": {
+  "left_curb_edge": {
+   "x_px": [
+    281,
+    292
+   ],
+   "note": "bright curb strip between left sidewalk and road"
+  },
+  "right_curb_edge": {
+   "x_px": [
+    850,
+    855
+   ]
+  },
+  "left_solid_lane_line": {
+   "x_px": [
+    336,
+    341
+   ],
+   "note": "white edge line just right of left curb (worn)"
+  },
+  "centre_dashed_line": {
+   "x_px": [
+    567,
+    573
+   ],
+   "note": "white dashed centre line (worn; dash pattern irregular)"
+  },
+  "right_lane_line": {
+   "x_px": [
+    799,
+    804
+   ],
+   "note": "pale yellowish/white line near right curb"
+  },
+  "road_width_curb_to_curb_px": "about 563 (x 292 -> 855)",
+  "lane_width_px": "left line to centre line centres: 570-338.5 = 231.5; centre to right line: 801.5-570 = 231.5",
+  "lamp_post_upper": {
+   "head_bbox_xyxy": [
+    177,
+    433,
+    217,
+    470
+   ],
+   "head_size_px": [
+    41,
+    38
+   ],
+   "full_extent_visual_xyxy": [
+    176,
+    432,
+    264,
+    476
+   ],
+   "note": "black hexagonal lamp head on left sidewalk, arm pointing right to post base at ~(251,465)"
+  },
+  "lamp_post_lower": {
+   "head_bbox_xyxy": [
+    176,
+    960,
+    218,
+    998
+   ],
+   "head_size_px": [
+    43,
+    39
+   ],
+   "full_extent_visual_xyxy": [
+    176,
+    899,
+    264,
+    999
+   ],
+   "note": "second lamp, arm goes up-right to post base at ~(251,909)"
+  },
+  "lamp_spacing_px": 529.7,
+  "fire_hydrant": {
+   "bbox_visual_xyxy": [
+    227,
+    939,
+    265,
+    979
+   ],
+   "size_px": [
+    38,
+    40
+   ],
+   "centre_px": [
+    246,
+    960
+   ],
+   "note": "small white/rust hydrant beside lower lamp (left sidewalk, x<272) - orange-ish, excluded from car mask"
+  },
+  "sidewalks": {
+   "left_x_px": [
+    20,
+    280
+   ],
+   "right_x_px": [
+    856,
+    1079
+   ],
+   "note": "paving slabs; grass strip at far left x<20"
+  },
+  "road_patches": "dark patched/pothole areas around the centre line (x~505-560) and right lane (x~600-830); static texture"
+ },
+ "events": {
+  "car_enters_view": {
+   "frame": 0,
+   "t": 0.0,
+   "note": "front already ~22 px into frame"
+  },
+  "car_fully_in_frame": {
+   "frame": 17,
+   "t": 0.5666
+  },
+  "car_decelerating": "throughout the clip, smooth (roughly constant) decrease of per-frame step; car does not stop by frame 90",
+  "motion_end": "none within clip (still moving ~3.5 px/frame at frame 90)",
+  "contacts_collisions": "none"
+ }
+}

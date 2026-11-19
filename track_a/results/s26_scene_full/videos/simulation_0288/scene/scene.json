@@ -1,0 +1,219 @@
+{
+ "video": "simulation_0288.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame/24, frame = round(t*24)",
+ "camera": {
+  "static": true,
+  "view": "top-down (orthographic-looking) view onto a plain light-grey ground/water plane with radial vignette; no perspective cues; no camera motion (median background reproduces every frame to <=9 grey levels outside the fish/shadow)"
+ },
+ "objects": [
+  {
+   "name": "koi_fish",
+   "description": "single koi carp seen from above, orange/red and white scales with a few black spots, translucent pale head and white fins; head points LEFT (-x); swims right-to-left across the image",
+   "moves": true,
+   "visible_frames": "0-71 (frames 0-~10: tail fin cut by / touching the right image edge)",
+   "track_file": "tracks/koi_fish.csv",
+   "reference_point": "body_cx/body_cy (centroid of the orange/white body core mask) and match_x/match_y (template-matched head+trunk path, smoother); origin of the rig is not visible - use these",
+   "manual_extents": [
+    {
+     "frame": 12,
+     "time_s": 0.5,
+     "nose": [
+      1776,
+      761
+     ],
+     "tail_tip": [
+      2446,
+      739
+     ],
+     "upper_fin_tip": [
+      1971,
+      648
+     ],
+     "lower_fin_tip": [
+      1993,
+      879
+     ],
+     "nose_to_tail_px": 670.4,
+     "bbox_w_px": 670,
+     "bbox_h_px": 231,
+     "fin_span_px": 232.0
+    },
+    {
+     "frame": 24,
+     "time_s": 1.0,
+     "nose": [
+      1503,
+      766
+     ],
+     "tail_tip": [
+      2163,
+      735
+     ],
+     "upper_fin_tip": [
+      1719,
+      666
+     ],
+     "lower_fin_tip": [
+      1728,
+      919
+     ],
+     "nose_to_tail_px": 660.7,
+     "bbox_w_px": 660,
+     "bbox_h_px": 253,
+     "fin_span_px": 253.2
+    },
+    {
+     "frame": 36,
+     "time_s": 1.5,
+     "nose": [
+      1210,
+      704
+     ],
+     "tail_tip": [
+      1866,
+      751
+     ],
+     "upper_fin_tip": [
+      1444,
+      649
+     ],
+     "lower_fin_tip": [
+      1437,
+      911
+     ],
+     "nose_to_tail_px": 657.7,
+     "bbox_w_px": 656,
+     "bbox_h_px": 262,
+     "fin_span_px": 262.1
+    },
+    {
+     "frame": 48,
+     "time_s": 2.0,
+     "nose": [
+      937,
+      705
+     ],
+     "tail_tip": [
+      1584,
+      783
+     ],
+     "upper_fin_tip": [
+      1175,
+      621
+     ],
+     "lower_fin_tip": [
+      1134,
+      850
+     ],
+     "nose_to_tail_px": 651.7,
+     "bbox_w_px": 647,
+     "bbox_h_px": 229,
+     "fin_span_px": 232.6
+    },
+    {
+     "frame": 60,
+     "time_s": 2.5,
+     "nose": [
+      658,
+      717
+     ],
+     "tail_tip": [
+      1316,
+      782
+     ],
+     "upper_fin_tip": [
+      894,
+      614
+     ],
+     "lower_fin_tip": [
+      875,
+      851
+     ],
+     "nose_to_tail_px": 661.2,
+     "bbox_w_px": 658,
+     "bbox_h_px": 237,
+     "fin_span_px": 237.8
+    },
+    {
+     "frame": 71,
+     "time_s": 2.9583,
+     "nose": [
+      436,
+      733
+     ],
+     "tail_tip": [
+      1099,
+      757
+     ],
+     "upper_fin_tip": [
+      666,
+      617
+     ],
+     "lower_fin_tip": [
+      666,
+      857
+     ],
+     "nose_to_tail_px": 663.4,
+     "bbox_w_px": 663,
+     "bbox_h_px": 240,
+     "fin_span_px": 240.0
+    }
+   ],
+   "length_nose_to_tailtip_px": {
+    "mean": 660.9,
+    "min": 651.7,
+    "max": 670.4
+   },
+   "fin_span_px_typical": "230-262 (pectoral fin tip to tip, across the body)",
+   "trunk_width_px_typical": 198.0,
+   "auto_mask_length_px_median": 577.3,
+   "auto_mask_width_px_median": 215.1,
+   "heading_deg_image": "axis_angle_deg column (180 = pointing -x; negative = nose tilted up in image); ranges ~ +176..-168",
+   "per_frame_displacement_px": {
+    "frames_2_70_mean": 23.8,
+    "min": 23.53,
+    "max": 24.04
+   }
+  },
+  {
+   "name": "fish_shadow",
+   "description": "dark grey cast shadow of the koi on the ground plane, offset up/right of the fish early and to the left/up (ahead of the nose) late; moves with the fish; NOT the fish",
+   "moves": true,
+   "visible_frames": "0-71",
+   "track": "shadow_cx/shadow_cy columns in tracks/koi_fish.csv (centroid of dark pixels, approximate)"
+  },
+  {
+   "name": "ground_plane",
+   "description": "uniform light-grey background (value ~180-218, brighter centre, darker corners); no markings, no other objects",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "frames 0 and 1 identical (fish still)",
+   "frame": 1,
+   "time_s": 0.041666666666666664
+  },
+  {
+   "event": "motion starts (first non-zero displacement, ~23.9 px/frame immediately)",
+   "frame": 2,
+   "time_s": 0.08333333333333333
+  },
+  {
+   "event": "vertical drift changes sign: moving slightly down (+y ~2 px/frame) until ~frame 20, ~0 frames 20-26, up (-y ~2 px/frame) frames 27-49, ~0 after ~50",
+   "frame": 26,
+   "time_s": 1.0833333333333333
+  },
+  {
+   "event": "frame 71 nearly identical to frame 70 (displacement ~0.5 px) - motion ends",
+   "frame": 71,
+   "time_s": 2.9583333333333335
+  }
+ ]
+}

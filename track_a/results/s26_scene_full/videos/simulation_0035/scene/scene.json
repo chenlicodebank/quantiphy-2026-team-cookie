@@ -1,0 +1,60 @@
+{
+  "video": "simulation_0035.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0. Frames 0 and 1 are pixel-identical (duplicated first frame), so the motion step 0->1 is zero and 1->2 is a normal step.",
+  "pixel_convention": "x to the right, y downward, origin top-left of the 1080x1080 image",
+  "camera": {
+    "motion": "static (phase correlation of the sky/dune band vs frame 0: |shift| < 0.02 px at frames 10, 30, 50, 71)",
+    "principal_point_assumed": [540, 540],
+    "focal_length": "unknown; estimate it from the question's depth_info plus a known size",
+    "perspective_cues": "Sea fills y 708-1080; ripples shrink and compress toward the far water edge at y ~708, where the water meets the base of a sand-dune backdrop. The true horizon is hidden behind the dunes, so it lies at y <= ~708. The camera looks roughly level along the sea surface. Both moving objects are far away and small (person ~41 px tall, bird ~20-31 px across)."
+  },
+  "objects": [
+    {"name": "bird", "kind": "flying bird (dark/black, flapping wings)", "moves": true,
+     "distinguish": "the only object in the sky; flies left to right just above the dunes",
+     "visible_frames": [0, 71], "track": "tracks/bird.csv",
+     "image_path": "x 55 -> 652, y 583 -> 598 (centroid), with a gentle vertical wave of +-8 px tied to the wing-beat phase",
+     "apparent_size_px": {"span_x_min": 18, "span_x_max": 31, "height_min": 4, "height_max": 24,
+        "note": "Horizontal span is largest when the wings are level (frames 5-6, 29-31, 52-55, 62-64: 25-31 px) and smallest when the wings are raised. Peak span falls slightly over the clip (30-31 px in frames 0-31 vs 25-28 px in frames 48-71), so the bird may be moving slightly away from the camera."},
+     "occlusion": "none; always against the sky"},
+    {"name": "person", "kind": "walking human (white top, grey/blue trousers, dark hair)", "moves": true,
+     "distinguish": "the only person; walks rightward along the light sand strip at the water's edge, bottom-left of the image",
+     "visible_frames": [0, 71], "track": "tracks/person.csv",
+     "image_path": "pelvis-estimate x 128.4 -> 201.6, y 723.8 -> 729.3; soles y 745 -> 751 (drifting slightly down the image, i.e. a little toward the camera)",
+     "apparent_size_px": {"height_median": 41, "height_range": [39, 43], "width_range": [11, 20],
+        "note": "Height is nearly constant (41 px at the start and the end), so the camera distance changes little. Width oscillates with the stride (narrow 11 px with legs together at frames 0-1, 33-35, 67-68; wide 18-20 px at frames 6-10, 26-28, 40-42, 60)."},
+     "occlusion": "none; passes in front of the dark wooden structure at x 120-157 during frames 0-18 (good contrast). A faint reflection on the wet sand/water below the feet (y 751-760) moves with the person and is excluded from the mask"},
+    {"name": "sea", "kind": "water surface", "moves": false,
+     "extent_px": {"x": [0, 1080], "y": [708, 1080]},
+     "note": "Ripples are almost static (no significant frame differences); ground plane for perspective"},
+    {"name": "sand_dunes", "kind": "background dune range", "moves": false,
+     "extent_px": {"x": [0, 1080], "y_top_range": [625, 665], "y_base": 708},
+     "note": "Left ridge top at y ~625 (x 0-200); central hump at x 540-660 (top y ~661); right ridge at x 900-1080 (top y ~628)"},
+    {"name": "white_rock_slope", "kind": "pale rock/concrete slope at far left", "moves": false,
+     "extent_px": {"x": [0, 72], "y": [686, 725]}, "note": "slopes down from (0,686) to (~72,708)"},
+    {"name": "small_dark_item_on_slope", "kind": "tiny dark object on the slope", "moves": false,
+     "extent_px": {"x": [62, 74], "y": [704, 709]}, "note": "a few pixels; unidentified"},
+    {"name": "sandstone_ledge", "kind": "low wall/promenade face behind the beach", "moves": false,
+     "extent_px": {"x": [0, 120], "y": [725, 742]}, "height_px": 17},
+    {"name": "dark_wooden_structure", "kind": "dark brown slatted structure (steps/crate/groyne) at the end of the ledge", "moves": false,
+     "extent_px": {"x": [120, 157], "y": [727, 742]}, "length_px": 37, "height_px": 15},
+    {"name": "beach_strip", "kind": "light pinkish-grey sand / wet-sand strip where the person walks", "moves": false,
+     "extent_px": {"x": [0, 360], "y": [742, 762]}, "note": "tapers toward the right and ends at x ~360"},
+    {"name": "sky_clouds", "kind": "sky backdrop", "moves": false, "extent_px": {"y": [0, 665]}}
+  ],
+  "events": [
+    {"event": "bird in flight for the whole clip (no take-off or landing)", "frames": [0, 71]},
+    {"event": "bird wings level (thin silhouette, bbox height 4-8 px, max horizontal span)", "frames": [5, 31, 40, 55, 63], "note": "silhouette tall (wings raised or lowered, bbox height 19-24 px) at about frames 0, 10, 23, 47, 71; flapping is irregular, roughly 1 s per full cycle"},
+    {"event": "person walking for the whole clip (no start or stop), steady rightward walk", "frames": [0, 71]},
+    {"event": "person stride wide / legs together", "frames_wide": [7, 27, 41, 60], "frames_together": [0, 34, 67], "note": "approximate gait phases from mask width"},
+    {"event": "no contacts, impacts or bounces", "frames": []}
+  ],
+  "tracks_columns": {
+    "person.csv": "frame,t, ref_x,ref_y = pelvis estimate (mask x-mean in rows within 2 px of 0.53*(height-1) above the soles), foot_x/foot_y = mean x of the bottom 6 mask rows / sole row, head_y = top row, cx,cy = mask centroid, bx0,by0,bx1,by1 = bbox, width_px,height_px, area, occluded",
+    "bird.csv": "frame,t, ref_x,ref_y = mask centroid (recommended origin proxy), bbox_cx,bbox_cy = bbox centre, body_x,body_y = centroid of the darkest 40% pixels, bx0..by1 = bbox, span_x_px = horizontal extent (wingspan proxy), height_px, pca_len,pca_wid = mask extents along/across its principal axis, area, occluded"
+  }
+}

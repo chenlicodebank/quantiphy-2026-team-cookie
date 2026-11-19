@@ -1,0 +1,60 @@
+{
+ "video": "simulation_0108.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "image_size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "pixel_convention": "x right, y DOWN, origin top-left pixel; all lengths in pixels",
+ "camera": {
+  "motion": "static (plain uniform grey background, no features; objects' motion is smooth and independent)",
+  "background_rgb": [204, 204, 204],
+  "perspective": "2D scene, no ground plane/horizon; virus B keeps constant size; virus A's apparent size grows ~4% (linear) over frames 0-27 (see notes)"
+ },
+ "objects": {
+  "virus_A": {
+   "description": "left / smaller coronavirus-like particle: dark-blue spherical body with dark-red-tipped spikes; starts left of centre",
+   "moves": true,
+   "motion": "straight up (slightly left, ~-0.35 px/frame in x), speeding up; exits through the TOP edge",
+   "visible_frames": [0, 67],
+   "fully_in_frame_frames": [0, 27],
+   "track": "tracks/virus_A.csv",
+   "centre_frame0_px": [721.5, 568.4],
+   "full_extent_px_frame0": {"width": 511, "height": 513},
+   "full_extent_px_frames0_27": {"width_min_mean_max": [511, 521.9, 533], "height_min_mean_max": [513, 518.7, 528]},
+   "body_core_diameter_px": {"frame0": 251, "frames0_27_min_mean_max": [251.1, 257.9, 263.4], "note": "circle fit to the spike-free body; bumpy surface + rotating spikes add a few px"},
+   "mask_area_px": {"frame0": 99117, "frame27": 108041},
+   "per_frame_displacement_px": {"frame2": [-0.36, -11.48], "frame27": [-0.39, -12.40], "frame47": [-0.50, -13.10], "trend": "|d| grows ~0.034-0.04 px/frame each frame (roughly linear), measured by template matching"}
+  },
+  "virus_B": {
+   "description": "right / larger coronavirus-like particle, same look as A; starts right of centre",
+   "moves": true,
+   "motion": "to the right (slightly up, -0.68 px/frame in y) at constant pixel speed; exits through the RIGHT edge",
+   "visible_frames": [0, 68],
+   "fully_in_frame_frames": [0, 23],
+   "track": "tracks/virus_B.csv",
+   "centre_frame0_px": [1305.7, 614.6],
+   "full_extent_px_frame0": {"width": 571, "height": 578},
+   "full_extent_px_frames0_23": {"width_min_mean_max": [571, 581.4, 593], "height_min_mean_max": [577, 578.1, 579]},
+   "body_core_diameter_px": {"frame0": 283.3, "frames0_23_min_mean_max": [283.3, 284.3, 286.1]},
+   "mask_area_px": {"frame0": 125641, "frame21": 126457},
+   "per_frame_displacement_px": {"frames2_36": [13.78, -0.68], "frames37_48": "13.62-13.72 (template-noise dip)", "frames49_59": [13.75, -0.66], "magnitude_mean": 13.8}
+  }
+ },
+ "static_objects": "none (uniform grey background only)",
+ "events": [
+  {"frame": 0, "t": 0.0, "what": "frames 0 and 1 are identical: both viruses static"},
+  {"frame": 2, "t": 0.0833, "what": "both start moving; already at full speed in the first step (A 11.48 px/frame up, B 13.80 px/frame right) - no ramp from rest"},
+  {"frame": 24, "t": 1.0, "what": "B's spikes first touch the right image edge (B clipped from here)"},
+  {"frame": 28, "t": 1.1667, "what": "A's spikes first touch the top image edge (A clipped from here)"},
+  {"frame": 46, "t": 1.9167, "what": "B's centre leaves the frame (x > 1919)"},
+  {"frame": 48, "t": 2.0, "what": "A's centre leaves the frame (y < 0)"},
+  {"frame": 67, "t": 2.7917, "what": "last frame with any part of A visible"},
+  {"frame": 68, "t": 2.8333, "what": "last frame with any part of B visible; frames 69-71 empty"},
+  {"what": "no contact between A and B: gap between their extents is 57 px at frame 0 and only grows"}
+ ],
+ "pairwise": {"centre_distance_frame0_px": 586.1, "centre_distance_note": "compute other times from the two track CSVs"},
+ "files": {"notes": "notes.md", "scripts": "scripts/", "tracks": ["tracks/virus_A.csv", "tracks/virus_B.csv"]}
+}

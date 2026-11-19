@@ -1,0 +1,67 @@
+{
+  "video": "captured_0002.mp4",
+  "source": "lab (real recording, background replaced by green: segmentation-style compositing)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation vs frame 0: |shift| <= 0.14 px in all frames)",
+    "intrinsics_from_task_convention": {"fx_px": 763.0, "fy_px": 763.0, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "view": "looks down obliquely at a wheeled over-bed table from its front; table top recedes upward in the image (far edge y~318-335, near edge y~477-495); no horizon visible (green replaced background)"
+  },
+  "objects": {
+    "ball": {
+      "description": "small orange/tan ball (looks like a light textured ball, ~25 px across at rest); the only moving object",
+      "moves": true,
+      "visible_frames": "0-46 (gone 47-48; leaves the bottom image edge after frame 46)",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "visible centre = mask bbox centre (cx, cy); centroid also given",
+      "apparent_size_px": {
+        "at_rest_frames_0_26": "diameter 25-26 px (bbox w 25-26, h 24-25); mean ~25.5",
+        "falling_in_front_of_board_30_35": "only the bright core is segmented (16-20 px wide) - underestimates",
+        "on_table_36_40": "width 20-24 px (faint, blurred), vertical extent inflated by motion blur",
+        "below_table_41_45": "width 28-32 px (horizontal width is the least blur-affected measure); height 34-57 px = blur streak",
+        "frame_46": "partly cut by bottom image edge, width 25 px unreliable"
+      }
+    },
+    "white_board": {
+      "description": "white rectangular board/tablet leaning upright on the table top, near the back-centre; the ball rests on its top edge at the start",
+      "moves": false,
+      "frame_measured": 48,
+      "corners_px": {"top_left": [559, 299], "top_right": [655, 291], "bottom_right": [665, 415], "bottom_left": [563, 423]},
+      "bbox_xyxy": [559, 291, 665, 424],
+      "extents_px": {"width_along_top_edge": 96, "width_along_bottom_edge": 102, "height_left_edge": 124, "height_right_edge": 124, "min_area_rect": [103.9, 128.4]},
+      "centre_px": [610.7, 357.7]
+    },
+    "table_top": {
+      "description": "wooden (light brown) rectangular top of a wheeled over-bed table, seen in perspective",
+      "moves": false,
+      "frame_measured": 48,
+      "corners_px": {"far_left": [520, 334], "far_right": [729, 318], "near_right": [779, 477], "near_left": [474, 495]},
+      "bbox_xyxy": [474, 316, 779, 495],
+      "extents_px": {"near_edge_length": 306, "far_edge_length": 210, "left_side_length": 168, "right_side_length": 167, "edge_thickness": "~10 px (dark front strip y~495-505 at left, 477-487 at right)"},
+      "notes": "far-left corner outline ragged (segmentation artefact)"
+    },
+    "table_stand": {
+      "description": "grey metal pedestal column under the table, with an upper cross-bar (casters at ~(563,537) and ~(696,560)) and a lower T/L base with casters at the bottom image edge (~(705,700))",
+      "moves": false,
+      "bbox_xyxy": [534, 498, 719, 719],
+      "column": "from table underside y~498 down to base y~680, x ~640-670 (lower part lighter grey)",
+      "notes": "base cut by the bottom image edge"
+    }
+  },
+  "events": [
+    {"event": "ball at rest on top edge of white board", "frames": "0-26", "t_s": "0.000-1.083", "pos_px": [617, 282]},
+    {"event": "ball starts to move (release / rolls off the board top)", "frame": 27, "t_s": 1.125, "note": "cy 283.5 -> 284 (27) -> 287.5 (28) -> 293.5 (29); first clear motion frame 28"},
+    {"event": "ball falls in front of the white board (faint over white)", "frames": "29-35"},
+    {"event": "ball hits the table top just in front of the board foot (bounce)", "frame": 36, "t_s": 1.5, "pos_px": [615.5, 436], "note": "image downward step drops from ~29 px/frame (35->36) to ~9 px/frame (36->37); impact between 35 and 37, best 36"},
+    {"event": "ball moves toward camera over the table top (bounce/roll)", "frames": "36-40"},
+    {"event": "ball passes the near (front) edge of the table", "frame": "40-41 (edge y~488 at x~605)", "t_s": "~1.69"},
+    {"event": "ball falls below the table toward the floor, accelerating", "frames": "41-46"},
+    {"event": "ball leaves the image at the bottom edge", "frame": 47, "t_s": 1.958, "note": "last visible 46 (bbox touches y=719)"}
+  ],
+  "files": {"ball_track": "tracks/ball.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

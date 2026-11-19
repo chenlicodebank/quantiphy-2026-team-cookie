@@ -1,0 +1,18 @@
+{
+ "video": "internet_0050.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 30.0,
+ "frames": 94,
+ "duration_s": 3.1333,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3119,
+  "question": "What is the height of the left basketball stand in meters?",
+  "prior": "average speed of the person riding scooter = 2.9 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

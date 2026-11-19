@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0190.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MS",
+ "fps": 120.0,
+ "frames": 401,
+ "duration_s": 3.3417,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 461,
+  "question": "What is the height of the truck(at time 0s) in meters?",
+  "prior": "width of the box = 1.33m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 120.0
+ }
+}

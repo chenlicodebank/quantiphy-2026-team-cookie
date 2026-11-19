@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0131.mp4",
+ "video_source": "simulation",
+ "video_type": "V2SX",
+ "fps": 24.00396,
+ "frames": 97,
+ "duration_s": 4.041,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 308,
+  "question": "What is the width of the hot air balloon in meters?",
+  "prior": "speed of the hot air balloon = 4m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

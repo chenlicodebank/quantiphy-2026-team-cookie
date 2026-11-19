@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0176.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 24.0,
+ "frames": 40,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1415,
+  "question": "What is the length of the airplane in meters?",
+  "prior": "speed of the airplane = 153.582m/s",
+  "depth_info": "t = 0.5s, distance_aircraft_nose_camera = 284.98m   \nt =1s, distance_aircraft_nose_camera = 305.627m   \ndistance_big_rock_camera = 296.350m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

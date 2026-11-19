@@ -1,0 +1,59 @@
+{
+ "wall_s": 280,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 31,
+  "duration_ms": 257200,
+  "total_cost_usd": 0.9977142000000001,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 40,
+  "cache_creation_input_tokens": 49160,
+  "cache_read_input_tokens": 653071,
+  "output_tokens": 23683,
+  "output_tokens_details": {
+   "thinking_tokens": 10625
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 49160,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 437,
+    "cache_read_input_tokens": 57296,
+    "cache_creation_input_tokens": 1758,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1758
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 30,
+  "flags": []
+ },
+ "video": "captured_0014",
+ "ids": [
+  2238
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/captured_0014__q2238.jsonl"
+}

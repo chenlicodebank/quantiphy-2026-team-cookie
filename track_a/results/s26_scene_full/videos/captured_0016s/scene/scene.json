@@ -1,0 +1,80 @@
+{
+  "video": "captured_0016s.mp4",
+  "source": "lab (real Orbbec Femto Mega recording; people + ball cut out with Segment Anything 2 and pasted on a synthetic static blue-white gradient background)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (catcher's shoes and the static background stay at the same pixels in all 49 frames)",
+    "intrinsics_from_benchmark": "focal length f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+    "roll": "people appear tilted: the catcher's standing body axis is ~29 deg from image vertical (feet lower-left, head upper-right) and the thrower leans the same way -> camera is rolled/tilted by roughly 25-30 deg; image x/y are NOT world horizontal/vertical",
+    "ground_plane": "not visible (background replaced). Only cue: catcher's shoes at image y ~375-437 (her feet on the floor). No horizon or vanishing points.",
+    "watermark": "'Modified with Segment Anything 2 Demo' box at x 1030-1280, y 690-720"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "black-and-white soccer ball (white with black pentagons, 'Franklin' logo and '=100=' print)",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre of the ball (circle centre; centre of the blur streak when blurred)",
+      "apparent_diameter_px": {
+        "held_by_thrower_frames_0_17": "~120-134 (Hough; visual check of frame 0/1 gives ~129)",
+        "release_frame_31": "~105 (blurred)",
+        "free_flight_32_40": "102 -> 88 (width across the blur)",
+        "frame_41": 82,
+        "held_by_catcher_44_48": "74 -> 62"
+      },
+      "depth_trend": "apparent size shrinks steadily through the flight: ball moves away from the camera from the near thrower to the far catcher, then further away as she pulls it in to her body (frames 44-48)"
+    },
+    {
+      "name": "thrower",
+      "description": "near person at the LEFT edge, light-grey T-shirt, dark trousers, glasses, face blurred; mostly outside the frame (only left part of torso, head, arms visible)",
+      "moves": true,
+      "role": "holds the ball (0-25), winds up, throws underarm/two-handed toward the catcher (release ~frame 30/31), arms then drop",
+      "visible_frames": "0-48",
+      "track": "tracks/thrower.csv (bbox of visible mask; x0 always 0, y1 always 719; partial body only)"
+    },
+    {
+      "name": "catcher",
+      "description": "far person at the RIGHT, dark-grey oversized T-shirt, black trousers with white drawstrings, white sneakers, long brown hair, face blurred; head top cut by the image top edge",
+      "moves": true,
+      "role": "stands in place (feet do not move), raises arms from ~frame 34-36, catches the ball at frames 41-44 and holds it in front of her body",
+      "visible_frames": "0-48",
+      "track": "tracks/catcher.csv",
+      "static_extents_frame0_px": {
+        "bbox": [922, 0, 1238, 439],
+        "length_along_body_axis": 511,
+        "width_across_body_axis": 193,
+        "body_axis_direction_xy": [-0.487, 0.873],
+        "note": "length is a lower bound of her height in pixels because the top of the head is cut at y = 0",
+        "left_shoe_px": "x 925-975, y 375-398 (toe at left)",
+        "right_shoe_px": "x 968-1005, y 405-437 (lowest point of the person: y ~437-439)"
+      }
+    }
+  ],
+  "static_objects": "none besides the synthetic background (no furniture, floor markings or props)",
+  "events": [
+    {"event": "ball held almost still in thrower's hands", "frames": "0-17", "t_s": "0.000-0.708", "detail": "centre wanders within ~(318-330, 528-554) px; Hough noise ~+-4 px"},
+    {"event": "wind-up: ball moves down-left toward thrower's hip", "frames": "18-25", "t_s": "0.750-1.042", "detail": "lowest/back-most point ~ (270, 600) at frames 23-25"},
+    {"event": "forward swing starts", "frame": 26, "t_s": 1.083},
+    {"event": "last hand contact (fingertips on ball)", "frame": 30, "t_s": 1.25},
+    {"event": "release: first frame with ball free", "frame": 31, "t_s": 1.292, "detail": "release between frames 30 and 31"},
+    {"event": "probable dropped capture frame", "frames": "35->36", "t_s": "1.458->1.500", "detail": "ball moves 88 px between 35 and 36 vs 58 and 35 px for neighbouring steps, and blur length (~20-27 px) indicates ~45 px per frame; positions are real (checked on crops)"},
+    {"event": "apex of the image trajectory (minimum image y ~70)", "frames": "37-38", "t_s": "1.542-1.583", "detail": "image y only, camera is rolled"},
+    {"event": "catcher begins raising arms", "frames": "34-36", "t_s": "1.42-1.50"},
+    {"event": "first contact with catcher's hands", "frame": 41, "t_s": 1.708, "detail": "hands under the ball; firm contact with forearm/hands at frame 42 (t 1.75)"},
+    {"event": "ball held by catcher", "frames": "43-48", "t_s": "1.792-2.000", "detail": "ball drifts down/right toward her body (944,162) -> (970,235)"}
+  ],
+  "files": {
+    "tracks/ball.csv": "frame,time_s,ref_x,ref_y,bbox,mask_length_px,mask_width_px,mask_height_px,diameter_est_px,occluded,source,note",
+    "tracks/catcher.csv": "frame,time_s,ref_x/ref_y = mask centroid, bbox, mask_area_px, occluded, note",
+    "tracks/thrower.csv": "same columns as catcher; partial body only",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

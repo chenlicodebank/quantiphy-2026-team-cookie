@@ -1,0 +1,57 @@
+{
+  "video": "simulation_0182.mp4",
+  "source": "simulation",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 40,
+  "duration_s": 1.6667,
+  "width": 1920,
+  "height": 1080,
+  "time_convention": "t = frame / 24; frame = round(t*24); frame 0 = t 0",
+  "camera": {
+    "motion": "static (frame 0 and frame 39 backgrounds identical outside the box; no pan/shake/zoom)",
+    "perspective": "3D interior: brick wall behind is roughly fronto-parallel; a blue roller-conveyor ramp runs from the upper-left shelf (image ~ (260-720, 540)) down to the right and toward the camera, ending at a wooden floor/pallet at bottom-right (~x 1300-1920, y 990-1080). Ramp far edge image line approx (720,540)->(1460,990), slope ~31 deg below horizontal in the image; the near side rail runs approx (260,540)->(1220,1080) and leaves the frame at the bottom. Ceiling/wall junction near y~0-60 at top. No horizon visible.",
+    "focal_length": "unknown; estimate from given depth_info + a known size"
+  },
+  "objects": [
+    {
+      "name": "box",
+      "description": "brown cardboard box with open/loose top flaps, the only moving object; starts in the air at upper-left just right of the stacked crates",
+      "moves": true,
+      "visible_frames": "0-39 (bottom of mask clipped by image bottom edge from frame 36 on)",
+      "track_file": "tracks/box.csv",
+      "reference_point": "cx,cy = mask centroid (best image proxy of the rigid box centre/origin)",
+      "pixel_size_frame0": {
+        "note": "box seen corner-on at frame 0 (upright, not yet rotated). Nearest vertical edge at x~605.",
+        "mask_bbox": [378, 224, 775, 446],
+        "total_width_px": 397,
+        "left_face_width_px": 227,
+        "right_face_width_px": 170,
+        "near_vertical_edge_height_px": 205,
+        "left_edge_height_px": 195,
+        "right_edge_height_px": 165,
+        "mask_height_incl_flaps_px": 222,
+        "sqrt_mask_area_px": 271
+      },
+      "apparent_size_trend": "sqrt(mask area) 271 px (frames 0-8, falling, constant) -> ~282 (f12-20) -> ~289 (f28-35): grows ~6-7% while sliding down the ramp toward the camera (box also rotates, so part of the change is orientation). From frame 36 the mask is clipped by the image bottom."
+    },
+    {"name": "conveyor_ramp", "description": "blue roller conveyor ramp, inclined, box slides down it", "moves": false,
+     "image_position": "top end ~ x 260-720 at y~540 (behind the box start), bottom end ~ x 1220-1460 at y 990-1080",
+     "pixel_extents": "far edge length ~ (720,540)->(1460,990) = ~866 px in image; top end width ~460 px; image slope ~31 deg"},
+    {"name": "blue_support_post", "description": "vertical blue post under the upper shelf/ramp top", "moves": false, "image_position": "x ~210-290, y ~570-1080"},
+    {"name": "crate_product_of_italy", "description": "orange cardboard crate 'PRODUCT OF ITALY / ROME' top-left, on shelf", "moves": false, "image_bbox": [0, 0, 275, 345]},
+    {"name": "crate_seedless_jaffas", "description": "tan crate 'SEEDLESS JAFFAS / ZIMBABWE ORANGES' below the orange one", "moves": false, "image_bbox": [0, 340, 320, 540]},
+    {"name": "shelf_top", "description": "wooden board under the crates at the top of the ramp", "moves": false, "image_bbox": [0, 535, 255, 575]},
+    {"name": "warning_sign", "description": "orange sign 'TAKE CARE WHEN STACKING CRATES' on the wall", "moves": false, "image_bbox": [1462, 578, 1678, 790], "size_px": {"width": 216, "height": 212}},
+    {"name": "brick_wall", "description": "grey breeze-block wall, background", "moves": false, "note": "block courses ~100 px tall in the image, blocks ~200-210 px long near the sign"},
+    {"name": "wooden_floor", "description": "light wooden floor/pallet at bottom-right where the ramp ends", "moves": false, "image_bbox": [1300, 985, 1920, 1080]}
+  ],
+  "events": [
+    {"event": "release / start of fall (box at rest)", "frame": 0, "t": 0.0, "note": "cy moves 1.3 px 0->1, 6.3 px 1->2: starts from rest at frame 0"},
+    {"event": "first contact with ramp (impact)", "frame": 8, "t": 0.333, "note": "lower-left corner touches the ramp between frames 7 and 8; box still upright at 8"},
+    {"event": "tilting onto the ramp slope", "frames": "8-13", "t": "0.333-0.542", "note": "image tilt of min-area rect 0 -> ~26-33 deg, box pivots onto the incline"},
+    {"event": "sliding down the ramp, roughly constant orientation, accelerating", "frames": "13-39", "t": "0.542-1.625", "note": "direction in image ~31.5 deg below horizontal, down-right and toward camera"},
+    {"event": "box reaches image bottom edge (mask clipped)", "frame": 36, "t": 1.5},
+    {"event": "box at lower end of ramp, near wooden floor", "frame": 39, "t": 1.625, "note": "video ends; no final stop observed"}
+  ]
+}

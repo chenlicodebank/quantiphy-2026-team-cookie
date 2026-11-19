@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0239_segmented.mp4",
+  "source": "segmentation (Blender render with background replaced by white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the building region frame 0 -> 25 and 0 -> 48: shift < 0.06 px",
+    "view": "looks down obliquely on the scene (animals seen from above: no legs visible); ground and sky removed by segmentation. Treated as 2D per inputs.json. Both animals keep a constant apparent size and constant image row, so each stays at a constant depth."
+  },
+  "objects": [
+    {
+      "name": "horse_brown",
+      "description": "dark reddish-brown quadruped (horse/cow-like), seen from above, upper animal (image row ~776), just below the building; head (narrow end with white tip) points right; white patch at left (rear) end",
+      "moves": true,
+      "visible_frames": "0-49 (all)",
+      "track": "tracks/horse_brown.csv",
+      "motion": "walks right, nearly horizontal (cy 775.2-777.0). cx 753.67 (f0) -> 876.33 (f48): +122.7 px in 48 frames. Per-frame step 0.6-4.8 px (gait-modulated).",
+      "apparent_size_px": {"mask_length_along_body": "143-166 (median ~148; gait/tail changes)", "mask_width_across": "36-42", "bbox_h": "36-42"},
+      "anomaly": "frame 49: animal jumps back to cx 750.4 (bbox 685-837), i.e. to ~its frame-0 position (animation loop/reset). Frame 49 is not real motion; use frames 0-48 for motion."
+    },
+    {
+      "name": "animal_cream",
+      "description": "cream/beige quadruped (sheep/cow-like, lighter, larger), seen from above, lower animal (image row ~865); head (narrow end with white tip) points right; wide rounded rump at left",
+      "moves": true,
+      "visible_frames": "0-49 (all)",
+      "track": "tracks/animal_cream.csv",
+      "motion": "walks right, nearly horizontal (cy oscillates 861.2-869.6 with gait). cx 973.70 (f0) -> 1196.46 (f49): +222.8 px, dy -8.1 px. Per-frame step 2.3-7.5 px.",
+      "apparent_size_px": {"mask_length_along_body": "163-190 (median ~176)", "mask_width_across": "49-55", "bbox_h": "48-53"}
+    },
+    {
+      "name": "building",
+      "description": "large tiled building at top centre: dark-grey brick left face, cream right face meeting at a vertical edge x~1018, with a wider horizontal band/eave (light tiles) across the middle",
+      "moves": false,
+      "visible_frames": "0-49",
+      "bbox_px": {"x0": 619, "y0": 24, "x1": 1423, "y1": 744, "w": 805, "h": 721},
+      "centroid_px": [1012.7, 393.8],
+      "parts_px": {
+        "main_block": "x 662-1361 (width ~700), y 24 (top at corner x~1018; 90 at sides) to 744 (bottom at corner; ~716 at sides)",
+        "middle_band": "x 620-1423 (width ~803) at y~400; band spans y ~270-525",
+        "vertical_corner_edge": "x ~1018, y 24-744 (length ~720)"
+      }
+    }
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "both animals already walking right at the start (no start of motion visible)"},
+    {"frame": 48, "t": 2.0, "event": "last valid frame of horse_brown motion"},
+    {"frame": 49, "t": 2.0417, "event": "horse_brown resets/teleports back by ~126 px to near its frame-0 position (render loop artifact)"},
+    {"frame": 49, "t": 2.0417, "event": "animal_cream still walking at end of clip"}
+  ],
+  "gait_cycles": {
+    "horse_brown": "mask length peaks near frames 8, 30, 48 (period ~20 frames)",
+    "animal_cream": "mask length peaks near frames 3, 20, 36 (period ~16-17 frames); cy minima near 16, 47"
+  },
+  "interactions": "none: the animals never touch each other or the building; vertical gap between their centres ~90 px"
+}

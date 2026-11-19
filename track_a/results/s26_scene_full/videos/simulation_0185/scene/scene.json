@@ -1,0 +1,58 @@
+{
+  "video": "simulation_0185.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 40,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels; time_s = frame/24",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of 3 background patches vs frame 0: |shift| <= 0.02 px in x for all frames (constant 0.5 px y offset in floor patch is a correlation artefact, identical in every frame)",
+    "per_frame_shift_px": [0, 0]
+  },
+  "video_artifacts": {
+    "duplicate_frame": {"frame": 38, "duplicate_of": 37, "note": "frame 38 is a repeat of 37 (mean abs diff 0.013 vs ~0.5 for other steps); frame 39 is two steps of motion beyond 37. Columns ref_x_dupfix/ref_y_dupfix give a midpoint estimate for 38."}
+  },
+  "moving_objects": [
+    {
+      "name": "gift_box",
+      "description": "small white gift box with yellow ribbon and yellow bow on top; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 39],
+      "track_file": "tracks/gift_box.csv",
+      "reference_point": "centroid of the box body mask (bow excluded) = proxy for object origin / box centre",
+      "orientation": "body edges tilted ~29 deg (bottom face parallel to ramp, rising to the left) the whole clip; no rotation during fall or slide",
+      "size_px_unoccluded_frames_0_8": {
+        "body_edge_along_ramp_direction": 111,
+        "body_edge_perpendicular": 109,
+        "body_edge_mean": 110,
+        "height_incl_bow_along_box_up_axis": 130,
+        "image_bbox_w_incl_bow": 137,
+        "image_bbox_h_incl_bow": 145,
+        "uncertainty_px": 3
+      },
+      "apparent_size_change": "body edge along ramp 111 (fall) -> 101 (frames 24-28) -> 119 (frame 39); bbox width 137 -> 124 -> 140. Partly occlusion by ramp rail (frames 9-31), partly perspective side-face visibility near image edges. Use frames 0-8 for size."
+    }
+  ],
+  "static_objects": [
+    {"name": "ramp_conveyor", "description": "dark-blue inclined conveyor/ramp with rails, from the shelf at upper left down to the floor at lower right", "image_position": "upper end near (330,540), lower end beyond (1300,1000)-(1420,1080)", "slope_in_image_deg": 28.6, "note": "slope measured from the box's slide path (frames 10-37: dx 734, dy 400 px); top rail edge in frame 0 runs roughly (330,535)->(1300,950)"},
+    {"name": "cardboard_box_pizza_topping", "description": "large orange cardboard box 'PIZZA TOPPING Hot and Spicy 8 x 500 ml' at top-left on shelf", "bbox_px": [0, 0, 290, 530], "note": "cut by frame edge; second box behind it to x~345"},
+    {"name": "small_crate_seedless_jaffas", "description": "small cardboard box 'SEEDLESS JAFFAS' next to the big box", "bbox_px": [285, 325, 405, 535]},
+    {"name": "shelf_table", "description": "blue metal shelf with wooden top holding the boxes; ramp starts at its right edge", "top_surface_y_px": [535, 600], "x_extent_px": [0, 335], "leg_x_px": [262, 335]},
+    {"name": "orange_hand_truck_frame", "description": "orange rectangular frame (hand-truck / trolley handle) at bottom-left foreground", "bbox_px": [0, 620, 222, 1080]},
+    {"name": "warning_sign", "description": "orange sign 'TAKE CARE WHEN STACKING CRATES' on the wall", "bbox_px": [1295, 575, 1482, 763], "size_px": [187, 188]},
+    {"name": "wall_vent", "description": "grey louvred vent low on the wall right side", "bbox_px": [1670, 857, 1855, 945], "size_px": [185, 88]},
+    {"name": "brick_wall", "description": "grey block wall background; block courses ~95-100 px tall, blocks ~190 px long"},
+    {"name": "wooden_floor", "description": "wooden plank floor, visible lower right below y~950"}
+  ],
+  "events": [
+    {"event": "release / start of motion (free fall from rest)", "frame": 0, "time_s": 0.0, "note": "vertical velocity extrapolates to ~0 at frame 0; x constant 496 px while falling"},
+    {"event": "impact / landing on ramp", "frame_between": [8, 9], "time_s_approx": 0.35, "note": "frame 8 last free-fall frame (vertical step 28.7 px/frame), frame 9 first on ramp (step (9.3, 9.8) px)"},
+    {"event": "direction change: vertical fall -> slide down ramp at ~28.6 deg below horizontal to the right", "frame": 9, "time_s": 0.375},
+    {"event": "sliding, accelerating, until end of clip; no bounce observed", "frames": [9, 39]},
+    {"event": "box reaches bottom end of ramp near floor", "frame": 39, "time_s": 1.625, "note": "still on ramp at the last frame"}
+  ],
+  "notes_file": "notes.md"
+}

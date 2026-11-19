@@ -1,0 +1,78 @@
+{
+ "video": "simulation_0024_segmented.mp4",
+ "source": "segmentation (of a Blender simulation)",
+ "scene": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "width": 960,
+ "height": 960,
+ "time_convention": "t = frame / 25; frame 0 at t = 0",
+ "units": "pixels (x right, y down, origin top-left), seconds",
+ "background": "pure white (255) replacement background; no ground, water, horizon or other features visible",
+ "camera": {
+  "motion": "static (rock mask bbox/centroid constant within 1-2 px over all 75 frames)",
+  "perspective_cues": "none in background (segmented). Boat moves almost parallel to image plane; apparent hull length ~constant (see apparent_size)."
+ },
+ "objects": {
+  "boat": {
+   "description": "red-and-white fishing boat with white wheelhouse (red roof), tall mast, hull lettering \"AH805\"; bow points left",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "track_file": "tracks/boat.csv",
+   "reference_point": "ref_x/ref_y = bbox centre of full boat mask (incl. mast) - proxy for rig origin; alternatives in csv: centroid, hull_cx with keel_y (hull bottom)",
+   "motion": "translates right-to-left across frame the whole clip (frame 0 to 74), slight upward drift in image (keel_y 672 -> 656)",
+   "apparent_size_px": {
+    "bbox_w_mean": 398.2162162162162,
+    "bbox_h_mean_incl_mast": 363.16,
+    "hull_len_mean": 390.7432432432432,
+    "hull_len_first10": 396.0,
+    "hull_len_last10": 386.8
+   },
+   "notes": "frame 0 clipped at right image edge (bow-to-stern length unreliable there); mast tip is pale and close to the rock bottom edge in early frames so bbox top / height there is +-5 px"
+  },
+  "rock": {
+   "description": "large pale (cream/brown, dark shadows on right) boulder/cliff-like rock in the upper half of the frame, above the boat",
+   "moves": false,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "image_extent_px": {
+    "x0": 326,
+    "y0": 24,
+    "x1": 959,
+    "y1": 313,
+    "width": 634,
+    "height": 290,
+    "centroid": [
+     636.6,
+     167.3
+    ],
+    "bbox_centre": [
+     642.5,
+     168.5
+    ],
+    "area": 128675
+   },
+   "notes": "right tip touches the right image edge (x=959), so width may be slightly truncated"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "boat already moving left at clip start (no start of motion observed)"
+  },
+  {
+   "frame": 74,
+   "t": 2.96,
+   "event": "boat still moving left at clip end (no stop)"
+  },
+  {
+   "event": "no contact/collision between boat and rock (mast tip passes just below rock bottom edge in early frames)"
+  }
+ ]
+}

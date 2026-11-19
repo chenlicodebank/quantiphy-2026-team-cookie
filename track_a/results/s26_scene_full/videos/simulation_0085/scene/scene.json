@@ -1,0 +1,44 @@
+{
+  "video": "simulation_0085.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "view": "orthographic-looking top-down view of a flat uniform grey ground (RGB 140,140,140); +x right, +y down in image",
+  "camera": {"motion": "static (uniform background, no features; no shift detectable)", "perspective": "none visible; top-down, both objects keep constant pixel size, treat as one plane / one scale"},
+  "objects": {
+    "cyclist": {
+      "description": "person riding a teal/cyan bicycle, dark clothing, seen from above, upper lane (y ~381); moves toward -x (left)",
+      "moves": true, "visible_frames": [0, 71], "fully_in_frame": [4, 67],
+      "track": "tracks/cyclist.csv (whole rider+bike), tracks/cyclist_parts.csv (teal bike only + dark pixels)",
+      "extent_px": {"length_along_x_rider_plus_bike": 213, "range": [211, 217], "width_across_y_handlebar_arms": 61, "bike_only_length": 208, "bike_only_width_handlebar": 50},
+      "reference_point": "bbox centre (= bike centre within 1.6 px); rider torso/pelvis lies ~10 px further back (+x) than bbox centre",
+      "image_y_px": 381.3,
+      "motion_px_per_frame": "constant ~26.6 px/frame toward -x (frames 1-71); frame 0 and 1 identical position"
+    },
+    "car": {
+      "description": "Cybertruck-like pickup: white/silver body, black glass roof, dark bed at rear (right), side mirrors; lower lane (y ~727); front points left, moves toward -x",
+      "moves": true, "visible_frames": [0, 71], "fully_in_frame": [40, 63],
+      "track": "tracks/car.csv",
+      "extent_px": {"length_along_x_bumper_to_bumper": 728, "range": [722, 734], "width_across_y_with_mirrors": 316, "width_body_without_mirrors": 268},
+      "reference_point": "bbox centre when fully visible; when cut by the frame edge use centre_x_full (front edge + (L-1)/2 or rear edge - (L-1)/2, L=726)",
+      "image_y_px": 727.5,
+      "motion_px_per_frame": "starts from (near) rest at frame 1-2, accelerates roughly uniformly (~1.5 px/frame^2 front-edge) to ~62 px/frame by ~frame 67, then ~constant"
+    }
+  },
+  "static_objects": "none: flat grey ground only, no markings, no props",
+  "events": [
+    {"event": "cyclist already moving at start (frames 0 and 1 same position, then ~26.6 px/frame)", "frame": 1, "t": 0.042},
+    {"event": "car starts moving from rest", "frame": 1, "t": 0.042, "note": "front edge 1839 (f0), 1838 (f1,f2), 1835 (f3)"},
+    {"event": "cyclist fully enters frame", "frame": 4, "t": 0.167},
+    {"event": "car fully in frame", "frame": 40, "t": 1.667},
+    {"event": "car front edge passes cyclist front edge (overtake begins)", "frame": 60.7, "t": 2.53},
+    {"event": "car front edge leaves frame (x0=0)", "frame": 64, "t": 2.667},
+    {"event": "car acceleration ends / speed levels off ~62 px/frame", "frame": 67, "t": 2.79, "note": "approximate, +/-2 frames"},
+    {"event": "car centre passes cyclist centre (x)", "frame": 68, "t": 2.833},
+    {"event": "cyclist front leaves frame", "frame": 68, "t": 2.833}
+  ],
+  "separation_px": {"lane_offset_y_cyclist_to_car_centre": 346, "note": "per-frame x distance from tracks"}
+}

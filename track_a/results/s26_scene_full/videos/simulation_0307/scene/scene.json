@@ -1,0 +1,172 @@
+{
+ "video": "simulation_0307.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_of_frame": "t = frame / 24",
+ "image_area": "letterboxed: black bars rows 0..~80 and ~1360..1439; picture is rows ~80..1360",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of 4 background corners vs frame 0: max |shift| 0.011 px over all 72 frames",
+  "view": "elevated oblique view looking down onto a forest clearing; ground plane rises toward image top (far); tree line at top; no visible horizon (cut by tree canopy)",
+  "perspective_cues": "ground recedes upward; tanks near bottom are closest; aircraft flies away from camera (up-left in image), apparent size shrinks ~0.68x over clip",
+  "focal_length": "unknown; estimate from given depth_info + known size (f = pixel_size * depth / world_size) and check"
+ },
+ "objects": [
+  {
+   "name": "aircraft",
+   "aka": "VTOL jet / drone gunship, dark grey, twin wings with ducted-fan rings, light camouflage cockpit pod on top",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/aircraft.csv",
+   "motion": "flies away from the camera and to the left/up in the image along a nearly straight line during the whole clip, attitude nearly constant (main image axis ~176 deg throughout); no stop, bounce or turn",
+   "reference_point": "hull_cx,hull_cy (centroid of filled convex hull of mask) recommended; bbox_cx,bbox_cy alternative; both approximate the origin (body centre)",
+   "frame0": {
+    "hull_cx": "1696.6",
+    "hull_cy": "857.8",
+    "x0": "1345",
+    "y0": "713",
+    "x1": "1995",
+    "y1": "995",
+    "bbox_w": "651",
+    "bbox_h": "283"
+   },
+   "frame71": {
+    "hull_cx": "782.5",
+    "hull_cy": "350.2",
+    "x0": "553",
+    "y0": "280",
+    "x1": "992",
+    "y1": "420",
+    "bbox_w": "440",
+    "bbox_h": "141"
+   }
+  },
+  {
+   "name": "tank_middle",
+   "aka": "upper/middle of three grey battle tanks, nearest the aircraft start, gun pointing up-right",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "bbox_px": [
+    1248,
+    978,
+    1450,
+    1112
+   ],
+   "centre_px": [
+    1350,
+    1050
+   ],
+   "gun_tip_px": [
+    1432,
+    978
+   ],
+   "hull_length_along_axis_px": 210,
+   "hull_width_px": "approx 75 (oblique)",
+   "image_extent_w_h_px": [
+    202,
+    112
+   ],
+   "note": "bbox includes gun; +/- ~8 px; hull axis runs from upper-left (rear) to lower-right; partially under aircraft early (shadow/lighting change only)"
+  },
+  {
+   "name": "tank_left",
+   "aka": "lower-left of three tanks, gun pointing up-left",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "bbox_px": [
+    988,
+    1115,
+    1202,
+    1280
+   ],
+   "centre_px": [
+    1095,
+    1215
+   ],
+   "gun_tip_px": [
+    1008,
+    1115
+   ],
+   "hull_length_along_axis_px": 225,
+   "image_extent_w_h_px": [
+    214,
+    130
+   ],
+   "note": "+/- ~8 px"
+  },
+  {
+   "name": "tank_right",
+   "aka": "lower-right of three tanks (closest to camera), gun pointing up-left",
+   "moves": false,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "bbox_px": [
+    1378,
+    1195,
+    1622,
+    1360
+   ],
+   "centre_px": [
+    1500,
+    1295
+   ],
+   "gun_tip_px": [
+    1392,
+    1195
+   ],
+   "hull_length_along_axis_px": 250,
+   "image_extent_w_h_px": [
+    244,
+    ">=130 (cut by bottom letterbox at y~1360)"
+   ],
+   "note": "bottom of tank cut by letterbox; +/- ~10 px"
+  },
+  {
+   "name": "trees",
+   "aka": "forest (tree line along top/right, two sparse conifers at lower-left)",
+   "moves": false
+  },
+  {
+   "name": "ground",
+   "aka": "grey clearing with pale gravel/snow patches",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "aircraft motion start",
+   "frame": 1,
+   "time": 0.0417,
+   "detail": "frames 0 and 1 are identical (same mask/bbox to the pixel); first displacement is frame 1->2 (~21 px). Moves continuously until the last frame 71 (t=2.958), no stop."
+  },
+  {
+   "event": "aircraft image direction",
+   "detail": "steady heading up-left in the image, ~-150 deg (atan2(dy,dx), y down); pixel step decreases ~21 -> ~9 px/frame as it recedes (perspective) - per-frame steps have ~+/-3 px mask jitter"
+  },
+  {
+   "event": "no bounce, impact, contact or direction change observed"
+  }
+ ],
+ "aircraft_apparent_size": {
+  "bbox_w_frame0": 651.0,
+  "bbox_w_frame71": 440.0,
+  "bbox_h_frame0": 283.0,
+  "bbox_h_frame71": 141.0,
+  "note": "shrinks monotonically as it recedes; see bbox_w/main_axis_len per frame in track"
+ }
+}

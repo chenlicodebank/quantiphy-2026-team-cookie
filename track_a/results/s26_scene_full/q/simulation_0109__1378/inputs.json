@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0109.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MX",
+ "fps": 24.008,
+ "frames": 72,
+ "duration_s": 2.999,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1378,
+  "question": "What is the diameter of the red blood cell in meters?",
+  "prior": "speed of the red blood cell = 4.7833 m/s",
+  "depth_info": "t=1.0s, distance_left_red_blood_cell_camera = 22.0155 m\nt=2.0s, distance_left_red_blood_cell_camera = 24.0333 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

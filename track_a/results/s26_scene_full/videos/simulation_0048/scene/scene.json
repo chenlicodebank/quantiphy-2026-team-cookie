@@ -1,0 +1,246 @@
+{
+ "video": "simulation_0048.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 33.0,
+ "frames": 99,
+ "width": 1920,
+ "height": 766,
+ "time_of_frame": "t = frame / 33",
+ "units": "pixels (x right, y down, origin top-left of the full frame) and seconds",
+ "camera": {
+  "static": true,
+  "evidence": "phase correlation of the static left half (x<1100) frame 0 vs every 10th frame: constant 0.5 px estimator artefact (also at frame 10 where mean abs diff is 0.09 grey levels), no drift; mean abs diff <1.4 grey levels",
+  "per_frame_shift_px": [
+   0,
+   0
+  ],
+  "view": "elevated view looking down a sloping street; camera above the sidewalk at the left (kiosk / wall in the near foreground), people come toward the camera",
+  "perspective": {
+   "street_direction_vanishing_point_px": [
+    1771,
+    -177
+   ],
+   "vp_note": "intersection of three nearly concurrent lines: walker foot path (1542.5,416.5)->(1500,526.5), cyclist wheel-contact path (~1730,417.5)->(~1712,761), right curb edge (1650,350)->(1570,700). All three meet within ~2 px at (1771,-177): the walk direction is parallel to the street and the VP lies above the image, i.e. the camera is pitched down. Horizon not visible (a crest of the street at y~310-320 hides it).",
+   "ground": "sidewalk (pale concrete slabs) left of the curb, asphalt road right of it; road crest / skyline at y~305-325 (x 1600-1920)",
+   "verticals": "building and kiosk verticals look close to vertical (small down-tilt convergence)"
+  }
+ },
+ "objects": [
+  {
+   "name": "walker",
+   "type": "person (adult man)",
+   "moves": true,
+   "distinguish": "light grey T-shirt, dark blue jeans, blurred face, walks on the SIDEWALK (left of the curb), toward the camera and slightly left; the left of the two people at frame 0",
+   "visible_frames": [
+    0,
+    98
+   ],
+   "track": "tracks/walker.csv",
+   "ref_point": "pelvis proxy = torso centre x at the shirt/jeans (belt) line",
+   "apparent_size": {
+    "height_px_f0": 185.0,
+    "height_px_f98": 225.5,
+    "width_px_f0": 57.5,
+    "width_px_f98": 66.0,
+    "note": "height = head top to lowest shoe; grows ~1.22x over the clip (approaching slowly)"
+   },
+   "occlusion": "none until ~f86; from ~f86 his left hand/arm touches the kiosk's right edge (x~1462), maybe a few px hidden"
+  },
+  {
+   "name": "cyclist",
+   "type": "person riding a bicycle (rider + bike)",
+   "moves": true,
+   "distinguish": "dark jacket over blue shirt, jeans, white/silver bicycle; rides on the ROAD (right of the curb) toward the camera; the right person at frame 0; much faster than the walker",
+   "visible_frames": [
+    0,
+    91
+   ],
+   "track": "tracks/cyclist.csv",
+   "ref_point": "pelvis proxy = torso centre x at the handlebar-grip line (hips are at about saddle/handlebar height); valid frames 0-61; chest_x/chest_y template point continues to f84",
+   "apparent_size": {
+    "height_px_f0": 178.5,
+    "height_px_f60": 306.0,
+    "width_px_f0": 55,
+    "width_px_f60": 87,
+    "note": "height = head top to front-wheel ground contact (rider+bike); grows ~1.71x f0->f60; ground contact leaves the image bottom at ~f61, head leaves at ~f91"
+   },
+   "occlusion": "none; cut by the bottom image border from ~f61, fully out after f91"
+  },
+  {
+   "name": "kiosk",
+   "type": "grey box-shaped kiosk/newsstand/bin with posters on its right side (red/white graffiti)",
+   "moves": false,
+   "distinguish": "large grey box in the centre-foreground, x 1100-1470, extends below the image bottom",
+   "image_position": {
+    "top_face_corners_px": {
+     "front_left": [
+      1102,
+      390
+     ],
+     "front_right": [
+      1415,
+      425
+     ],
+     "back_right": [
+      1468,
+      350
+     ],
+     "back_left": [
+      1162,
+      327
+     ]
+    },
+    "front_face_top_edge_length_px": 315,
+    "side_face_top_edge_length_px": 91,
+    "visible_height_px": ">376 (front-left vertical edge from y 390 to the image bottom 766; bottom not visible)"
+   }
+  },
+  {
+   "name": "manhole_cover",
+   "type": "round manhole cover on the road",
+   "moves": false,
+   "distinguish": "dark ellipse on the asphalt right of the cyclist's path",
+   "image_position": {
+    "centre_px": [
+     1833,
+     428
+    ],
+    "major_axis_px": 116,
+    "minor_axis_px": 27
+   }
+  },
+  {
+   "name": "tree",
+   "type": "street tree on the sidewalk edge",
+   "moves": false,
+   "distinguish": "single tree at the right end of the sidewalk, behind the people",
+   "image_position": {
+    "trunk_centre_x_px": 1630,
+    "trunk_base_y_px": 350,
+    "trunk_width_px": 25,
+    "crown_x_range_px": [
+     1460,
+     1860
+    ],
+    "crown_top": "above the image top"
+   }
+  },
+  {
+   "name": "stairs_railings",
+   "type": "stoop stairs with black railings and ball-topped posts",
+   "moves": false,
+   "image_position": {
+    "x_range_px": [
+     1180,
+     1500
+    ],
+    "y_range_px": [
+     180,
+     400
+    ],
+    "nearest_post_finial_px": [
+     1462,
+     245
+    ]
+   }
+  },
+  {
+   "name": "lab_sign",
+   "type": "beige sign with black letters 'O LAB'",
+   "moves": false,
+   "image_position": {
+    "x_range_px": [
+     600,
+     828
+    ],
+    "y_range_px": [
+     45,
+     275
+    ]
+   }
+  },
+  {
+   "name": "blue_wall_M_logo",
+   "type": "out-of-focus blue wall with a yellow 'M' logo, near foreground left",
+   "moves": false,
+   "image_position": {
+    "x_range_px": [
+     0,
+     600
+    ],
+    "y_range_px": [
+     0,
+     766
+    ]
+   }
+  },
+  {
+   "name": "curb",
+   "type": "curb between sidewalk and road",
+   "moves": false,
+   "image_position": {
+    "right_edge_line_px": [
+     [
+      1650,
+      350
+     ],
+     [
+      1570,
+      700
+     ]
+    ]
+   }
+  },
+  {
+   "name": "sidewalk",
+   "type": "ground: concrete slabs",
+   "moves": false
+  },
+  {
+   "name": "road",
+   "type": "ground: asphalt, slopes up to a crest at y~310",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "walker walking (steady gait toward camera) the whole clip; no start/stop",
+   "frames": [
+    0,
+    98
+   ]
+  },
+  {
+   "event": "cyclist riding toward camera the whole clip; no start/stop observed",
+   "frames": [
+    0,
+    91
+   ]
+  },
+  {
+   "event": "cyclist front-wheel ground contact reaches image bottom",
+   "frame": 61,
+   "time_s": 1.848
+  },
+  {
+   "event": "cyclist handlebar line leaves image (approx.)",
+   "frame": 78,
+   "time_s": 2.364
+  },
+  {
+   "event": "cyclist last visible (top of head)",
+   "frame": 91,
+   "time_s": 2.758
+  },
+  {
+   "event": "walker's left hand reaches the kiosk's right edge (possible slight occlusion)",
+   "frame": 86,
+   "time_s": 2.606
+  },
+  {
+   "event": "no contacts/collisions between objects",
+   "frames": null
+  }
+ ]
+}

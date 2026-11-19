@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0247.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MS",
+ "fps": 30.0,
+ "frames": 75,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1629,
+  "question": "What is the length of the deer in meters?",
+  "prior": "speed of the deer = 1.277m/s",
+  "depth_info": "t=0s, distance_rabbit_camera=15.798m  \nt=1.0s, distance_rabbit_camera=15.852m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

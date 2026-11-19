@@ -1,0 +1,55 @@
+{
+  "video": "captured_0062s.mp4",
+  "source": "lab (captured, Orbbec Femto Mega RGB; background replaced by SAM2 demo - smooth colour gradient, watermark 'Modified with Segment Anything 2 Demo' at x>=1025,y>=688)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+  "time_convention": "t = frame / 24; frame = round(t*24)",
+  "camera": {
+    "motion": "static (static props' mask centroids vary by <=0.1 px std for bin/bag, <=0.5 px for carton/bear over all 49 frames)",
+    "intrinsics_from_benchmark": "fx = fy = 0.5959*1280 = 763 px, principal point ~ (640, 360); no zoom",
+    "view": "oblique view looking down on a floor (background removed, so no floor texture/horizon visible). Objects lie on the floor; image-up corresponds to farther from the camera, image-down to nearer.",
+    "perspective_cues": "Only object sizes: the moving board's apparent size shrinks steadily as it moves up-left in the image (moving away from the camera). No ground lines or vanishing points are visible."
+  },
+  "objects": {
+    "white_board": {
+      "description": "flat white rectangular board/tray with two small grey knobs/handles at the corners of its far (upper) edge; the only white large object",
+      "moves": true,
+      "visible_frames": "0-48 (frames 0-20 cut by the bottom image edge and/or watermark; fully visible 21-48)",
+      "track": "tracks/white_board.csv",
+      "reference_point": "cx,cy = centroid of the visible white mask (visible centre). minrect_cx/cy = centre of min-area rectangle.",
+      "apparent_size_px": {
+        "frame_0_rest_cut": {"minrect_length": 324.7, "minrect_width": 181.9, "note": "bottom part out of frame; visible part only"},
+        "frame_21_first_uncut": {"length": 326.5, "width": 163.2, "area": 42461},
+        "frame_24": {"length": 298.3, "width": 157.5, "area": 37053},
+        "frame_30": {"length": 260.1, "width": 133.6, "area": 28840},
+        "frame_36": {"length": 230.5, "width": 111.3, "area": 21558},
+        "frame_42": {"length": 210.5, "width": 98.6, "area": 17266},
+        "frame_48": {"length": 203.4, "width": 85.6, "area": 13928}
+      },
+      "long_axis_angle_deg": "~21 deg at rest (image, y down, clockwise from +x), ~10-13 deg during motion"
+    },
+    "trash_bin": {"description": "dark navy bin/basket with yellow and white confetti pattern, top-left", "moves": false, "visible_frames": "0-48",
+      "centre_px": [337.0, 157.4], "bbox_px": [289, 110, 378, 209], "width_px": 90, "height_px": 100, "minrect_length_px": 97.7, "minrect_width_px": 88.0,
+      "note": "seen obliquely from above: top rim ellipse visible at y~110-135; height_px is the image-vertical extent incl. rim"},
+    "tote_bag": {"description": "navy blue tote bag lying flat with round pink/beige logo and dark handle loop, right of centre", "moves": false, "visible_frames": "0-48",
+      "centre_px": [837.6, 329.7], "bbox_px": [772, 295, 895, 371], "width_px": 124, "height_px": 77, "minrect_length_px": 124.6, "minrect_width_px": 74.9,
+      "note": "body ~ 772-880 x, handle loop extends to x~895"},
+    "carton": {"description": "small white printed drink carton / box lying on its side, centre-lower-left", "moves": false, "visible_frames": "0-48",
+      "centre_px": [517.2, 499.6], "bbox_px": [491, 464, 543, 534], "width_px": 53, "height_px": 71,
+      "minrect_length_px": 69.0, "minrect_width_px": 52.0,
+      "note": "box lying obliquely (top face + side visible); longest visible extent ~69 px, roughly image-vertical; box edges are diagonal so this is approximate"},
+    "teddy_bear": {"description": "brown/orange teddy bear (plush toy) lying on its back, bottom centre", "moves": false, "visible_frames": "0-48",
+      "centre_px": [630.3, 622.9], "bbox_px": [580, 577, 689, 666], "width_px": 110, "height_px": 89,
+      "minrect_length_px": 115.8, "minrect_width_px": 75.7, "long_axis_angle_deg": 24.1,
+      "note": "head at right (~x 650-690), feet/legs at left; long axis = head-to-feet"}
+  },
+  "events": [
+    {"event": "board at rest", "frames": "0-15", "t_s": "0.000-0.625"},
+    {"event": "board motion start (first sub-pixel shift at 16, clear motion at 17)", "frame": 16, "t_s": 0.667},
+    {"event": "peak image-plane step (~25 px/frame)", "frame": 21, "t_s": 0.875},
+    {"event": "board fully inside frame (no longer cut by bottom edge/watermark)", "frame": 21, "t_s": 0.875},
+    {"event": "probable dropped frame: step 35->36 is ~31 px vs ~15 px neighbours", "frame": 36, "t_s": 1.5},
+    {"event": "board still moving at last frame (step ~12.5 px/frame, slowly decreasing)", "frame": 48, "t_s": 2.0}
+  ],
+  "motion_direction": "board moves up-left in the image (from ~(957,630) to ~(548,278)), nearly straight line, i.e. away from the camera across the floor; slight rotation of its long axis from ~21 deg to ~10 deg (frames 16-26) then back to ~12.5 deg"
+}

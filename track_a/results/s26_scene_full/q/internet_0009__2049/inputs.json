@@ -1,0 +1,18 @@
+{
+ "video": "internet_0009.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 59.826879,
+ "frames": 111,
+ "duration_s": 1.8554,
+ "width": 2160,
+ "height": 3840,
+ "question": {
+  "id": 2049,
+  "question": "What is the total displacement of the player on the right in meters?",
+  "prior": "singles court width = 8.23m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 60.0
+ }
+}

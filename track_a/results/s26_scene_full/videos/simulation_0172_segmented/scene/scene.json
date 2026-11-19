@@ -1,0 +1,38 @@
+{
+  "video": "simulation_0172_segmented.mp4",
+  "source": "segmentation (Blender render with background replaced by plain white)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 80, "duration_s": 3.3333, "width": 2304, "height": 1296,
+  "time_convention": "t = frame / 24; frame = round(t*24)",
+  "objects": [
+    {
+      "name": "astronaut",
+      "description": "single white spacesuit astronaut with backpack (life-support pack on its back, left side of image), walking; the only object in the video",
+      "moves": true, "type": "human (walking)",
+      "visible_frames": [0, 79], "occluded_frames": [], "touches_border": false,
+      "track": "tracks/astronaut.csv",
+      "reference_point": "pelvis_x/pelvis_y = pelvis estimate (47% of bbox height below head top, x = mean mask x in that row band); centroid_x/y = mask centroid (practically the same, within ~10 px)",
+      "summary_px": {
+        "pelvis_start_f0": [687.8, 758.7], "pelvis_end_f79": [1873.9, 834.4],
+        "bbox_h_f0": 342, "bbox_h_f79": 435, "bbox_h_median_by_10_frames": [341, 349, 382, 410, 416, 404, 405, 428],
+        "bbox_h_min": "~339 near f9", "bbox_h_max": "435 at f79",
+        "bbox_w_range": "~179 (f16-24) to ~253 (f54)",
+        "mean_pelvis_step_px_per_frame": 16.1
+      }
+    }
+  ],
+  "static_objects": "none: background is uniform white (segmented); no ground, horizon or markings visible",
+  "events": [
+    {"name": "motion_start", "frame": 0, "t": 0.0, "note": "already walking at first frame"},
+    {"name": "motion_end", "frame": 79, "t": 3.2917, "note": "still walking at last frame"},
+    {"name": "image_path_lowest_point_1", "frame": 16, "t": 0.667, "note": "pelvis/feet image y local max (lowest on screen)"},
+    {"name": "image_path_highest_point", "frame": 35, "t": 1.458, "note": "pelvis/feet image y local min (highest on screen), frames 34-36"},
+    {"name": "image_path_lowest_point_2", "frame": 63, "t": 2.625, "note": "pelvis/feet image y local max"},
+    {"name": "fastest_image_motion", "frames": [20, 30], "note": "dx ~29 px/frame vs ~7-9 at start and end"}
+  ],
+  "camera": {
+    "motion": "unknown - background removed, no static reference visible; treat as fixed (simulation convention: camera fixed within a clip)",
+    "perspective_cues": "none in image (no ground plane / horizon). Apparent height grows 342 -> 435 px (x1.27) so the astronaut ends ~21% closer to the camera than at start (if its pose height is unchanged); the image path weaves vertically (down to f16, up to f35, down to f63)."
+  },
+  "files": {"tracks": ["tracks/astronaut.csv"], "notes": "notes.md", "scripts": ["scripts/track.py", "scripts/analyze.py"], "checks": "check/*.png"}
+}

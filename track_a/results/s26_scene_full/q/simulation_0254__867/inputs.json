@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0254.mp4",
+ "video_source": "simulation",
+ "video_type": "S2SS",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 867,
+  "question": "What is the acceleration of the tennis ball at time 0.5s in m/s^2?",
+  "prior": "diameter of the tennis ball = 0.17m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

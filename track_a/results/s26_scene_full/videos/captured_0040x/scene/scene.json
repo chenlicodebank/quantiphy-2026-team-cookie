@@ -1,0 +1,198 @@
+{
+ "video": "captured_0040x.mp4",
+ "source": "lab (SAM2-segmented: background blacked out, watermark \"Modified with Segment Anything 2 Demo\")",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "camera": {
+  "static": true,
+  "per_frame_shift_px": "< 0.15 px (phase correlation of table region vs frame 0, all frames)",
+  "intrinsics_from_conventions": {
+   "fx_px": 763,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "perspective": "camera slightly above table height looking slightly down; table top seen as a trapezoid narrowing away; no horizon visible (black background)"
+ },
+ "units": "pixels, seconds; t = frame / 24",
+ "objects": {
+  "white_toy": {
+   "moves": true,
+   "track": "tracks/white_toy.csv",
+   "visible_frames": "0-48 (all)",
+   "description": "white/cream oblong (capsule / bean-shaped) soft object, the only moving object. Held by a hand (hand removed by segmentation) at left (x~125-190, y~460-550) frames 0-22, thrown to the right, bounces on the table twice, still in view (x~1183) at the last frame",
+   "apparent_size_trend": "minor-axis width ~36 px (frames 0-22, in hand), ~37-40 px (frames 25-30), ~39-46 px (34-38), ~47-56 px (42-48): object comes toward the camera over the clip. Major axis 72-80 px in flight frames 26-29 (includes some blur); bbox at frame 29 = 73x39 px with major axis near horizontal"
+  },
+  "glass_jar": {
+   "moves": false,
+   "bbox_xyxy_frame0": [
+    482,
+    416,
+    543,
+    497
+   ],
+   "width_px": 61,
+   "height_px": 81,
+   "description": "clear glass jar with white lid, leftmost item on table back"
+  },
+  "tape_roll": {
+   "moves": false,
+   "bbox_xyxy_frame0": [
+    551,
+    437,
+    629,
+    484
+   ],
+   "width_px": 78,
+   "height_px": 47,
+   "description": "wide translucent yellowish tape roll lying flat, right of jar"
+  },
+  "card_tent": {
+   "moves": false,
+   "bbox_xyxy_frame0": [
+    663,
+    417,
+    712,
+    500
+   ],
+   "width_px": 49,
+   "height_px": 83,
+   "description": "playing cards leaned into a tent (blue/white backs), between tape roll and cup"
+  },
+  "white_cup": {
+   "moves": false,
+   "bbox_xyxy_frame0": [
+    740,
+    377,
+    814,
+    503
+   ],
+   "top_diameter_px": 74,
+   "height_px": 126,
+   "description": "tall white tumbler/cup, rightmost item, tallest object"
+  },
+  "flat_cards": {
+   "moves": false,
+   "bbox_xyxy_frame0": [
+    645,
+    500,
+    745,
+    515
+   ],
+   "width_px": 100,
+   "description": "playing card(s) lying flat in front of the card tent"
+  },
+  "dark_card": {
+   "moves": false,
+   "bbox_xyxy_frame0": [
+    510,
+    529,
+    617,
+    551
+   ],
+   "width_px": 107,
+   "description": "dark navy card/booklet lying flat at the table front, small yellow sticky note at its right end (~x585-615)"
+  },
+  "table": {
+   "moves": false,
+   "top_corners_approx_xy": {
+    "front_left": [
+     210,
+     542
+    ],
+    "front_right": [
+     1138,
+     588
+    ],
+    "back_left": [
+     450,
+     452
+    ],
+    "back_right": [
+     905,
+     465
+    ]
+   },
+   "front_edge_thickness_px": "~25-30",
+   "bbox_xyxy": [
+    210,
+    450,
+    1140,
+    622
+   ],
+   "description": "wooden (brown) table top, seen obliquely; its right/front edge recedes"
+  },
+  "table_leg": {
+   "moves": false,
+   "bbox_xyxy": [
+    629,
+    620,
+    688,
+    719
+   ],
+   "width_px": 60,
+   "description": "dark grey central pedestal leg, cut by the image bottom"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time_s": 0.0,
+   "event": "clip start: toy in (masked) hand, swinging down-left (wind-up)"
+  },
+  {
+   "frame": 8,
+   "time_s": 0.3333,
+   "event": "lowest point of first wind-up swing (cy 521), reverses upward"
+  },
+  {
+   "frame": 12,
+   "time_s": 0.5,
+   "event": "top of swing (cy 494), reverses downward"
+  },
+  {
+   "frame": 20,
+   "time_s": 0.8333,
+   "event": "lowest point of second swing (cy 532, cx 127)"
+  },
+  {
+   "frame": 22,
+   "time_s": 0.9167,
+   "event": "last in-hand frame; release between frame 22 and 23 (displacement jumps to ~33 then ~55 px/frame)"
+  },
+  {
+   "frame": 28,
+   "time_s": 1.1667,
+   "event": "apex of first flight arc (cy 331.6 at f28, 332.0 at f29; apex ~f28.5)"
+  },
+  {
+   "frame": 33,
+   "time_s": 1.375,
+   "event": "first bounce/impact on the table top behind the tape roll / card tent (lowest image point, occluded)"
+  },
+  {
+   "frame": 36,
+   "time_s": 1.5,
+   "event": "apex of second arc (cy 358.1 f36, 359.3 f37), toy passes just above / in front of the white cup top (f36-38)"
+  },
+  {
+   "frame": 41,
+   "time_s": 1.7083,
+   "event": "second bounce on the table top right of the cup (cy 486.7)"
+  },
+  {
+   "frame": 45,
+   "time_s": 1.875,
+   "event": "apex of third arc (cy 384.6)"
+  },
+  {
+   "frame": 48,
+   "time_s": 2.0,
+   "event": "clip end, toy still visible, descending near the right of the table (cx 1183)"
+  }
+ ],
+ "no_contact_with_static_objects": "static_check.py shows no static object moved (mean abs diffs constant except when the toy overlaps them)"
+}

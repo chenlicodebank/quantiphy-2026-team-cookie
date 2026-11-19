@@ -1,0 +1,86 @@
+{
+  "video": "internet_0023.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 26.636204,
+  "frames": 130,
+  "duration_s": 4.8806,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels (full resolution 2560x1440, x right, y down) and seconds; no metric scale",
+  "description": "Near-nadir (top-down) drone view of a rectangular outdoor swimming pool on a dark wooden deck. One man (white swim trunks, dark hair) dives in from the left (west) end and glides / swims underwater to the right along y ~ 685-700. Video starts mid-dive (body horizontal above the water, hands touching the surface) and ends with him underwater about two-thirds of the way along the pool.",
+  "camera": {
+    "type": "hovering drone, looking straight down; essentially static with slow drift",
+    "file": "camera.csv",
+    "drift_summary": "background shift relative to frame 0 at the pool centre: dx grows 0 -> +12.8 px (max ~frame 120), dy goes 0 -> -8.4 px (frame 48) -> -1 px (frame 129); rotation < 0.05 deg; image scale shrinks by <= 0.47 % (slight altitude gain)",
+    "advice": "drift is ~1 % of the swimmer's travel; columns *_bgcomp in the track subtract camera dx/dy (translation only)",
+    "perspective": "top-down: pool rim is a clean rectangle, no visible vanishing point; treat as planar. Swimmer is under water (a few dm below surface) after frame ~10, so refraction/depth makes him look slightly smaller than at the surface."
+  },
+  "moving_objects": {
+    "swimmer": {
+      "description": "adult man, white/grey swim trunks, dark hair; the only moving object. Head and shoulders appear as a smooth flat grey-teal blob ('head patch') once underwater (frames ~22-129).",
+      "visible_frames": [0, 129],
+      "track_file": "tracks/swimmer.csv",
+      "motion_direction": "+x (left to right along the pool length), y nearly constant ~680-700",
+      "reference_points": {
+        "mid_x/mid_y": "visible centre = midpoint of rear (toes) and front (leading tip); frames 0-18 and 74-129 (feet not discernible 19-73)",
+        "head_x/head_y": "frames 0-6 manual centre of the head (dark hair); frames 22-129 automatic centroid of the smooth head/shoulder patch; missing 7-21",
+        "front_x": "leading tip (fingertips / splash front / patch tip) every frame 0-129 (manual keyframes, linear interpolation between, src m/i)",
+        "rear_x": "toe tips (left end)",
+        "hip_x": "centre of white trunks frames 0-8 only"
+      },
+      "pixel_sizes": {
+        "full_length_feet_to_fingertips_frame0_px": 256,
+        "feet_to_top_of_head_frame0_px": 205,
+        "feet_to_fingertips_frames0_3_px": [256, 266, 268, 274],
+        "body_width_across_frame0_px": 47,
+        "trunks_length_frame0_px": 35,
+        "head_diameter_frame0_px": 22,
+        "underwater_length_rear_to_front_frames110_122_px": [208, 210, 198],
+        "underwater_length_with_arms_extended_frame98_px": 253,
+        "note": "frames 0-3 are the best full-body view (body straight, at/above the surface). Underwater lengths vary with stroke phase, kick and depth."
+      },
+      "head_patch_size_px": "about 80-90 long x 60-75 wide (frames 52-129), larger with arms spread (frames 92-107)"
+    }
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "video starts mid-dive: body horizontal at the surface, fingertips touching water at x~835 (small splash); no take-off seen"},
+    {"frame": 3, "t": 0.1126, "event": "hands/forearms in the water, splash grows"},
+    {"frame": 6, "t": 0.2253, "event": "head goes under (last frame head clearly visible)"},
+    {"frame": 9, "t": 0.3379, "event": "trunks/hips go under"},
+    {"frame": 19, "t": 0.7133, "event": "feet go under (last toes visible ~frame 18)"},
+    {"frame": 22, "t": 0.8259, "event": "smooth head patch forms; glide slowing strongly"},
+    {"frame": 30, "t": 1.1263, "event": "slowest glide: head moves ~1-2 px/frame (frames 26-36)"},
+    {"frame": 42, "t": 1.5768, "event": "brief stall (frames 42-46) then underwater swimming resumes"},
+    {"frame": 58, "t": 2.1775, "event": "steady underwater swimming ~4-5 px/frame head speed (58-72)"},
+    {"frame": 78, "t": 2.9283, "event": "slower phase ~2 px/frame (78-86)"},
+    {"frame": 94, "t": 3.529, "event": "arm sweep: patch spreads (arms out) frames ~92-107, head centroid stalls/jitters 94-101"},
+    {"frame": 102, "t": 3.8294, "event": "faster again ~4-5 px/frame (102-125)"},
+    {"frame": 129, "t": 4.843, "event": "video ends; head ~x 1430, front ~1475, toes ~1300 (still moving +x)"}
+  ],
+  "static_objects": {
+    "pool_water_main_basin": {"x": [566, 1725], "y": [478, 1020], "length_px": 1159, "width_px": 542, "frame": 0, "note": "water edge (inner coping edge); length along x, width along y"},
+    "pool_step_bay": {"x": [1725, 1942], "y": [872, 1017], "note": "shallow entry steps at bottom-right extension; 6 treads, riser lines at x ~1740,1780,1817,1853,1893,1933 (pitch ~38 px)"},
+    "pool_total_water_length_px": 1376,
+    "pool_coping_outer": {"x": [526, 1983], "y": [440, 1057], "coping_width_px": 40, "note": "beige stone border; outer x at main basin right side ~1764; bay coping top outer y ~833"},
+    "pool_lights": {"positions": [[774, 454], [1158, 451], [1533, 448], [1975, 1000]], "note": "small white discs on the coping"},
+    "lounger_top_left": {"bbox": [584, 128, 681, 371], "length_px": 246, "width_px": 89, "colour": "teal cushion, upper deck, left one"},
+    "lounger_top_right": {"bbox": [782, 136, 871, 381], "length_px": 246, "width_px": 88, "colour": "teal, upper deck, right one"},
+    "lounger_bottom_1": {"bbox_visible": [818, 1163, 903, 1340], "width_px": 86, "note": "lower deck from left; lower part in palm shadow, true length ~240 px (y ~1160-1400)"},
+    "lounger_bottom_2": {"bbox_visible": [988, 1160, 1067, 1319], "width_px": 80, "note": "lower deck 2nd; shadowed below ~1320"},
+    "lounger_bottom_3": {"bbox_visible": [1467, 1148, 1549, 1314], "width_px": 83, "note": "lower deck 3rd"},
+    "lounger_bottom_4": {"bbox_visible": [1652, 1154, 1735, 1319], "width_px": 84, "note": "lower deck 4th (rightmost)"},
+    "umbrella_white_top_left": {"bbox": [93, 346, 355, 656], "centre": [222, 499], "diameter_px": [260, 300], "note": "closed-canopy hexagon seen from above; flat-to-flat ~260, corner-to-corner ~300"},
+    "umbrella_white_bottom_left": {"bbox": [69, 832, 365, 1109], "centre": [216, 972], "diameter_px": [265, 299]},
+    "umbrella_white_bottom_right": {"bbox": [1838, 1130, 2128, 1439], "centre": [1983, 1282], "diameter_px": [275, 309], "note": "cut by bottom image edge"},
+    "umbrella_grey_top_right": {"bbox_approx": [1839, 390, 2125, 680], "centre": [1994, 531], "diameter_px": [280, 290], "note": "white umbrella in tree shade (looks grey)"},
+    "thatch_roof": {"bbox_approx": [838, 0, 1997, 211], "note": "straw roof edge at top, cut by image edge"},
+    "deck": "dark wooden slatted deck all around the pool"
+  },
+  "files": {
+    "tracks/swimmer.csv": "per-frame swimmer track",
+    "camera.csv": "per-frame camera drift (similarity transform frame0->frame i)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

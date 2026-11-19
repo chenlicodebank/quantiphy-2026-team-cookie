@@ -1,0 +1,56 @@
+{
+  "video": "captured_0038s.mp4",
+  "source": "lab (Orbbec Femto Mega RGB, background replaced with green by Segment Anything 2; watermark bottom-right)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24, frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation vs frame 0: |shift| <= 0.13 px in all frames)",
+    "intrinsics_from_benchmark": "fx = fy ~ 0.5959*1280 = 763 px, principal point ~ (640, 360)",
+    "perspective": "camera slightly above table height looking at a square table seen obliquely; table top corners approx back-left (455,450), back-right (915,465), front-left (210,540), front-right (1140,590); image y increases toward the camera on the table plane"
+  },
+  "objects": {
+    "ball": {
+      "desc": "white ball (ping-pong-like) - the only moving object. Starts at rest on the far-left corner of the table top, launched rightwards along the table, rolls in front of the card tent / flat cards and the white cup, still rolling at the last frame",
+      "moves": true,
+      "visible_frames": "0-48",
+      "track": "tracks/ball.csv",
+      "reference_point": "cx, cy = centre of the visible ball (mask bbox centre)",
+      "apparent_diameter_px": {
+        "at_rest_frames_0_5": "about 40-41 (bbox 43x41, left part clipped by segmentation artefact)",
+        "frames_15_28_vertical": "37-38",
+        "frames_38_48_vertical": "35-36",
+        "note": "use height_px / max_col_height (vertical, blur-free); width_px includes horizontal motion blur (~53 px when moving)"
+      },
+      "image_motion": "left to right, x 277 -> 968 px, y 492 -> 511 px (slightly toward camera)"
+    },
+    "pink_bottle": {"desc": "pink insulated bottle with cream lid, behind-left of card tent", "moves": false,
+      "bbox_xyxy": [636, 332, 687, 477], "width_px": 52, "height_px": 146, "base_centre": [661, 477]},
+    "white_cup": {"desc": "white tumbler/cup right of bottle, right of card tent", "moves": false,
+      "bbox_xyxy": [724, 378, 794, 497], "width_px": 71, "height_px": 120, "base_centre": [759, 497]},
+    "card_tent": {"desc": "two playing cards leaning against each other (card house) in front of the bottle", "moves": false,
+      "bbox_xyxy_approx": [655, 415, 712, 498], "width_px": 57, "height_px": 83},
+    "flat_cards": {"desc": "playing card(s) lying flat on table in front of the card tent", "moves": false,
+      "bbox_xyxy": [645, 495, 743, 515], "width_px": 99, "height_px": 21},
+    "dark_card": {"desc": "dark blue card/phone with yellow sticker lying near the front edge of the table", "moves": false,
+      "bbox_xyxy": [519, 533, 619, 551], "width_px": 101, "height_px": 19},
+    "table": {"desc": "square wooden table top on a single black pedestal", "moves": false,
+      "top_bbox_xyxy": [208, 450, 1141, 623], "front_edge_length_px": "~940 (front-left (210,540) to front-right (1140,590))",
+      "edge_thickness_px": "~22-30", "pedestal_bbox_xyxy": [605, 590, 719, 719], "pedestal_column_width_px": "~57 (x 630-687)"}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "ball at rest on far-left corner of table, centre ~(277, 492)"},
+    {"frame": 5, "t": 0.2083, "event": "ball starts a small leftward shift (~3 px, frames 5-8) - pre-launch contact by the (segmented-out) striker"},
+    {"frame": 11, "t": 0.4583, "event": "last frame near rest position (x ~277)"},
+    {"frame": 12, "t": 0.5, "event": "ball launched: first moving frame, step ~50 px, heavy motion blur (launch between frames 11 and 12)"},
+    {"frame": 17, "t": 0.7083, "event": "per-frame step has fallen from ~50 (f12) via 31, 28, 24, 20 to ~16-17 px/frame; roughly steady ~16 px/frame afterwards"},
+    {"frame": 29, "t": 1.2083, "event": "ball starts passing in front of the card tent and flat cards (not occluded; ball is in front)"},
+    {"frame": 34, "t": 1.4167, "event": "ball passes in front of the white cup base (frames ~34-37)"},
+    {"frame": 36, "t": 1.5, "event": "step 35->36 is ~33 px (twice normal): probable dropped frame in the recording"},
+    {"frame": 48, "t": 2.0, "event": "last frame, ball still rolling at ~(968, 511), no impact or bounce in the clip"}
+  ]
+}

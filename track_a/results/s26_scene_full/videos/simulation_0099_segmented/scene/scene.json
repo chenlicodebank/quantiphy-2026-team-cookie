@@ -1,0 +1,43 @@
+{
+  "video": "simulation_0099_segmented.mp4",
+  "source": "segmentation (simulation render, background replaced by pure white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "duration_s": 3.0417,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {"motion": "static (no background exists; both objects move at constant pixel velocity, no global shift detectable)", "perspective": "2D side view, both objects in a plane facing the camera, no ground/horizon cues"},
+  "objects": {
+    "boat": {
+      "description": "red-and-dark-purple fishing boat, white wheelhouse, hull number 'AH805', mast; upper half of image; bow points right",
+      "moves": true, "direction": "+x (rightwards), horizontal",
+      "visible_frames": "0-72 (fully inside horizontally 0-47; bow clipped by right edge from 48; mast top always clipped by top edge, mast leaves frame ~70)",
+      "full_length_px": 857, "full_length_note": "stern (incl. hull, x=229 at f0) to bow tip (x=1088 at f0), measured in frames 0-47, range 856-860",
+      "heights_px_at_frame0": {"keel_bottom_y": 644, "bow_tip_top_y": 352, "hull_height_bow_top_to_keel": 292, "wheelhouse_roof_y": 237, "visible_top_y": 0, "visible_height_px": 645, "note": "true total height (with mast) is NOT measurable: mast is cut off by the top frame edge in every frame"},
+      "reference_point": "ref_x = stern_x + 428 (horizontal centre of the full 857 px length); ref_y_hull = 498 (middle of hull, constant; true origin y unknown)",
+      "pixel_velocity": "0 between frames 0 and 1; from frame 1 on constant +17.886 px/frame (fit to stern x, frames 1-72, max residual 1.6 px) = 429.3 px/s",
+      "track": "tracks/boat.csv"
+    },
+    "shark": {
+      "description": "blue-grey shark with pale snout, lower part of image (y 853-955); swims leftwards, nose pointing left",
+      "moves": true, "direction": "-x (leftwards), horizontal",
+      "visible_frames": "0-72 (fully inside 0-62; nose clipped by left edge from 63)",
+      "full_length_px": 278, "full_length_note": "snout tip to tail-fin tip, frames 0-62, range 276-280 (tail beat small)",
+      "height_px": 103, "height_note": "dorsal-fin tip (y=853) to pectoral-fin bottom (y=955), constant",
+      "reference_point": "bbox centre (ref_x, ref_y=904); when clipped, ref_x = tail_x - 138.5",
+      "pixel_velocity": "~0 between frames 0 and 1 (-0.5 px); from frame 1 on constant -10.75 px/frame (nose fit -10.76, tail fit -10.74, max residual ~2 px) = 258 px/s",
+      "track": "tracks/shark.csv"
+    }
+  },
+  "static_objects": "none - background is plain white (segmentation video); no ground, water line or markings",
+  "events": [
+    {"event": "both objects at rest (frame 0 identical position to frame 1)", "frame": 0, "t": 0.0},
+    {"event": "motion starts: both objects move from frame 1 to 2 on, at constant speed thereafter", "frame": 1, "t": 0.0417, "note": "backward-difference speed is 0 at frame 1 and constant from frame 2 (t=0.0833)"},
+    {"event": "boat bow reaches right image edge", "frame": 48, "t": 2.0},
+    {"event": "shark snout reaches left image edge", "frame": 63, "t": 2.625},
+    {"event": "boat and shark horizontally aligned centres (ref_x equal)", "frame_approx": 6.2, "note": "boat ref_x ~ 212+428+17.89f, shark ref_x ~ 818-10.75f -> equal at f~6.2"},
+    {"event": "video end", "frame": 72, "t": 3.0}
+  ],
+  "pairwise": {"vertical_offset_ref_px": "shark ref_y 904 - boat hull mid 498 = 406 px (boat origin height uncertain)", "relative_horizontal_velocity_px_per_frame": 28.63}
+}

@@ -1,0 +1,73 @@
+{
+  "video": "simulation_0145.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "n_frames": 29,
+  "frame_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 = t 0",
+  "units": "pixels and seconds; image coords x right, y down, origin top-left",
+  "description": "Side view of a military rocket-launcher truck (HIMARS-like, olive green, 3 axles) parked facing left on a desert road, launcher pod raised ~39 deg pointing up-left. A single rocket slides out of the pod's upper end and flies in a straight line up-left, accelerating, leaving the top of the frame. Camera fixed.",
+  "camera": {
+    "motion": "static (phase correlation of background patches vs frame 0: |shift| <= 0.01 px in all frames)",
+    "per_frame_background_shift_px": "0 for all frames",
+    "perspective": "2D side view; truck seen exactly side-on, horizon/dune ridge ~y 440-540; ground road band y ~840-900. Rocket flies in the image plane at (presumably) the truck's depth; one scale for the whole scene."
+  },
+  "objects": {
+    "rocket": {
+      "moves": true,
+      "identify": "the only moving object: slender grey-brown rocket (~17 px diameter) leaving the raised launcher pod, flying up-left at 39.0 deg above horizontal",
+      "visible_frames": "nose tip first visible frame 3; partly visible (tail inside pod) frames 3-12; fully visible frames 13-21; nose beyond image top frames 22-25; gone from frame 26",
+      "track_file": "tracks/rocket.csv",
+      "reference_point": "rocket centre (midpoint of nose and tail along the flight axis); during partial visibility = visible end -/+ L/2 along the axis",
+      "flight_axis": {"point_px": [672.42, 208.80], "unit_direction_of_flight": [-0.77732, -0.62910], "angle_above_horizontal_deg": 38.98, "straightness": "free-flight centroids lie on the line within 0.05 px; orientation constant"},
+      "length_px": {"best": 202, "range": [199, 210], "method": "distance between 50%-of-plateau crossings of the along-axis profile of |frame - frame0| (blur-invariant), median of frames 13-21; raw d>30 mask length 226-240 px includes motion-blur smear"},
+      "width_px": {"best": 16.7, "range": [16.5, 17.2], "method": "1-99 percentile across-axis extent of d>30 mask, frames 13-22"},
+      "axis_aligned_bbox_px_free_flight": "axis span 157 x 127 px (x by y) for the 202 px rocket at 39 deg, ~168 x 140 including its 17 px diameter (unblurred estimate); blurred mask bbox about 185 x 147, see csv",
+      "speed_trend_px_per_frame_along_axis": "centre advance ~16-20 px/frame at frames 4-6, ~37 at 12, ~48 at 15, ~57 at 20, ~61 at 23-24 (accelerating); for reference only, compute from csv"
+    },
+    "launcher_truck": {
+      "moves": false,
+      "identify": "olive-green 3-axle truck, cab at left (facing left), flat chassis, launcher pod raised at rear",
+      "visible_frames": "0-28",
+      "note": "rocks very slightly during launch: cab region up to 0.83 px upward (frames 2-13, peak frames 7-9), pod region up to 0.34 px downward; returns to rest by frame 14. Otherwise static.",
+      "extents_frame0_px": {
+        "length_front_bumper_to_rear_outrigger": 672, "front_bumper_x": 568, "rear_outrigger_x": 1240, "chassis_rear_x": 1225,
+        "height_ground_to_cab_roof": 227, "ground_contact_y": 867, "cab_roof_y": 640, "roof_beacon_top_y": 627, "antenna_top_y": 620,
+        "overall_height_ground_to_pod_hook_tip": 488, "pod_hook_tip_y": 379
+      },
+      "wheels": {
+        "diameter_px": 98,
+        "front_wheel_centre": [701, 818], "middle_wheel_centre": [1035, 818], "rear_wheel_centre": [1149, 818],
+        "axle_spacing_front_mid_px": 334, "axle_spacing_mid_rear_px": 114
+      }
+    },
+    "launcher_pod": {
+      "moves": false,
+      "identify": "grey-green box on the truck's rear, raised ~39 deg, upper end has a dark (charcoal) face and a thin rail arm with hook extending beyond it",
+      "extents_frame0_px": {
+        "box_length_along_axis": 300, "box_width_across_axis": 85,
+        "rail_arm_length_beyond_mouth": 83,
+        "mouth_point_on_rocket_axis_px": [980.2, 457.9],
+        "upper_dark_face_corner_approx": [[948, 500], [1000, 447]],
+        "lower_end_corner_approx": [1290, 690],
+        "bbox_with_rail": [920, 379, 1293, 741]
+      },
+      "reliability": "+-10 px (lower end merges with lifting gear)"
+    },
+    "road": {"moves": false, "identify": "pale pinkish-grey dirt road strip under the truck", "image_y_range": [845, 900]},
+    "dunes_and_rocks": {"moves": false, "identify": "sand dunes in background, ridge from y~440 (left) to ~500-540; small dark rock outcrops at right (e.g. x 1550-1700, y 590-640)"},
+    "shadow": {"moves": false, "identify": "truck shadow cast to the left on the ground, y ~815-860, x ~0-1000"}
+  },
+  "events": [
+    {"event": "truck starts rocking (launch onset)", "frame": 2, "time_s": 0.0833},
+    {"event": "rocket nose tip first visible at pod mouth", "frame": 3, "time_s": 0.125},
+    {"event": "rocket tail leaves pod mouth (fully out)", "frame_between": [11, 12], "time_s_approx": 0.48},
+    {"event": "first frame with whole rocket clearly free of pod", "frame": 13, "time_s": 0.5417},
+    {"event": "truck rocking ends", "frame": 14, "time_s": 0.5833},
+    {"event": "rocket nose reaches image top", "frame": 22, "time_s": 0.9167},
+    {"event": "rocket last visible (tail stub at top edge)", "frame": 25, "time_s": 1.0417},
+    {"event": "rocket gone", "frame": 26, "time_s": 1.0833}
+  ],
+  "files": {"tracks": ["tracks/rocket.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

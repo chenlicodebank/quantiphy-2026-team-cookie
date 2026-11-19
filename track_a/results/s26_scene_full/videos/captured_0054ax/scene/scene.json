@@ -1,0 +1,483 @@
+{
+ "video": "captured_0054ax.mp4",
+ "source": "lab (captured; persons segmented onto a green background, SAM2 watermark bottom-right)",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame": "t = frame / 24",
+ "units": "pixels (x right, y down, origin top-left of the 1280x720 image) and seconds",
+ "camera": {
+  "motion": "static (no background visible; both persons' feet / static body parts stay fixed to <1 px; see notes)",
+  "intrinsics_from_benchmark": "Orbbec Femto Mega, HFOV 80 deg: f = 0.5959*1280 = 762.8 px, principal point ~ (640, 360)",
+  "perspective_cues": "no floor/horizon visible (green screen). Standing person feet at y~535-542, crouching person feet at y~600-612 -> crouching person is nearer the camera. Basketball rolls toward the camera (apparent diameter grows ~70 -> ~100 px)."
+ },
+ "inventory": [
+  {
+   "name": "person_crouching",
+   "desc": "person in black hoodie, squatting at left (x~60-300, y~386-640); face masked green. Pushes the basketball (right hand, frames ~5-11) and the soccer ball (left hand, frames ~22-29), then the two small balls fly past/in front of their head at the end.",
+   "moves": true,
+   "visible": "0-48",
+   "track": "tracks/person_crouching.csv"
+  },
+  {
+   "name": "person_standing",
+   "desc": "person in blue-grey hoodie and dark trousers, standing at centre-right (x~600-722, y~201-542, ~336 px tall head-top to shoe sole); face masked green. Holds a yellow ball (right hand, image x~700) and a pinkish-grey ball (left hand, image x~628), throws both underhand to the left (release ~22 and ~24).",
+   "moves": "arms only (feet fixed)",
+   "visible": "0-48",
+   "track": "tracks/person_standing.csv"
+  },
+  {
+   "name": "basketball",
+   "desc": "orange-brown basketball, starts at (241,572) under the crouching person's right hand, rolls right/down toward the camera and out of the bottom edge.",
+   "moves": true,
+   "visible": "0-32 (truncated by bottom edge 22-32, gone from 33)",
+   "track": "tracks/basketball.csv"
+  },
+  {
+   "name": "soccer_ball",
+   "desc": "white soccer ball with black patches, starts at (155,597) under the crouching person's left hand, pushed down-left, exits bottom-left corner.",
+   "moves": true,
+   "visible": "0-40 (truncated by image edge 34-40, gone from 41)",
+   "track": "tracks/soccer_ball.csv"
+  },
+  {
+   "name": "yellow_ball",
+   "desc": "small yellow ball (tennis-ball colour, ~14-17 px across when unblurred mid-flight), thrown by the standing person, bounces (floor not visible) and flies up past the crouching person's head.",
+   "moves": true,
+   "visible": "0-48 (held in hand 0-24)",
+   "track": "tracks/yellow_ball.csv"
+  },
+  {
+   "name": "pink_ball",
+   "desc": "small pinkish/lavender-grey ball (~16-18 px across in flight), thrown just before the yellow one, travels slightly above/ahead of it, bounces, flies up past the crouching person's head.",
+   "moves": true,
+   "visible": "in hand 0-21 (not tracked), tracked 22-48",
+   "track": "tracks/pink_ball.csv"
+  }
+ ],
+ "static_objects": "none besides the people (no furniture, floor or markings visible; background replaced by green).",
+ "sizes_px": {
+  "basketball_free_rolling_diameter": {
+   "frames": "11-21",
+   "median": 79.0,
+   "min": 74.0,
+   "max": 84.0
+  },
+  "basketball_circle_fit_diameter_frames_0_10": {
+   "median": 68.0,
+   "note": "ball partly covered by the hand; circle fit to orange outline"
+  },
+  "soccer_ball_circle_diameter_frames_0_22": {
+   "median": 70.0,
+   "note": "circle fit to silhouette edge, ball touching the person"
+  },
+  "soccer_ball_bbox_w_frames_0_22": {
+   "frames": "0-22",
+   "median": 72.0,
+   "min": 70.0,
+   "max": 76.0
+  },
+  "yellow_ball_width_in_flight": {
+   "frames": "25-30",
+   "median": 15.2,
+   "min": 13.3,
+   "max": 16.7
+  },
+  "yellow_ball_in_hand_frame0": {
+   "bw": 17,
+   "bh": 13,
+   "note": "partly covered by fingers"
+  },
+  "pink_ball_width_in_flight": {
+   "frames": "24-29",
+   "median": 17.8,
+   "min": 17.3,
+   "max": 18.6
+  },
+  "person_standing_height_bbox": {
+   "frames": "0-48",
+   "median": 341.0,
+   "min": 335.0,
+   "max": 342.0
+  },
+  "person_standing_width_bbox_frame0": 102,
+  "person_crouching_bbox_frame0": {
+   "bw": 212,
+   "bh": 219,
+   "note": "squatting; bbox includes arms, top of hood y=389"
+  }
+ },
+ "apparent_size_vs_time": {
+  "basketball": [
+   {
+    "frame": 0,
+    "circle_diameter_px": 67.0,
+    "bbox_w": 70,
+    "bbox_h": 68,
+    "truncated": 0
+   },
+   {
+    "frame": 2,
+    "circle_diameter_px": 68.1,
+    "bbox_w": 70,
+    "bbox_h": 65,
+    "truncated": 0
+   },
+   {
+    "frame": 4,
+    "circle_diameter_px": 67.4,
+    "bbox_w": 70,
+    "bbox_h": 66,
+    "truncated": 0
+   },
+   {
+    "frame": 6,
+    "circle_diameter_px": 67.7,
+    "bbox_w": 72,
+    "bbox_h": 68,
+    "truncated": 0
+   },
+   {
+    "frame": 8,
+    "circle_diameter_px": 68.8,
+    "bbox_w": 72,
+    "bbox_h": 70,
+    "truncated": 0
+   },
+   {
+    "frame": 10,
+    "circle_diameter_px": 68.8,
+    "bbox_w": 74,
+    "bbox_h": 66,
+    "truncated": 0
+   },
+   {
+    "frame": 12,
+    "circle_diameter_px": 77.3,
+    "bbox_w": 76,
+    "bbox_h": 79,
+    "truncated": 0
+   },
+   {
+    "frame": 14,
+    "circle_diameter_px": 79.9,
+    "bbox_w": 76,
+    "bbox_h": 85,
+    "truncated": 0
+   },
+   {
+    "frame": 16,
+    "circle_diameter_px": 83.8,
+    "bbox_w": 79,
+    "bbox_h": 88,
+    "truncated": 0
+   },
+   {
+    "frame": 18,
+    "circle_diameter_px": 84.6,
+    "bbox_w": 80,
+    "bbox_h": 91,
+    "truncated": 0
+   },
+   {
+    "frame": 20,
+    "circle_diameter_px": 89.3,
+    "bbox_w": 81,
+    "bbox_h": 97,
+    "truncated": 0
+   },
+   {
+    "frame": 22,
+    "circle_diameter_px": 93.0,
+    "bbox_w": 85,
+    "bbox_h": 100,
+    "truncated": 1
+   },
+   {
+    "frame": 24,
+    "circle_diameter_px": 93.1,
+    "bbox_w": 92,
+    "bbox_h": 86,
+    "truncated": 1
+   },
+   {
+    "frame": 26,
+    "circle_diameter_px": 88.8,
+    "bbox_w": 90,
+    "bbox_h": 72,
+    "truncated": 1
+   },
+   {
+    "frame": 28,
+    "circle_diameter_px": 99.8,
+    "bbox_w": 102,
+    "bbox_h": 56,
+    "truncated": 1
+   },
+   {
+    "frame": 30,
+    "circle_diameter_px": 105.0,
+    "bbox_w": 97,
+    "bbox_h": 38,
+    "truncated": 1
+   },
+   {
+    "frame": 32,
+    "circle_diameter_px": 107.9,
+    "bbox_w": 79,
+    "bbox_h": 20,
+    "truncated": 1
+   }
+  ],
+  "soccer_ball": [
+   {
+    "frame": 0,
+    "circle_diameter_px": 71.5,
+    "bbox_w": 75,
+    "bbox_h": 76,
+    "truncated": 0
+   },
+   {
+    "frame": 2,
+    "circle_diameter_px": 68.8,
+    "bbox_w": 72,
+    "bbox_h": 72,
+    "truncated": 0
+   },
+   {
+    "frame": 4,
+    "circle_diameter_px": 68.8,
+    "bbox_w": 72,
+    "bbox_h": 72,
+    "truncated": 0
+   },
+   {
+    "frame": 6,
+    "circle_diameter_px": 70.2,
+    "bbox_w": 73,
+    "bbox_h": 74,
+    "truncated": 0
+   },
+   {
+    "frame": 8,
+    "circle_diameter_px": 68.9,
+    "bbox_w": 72,
+    "bbox_h": 72,
+    "truncated": 0
+   },
+   {
+    "frame": 10,
+    "circle_diameter_px": 71.0,
+    "bbox_w": 72,
+    "bbox_h": 74,
+    "truncated": 0
+   },
+   {
+    "frame": 12,
+    "circle_diameter_px": 70.8,
+    "bbox_w": 72,
+    "bbox_h": 75,
+    "truncated": 0
+   },
+   {
+    "frame": 14,
+    "circle_diameter_px": 70.0,
+    "bbox_w": 72,
+    "bbox_h": 74,
+    "truncated": 0
+   },
+   {
+    "frame": 16,
+    "circle_diameter_px": 70.6,
+    "bbox_w": 72,
+    "bbox_h": 74,
+    "truncated": 0
+   },
+   {
+    "frame": 18,
+    "circle_diameter_px": 67.3,
+    "bbox_w": 70,
+    "bbox_h": 71,
+    "truncated": 0
+   },
+   {
+    "frame": 20,
+    "circle_diameter_px": 70.2,
+    "bbox_w": 74,
+    "bbox_h": 73,
+    "truncated": 0
+   },
+   {
+    "frame": 22,
+    "circle_diameter_px": 71.8,
+    "bbox_w": 76,
+    "bbox_h": 75,
+    "truncated": 0
+   },
+   {
+    "frame": 24,
+    "circle_diameter_px": 68.9,
+    "bbox_w": 72,
+    "bbox_h": 72,
+    "truncated": 0
+   },
+   {
+    "frame": 26,
+    "circle_diameter_px": 67.5,
+    "bbox_w": 72,
+    "bbox_h": 73,
+    "truncated": 0
+   },
+   {
+    "frame": 28,
+    "circle_diameter_px": 70.3,
+    "bbox_w": 70,
+    "bbox_h": 75,
+    "truncated": 0
+   },
+   {
+    "frame": 30,
+    "circle_diameter_px": 71.2,
+    "bbox_w": 78,
+    "bbox_h": 70,
+    "truncated": 0
+   },
+   {
+    "frame": 32,
+    "circle_diameter_px": 70.9,
+    "bbox_w": 82,
+    "bbox_h": 71,
+    "truncated": 0
+   },
+   {
+    "frame": 34,
+    "circle_diameter_px": 77.6,
+    "bbox_w": 88,
+    "bbox_h": 78,
+    "truncated": 1
+   },
+   {
+    "frame": 36,
+    "circle_diameter_px": 62.9,
+    "bbox_w": 82,
+    "bbox_h": 52,
+    "truncated": 1
+   },
+   {
+    "frame": 38,
+    "circle_diameter_px": 66.4,
+    "bbox_w": 64,
+    "bbox_h": 31,
+    "truncated": 1
+   },
+   {
+    "frame": 40,
+    "circle_diameter_px": null,
+    "bbox_w": 32,
+    "bbox_h": 12,
+    "truncated": 1
+   }
+  ]
+ },
+ "events": [
+  {
+   "event": "basketball_starts_moving",
+   "frame": 6,
+   "t": 0.25,
+   "note": "centre x 242.3 (f5) -> 246.4 (f6); pushed by crouching person right hand"
+  },
+  {
+   "event": "basketball_released",
+   "frame": 11,
+   "t": 0.4583,
+   "note": "first frame the ball is a separate blob from the hand"
+  },
+  {
+   "event": "basketball_touches_bottom_edge",
+   "frame": 22,
+   "t": 0.9167,
+   "note": "bottom of ball reaches y=719; truncated afterwards"
+  },
+  {
+   "event": "basketball_last_visible",
+   "frame": 32,
+   "t": 1.3333,
+   "note": "gone from frame 33"
+  },
+  {
+   "event": "soccer_starts_moving",
+   "frame": 23,
+   "t": 0.9583,
+   "note": "stationary (<2 px jitter) frames 0-22 under the left hand; pushed down-left"
+  },
+  {
+   "event": "soccer_released",
+   "frame": 29,
+   "t": 1.2083,
+   "note": "first frame separate from the person blob"
+  },
+  {
+   "event": "soccer_touches_image_edge",
+   "frame": 34,
+   "t": 1.4167,
+   "note": "truncated afterwards"
+  },
+  {
+   "event": "soccer_last_visible",
+   "frame": 40,
+   "t": 1.6667,
+   "note": "gone from frame 41"
+  },
+  {
+   "event": "standing_throw_swing_start",
+   "frame": 15,
+   "t": 0.625,
+   "note": "yellow ball (in right hand) starts moving left at frame ~14-15"
+  },
+  {
+   "event": "pink_ball_release",
+   "frame": 22,
+   "t": 0.9167,
+   "note": "leaves the left hand between 22 and 23 (separate blob from 23)"
+  },
+  {
+   "event": "yellow_ball_release",
+   "frame": 24,
+   "t": 1.0,
+   "note": "leaves the hand between 24 and 25 (separate blob from 25)"
+  },
+  {
+   "event": "pink_ball_apex",
+   "frame": 27,
+   "t": 1.125,
+   "note": "min image y 257.5"
+  },
+  {
+   "event": "yellow_ball_apex",
+   "frame": 26,
+   "t": 1.0833,
+   "note": "min image y 281.9"
+  },
+  {
+   "event": "yellow_ball_bounce",
+   "frame": 37,
+   "t": 1.5417,
+   "note": "max image y 654.9 (floor contact ~frame 37, between 36 and 38)"
+  },
+  {
+   "event": "pink_ball_bounce",
+   "frame": 38,
+   "t": 1.5833,
+   "note": "max image y 669.0 (floor contact ~frame 38)"
+  },
+  {
+   "event": "small_balls_overlap_crouching_person",
+   "frame": 42,
+   "t": 1.75,
+   "note": "from 42 on both small balls are drawn over the crouching person (in front of the body/face); still in flight at 48"
+  }
+ ],
+ "reference_points": "balls: visible centre (mask centroid cx,cy; circ_cx,circ_cy = circle fit, better when touching a person or cut by the image edge). people: mask centroid + bbox."
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0055.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 30.0,
+ "frames": 75,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3157,
+  "question": "What is the distance of the Bicycle sign to the ground in meters?",
+  "prior": "average speed of the person riding scooter = 1.95 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

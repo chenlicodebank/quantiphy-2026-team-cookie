@@ -1,0 +1,68 @@
+{
+ "wall_s": 620,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 55,
+  "duration_ms": 524055,
+  "total_cost_usd": 1.9830308,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 68,
+  "cache_creation_input_tokens": 90149,
+  "cache_read_input_tokens": 1824834,
+  "output_tokens": 44830,
+  "output_tokens_details": {
+   "thinking_tokens": 25301
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 90149,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 701,
+    "cache_read_input_tokens": 96401,
+    "cache_creation_input_tokens": 3642,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 3642
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 53,
+  "flags": [
+   {
+    "tool": "Write",
+    "paths": [
+     "/tmpl_%d.png"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_b/simulation_0172/q_1413/scale_tm.py\", \"content\": \"\\\"\\\"\\\"Relative apparent scale of the rigid upper body (helmet + backpack) vs a reference frame,\\nby brute-force scale/rotation template matching. Output: frame, best scale, rot, score, match pos"
+   }
+  ]
+ },
+ "video": "simulation_0172",
+ "ids": [
+  1413
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0172__q1413.jsonl"
+}

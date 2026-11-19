@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0179.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MC",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 432,
+  "question": "What is the height of the entrance gate (including the frame) in meters?",
+  "prior": "acceleration of the trolley = 1.507m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

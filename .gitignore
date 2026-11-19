@@ -1,0 +1,34 @@
+# local environment
+.venv/
+__pycache__/
+
+# written by track_a/reproduce.sh
+track_a/results/fulltest_s39_f1/
+track_a/results/fulltest_s39_f2/changes.csv
+track_a/results/fulltest_s39_f2/manifest.json
+track_a/results/fulltest_s39_f2/track_a_s39_f2.csv
+track_a/results/fulltest_s39_f3/changes.csv
+track_a/results/fulltest_s39_f3/manifest.json
+track_a/results/fulltest_s39_f3/track_a_s39_f3.csv
+track_a/results/fulltest_s40_c1/changes.csv
+track_a/results/fulltest_s40_c1/manifest.json
+track_a/results/fulltest_s40_c1/snap_rows.csv
+track_a/results/fulltest_s40_c1/track_a_s40_c1.csv
+track_a/results/fulltest_s43_gray_rsi/track_a_s43_gray_rsi.csv
+track_a/results/fulltest_s43_strict_rsi/changes.csv
+track_a/results/fulltest_s43_strict_rsi/manifest.json
+track_a/results/fulltest_s43_strict_rsi/track_a_s43_strict_rsi.csv
+
+# written by track_b/reproduce.sh, which also unpacks records.tar.xz into results/
+track_b/results/b9_runs/
+track_b/results/fulltest_s37_b10const/
+track_b/results/fulltest_s37_b10lat/
+track_b/results/fulltest_s37_b10mix/
+track_b/results/fulltest_s37_b9const/
+track_b/results/fulltest_s37_b9lat/
+track_b/results/fulltest_s43_k3/changes.csv
+track_b/results/fulltest_s43_k3/manifest.json
+track_b/results/fulltest_s43_k3/snap_rows.csv
+track_b/results/fulltest_s43_k3/track_b_s43_k3.csv
+track_b/results/s37_physcheck/
+track_b/results/s37_test_repeats/

@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0247_segmented.mp4",
+  "source": "segmentation (Blender simulation render, background replaced by plain white)",
+  "scene": "3D",
+  "fps": 30.0, "frames": 75, "duration_s": 2.5, "width": 1920, "height": 1080,
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (no background texture to check directly; both animals keep constant image y of feet/top and constant apparent size, consistent with a fixed camera)",
+    "perspective": "no ground plane, horizon or vanishing point visible (white background). Both animals walk left->right along image x with constant bbox height and constant foot line y~799-800 px: motion is essentially parallel to the image plane at a constant depth. Feet of both animals at the same image row (~800 px), so both are likely on the same ground line; the rabbit is just ahead of (and possibly slightly in front of) the creature."
+  },
+  "objects": [
+    {
+      "name": "creature",
+      "description": "large fantasy quadruped (antelope/goat-like beast, orange-brown body, long striped curved horns sweeping backwards, white/grey muzzle, long tufted tail)",
+      "distinguish": "the big animal; only large object",
+      "moves": true,
+      "visible_frames": [0, 74],
+      "motion": "walks steadily to the right (+x image), no vertical drift; leg/tail swing cycle ~40 frames (bbox width oscillates 542..617 px)",
+      "track": "tracks/creature.csv",
+      "pixel_size": {
+        "bbox_w_px": {"min": 542, "max": 617, "mean": 580.4, "frame0": 544, "note": "tail tip to muzzle tip incl. swinging tail and backward horns; varies with gait"},
+        "bbox_h_px": {"min": 428, "max": 439, "mean": 434.3, "frame0": 437, "note": "horn top (~y 363) to lowest hoof (~y 799)"},
+        "mask_area_px": {"mean": 85981}
+      },
+      "reference_point_note": "true origin (root) not visible; ref_x/ref_y = bbox centre, centroid_x/y = mask centroid (more stable horizontally: step sd 0.77 px vs 1.68 px for bbox centre)",
+      "image_motion": {"centroid_dx_total_px": 586.8, "bbox_center_dx_total_px": 567.0, "dy_total_px": 0.2,
+                        "mean_step_px_per_frame_centroid": 7.96, "mean_step_px_per_frame_bboxcenter": 7.71,
+                        "linear_fit_px_per_frame": 7.87, "quadratic_term": "~0 (constant speed)"}
+    },
+    {
+      "name": "rabbit",
+      "description": "small brown rabbit/bunny",
+      "distinguish": "small animal at the creature's front feet, bottom-right of the creature",
+      "moves": true,
+      "visible_frames": [0, 74],
+      "motion": "hops to the right alongside/just ahead of the creature; hop period ~13 frames, feet lift only ~8 px",
+      "track": "tracks/rabbit.csv",
+      "pixel_size": {
+        "bbox_w_px": {"min": 77, "max": 99, "mean": 84.2, "frame0": 81, "note": "nose/ear to tail, varies with hop pose"},
+        "bbox_h_px": {"min": 57, "max": 75, "mean": 67.1, "frame0": 73, "note": "ear tip to feet; drops to ~58 when crouched/stretched mid-hop"},
+        "mask_area_px": {"mean": 3289}
+      },
+      "reference_point_note": "ref = bbox centre; centroid also given (nearly identical)",
+      "image_motion": {"centroid_dx_total_px": 572.1, "dy_total_px": -0.4,
+                       "mean_step_px_per_frame": 7.74, "linear_fit_px_per_frame": 7.69,
+                       "step_range_px": [4.4, 11.6], "note": "per-frame step pulses with each hop (fast ~10-11 px in frames after take-off, slow ~5 px near landing)"}
+    }
+  ],
+  "static_objects": "none (plain white background, no ground features or props)",
+  "relations": {
+    "rabbit_minus_creature_centroid_dx_px": {"frame0": 261.9, "frame74": 247.2, "min": 239.1, "max": 265.3},
+    "note": "the two move together at nearly the same image speed (~7.7-7.9 px/frame); the rabbit's bbox overlaps the creature's bbox in x (under the muzzle) but masks never touch"
+  },
+  "events": [
+    {"what": "both animals already moving at frame 0 and still moving at frame 74 (no start/stop in clip)", "frame": 0, "t": 0.0},
+    {"what": "rabbit take-off (feet bottom rises from ~801 to ~793 px)", "frames": [3, 16, 29, 42, 55, 68]},
+    {"what": "rabbit landing (bottom back to ~800-801 px)", "frames": [9, 22, 34, 48, 61, 73]},
+    {"what": "creature lowest hoof lifted (bbox bottom 790-795 instead of 799): gait phase", "frames": [[18, 31], [58, 71]]}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/creature.csv", "tracks/rabbit.csv"], "scripts": ["scripts/track.py", "scripts/summarize.py"]}
+}

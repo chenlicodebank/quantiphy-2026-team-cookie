@@ -1,0 +1,60 @@
+{
+ "video": "simulation_0075.mp4",
+ "source": "simulation (Blender render)",
+ "scene_type": "2D (near-top-down view of a street intersection; all motion in the ground plane)",
+ "fps": 24.0, "frames": 72, "duration_s": 3.0, "width": 2160, "height": 1080,
+ "time_convention": "t = frame/24; frame = round(t*24)",
+ "image_axes": "x right (east), y down (south) in pixels; 'up' in image = -y",
+ "camera": {
+  "static": true,
+  "evidence": "static objects (lamps, parked cars, planters) identical at frames 0 and 71; background median subtraction gives no residue on static items",
+  "perspective": "near-orthographic top-down; vehicle tops/windshields visible, no measurable size change of vehicles with position (van length 236-247 px all clip, tan car 219-224 px). Treat as one px scale for the ground plane.",
+  "note": "frame 1 is (almost) a copy of frame 0 (mean abs diff 0.03 vs ~0.22 for other consecutive pairs): tan car, cyclist and walker have zero displacement 0->1"
+ },
+ "road_layout_px": {
+  "vertical_road_x_range": [616, 1082], "vertical_road_width_px": 466,
+  "horizontal_road_y_range": [288, 756], "horizontal_road_width_px": 468,
+  "note": "edges = transition between beige sidewalk and grey asphalt (curb face included in sidewalk side)"
+ },
+ "moving_objects": {
+  "white_van": {"desc": "white van/minibus in the vertical road, left lane (x~831)", "moves": true,
+   "visible_frames": [0, 71], "track": "tracks/white_van.csv",
+   "body_size_px": {"length": 236, "width": 88, "note": "body only, single-frame threshold 25 at f0/f36/f71; track masks include a little shadow (length 239-247, width 91-101)"},
+   "motion": "starts at rest at frame 0 and speeds up steadily, driving straight up (-y). Per-frame step grows ~linearly from ~0.5 px (f1-2) to ~20 px (f71). Centre y 923.5 -> 202.0, x constant ~830-832. Path length 727.6 px (sum of steps, includes ~1 px jitter per frame)"},
+  "tan_car": {"desc": "tan/peach sedan; starts in the vertical road right of the van (x~989, y~849) heading up, turns right into the horizontal road", "moves": true,
+   "visible_frames": [0, 71], "track": "tracks/tan_car.csv",
+   "body_size_px": {"length": 219, "width": 82, "note": "threshold 25 at f0 (218.5x81.8) and f71 (219x83); track length 219-224, width 84-92 during turn (motion blur)"},
+   "motion": "near-constant step ~6.8 px/frame (mean of f2-71 steps); heading turns smoothly from up (axis 90 deg) to right (axis 180 deg), heading 105 deg at f15, 136 at f30, 160 at f40, 172 at f50, ~180 from f60. Path 478.9 px"},
+  "pedestrian_road": {"desc": "cyclist / scooter rider (dark clothes, thin vehicle, small white light at the front) riding straight up in the vertical road between van and tan car, x~917", "moves": true,
+   "visible_frames": [0, 71], "track": "tracks/pedestrian_road.csv",
+   "size_px": {"length_along_travel": 62, "width": 19, "note": "length = mask along travel (vehicle + rider; any shadow included); width ~ shoulders"},
+   "motion": "constant ~8.9 px/frame straight up (-y) from frame 1->2 onward; y 825 -> 204.5. Path 621.7 px"},
+  "pedestrian_sidewalk": {"desc": "person in white top walking right (+x) on the bottom-right (SE) sidewalk, y~843, near trash bin and lamp S2", "moves": true,
+   "visible_frames": [0, 71], "track": "tracks/pedestrian_sidewalk.csv",
+   "size_px": {"mask_length": "19-37 (changes with stride)", "mask_width": "12-25", "torso_white_blob_px": "~150 px area"},
+   "motion": "walks right ~2.0 px/frame (torso_x 1331.8 -> 1473.0 over 70 frames); mask centre jitters with legs; use torso_x/torso_y as pelvis proxy",
+   "occlusion": "partially under street lamp S2 head, frames 28-53 (occluded=1)"}
+ },
+ "static_objects": "see static_objects.json (centre, bbox, length/width in px). Summary below.",
+ "static_summary": {
+  "parked_purple_car": {"desc": "lavender/purple sedan parked in horizontal road upper lane, facing right", "center": [1337, 444], "length_px": 196, "width_px": 72, "note": "light bumpers blend into road; +-5 px"},
+  "parked_green_car": {"desc": "mint-green sedan in horizontal road lower lane, facing right (white headlights at x~530)", "center": [433, 601], "length_px": 200, "width_px": 73, "note": "+-6 px"},
+  "white_ball_on_road": {"center": [2024.5, 432.5], "diameter_px": 20, "note": "bright disk ~20 px; bbox 30 px wide incl. its shadow to the left"},
+  "rock_cluster_on_road": {"center": [2063, 619], "bbox_px": [67, 55]},
+  "dark_square_grate_N": {"center": [1277, 72], "size_px": [89, 91]},
+  "brown_squares": {"NW": [411, 222.5], "SW": [410.5, 849], "SE": [1217, 845.5], "size_px": "~82x82 (SE 80x80)"},
+  "trash_bin_SE": {"center": [1342, 806], "diameter_px": 25},
+  "signal_posts (corner poles)": {"NW": [540, 230], "NE": [1165.5, 220], "SW": [545, 807], "SE": [1130, 828.5]},
+  "street_lamps (3-headed, top view)": {"N": [[192, 227], [1421, 217], [1732, 214.5], [2051.5, 214.5]], "S": [[192, 801], [1422, 811], [1732, 812.5], [2051.5, 812.5]], "spacing_x_px": "1421->1732->2051.5 = 311, 319.5"}
+ },
+ "events": [
+  {"frame": 0, "t": 0.0, "event": "van at rest, begins accelerating upward (step 0.4-1.3 px in f1-3, steadily increasing)"},
+  {"frame": 1, "t": 0.0417, "event": "duplicate of frame 0; tan car, cyclist and walker first move between frames 1 and 2"},
+  {"frame": 2, "t": 0.0833, "event": "tan car begins its right turn (heading leaves 90 deg gradually; clearly turning from ~f6)"},
+  {"frame": 60, "t": 2.5, "event": "tan car heading reaches ~180 deg (pointing right, +x); straight afterwards"},
+  {"frame": 28, "t": 1.1667, "event": "walker reaches street lamp S2 (partial occlusion until f53)"},
+  {"frame": 71, "t": 2.9583, "event": "van centre draws level with cyclist centre between f70 (van 7.5 px behind) and f71 (2.5 px ahead); van x 832 vs cyclist x 916.5 (lateral gap ~85 px)"},
+  {"frame": 0, "t": 0.0, "event": "closest centre distances: tan car-cyclist 73.9 px and tan car-van 173.5 px, both at f0; no contacts or collisions in the clip"}
+ ],
+ "files": {"tracks": "tracks/*.csv", "static": "static_objects.json", "vehicle_sizes": "vehicle_sizes.json", "notes": "notes.md", "scripts": "scripts/"}
+}

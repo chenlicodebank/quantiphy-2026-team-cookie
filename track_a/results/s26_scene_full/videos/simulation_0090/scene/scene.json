@@ -1,0 +1,103 @@
+{
+ "video": "simulation_0090.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 30,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "background": "uniform blue sky, no ground, no landmarks; very faint static mottling near the bottom",
+ "camera": {
+  "static": true,
+  "evidence": "background residual vs sky-only frames 24-29 stays at noise level in every frame (mean |dBGR| per frame listed)",
+  "background_residual_per_frame": [
+   0.177,
+   0.142,
+   0.142,
+   0.122,
+   0.12,
+   0.107,
+   0.105,
+   0.098,
+   0.097,
+   0.089,
+   0.088,
+   0.084,
+   0.082,
+   0.076,
+   0.077,
+   0.074,
+   0.072,
+   0.067,
+   0.069,
+   0.047,
+   0.041,
+   0.033,
+   0.032,
+   0.025,
+   0.018,
+   0.012,
+   0.011,
+   0.013,
+   0.015,
+   0.024
+  ]
+ },
+ "objects": {
+  "eagle": {
+   "desc": "large bald eagle (dark brown wings/body, white head and tail, yellow beak/feet); the bigger, faster bird; flies right-to-left, head to the left",
+   "moves": true,
+   "visible_frames": "0-11 full (0-1 touching crow), 11 clipped at left edge, 12 only a 9 px sliver, gone from 13",
+   "track": "tracks/eagle.csv",
+   "horizontal_extent_px": "bbox_w = 181-182 px in every unclipped frame (frames 2-10); beak-to-tail length along flight direction ~181 px (wing tips never extend beyond it in this side view)",
+   "vertical_extent_px": "bbox_h varies with wing beat: max 200 (frame 0-1, wings up), 188 (f2), min 48 (f6, wings level); 176-181 at f10-11 (wings down)",
+   "body_line_y_px": "~597-604 (row of widest horizontal run = body axis), essentially level flight",
+   "pixel_step_per_frame_x": "about -156 px/frame (x0 steps -156,-156,-157,-155,-158,-156,-156,-156), constant from frame 1->2 on"
+  },
+  "crow": {
+   "desc": "small black crow/raven-like bird, blue-black, smaller and slower; starts just behind (right of) the eagle and trails it; flies right-to-left, head to the left",
+   "moves": true,
+   "visible_frames": "0-18 full (0-1 touching eagle), 19 clipped at left edge, gone from 20",
+   "track": "tracks/crow.csv",
+   "horizontal_extent_px": "bbox_w = 110-113 px (beak to tail) in unclipped frames 2-18 (107 at f16)",
+   "vertical_extent_px": "bbox_h wing-beat cycle with 9-frame period: min 36 (f4,f12), max 95-96 (f9,f18)",
+   "body_line_y_px": "~601-611, oscillates a few px with the wing beat; level flight",
+   "pixel_step_per_frame_x": "about -95.5 px/frame (x0 1507 at f3 -> 648 at f12 = -859 px in 9 frames), constant from frame 1->2 on"
+  }
+ },
+ "static_objects": "none (empty sky)",
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "frames 0 and 1 are (near-)identical: both birds at the same place; eagle beak/feet overlap crow beak"
+  },
+  {
+   "frame": 1,
+   "t": 0.04167,
+   "what": "last frame before motion; motion visible from frame 1->2 on at constant rates"
+  },
+  {
+   "frame": 2,
+   "t": 0.08333,
+   "what": "birds separate (no longer touching); eagle pulling ahead to the left"
+  },
+  {
+   "frame": 11,
+   "t": 0.45833,
+   "what": "eagle begins to leave frame across left edge"
+  },
+  {
+   "frame": 12,
+   "t": 0.5,
+   "what": "eagle almost fully out (9 px sliver); gone from frame 13"
+  },
+  {
+   "frame": 19,
+   "t": 0.79167,
+   "what": "crow partly out across left edge; gone from frame 20 (frames 20-29 empty sky)"
+  }
+ ],
+ "notes": "notes.md"
+}

@@ -1,0 +1,77 @@
+{
+  "video": "simulation_0168.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 80,
+  "time_of_frame": "t = frame / 24 (frame 0 at t = 0); last frame 79 at t = 3.2917 s",
+  "image_size_px": [1920, 1080],
+  "units": "pixels (x right, y down, origin top-left of full-resolution frame) and seconds; no metric scale",
+  "camera": {
+    "motion": "static. Phase correlation of the facade region (x 0-800, y 0-500) against frame 0 gives |shift| < 0.02 px in every frame.",
+    "perspective": {
+      "ground_plane": "road surface (asphalt) fills the lower half; both moving objects ride on it",
+      "front_road_yellow_solid_line_frame0": "y = -0.1933 x + 1053.2 (fitted on yellow pixels, x 0-1250)",
+      "right_white_edge_line_frame0": "y = -0.400 x + 1627 (weak fit, few columns; runs to the bottom-right corner)",
+      "vanishing_point_of_these_two_lines": [2777, 516],
+      "horizon_estimate_y": "about 515-530 px if the camera has no roll (from that vanishing point); uncertain +-30 px",
+      "note": "objects' wheel contacts are at y 638-824, well below the horizon; they move toward the camera so they grow and move down in the image"
+    },
+    "focal_length": "unknown (not estimated; use given depths + a known size)"
+  },
+  "objects": [
+    {
+      "name": "cyclist",
+      "description": "cartoon delivery rider on a lilac/pink bicycle with white-spoked wheels; orange-and-light-blue round helmet, grey faceless head, green jacket with backpack, orange trousers, yellow parcel box on the front rack",
+      "distinguish": "only person/bike in the scene; always the left-most moving object, in front of (closer to the camera than) the van",
+      "moves": true,
+      "visible_frames": [0, 79],
+      "occluded": "never (it occludes the van's front-left from frame 42 on)",
+      "track": "tracks/cyclist.csv",
+      "motion_summary": "rides from the right side of the image (x~1836) toward the camera and to the left (x~783 at frame 79); slow image motion in frames 0-8, faster afterwards; body sways left-right while pedalling (KLT rotation +-2 deg)",
+      "apparent_size": {"bbox_height_px": {"0": 177, "20": 207, "40": 253, "60": 313, "79": 419}, "bbox_width_px": {"0": 85, "20": 100, "40": 120, "60": 164, "79": 245}, "growth_0_to_79": 2.37}
+    },
+    {
+      "name": "police_van",
+      "description": "white VW Transporter-type police van ('Police' lettering, blue chevrons at the rear of the side, plate '1-MWS-002'), roof light bar with flashing blue beacons",
+      "distinguish": "only vehicle; to the right of / behind the cyclist",
+      "moves": true,
+      "visible_frames": [0, 79],
+      "partially_outside_frame": "frames 0-38: its right part is beyond the right image border (x > 1919); fully inside from frame 39",
+      "occluded": "frames 42-79: its front-left corner (left bumper/mirror, front-left wheel) is hidden behind the cyclist",
+      "track": "tracks/van.csv",
+      "motion_summary": "drives toward the camera and to the left, roughly front-on at first, turning its right-hand flank (as seen in the image) increasingly into view; continuous motion all clip",
+      "apparent_size": {"bbox_height_px (light-bar top to lowest tyre contact)": {"0": 170, "20": 210, "40": 258, "60": 326, "79": 439}, "bbox_width_px (front + visible side)": {"40": 328, "60": 412, "79": 593}, "growth_of_height_0_to_79": 2.58},
+      "wheel_contacts_hand_measured": "see scene/scripts/keyframes.json (frames 40-79): FR = front wheel on image-right side, RR = rear wheel same side, FL = other front wheel. e.g. frame 79 FR (1160,790) RR (1400,749); frame 60 FR (1552,724) RR (1690,701) FL (1326,717); frame 40 FR (1795,684) RR (1880,669) FL (1597,678)"
+    }
+  ],
+  "static_objects_frame0": [
+    {"name": "lamp_post_left", "desc": "dark grey street-light / traffic-signal pole on the left sidewalk corner", "bbox": [355, 0, 400, 780], "note": "base at y~780; signal head on it at x 322-360, y 305-415"},
+    {"name": "picket_fence_left", "desc": "dark railing / fence, lower-left", "bbox": [0, 595, 305, 810]},
+    {"name": "bunting", "desc": "red and white triangular pennant flags, upper left", "bbox": [0, 140, 260, 245]},
+    {"name": "corner_building", "desc": "white-brick building with glass stair tower in the middle", "bbox": [300, 0, 1565, 680]},
+    {"name": "black_base_panels", "desc": "row of black panels / planters along the building base", "bbox": [420, 568, 1290, 660]},
+    {"name": "carwash_sign", "desc": "blue 'SUPER STAR CAR WASH' sign", "bbox": [1565, 268, 1670, 405]},
+    {"name": "business_center_sign", "desc": "yellow 'Business center' lettering", "bbox": [1720, 225, 1800, 275]},
+    {"name": "pole_right", "desc": "thin dark pole on the right sidewalk", "bbox": [1703, 120, 1722, 637]},
+    {"name": "plant_planter_left", "desc": "green potted plant", "bbox": [140, 445, 290, 570]},
+    {"name": "neon_sign_left", "desc": "red neon figure sign, left shop", "bbox": [0, 415, 100, 545]},
+    {"name": "yellow_centre_line", "desc": "solid yellow line + yellow dashes below it on the front road", "line": "y = -0.1933 x + 1053.2 (solid line)"},
+    {"name": "white_edge_line_right", "desc": "white line along the right kerb, bottom-right", "line": "y ~ -0.40 x + 1627"},
+    {"name": "cross_street_white_lines", "desc": "white lane lines of the street the objects ride on, e.g. from (720,770) to (1100,718) and from (1290,800) to (1920,840)"},
+    {"name": "sidewalk_kerbs", "desc": "light grey kerbs: left corner (y 740-830 at x 0-700), far side along the building (y ~ 660-690), right bottom corner"}
+  ],
+  "events": [
+    {"frame": 0, "time_s": 0.0, "event": "both objects already moving; cyclist at right edge, van mostly outside the right border (only its mirror/front-left corner visible)"},
+    {"frame": 8, "time_s": 0.333, "event": "cyclist's image motion speeds up (left edge moves ~4 px/frame in frames 0-8, ~8-10 px/frame after)"},
+    {"frame": 39, "time_s": 1.625, "event": "van entirely inside the frame"},
+    {"frame": 42, "time_s": 1.75, "event": "cyclist starts to overlap (occlude) the van's front-left corner; overlap lasts to the end"},
+    {"frame": 79, "time_s": 3.292, "event": "last frame; both still moving"}
+  ],
+  "files": {
+    "tracks/cyclist.csv": "per-frame bbox, centre, ground point, hip estimate",
+    "tracks/van.csv": "per-frame bbox, centre, ground point, plate centre, wheel contact points, flags",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts + keyframes.json (hand measurements) + klt.json (frame-to-frame motion fits)"
+  }
+}

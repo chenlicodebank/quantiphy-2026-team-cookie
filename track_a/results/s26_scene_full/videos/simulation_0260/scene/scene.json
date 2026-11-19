@@ -1,0 +1,57 @@
+{
+  "video": "simulation_0260.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 40,
+  "width": 1920,
+  "height": 1080,
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (image coords, x right, y DOWN) and seconds; no metric scale",
+  "camera": {
+    "motion": "static (phase correlation vs frame 0 on the left part of the image: shift 0.00 px in x and y for all frames)",
+    "view": "frontal view of a wall with a table at the bottom; mug falls in a plane roughly parallel to the image plane; camera roughly at table-top height, so the high mug is seen slightly from below (bottom ellipse visible, frames 5-9)"
+  },
+  "objects": [
+    {
+      "name": "mug",
+      "description": "cream/white ceramic mug with a handle on its right side and a small cartoon face printed on the front; the ONLY moving object",
+      "moves": true,
+      "visible_frames": "2-39 (enters at the top edge at frame 2; top clipped by the image edge in frames 2-4)",
+      "track": "tracks/mug.csv",
+      "reference_point": "ref_x, ref_y in tracks/mug.csv = body centre (handle excluded) horizontally, centre of silhouette vertically",
+      "size_px_at_rest_frames_20_39": {
+        "height_rim_to_base": 56,
+        "body_width_no_handle": 48,
+        "width_incl_handle": 67,
+        "bbox": [1218, 814, 1284, 869]
+      },
+      "size_px_in_flight": "height 53-71 px (larger when high: seen from below, bottom ellipse adds height); body width 43-49 px; width incl. handle 66-71 px",
+      "rest_position_ref": [1242.5, 841.5]
+    }
+  ],
+  "static_objects": [
+    {"name": "table", "description": "long dark wooden table top with black metal legs, spans most of the bottom; mug lands on it",
+     "top_surface_back_edge_y": 867, "front_edge_y": [897, 923], "x_extent": [518, 1540], "length_px": 1022,
+     "legs": "right leg x~1500-1540 down to bottom of image; left end hidden behind/at the AC unit (x~518-555), another dark vertical near x~700", "bottom": "clipped by image bottom"},
+    {"name": "air_conditioner", "description": "white LG outdoor AC unit with round fan grille, at left", "bbox": [133, 757, 639, 1080],
+     "width_px": 506, "height_px_visible": ">=323 (clipped at bottom)", "fan_grille_diameter_px": 203, "LG_logo_circle_diameter_px": 60},
+    {"name": "coffee_cup", "description": "red-and-white takeaway coffee cup with white lid on the table, left of centre", "bbox": [837, 808, 879, 872], "width_px": 42, "height_px": 64},
+    {"name": "notebook_or_wallet", "description": "flat dark object lying on table, x~900-972", "bbox": [900, 862, 972, 872], "length_px": 72},
+    {"name": "pen", "description": "thin pen lying on the table, x~993-1057", "bbox": [993, 864, 1057, 870], "length_px": 64},
+    {"name": "potted_plant", "description": "small succulent in a white pot", "bbox": [1084, 809, 1128, 868], "pot_width_px": 44, "pot_height_px": 39, "total_height_px": 59},
+    {"name": "phone", "description": "black smartphone lying flat on the table, just left of the mug's landing spot", "bbox": [1142, 862, 1193, 872], "length_px": 51},
+    {"name": "camera_bag", "description": "beige/lavender camera bag (Nikon) on the table at right", "bbox": [1312, 742, 1535, 877], "width_px": 223, "height_px": 135},
+    {"name": "window", "description": "tall white-framed window at the right side of the wall", "x_extent": [1630, 1750], "y_extent": [0, 830]},
+    {"name": "wall", "description": "textured blue plaster wall, background"}
+  ],
+  "events": [
+    {"event": "release / start of fall", "frame": 0, "time": 0.0, "note": "not visible; extrapolating the per-frame drop (about +7 px/frame each frame) back to zero speed gives about frame 0-1, above the image"},
+    {"event": "mug enters view at the top edge", "frame": 2, "time": 0.0667},
+    {"event": "mug fully in view", "frame": 5, "time": 0.1667},
+    {"event": "impact on the table (first frame in contact; mug drawn slightly sunk into the table top, bottom ~873 vs resting 869)", "frame": 16, "time": 0.5333, "note": "contact happens between frames 15 and 16"},
+    {"event": "small rebound: top rim 820 -> 811 -> 809 px (about 5 px above its resting height at frame 18)", "frame": 18, "time": 0.6},
+    {"event": "settled at rest on the table", "frame": 20, "time": 0.6667, "note": "stationary from about frame 20/21 to the end (frame 39)"}
+  ],
+  "files": {"tracks": ["tracks/mug.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

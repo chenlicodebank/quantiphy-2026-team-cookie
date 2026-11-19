@@ -1,0 +1,104 @@
+{
+  "video": "captured_0038.mp4",
+  "source": "lab (real capture, Orbbec Femto Mega RGB; frame carries a 'Modified with Segment Anything 2 Demo' watermark: the face is replaced by a flat skin-coloured blob and the room background is blurred)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0; last frame 48 at t = 2.000 s",
+  "camera_intrinsics_lab_convention": {"f_px": 762.8, "note": "0.5959 x 1280 from the benchmark's lab convention (HFOV 80 deg); principal point assumed ~(640,360). Not measured here."},
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the upper wall/tripod/table-right region between consecutive frames: |shift| <= 0.04 px every frame (scripts/pts.py)",
+    "container_timestamps": "regular 1/24 s, no gaps in the file",
+    "view": "slightly elevated, looking at a table roughly at table-top height; the table top is seen at a grazing angle",
+    "perspective_cues": {
+      "table_front_edge_upper": "from ~(210,540) to ~(1140,588) px (image slope ~0.05, lower/closer to camera on the right)",
+      "table_front_face_lower_edge": "~(210,568) to ~(1140,620)",
+      "table_back_right_corner": "~(1062,470)",
+      "table_back_edge": "~(258,452) to ~(1062,470) (soft, low contrast against the blurred background; left end near the person)",
+      "table_right_side_edge": "~(1062,470) to ~(1142,588)",
+      "table_top_band": "back edge to front edge spans ~85 px vertically at the left and ~118 px at the right: the right part of the table is closer to the camera",
+      "horizon": "not visible; camera roughly level, horizon estimated well above the table top (table top appears as a thin band ~50-120 px tall)"
+    }
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ball (ping-pong-like) on the wooden table; the only object that translates",
+      "distinguish": "white sphere, ~38 px diameter; the other white things are the white tumbler (much larger, upright, x 724-794) and the playing cards",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre of the ball (cx_best, cy_best)",
+      "apparent_size_px": {
+        "vertical_diameter": "~38 (37-39) px, constant within measurement error over the clip (top edge to bottom of shaded ball)",
+        "horizontal_width_incl_motion_blur": "36 visible at rest (left edge hidden by face blob, true >= 37); ~41 at x 450-620 (frames 16-28); ~43.7 at x 820-970 (frames 39-48)",
+        "note": "vertical size is blur-free; horizontal width includes blur of a few px (speed ~16 px/frame). The slight growth to the right (with y increasing 490->514) suggests the ball comes slightly closer to the camera as it rolls right"
+      }
+    },
+    {
+      "name": "person",
+      "description": "person seated at the left edge behind/beside the table, face replaced by an opaque skin-coloured blob, dark hair, black top with light-blue garment; hand appears near the ball at launch and later at the face",
+      "moves": true,
+      "visible_frames": "0-48",
+      "image_region_px": "head blob ~x 100-260, y 430-560; torso/arms down to the bottom edge x 0-400",
+      "motion": "small head motion; right hand/finger near the table edge at x~250-290,y~460-480 around frames 12-16 (launch), hand raised to face around frames 24-36; not tracked numerically",
+      "track": null
+    },
+    {
+      "name": "pink_bottle",
+      "description": "pink insulated bottle / thermos with cream lid band, standing upright on the table behind the card stand",
+      "moves": false,
+      "extents_px": {"x0": 643, "x1": 690, "width": 47, "top_y": 328, "lid_body_boundary_y": 345, "bottom_y": 478, "height": 150, "centre": [666, 403]},
+      "note": "base partly hidden by the card stand"
+    },
+    {
+      "name": "white_tumbler",
+      "description": "white (slightly tapered) cup / tumbler with metal rim, right of the bottle",
+      "moves": false,
+      "extents_px": {"x0_top": 724, "x1_top": 794, "width_top": 70, "width_at_y470": 62, "rim_y": 376, "bottom_y": 498, "height": 122, "centre": [759, 437]}
+    },
+    {
+      "name": "card_stand",
+      "description": "two playing cards leaned against each other (A-frame / card house), blue-and-white back pattern facing camera, red faces visible on left card, in front of the bottle",
+      "moves": false,
+      "extents_px": {"x0": 661, "x1": 706, "width": 45, "apex_y": 421, "base_y": 500, "height": 79, "single_card_long_axis_px": "~80 (tilted ~15 deg from vertical)"},
+      "note": "not touched by the ball (ball passes in front of it, frames 29-35); stays standing"
+    },
+    {
+      "name": "lying_card",
+      "description": "playing card lying flat on the table at the foot of the card stand",
+      "moves": false,
+      "extents_px": {"x0": 647, "x1": 743, "length_x": 96, "y0": 494, "y1": 515, "apparent_depth_y": 21}
+    },
+    {
+      "name": "dark_card",
+      "description": "dark navy flat rectangle (card / phone) with a yellow sticky label, lying near the table front edge left of centre",
+      "moves": false,
+      "extents_px": {"x0": 521, "x1": 619, "length_x": 98, "y0": 533, "y1": 554, "apparent_depth_y": 21, "yellow_label": "x ~585-615, y ~537-545"}
+    },
+    {
+      "name": "table",
+      "description": "wooden table, top seen at grazing angle, black central pedestal",
+      "moves": false,
+      "extents_px": {"front_edge_x_from": 210, "front_edge_x_to": 1140, "front_edge_image_length": 931, "front_face_thickness_px": "~28 at left, ~32 at right", "pedestal": "black column x ~605-700, y ~595-720"}
+    },
+    {
+      "name": "background",
+      "description": "blurred room: grey wall panels, a tripod (blurred) behind the bottle (top ~x 690, y 70), dark monitor/TV at top right (x ~1000-1280, y 0-140), bright ceiling light region top centre",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball at rest", "frames": "0-11", "t": "0.000-0.458", "note": "jitters by <=2.5 px (frames 5-11), consistent with being nudged/rocking or edge noise near the face blob"},
+    {"event": "launch (start of motion)", "frame": 12, "t": 0.5, "note": "ball leaves rest between frame 11 (t=0.458) and 12 (t=0.500); the person's hand/finger appears at the table edge just behind the ball in frames 12-16 (flick, or possibly a blow)"},
+    {"event": "fast initial phase, decelerating", "frames": "12-17", "note": "per-frame x steps 48.5, 32.4, 28.6, 24.0, 20.1, 16.5 px"},
+    {"event": "steady roll", "frames": "17-48", "note": "~16.2 px/frame in x, +0.6 px/frame in y (rightwards and slightly down/closer), no visible deceleration"},
+    {"event": "passes in front of card stand / lying card / tumbler base (no contact)", "frames": "29-35", "t": "1.208-1.458"},
+    {"event": "probable dropped frame in the recording", "between_frames": "35 and 36", "note": "x step 31.4 px = twice the steady 16.2 px/frame; tracker and template match agree; file timestamps are regular, so one capture frame is likely missing here"},
+    {"event": "end of clip, ball still rolling", "frame": 48, "t": 2.0, "note": "ball at (968,514), not stopped, no impact or bounce in the clip"}
+  ],
+  "files": {"ball_track": "tracks/ball.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

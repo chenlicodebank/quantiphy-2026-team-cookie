@@ -1,0 +1,10 @@
+Yellow taxi tracked with SAM 3 masks at frames 0/14/26/38/50/62/71 (bbox centre = projection of the car centre); back-projected with the given depths (31.05 m at t=0.58 s, 30.43 m at t=1.58 s, nearly constant) and a focal length f=1850 px estimated from the 6 m white van's pixel length corrected for foreshortening, cross-checked by the pedestrian's height (1.7-1.8 m -> f~1920-2030), the side-on taxi length at frame 26 (f~1847) and the vertical vanishing point of the light poles. Mean of the per-frame 3D speeds over the 72 frames = 3.32 m/s (path/duration 3.32, net displacement/duration 3.27). Second route: LK tracking of 220 material points on the taxi reproduces the same image track (peak 12.2 px/frame near frame 24, 5.6 px/frame at frame 68) and brackets the answer at 3.65 m/s; the 3D displacement between the two depth-stamped times is 3.9 m/s, the clip average being lower because the taxi slows through the turn.
+
+Final message:
+**Answer: 3.3 m/s** (question id 1365)
+
+Method summary:
+- **Object**: the yellow taxi (orange-yellow sedan) driving left along the far road; tracked with SAM 3 masks at 7 frames, using the bbox centre as the projection of the car's centre.
+- **Scale**: focal length f ≈ 1850 px, obtained from the given 6 m white-van length (pixel length corrected for the body-axis foreshortening, direction taken from the van's exactly linear image track), cross-checked by the pedestrian's height (1.7–1.8 m → f ≈ 1920–2030), the side-on taxi length at frame 26 (f ≈ 1847) and the vertical vanishing point of the traffic-light poles.
+- **Depth**: the taxi's given distances (31.05 m → 30.43 m) are nearly constant; a linear model was used (a constant depth changes the answer by only 1.5 %).
+- **Result**: mean of the per-frame 3D speeds = 3.32 m/s (path/duration 3.32, net/duration 3.27). A second route (Lucas–Kanade tracking of 220 material points) reproduces the same image track and brackets the value at 3.65 m/s; the taxi visibly decelerates through the turn, so the clip average is below the 3.9 m/s seen between the two depth-stamped times.

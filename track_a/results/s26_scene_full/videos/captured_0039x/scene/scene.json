@@ -1,0 +1,46 @@
+{
+  "video": "captured_0039x.mp4",
+  "source": "lab (captured; background blacked out by Segment-Anything-2 style segmentation, watermark 'Modified with Segment Anything 2 Demo' bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation of a ball-free region vs frame 0: |dx| <= 0.07 px, |dy| <= 0.12 px over all 49 frames; per-frame values in camera_shift.json)",
+    "intrinsics_from_task_conventions": {"focal_px": 762.8, "principal_point_px": [640, 360], "hfov_deg": 80, "note": "focal = 0.5959 x 1280 (Orbbec Femto Mega RGB, stated in the benchmark conventions)"},
+    "view": "slightly elevated, looking down onto a table top; the table top is seen as a trapezoid (back edge short and high in the image, front edge long and low), both long edges slope down to the right (front edge ~0.060 px/px, back edge ~0.044 px/px) - small camera roll and/or table yaw",
+    "perspective_cues": "table top plane: back-left corner ~(447,450), back-right corner ~(925,471), front-left corner ~(225,532), front-right corner ~(1135,590); front edge face (table thickness) ~26-32 px tall (y 535->566 at left, 590->622 at right). Left and right side edges converge upward (vanishing point far above the table, roughly near x~640-700). No horizon visible (black background)."
+  },
+  "objects": [
+    {"name": "ball", "description": "the only moving object: small grey/off-white sphere; starts resting at the BACK edge of the table top (left of the pink bottle), rolls toward the camera and to the left across the table top, rolls off the FRONT edge just left of the dark blue card and falls out of the bottom of the image",
+     "moves": true, "visible_frames": "0-44 (44 partly cut by image bottom); out of view 45-48",
+     "track_file": "tracks/ball.csv",
+     "reference_point": "visible centre of the ball (circle centre)",
+     "apparent_diameter_px": {"rest_frames_0_17": 24.7, "f19": 29.1, "f24": 32.1, "f30": 37.4, "f35": 42.5, "f40": 50.9, "falling_41_44_horizontal_width": "52-56 (blurred)"},
+     "position_at_rest_px": [565.0, 440.4]},
+    {"name": "table", "description": "wooden (light brown) table top with darker front edge face, single black pedestal/leg under it", "moves": false, "visible_frames": "0-48",
+     "image_extent_px": {"x": [209, 1141], "y": [445, 622]}, "top_corners_px": {"back_left": [447, 450], "back_right": [925, 471], "front_left": [225, 532], "front_right": [1135, 590]},
+     "front_edge_length_px": 912, "back_edge_length_px": 478, "front_face_thickness_px": "26-32 (larger on the right)"},
+    {"name": "table_pedestal", "description": "black leg/column below table centre", "moves": false, "image_extent_px": {"x": [629, 687], "y": [615, 719]}, "width_px": 59, "note": "cut by image bottom"},
+    {"name": "pink_bottle", "description": "tall pink thermos/water bottle with white band near top, standing on the table behind the leaning playing card", "moves": false,
+     "image_extent_px": {"x": [642, 690], "y": [331, 477]}, "width_px": 48, "height_px": 146, "note": "bottom partly hidden by the leaning card; height measured top (331) to visible base at left (~477)"},
+    {"name": "white_cup", "description": "white tumbler/cup with metal rim, right of the pink bottle, slightly tapered (wider at top)", "moves": false,
+     "image_extent_px": {"x": [724, 795], "y": [375, 498]}, "top_width_px": 72, "bottom_width_px": 53, "height_px": 123},
+    {"name": "leaning_card", "description": "playing card (blue/white back pattern) leaning against the pink bottle, forming a tent", "moves": false,
+     "image_extent_px": {"x": [663, 713], "y": [416, 500]}},
+    {"name": "flat_cards", "description": "small stack of playing cards lying flat on the table in front of bottle and cup", "moves": false,
+     "image_extent_px": {"x": [642, 745], "y": [501, 517]}, "length_px": 103},
+    {"name": "blue_card", "description": "dark blue flat rectangle (card holder / phone / notebook) with a yellow sticker at its right end, lying near the table's front edge, right of where the ball rolls off", "moves": false,
+     "image_extent_px": {"x": [518, 620], "y": [532, 552]}, "length_px": 102, "yellow_sticker_px": {"x": [588, 616], "y": [536, 543]}}
+  ],
+  "events": [
+    {"event": "ball at rest at back edge of table", "frames": "0-17", "t_s": "0.000-0.708"},
+    {"event": "ball starts rolling (first clear displacement 18->19 ~5 px; 17->18 <1 px)", "frame": 18, "t_s": 0.75},
+    {"event": "ball reaches front edge of table top (ball bottom ~y 549 = front edge line), leaves the table", "frame": 40, "t_s": 1.667, "uncertainty": "+-1 frame"},
+    {"event": "ball falling off the front edge (vertical motion blur)", "frames": "41-44", "t_s": "1.708-1.833"},
+    {"event": "ball exits the image at the bottom", "frame": 45, "t_s": 1.875, "note": "partly visible at 44, gone at 45"}
+  ],
+  "files": {"tracks": ["tracks/ball.csv"], "camera_shift": "camera_shift.json", "overlay": "track_overlay.png", "notes": "notes.md", "scripts": "scripts/"}
+}

@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0081.mp4",
+  "source": "simulation",
+  "scene_type": "2D (top-down / nadir view of a flat ground plane; mild perspective parallax for tall parts, see notes)",
+  "fps": 24.0,
+  "frames": 29,
+  "frame_range": [0, 28],
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t*24)",
+  "units": "pixels, seconds; image x to the right, y down",
+  "camera": {
+    "motion": "static (floor's faint texture is identical in all frames; median background is clean)",
+    "view": "looking straight down at a uniform grey floor (~RGB 151), no horizon, no markings",
+    "perspective_cues": "Tall parts are displaced radially away from the image centre (~960,540): rider head minus bicycle centre goes from +52 px at bike x=1711 to +3 px at bike x=478 (slope ~0.040 px/px). Bicycle pixel length grows slightly with x: len ~ 373.2 + 0.0072*x (376 px at x~480, 386 px at x~1710; ~2.5% change) - slight camera tilt or lens effect. Treat as 2D with one scale; perspective is a ~2-5% effect."
+  },
+  "duplicate_frames": "frames 0 and 1 are pixel-identical (no motion between them for both objects); motion starts at frame 1->2",
+  "objects": {
+    "pedestrian": {
+      "description": "man in white T-shirt, dark hair, dark blue-grey jeans, black shoes, walking to the RIGHT (+x) along y~440 in the upper-left part of the frame",
+      "moves": true,
+      "visible_frames": [0, 28],
+      "track": "tracks/pedestrian.csv",
+      "reference_point": "ref_x/ref_y = centroid of the dark hair (head) blob seen from above; smooth. Pelvis lies under it; head x is displaced ~-30..-45 px toward the left image edge by parallax vs. feet, so pelvis x is probably ~10-25 px right of head x. Mask/bbox centres also given (they oscillate with the stride).",
+      "head_x_range_px": [64.9, 414.5],
+      "net_head_displacement_px_frames_0_28": 349.6,
+      "mean_head_step_px_per_frame_frames_1_28": 12.95,
+      "head_y_px": "434-440 (nearly constant)",
+      "extents_px": {
+        "along_motion_x_bbox": "124-225 (stride dependent; min ~117-124 at frames 16-18 legs together, max ~225 at frames 25-26)",
+        "across_motion_y_bbox": "127-134 (shoulder/arm span)",
+        "head_hair_blob_diameter": "~45-50"
+      }
+    },
+    "cyclist": {
+      "description": "rider in black jacket on a light-cyan (turquoise) bicycle with a rear rack, riding to the LEFT (-x) along y~641 in the lower half; front wheel points left",
+      "moves": true,
+      "visible_frames": [0, 28],
+      "cut_by_right_edge_frames": [0, 1],
+      "track": "tracks/cyclist.csv",
+      "reference_point": "ref_x/ref_y = centre of the bounding box of the cyan bicycle pixels (wheel-to-wheel midpoint), a ground-level root proxy. Front-wheel tip = bike_bbox_x0.",
+      "ref_x_range_px": [1711.5, 478.5],
+      "mean_step_px_per_frame_frames_2_28": -47.42,
+      "front_tip_mean_step": -47.23,
+      "rear_tip_mean_step": -47.62,
+      "motion_character": "steady, essentially constant pixel speed (per-frame steps 46-49 px, jitter from 1-2 px quantisation)",
+      "extents_px": {
+        "bicycle_length_x": "376-386 (mean 381.0) over frames 2-28; frames 0-1 cut by edge (355 visible)",
+        "bicycle_handlebar_width_y_cyan": "90-106 (cyan only, grips faint)",
+        "bicycle_plus_rider_y_extent": "118-119 (includes rider hands/elbows)",
+        "bicycle_plus_rider_x_extent": "378-388"
+      }
+    }
+  },
+  "static_objects": "none (plain grey floor, no markings or props). Soft dark shadows around both figures (not part of masks).",
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "start; frames 0 and 1 identical"},
+    {"frame": 2, "t": 0.0833, "event": "first visible motion of both objects; cyclist's rear fully inside the frame from here"},
+    {"frame": 28, "t": 1.1667, "event": "end; pedestrian (x~350-562) and cyclist (x~288-666) are side by side, separated in y by ~205 px (head y 437 vs bike y 641). They never touch."},
+    {"note": "No direction changes, no contacts. They approach head-on in x: at frame 28 bike centre x 478.5 vs pedestrian head x 414.5 (still 64 px apart in x, centres not yet crossed); the bike's front tip passes the pedestrian head x near frame 23-24. Distance between them per frame can be computed from the two track files."}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0024_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V3MX",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "question": {
+  "id": 1679,
+  "question": "What is the width of the boat in meters?",
+  "prior": "speed of the boat = 4m/s",
+  "depth_info": "t=1s, distance_boat_camera = 90.1103 m\nt=2s, distance_boat_camera = 90.4360 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

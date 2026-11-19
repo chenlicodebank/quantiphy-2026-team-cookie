@@ -1,0 +1,77 @@
+{
+  "video": "internet_0025.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 29.970032,
+  "frames": 473,
+  "duration_s": 15.7824,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 = t 0",
+  "description": "Alpine lake (Hallstatt-like) with a mountain/cliff backdrop. A long traditional wooden boat (orange-brown varnish, high upturned bow on the right) with one standing boatman at the stern (left) moves left-to-right, side-on to the camera, across the whole clip. Camera slowly pans right and rolls ~1 deg.",
+  "camera": {
+    "motion": "slow pan right + slight tilt + roll; no zoom",
+    "file": "tracks/camera_shift.csv",
+    "background_shift_img_centre_px": {"frame_0": [0, 0], "frame_150": [-28.8, -9.8], "frame_300": [-44.3, -5.5], "frame_390": [-50.4, 0.6], "frame_472": [-45, 1]},
+    "roll_deg_total": -1.0,
+    "scale_change": "< 0.1 % (no zoom)",
+    "method": "LK-tracked background features (y<555) vs frame 0, RANSAC similarity; residual ~0.2 px; cross-checked by template matching of 4 background patches (agree within ~2 px)",
+    "stabilised_frame": "x_stab / y_stab columns = positions mapped into frame-0 pixel coordinates (background-fixed)"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "aka": ["wooden boat", "rowing boat", "Plätte / traditional flat boat", "canoe-like boat"],
+      "distinguish": "only boat in the video; orange-brown wood, long and low, upturned pointed bow at right, square dark stern post at left, small wooden seat/box structures mid-deck, blue fender/rope at about 1/3 from the stern",
+      "moves": true,
+      "visible_frames": [0, 472],
+      "occluded": false,
+      "track": "tracks/boat.csv",
+      "reference_point": "x_img/y_img = centre of the above-water bounding box (stern..bow tip, bow-tip top..waterline); x_stab/y_stab = same point in frame-0 background coords",
+      "length_bow_to_stern_px": {"frame_0_29_mean": 351.9, "frames_221_250_mean": 346.0, "frames_443_472_mean": 340.9, "column": "length_incl_stern_post_px", "note": "orange-only length (length_px) is 2-4 px shorter"},
+      "height_bow_tip_to_waterline_px": {"start": 34.4, "end": 37.2},
+      "hull_height_midships_px": 24,
+      "direction": "left to right (+x), roughly constant pace with poling-stroke surges",
+      "stabilised_displacement_px": {"frame_0_to_472_centre_x": 428.3, "image_frame_0_to_472_centre_x": 386.0}
+    },
+    {
+      "name": "boatman",
+      "aka": ["person", "man", "rower", "ferryman"],
+      "distinguish": "only person; stands near the stern (left end) of the boat, black shirt and shorts, face pixelated, works a long oar/pole on the starboard (near) side",
+      "moves": true,
+      "visible_frames": [0, 472],
+      "occluded": "legs/feet hidden behind the gunwale; visible height = head top to the deck/gunwale",
+      "track": "tracks/boatman.csv",
+      "visible_height_px": {"p5": 47, "median": 51, "p95": 55},
+      "torso_x_minus_boat_stern_x_px": "oscillates 34..57 with the strokes (leans forward/back)"
+    },
+    {
+      "name": "oar_pole",
+      "distinguish": "thin dark shaft held by the boatman, slanting down to the water near the stern; blue fender/rope piece on hull at ~x stern+100",
+      "moves": true,
+      "note": "not tracked separately; too thin"
+    },
+    {
+      "name": "wake",
+      "distinguish": "white line on the water behind (left of) the stern at the waterline (y~672 at frame 0), plus a fainter older wake line at y~632",
+      "moves": "follows the boat"
+    }
+  ],
+  "static_objects_frame0_px": {
+    "shoreline_waterline_y": 564,
+    "left_wooded_headland": {"bbox": [0, 370, 205, 566], "note": "dark tree-covered point at far left edge"},
+    "house_left_large_purple_roof": {"bbox": [271, 534, 319, 556], "width": 48, "height": 22},
+    "house_left_small": {"bbox": [360, 541, 386, 557], "width": 26, "height": 16},
+    "house_right_white": {"bbox": [1700, 527, 1735, 557], "width": 35, "height": 30},
+    "house_right_blue_roof": {"bbox": [1794, 532, 1849, 556], "width": 55, "height": 24},
+    "radio_mast": {"x": 772, "y_top": 455, "y_base": 485, "note": "small lattice tower above the treeline"},
+    "mountain_cliffs": "grey limestone cliffs, top of frame; forested slopes; right slope dark green",
+    "note": "these are kilometres away; their pixel sizes are NOT on the boat's scale"
+  },
+  "events": [
+    {"event": "boat already moving at start", "frame": 0, "t": 0.0},
+    {"event": "boat still moving at end, no stop", "frame": 472, "t": 15.749},
+    {"event": "no bounce/impact/contact/direction change; heading stays +x"}
+  ],
+  "perspective": "boat seen side-on at nearly constant distance (stabilised waterline y 672-676 throughout); apparent length shrinks ~3 % (352 -> 341 px) over the clip, probably slight yaw/receding; single planar scale is appropriate",
+  "files": {"notes": "notes.md", "tracks": ["tracks/boat.csv", "tracks/boatman.csv", "tracks/camera_shift.csv"], "scripts": "scripts/"}
+}

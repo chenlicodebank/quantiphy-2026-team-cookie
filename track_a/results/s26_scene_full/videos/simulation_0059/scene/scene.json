@@ -1,0 +1,83 @@
+{
+  "video": "simulation_0059.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2160, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+  "frame_duplicate": "frame 1 is an exact copy of frame 0 (mean |diff| 0.02): every object shows zero displacement 0->1. From frame 1 on every frame differs.",
+  "camera": {
+    "motion": "static (sky/background residual < 0.05 grey levels over the clip; parked cars shift <= 0.5 px by phase correlation)",
+    "per_frame_background_shift_px": 0,
+    "road_vanishing_point_px": [1258, 702],
+    "vanishing_point_note": "intersection of the two curbs of the main road that runs away from the camera: left curb through (0,1036) and (825,817); right curb through (1563,817) and (2160,1042). Read at 0.8x zoom, about +-15 px. VP x = 1258 is right of the image centre (1080), so the camera looks slightly left of the road direction.",
+    "horizon_y_px": 702,
+    "horizon_note": "far end of the road / horizon at y ~ 700-712. It is below the image centre (540), so the camera is pitched down.",
+    "cross_street": "a street crossing left to right at mid-distance. The van and cyclist move along it at almost constant image y (van tyre contact y ~ 799, cyclist wheel bottom y ~ 801), so that street is nearly parallel to the image x axis. The van's apparent length grows a little as it moves right (its rear face comes into view)."
+  },
+  "moving_objects": {
+    "taxi": {
+      "description": "yellow NYC-style taxi with a roof sign. Starts on the cross street at left, side view, heading right, behind the pedestrian. Turns right into the main road toward the camera and ends front-on at x~870-1050 in the camera's lane area.",
+      "visible_frames": [0, 71],
+      "track": "tracks/taxi.csv",
+      "reference_point": "cx, cy = bbox centre. The vehicle root is not visible: use the bbox centre or the bottom centre (cx, y_max) on the ground.",
+      "apparent_size_px": "side view f5-25: length ~300, height ~90. Turning f25-49: bbox width shrinks to ~131 (front-on, f47-53). Then front-on width grows 131 -> 181 and height 110 -> 128 by f71 as it approaches. Bottom (tyres) y: 807 (f0) -> 826 (f36) -> 852 (f71)."
+    },
+    "van": {
+      "description": "white cargo van with two brown rectangular side panels. Drives left -> right along the cross street, behind the taxi and the cyclist and in front of the green car.",
+      "visible_frames": [0, 71],
+      "track": "tracks/van.csv",
+      "reference_point": "cx, cy = bbox centre. patch_cx (centre of the two brown side panels, sub-pixel template match) is the most precise x-motion signal (+-0.3 px).",
+      "apparent_size_px": "length (rear to front bumper) ~296-303 px over f0-60, growing to 316 at f71 (rear face visible). Height ~108 px (roof y~692, tyre contact y~799), constant within ~2 px."
+    },
+    "cyclist": {
+      "description": "rider in dark navy top and jeans on a silver/white bicycle. Crosses left -> right along the cross street at constant pace, between the taxi (in front of him early) and the van (behind him late).",
+      "visible_frames": [0, 71],
+      "track": "tracks/cyclist.csv",
+      "reference_point": "rider_cx/cy = head+torso template centre (precise, +-0.5 px). pelvis_x_est/pelvis_y_est = hip/saddle estimate (+-4 px). cx/cy = bbox centre.",
+      "apparent_size_px": "bbox (rear wheel to front wheel x head top to wheel bottom) ~92 x 88 px, constant (measured on clean frames 33-36, checked at f55, f64, f71)."
+    },
+    "pedestrian": {
+      "description": "man in a white T-shirt and light-blue jeans on the left sidewalk (x ~510-630). Stands almost still at the start, then walks toward the camera and to the left.",
+      "visible_frames": [0, 71],
+      "track": "tracks/pedestrian.csv",
+      "reference_point": "cx = body axis x. pelvis_x_est/pelvis_y_est = pelvis estimate. head_top measured every frame. The feet are behind the garbage bags from frame ~25 on.",
+      "apparent_size_px": "standing height head-top -> soles ~110 px (head top ~706, soles ~815) for frames 0-24. Body width incl. arms ~44 px. Head top stays at 706-709 all clip. The bottom is hidden later, so the later growth is not measured."
+    }
+  },
+  "static_objects": {
+    "maroon_sedan": {"description": "dark maroon/purple sedan, rear facing the camera, parked in the main road right of centre (closer than the green car)", "bbox_px": [1256, 739, 1398, 849], "width_px": 142, "height_px": 110, "moves": false},
+    "green_car": {"description": "small dark-green/white car (BMW-like), front facing the camera, far down the main road just left of centre", "bbox_px": [1090, 728, 1172, 784], "width_px": 82, "height_px": 56, "moves": false},
+    "trash_can": {"description": "silver metal trash can standing on the road, near the bottom right of centre", "bbox_px": [1411, 927, 1498, 1034], "width_px": 87, "height_px": 107, "moves": false},
+    "garbage_bags": {"description": "pile of black/grey garbage bags (three bags) in the left foreground on the road/curb", "bbox_px": [452, 803, 693, 1058], "width_px": 241, "height_px": 255, "moves": false},
+    "green_bin": {"description": "dark-green slatted litter bin on the left sidewalk next to a lamp post", "bbox_px": [652, 780, 690, 838], "width_px": 38, "height_px": 58, "moves": false},
+    "lamp_posts": {"description": "ornate double-lantern street lamps on both sidewalks", "instances_px": {"left_near": {"x": 431, "top_y": 544, "base_y": 894}, "left_mid": {"x": 654, "top_y": 590, "base_y": 838}, "right_mid": {"x": 1741, "top_y": 581, "base_y": 850}, "right_near": {"x": 1931, "top_y": 531, "base_y": 906}, "far_left_edge_partial": {"x": "0-60", "y": "~400-560"}}, "note": "positions read at 0.8x zoom, +-5 px; a long row of smaller lamps continues down both sides of the road", "moves": false},
+    "traffic_lights": {"description": "traffic-light poles", "instances_px": {"left_pole": {"x": 750, "top_y": 562, "base_y": 819}, "left_small": {"x": 912, "top_y": 569, "base_y": 781}, "right_main_with_pedestrian_sign": {"x": 1650, "top_y": 504, "base_y": 825}, "right_far": {"x": 1519, "top_y": 600, "base_y": 781}}, "moves": false},
+    "road_and_sidewalks": {"description": "grey asphalt main road running away from the camera with beige sidewalks on both sides; a cross street at mid-distance (y ~700-800); red-brown tree pits / planters on the sidewalks (e.g. right sidewalk x 1890-2100, y ~810-830)", "left_curb_points_px": [[0, 1036], [825, 817]], "right_curb_points_px": [[1563, 817], [2160, 1042]]}
+  },
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "clip start; frame 1 duplicates frame 0"},
+    {"frame": 1, "time": 0.0417, "event": "van at rest at frames 0-1. It starts moving between frames 1 and 2 and then speeds up smoothly to the end (patch shift 0.8 px/frame at f1->2, ~26.5 px/frame at f70->71)"},
+    {"frame": 1, "time": 0.0417, "event": "cyclist moving at a steady ~11.9 px/frame to the right from the first real frame change (f1->2) to the end"},
+    {"frame": 1, "time": 0.0417, "event": "taxi moving to the right on the cross street from the start, ~6-7 px/frame image-x (bbox centre is jittery early: +-6 px)"},
+    {"frame": "0-16", "time": "0-0.67", "event": "pedestrian starts nearly still (~0.2-0.3 px/frame) and gradually speeds up to ~1.5 px/frame by f16-20. Then walks steadily left (and toward the camera) at ~1.0-1.4 px/frame"},
+    {"frame": "~20-28", "time": "0.83-1.17", "event": "cyclist comes out from behind the taxi's front (fully visible from f28)"},
+    {"frame": "~25-49", "time": "1.04-2.04", "event": "taxi turns toward the camera: bbox width shrinks 290 -> 131 px"},
+    {"frame": "~44-47", "time": "1.83-1.96", "event": "taxi image-x motion reverses: it moves right up to ~f45, then slowly left. From here it heads toward the camera (tyre-contact y rises ~1 px/frame to the end)"},
+    {"frame": "28-37", "time": "1.17-1.54", "event": "cyclist passes in front of the static green car"},
+    {"frame": "~30-50", "time": "1.25-2.08", "event": "van passes behind the taxi"},
+    {"frame": "41-50", "time": "1.71-2.08", "event": "cyclist's bike and legs hidden behind the static maroon sedan; head and torso visible above it"},
+    {"frame": 59, "time": 2.4583, "event": "van front passes the cyclist's centre in image x: the van overtakes the cyclist behind him (cyclist in front)"},
+    {"frame": 71, "time": 2.9583, "event": "clip end. All four moving objects still in view"}
+  ],
+  "tracks_columns": {
+    "common": "frame, time, x_min, x_max, y_min, y_max (bbox, px), cx, cy (bbox centre or body axis), occluded_by (front objects overlapping >=5% of bbox)",
+    "taxi.csv": "width_px, height_px, yellow_cx/yellow_cy/yellow_area (yellow-paint centroid)",
+    "van.csv": "patch_cx (brown side panels centre), length_px, height_px, rear_raw/front_raw (directly measured ends where clean)",
+    "cyclist.csv": "rider_cx/rider_cy (template), pelvis_x_est/pelvis_y_est, template_score, occlusion text",
+    "pedestrian.csv": "centre_x/centre_y (template), pelvis_x_est/pelvis_y_est, head_top, feet_y (visible frames only), height_px (frames 0-24), template_score, occlusion text"
+  }
+}

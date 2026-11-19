@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0164.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 66,
+ "duration_s": 2.75,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1389,
+  "question": "What is the acceleration of the ball at time 1s in m/s^2?",
+  "prior": "diameter of the ball = 0.21m",
+  "depth_info": "t=0.5s distance_bowling_ball_camera = 9.391m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,61 @@
+{
+  "video": "captured_0033x.mp4",
+  "source": "lab (real Orbbec Femto Mega recording, background removed with Segment Anything 2: everything except the table and ball is black)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static. Phase correlation of the table front edge + leg vs frame 0: |shift| <= 1 px in every frame (segmentation jitter), no pan/shake",
+    "intrinsics_from_benchmark": "f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+    "perspective": "camera looks slightly down at a square/rectangular table top seen as a trapezoid: back edge y~430-437 (x 461..~765, ~300 px long), front edge y~520-548 (x 302..911, ~610 px long). Front edge is nearer the camera (2x longer in image). Horizon is above the table, not visible (black background)."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "the only moving object: small white/pale-pink ball (looks like a ping-pong / light foam ball). Thrown up from above the table centre, bounces on the table top twice, rolls/moves toward the camera and slightly left, falls off the FRONT edge of the table and leaves the image at the bottom",
+      "moves": true,
+      "visible_frames": [0, 38],
+      "track_file": "tracks/ball.csv",
+      "reference_point": "centroid of the brighter-than-background mask (visible centre); in blurred frames the centroid of the blur streak = centre at mid-exposure",
+      "apparent_diameter_px": {
+        "frame_0_to_3_(static, start)": 21,
+        "frame_8_apex1": "minor 25.9 (some blur)",
+        "frames_19_20_apex2": "30-32",
+        "frames_25_28_on_table_back": "33-36 (height), width inflated by horizontal blur",
+        "frames_29_34_on_table_moving_forward": "37-42 (minor extent)",
+        "note": "use minor_extent_px (across the blur) as the diameter; grows with time because the ball comes toward the camera (depth decreases ~2x from frame 0 to frame 34)"
+      }
+    },
+    {
+      "name": "table",
+      "description": "wooden (light brown) table top on a single dark grey central pedestal leg; static",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "top_corners_px": {"back_left": [461, 430], "back_right": [765, 437], "front_left_top": [302, 520], "front_right_top": [911, 538]},
+      "front_edge_bottom_y_px": {"left_x302": 548, "x600": 552, "right_x911": 561},
+      "front_edge_thickness_px": "about 26 (left) to 23 (right) px (front face of the top slab)",
+      "top_width_px": {"back_edge": 304, "front_edge": 609, "row_y500": 526},
+      "top_depth_extent_image_y_px": "430 -> 548 (118 px incl. slab front face)",
+      "leg_px": {"x_range": [559, 607], "width": 45, "y_top": 561, "y_bottom": "719 (cut by image bottom)", "visible_height": 159}
+    },
+    {
+      "name": "watermark",
+      "description": "text 'Modified with Segment Anything 2 Demo' at bottom-right (x 1040-1300, y 698-714); not a physical object",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball held/nearly static above table centre (hand removed by segmentation)", "frames": [0, 2], "t": [0.0, 0.0833], "pos_px": [625, 235]},
+    {"event": "start of upward motion / release (throw up)", "frame": 3, "t": 0.125, "note": "cy 236.2 (f2) -> 234.5 (f3) -> 222.0 (f4); release between f3 and f4"},
+    {"event": "first apex (highest point)", "frame": 8, "t": 0.3333, "cy": 180.9, "note": "f9 cy 181.4 nearly equal; true apex ~f8.3"},
+    {"event": "first impact on the table top, near its back edge", "frame": 14, "t": 0.5833, "note": "lowest position (blur streak bottom y 437, back edge y~430); f15 already rising"},
+    {"event": "second apex (bounce peak)", "frame": 20, "t": 0.8333, "cy": 314.8},
+    {"event": "second impact on table top", "frame": 25, "t": 1.0417, "cy": 435.1, "note": "f24 still falling (blur streak), f25 lowest"},
+    {"event": "small hop after second impact", "frames": [26, 27], "note": "cy 427.2, 428.8 (~7 px up) then down again"},
+    {"event": "ball rolling/moving on table top toward camera and leftwards", "frames": [28, 35], "note": "image motion (-x, +y), speed in px increasing"},
+    {"event": "ball leaves the front edge of the table", "frame": 35, "t": 1.4583, "note": "f35 bottom at y 533 at the front edge; f36 below the edge in free fall"},
+    {"event": "falling below table, leaves image through bottom edge", "frames": [36, 38], "note": "f37-38 cut by image bottom; not visible from f39 (t 1.625)"}
+  ]
+}

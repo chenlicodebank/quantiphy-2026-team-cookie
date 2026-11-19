@@ -1,0 +1,100 @@
+{
+ "video": "simulation_0029.mp4",
+ "source": "simulation (Blender render)",
+ "scene_type": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "image_size_px": [960, 960],
+ "time_convention": "t = frame / 25; frame 0 at t = 0",
+ "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+ "camera": {
+  "motion": "static (mean abs change of sky rows between consecutive frames <= 0.5 grey levels; no pan/shake)",
+  "per_frame_background_shift_px": [0, 0],
+  "principal_point_assumed_px": [480, 480],
+  "focal_length": "unknown - estimate from a question's depth_info + known size",
+  "perspective_cues": {
+   "far_shoreline_y_px": "about 630-632, nearly horizontal across the image (water/sand boundary); true horizon is hidden behind the dunes, so it lies above y = 630",
+   "hill_ridge_y_px_by_x": {"0": 548, "120": 562, "240": 566, "360": 572, "480": 588, "600": 598, "680": 606, "760": 590, "840": 574, "920": 564},
+   "ground_plane": "flat water surface filling y > ~632; the boat waterline moves from y 679 to y 684 (lower in the image = nearer the camera)"
+  }
+ },
+ "objects": [
+  {
+   "name": "boat",
+   "description": "red and white fishing boat (red hull with white top band and a lettered name, white cabin with a red roof, white rails at the stern, a thin white mast with a short black antenna/light bar). Bow points left, slightly toward the camera; we see its port side",
+   "moves": true,
+   "visible_frames": "0-74 (all), never occluded",
+   "track_file": "tracks/boat.csv",
+   "reference_point": "the origin cannot be seen. Candidates: hull_bbox_cx/cy (centre of the red-hull box: x between bow and stern, y between hull top and waterline) or mask_cx/cy (centroid of the whole visible boat above the waterline). They give the same horizontal motion (~2.63 px/frame); hull_bbox_cy is about 7 px lower than mask_cy",
+   "frame0": {"hull_bbox_cx": 544.5, "hull_bbox_cy": 646.5, "length_px_hull": 158, "waterline_y": 679, "mast_top_y": 490.5, "height_px_waterline_to_mast_top": 188.5, "hull_height_px": 65},
+   "frame37": {"hull_bbox_cx": 450.5, "hull_bbox_cy": 648.5, "length_px_hull": 166, "waterline_y": 683, "mast_top_y": 487.0, "height_px": 196.0, "hull_height_px": 69},
+   "frame74": {"hull_bbox_cx": 351.5, "hull_bbox_cy": 649.0, "length_px_hull": 176, "waterline_y": 684, "mast_top_y": 483.5, "height_px": 200.5, "hull_height_px": 70},
+   "apparent_size_change": "length grows linearly about 156.7 + 0.26*frame px (x1.11 over the clip); height (waterline to mast top) 188.5 -> 200.5 px (x1.06). The boat gets slightly nearer the camera while it moves left",
+   "notes": "length_px_hull = red-hull extent bow to stern (best length measure, +/-2 px); length_px_mask (whole silhouette) jitters by +/-6 px because water ripples at the bow leak into the mask. The length seen is along the image x axis; the boat is turned slightly toward the camera, so its true length is foreshortened a little. Width (beam) is not measurable from this view."
+  },
+  {
+   "name": "bird",
+   "description": "small dark bird (gull-like silhouette, black) flapping across the sky just above the dunes, left to right",
+   "moves": true,
+   "visible_frames": "0-74 (all). Frames 48-49: overlaps the boat's antenna in the image (passes in front of it); centre is interpolated there (cx_interp/cy_interp, occluded=1)",
+   "track_file": "tracks/bird.csv",
+   "reference_point": "centroid of the dark silhouette (cx, cy); bbox centre is also given",
+   "frame0": {"cx": 40.5, "cy": 518.1},
+   "frame74": {"cx": 580.2, "cy": 531.8},
+   "image_motion": "about 7.3 px/frame to the right (cx linear fit 55.2 + 7.28*frame; first frames are a bit slower). y goes up and down between 518 and 538 (wavy flight)",
+   "size_px": "wingspan changes with the wingbeat: bbox width 13-28 px (median 19), height 4-20 px (median 11); widest when the wings are spread flat (e.g. frames 30, 54: 25 and 23 px wide, 4-12 px tall)",
+   "notes": "small object (~100 px area): bbox +/-1-2 px. Its depth is unknown and need not equal the boat's."
+  },
+  {
+   "name": "shore_posts",
+   "description": "small group of dark brown wooden posts/stumps at the water's edge on the left shore",
+   "moves": false,
+   "visible_frames": "0-74",
+   "bbox_px": {"x0": 112, "x1": 139, "y0": 646, "y1": 659},
+   "extent_px": {"length_x": 28, "height_y": 14},
+   "notes": "a lighter, low structure goes on to its left (x ~ 92-110) and there is a tiny dark speck at (109, 642); the edges are soft"
+  },
+  {
+   "name": "left_beach",
+   "description": "pale sandy beach/spit in the left foreground, sloping down from the left image edge to the water (x 0-~250, y ~600-720)",
+   "moves": false,
+   "visible_frames": "0-74"
+  },
+  {
+   "name": "sand_dunes",
+   "description": "range of sand-coloured dunes/hills behind the water on the far shore across the full width; ridge y by x given under camera.perspective_cues",
+   "moves": false,
+   "visible_frames": "0-74"
+  },
+  {
+   "name": "water",
+   "description": "rippling sea/lake surface from the far shoreline y~631 to the bottom of the frame; shows the boat's red reflection under the hull",
+   "moves": "surface ripples only",
+   "visible_frames": "0-74"
+  },
+  {
+   "name": "sky",
+   "description": "cloudy blue-white sky, static"
+  },
+  {
+   "name": "far_right_specks",
+   "description": "a few tiny dark specks on the dune ridge at x ~ 925-945, y ~ 558-562 (possibly distant posts/birds); static, too small to measure",
+   "moves": false
+  }
+ ],
+ "events": [
+  {"event": "boat moving leftward (and slightly toward the camera) for the whole clip, steady image speed", "frames": "0-74", "t_s": "0-2.96", "note": "no start or stop seen"},
+  {"event": "bird flying left to right for the whole clip", "frames": "0-74", "note": "no start or stop seen; wingbeat changes the silhouette size"},
+  {"event": "bird passes in front of the boat's mast/antenna in the image (overlap only, no contact)", "frames": "48-49", "t_s": "1.92-1.96"},
+  {"event": "no release, bounce, impact or contact events"}
+ ],
+ "files": {
+  "tracks/boat.csv": "per-frame boat track (75 rows)",
+  "tracks/bird.csv": "per-frame bird track (75 rows)",
+  "summary_stats.json": "min/max/first/last of the track columns, mean per-frame step lengths",
+  "static_raw.json": "raw static measurements (dune ridge and far shoreline y by x, shore posts bbox)",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts"
+ }
+}

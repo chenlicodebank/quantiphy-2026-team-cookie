@@ -1,0 +1,173 @@
+{
+ "video": "simulation_0133.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 30.0,
+ "frames": 90,
+ "width": 1080,
+ "height": 1920,
+ "time_convention": "t = frame / 30; frame 0 at t = 0",
+ "pixel_coords": "x right, y down, origin top-left, full-resolution pixels",
+ "camera": {
+  "motion": "static",
+  "evidence": "frame 0 vs frame 89 outside the apple: mean |diff| 0.33/765, max 42 (noise)",
+  "perspective": "side view, nearly fronto-parallel; counter front face seen square-on; camera roughly at counter-top height (top surface of counter not visible). Treat as planar (2D)."
+ },
+ "objects": [
+  {
+   "name": "apple",
+   "moving": true,
+   "visible_frames": [
+    0,
+    89
+   ],
+   "track": "tracks/apple.csv",
+   "description": "single red apple (one side pale/whitish, visible from ~frame 80 on). Only moving object.",
+   "pixel_size": {
+    "diameter_px_unoccluded_median": 62,
+    "mask_width_range_px": [
+     60,
+     66
+    ],
+    "mask_height_range_px": [
+     61,
+     65
+    ],
+    "note": "on the floor (frames 48-89) mask height reads 68-70 because ~4 px contact shadow is included; true height ~62-64; equivalent-area diameter ~62 on the counter, ~65 on the floor"
+   },
+   "start_position_px": [
+    883,
+    854
+   ],
+   "end_position_px": [
+    29,
+    1526
+   ]
+  },
+  {
+   "name": "counter",
+   "moving": false,
+   "description": "dark grey cabinet/counter block on the right; speckled light-grey top slab",
+   "left_edge_x": 578,
+   "side_face_x": [
+    575,
+    582
+   ],
+   "right_edge_x": ">1080 (cut by frame edge)",
+   "top_y": 907,
+   "top_slab_front_y": [
+    907,
+    945
+   ],
+   "bottom_y": 1663,
+   "height_px": 756,
+   "visible_width_px": 505,
+   "top_slab_thickness_px": 38
+  },
+  {
+   "name": "ramp_board",
+   "moving": false,
+   "description": "thin dark stick/board leaning from the plate down onto the counter top; the apple starts on it",
+   "left_end_px": [
+    705,
+    908
+   ],
+   "right_end_px": [
+    950,
+    877
+   ],
+   "length_px": 247,
+   "thickness_px": "~5",
+   "slope_deg_in_image": 7.2
+  },
+  {
+   "name": "plate",
+   "moving": false,
+   "description": "white plate on the counter top at the far right, partly out of frame, supports the upper end of the board",
+   "x_range": [
+    925,
+    ">1080"
+   ],
+   "y_range": [
+    881,
+    906
+   ]
+  },
+  {
+   "name": "floor",
+   "moving": false,
+   "description": "light grey floor with a bright light patch left of the counter; apple floor-contact level y ~1556 (apple resting centre y ~1524-1526)",
+   "lighting_band_edges_y": [
+    1464,
+    1630
+   ]
+  },
+  {
+   "name": "back_wall",
+   "moving": false,
+   "description": "plain grey wall; ceiling/wall line y ~226"
+  },
+  {
+   "name": "apple_shadow",
+   "moving": true,
+   "description": "cast shadow to the right of/below the apple on the floor (frames 47+); not part of the apple"
+  }
+ ],
+ "events": [
+  {
+   "event": "motion start (apple released at rest on the board, rolling left/down)",
+   "frame": 0,
+   "t": 0.0,
+   "note": "moves 0.4 px by frame 1, accelerating"
+  },
+  {
+   "event": "apple leaves the ramp board onto the counter top",
+   "frame": 26,
+   "t": 0.867,
+   "note": "approx frames 25-27; afterwards top edge constant at y ~852-854"
+  },
+  {
+   "event": "apple rolls along counter top (flat)",
+   "frames": [
+    27,
+    33
+   ]
+  },
+  {
+   "event": "apple leaves counter edge (start of fall)",
+   "frame": 34,
+   "t": 1.133,
+   "note": "centre passes counter left edge x=578 at ~frame 34; y starts rising at 34-35"
+  },
+  {
+   "event": "free fall (projectile, moving left)",
+   "frames": [
+    35,
+    47
+   ]
+  },
+  {
+   "event": "floor impact",
+   "frame": 48,
+   "t": 1.6,
+   "note": "first frame on the floor; contact between frames 47 and 48 (frame 47 still ~84 px above)"
+  },
+  {
+   "event": "tiny rebound after impact (~2-3 px up at frame 49) then rolling left on the floor",
+   "frames": [
+    48,
+    89
+   ]
+  },
+  {
+   "event": "apple reaches left image border, still moving",
+   "frame": 89,
+   "t": 2.967
+  }
+ ],
+ "files": {
+  "tracks": "tracks/apple.csv",
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

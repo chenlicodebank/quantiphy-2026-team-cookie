@@ -1,0 +1,143 @@
+{
+ "video": "internet_0039.mp4",
+ "source": "internet",
+ "scene": "2D",
+ "fps": 18.537415,
+ "frames": 72,
+ "width": 2160,
+ "height": 3840,
+ "time_convention": "t = frame / fps, frame 0 at t=0",
+ "description": "Overhead (top-down) view of one swimmer doing front crawl (freestyle) in a pool lane between two lane ropes; swimmer moves toward the TOP of the image (-y). Static camera.",
+ "camera": {
+  "motion": "static (background shift < 1 px/frame; lane-rope float pattern drifts ~7 px over the whole clip, consistent with ropes bobbing, not a pan)",
+  "view": "near-vertical top-down; swimmer, ropes and pool floor marks approximately in one plane -> one px scale is reasonable",
+  "per_frame_bg_shift": "see scene/bgshift_raw.json (phase correlation per strip: (dx,dy,response)); |dx|,|dy| < 1 px in rope strips for all frames",
+  "duplicate_frames": [
+   1,
+   11,
+   20,
+   30,
+   40,
+   50,
+   60,
+   70
+  ],
+  "duplicate_note": "these frames are pixel copies of the previous frame (frame-rate conversion); the object shows 0 displacement on them and ~21 px on the neighbours. Per-frame diffs at these frames are artefacts."
+ },
+ "objects": {
+  "swimmer": {
+   "moves": true,
+   "visible_frames": "0-71 (all)",
+   "track": "tracks/swimmer.csv",
+   "distinguish": "only person in the video; black swim trunks, black/white swim cap; centre lane",
+   "motion": "swims toward image top (-y), nearly straight (x stays 940-1040)",
+   "reference_points": {
+    "cx,cy": "visible-mask centroid (includes arms; shifts with arm stroke)",
+    "head_x,head_y": "swim-cap centre (template tracked; smoothest point)",
+    "hip_x,hip_y": "centroid of black trunks = pelvis proxy"
+   },
+   "summary_px": {
+    "head_y_frame0": 2079.0,
+    "head_y_frame71": 774.9,
+    "head_net_disp_0_71": 1304.7,
+    "head_path_0_71": 1342.1,
+    "hip_net_disp_0_71": 1262.5,
+    "centroid_net_disp_0_71": 1266.4,
+    "head_linear_fit_px_per_frame": -18.64,
+    "head_linear_fit_px_per_s": -345.6,
+    "mean_step_over_non_duplicate_frames_head_px": 20.7
+   },
+   "sizes_px": {
+    "head_cap_top_to_feet_median": 1040.7,
+    "head_cap_top_to_feet_range": [
+     984.9,
+     1081.9
+    ],
+    "mask_bbox_height_incl_extended_arm_range": [
+     1122,
+     1372
+    ],
+    "mask_bbox_height_median": 1294.5,
+    "mask_bbox_width_range": [
+     285,
+     504
+    ],
+    "pca_len_main_median": 1289.9499999999998,
+    "hip_to_head_median": 454.5,
+    "cap_diameter_approx": "~110 wide x ~125 long (frame 19, manual)",
+    "shoulder_width_approx": "~280 (frame 19, manual, blurry)",
+    "trunks_width_median": 209.0,
+    "trunks_length_median": 170.0
+   }
+  },
+  "lane_rope_left": {
+   "moves": false,
+   "distinguish": "left lane rope (red/white/blue floats), x ~ 290-355",
+   "centre_line_frame0": {
+    "x_at_y0": 345.1,
+    "x_at_y1920": 318.5,
+    "x_at_y3840": 291.8
+   },
+   "width_px": "~44-60",
+   "float_pattern": "groups of red, blue, white floats; red groups repeat every ~202 px (each red group ~58 px long, single float ~20-30 px)"
+  },
+  "lane_rope_right": {
+   "moves": false,
+   "distinguish": "right lane rope, x ~ 1660-1700",
+   "centre_line_frame0": {
+    "x_at_y0": 1667.5,
+    "x_at_y1920": 1682.3,
+    "x_at_y3840": 1697.1
+   },
+   "width_px": "~56-60",
+   "float_pattern": "same ~202 px red-group period"
+  },
+  "lane": {
+   "moves": false,
+   "width_between_rope_centres_px": "~1364 at y=1920 frame 0 (1350-1400 depending on y/frame; ropes bow slightly)"
+  },
+  "pool_floor_marks": {
+   "moves": false,
+   "distinguish": "faint dark rectangular markings on the pool floor in neighbouring lanes, x ~0-200 and ~1850-2100, y ~900-1900 (frame 0); also a faint dark lane line under the swimmer ~x 950-1100",
+   "note": "low contrast, distorted by water surface"
+  }
+ },
+ "events": [
+  {
+   "event": "swimmer already moving at frame 0, still moving at frame 71 (no start/stop)",
+   "frame": 0
+  },
+  {
+   "event": "right arm (image right) recovery, widest sideways sweep",
+   "frame": 10,
+   "t": 0.539
+  },
+  {
+   "event": "right arm extended forward ahead of head (entry/glide)",
+   "frames": "19-30",
+   "t": [
+    1.025,
+    1.618
+   ]
+  },
+  {
+   "event": "left arm (image left) recovery, widest sweep (bbox width 504 px)",
+   "frame": 43,
+   "t": 2.32
+  },
+  {
+   "event": "left arm extended forward",
+   "frames": "49-60"
+  },
+  {
+   "event": "right arm recovery, widest sweep (bbox width 504 px)",
+   "frame": 66,
+   "t": 3.56
+  },
+  {
+   "event": "left arm extended forward at start",
+   "frames": "0-8"
+  }
+ ],
+ "stroke_cycle": "right-arm recovery peaks at frames ~10 and ~66 -> one full stroke cycle ~56 frames (~3.0 s); arm recoveries alternate every ~28 frames"
+}

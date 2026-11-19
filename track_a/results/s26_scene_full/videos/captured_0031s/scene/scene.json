@@ -1,0 +1,519 @@
+{
+ "video": "captured_0031s.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera_intrinsics_lab_convention": {
+  "focal_px": 763.0,
+  "cx": 640,
+  "cy": 360,
+  "note": "Orbbec Femto Mega, HFOV 80 deg, f = 0.5959*1280"
+ },
+ "background": "replaced (Segment Anything 2 demo, watermark bottom-right); only table, pedestal and balls are real",
+ "objects": {
+  "yellow_ball": {
+   "desc": "yellow tennis-type ball, the larger ball, starts at far-right part of table top",
+   "moves": true,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "tracks/yellow_ball.csv",
+   "rest_position_px": {
+    "frames": [
+     0,
+     14
+    ],
+    "cx": 757.6,
+    "cy": 411.5,
+    "diam_px": 33.0
+   },
+   "apparent_diam_px_by_frame": [
+    [
+     0,
+     412.0,
+     34.0
+    ],
+    [
+     4,
+     411.5,
+     33.0
+    ],
+    [
+     8,
+     411.5,
+     33.0
+    ],
+    [
+     12,
+     411.5,
+     33.0
+    ],
+    [
+     16,
+     412.5,
+     34.0
+    ],
+    [
+     20,
+     417.5,
+     36.0
+    ],
+    [
+     24,
+     423.5,
+     39.0
+    ],
+    [
+     28,
+     429.5,
+     42.0
+    ],
+    [
+     32,
+     436.5,
+     45.0
+    ],
+    [
+     36,
+     447.0,
+     51.0
+    ],
+    [
+     40,
+     456.0,
+     56.0
+    ],
+    [
+     44,
+     507.5,
+     61.0
+    ]
+   ]
+  },
+  "white_ball": {
+   "desc": "small white/grey ball (ping-pong-like), starts left of yellow ball on far part of table",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/white_ball.csv",
+   "rest_position_px": {
+    "frames": [
+     0,
+     14
+    ],
+    "cx": 678.9,
+    "cy": 417.0,
+    "diam_px": 20.0
+   },
+   "apparent_diam_px_by_frame": [
+    [
+     0,
+     418.0,
+     19.0
+    ],
+    [
+     4,
+     417.0,
+     20.0
+    ],
+    [
+     8,
+     417.0,
+     20.0
+    ],
+    [
+     12,
+     417.0,
+     20.0
+    ],
+    [
+     16,
+     420.0,
+     20.0
+    ],
+    [
+     20,
+     422.5,
+     21.0
+    ],
+    [
+     24,
+     427.0,
+     23.0
+    ],
+    [
+     28,
+     431.0,
+     24.0
+    ],
+    [
+     32,
+     436.5,
+     26.0
+    ],
+    [
+     36,
+     442.0,
+     28.0
+    ],
+    [
+     40,
+     447.75,
+     29.5
+    ],
+    [
+     44,
+     452.5,
+     30.0
+    ],
+    [
+     48,
+     459.5,
+     32.0
+    ]
+   ]
+  },
+  "table_top": {
+   "desc": "brown wood-grain rectangular table top seen obliquely from the front, slightly above",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "corners_px_approx": {
+    "far_left": [
+     570,
+     428
+    ],
+    "far_right": [
+     841,
+     430
+    ],
+    "near_left_top": [
+     464,
+     485
+    ],
+    "near_right_top": [
+     962,
+     497
+    ],
+    "near_left_bottom": [
+     466,
+     505
+    ],
+    "near_right_bottom": [
+     960,
+     518
+    ]
+   },
+   "far_edge_length_px": 271,
+   "near_edge_length_px": 498,
+   "front_face_thickness_px": {
+    "left": 20,
+    "right": 21
+   },
+   "front_edge_top_y_by_x": {
+    "480": 473,
+    "520": 484,
+    "560": 485,
+    "600": 486,
+    "640": 486,
+    "680": 487,
+    "720": 488,
+    "760": 489,
+    "800": 490,
+    "840": 492,
+    "880": 492,
+    "920": 494
+   },
+   "mask_bbox_frame48": [
+    464,
+    427,
+    963,
+    518
+   ],
+   "polygon_frame48": [
+    [
+     464,
+     484
+    ],
+    [
+     466,
+     505
+    ],
+    [
+     959,
+     518
+    ],
+    [
+     963,
+     513
+    ],
+    [
+     961,
+     497
+    ],
+    [
+     942,
+     490
+    ],
+    [
+     939,
+     482
+    ],
+    [
+     924,
+     482
+    ],
+    [
+     883,
+     450
+    ],
+    [
+     841,
+     430
+    ],
+    [
+     570,
+     428
+    ]
+   ],
+   "row_extents": {
+    "table_row_y430": [
+     570,
+     841
+    ],
+    "table_row_y450": [
+     530,
+     883
+    ],
+    "table_row_y470": [
+     490,
+     905
+    ],
+    "table_row_y490": [
+     464,
+     947
+    ],
+    "table_row_y500": [
+     464,
+     963
+    ],
+    "table_row_y510": [
+     686,
+     963
+    ]
+   },
+   "col_extents": {
+    "table_col_x470": [
+     480,
+     505
+    ],
+    "table_col_x500": [
+     466,
+     505
+    ],
+    "table_col_x580": [
+     428,
+     507
+    ],
+    "table_col_x650": [
+     428,
+     509
+    ],
+    "table_col_x700": [
+     428,
+     510
+    ],
+    "table_col_x750": [
+     430,
+     511
+    ],
+    "table_col_x800": [
+     430,
+     513
+    ],
+    "table_col_x850": [
+     434,
+     515
+    ],
+    "table_col_x900": [
+     464,
+     517
+    ],
+    "table_col_x950": [
+     495,
+     518
+    ]
+   }
+  },
+  "pedestal": {
+   "desc": "dark grey vertical column under the table centre, cut off by bottom image border",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "bbox_px": [
+    707,
+    519,
+    747,
+    719
+   ],
+   "width_px": 39.5,
+   "visible_height_px": 201,
+   "widths_by_row": {
+    "530": 39,
+    "560": 38,
+    "590": 40,
+    "620": 40,
+    "650": 40,
+    "680": 39,
+    "710": 39
+   }
+  }
+ },
+ "events": [
+  {
+   "what": "both balls at rest",
+   "frames": [
+    0,
+    14
+   ],
+   "t": [
+    0.0,
+    0.583
+   ]
+  },
+  {
+   "what": "yellow ball starts rolling toward camera (and slightly left)",
+   "frame": 15,
+   "t": 0.625,
+   "uncertainty_frames": 1
+  },
+  {
+   "what": "white ball starts rolling toward camera and left",
+   "frame": 15,
+   "t": 0.625,
+   "uncertainty_frames": 1,
+   "note": "clearly moving by frame 16; starts together with the yellow ball (cause not visible)"
+  },
+  {
+   "what": "yellow ball reaches table front edge (ball bottom at edge line y~488)",
+   "frame": 41,
+   "t": 1.708
+  },
+  {
+   "what": "yellow ball leaves table / starts falling",
+   "frame": 42,
+   "t": 1.75,
+   "uncertainty_frames": 1
+  },
+  {
+   "what": "yellow ball falling in front of pedestal, motion-blurred",
+   "frames": [
+    43,
+    47
+   ]
+  },
+  {
+   "what": "yellow ball exits bottom of image",
+   "frame": 48,
+   "t": 2.0,
+   "note": "last (partial) view frame 47"
+  },
+  {
+   "what": "white ball still rolling on table at end of clip, never reaches the edge",
+   "frame": 48,
+   "t": 2.0
+  }
+ ],
+ "camera": {
+  "static": true,
+  "evidence": "phase correlation of table patches vs frame 0: variation <= 0.15 px over the clip (constant +0.5 px offset is a method artefact)",
+  "shift_dx_dy_vs_frame0": [
+   [
+    0,
+    0.5,
+    0.0
+   ],
+   [
+    4,
+    0.376,
+    -0.081
+   ],
+   [
+    8,
+    0.404,
+    -0.031
+   ],
+   [
+    12,
+    0.471,
+    0.051
+   ],
+   [
+    16,
+    0.504,
+    0.096
+   ],
+   [
+    20,
+    0.491,
+    0.003
+   ],
+   [
+    24,
+    0.442,
+    0.055
+   ],
+   [
+    28,
+    0.522,
+    0.01
+   ],
+   [
+    32,
+    0.479,
+    -0.104
+   ],
+   [
+    36,
+    0.476,
+    -0.098
+   ],
+   [
+    40,
+    0.43,
+    -0.143
+   ],
+   [
+    44,
+    0.537,
+    -0.056
+   ],
+   [
+    48,
+    0.573,
+    -0.039
+   ]
+  ]
+ },
+ "perspective": {
+  "ground_plane": "table top (horizontal) is the only plane; the room is replaced by a synthetic background",
+  "table_side_vanishing_point_px": [
+   706,
+   354
+  ],
+  "horizon_y_px_if_table_level": 354,
+  "note": "VP from extending left side (464,485)-(570,428) and right side (962,497)-(841,430); camera roughly level, looking slightly down at the table top",
+  "size_change": "yellow ball apparent diameter 33 px at rest -> 57 px at frame 41 (approaches camera, depth roughly x0.58); white ball 20 px -> 32 px at frame 48 (depth roughly x0.62)"
+ }
+}

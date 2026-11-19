@@ -1,0 +1,50 @@
+{
+  "video": "simulation_0233_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (chair mask bbox constant to within 1 px over all 50 frames: x 1538-1539..1834-1835, y 496-497..715)",
+    "view": "looking straight at the motion plane (looks like a top-down view of the animal); no perspective cues, uniform white background; animal y-centre stays within 528-535 px so it moves in one plane at constant depth"
+  },
+  "objects": [
+    {
+      "name": "animal",
+      "description": "the only moving object: black four-legged animal (cat-like: long body, thin tail trailing to the left, head on the right with a small light-grey nose/snout tip), seen in silhouette, walking to the right (+x) along y ~ 531 px",
+      "moves": true,
+      "visible_frames": "0-49 (frames 0-21 partly cut off by the left image edge, x0 = 0; fully in frame from frame 22 on)",
+      "track_file": "tracks/animal.csv",
+      "reference_point_note": "the rig root/pelvis cannot be seen directly; use the mask centroid (cx, cy) or the tail-removed body centroid (body_cx, body_cy) on frames 22-49; on frames 0-21 the centroid is biased by the edge cut, use the nose front x1 instead (always visible)",
+      "pixel_size_fully_visible_frames_22_49": {
+        "length_nose_to_tail_tip_px": {"median": 336, "min": 324, "max": 354},
+        "width_across_body_px (vertical extent in image)": {"median": 67, "min": 64, "max": 75},
+        "main_axis": "horizontal (axis angle within +-2 deg of 0)"
+      },
+      "motion_summary_px": {
+        "direction": "+x (rightward), essentially no vertical drift",
+        "nose_front_x1": "66 px at frame 0 -> 710 px at frame 49 (644 px in 49 frames, linear fit 13.08 px/frame, gait-step jumps of 30 px every ~9-10 frames)",
+        "centroid_cx_frames_22_49": "linear fit 13.36 px/frame (per-frame 9.5-17 px, gait oscillation)"
+      }
+    },
+    {
+      "name": "chair",
+      "description": "brown wooden chair (seat/back rectangle with a curved top rail and thin dark legs), right side of the image",
+      "moves": false,
+      "visible_frames": "0-49",
+      "bbox_px": {"x0": 1538, "x1": 1835, "y0": 496, "y1": 715},
+      "extent_px": {"horizontal": 298, "vertical": 220},
+      "mask_centroid_px": [1687, 615],
+      "parts_px": "top rail spans x ~1538-1835 at y ~496-545; square brown panel x ~1585-1767, y ~548-715",
+      "per_frame_check": "tracks/chair_check.csv"
+    }
+  ],
+  "events": [
+    {"event": "animal already walking at frame 0 (enters from the left edge); walks at roughly constant pace throughout", "frame": 0, "time_s": 0.0},
+    {"event": "animal tail tip leaves left edge (animal fully visible)", "frame": 22, "time_s": 0.9167},
+    {"event": "end of clip, animal still walking, nose at x = 710 px, ~830 px left of the chair; no contact with the chair", "frame": 49, "time_s": 2.0417}
+  ]
+}

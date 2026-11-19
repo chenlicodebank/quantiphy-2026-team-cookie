@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0149.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1522,
+  "question": "What is the speed of the car at time 0.5s in m/s?",
+  "prior": "diameter of the tire = 0.764m",
+  "depth_info": "t=0s, distance_yellowCarRightFrontTire_camera = 14.244m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

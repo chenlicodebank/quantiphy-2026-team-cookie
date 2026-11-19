@@ -1,0 +1,83 @@
+{
+ "video": "captured_0024s.mp4",
+ "source": "lab (real recording; background replaced - watermark 'Modified with Segment Anything 2 Demo' bottom-right)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "size_px": [1280, 720],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static",
+  "max_background_shift_px": 0.02,
+  "intrinsics_from_task_conventions": {"fx_px": 762.8, "fy_px": 762.8, "cx_px": 640, "cy_px": 360, "note": "0.5959 x 1280, HFOV 80 deg, Orbbec Femto Mega RGB"},
+  "view": "looking slightly down at a square wooden table top; table seen corner-on (front corner nearest camera)",
+  "perspective_cues": {
+   "table_top_corners_px": {"left": [414, 470], "front_near": [640, 608], "right": [1112, 512], "back": "hidden behind ramp/book stack, roughly [860, 452]"},
+   "table_top_thickness_at_front_corner_px": 20,
+   "vanishing_point_left_front_and_right_back_edges_px": [183, 333],
+   "vanishing_point_front_right_and_back_left_edges_px": [1527, 428],
+   "note": "vanishing points are rough (edges short, back edge partly hidden); horizon roughly the line through them, y ~ 330-430, i.e. near/above the image centre row"
+  }
+ },
+ "objects": [
+  {
+   "name": "teal_book",
+   "description": "small hardcover book with pale teal / mint cover and cream page edges; the only moving object",
+   "moves": true,
+   "visible_frames": [0, 48],
+   "track_file": "tracks/teal_book.csv",
+   "track_file_cover_only": "tracks/teal_book_cover_only.csv",
+   "reference_point": "centroid of the full visible mask (cover + page edges), i.e. visible centre",
+   "start_position_px": [783.0, 373.6],
+   "start_bbox_px": [720, 352, 848, 397],
+   "rest_position_px": [570.0, 477.5],
+   "rest_bbox_px": [497, 458, 647, 496],
+   "apparent_size": "on ramp (frames 0-23): min-area-rect length ~128-131 px, width ~45-47 px, bbox 128 x 46 px (book seen tilted on the incline). Resting on table (frames 36-48): length 150 px (along its long axis, roughly parallel to the image x axis, slight tilt), width ~30 px, bbox 151 x 39 px (page block + cover thickness visible, ~8-10 px). Frames 24-33: book rotates from incline to flat; mask shape changes, length dips to ~95 px at frame 29."
+  },
+  {
+   "name": "white_ramp_board",
+   "description": "flat white board used as inclined plane; lower edge on the table, upper edge propped on the book stack",
+   "moves": false,
+   "visible_frames": [0, 48],
+   "corners_px": {"top_left": [750, 360], "top_right": [859, 361], "bottom_left": [610, 468], "bottom_right": [706, 490]},
+   "bbox_px": [610, 360, 859, 490],
+   "slope_length_px": 188,
+   "slope_length_note": "image distance from midpoint of lower edge (658,479) to midpoint of upper edge (804.5,360.5); left side edge (610,468)-(750,360) = 177 px, right side edge (706,490)-(859,361) = 200 px",
+   "width_px": {"upper_edge": 109, "lower_edge": 98},
+   "direction_down_slope_image": "towards lower-left (dx -146, dy +119 per 188 px)"
+  },
+  {
+   "name": "book_stack",
+   "description": "support under the upper ramp edge: dark blue-grey hardcover book (bottom, gold text on its visible side) with a cream/white book on top",
+   "moves": false,
+   "parts": {
+    "dark_bottom_book": {"bbox_px": [733, 450, 853, 488], "length_px": 120, "height_px": 37},
+    "cream_top_book": {"bbox_px": [757, 437, 835, 456], "length_px": 78, "height_px": 19, "note": "partly hidden behind the ramp"}
+   }
+  },
+  {
+   "name": "table_top",
+   "description": "square wooden (brown) table top, seen corner-on",
+   "moves": false,
+   "bbox_px": [414, 450, 1111, 609],
+   "edge_lengths_px": {"left_to_front": 264, "front_to_right": 482},
+   "note": "a dark shading artifact extends past the right corner to x~1140"
+  },
+  {
+   "name": "table_post",
+   "description": "dark grey central pedestal column under the table",
+   "moves": false,
+   "bbox_px": [745, 601, 797, 719],
+   "width_px": 50,
+   "note": "runs off the bottom of the frame"
+  }
+ ],
+ "events": [
+  {"event": "teal_book at rest at top of ramp", "frames": [0, 18], "t_s": [0.0, 0.75]},
+  {"event": "teal_book starts sliding (release)", "frame": 19, "t_s": 0.792, "note": "first displacement 0.6 px at 18->19, 2.9 px at 19->20; onset between frames 18 and 19"},
+  {"event": "teal_book reaches lower end of ramp / front edge contacts table", "frame": 29, "t_s": 1.208, "note": "per-frame step peaks at 28->29 (~22.5 px) then drops; book tilts from incline to flat over frames 29-32"},
+  {"event": "teal_book flat on table, sliding and decelerating", "frames": [32, 36], "t_s": [1.333, 1.5]},
+  {"event": "teal_book stops", "frame": 36, "t_s": 1.5, "note": "last motion 35->36 (6 px), zero after"},
+  {"event": "teal_book at rest on table", "frames": [36, 48], "t_s": [1.5, 2.0]}
+ ]
+}

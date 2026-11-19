@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0120.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.007839,
+  "frames": 49,
+  "frame_time": "t = frame / 24.007839 ; frame = round(t * 24.007839); last frame 48 at t = 1.99935 s",
+  "image_size_px": [1080, 1080],
+  "pixel_coords": "x right, y down, origin top-left of the 1080x1080 frame",
+  "view": "Top-down (bird's-eye) perspective render of a living room. Floor is roughly perpendicular to the optical axis; walls lean outward at the image edges (perspective), so tall objects' tops are slightly enlarged/displaced relative to floor-level objects.",
+  "camera": {
+    "motion": "static",
+    "evidence": "frame differencing over all 49 frames: only the robot vacuum region changes (plus a 1-3 frame flicker of ~50 px at x~152-167, y~777-790 at the TV corner, compression noise). Background shift = 0 px every frame."
+  },
+  "moving_objects": {
+    "robot_vacuum": {
+      "description": "white round disc-shaped robot vacuum on the floor/rug edge, bottom-left of the rug at start; the only moving object",
+      "track_file": "tracks/robot_vacuum.csv",
+      "reference_point": "centre of the fitted circle of the top disc (= object origin in top view)",
+      "visible_frames": "0-48 (fully visible 0-32; progressively occluded by the sofa's lower-left arm from frame 33; frames 42-48 only a ~15 px tall sliver below the sofa is visible, centre from fixed-radius circle fit of that arc)",
+      "diameter_px": 68.8,
+      "diameter_px_note": "median fitted circle diameter over 33 unoccluded frames, sd 0.33 px (radius 34.39 px); visible bbox ~70x70 px",
+      "length_width_px": [68.8, 68.8],
+      "height_px": "not observable (top view)",
+      "motion": "straight horizontal line to the right (+x) at constant image row y = 811.5 +/- 0.3 px; centre x 353.4 (f0) -> 757.2 (f48); mean step 8.41 px/frame, per-frame steps 7.75-9.25 px (fit noise), no visible acceleration",
+      "start_px": [353.41, 811.38],
+      "end_px": [757.24, 811.52],
+      "net_displacement_px_f0_f48": 403.8,
+      "path_length_px_f0_f48": "403.9 (sum of per-frame steps; motion is straight)"
+    }
+  },
+  "events": [
+    {"frame": 0, "t_s": 0.0, "event": "vacuum already moving right at video start (step f0->f1 = 8.6 px); no start of motion seen"},
+    {"frame": 33, "t_s": 1.3746, "event": "vacuum's right edge reaches the sofa's lower-left arm (x~666) and starts passing under it"},
+    {"frame": 41, "t_s": 1.7078, "event": "vacuum centre passes under sofa bottom edge region; from frame 42 only the bottom sliver (y 832-846) is visible"},
+    {"frame": 48, "t_s": 1.9994, "event": "video ends; vacuum still moving right under the sofa, no stop/bounce/direction change observed"}
+  ],
+  "static_objects_px_frame0": {
+    "sofa_L_shaped": {"desc": "dark grey L-shaped sectional sofa, right half of room", "bbox": [565, 207, 918, 835], "extent_x": 353, "extent_y": 628},
+    "sofa_chaise_top_section": {"desc": "horizontal top part of the L (with orange throw)", "bbox": [565, 207, 918, 415], "extent_x": 353, "extent_y": 208},
+    "sofa_seat_cushion_upper": {"bbox": [670, 412, 850, 588], "extent_x": 180, "extent_y": 176},
+    "sofa_seat_cushion_lower": {"bbox": [670, 590, 850, 770], "extent_x": 180, "extent_y": 180},
+    "sofa_lower_arm": {"desc": "bottom arm of sofa that the vacuum passes under", "bbox": [666, 770, 918, 836]},
+    "coffee_table": {"desc": "light grey square table with rounded corners, centre-left of rug", "bbox": [432, 459, 599, 624], "extent_x": 167, "extent_y": 165, "centre": [515.5, 541.5]},
+    "chessboard": {"desc": "black/white checkerboard on coffee table (8x8)", "bbox": [467, 530, 552, 615], "extent": 85, "square_px": 10.6},
+    "tray_with_picture_on_table": {"bbox": [513, 463, 575, 528], "extent_x": 62, "extent_y": 65},
+    "rug": {"desc": "blue-grey shaggy rug, extends under the sofa", "visible_bbox": [330, 255, 668, 815], "visible_extent_x": 338, "visible_extent_y": 560},
+    "orange_throw_blanket": {"desc": "on sofa chaise", "bbox": [590, 255, 750, 430]},
+    "beige_fluffy_pillow": {"desc": "top-right on sofa", "bbox": [820, 275, 878, 390]},
+    "orange_pillow": {"desc": "right on sofa lower cushion", "bbox": [818, 608, 872, 742]},
+    "tv_black_panel": {"desc": "black wall panel/TV with large white '3' and '12' (clock), left wall", "bbox": [148, 388, 215, 795], "note": "on wall, perspective-distorted"},
+    "fireplace_strip": {"desc": "long narrow electric fireplace with flames, left", "bbox": [228, 408, 268, 750]},
+    "plush_toy": {"desc": "white stuffed toy on left console, bottom-left", "bbox": [200, 785, 268, 845]},
+    "wall_art_right": {"desc": "black panel with white contour-line pattern on right wall", "bbox": [945, 237, 1062, 443], "note": "on wall, perspective-distorted"},
+    "white_curtains_bottom": {"desc": "white curtains along bottom wall", "y_from": 855},
+    "wood_floor": {"desc": "grey wood plank floor visible above rug (y<255) and below rug (y 815-855)"}
+  },
+  "notes_file": "notes.md"
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0012.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 22.925373,
+ "frames": 61,
+ "duration_s": 2.6608,
+ "width": 1920,
+ "height": 1954,
+ "question": {
+  "id": 6,
+  "question": "What is the body length of the bird in meters?",
+  "prior": "speed of the bird =6m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

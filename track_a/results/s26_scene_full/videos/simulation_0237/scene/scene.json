@@ -1,0 +1,81 @@
+{
+  "video": "simulation_0237.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "width_px": 1920,
+  "height_px": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (image coords, x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of background region (x1300-1900, y0-600) vs frame 0: |shift| <= 0.02 px in all 50 frames",
+    "view": "near top-down (bird's-eye) view of a house roof, lawn and trees; horse seen from above",
+    "lighting_note": "small global brightness/colour change between frames 17 and 18 (mean abs diff vs frame 0 jumps from ~0.2 to ~1.1 grey levels); not camera motion"
+  },
+  "objects": [
+    {
+      "name": "horse",
+      "kind": "animal (chestnut/brown horse with white blaze on the nose)",
+      "distinguish": "only animal and only moving object; small brown shape on the lawn just below the bottom-left of the house roof, head pointing right (+x)",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "occluded_frames": [],
+      "track_file": "tracks/horse.csv",
+      "motion_summary_px": {
+        "direction": "walks toward +x (image right), axis within ~2 deg of horizontal; ref_y wanders 772.7-778.7 (lateral sway)",
+        "ref_frame0": [747.17, 776.28],
+        "ref_frame49": [876.59, 774.91],
+        "net_displacement_0_49_px": 129.43,
+        "path_length_0_49_px": 130.25,
+        "per_frame_displacement_px": {"mean": 2.658, "sd": 0.275, "min": 1.635, "max": 3.218},
+        "mean_disp_per_frame_frames_0_24": 2.662,
+        "mean_disp_per_frame_frames_24_49": 2.655
+      },
+      "size_px": {
+        "length_nose_to_rump_along_x": {"best": 145, "range_clean_frames": [143, 149], "note": "bbox_w in clean frames; larger values (150-162) come from grass specks / leg or tail pixels"},
+        "width_full_mask_vertical": {"median": 43.5, "range": [40, 48], "note": "main-blob vertical extent incl. ears/neck"},
+        "trunk_width_vertical": {"median": 32, "range": [32, 34], "note": "median vertical extent of mask over 20-60% of body length (barrel)"},
+        "height": "not observable (top-down view)"
+      }
+    },
+    {
+      "name": "house",
+      "kind": "building (roof seen from above): two parallel grey/beige tiled wings joined by a wider cross-wing in the middle",
+      "moves": false,
+      "visible_frames": [0, 49],
+      "frame_measured": 0,
+      "bbox_px": [617, 22, 1425, 745],
+      "extents_px": {
+        "overall_width_x": 809,
+        "overall_height_y": 724,
+        "main_block_width_x": 701,
+        "main_block_x_range": [662, 1363],
+        "main_block_y_range_at_x1025": [24, 745],
+        "cross_wing_width_x": 805,
+        "cross_wing_x_range_at_y380": [621, 1424],
+        "cross_wing_y_range_at_x650": [273, 519],
+        "cross_wing_y_extent_px": 247
+      },
+      "note": "roof top/bottom outline is a shallow chevron (y 97 at x 675 -> y 24 at x 1025 -> y 94 at x 1350) due to the hipped roof/perspective"
+    },
+    {
+      "name": "lawn_and_trees",
+      "kind": "ground: sunlit yellow-green lawn (right, upper left), darker grass and tree shadows/canopies (left, bottom)",
+      "moves": false,
+      "note": "background only; no markings"
+    }
+  ],
+  "events": [
+    {"event": "horse walking at start of clip (already moving)", "frame": 0, "time_s": 0.0},
+    {"event": "horse still walking at end of clip (no stop)", "frame": 49, "time_s": 2.0417},
+    {"event": "no release/bounce/impact/contact/direction change observed", "frame": null, "time_s": null}
+  ],
+  "files": {
+    "tracks/horse.csv": "per-frame horse track",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

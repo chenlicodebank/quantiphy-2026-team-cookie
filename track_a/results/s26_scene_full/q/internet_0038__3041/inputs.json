@@ -1,0 +1,18 @@
+{
+ "video": "internet_0038.mp4",
+ "video_source": "internet",
+ "video_type": "S2MS",
+ "fps": 18.484888,
+ "frames": 15,
+ "duration_s": 0.8115,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 3041,
+  "question": "What is the length of the Apple Magic Mouse in cm?",
+  "prior": "width of the Apple Magic Mouse = 5.71 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 26.0
+ }
+}

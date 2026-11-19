@@ -1,0 +1,18 @@
+{
+ "video": "internet_0010.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.662162,
+ "frames": 97,
+ "duration_s": 3.2702,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2050,
+  "question": "How tall is the shooter in cm?",
+  "prior": "basketball diameter = 24cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

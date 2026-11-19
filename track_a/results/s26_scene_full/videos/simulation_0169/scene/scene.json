@@ -1,0 +1,60 @@
+{
+  "video": "simulation_0169.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 80,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the moon region vs frame 0: max |dx| 0.5 px, |dy| 0.01 px over all 80 frames; moon limb x per row varies <= 2 px (mask noise)",
+    "per_frame_shift_px": "0 (none applied)"
+  },
+  "objects": [
+    {
+      "name": "astronaut",
+      "description": "the only moving object: small white spacesuit figure with dark/gold visor, floating in black space to the right of the moon limb",
+      "moves": true,
+      "visible_frames": [0, 79],
+      "occluded": "never",
+      "track_file": "tracks/astronaut.csv",
+      "reference_point": "cx, cy = centroid of the white-suit mask (stand-in for the pelvis/origin; at frame 0 it lies at the hip/pelvis region of the upright figure)",
+      "start_px": {"frame": 0, "cx": 1295.58, "cy": 518.53},
+      "end_px": {"frame": 79, "cx": 1310.87, "cy": 244.03},
+      "net_displacement_px": {"dx": 15.3, "dy": -274.5, "magnitude": 274.9},
+      "path_length_px_sum_of_per_frame_centroid_steps": 275.3,
+      "direction": "almost straight up the image (about 3 deg to the right of vertical), away from the moon's lower part",
+      "size_px": {
+        "body_length_along_main_axis": "90.2-92.4 (median ~91.5); constant within noise, i.e. no apparent depth change",
+        "width_across_main_axis": "43.4-49.0 (median ~47; arms change pose slightly)",
+        "bbox_frame0_w_h": [44, 91],
+        "bbox_frame79_w_h": [62, 84],
+        "mask_area_px": "2350-2510"
+      },
+      "orientation": "main-axis angle (image coords, 90 = vertical) 94.7 deg at frame 0 -> 120.2 deg at frame 79: the body slowly tilts ~25 deg (head toward upper right, feet toward lower left); rotation eases in/out with the translation"
+    },
+    {
+      "name": "moon",
+      "description": "large grey cratered moon surface filling the left of the frame; curved limb on its right side; appears as a backdrop with straight horizontal cut edges at top and bottom",
+      "moves": false,
+      "visible_frames": [0, 79],
+      "extent_px": {"x": [0, 1357], "y": [86, 993], "visible_height": 908},
+      "limb": "rightmost moon x: 840 at y=87, 998 at y=300, 1147 at y=540, 1274 at y=800, 1357 at y=992; circle fit to limb: centre (-1665.7, 2111.8), radius 3221.6 px (rms 1.4 px, only an arc is visible, so the radius is extrapolated)",
+      "astronaut_gap_to_limb_px": "radial gap centroid -> fitted limb circle: ~141 px at frame 0, ~292 px at frame 79"
+    },
+    {
+      "name": "stars",
+      "description": "a few faint 2-6 px white dots on the black sky, e.g. (1665,127), (1418,771), (1235,549), (1020,316)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "astronaut starts moving (ease-in from rest)", "frame": 1, "t": 0.042, "note": "centroid step 0.07 px at frame 1, 0.5-0.9 px at frames 2-4, growing"},
+    {"event": "astronaut reaches peak pixel speed (plateau ~5.0-5.3 px/frame)", "frame_range": [32, 47], "t_range": [1.333, 1.958], "note": "centre of plateau ~frame 40 (t=1.667)"},
+    {"event": "astronaut decelerates to rest", "frame": 79, "t": 3.292, "note": "steps 0.5 px at frames 77-78, 0.04 px at frame 79; effectively stopped at the end"},
+    {"event": "no bounces, impacts or contacts; direction stays nearly constant (upward)"}
+  ]
+}

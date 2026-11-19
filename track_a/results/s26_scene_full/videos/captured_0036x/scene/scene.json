@@ -1,0 +1,41 @@
+{
+  "video": "captured_0036x.mp4",
+  "source": "lab (real recording, background replaced by SAM2 segmentation: pure white 255 background, watermark 'Modified with Segment Anything 2 Demo' bottom-right x>=1030,y>=690)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+  "time_convention": "t = frame/24; frame = round(t*24)",
+  "camera": {
+    "motion": "static (table pixels identical frame to frame within compression noise; no shift)",
+    "intrinsics_from_benchmark": {"f_px": 762.8, "cx": 640, "cy": 360, "hfov_deg": 80},
+    "perspective": {
+      "table_top_corners_px": {"back_left": [405, 441], "back_right": [760, 446], "front_left": [187, 588], "front_right": [1000, 592]},
+      "vanishing_point_of_table_side_edges_px": [570, 330],
+      "horizon_y_px": 330,
+      "note": "table sides converge -> camera looks along the table's long (depth) axis, pitched down ~2 deg (horizon 30 px above image centre); back edge is far, front edge near"
+    }
+  },
+  "objects": [
+    {"name": "ball", "desc": "small white/cream ball (only moving object)", "moves": true,
+     "visible_frames": [0, 40], "track": "tracks/ball.csv",
+     "reference_point": "centroid of the filled (convex-hull) mask = visible centre",
+     "apparent_diameter_px": {"frames_0_12_at_rest": "24-26 (bbox 25-27 w x 22-24 h)", "frames_15_21": "23-25 across motion", "frames_25_31": "about 30-34 (minor axis; some frames inflated by white segmentation halo under the ball)", "frames_33_34": "about 46-50"},
+     "path_px": "starts at (421,429) on the far (back-left) edge of the table top, rolls diagonally toward the camera and to the right, crosses the table top, leaves over the right side edge around frame 35-36 near (872-943, 514-536), falls (heavily blurred streak) and exits through the bottom of the image at frame 40-41 near x~1107"},
+    {"name": "table_top", "desc": "brown wood-grain rectangular table top, seen in perspective", "moves": false,
+     "visible_frames": [0, 48],
+     "pixels": {"back_edge_width_px": 355, "back_edge_y": 441, "front_edge_width_px": 814, "front_edge_y": 588, "image_bbox": [186, 438, 1001, 628],
+                "top_surface_depth_extent_px_vertical": 147}},
+    {"name": "table_edge_band", "desc": "dark brown front face/thickness of the table top", "moves": false,
+     "pixels": {"front_y_range": [588, 626], "thickness_px_at_front": 38, "x_range": [186, 1001]}},
+    {"name": "table_leg", "desc": "dark grey central pedestal leg below the table", "moves": false,
+     "pixels": {"x_range": [534, 589], "width_px": 55, "y_range": [627, 719], "note": "cut off by the image bottom"}}
+  ],
+  "events": [
+    {"event": "ball at rest / nearly at rest on the back edge of the table (slight leftward drift of ~5 px, frames 4-10)", "frames": [0, 12], "t": [0.0, 0.5]},
+    {"event": "start of main motion (ball begins rolling toward camera/right)", "frame": 12, "t": 0.5, "uncertainty_frames": 1},
+    {"event": "ball rolls across the table top", "frames": [13, 35], "t": [0.542, 1.458]},
+    {"event": "ball leaves the table over the right side edge (centre crosses the edge line)", "frame": 35, "t": 1.458, "uncertainty_frames": 1},
+    {"event": "ball falls beside the table, strongly motion blurred", "frames": [36, 40], "t": [1.5, 1.667]},
+    {"event": "ball exits image bottom; not visible afterwards", "frame": 41, "t": 1.708}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/ball.csv"], "scripts": "scripts/"}
+}

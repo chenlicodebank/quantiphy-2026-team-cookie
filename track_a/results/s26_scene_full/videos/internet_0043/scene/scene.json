@@ -1,0 +1,74 @@
+{
+ "video": "internet_0043.mp4",
+ "source": "internet",
+ "scene_type": "2D",
+ "fps": 30.0,
+ "frames": 61,
+ "size_px": [1920, 1080],
+ "time_convention": "t = frame / 30; frame 0 at t = 0",
+ "summary": "Fixed (slightly drifting) camera facing a wooden desk with a row of objects. A hand at the right edge rolls/flicks a white egg leftwards along the desk top in front of the objects; the egg rolls right-to-left, slowing, and leaves the frame at the left edge.",
+ "camera": {
+  "type": "static on a support or handheld-steady; slow smooth drift only",
+  "shift_vs_frame0_px": "scene/camera_shift.json  [frame, dx, dy]  (phase correlation on wall/monitor region y<650, x<1500; content moves by (dx,dy) relative to frame 0)",
+  "drift_total_px": {"dx_frame60": -8.1, "dy_max": 2.6},
+  "note": "drift is ~0.1-0.3 px/frame, <0.7% of the egg's per-frame motion; egg.csv gives both raw image coords (ref_x, ref_y) and drift-compensated coords in frame-0 alignment (ref_x_aligned, ref_y_aligned)"
+ },
+ "perspective": "near-frontal view of the desk; egg rolls along a line roughly parallel to the image x axis (y 786 -> 792 px, i.e. drifting very slightly towards the camera); apparent egg height grows 77 -> 80 px from right to left (~4%). Desk front edge near y ~1000 px; desk/wall junction hidden behind objects around y ~600-650.",
+ "objects": {
+  "egg": {
+   "description": "white (bluish-white in shadow-free light) chicken egg, the only moving prop; rolls on its side right->left along the desk at y~786-792 px",
+   "moves": true,
+   "visible_frames": "18 (sliver in hand at right edge) ... 58 (partly outside left edge); fully free and in frame 20-56",
+   "track": "scene/tracks/egg.csv",
+   "reference_point": "ref_x, ref_y = midpoint of the egg's visible left/right and top/bottom edges",
+   "pixel_size": {
+    "height_px_median_f25_56": 79.2,
+    "height_px_range": [77, 81],
+    "width_px_white_core_f30_56": 74,
+    "width_px_full_including_shaded_right_side_visual": "about 79-80 (frames 26, 40 zoomed)",
+    "width_px_blurred_f20_24": "91-101 (motion blur adds ~20 px at the fastest frames)",
+    "best_diameter_px": 79,
+    "note": "egg appears nearly circular (seen roughly end-on / tumbling). Its length along the motion direction is best taken as ~79 px (= height and visual full width); the half-max edge width (~74) misses the darker right (shaded) side."
+   }
+  },
+  "hand": {
+   "description": "a person's hand (right side of frame, x > ~1820 px, y ~ 700-860) that launches the egg",
+   "moves": true,
+   "visible_frames": "0-60 (always partly visible at the right edge, mostly outside the frame)",
+   "events": "rests 0-~11; swings in/out 12-19 (motion blurred); egg leaves fingers at frame 19-20; hand rests on desk again at right edge from ~21",
+   "track": "not tracked (mostly out of frame)"
+  },
+  "white_bowl": {"description": "white wavy-rimmed ceramic bowl, far left", "moves": false, "bbox_frame0": [127, 601, 516, 771], "width_px": 390, "height_px": 171, "base_y": 771},
+  "iced_tea_bottle": {"description": "plastic iced-tea bottle with yellow cap and orange liquid/label, left of centre", "moves": false, "bbox_frame0": [582, 378, 702, 770], "width_px": 118, "height_px": 393, "base_y": 770},
+  "green_glass_bottle": {"description": "tall dark-green glass (wine/champagne-type) bottle, centre", "moves": false, "bbox_frame0": [794, 253, 934, 771], "width_px": 138, "height_px": 519, "base_y": 771},
+  "white_cylinder_cup": {"description": "white/cream cylindrical cup or vase with diagonal ridges, right of centre", "moves": false, "bbox_frame0": [990, 555, 1112, 753], "width_px": 122, "height_px": 199, "base_y": 753},
+  "red_kettle": {"description": "red Tefal electric kettle, right of centre (spout left, handle right)", "moves": false, "bbox_frame0": [1165, 476, 1519, 767], "width_px": 355, "height_px": 292, "base_y": 767},
+  "monitor": {"description": "black computer monitor behind the objects", "moves": false, "bbox_frame0_approx": [460, 0, 1347, 445], "note": "top cut by frame; screen width ~887 px"},
+  "desk_lamp": {"description": "black articulated desk lamp, right; shade top right", "moves": false, "bbox_frame0_approx": [1515, 0, 1840, 660]},
+  "flowers": {"description": "dark red roses at the far right edge", "moves": false, "bbox_frame0_approx": [1760, 265, 1920, 440]},
+  "desk": {"description": "light wooden desk top, the rolling surface", "moves": false, "front_edge_y_approx": 1000, "note": "the egg rolls ~30-40 px in front of (below in image) the object bases (y 753-771)"}
+ },
+ "events": [
+  {"event": "hand starts swing (wind-up)", "frame": 12, "t": 0.400, "reliability": "+-2 frames, motion blurred"},
+  {"event": "egg first visible (in hand, right edge)", "frame": 18, "t": 0.600},
+  {"event": "egg release (last contact with fingers at 19, free at 20)", "frame": 19, "t": 0.633, "reliability": "+-1 frame"},
+  {"event": "egg rolls right->left; no bounce, no collision with any object", "frames": "20-56"},
+  {"event": "strong deceleration phase (per-frame dx ~72 -> ~46 px)", "frames": "21-28"},
+  {"event": "near-constant rolling (per-frame dx 43-45 px), slight further slowdown to ~41-42 px at 53-56", "frames": "29-56"},
+  {"event": "egg centre (ref_x) within the red kettle's x-range", "frames": "24-31"},
+  {"event": "egg centre within the white cup's x-range", "frames": "33-35"},
+  {"event": "egg centre within the green bottle's x-range", "frames": "37-39"},
+  {"event": "egg centre within the iced-tea bottle's x-range", "frames": "42-44"},
+  {"event": "egg centre within the white bowl's x-range", "frames": "46-55"},
+  {"event": "egg starts leaving frame at left edge", "frame": 57, "t": 1.900},
+  {"event": "egg last visible (partial)", "frame": 58, "t": 1.933},
+  {"event": "egg gone", "frame": 59, "t": 1.967}
+ ],
+ "files": {
+  "tracks": ["scene/tracks/egg.csv"],
+  "camera_shift": "scene/camera_shift.json",
+  "static": "scene/static_objects.json (GrabCut masks at frame 0; values above are the cleaned ones)",
+  "notes": "scene/notes.md",
+  "scripts": "scene/scripts/"
+ }
+}

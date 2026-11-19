@@ -1,0 +1,69 @@
+{
+  "video": "simulation_0279.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "units": "pixels (x right, y down, full resolution 2560x1440) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "vignette brightness-100 crossing row at x=150 stays 643.0-643.7 px and at x=2450 470-473 px over all 72 frames; fixed corner patch grey 22.7->19.7 (only dims slightly as the tail rises nearby); background is a textureless spot-lit gradient so a sub-pixel pan could not be excluded, but nothing indicates one",
+    "per_frame_background_shift_px": "0 (tracks/camera_check.csv)",
+    "perspective": "2D scene: whale seen side-on, swimming parallel to the image plane; it moves horizontally and its apparent size does not change (snout-to-eye head template matches at scale 1 all clip)"
+  },
+  "objects": [
+    {
+      "name": "whale",
+      "description": "humpback-like whale, grey, the only moving object; side view, head to the LEFT, long pectoral flippers hanging down, tail (flukes) to the right",
+      "moves": true,
+      "visible_frames": "0-71 (all)",
+      "partially_out_of_frame": "tail beyond the right image edge in frames 0-34 and 37-46 (bbox_x1 = 2559, cut_by_right_edge = 1); whole whale inside the frame in frames 35-36 and 47-71",
+      "track_file": "tracks/whale.csv",
+      "reference_point_recommended": "head_chain_x/head_chain_y (= snout tip at frame 0, carried rigidly with the head) or snout_sub_x/snout_y. The rig origin itself is not visible; the body bends (tail beats) so bbox/mask centres wander with the tail, while the head translates uniformly. Whole-body translation = head translation.",
+      "motion_summary_px": "moves LEFT, horizontally; head_chain_x 614.41 (frames 0 and 1) -> 53.01 (frame 71) = -561.4 px over the 70 steps 1->71, i.e. -8.02 px per frame (per-step std ~0.1 px, no trend); head_chain_y constant 542.3-544.0 px (snout y 541-545); frames 0 and 1 identical (duplicate first frame)",
+      "size_px": {
+        "full_length_snout_to_tail_tip": "only when uncut (frames 47-71): bbox_w 2312 (f47), 2319 (f52, body nearly straight, axis angle 0 deg), 2290 (f60), 2246 (f66), 2217 (f71, tail raised); straight snout-to-tail-tip distance 2318-2319 px at frames 47-52, 2253 px at f71",
+        "best_straight_body_length_px": "~2319 (frame 52: snout x 205 to tail tip x 2523, tail tip y 574 vs snout y 543 - body almost straight)",
+        "bbox_height_px": "533 (f47, min) to 869 (f71, tail raised high); 536-614 in frames 0-12 incl. flipper; height includes the hanging flipper",
+        "body_depth_px": "back top y ~393-396 to belly bottom ~745 near the flippers: ~350 px (body only, without flipper)",
+        "head_snout_to_eye_px": "frame 0: snout tip (613,544) to eye (~1125,525): ~512 px",
+        "pectoral_flipper": "frame 0: from root ~(1250,560) to tip (1700,1005): ~600 px long (+-40, root not sharply defined)"
+      }
+    },
+    {
+      "name": "whale_shadow",
+      "description": "soft dark shadow of the whale on the floor below it (y ~1000-1440), moves with the whale; blurred edges (sharp only where the fluke's/flipper's shadow meets the whale, frames ~20-35 at the tail and ~40-71 at the flipper tip)",
+      "moves": true,
+      "visible_frames": "0-71; left end leaves the frame at frame ~57-60",
+      "track_file": "tracks/shadow.csv (threshold-based, blurry: positions +-10 px)"
+    },
+    {
+      "name": "floor_and_backdrop",
+      "description": "seamless light-grey studio floor/backdrop lit by a spotlight centred near the top middle; dark vignette in the upper corners; no markings or texture",
+      "moves": false,
+      "visible_frames": "0-71",
+      "extent_px": "whole frame; brightest region around x 1000-1700, y 300-1400; dark corners top-left/top-right (grey ~20-30)"
+    }
+  ],
+  "events": [
+    {"frame": 0, "time_s": 0.0, "event": "clip start; whale already swimming left; frames 0 and 1 are identical (no motion between them)"},
+    {"frame": 1, "time_s": 0.0417, "event": "first frame with motion (frame 1->2 step -8 px); uniform leftward motion continues to the last frame, no start/stop inside the clip"},
+    {"frame": "0-14", "time_s": "0-0.583", "event": "flipper tip rises (bbox bottom 1009 -> 916 px) while the cut-off tail swings down; tail-at-edge goes lower from frame ~14"},
+    {"frame": "27-29", "time_s": "1.125-1.208", "event": "tail at its lowest (whale bbox bottom max 1099 px at frame 27, at the right edge); the fluke's shadow meets the tail around frames 20-35 (apparent contact of tail and its shadow at x~2420,y~1045 in frame 24)"},
+    {"frame": "35-36", "time_s": "1.458-1.5", "event": "tail tip briefly fully inside the frame (x~2554)"},
+    {"frame": 47, "time_s": 1.958, "event": "tail fully inside the frame from here on"},
+    {"frame": 52, "time_s": 2.167, "event": "body nearly straight (PCA axis 0 deg, tail tip y 574 ~ snout y 543): tail moving upward through the horizontal"},
+    {"frame": "47-71", "time_s": "1.958-2.958", "event": "tail rises continuously: tail tip y 733 -> 132 px (upstroke not finished at clip end)"},
+    {"frame": "~40-71", "time_s": "~1.67-2.96", "event": "flipper tip touches/overlaps its own shadow's tip in the image (bbox bottom there ~+-20 px uncertain)"}
+  ],
+  "files": {
+    "tracks/whale.csv": "per-frame whale measurements (see notes.md)",
+    "tracks/shadow.csv": "per-frame floor-shadow blob",
+    "tracks/camera_check.csv": "background stability measures",
+    "scripts/": "all measurement scripts",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "video": "simulation_0031_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by plain white)",
+  "scene": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "image_size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame = round(t*25)",
+  "pixel_convention": "x right, y down, origin top-left, units px",
+  "camera": {
+    "motion": "assumed static (simulation clips use a fixed camera). Background is uniform white, so camera motion cannot be checked directly; all three objects move in different directions, consistent with a fixed camera.",
+    "perspective_cues": "No ground, water, horizon or vanishing lines visible (background removed). Depth cues only from apparent object size: boat slowly shrinks (receding), human about constant (~70-77 px tall), bird wingspan peaks about constant (~66-70 px).",
+    "focal_length": "unknown; estimate from given depth_info + known size (f_px = pixel_size * depth / world_size)"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "Large red-and-white fishing boat (red hull, white cabin with red roof, tall mast with crossbar, dark crane/davit arm at the right of the cabin) in the lower-left of the frame",
+      "moves": true,
+      "motion": "drifts left and slightly up in the image at ~4 px/frame left, ~1.6 px/frame up; apparent size shrinks slightly (bbox height 453 px at f0 -> ~430 px at f50) -> moving away from camera while moving left",
+      "visible_frames": [0, 74],
+      "fully_in_frame": [0, 53],
+      "clipped_by_left_edge": [54, 74],
+      "track": "tracks/boat.csv",
+      "size_px_frame0": {"bbox_w": 275, "bbox_h": 453, "note": "bbox from mast top (y=469) to keel bottom (y=921), stern-left edge x=188 to bow tip x=462; boat is seen 3/4 from the front-right, so bbox_w mixes length and beam"},
+      "reference_point": "ref_x, ref_y (bbox centre while unclipped; bow-based extrapolation once clipped, ~3 px mean / 9 px max error on test). Blender origin of the boat is not visible; the hull centre is lower than the bbox centre (bbox includes the mast)."
+    },
+    {
+      "name": "human",
+      "description": "Small walking man (white T-shirt, dark trousers, pale skin) right of centre, around x=660-760, y=565-680",
+      "moves": true,
+      "motion": "walks steadily left and slightly toward the camera: centroid x 755 -> 665 px, y 602 -> 642 px over 3 s; bbox height about constant 67-78 px (gait oscillation)",
+      "visible_frames": [0, 74],
+      "track": "tracks/human.csv",
+      "size_px": {"height_bbox_range": [67, 78], "height_median": 73, "width_bbox_range": [22, 30]},
+      "reference_point": "mask centroid cx, cy (approximate pelvis; pelvis is about at the mask centroid / slightly below mid-height of bbox)"
+    },
+    {
+      "name": "bird",
+      "description": "Dark (black-brown) flying bird, flapping, above the boat/human",
+      "moves": true,
+      "motion": "flies right and slightly down: centroid (318,327) at f0 -> (924,531) at f53, ~11-14 px/frame; leaves through the right image edge f54-f58; not visible from f59",
+      "visible_frames": [0, 58],
+      "fully_in_frame": [0, 53],
+      "clipped_by_right_edge": [54, 58],
+      "track": "tracks/bird.csv",
+      "size_px": {"wingspan_bbox_w_max": 70, "wingspan_frames_max": [31, 33], "bbox_w_min": 30, "bbox_w_min_frames": [23, 24], "main_len_max": 70.0, "main_len_min_unclipped": 43.7},
+      "reference_point": "mask centroid cx, cy"
+    }
+  ],
+  "static_objects": [],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "all three objects already moving at first frame"},
+    {"frame": 54, "t": 2.16, "event": "bird first touches right image edge"},
+    {"frame": 54, "t": 2.16, "event": "boat stern first touches left image edge (clipped thereafter)"},
+    {"frame": 58, "t": 2.32, "event": "last frame the bird is visible (sliver at right edge)"},
+    {"frame": 59, "t": 2.36, "event": "bird gone"},
+    {"frames": [5, 17, 32, 42, 55], "event": "bird wings at flat/extended pose (bbox height minimum, wingspan near maximum) - flap cycle ~12 frames (~0.48 s)"},
+    {"frames": [0, 10, 24, 36, 49], "event": "bird wings raised/folded pose (bbox height maximum, width minimum)"}
+  ],
+  "files": {"notes": "notes.md", "scripts": "scripts/", "tracks": "tracks/"}
+}

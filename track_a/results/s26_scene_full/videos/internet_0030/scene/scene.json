@@ -1,0 +1,145 @@
+{
+ "video": "internet_0030.mp4",
+ "source": "internet",
+ "scene": "2D",
+ "fps": 29.1532,
+ "frames": 42,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / fps, frame 0 at t=0",
+ "camera": {
+  "type": "handheld/tripod pan following the boat slowly to the right",
+  "per_frame_shift_file": "tracks/camera.csv (background image shift vs frame 0, px; negative x = background moves left = camera pans right)",
+  "total_shift_frame41_px": {
+   "x": -30.7,
+   "y": 4.4
+  },
+  "mean_rate_px_per_frame": {
+   "x": -0.75,
+   "y": 0.11
+  },
+  "zoom": "none detected (left/mid/right hill regions shift equally, -31.6/-30.5/-31.6 px)",
+  "rotation": "negligible (left vs right hill dy differ by ~2.8 px over 1320 px, ~0.1 deg)",
+  "stabilized_coords": "x_stab = x_image - bg_shift_x (frame-0 background coordinates); columns *_stab in boat.csv"
+ },
+ "objects": [
+  {
+   "name": "boat",
+   "aliases": [
+    "motorboat",
+    "speedboat",
+    "bowrider"
+   ],
+   "moves": true,
+   "description": "dark navy/black-hulled motorboat with white gunwale stripe and white bimini top (canopy) on a 4-bar frame, 1-2 people aboard, orange object/flag at the stern transom; travels left->right along the river, parallel to the image plane, throwing a white wake/spray behind",
+   "visible_frames": [
+    0,
+    41
+   ],
+   "track": "tracks/boat.csv",
+   "reference_point": "ref_x/ref_y = centre of visible box (stern..bow, canopy top..hull bottom); bow_x/bow_y = bow tip; stern_x = rear edge of orange object at transom",
+   "pixel_extents": {
+    "length_bow_to_stern_px": {
+     "frame0": 208.0,
+     "frame20": 197.5,
+     "frame41": 189.6,
+     "mean_all": 197.8,
+     "min": 189.6,
+     "max": 208.3,
+     "note": "shrinks steadily ~208 -> ~190 px (about -9%) while canopy length and height stay constant: boat yawing slightly / foreshortening; no camera zoom"
+    },
+    "height_canopy_top_to_waterline_px": {
+     "median_where_waterline_visible": 77.0,
+     "frames_waterline_visible": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32
+     ]
+    },
+    "height_canopy_top_to_bow_tip_px": 38.8,
+    "canopy_bimini_top_length_px": 67.0,
+    "hull_top_to_waterline_note": "hull side (gunwale white stripe to waterline) at mid-length roughly y 487..521 => ~34 px; stern deck lower"
+   }
+  },
+  {
+   "name": "people_in_boat",
+   "moves": true,
+   "description": "1-2 occupants under the bimini (driver), dark, ~y 455-485; move with the boat, not tracked separately (hidden by canopy frame)",
+   "visible_frames": [
+    0,
+    41
+   ]
+  },
+  {
+   "name": "orange_stern_object",
+   "moves": true,
+   "description": "orange/red flag or light at the transom, ~8x12 px, centre ~y 502; used as stern marker",
+   "visible_frames": [
+    0,
+    41
+   ]
+  },
+  {
+   "name": "wake_spray",
+   "moves": true,
+   "description": "white water trail behind the boat along y ~505-525, extends from the stern to the left image edge; bow wave spray along the lower hull in frames 9-18 and 33-41"
+  },
+  {
+   "name": "river",
+   "moves": false,
+   "description": "water surface occupying the image below y ~470 (far shore waterline at y ~470-480 at frame 0); rippled, sun glints in lower part"
+  },
+  {
+   "name": "far_bank_trees_and_hill",
+   "moves": false,
+   "description": "dark tree line and green grassy hillside above y ~470, filling the top of the frame; used as background reference for camera shift"
+  },
+  {
+   "name": "far_shoreline",
+   "moves": false,
+   "description": "near-horizontal line where water meets far bank, y ~ 470-480 (frame 0) across the full width"
+  }
+ ],
+ "events": [
+  {
+   "event": "boat in motion throughout",
+   "frames": [
+    0,
+    41
+   ],
+   "times_s": [
+    0.0,
+    1.4064
+   ],
+   "note": "no start/stop, release, bounce or contact; boat enters/leaves nothing (fully visible all frames)"
+  },
+  {
+   "event": "bow pitch oscillation (bow tip y)",
+   "note": "bow_y ~486-487 frames 0-8, rises to ~481.4 at frames 17-19, falls to ~488 at frames 29-32, back to ~485.5 at 41 (boat pitching on waves)"
+  }
+ ],
+ "files": {
+  "notes": "notes.md",
+  "tracks": [
+   "tracks/boat.csv",
+   "tracks/camera.csv"
+  ],
+  "scripts": "scripts/"
+ }
+}

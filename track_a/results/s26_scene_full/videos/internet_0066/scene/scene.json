@@ -1,0 +1,108 @@
+{
+  "video": "internet_0066.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down view of a wooden gym floor; ball moves in a plane roughly parallel to the image)",
+  "fps": 30.0,
+  "frames": 100,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (full 1920x1080 resolution) and seconds; no metric scale assumed",
+  "camera": {
+    "type": "hand-held, looking straight down at the floor (the holder's own shoes are visible at the bottom edge); no pan, slow drift only",
+    "per_frame_shift_file": "tracks/camera_shift.csv (dx, dy of frame i relative to frame 0, phase correlation on the top band y<260)",
+    "drift_summary_px": {"dx_range": [-10.2, 0.0], "dy_range": [-21.2, 0.0],
+                         "during_ball_pass_frames_49_72": "dx about -5.9 to -6.9, dy about -8.5 to -7.0; < 1 px per frame, negligible versus ball motion (~90 px/frame)"},
+    "rotation_or_zoom": "none detected (top court line tilts ~10 px over 1100 px in every frame: slight camera roll, constant)"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "basketball, dark reddish-brown with black seams; the only moving object",
+      "moves": true,
+      "visible_frames": [49, 72],
+      "fully_in_frame_frames": [53, 69],
+      "partly_out_of_frame": {"entering_right_edge": [49, 52], "leaving_left_edge": [70, 72]},
+      "motion": "enters at the right edge, travels right-to-left across the image along y ~ 430-450, exits at the left edge; image-x decreases monotonically",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "visible centre (cx, cy) = midpoint of the left/right mask edges (x) and of top/bottom edges (y); for edge-cut frames the visible edge -/+ DREF/2",
+      "size_px": {
+        "diameter_vertical_median_frames_53_69": 256.0,
+        "diameter_vertical_range_frames_53_69": [250, 261],
+        "length_along_motion_x_median_frames_53_69": 260.0,
+        "note": "vertical (across-motion) extent is the blur-free diameter; horizontal extent includes ~0-30 px motion blur (241-283 px). bbox height (bbox_y1-bbox_y0) is 251-266 px.",
+        "ball_diameter_px_recommended": 256
+      },
+      "apparent_size_trend": "vertical diameter ~258-265 px at frames 52-53, ~250-254 px at frames 56-63, ~256-261 px at frames 64-69: variation within ~+-2-4% (near measurement noise); no clear size change",
+      "shadow": "a soft grey shadow is attached to the ball: ahead (left) of it until ~frame 59, then behind (right) after ~frame 61 as it passes under the overhead light; tracks/ball_shadow.csv (low reliability)"
+    },
+    {
+      "name": "shoes",
+      "description": "two light blue-grey sneakers (toes) of the person holding the camera, at the bottom edge, cut by the frame",
+      "moves": false,
+      "visible_frames": [0, 99],
+      "position_frame0_px": {"left_shoe_bbox": [800, 1015, 896, 1080], "right_shoe_bbox": [1005, 1020, 1107, 1080]},
+      "size_px": {"visible_width_each": "~94 px (x), visible length ~58-65 px (cut by bottom edge)"}
+    },
+    {
+      "name": "top_maroon_line",
+      "description": "dark maroon painted court line, horizontal, near the top of the image",
+      "moves": false,
+      "position_frame0_px": "rows 135-185 at x=300, 144-194 at x=900, 145-194 at x=1400 (slightly tilted)",
+      "width_px": 50,
+      "extent_px": "spans the full image width from the left line (x~30) to the right edge"
+    },
+    {
+      "name": "right_maroon_line",
+      "description": "dark maroon vertical court line on the right side",
+      "moves": false,
+      "position_frame0_px": "columns 1700-1751 (centre x ~1726), from the top line down to the bottom edge",
+      "width_px": 50
+    },
+    {
+      "name": "left_maroon_line",
+      "description": "dark maroon vertical court line at the left edge (partly cut by the frame, partly glare)",
+      "moves": false,
+      "position_frame0_px": "columns ~30-80 (centre x ~55)",
+      "width_px": "~50 (partly cut/glare)"
+    },
+    {
+      "name": "blue_line",
+      "description": "light-blue vertical court line between the maroon lines",
+      "moves": false,
+      "position_frame0_px": "columns 1116-1167 (centre x ~1141; 1120-1167 at y=300, 1116-1163 at y=900)",
+      "width_px": 47
+    },
+    {
+      "name": "light_reflections",
+      "description": "bright glare spots of ceiling lights on the floor, along y~640 (x ~470, ~1210, ~80)",
+      "moves": false,
+      "position_frame0_px": "centres approx (470, 640), (1210, 640), (80, 640)"
+    },
+    {
+      "name": "floorboards",
+      "description": "vertical wooden floorboard strips; spacing about 45-60 px",
+      "moves": false
+    }
+  ],
+  "distances_between_static_features_px_frame0": {
+    "right_maroon_line_centre_to_blue_line_centre_x": 585,
+    "blue_line_centre_to_left_maroon_line_centre_x": 1086,
+    "left_to_right_maroon_line_centres_x": 1671,
+    "maroon_line_width": 50,
+    "blue_line_width": 47
+  },
+  "events": [
+    {"event": "shadow of ball appears at right edge", "frame": 47, "time_s": 1.5667},
+    {"event": "ball first visible (entering at right edge)", "frame": 49, "time_s": 1.6333},
+    {"event": "ball centre crosses right maroon line (x~1726)", "frame": 52.3, "time_s": 1.743, "note": "interpolated"},
+    {"event": "ball fully inside frame", "frame": 53, "time_s": 1.7667},
+    {"event": "ball centre crosses blue line (x~1141)", "frame": 58.7, "time_s": 1.957, "note": "interpolated"},
+    {"event": "shadow switches from ahead to behind the ball (passes under light)", "frame": 60, "time_s": 2.0, "note": "approximate, +-1 frame"},
+    {"event": "ball starts leaving at left edge", "frame": 70, "time_s": 2.3333},
+    {"event": "ball centre crosses left maroon line (x~55)", "frame": 70.9, "time_s": 2.363, "note": "interpolated"},
+    {"event": "ball last visible (sliver at left edge)", "frame": 72, "time_s": 2.4},
+    {"event": "ball gone", "frame": 73, "time_s": 2.4333}
+  ],
+  "no_events_detected": "no bounce, impact, contact or direction change is visible while the ball is in view; motion is a near-straight right-to-left pass (rolling or very low trajectory)"
+}

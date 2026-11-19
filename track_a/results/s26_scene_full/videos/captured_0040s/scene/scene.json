@@ -1,0 +1,204 @@
+{
+ "video": "captured_0040s.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "background": "replaced by uniform green (Segment-Anything-2 demo watermark bottom right); the thrower was removed, only the ball and table set remain",
+ "camera": {
+  "static": true,
+  "evidence": "table/objects pixel-fixed over all frames (median background crisp)",
+  "intrinsics_lab_convention": {
+   "fx_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "perspective": "camera slightly above table height looking roughly level; table top seen as trapezoid (front edge longer, back edge shorter); horizon approx y~420-450 (back edge of table y~455 is just below eye level)"
+ },
+ "objects": {
+  "ball": {
+   "moves": true,
+   "desc": "white ball (ping-pong/foam-sized), the only moving object; held by a removed hand at left (x~130-170, y~477-530) frames 0-22, thrown to the right over the table, bounces on the table twice, exits towards lower right",
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/ball.csv",
+   "diameter_px_unblurred": {
+    "held_frames_0_22_major_axis": "41-44 (fingers cut part, best ~43)",
+    "flight_width_minor": "frames 23-24 ~33, 25-29 ~37-40, 30-31 ~41-42, 34-41 ~42-46, 42-46 ~46-50, 47-48 ~54"
+   },
+   "apparent_size_trend": "grows from ~40 px to ~54 px across the throw -> ball moves toward the camera (closer at the end)"
+  },
+  "glass_jar": {
+   "moves": false,
+   "desc": "clear glass jar with white/silver lid, leftmost object on table",
+   "bbox_frame0": [
+    493,
+    415,
+    543,
+    498
+   ],
+   "width_px": 50,
+   "height_px": 83
+  },
+  "tape_roll": {
+   "moves": false,
+   "desc": "wide translucent beige packing-tape roll lying flat, right of jar",
+   "bbox_frame0": [
+    551,
+    437,
+    629,
+    484
+   ],
+   "width_px": 78,
+   "height_px": 47
+  },
+  "card_tent": {
+   "moves": false,
+   "desc": "two playing cards leaned into a tent (house of cards), blue-back card facing camera, centre of table",
+   "bbox_frame0": [
+    660,
+    416,
+    712,
+    500
+   ],
+   "width_px": 52,
+   "height_px": 84
+  },
+  "flat_cards": {
+   "moves": false,
+   "desc": "playing card(s) lying flat in front of the card tent",
+   "bbox_frame0": [
+    643,
+    500,
+    746,
+    516
+   ],
+   "width_px": 103,
+   "height_px": 16
+  },
+  "white_cup": {
+   "moves": false,
+   "desc": "white tumbler/cup, rightmost and tallest object",
+   "bbox_frame0": [
+    740,
+    375,
+    814,
+    504
+   ],
+   "width_px": 74,
+   "height_px": 129,
+   "top_rim_y": 377
+  },
+  "dark_card_with_sticky_note": {
+   "moves": false,
+   "desc": "dark navy flat object (card/wallet/phone) near table front with a small yellow note on its right part",
+   "bbox_frame0": [
+    512,
+    530,
+    617,
+    550
+   ],
+   "yellow_note_bbox": [
+    583,
+    534,
+    613,
+    544
+   ]
+  },
+  "table": {
+   "moves": false,
+   "desc": "wooden table top with dark edge band and black central pedestal",
+   "top_corners_frame0": {
+    "front_left": [
+     212,
+     537
+    ],
+    "front_right": [
+     1140,
+     590
+    ],
+    "back_left_approx": [
+     435,
+     453
+    ],
+    "back_right_approx": [
+     905,
+     465
+    ]
+   },
+   "front_edge_length_px": 930,
+   "edge_band_thickness_px": {
+    "left": 30,
+    "right": 32
+   },
+   "pedestal": {
+    "x": [
+     630,
+     690
+    ],
+    "y_top": 600,
+    "continues_below_frame": true
+   }
+  }
+ },
+ "events": [
+  {
+   "name": "ball held/jiggled in hand (moves down-up twice)",
+   "frames": [
+    0,
+    22
+   ],
+   "detail": "lowest image points frame 8 (y 519) and frame 20-21 (y 530); highest frame 12 (y 491)"
+  },
+  {
+   "name": "throw/release",
+   "frame": 23,
+   "t": 0.958,
+   "detail": "upward swing starts frame 21; mask loses finger notch and becomes blurred at 23; release between 22 and 23"
+  },
+  {
+   "name": "flight1 apex (image)",
+   "frame": 28.5,
+   "detail": "y min ~331 at frames 28-29"
+  },
+  {
+   "name": "ball passes in front of tape roll",
+   "frames": [
+    32,
+    33
+   ]
+  },
+  {
+   "name": "bounce 1 on table",
+   "frame": 33,
+   "t": 1.375,
+   "detail": "lowest point between frames 33 and 34, near (630-640, ~490) in front of tape roll / left of card tent"
+  },
+  {
+   "name": "flight2 apex (image), passes just above the white cup rim",
+   "frame": 36.5,
+   "detail": "y min ~358 at frames 36-37"
+  },
+  {
+   "name": "bounce 2 on table",
+   "frame": 41,
+   "t": 1.708,
+   "detail": "lowest at frame 41 (930, 487), right part of table"
+  },
+  {
+   "name": "flight3 apex (image)",
+   "frame": 45,
+   "detail": "y min ~383"
+  },
+  {
+   "name": "end of clip, ball still visible at right, descending",
+   "frame": 48
+  }
+ ]
+}

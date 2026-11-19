@@ -1,0 +1,18 @@
+{
+ "video": "internet_0024.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 25.0,
+ "frames": 30,
+ "duration_s": 1.2,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2126,
+  "question": "What is the moving velocity of the mug at 0.50s in cm/s?",
+  "prior": "width of the earphone case = 45mm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 25.0
+ }
+}

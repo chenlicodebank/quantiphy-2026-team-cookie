@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0026_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by plain white)",
+  "scene": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "width": 960,
+  "height": 960,
+  "time_convention": "t = frame / 25; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale",
+  "camera": {
+    "motion": "assumed static (fixed camera in this benchmark's simulations). Background is uniform white so a pan cannot be checked directly; the smooth, near-constant image motion of both objects is consistent with a static camera.",
+    "perspective": {
+      "horizon_y_est_px": 466,
+      "horizon_note": "The boat recedes while moving left: its mast top moves DOWN (304 -> ~314) and its keel moves UP (633 -> 619), while its cabin roof stays at y = 466 in every frame, so the horizon (camera eye level) is approx y = 466 (+/- 5). Everything of the human is below this line, i.e. the camera is above the human's head height.",
+      "ground_plane": "not visible (segmented). Boat keel y and human feet y are the only ground/water contact cues.",
+      "principal_point_assumed": [480, 480]
+    }
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "Red-and-white fishing boat / small trawler: red hull with name 'AHBOS'-like lettering, white/grey cabin (wheelhouse) with windows, black funnel/exhaust pipe behind cabin, white railings, tall grey mast with a crossbar (radar/antenna) near its top. Largest object, left/centre of frame.",
+      "moves": true,
+      "visible_frames": "0-74 (whole clip, never occluded, never leaves the frame; bow reaches x=22 at frame 74)",
+      "motion": "translates leftwards (bow to the left, i.e. it moves bow-first) and slowly away from the camera; image speed ~4.0 px/frame at start to ~3.5 px/frame at end; apparent size shrinks ~13% (length 261 -> 228 px). Mast crossbar appears to rotate / change apparent width (radar-like) - do not use mast width as a size.",
+      "track": "tracks/boat.csv",
+      "reference_point": "origin not visible; candidates recorded: bbox centre (bbox_cx,bbox_cy), mask centroid, body (no-mast) bbox centre, hull bbox centre. For horizontal motion all give the same per-frame x shift within ~1 px.",
+      "size_frame0_px": {"length_bow_to_stern": 261, "height_mast_top_to_keel": 330, "body_height_cabin_roof_to_keel": 168, "hull_height_bow_tip_to_keel": 120},
+      "size_frame74_px": {"length_bow_to_stern": 228, "height_mast_top_to_keel": 304, "body_height_cabin_roof_to_keel": 152, "hull_height_bow_tip_to_keel": 109}
+    },
+    {
+      "name": "human",
+      "description": "Small walking person (white/light top, dark grey trousers, pale head) to the right of the boat; at frame 0 just right of the boat's stern (gap ~7 px), afterwards the boat pulls away leftwards.",
+      "moves": true,
+      "visible_frames": "0-74 (whole clip, never occluded)",
+      "motion": "walking (legs alternate) slowly leftwards (~0.5 px/frame, bbox_cx 559.5 -> 521.5) and slightly toward the camera / down the image (feet y 580 -> 590-591). Apparent height stays ~46-50 px (T=20 mask) / 44-47 px (core mask) - no clear growth.",
+      "track": "tracks/human.csv",
+      "reference_point": "pelvis estimated as (mean x of mask below the top 40%, feet_y - 0.53*height); bbox centre and centroid also given",
+      "size_px": {"height_standing_frame0_T20": 54, "height_typical": "46-51 (T20), 44-47 (core T60)", "width": "14-18"}
+    }
+  ],
+  "static_objects": "none - background removed by segmentation (plain white). No ground markings, furniture or horizon line are visible.",
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip start: boat already moving left; human already walking; human is right next to the boat's stern (human bbox x 553-566, boat stern x 545)"},
+    {"frame": 74, "t": 2.96, "event": "clip end: boat bow at x=22 (still fully inside frame), human at x 514-529"},
+    {"note": "no start/stop, bounce, contact or direction change observed for either object; both move steadily for the whole clip"}
+  ],
+  "apparent_size_change": {
+    "boat_length_px": {"0": 261, "15": 255, "30": 248, "45": 240, "60": 234, "74": 228},
+    "boat_height_px": {"0": 330, "30": 313, "60": 304, "74": 304},
+    "human_height_px_T20": {"0": 54, "30": 46, "60": 49, "74": 48},
+    "human_core_height_px": {"0": 47, "30": 44, "60": 46, "74": 47}
+  },
+  "files": {"notes": "notes.md", "tracks": ["tracks/boat.csv", "tracks/human.csv"], "scripts": "scripts/"}
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0034.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 24.097768,
+ "frames": 60,
+ "duration_s": 2.4899,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3026,
+  "question": "What is the displacement of toilet paper roll from 0.5s to 1.73s in cm?",
+  "prior": "size of toilet paper roll = 100 mm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "video": "simulation_0255_segmented.mp4",
+ "source": "segmentation (Blender simulation, background replaced by white)",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 41,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "units": "pixels, seconds; image coords x right, y down",
+ "camera": {
+  "static": true,
+  "evidence": "pure white background, no texture; nothing to pan against; 2D scene with motion in a plane facing the camera"
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "description": "single small olive/dark-yellow-green shaded sphere (RGB core ~ (80,87,6)); the only object in the video",
+   "moves": true,
+   "visible_frames": [
+    0,
+    40
+   ],
+   "occluded_frames": [],
+   "track_file": "tracks/ball.csv",
+   "reference_point": "intensity-weighted centroid of the ball mask (= sphere centre / object origin)",
+   "diameter_px": {
+    "mask_height_px": {
+     "mean": 25.39,
+     "median": 25.0,
+     "min": 25.0,
+     "max": 27.0
+    },
+    "mask_length_along_motion_px": {
+     "mean": 26.49,
+     "median": 26.0,
+     "min": 25.0,
+     "max": 28.0
+    },
+    "equivalent_diameter_from_area_px": {
+     "mean": 25.06,
+     "median": 25.02,
+     "min": 24.28,
+     "max": 25.85
+    },
+    "best_estimate_px": 25.0,
+    "uncertainty_px": 1.0,
+    "note": "mask horizontal extent is ~1 px larger than vertical (slight motion blur / antialiasing); use ~25 px (vertical extent / equivalent diameter) as the ball diameter"
+   },
+   "motion": "straight horizontal line to the right at constant y ~ 564.15 px; speed decreases steadily (decelerating)",
+   "start_px": [
+    69.07,
+    564.1
+   ],
+   "end_px": [
+    1623.06,
+    564.06
+   ],
+   "net_displacement_px_frame0_to_40": 1553.99,
+   "path_length_px_frame0_to_40": 1554.0,
+   "per_frame_step_px": {
+    "first(0->1)": 44.26,
+    "last(39->40)": 33.51,
+    "all": [
+     44.26,
+     43.72,
+     43.83,
+     42.96,
+     42.86,
+     42.97,
+     42.71,
+     42.08,
+     41.84,
+     41.66,
+     41.27,
+     41.07,
+     40.94,
+     40.21,
+     40.57,
+     40.0,
+     39.49,
+     39.86,
+     39.38,
+     38.83,
+     38.63,
+     38.46,
+     38.11,
+     37.76,
+     37.87,
+     37.16,
+     37.13,
+     36.89,
+     36.33,
+     36.77,
+     36.03,
+     35.92,
+     34.8,
+     35.53,
+     35.36,
+     34.08,
+     35.03,
+     34.19,
+     33.92,
+     33.51
+    ]
+   },
+   "y_spread_px": 0.074
+  }
+ ],
+ "static_objects": [],
+ "events": [
+  {
+   "event": "ball already moving at frame 0 (no visible start/release)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "ball still moving (decelerating, not stopped) at last frame; does not leave frame",
+   "frame": 40,
+   "t": 1.66667
+  },
+  {
+   "event": "no bounce, impact, contact or direction change observed",
+   "frame": null,
+   "t": null
+  }
+ ],
+ "perspective": "none (2D scene, plain background); a single metres-per-pixel scale applies",
+ "scripts": [
+  "scripts/track.py",
+  "scripts/check.py",
+  "scripts/write_scene.py"
+ ]
+}

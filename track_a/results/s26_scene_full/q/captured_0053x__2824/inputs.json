@@ -1,0 +1,18 @@
+{
+ "video": "captured_0053x.mp4",
+ "video_source": "lab",
+ "video_type": "V3MX",
+ "fps": 24.0,
+ "frames": 48,
+ "duration_s": 2.0,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2824,
+  "question": "What is the length of the book in cm?",
+  "prior": "velocity of the trashbin at 0.4s = 0.9962m/s",
+  "depth_info": "t=0.4s, distance_trashbin_camera = 2.7300m\ndistance_white_cup_camera = 2.5160m\ndistance_book_camera = 2.0820m\ndistance_basketball_camera = 2.9250m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

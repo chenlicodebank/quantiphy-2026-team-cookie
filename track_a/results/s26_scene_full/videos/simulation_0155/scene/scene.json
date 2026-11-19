@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0155.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 48,
+  "duration_s": 2.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, full-resolution 1920x1080) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the sea-floor strip vs the median background: |shift| <= 0.1 px (half-res) in every 4th frame; the background is identical apart from animated caustics on the sand and faint light rays",
+    "view": "side view, camera horizontal; the shark swims parallel to the image plane (2D scene). Shark apparent height constant (bbox 161/162 -> 431-433 px all clip); full silhouette length 926-928 px at frames 15-20 and 914-919 px at frames 24-30 (body flex / slight yaw, <=1.5 %)"
+  },
+  "objects": [
+    {
+      "name": "shark",
+      "description": "single grey-blue shark (great-white-like: pale snout and belly, gill slits, tall dorsal fin, crescent tail). The only moving object.",
+      "moves": true,
+      "visible_frames": "0-46 (frame 47: gone). Fully inside the image in frames 15-30. The snout enters first: the rear body/tail is cut by the right edge in frames 0-14; the snout is cut by the left edge from frame 31 on.",
+      "fully_visible_frames": [15, 30],
+      "direction": "right to left (-x), horizontal; no vertical motion (top/bottom of mask constant within +-1 px)",
+      "track_file": "tracks/shark.csv",
+      "reference_point": "origin_x_est / origin_y_est = estimated centre of the full silhouette bbox (proxy for the rig origin). Frames 6-38 from the dorsal-fin apex (+15.4 px), 0-5 from the snout tip (+459.6), 39-46 from the tail tip (-453.2). origin_y = 297 px constant.",
+      "size_px_full_view": {
+        "frame": 20,
+        "snout_tip_x": 652, "tail_tip_x": 1577,
+        "length_bbox_x": 926,
+        "length_range_frames_15_30": [914, 929],
+        "height_bbox_y_dorsal_tip_to_lowest_fin": 271,
+        "top_y_dorsal_apex": 162, "bottom_y": 432,
+        "body_depth_px_approx_note": "trunk depth without fins is about 140-150 px near the gills (visual estimate from overlay)"
+      },
+      "motion_summary_px": {
+        "origin_x_frame0": 2236.6, "origin_x_frame20": 1114.5, "origin_x_frame46": -392.2,
+        "dorsal_apex_mean_step_px_per_frame_frames_7_38": 58.6,
+        "note": "per-frame steps of the dorsal apex 56-61 px (feature noise +-1.5 px); snout steps start at 37 (0->1), 51, 55, 52, 56 for frames 1-5; tail-tip steps ~56 at frames 39-46. Different body points give slightly different speeds because the body flexes (see notes.md)."
+      }
+    }
+  ],
+  "static_objects": [
+    {"name": "sea_floor", "description": "undulating pale sand dunes across the bottom of the image with moving turquoise caustic light patches", "moves": false, "image_region": "y from ~795-1030 (top edge varies with x: e.g. x=0 ->832, x=600 ->989, x=1080 ->795, x=1440 ->1031) to 1080, full width", "reliability": "edge poorly defined (caustics), +-20 px"},
+    {"name": "water / light rays", "description": "blue water background, lighter at top, faint diagonal god rays", "moves": false}
+  ],
+  "events": [
+    {"event": "shark already in motion at first frame, snout entering from right edge", "frame": 0, "time_s": 0.0, "snout_x": 1777},
+    {"event": "tail tip clears right image edge (shark fully visible)", "frame": 15, "time_s": 0.625},
+    {"event": "snout reaches left image edge", "frame": 31, "time_s": 1.2917, "snout_x": "~0-8"},
+    {"event": "dorsal fin leaves through left edge", "frame": 39, "time_s": 1.625},
+    {"event": "last visible (tail fin only at left edge)", "frame": 46, "time_s": 1.9167},
+    {"event": "shark fully out of frame", "frame": 47, "time_s": 1.9583},
+    {"note": "no start/stop, bounce, contact or direction change inside the clip"}
+  ],
+  "files": {"tracks": "tracks/shark.csv", "notes": "notes.md", "scripts": "scripts/", "background": "bg_half.png (median background, half res), bg_top_full.png (rows 0-759 median, half-res copy)"}
+}

@@ -1,0 +1,76 @@
+{
+ "wall_s": 133,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 19,
+  "duration_ms": 132163,
+  "total_cost_usd": 0.5719486,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 26,
+  "cache_creation_input_tokens": 29384,
+  "cache_read_input_tokens": 359263,
+  "output_tokens": 13246,
+  "output_tokens_details": {
+   "thinking_tokens": 4943
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 29384,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 656,
+    "cache_read_input_tokens": 38557,
+    "cache_creation_input_tokens": 2994,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 2994
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "a",
+ "audit": {
+  "tool_calls": 18,
+  "flags": [
+   {
+    "tool": "Write",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_a/q_2619_placeholder.txt"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_a/q_2619_placeholder.txt\", \"content\": \"x\"}"
+   },
+   {
+    "tool": "Bash",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_a/q_2619_placeholder.txt"
+    ],
+    "words": [],
+    "input": "{\"command\": \"~/miniforge3/envs/ml/bin/python -c \\\"import os; os.remove('/private/tmp/qp_blind/scene_full_a/q_2619_placeholder.txt')\\\"\"}"
+   }
+  ]
+ },
+ "video": "captured_0035a",
+ "ids": [
+  2619
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_a/captured_0035a__q2619.jsonl"
+}

@@ -1,0 +1,86 @@
+{
+  "video": "internet_0026.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 19.68,
+  "frames": 29,
+  "duration_s": 1.4736,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 19.68; frame 0 at t = 0",
+  "units": "pixels and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "handheld, slowly accelerating sideways move (translation with parallax); scene content drifts RIGHT in the image, faster for nearer layers",
+    "shift_file": "tracks/camera_shift.csv",
+    "cumulative_shift_at_frame_28_px": {
+      "floor_grout_lines_y765 (truck depth, recommended)": {"dx": 87.3, "dy": -10.8},
+      "armchair/back wall (far)": {"dx": 42.3, "dy": "~-1.5"},
+      "foreground window sill y820-1060": {"dx": 75.6, "dy": "~+12"}
+    },
+    "shift_profile": "dx(floor) by frame: f7 5.6, f14 19.7, f21 49.9, f28 87.3 (accelerating; near 0 for the first few frames)",
+    "scale_change": "none measurable (truck length constant ~312 px; armchair width 320->323 px)"
+  },
+  "objects": [
+    {
+      "name": "toy_truck",
+      "description": "toy dump truck: blue cab with yellow driver figure, red dump bed, yellow chassis, 4 black wheels; the only clearly moving object",
+      "moves": true,
+      "visible_frames": [0, 28],
+      "motion": "rolls right-to-left (towards the child) along the floor, parallel to the image plane; already moving at frame 0 after a push by the man",
+      "track_file": "tracks/toy_truck.csv",
+      "reference_point": "bbox centre (cx, cy); front_x = leftmost blue pixel of the cab (leading edge, never occluded)",
+      "pixel_size": {
+        "length_bumper_to_bumper_px": 312,
+        "length_note": "median bbox width frames 3-28 (range 310-318); frames 0-2 read 304-306 because the rear is hidden by the man's knee",
+        "height_wheel_bottom_to_bed_top_px": 255,
+        "height_note": "median frames 3-28 (252-264)",
+        "wheel_diameter_px": 78,
+        "wheelbase_px": 155
+      },
+      "raw_displacement_frame0_to_28_px": {"cx": -360, "front_x": -364},
+      "floor_compensated_displacement_frame0_to_28_px": {"cx": -447, "front_x": -451}
+    },
+    {
+      "name": "man",
+      "description": "adult in black T-shirt and blue jeans, crouching at right, face blurred; pushed the truck",
+      "moves": "small body movements only; image drift follows the camera (~+90 px by f28)",
+      "visible_frames": [0, 28],
+      "bbox_px": {"frame0": [1205, 95, 1655, 757], "frame28": [1300, 88, 1742, 768]},
+      "height_crouching_px": 665,
+      "note": "bbox read by eye from grid frames (+-10 px); crouching, not standing height"
+    },
+    {
+      "name": "child",
+      "description": "toddler in dark blue shirt and shorts, black/white sneakers, sitting on the floor against the red sofa at left, legs stretched towards the truck; face blurred",
+      "moves": "small (legs/arms); image drift follows the camera (~+70 px by f28)",
+      "visible_frames": [0, 28],
+      "bbox_px": {"frame0": [275, 375, 612, 668], "frame28": [345, 372, 645, 670]},
+      "sitting_height_px": 293,
+      "leg_extent_note": "hip to shoe tip ~ 270 px horizontally"
+    },
+    {"name": "red_sofa", "description": "large orange-red sofa at left, back to the child", "moves": false,
+     "bbox_px_frame0": [0, 130, 685, 545], "note": "extends past the left image edge"},
+    {"name": "red_armchair", "description": "red armchair centre background on metal feet", "moves": false,
+     "bbox_px_frame0": [890, 25, 1210, 325], "width_px": 320},
+    {"name": "small_black_stool", "description": "small round side table/stool with black legs between sofa and armchair", "moves": false,
+     "bbox_px_frame0": [650, 175, 800, 380]},
+    {"name": "bar_stools", "description": "wicker/dark bar stools and table at right background", "moves": false,
+     "bbox_px_frame0": [1400, 0, 1900, 450]},
+    {"name": "coffee_table_and_back_sofa", "description": "dark sofa with cushions and coffee table at top-left background", "moves": false,
+     "bbox_px_frame0": [0, 0, 880, 160]},
+    {"name": "floor_tiles", "description": "large glossy grey tiles with dark grout; strong reflections", "moves": false,
+     "grout_spacing_along_y765_px": [409, 416, 428], "grout_crossings_y765_frame0_px": [535, 944, 1360, 1788]},
+    {"name": "window_sill", "description": "foreground window frame / sill spanning the bottom of the image (y ~ 800-1000) with LED strip at lower right", "moves": false}
+  ],
+  "events": [
+    {"event": "truck already rolling at first frame (push happened before the clip); man's hand near the bed rear frames 0-3, no clear contact", "frame": 0, "t": 0.0},
+    {"event": "truck rear no longer hidden by the man's knee", "frame": 3, "t": 0.152},
+    {"event": "cab front starts to overlap (pass in front of) the child's right shoe in the image", "frame": 26, "t": 1.321},
+    {"event": "clip ends; truck still moving (~10-17 px/frame floor-compensated)", "frame": 28, "t": 1.423}
+  ],
+  "files": {
+    "tracks/toy_truck.csv": "per-frame truck track",
+    "tracks/camera_shift.csv": "per-frame cumulative background shift by depth band",
+    "tracks/camera_phasecorr.csv": "phase-correlation shift of far band and sill (cross-check)",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "video": "internet_0034.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 24.097768,
+  "frames": 60,
+  "duration_s": 2.4899,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels (full 3840x2160 resolution, x right, y down) and seconds; no metric scale assumed",
+  "summary": "Static close-up of a white tiled bathroom wall with a white wall-mounted toilet-roll holder (suction disc + horizontal rod). A right hand brings a white toilet roll in from the bottom-right corner, moves it up-left, then slides it leftwards onto the holder rod and stops at frame ~56; the hand still holds the roll at the end (no release).",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the upper-left wall area (never covered) vs frame 0: |shift| <= 0.3 px in every frame (scripts/probe.py)",
+    "per_frame_background_shift_px": "all < 0.3 px; treat as 0",
+    "view": "roughly fronto-parallel to the wall; grout lines tilt ~0.3 deg and tile widths differ by ~5 % across the frame (mild perspective / lens), ignorable for the planar single-scale convention"
+  },
+  "objects": [
+    {
+      "name": "toilet_roll",
+      "description": "white toilet-paper roll with embossed flower pattern, seen from the side (cylinder axis horizontal, along the image x direction) once it is near the holder; held by the right hand at its right end",
+      "moves": true,
+      "visible_frames": "0-59 (frames 0-4 partly out of frame at bottom-right; right/lower part covered by fingers in all frames from 2)",
+      "track": "tracks/toilet_roll.csv",
+      "reference_point": "center_x/center_y = mean of the 4 silhouette corners (visible centre of the side-view rectangle); NaN in frames 0-4 where the roll is cut by the frame edge (use TL corner or visible_bbox_center there)",
+      "size_px_clear_frames": {
+        "length_along_axis_px": "589 +- 3 (frames 50-59, roll at rest, axis horizontal); 590-600 over frames 13-34",
+        "height_diameter_px": "697 +- 2 (frames 50-59); 698-707 over frames 13-34",
+        "note": "length = mean of top and bottom silhouette edge lengths (end face to end face), height = mean of left and right edge lengths (outer diameter)"
+      },
+      "apparent_size_change": "length and diameter constant within ~2 % over frames 9-59 -> no significant depth change in the side-view phase; frames 1-8 are a 3/4 view while the roll turns, so their 'length' is a projected value"
+    },
+    {
+      "name": "hand",
+      "description": "person's right hand (bare skin) entering from the right edge with a dark green sleeve on the forearm (sleeve visible at right edge from ~frame 30); holds the roll by its right end, thumb on the roll face",
+      "moves": true,
+      "visible_frames": "2-59 (always cut by the right/bottom frame edge)",
+      "track": "tracks/hand.csv",
+      "reference_point": "centroid of the visible skin mask (truncated by the frame edge, so biased right/down); leftmost_x = fingertip/thumb tip extreme"
+    },
+    {
+      "name": "toilet_roll_holder",
+      "description": "white plastic holder on the wall: round suction disc with oval knob at upper-left, bracket going down, horizontal rod pointing right with a small upward end post at its free (right) end",
+      "moves": false,
+      "visible_frames": "0-59 (rod and lower bracket progressively hidden behind the roll from ~frame 20; disc stays visible)",
+      "image_position_frame0_px": {
+        "suction_disc_center": [1596, 1049],
+        "suction_disc_diameter": 288,
+        "rod_x_range": [1515, 2340],
+        "rod_length_px": 825,
+        "rod_y_top_bottom": [1291, 1411],
+        "rod_thickness_px": 120,
+        "end_post_x": [2325, 2342],
+        "end_post_y_top_bottom": [1233, 1430],
+        "whole_holder_bbox": [1452, 905, 2342, 1435]
+      }
+    },
+    {
+      "name": "wall_tiles",
+      "description": "large white rectangular wall tiles laid in a running-bond pattern with grey grout lines",
+      "moves": false,
+      "measurements_frame0_px": {
+        "horizontal_grout_y": {"at_x_100_900": [687, 1741], "at_x_2700_3400": [682, 1772]},
+        "vertical_grout_x": {"top_row_y_200_600": [262, 1810, 3441], "middle_row_y_800_900": [998, 2607], "bottom_row_y_1900_2100": [253, 1800]},
+        "tile_width_px": "1548-1631 (middle row 1609)",
+        "tile_height_px": "1054 (left) to 1090 (right) between grout centres",
+        "note": "middle tile row (y 687-1741) holds the holder; the roll ends up in front of the middle tile with its bottom edge ~10-20 px above the lower horizontal grout"
+      }
+    },
+    {
+      "name": "roll_shadow",
+      "description": "soft grey shadow of roll/hand on the wall (to the left/upper-left of the roll)",
+      "moves": true,
+      "note": "not tracked; can make the roll's left edge look wider in a naive mask"
+    }
+  ],
+  "events": [
+    {"frame": 0, "time_s": 0.0, "event": "roll already entering: blurred top-left corner visible at bottom-right (~3280, 2025)"},
+    {"frame": 2, "time_s": 0.083, "event": "hand (fingers) first visible at bottom-right"},
+    {"frame": "0-12", "time_s": "0.00-0.50", "event": "fast up-left motion of the roll; roll turns from a 3/4 view (left end face with core hole visible, frames 1-8) to a side view (by ~frame 10); in-plane tilt of the axis falls from ~14 deg to ~6 deg"},
+    {"frame": 15, "time_s": 0.622, "event": "highest roll position (TL_y min ~949, centre_y min ~1321 at f17): vertical motion reverses from up to slightly down"},
+    {"frame": 18, "time_s": 0.747, "event": "roll's left end passes the free end (end post, x~2340) of the holder rod: start of sliding onto the rod (rod enters the roll core)"},
+    {"frame": "42-48", "time_s": "1.74-1.99", "event": "roll yaws slightly (right end face visible as a thin strip) and its axis tilts to ~-4 deg"},
+    {"frame": "48-50", "time_s": "1.99-2.07", "event": "roll drops ~35-45 px (TL_y 1021->1066 at the right, centre_y 1391->1414) and becomes level: core settles onto the rod"},
+    {"frame": 56, "time_s": 2.324, "event": "roll stops; at rest frames 56-59 (centre ~ (1911, 1411), left end x ~1615); hand still holding, no release in the clip"}
+  ],
+  "files": {
+    "tracks/toilet_roll.csv": "per-frame roll corners, centre, bbox, extents, tilt, occlusion, source",
+    "tracks/hand.csv": "per-frame hand skin-mask centroid, bbox, extents",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts and intermediate JSON"
+  }
+}

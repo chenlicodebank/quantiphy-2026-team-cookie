@@ -1,0 +1,120 @@
+{
+  "video": "internet_0070.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 29.970032,
+  "frames": 185,
+  "duration_s": 6.1728,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels and seconds only; no metric scale assumed",
+  "summary": "Side view across a river. A dark navy motorboat with a white bimini canopy, a German flag on the stern, and 1-2 people aboard crosses from left to right at high speed, leaving a long white wake. The camera pans slowly to the right (background drifts up to ~59 px left). Far bank: dark trees (left), grassy hill (right), a light-coloured riverside path line, a lone tree at the waterline. A small dark figure walks/cycles along the far-bank path at the right in frames 0-58.",
+  "camera": {
+    "type": "handheld/tripod pan, slow, smooth",
+    "file": "scene/camera_shift.csv",
+    "columns": "bg_dx, bg_dy = image position of a static background point in frame i minus its position in frame 0 (px); scale_vs_f0 and rot_deg_vs_f0 from a similarity fit",
+    "bg_shift_px": {"f0": [0, 0], "f30": [-8.3, 2.8], "f60": [-28.1, 5.2], "f90": [-49.6, 9.3], "f120": [-58.0, 10.9], "f135": [-58.6, 10.0], "f150": [-57.8, 8.9], "f184": [-52.5, 7.7]},
+    "pan_description": "background moves left (camera pans right, following the boat) from ~f5 to ~f135 (max -58.6 px at ~f135), then drifts back right ~6 px to the end; vertical drift up to +11 px around f115-125. Zoom: scale change < 0.16 % (negligible); rotation < 0.22 deg.",
+    "to_background_coords": "x_bg = x - bg_dx, y_bg = y - bg_dy (frame-0 background coordinates); boat.csv already has *_bg columns",
+    "perspective": "2D scene: boat moves roughly parallel to the image plane along the far half of the river; horizon not visible; far shoreline (water/bank boundary) is a near-horizontal line at y~467 (frame 0). Boat apparent canopy width is constant (~67-68 px), so its distance from the camera is ~constant; the hull's apparent length shrinks (227 -> 179 px) because the boat's heading/yaw changes (later frames show more of the rear deck), not because of distance."
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "motorboat (bowrider), dark navy/black hull, white/grey deck edge, white bimini canopy on a frame, German flag (black-red-gold) on the stern, driver + passenger; only vehicle in the scene",
+      "moves": true,
+      "direction": "left -> right (+x), along the far half of the river",
+      "visible_frames": [5, 154],
+      "fully_in_frame": [20, 139],
+      "track": "scene/tracks/boat.csv",
+      "reference_point": "ref_x,ref_y = centre of the bounding box (bow tip .. stern end, canopy top .. hull bottom), i.e. the visible centre; for frames cut by the image edge it is the centre of the visible part (cut_by_edge=1)",
+      "other_points": "bow_x (bow tip, best for front-to-front measurements), stern_end_x (rearmost point), stern_flag_x (left edge of the stern flag), canopy_tm_x (smooth canopy-position track, best for speeds), canopy_x0/x1",
+      "length_along_motion_px": {"note": "bow tip to stern end, horizontal; changes with view angle", "f21": 227.7, "f30": 218.7, "f45": 213.9, "f61": 202.0, "f75": 194.5, "f90": 190.7, "f105": 186.7, "f120": 179.3, "f138": 179.0, "mean_f21_138": 199.6},
+      "length_including_note": "stern end = flag left edge up to ~f95 (flag hangs at the transom; true transom ~10 px to the right of the flag edge at f61); later the white rear deck/swim platform edge is visible behind the flag and is the rearmost point",
+      "height_px": {"canopy_top_to_hull_bottom": "57-64, mean 59.6 (f21-138); f30 ~61, f130 ~57"},
+      "canopy_width_px": "67-68 (constant, f18-146)",
+      "canopy_height_px": "8-10",
+      "image_speed_px_per_frame_info": "not a model, for orientation only: canopy moves ~15.3 px/frame (image) / 15.8 (background-compensated) in f21-50 and ~13.4 / 13.5 in f109-138; it slows down in the image",
+      "occlusion": "never occluded by other objects; spray/wake hides the lower stern; flag occludes the transom"
+    },
+    {
+      "name": "boat_flag",
+      "description": "German flag on a short staff at the stern of the boat, ~10-12 px wide, ~12-15 px tall",
+      "moves": true,
+      "visible_frames": [19, 153],
+      "track": "boat.csv column stern_flag_x (left edge of the flag)"
+    },
+    {
+      "name": "boat_people",
+      "description": "driver (standing/seated under the canopy, skin-coloured upper body) and a passenger, part of the boat",
+      "moves": true,
+      "visible_frames": [10, 150],
+      "track": "move with the boat (under the canopy, ~canopy_x0+40 .. canopy_x1+10)"
+    },
+    {
+      "name": "wake",
+      "description": "white foam trail behind the boat at y~500-525 (frame coords), stretches from the stern back to the left image edge; stays on the water after the boat passes (full-width white line at y~515-525 in the last frames)",
+      "moves": "grows with the boat; front end attached to the stern",
+      "visible_frames": [15, 184]
+    },
+    {
+      "name": "bank_figure",
+      "description": "small dark figure (probably a pedestrian or cyclist) on the light-coloured far-bank path at the right, ~16-18 px tall, ~10-13 px wide, low contrast against grass",
+      "moves": true,
+      "direction": "left -> right (+x) along the path, ~2.2 px/frame in background coordinates",
+      "visible_frames": [0, 58],
+      "track": "scene/tracks/bank_figure.csv (detected=0 rows interpolated; lost in f21-25, f40-53; leaves view / becomes undetectable after ~f58)",
+      "reliability": "low (+-3 px)"
+    },
+    {
+      "name": "far_shoreline",
+      "description": "boundary between river and far bank; near-horizontal line",
+      "moves": false,
+      "position_f0": "y ~467 across the full width (x 0-1919)"
+    },
+    {
+      "name": "bank_path",
+      "description": "light grey/white riverside path or wall line on the far bank, right half of the image",
+      "moves": false,
+      "position_f0": "y ~455 for x ~1000-1920"
+    },
+    {
+      "name": "lone_tree",
+      "description": "single deciduous tree standing at the far waterline in front of the hill, centre of the image",
+      "moves": false,
+      "position_f0": {"crown_x": [1037, 1120], "trunk_x": 1073, "top_y": 293, "base_y": 467, "height_px": 174, "crown_width_px": 83},
+      "reliability": "+-4 px (dark crown against darker forest)"
+    },
+    {
+      "name": "forest_and_hill",
+      "description": "dark forest on the far bank (left half, x 0-1000) and a sunlit grassy hill (right half, x 1000-1920) above the shoreline, y 0-467",
+      "moves": false
+    },
+    {
+      "name": "foreground_vegetation",
+      "description": "near-bank plants: a leafy bush entering at the right edge (x>1840, y 550-1080, more visible after the pan, f~80+) and thin reed stalks at the bottom edge (y>1010, x~880, 1100, 1650)",
+      "moves": false
+    },
+    {
+      "name": "river_water",
+      "description": "river surface with ripples and sun glints, y 467-1080",
+      "moves": "texture only"
+    }
+  ],
+  "events": [
+    {"event": "boat bow enters at the left image edge", "frame": 5, "t": 0.167, "note": "bow tip x~7 at f5 (x=0 at ~f4.5)"},
+    {"event": "boat canopy enters", "frame": 10, "t": 0.334},
+    {"event": "boat stern (flag) enters; boat fully in frame", "frame": 20, "t": 0.667, "note": "stern end x~17 at f20 (0 at ~f19)"},
+    {"event": "boat bow reaches the right image edge", "frame": 141, "t": 4.705, "note": "bow tip 1890.8 at f139, x=1919 at ~f141"},
+    {"event": "boat stern leaves the right edge; boat gone", "frame": 155, "t": 5.172, "note": "stern end 1852.5 at f150; flag left edge 1878 at f151"},
+    {"event": "camera pan peak (background furthest left)", "frame": 135, "t": 4.504, "note": "bg_dx ~ -58.7"},
+    {"event": "boat motion", "note": "moves continuously left->right for the whole time it is visible; no stops, no reversals, no bounces; slight slowing in image px/frame (see boat entry)"},
+    {"event": "bank_figure walks/cycles right", "frames": [0, 58]}
+  ],
+  "files": {
+    "tracks": ["scene/tracks/boat.csv", "scene/tracks/bank_figure.csv"],
+    "camera": "scene/camera_shift.csv",
+    "notes": "scene/notes.md",
+    "scripts": "scene/scripts/"
+  }
+}

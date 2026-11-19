@@ -1,0 +1,212 @@
+{
+ "video": "captured_0034b.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24; frame 0 at t=0",
+ "camera": {
+  "motion": "static (phase-correlation background shift < 0.1 px over all frames)",
+  "intrinsics_from_benchmark": {
+   "fx_px": 763,
+   "hfov_deg": 80,
+   "principal_point": [
+    640,
+    360
+   ]
+  },
+  "view": "elevated, looking down obliquely at a table top; table front edge nearest the camera",
+  "perspective": {
+   "table_top_corners_px_approx_pm5": {
+    "back_left": [
+     500,
+     244
+    ],
+    "back_right": [
+     803,
+     251
+    ],
+    "front_right": [
+     851,
+     425
+    ],
+    "front_left": [
+     436,
+     413
+    ]
+   },
+   "table_back_edge_px": 303,
+   "table_front_edge_px": 415,
+   "table_left_edge_px": 181,
+   "table_right_edge_px": 181,
+   "note": "table top recedes upward in the image (back edge shorter than front edge): rows higher in the image are farther away. Horizon is above the frame."
+  },
+  "background": "everything except the table and objects on it is blurred (video edited with Segment Anything 2; watermark bottom right); faces blurred"
+ },
+ "objects": {
+  "ball_left": {
+   "type": "tennis ball (yellow-green)",
+   "moves": true,
+   "visible_frames": "0-48 (partially hidden behind soccer ball 32-48)",
+   "distinguish": "starts held by the LEFT seated person at the left table edge (~466,281); rolls right, passes behind (far side of) the soccer ball",
+   "track": "tracks/ball_left.csv",
+   "first": [
+    "464.81",
+    "282.8"
+   ],
+   "last": [
+    "607.23",
+    "271.9"
+   ],
+   "diam_px_rolling_median": 28.66
+  },
+  "ball_right": {
+   "type": "tennis ball (yellow-green)",
+   "moves": true,
+   "visible_frames": "0-48 (never occluded)",
+   "distinguish": "starts held by the RIGHT seated person at the back-right table corner (~821,253); rolls left toward the soccer ball, hits the left ball, then rolls toward the camera (down-right in image)",
+   "track": "tracks/ball_right.csv",
+   "first": [
+    "819.77",
+    "254.41"
+   ],
+   "last": [
+    "677.35",
+    "300.42"
+   ],
+   "diam_px_rolling_median": 29.25
+  },
+  "soccer_ball": {
+   "type": "black-and-white football",
+   "moves": false,
+   "visible_frames": "0-48",
+   "image_center_px": [
+    601.3,
+    315.0
+   ],
+   "diameter_px": 91.3,
+   "bbox_px": [
+    556,
+    270,
+    649,
+    359
+   ],
+   "distinguish": "large ball in the middle-left of the table; occludes the left tennis ball"
+  },
+  "pencil_case": {
+   "type": "yellow/orange cylindrical pencil case",
+   "moves": false,
+   "visible_frames": "0-48",
+   "image_center_px": [
+    695.8,
+    347.0
+   ],
+   "length_px": 98.1,
+   "width_px": 33.3,
+   "axis_angle_deg": "long axis rises to the right ~ -22..-28 deg in image",
+   "bbox_px": [
+    648,
+    320,
+    739,
+    381
+   ],
+   "distinguish": "elongated yellow object right of / in front of the soccer ball"
+  },
+  "table": {
+   "type": "wooden table top on a metal frame",
+   "moves": false,
+   "visible_frames": "0-48",
+   "distinguish": "light wood rectangle, the surface the balls roll on; see camera.perspective for corners"
+  },
+  "person_left": {
+   "type": "seated person (blurred, face masked)",
+   "moves": "only arm/hand (releases ball_left ~frame 24-25)",
+   "approx_bbox_px": [
+    290,
+    230,
+    560,
+    600
+   ],
+   "distinguish": "left of the table, light-blue trousers"
+  },
+  "person_right": {
+   "type": "seated person (blurred, face masked)",
+   "moves": "only arm/hand (releases ball_right ~frame 24-25)",
+   "approx_bbox_px": [
+    800,
+    220,
+    1010,
+    620
+   ],
+   "distinguish": "right of the table, grey clothes"
+  },
+  "person_background": {
+   "type": "person in the background (blurred, legs/white shoes visible)",
+   "moves": "negligible",
+   "approx_bbox_px": [
+    1040,
+    50,
+    1280,
+    400
+   ]
+  },
+  "blue_box": {
+   "type": "blue box/bag in background (blurred)",
+   "moves": false,
+   "approx_bbox_px": [
+    760,
+    70,
+    890,
+    190
+   ]
+  }
+ },
+ "events": [
+  {
+   "frame": 24,
+   "t": 1.0,
+   "event": "last frame both tennis balls are at rest in the hands (release between frames 24 and 25)"
+  },
+  {
+   "frame": 25,
+   "t": 1.0417,
+   "event": "both tennis balls start moving (first displaced frame); motion-blurred / hand still near them frames 25-27"
+  },
+  {
+   "frame": 32,
+   "t": 1.3333,
+   "event": "ball_left starts to be hidden behind the soccer ball (partial occlusion until the end)"
+  },
+  {
+   "frame": "35->36",
+   "t": "1.458->1.5",
+   "event": "both balls jump ~2x their usual per-frame displacement: probably one dropped capture frame between 35 and 36"
+  },
+  {
+   "frame": 38,
+   "t": 1.5833,
+   "event": "tennis balls collide (centres 29.4 px apart = one ball diameter); both reverse their image-x direction afterwards"
+  },
+  {
+   "frame": 39,
+   "t": 1.625,
+   "event": "after collision: ball_right moves down-right (toward camera), ball_left drifts slowly left behind the soccer ball"
+  },
+  {
+   "frame": 48,
+   "t": 2.0,
+   "event": "video ends; both balls still moving slowly (ball_right ~2.8 px/frame, ball_left ~1-2 px/frame)"
+  }
+ ],
+ "files": {
+  "tracks": [
+   "tracks/ball_left.csv",
+   "tracks/ball_right.csv"
+  ],
+  "static": "static_measure.json",
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

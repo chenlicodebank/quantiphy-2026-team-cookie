@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0177_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2SX",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1890,
+  "question": "What is the height of the elephant in meters?",
+  "prior": "speed of the elephant = 1.424m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

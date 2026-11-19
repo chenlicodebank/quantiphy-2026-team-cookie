@@ -1,0 +1,156 @@
+{
+ "video": "simulation_0236.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1080,
+ "height": 1920,
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "camera": {
+  "motion": "static (frame 0 vs 49 mean abs diff in sky/house ~2-4 grey levels = compression noise)",
+  "view": "frontal, horizontal; horse walks parallel to the image plane, house facade faces camera",
+  "ground_horizon_y_px": "grass/sky line ~988-995 at image left (x<250); house base ~1040"
+ },
+ "objects": {
+  "horse": {
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded": "never (fully in frame, in front of house)",
+   "description": "single chestnut (orange-brown) horse with white socks and a pale/grey face, side view, walking LEFT->RIGHT in front of the house's left ground floor; faces right",
+   "track": "tracks/horse.csv (ref_x/ref_y = trunk midpoint, torso template chain); keyframes tracks/horse_keyframes.csv",
+   "size_px": {
+    "length_nose_to_rear": "182 +-3 (keyframes 0,12,37,49: 182,182,182,185; 25: 181)",
+    "height_ear_top_to_hoof": "162 +-3",
+    "withers_height_approx": "~120-125 (back line y ~925-930, hooves ~1045)",
+    "trunk_length_buttock_to_breast": "~123 (frame 0: 163.7 -> 287)",
+    "body_depth_back_to_belly": "~50-55 (back ~928, belly ~980)"
+   },
+   "displacement_px": {
+    "ref_x frame0->49": 154.2,
+    "rump_edge frame0->49": 155.2,
+    "rump_mask frame0->49": 164.0,
+    "mean_px_per_frame": "~3.15-3.35 (torso 3.15, rump edge 3.17, mask rump 3.35)",
+    "vertical": "ref_y within +-2 px (walk on flat ground)"
+   }
+  },
+  "house": {
+   "moves": false,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "description": "two-storey half-timbered house, brick ground floor with 3 arched windows, upper storey with central wooden door/shutter and 2 small shutters, gable roof; centred in frame behind the horse",
+   "extents_px": {
+    "overall_x": [
+     180,
+     900
+    ],
+    "overall_width": 720,
+    "roof_apex_y": 270,
+    "base_y": 1040,
+    "overall_height": 770,
+    "roof_eaves_x": [
+     218,
+     866
+    ],
+    "roof_eaves_bottom_y": 478,
+    "upper_storey": {
+     "x": [
+      200,
+      880
+     ],
+     "y": [
+      630,
+      830
+     ]
+    },
+    "brick_ground_floor": {
+     "x": [
+      250,
+      830
+     ],
+     "y": [
+      845,
+      1040
+     ],
+     "width": 580,
+     "height": 195
+    },
+    "arched_windows": {
+     "left_x": [
+      272,
+      338
+     ],
+     "middle_x": [
+      508,
+      572
+     ],
+     "right_x": [
+      744,
+      808
+     ],
+     "y": [
+      845,
+      950
+     ],
+     "width": 64,
+     "height": 105
+    },
+    "upper_central_door": {
+     "x": [
+      462,
+      620
+     ],
+     "y": [
+      632,
+      790
+     ]
+    }
+   },
+   "reliability": "+-5 px, read on a 10 px grid"
+  },
+  "red_flowers": {
+   "moves": false,
+   "description": "small red flowers in the foreground grass",
+   "blobs_px": [
+    {
+     "cx": 324.7,
+     "cy": 1246.9,
+     "w": 20,
+     "h": 12,
+     "area": 118
+    },
+    {
+     "cx": 975.3,
+     "cy": 1661.9,
+     "w": 14,
+     "h": 20,
+     "area": 132
+    },
+    {
+     "cx": 1018.5,
+     "cy": 1709.4,
+     "w": 10,
+     "h": 4,
+     "area": 18
+    }
+   ]
+  },
+  "grass_field": {
+   "moves": false,
+   "description": "grass foreground from y~990 to bottom; distant grass hills at left"
+  },
+  "sky": {
+   "moves": false,
+   "description": "cloudy sky, static"
+  }
+ },
+ "events": {
+  "horse_motion": "walking throughout frames 0-49 (already moving at frame 0, still moving at 49); no start/stop, no direction change; gait gives a step-to-step oscillation of the torso x-step (~2.5-4.5 px/frame)"
+ },
+ "notes_file": "notes.md"
+}

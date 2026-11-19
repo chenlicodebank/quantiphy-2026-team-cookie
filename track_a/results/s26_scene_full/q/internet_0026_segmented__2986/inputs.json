@@ -1,0 +1,18 @@
+{
+ "video": "internet_0026_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MC",
+ "fps": 30.0003,
+ "frames": 36,
+ "duration_s": 1.2,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2986,
+  "question": "What is the length of the toy truck in cm?",
+  "prior": "total height of the sofa = 90 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

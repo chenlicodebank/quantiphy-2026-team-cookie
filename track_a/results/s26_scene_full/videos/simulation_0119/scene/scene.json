@@ -1,0 +1,55 @@
+{
+  "video": "simulation_0119.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.012007,
+  "frames": 48,
+  "duration_s": 1.999,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (frames 37-47 are pixel-identical outside compression noise; no background shift at any frame)",
+    "view": "orthographic-looking top-down view of a coffee table on a shaggy rug; motion plane = table/board top, facing the camera",
+    "perspective": "negligible: board squares have equal pitch (33.6 px) across the whole board in x and y"
+  },
+  "moving_objects": [
+    {
+      "name": "dark_piece",
+      "description": "the only moving object: a dark smoky-glass chess piece seen from directly above (round, ~34.3 px diameter), in the 9th of 10 board columns (x ~533.7) starting in the board's top row; it slides straight down the board (image +y) by ~50.3 px (1.5 squares) and stops",
+      "distinguish": "other dark glass pieces on the board are static (e.g. at (295,690), (499,690), (533,760)); the piece at (533,760) is in the same column but further down and never moves",
+      "track_file": "tracks/dark_piece.csv",
+      "reference_point": "circ_cx, circ_cy = centre of fixed-radius circle fitted to the piece outline (top-down => projection of the piece's vertical axis; best proxy for the origin)",
+      "visible_frames": [0, 47],
+      "moving_frames": [0, 36],
+      "position_frame0_px": [533.52, 521.28],
+      "position_rest_px": [533.81, 571.57],
+      "net_displacement_px_frame0_to_36": 50.29,
+      "path_length_px_frame0_to_36": 50.35,
+      "mean_step_px_per_frame": {"frames_1_12": 1.408, "frames_13_24": 1.404, "frames_25_36": 1.384},
+      "apparent_diameter_px": 34.3,
+      "apparent_diameter_range_px": [33.6, 35.4],
+      "occluded": "never"
+    }
+  ],
+  "events": [
+    {"event": "piece already moving at first frame (moves between frame 0 and 1)", "frame": 0, "time_s": 0.0},
+    {"event": "last displacement (frame 35 -> 36); piece at rest from frame 36 on (abrupt stop, no visible slow-down in the steps)", "frame": 36, "time_s": 1.4993},
+    {"event": "at rest until the end", "frame": 47, "time_s": 1.9574}
+  ],
+  "static_objects": [
+    {"name": "checkerboard", "desc": "10x10 black/white board on the table", "bbox_px": [248, 504, 584, 841], "size_px": [336, 337], "square_pitch_px": 33.6, "reliability": "+-1 px"},
+    {"name": "board_square", "desc": "one board square", "size_px": [33.6, 33.7]},
+    {"name": "table", "desc": "light grey rounded-square coffee table top", "bbox_px": [112, 212, 777, 877], "size_px": [665, 665], "reliability": "+-3 px"},
+    {"name": "tray", "desc": "dark blue-grey rectangular tray, upper right of table", "bbox_px": [433, 233, 680, 492], "size_px": [247, 259], "reliability": "+-4 px"},
+    {"name": "magazine", "desc": "magazine/book in the tray (cover with black knot sculpture)", "bbox_px": [460, 248, 647, 391], "size_px": [187, 143], "reliability": "+-4 px (visual)"},
+    {"name": "figure_sculpture", "desc": "dark metallic human-figure statuette lying on the tray, reaching onto the board's top edge", "bbox_px": [478, 363, 582, 510], "reliability": "+-5 px (visual)"},
+    {"name": "offboard_dark_pawn", "desc": "small dark pawn standing on the table above the board, left of tray", "center_px": [358, 458], "diameter_px": 27, "reliability": "+-3 px (visual)"},
+    {"name": "offboard_clear_pieces", "desc": "three clear-glass pieces on the table left of the board (one lying)", "centers_px": [[175, 532], [160, 560], [211, 566]], "reliability": "visual"},
+    {"name": "toppled_dark_piece", "desc": "dark tall piece lying on the board, top-left", "center_px": [292, 550], "length_px": 60, "reliability": "visual"},
+    {"name": "board_pieces_static", "desc": "other static pieces on the board (c=clear glass, d=dark glass)", "centers_px": {"c_top_row": [465, 520], "c1": [363, 555], "c_lying1": [295, 622], "c_large": [530, 622], "c2": [430, 656], "c_lying2": [352, 676], "d1": [295, 690], "d2": [499, 690], "d_lying": [330, 760], "d_same_column_as_mover": [533, 760], "c_large_lying": [358, 800], "c_lying3": [293, 828], "c_lying4": [462, 836]}, "reliability": "+-4 px visual"},
+    {"name": "sofa", "desc": "dark brown sofa along top edge and right edge of the frame", "bbox_px_right_part": [990, 80, 1080, 1080]},
+    {"name": "blanket", "desc": "tan/ochre throw draped on the sofa back, top right", "bbox_px": [700, 0, 1000, 160]},
+    {"name": "rug", "desc": "shaggy blue-grey rug covering the floor"}
+  ]
+}

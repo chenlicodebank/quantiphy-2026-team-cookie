@@ -1,0 +1,54 @@
+{
+  "video": "captured_0037x.mp4",
+  "source": "lab (captured; background replaced by black via Segment Anything 2, watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0, "frames": 49, "duration_s": 2.0417, "width": 1280, "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of table region vs frame 0: |shift| <= 0.1 px in every frame",
+    "intrinsics_from_task": "Orbbec Femto Mega RGB, HFOV 80 deg: f = 0.5959*1280 = 763 px, principal point ~ (640, 360)",
+    "view": "slightly elevated, looking at a table whose front edge runs from lower-left (208,540) to lower-right (1140,590); table top seen at grazing angle, receding up-right to back edge at y~455-470"
+  },
+  "objects": {
+    "ball": {
+      "description": "small white ping-pong-type ball; the only moving object",
+      "moves": true, "visible_frames": "0-48 (partly occluded 19, 20, 28; overlaps glass jar 35-36)",
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre = centroid of the segmented mask (cx, cy)",
+      "apparent_diameter_px": {"frame_0_at_rest": 18, "frames_45_48": 34, "note": "use width_minor_px (across blur); diameter roughly doubles over the clip as the ball comes toward the camera"},
+      "start_position_px": [822, 377]
+    },
+    "white_cup": {"description": "tall white tumbler/cup, right of centre; the ball sits on its top-right rim at the start", "moves": false,
+      "bbox_px": [740, 379, 813, 502], "width_px": 74, "height_px": 124, "top_rim_y": 379, "base_y": 502},
+    "glass_jar": {"description": "small clear glass jar with metal/grey lid, left-most object", "moves": false,
+      "bbox_px": [444, 408, 500, 484], "width_px": 57, "height_px": 77, "note": "bbox read by eye (transparent, auto segmentation failed) +-3 px"},
+    "tape_roll": {"description": "pale yellow roll of clear tape lying flat, between jar and card tent", "moves": false,
+      "bbox_px": [521, 430, 591, 473], "width_px": 71, "height_px": 44},
+    "card_tent": {"description": "two playing cards leaning together as a tent (house of cards), left of the cup", "moves": false,
+      "bbox_px": [660, 416, 711, 500], "width_px": 52, "height_px": 85, "note": "not knocked over by the ball; by eye +-3 px"},
+    "flat_cards": {"description": "playing card(s) lying flat in front of the card tent", "moves": false,
+      "bbox_px": [644, 501, 743, 516], "length_px": 100, "apparent_depth_px": 16},
+    "dark_card_on_table": {"description": "dark blue card/wallet with yellow item lying flat near front edge of table", "moves": false,
+      "bbox_px": [511, 529, 616, 551], "length_px": 106, "apparent_depth_px": 23},
+    "table": {"description": "wooden table top with single dark pedestal leg", "moves": false,
+      "bbox_px": [208, 430, 1140, 622],
+      "front_edge_top_line": [[208, 540], [1140, 590]], "front_edge_thickness_px": "~30-35",
+      "front_edge_length_px": 933, "leg_bbox_px": [628, 610, 690, 719]}
+  },
+  "events": [
+    {"name": "ball at rest on cup rim", "frames": "0-6", "t": "0.000-0.250"},
+    {"name": "ball starts moving (slips down outside of cup rim)", "frame": 7, "t": 0.292},
+    {"name": "ball launched up-left off the cup rim (lowest point of slip at frame 11, cy 389)", "frame": 11, "t": 0.458},
+    {"name": "apex 1", "frame": 15, "t": 0.625, "cy": 341.5},
+    {"name": "bounce 1 (lowest image point, behind card tent, partly occluded)", "frame": 19, "t": 0.792, "cy": 423.0},
+    {"name": "apex 2", "frame": 24, "t": 1.000, "cy": 351.9},
+    {"name": "bounce 2 (behind tape roll)", "frame": 28, "t": 1.167, "cy": 438.5},
+    {"name": "apex 3", "frame": 32, "t": 1.333, "cy": 362.8},
+    {"name": "bounce 3 (near glass jar)", "frame": 36, "t": 1.500, "cy": 440.6},
+    {"name": "apex 4", "frame": 40, "t": 1.667, "cy": 373.2},
+    {"name": "bounce 4 (left part of table)", "frame": 43, "t": 1.792, "cy": 460.2},
+    {"name": "ball still in flight up-left at end", "frame": 48, "t": 2.000}
+  ],
+  "notes": "see notes.md"
+}

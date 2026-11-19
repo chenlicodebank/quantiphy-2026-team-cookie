@@ -1,0 +1,354 @@
+id,video,cat,kind,F,how,question
+2143,captured_0001,D3,disp,1.1479,match:the yellow ball#0:size+anchor,What is the displacement of the ball between 0s and 1.5s in cm?
+2144,captured_0001,D3,vel,1.2167,match:the yellow ball#0:size+anchor,What is the velocity of the ball at 1.5s in cm/s?
+2145,captured_0001,D3,vel,,no usable time,What is the velocity of the ball at the end of the slope in cm/s?
+2148,captured_0002,D3,disp,1.4793,match:the yellow ball#0:size+anchor,What is the displacement of the ball between 1.0s and 1.3s in cm?
+2149,captured_0002,D3,vel,1.4985,match:the yellow ball#0:size+anchor,What is the velocity of the ball at 1.3s in cm/s?
+2150,captured_0002,D3,vel,,no usable time,What is the velocity of the ball at the end of the slope in cm/s?
+2153,captured_0006,D3,vel,1.4063,match:the yellow toy#0:size+anchor,What is the velocity of the toy at 1.2s in m/s?
+2154,captured_0006,D3,disp,1.2777,match:the yellow toy#0:size+anchor,What the displacement of the toy between 1s and 1.2s in cm?
+2155,captured_0006,D3,vel,,no usable time,What is the velocity of the toy when hitting the desk for the first time in m/s?
+2158,captured_0006s,D3,vel,1.4258,match:the yellow toy#0:size+anchor,What is the velocity of the toy at 1.2s in m/s?
+2159,captured_0006s,D3,disp,1.1616,match:the yellow toy#0:size+anchor,What the displacement of the toy between 1s and 1.2s in cm?
+2160,captured_0006s,D3,vel,,no usable time,What is the velocity of the toy when hitting the desk for the first time in m/s?
+2164,captured_0008,D3,vel,1.3799,match:the basketball#0:size-rel,What is the basketball's velocity at 1.2s in m/s?
+2169,captured_0008s,D3,vel,1.3336,match:the basketball#0:size-rel,What is the basketball's velocity at 1.2s in m/s?
+2174,captured_0008x,D3,vel,1.3554,match:the basketball#0:size-rel,What is the basketball's velocity at 1.2s in m/s?
+2179,captured_0009,D3,vel,1.4445,match:the basketball#0:size-rel,What is the basketball's velocity at 1.8s in m/s?
+2184,captured_0009s,D3,vel,1.371,match:the basketball#0:size-rel,What is the basketball's velocity at 1.8s in m/s?
+2189,captured_0009x,D3,vel,1.3893,match:the basketball#0:size-rel,What is the basketball's velocity at 1.8s in m/s?
+2193,captured_0010,D3,vel,1.1431,match:the orange ball#0:size+anchor,What is the ball's velocity at 0.3s in m/s?
+2194,captured_0010,D3,vel,1.1892,match:the orange ball#0:size+anchor,What is the ball's velocity at 0.6s in m/s?
+2195,captured_0010,D3,acc,,kind acc,What is that ball's acceleration at 0.3s in m/s^2?
+2196,captured_0010,D3,acc,,kind acc,What is that ball's acceleration at 0.6s in m/s^2?
+2199,captured_0010s,D3,vel,1.2103,match:the red ball on the string#0:size+anchor,What is the ball's velocity at 0.3s in m/s?
+2200,captured_0010s,D3,vel,1.0565,match:the red ball on the string#0:size+anchor,What is the ball's velocity at 0.6s in m/s?
+2201,captured_0010s,D3,acc,,kind acc,What is that ball's acceleration at 0.3s in m/s^2?
+2202,captured_0010s,D3,acc,,kind acc,What is that ball's acceleration at 0.6s in m/s^2?
+2205,captured_0010X,D3,vel,,geometry size+anchor,What is the ball's velocity at 0.3s in m/s?
+2206,captured_0010X,D3,vel,1.072,match:the white ball#0:size+anchor,What is the ball's velocity at 0.6s in m/s?
+2207,captured_0010X,D3,acc,,kind acc,What is that ball's acceleration at 0.3s in m/s^2?
+2208,captured_0010X,D3,acc,,kind acc,What is that ball's acceleration at 0.6s in m/s^2?
+2216,captured_0013,D3,vel,1.3939,match:the ball#0:size-rel,What is the velocity of the ball at 1.5s in cm/s?
+2224,captured_0013s,D3,vel,1.2577,match:the ball#0:size-rel,What is the velocity of the ball at 1.5s in cm/s?
+2232,captured_0013x,D3,vel,1.2483,match:the ball#0:size-rel,What is the velocity of the ball at 1.5s in cm/s?
+2240,captured_0014,D3,vel,1.2947,match:the white ball#0:size+anchor,What is the velocity of the rolling ball at 0.6s in cm/s?
+2243,captured_0014,D3,disp,,no track,What is the displacement of the rolling object from 0s to 0.6s in cm?
+2251,captured_0014s,D3,vel,1.4056,match:the white ball#0:size+anchor,What is the velocity of the rolling ball at 0.6s in cm/s?
+2254,captured_0014s,D3,disp,,no track,What is the displacement of the rolling object from 0s to 0.6s in cm?
+2262,captured_0014x,D3,vel,1.3106,match:the white ball#0:size+anchor,What is the velocity of the rolling ball at 0.6s in cm/s?
+2265,captured_0014x,D3,disp,,no track,What is the displacement of the rolling object from 0s to 0.6s in cm?
+2283,captured_0016,D3,vel,1.3829,match:the soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.5s in m/s?
+2284,captured_0016,D3,disp,1.4976,match:the soccer ball#0:size+anchor,What is the displacement of the soccer ball between 1.0s and 1.5s in cm?
+2287,captured_0016s,D3,vel,1.3922,match:the soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.5s in m/s?
+2288,captured_0016s,D3,disp,1.4978,match:the soccer ball#0:size+anchor,What is the displacement of the soccer ball between 1.0s and 1.5s in cm?
+2291,captured_0016x,D3,vel,1.391,match:the soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.5s in m/s?
+2292,captured_0016x,D3,disp,1.4975,match:the soccer ball#0:size+anchor,What is the displacement of the soccer ball between 1.0s and 1.5s in cm?
+2302,captured_0018,D3,vel,,no usable time,What is the velocity of the box at 3.4s in cm/s?
+2303,captured_0018,D3,vel,,no usable time,What is the velocity of the soccer ball at 3.4s in cm/s?
+2304,captured_0018,D3,vel,,no usable time,What is the velocity of the tennis ball at 3.4s in cm/s?
+2305,captured_0018,D3,vel,,no usable time,What is the velocity of the pineapple toy at 3.4s in cm/s?
+2321,captured_0018s,D3,vel,,no usable time,What is the velocity of the box at 3.4s in cm/s?
+2322,captured_0018s,D3,vel,,no usable time,What is the velocity of the soccer ball at 3.4s in cm/s?
+2323,captured_0018s,D3,vel,,no usable time,What is the velocity of the tennis ball at 3.4s in cm/s?
+2324,captured_0018s,D3,vel,,no usable time,What is the velocity of the pineapple toy at 3.4s in cm/s?
+2340,captured_0018x,D3,vel,,no usable time,What is the velocity of the box at 3.4s in cm/s?
+2341,captured_0018x,D3,vel,,no usable time,What is the velocity of the soccer ball at 3.4s in cm/s?
+2342,captured_0018x,D3,vel,,no usable time,What is the velocity of the tennis ball at 3.4s in cm/s?
+2343,captured_0018x,D3,vel,,no usable time,What is the velocity of the pineapple toy at 3.4s in cm/s?
+2354,captured_0020,D3,vel,1.1563,match:the yellow toy#0:size+anchor,What is the velocity of the yellow toy at 0.60s in cm/s?
+2355,captured_0020,D3,vel,,no track,What is the velocity of the white jar at 0.60s in cm/s?
+2356,captured_0020,D3,disp,1.4431,match:the yellow toy#0:size+anchor,What is the displacement of the yellow toy from 0.60s to 0.80s in cm?
+2357,captured_0020,D3,disp,,no track,What is the displacement of the white jar from 0.60s to 0.80s in cm?
+2362,captured_0020s,D3,vel,1.0889,match:the yellow toy#0:size+anchor,What is the velocity of the yellow toy at 0.60s in cm/s?
+2363,captured_0020s,D3,vel,,no track,What is the velocity of the white jar at 0.60s in cm/s?
+2364,captured_0020s,D3,disp,1.2883,match:the yellow toy#0:size+anchor,What is the displacement of the yellow toy from 0.60s to 0.80s in cm?
+2365,captured_0020s,D3,disp,,no track,What is the displacement of the white jar from 0.60s to 0.80s in cm?
+2370,captured_0020x,D3,vel,1.1232,match:the yellow toy#0:size+anchor,What is the velocity of the yellow toy at 0.60s in cm/s?
+2371,captured_0020x,D3,vel,,no track,What is the velocity of the white jar at 0.60s in cm/s?
+2372,captured_0020x,D3,disp,1.346,match:the yellow toy#0:size+anchor,What is the displacement of the yellow toy from 0.60s to 0.80s in cm?
+2373,captured_0020x,D3,disp,,no track,What is the displacement of the white jar from 0.60s to 0.80s in cm?
+2374,captured_0021,S3,vel,1.0018,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.2s in cm/s?
+2375,captured_0021,S3,vel,1.0088,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2376,captured_0021,S3,disp,1.0014,match:the white ball#0:size+anchor,What is the displacement of the ping pong ball between 1.0s and 1.4s in cm?
+2379,captured_0021s,S3,vel,1.0025,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.2s in cm/s?
+2380,captured_0021s,S3,vel,1.0085,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2381,captured_0021s,S3,disp,1.0014,match:the white ball#0:size+anchor,What is the displacement of the ping pong ball between 1.0s and 1.4s in cm?
+2384,captured_0021x,S3,vel,1.0019,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.2s in cm/s?
+2385,captured_0021x,S3,vel,1.0084,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2386,captured_0021x,S3,disp,1.0014,match:the white ball#0:size+anchor,What is the displacement of the ping pong ball between 1.0s and 1.4s in cm?
+2389,captured_0022,S3,vel,1.0451,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 0.8s in cm/s?
+2390,captured_0022,S3,vel,1.2111,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.2s in cm/s?
+2391,captured_0022,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.2s in cm/s^2?
+2392,captured_0022,S3,disp,,geometry size+anchor,What is the displacement of the ping pong ball between 0.6s and 1.6s in cm?
+2395,captured_0022s,S3,vel,1.4004,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 0.8s in cm/s?
+2396,captured_0022s,S3,vel,1.1079,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.2s in cm/s?
+2397,captured_0022s,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.2s in cm/s^2?
+2398,captured_0022s,S3,disp,1.1411,match:the white ball#0:size+anchor,What is the displacement of the ping pong ball between 0.6s and 1.6s in cm?
+2401,captured_0022x,S3,vel,1.0722,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 0.8s in cm/s?
+2402,captured_0022x,S3,vel,1.2994,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.2s in cm/s?
+2403,captured_0022x,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.2s in cm/s^2?
+2404,captured_0022x,S3,disp,1.1621,match:the white ball#0:size+anchor,What is the displacement of the ping pong ball between 0.6s and 1.6s in cm?
+2407,captured_0023,D3,vel,1.1111,match:the book#1:size+anchor,What is the velocity of the book at 1.2s in cm/s?
+2408,captured_0023,D3,vel,1.1807,match:the book#1:size+anchor,What is the velocity of the book at 1.4s in cm/s?
+2415,captured_0023,D3,disp,1.1056,match:the book#1:size+anchor,What is the displacement of the book between 1.0s and 1.6s in cm?
+2416,captured_0023s,D3,vel,1.1012,match:the book#0:size+anchor,What is the velocity of the book at 1.2s in cm/s?
+2417,captured_0023s,D3,vel,1.2056,match:the book#0:size+anchor,What is the velocity of the book at 1.4s in cm/s?
+2424,captured_0023s,D3,disp,1.1044,match:the book#0:size+anchor,What is the displacement of the book between 1.0s and 1.6s in cm?
+2425,captured_0023x,D3,vel,1.1001,match:the book#1:size+anchor,What is the velocity of the book at 1.2s in cm/s?
+2426,captured_0023x,D3,vel,1.1987,match:the book#1:size+anchor,What is the velocity of the book at 1.4s in cm/s?
+2433,captured_0023x,D3,disp,1.0988,match:the book#1:size+anchor,What is the displacement of the book between 1.0s and 1.6s in cm?
+2434,captured_0024,D3,vel,1.3119,match:the book sliding down the slope#0:size+anchor,What is the velocity of the book at 1.0s in cm/s?
+2435,captured_0024,D3,vel,1.0195,match:the book sliding down the slope#0:size+anchor,What is the velocity of the book at 1.2s in cm/s?
+2443,captured_0024,D3,path,,no usable time,What is the distance travelled by the book in cm?
+2444,captured_0024s,D3,vel,1.3262,match:the light blue book#0:size+anchor,What is the velocity of the book at 1.0s in cm/s?
+2445,captured_0024s,D3,vel,1.479,match:the light blue book#0:size+anchor,What is the velocity of the book at 1.2s in cm/s?
+2453,captured_0024s,D3,path,,no usable time,What is the distance travelled by the book in cm?
+2454,captured_0024x,D3,vel,1.3283,match:the book#0:size+anchor,What is the velocity of the book at 1.0s in cm/s?
+2455,captured_0024x,D3,vel,1.4665,match:the book#0:size+anchor,What is the velocity of the book at 1.2s in cm/s?
+2463,captured_0024x,D3,path,,no usable time,What is the distance travelled by the book in cm?
+2464,captured_0027,S3,vel,1.027,match:the red ball#0:size-rel,What is the velocity of the red ball at 0.2s in cm/s?
+2465,captured_0027,S3,vel,1.0932,match:the red ball#0:size-rel,What is the velocity of the red ball at 0.6s in cm/s?
+2466,captured_0027,S3,acc,,kind acc,What is the acceleration of the red ball at 0.2s in cm/s^2?
+2468,captured_0027s,S3,vel,1.0248,match:the red ball#0:size-rel,What is the velocity of the red ball at 0.2s in cm/s?
+2469,captured_0027s,S3,vel,1.1161,match:the red ball#0:size-rel,What is the velocity of the red ball at 0.6s in cm/s?
+2470,captured_0027s,S3,acc,,kind acc,What is the acceleration of the red ball at 0.2s in cm/s^2?
+2471,captured_0027x,S3,vel,1.0262,match:the red ball#0:size-rel,What is the velocity of the red ball at 0.2s in cm/s?
+2472,captured_0027x,S3,vel,1.1189,match:the red ball#0:size-rel,What is the velocity of the red ball at 0.6s in cm/s?
+2473,captured_0027x,S3,acc,,kind acc,What is the acceleration of the red ball at 0.2s in cm/s^2?
+2474,captured_0028,S3,vel,1.3626,match:the white ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.0s in cm/s?
+2475,captured_0028,S3,vel,1.1626,match:the white ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.3s in cm/s?
+2476,captured_0028,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.0s in cm/s^2?
+2477,captured_0028,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.3s in cm/s^2?
+2478,captured_0028,S3,path,1.3841,match:the white ping pong ball#0:size+anchor,What is the distance travelled by the ping pong ball between 1.1s and 1.3s in cm?
+2480,captured_0028s,S3,vel,1.1107,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.0s in cm/s?
+2481,captured_0028s,S3,vel,1.0065,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.3s in cm/s?
+2482,captured_0028s,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.0s in cm/s^2?
+2483,captured_0028s,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.3s in cm/s^2?
+2484,captured_0028s,S3,path,1.303,match:the white ball#0:size+anchor,What is the distance travelled by the ping pong ball between 1.1s and 1.3s in cm?
+2486,captured_0028x,S3,vel,1.1046,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.0s in cm/s?
+2487,captured_0028x,S3,vel,1.0054,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.3s in cm/s?
+2488,captured_0028x,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.0s in cm/s^2?
+2489,captured_0028x,S3,acc,,kind acc,What is the acceleration of the ping pong ball at 1.3s in cm/s^2?
+2490,captured_0028x,S3,path,1.2854,match:the white ball#0:size+anchor,What is the distance travelled by the ping pong ball between 1.1s and 1.3s in cm?
+2494,captured_0029,S3,vel,1.3501,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.0s in cm/s?
+2495,captured_0029,S3,vel,,no usable time,What is the velocity of the tennis ball when it hits the whiteboard in cm/s?
+2496,captured_0029,S3,vel,1.4796,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.6s in cm/s?
+2497,captured_0029,S3,path,,no usable time,What is the distance travelled by the tennis ball when it hits the whiteboard in cm?
+2500,captured_0029s,S3,vel,1.0349,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.0s in cm/s?
+2501,captured_0029s,S3,vel,1.2952,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.6s in cm/s?
+2502,captured_0029s,S3,path,,no usable time,What is the distance travelled by the tennis ball when it hits the whiteboard in cm?
+2505,captured_0029x,S3,vel,1.0409,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.0s in cm/s?
+2506,captured_0029x,S3,vel,1.2949,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.6s in cm/s?
+2507,captured_0029x,S3,path,,no usable time,What is the distance travelled by the tennis ball when it hits the whiteboard in cm?
+2508,captured_0030,S3,vel,1.2318,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.2s in cm/s?
+2509,captured_0030,S3,vel,1.0408,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.4s in cm/s?
+2510,captured_0030,S3,vel,1.4805,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.6s in cm/s?
+2511,captured_0030,S3,vel,1.2293,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.8s in cm/s?
+2512,captured_0030s,S3,vel,1.2327,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.2s in cm/s?
+2513,captured_0030s,S3,vel,1.0409,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.4s in cm/s?
+2514,captured_0030s,S3,vel,1.4858,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.6s in cm/s?
+2515,captured_0030s,S3,vel,1.2384,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.8s in cm/s?
+2516,captured_0030x,S3,vel,1.2358,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.2s in cm/s?
+2517,captured_0030x,S3,vel,1.0431,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.4s in cm/s?
+2518,captured_0030x,S3,vel,1.4814,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.6s in cm/s?
+2519,captured_0030x,S3,vel,1.2343,match:the red ball#0:size+anchor,What is the velocity of the red ball at 0.8s in cm/s?
+2523,captured_0031,S3,vel,1.0295,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.6s in cm/s?
+2524,captured_0031,S3,vel,1.0222,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.6s in cm/s?
+2529,captured_0031s,S3,vel,1.0297,match:the yellow tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.6s in cm/s?
+2530,captured_0031s,S3,vel,1.0421,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.6s in cm/s?
+2534,captured_0031x,S3,vel,1.03,match:the yellow tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.6s in cm/s?
+2535,captured_0031x,S3,vel,1.0441,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.6s in cm/s?
+2537,captured_0032,S3,vel,1.0225,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.6s in cm/s?
+2540,captured_0032,S3,vel,1.2288,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.5s in cm/s?
+2541,captured_0032,S3,vel,1.024,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.5s in cm/s?
+2546,captured_0032s,S3,vel,1.2244,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.5s in cm/s?
+2547,captured_0032s,S3,vel,1.1126,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.5s in cm/s?
+2552,captured_0032x,S3,vel,1.2229,match:the tennis ball#0:size+anchor,What is the velocity of the tennis ball at 1.5s in cm/s?
+2553,captured_0032x,S3,vel,1.0261,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.5s in cm/s?
+2555,captured_0033,S3,vel,1.2732,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 0.5s in cm/s?
+2556,captured_0033,S3,vel,1.092,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2557,captured_0033,S3,vel,1.4992,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.5s in cm/s?
+2558,captured_0033s,S3,vel,1.3735,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 0.5s in cm/s?
+2559,captured_0033s,S3,vel,1.0023,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2560,captured_0033s,S3,vel,1.0342,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.5s in cm/s?
+2561,captured_0033x,S3,vel,1.332,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 0.5s in cm/s?
+2562,captured_0033x,S3,vel,1.0534,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2563,captured_0033x,S3,vel,1.438,match:the white ball#0:size+anchor,What is the velocity of the ping pong ball at 1.5s in cm/s?
+2564,captured_0034a,S3,vel,1.4925,side:the left tennis ball#0:size+anchor,What is the velocity of the left tennis ball at 1.2s in cm/s?
+2565,captured_0034a,S3,vel,1.4997,side:the left tennis ball#1:size+anchor,What is the velocity of the right tennis ball at 1.2s in cm/s?
+2569,captured_0034a,S3,vel,1.3007,side:the left tennis ball#0:size+anchor,What is the velocity of the left tennis ball at 1.3s in cm/s?
+2570,captured_0034a,S3,vel,1.4782,side:the left tennis ball#1:size+anchor,What is the velocity of the right tennis ball at 1.3s in cm/s?
+2571,captured_0034a,S3,path,,no usable time,What is the total distance traveled by the left tennis ball in cm?
+2572,captured_0034a,S3,path,,no usable time,What is the total distance traveled by the right tennis ball in cm?
+2573,captured_0034as,S3,vel,1.4923,side:the tennis ball#1:size+anchor,What is the velocity of the left tennis ball at 1.2s in cm/s?
+2574,captured_0034as,S3,vel,1.4973,side:the tennis ball#0:size+anchor,What is the velocity of the right tennis ball at 1.2s in cm/s?
+2578,captured_0034as,S3,vel,1.3866,side:the tennis ball#1:size+anchor,What is the velocity of the left tennis ball at 1.3s in cm/s?
+2579,captured_0034as,S3,vel,1.4881,side:the tennis ball#0:size+anchor,What is the velocity of the right tennis ball at 1.3s in cm/s?
+2580,captured_0034as,S3,path,,no usable time,What is the total distance traveled by the left tennis ball in cm?
+2581,captured_0034as,S3,path,,no usable time,What is the total distance traveled by the right tennis ball in cm?
+2582,captured_0034ax,S3,vel,1.4826,side:the tennis ball#1:size+anchor,What is the velocity of the left tennis ball at 1.2s in cm/s?
+2583,captured_0034ax,S3,vel,1.4967,side:the tennis ball#0:size+anchor,What is the velocity of the right tennis ball at 1.2s in cm/s?
+2587,captured_0034ax,S3,vel,1.4131,side:the tennis ball#1:size+anchor,What is the velocity of the left tennis ball at 1.3s in cm/s?
+2588,captured_0034ax,S3,vel,1.4915,side:the tennis ball#0:size+anchor,What is the velocity of the right tennis ball at 1.3s in cm/s?
+2589,captured_0034ax,S3,path,,no usable time,What is the total distance traveled by the left tennis ball in cm?
+2590,captured_0034ax,S3,path,,no usable time,What is the total distance traveled by the right tennis ball in cm?
+2591,captured_0034b,S3,vel,1.289,side:the tennis ball#2:size+anchor,What is the velocity of the left tennis ball at 1.2s in cm/s?
+2592,captured_0034b,S3,vel,1.4463,side:the tennis ball#1:size+anchor,What is the velocity of the right tennis ball at 1.2s in cm/s?
+2596,captured_0034b,S3,path,,no usable time,What is the total distance traveled by the left tennis ball in cm?
+2597,captured_0034b,S3,path,,no usable time,What is the total distance traveled by the right tennis ball in cm?
+2598,captured_0034bs,S3,vel,1.0612,side:the left tennis ball#0:size+anchor,What is the velocity of the left tennis ball at 1.2s in cm/s?
+2599,captured_0034bs,S3,vel,1.4443,side:the tennis ball#1:size+anchor,What is the velocity of the right tennis ball at 1.2s in cm/s?
+2603,captured_0034bs,S3,path,,no usable time,What is the total distance traveled by the left tennis ball in cm?
+2604,captured_0034bs,S3,path,,no usable time,What is the total distance traveled by the right tennis ball in cm?
+2605,captured_0034bx,S3,vel,1.068,side:the tennis ball#1:size+anchor,What is the velocity of the left tennis ball at 1.2s in cm/s?
+2606,captured_0034bx,S3,vel,1.4393,side:the tennis ball#0:size+anchor,What is the velocity of the right tennis ball at 1.2s in cm/s?
+2610,captured_0034bx,S3,path,,no usable time,What is the total distance traveled by the left tennis ball in cm?
+2611,captured_0034bx,S3,path,,no usable time,What is the total distance traveled by the right tennis ball in cm?
+2612,captured_0035a,S3,vel,1.44,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.6s in cm/s?
+2613,captured_0035a,S3,vel,1.394,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 0.6s in cm/s?
+2614,captured_0035a,S3,disp,1.4272,match:the white soccer ball#0:size+anchor,What is the displacement of the soccer ball between 0.5s and 0.6s in cm?
+2615,captured_0035a,S3,disp,1.3904,match:the orange basketball#0:size+anchor,What is the displacement of the basketball between 0.5s and 0.6s in cm?
+2617,captured_0035a,S3,vel,1.2542,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.5s in cm/s?
+2618,captured_0035a,S3,vel,1.2022,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.5s in cm/s?
+2619,captured_0035a,S3,vel,1.0221,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.6s in cm/s?
+2620,captured_0035a,S3,vel,1.226,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.6s in cm/s?
+2621,captured_0035as,S3,vel,1.4499,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.6s in cm/s?
+2622,captured_0035as,S3,vel,1.3896,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 0.6s in cm/s?
+2623,captured_0035as,S3,disp,1.4319,match:the white soccer ball#0:size+anchor,What is the displacement of the soccer ball between 0.5s and 0.6s in cm?
+2624,captured_0035as,S3,disp,1.3854,match:the orange basketball#0:size+anchor,What is the displacement of the basketball between 0.5s and 0.6s in cm?
+2626,captured_0035as,S3,vel,1.3609,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.5s in cm/s?
+2627,captured_0035as,S3,vel,1.499,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.5s in cm/s?
+2628,captured_0035as,S3,vel,1.4778,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.6s in cm/s?
+2629,captured_0035as,S3,vel,1.4264,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.6s in cm/s?
+2630,captured_0035ax,S3,vel,1.4447,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.6s in cm/s?
+2631,captured_0035ax,S3,vel,1.3693,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 0.6s in cm/s?
+2632,captured_0035ax,S3,disp,1.4507,match:the white soccer ball#0:size+anchor,What is the displacement of the soccer ball between 0.5s and 0.6s in cm?
+2633,captured_0035ax,S3,disp,1.3655,match:the orange basketball#0:size+anchor,What is the displacement of the basketball between 0.5s and 0.6s in cm?
+2635,captured_0035ax,S3,vel,1.2779,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.5s in cm/s?
+2636,captured_0035ax,S3,vel,1.4857,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.5s in cm/s?
+2637,captured_0035ax,S3,vel,1.3763,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.6s in cm/s?
+2638,captured_0035ax,S3,vel,1.456,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.6s in cm/s?
+2639,captured_0035b,S3,vel,1.3202,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.9s in cm/s?
+2640,captured_0035b,S3,vel,1.4926,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 0.9s in cm/s?
+2641,captured_0035b,S3,vel,1.2662,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.4s in cm/s?
+2642,captured_0035b,S3,vel,1.2385,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.4s in cm/s?
+2643,captured_0035b,S3,disp,1.3553,match:the white soccer ball#0:size+anchor,What is the displacement of the soccer ball between 0.4s and 0.9s in cm?
+2644,captured_0035b,S3,disp,1.39,match:the orange basketball#0:size+anchor,What is the displacement of the basketball between 0.4s and 0.9s in cm?
+2646,captured_0035b,S3,vel,1.3891,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.3s in cm/s?
+2647,captured_0035b,S3,vel,1.3798,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.3s in cm/s?
+2648,captured_0035bs,S3,vel,1.2956,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.9s in cm/s?
+2649,captured_0035bs,S3,vel,1.4988,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 0.9s in cm/s?
+2650,captured_0035bs,S3,vel,1.4198,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.4s in cm/s?
+2651,captured_0035bs,S3,vel,1.4724,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.4s in cm/s?
+2652,captured_0035bs,S3,disp,1.3371,match:the white soccer ball#0:size+anchor,What is the displacement of the soccer ball between 0.4s and 0.9s in cm?
+2653,captured_0035bs,S3,disp,1.398,match:the orange basketball#0:size+anchor,What is the displacement of the basketball between 0.4s and 0.9s in cm?
+2655,captured_0035bs,S3,vel,1.4151,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.3s in cm/s?
+2656,captured_0035bs,S3,vel,1.4635,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.3s in cm/s?
+2657,captured_0035bx,S3,vel,1.2993,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.9s in cm/s?
+2658,captured_0035bx,S3,vel,1.4976,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 0.9s in cm/s?
+2659,captured_0035bx,S3,vel,1.4245,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.4s in cm/s?
+2660,captured_0035bx,S3,vel,1.4787,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.4s in cm/s?
+2661,captured_0035bx,S3,disp,1.3296,match:the white soccer ball#0:size+anchor,What is the displacement of the soccer ball between 0.4s and 0.9s in cm?
+2662,captured_0035bx,S3,disp,1.3971,match:the orange basketball#0:size+anchor,What is the displacement of the basketball between 0.4s and 0.9s in cm?
+2664,captured_0035bx,S3,vel,1.4115,match:the white soccer ball#0:size+anchor,What is the velocity of the soccer ball at 1.3s in cm/s?
+2665,captured_0035bx,S3,vel,1.4787,match:the orange basketball#0:size+anchor,What is the velocity of the basketball at 1.3s in cm/s?
+2666,captured_0036,S3,vel,1.4998,match:the white ball#0:size+anchor,What is the ping pong ball's velocity at 0.9s in cm/s?
+2667,captured_0036,S3,vel,1.2626,match:the white ball#0:size+anchor,What is the ping pong ball's velocity at 1.4s in cm/s?
+2668,captured_0036,S3,disp,1.2602,match:the white ball#0:size+anchor,What is the ping pong ball's displacement between 0.9s and 1.4s in cm?
+2671,captured_0036s,S3,vel,1.2488,match:the white ball#0:size+anchor,What is the ping pong ball's velocity at 0.9s in cm/s?
+2672,captured_0036s,S3,vel,1.1947,match:the white ball#0:size+anchor,What is the ping pong ball's velocity at 1.4s in cm/s?
+2673,captured_0036s,S3,disp,1.2807,match:the white ball#0:size+anchor,What is the ping pong ball's displacement between 0.9s and 1.4s in cm?
+2676,captured_0036x,S3,vel,1.2208,match:the white ball#0:size+anchor,What is the ping pong ball's velocity at 0.9s in cm/s?
+2677,captured_0036x,S3,vel,1.2028,match:the white ball#0:size+anchor,What is the ping pong ball's velocity at 1.4s in cm/s?
+2678,captured_0036x,S3,disp,1.2818,match:the white ball#0:size+anchor,What is the ping pong ball's displacement between 0.9s and 1.4s in cm?
+2685,captured_0037,S3,vel,1.1597,match:the ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.0s in cm/s?
+2686,captured_0037,S3,vel,1.2997,match:the ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2691,captured_0037s,S3,vel,1.1709,match:the ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.0s in cm/s?
+2692,captured_0037s,S3,vel,1.2946,match:the ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2697,captured_0037x,S3,vel,1.2212,match:the ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.0s in cm/s?
+2698,captured_0037x,S3,vel,1.3159,match:the ping pong ball#0:size+anchor,What is the velocity of the ping pong ball at 1.4s in cm/s?
+2700,captured_0038,S3,vel,1.4985,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.4s in cm/s?
+2703,captured_0038,S3,disp,1.068,match:the white ball#0:size+anchor,What is the displacement of the white ball between 0.9s and 1.4s in cm?
+2707,captured_0038s,S3,vel,1.4545,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.4s in cm/s?
+2710,captured_0038s,S3,disp,1.4958,match:the white ball#0:size+anchor,What is the displacement of the white ball between 0.9s and 1.4s in cm?
+2714,captured_0038x,S3,vel,1.4836,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.4s in cm/s?
+2717,captured_0038x,S3,disp,1.4924,match:the white ball#0:size+anchor,What is the displacement of the white ball between 0.9s and 1.4s in cm?
+2721,captured_0039,S3,vel,1.0027,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.0s in cm/s?
+2724,captured_0039,S3,disp,1.3525,match:the white ball#0:size-rel,What is the displacement of the white ball between 1.0s and 1.5s in cm?
+2728,captured_0039s,S3,vel,1.0015,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.0s in cm/s?
+2731,captured_0039s,S3,disp,1.0003,match:the white ball#0:size-rel,What is the displacement of the white ball between 1.0s and 1.5s in cm?
+2735,captured_0039x,S3,vel,,track incomplete,What is the velocity of the white ball at 1.0s in cm/s?
+2738,captured_0039x,S3,disp,,track incomplete,What is the displacement of the white ball between 1.0s and 1.5s in cm?
+2742,captured_0040,S3,vel,1.2893,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.5s in cm/s?
+2745,captured_0040,S3,path,1.3689,match:the white ball#0:size-rel,What is the distance travelled by the white ball between 1.5s and 1.9s in cm?
+2748,captured_0040,S3,vel,1.4995,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.4s in cm/s?
+2750,captured_0040s,S3,vel,1.3684,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.5s in cm/s?
+2753,captured_0040s,S3,path,1.4018,match:the white ball#0:size-rel,What is the distance travelled by the white ball between 1.5s and 1.9s in cm?
+2756,captured_0040s,S3,vel,1.4989,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.4s in cm/s?
+2758,captured_0040x,S3,vel,1.4184,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.5s in cm/s?
+2761,captured_0040x,S3,path,1.4107,match:the white ball#0:size-rel,What is the distance travelled by the white ball between 1.5s and 1.9s in cm?
+2764,captured_0040x,S3,vel,1.4966,match:the white ball#0:size-rel,What is the velocity of the white ball at 1.4s in cm/s?
+2766,captured_0041,D3,disp,1.2142,match:the soccer ball#1:size+anchor,What is the soccer ball's displacement between 1.5s and 1.6s in meters?
+2769,captured_0041s,D3,disp,1.0134,match:the soccer ball#0:size+anchor,What is the soccer ball's displacement between 1.5s and 1.6s in meters?
+2772,captured_0041x,D3,disp,1.0135,match:the soccer ball#0:size+anchor,What is the soccer ball's displacement between 1.5s and 1.6s in meters?
+2775,captured_0047,D3,disp,1.074,match:the yoga ball#0:size+anchor,What is the yoga ball's displacement between 1.0s and 1.5s in meters?
+2778,captured_0047s,D3,disp,,no track,What is the yoga ball's displacement between 1.0s and 1.5s in meters?
+2781,captured_0047x,D3,disp,,no track,What is the yoga ball's displacement between 1.0s and 1.5s in meters?
+2814,captured_0053,D3,disp,1.1079,match:the blue trashbin#0:size+anchor,What is the displacement of the trashbin between 0.4s and 1.4s in meters?
+2822,captured_0053s,D3,disp,,no track,What is the displacement of the trashbin between 0.4s and 1.4s in meters?
+2830,captured_0053x,D3,disp,,no track,What is the displacement of the trashbin between 0.4s and 1.4s in meters?
+2831,captured_0054a,D3,disp,1.3603,match:the orange ball#0:size+anchor,What is the orange ball's displacement between 0.5s and 1.0s in meters?
+2832,captured_0054a,D3,disp,1.0151,match:the soccer ball#0:size-rel,What is the soccer ball's displacement between 1.0s and 1.4s in meters?
+2836,captured_0054a,D3,vel,1.1853,match:the soccer ball#0:size-rel,What is the soccer ball's velocity at 0.5s in m/s?
+2837,captured_0054a,D3,vel,,track incomplete,What is the velocity of the green ball at 1.0s in m/s?
+2838,captured_0054a,D3,vel,1.0371,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.0s in m/s?
+2839,captured_0054a,D3,vel,,track incomplete,What is the velocity of the green ball at 1.5s in m/s?
+2840,captured_0054a,D3,vel,1.4593,match:the pink ball#0:size-rel,What is the velocity of the pink ball at 1.5s in m/s?
+2843,captured_0054as,D3,disp,1.3606,match:the orange ball#0:size+anchor,What is the orange ball's displacement between 0.5s and 1.0s in meters?
+2844,captured_0054as,D3,disp,1.0166,match:the soccer ball#0:size-rel,What is the soccer ball's displacement between 1.0s and 1.4s in meters?
+2848,captured_0054as,D3,vel,1.1926,match:the soccer ball#0:size-rel,What is the soccer ball's velocity at 0.5s in m/s?
+2849,captured_0054as,D3,vel,,track incomplete,What is the velocity of the green ball at 1.0s in m/s?
+2850,captured_0054as,D3,vel,1.0389,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.0s in m/s?
+2851,captured_0054as,D3,vel,,track incomplete,What is the velocity of the green ball at 1.5s in m/s?
+2852,captured_0054as,D3,vel,1.2684,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.5s in m/s?
+2855,captured_0054ax,D3,disp,1.3608,match:the orange ball#0:size+anchor,What is the orange ball's displacement between 0.5s and 1.0s in meters?
+2856,captured_0054ax,D3,disp,1.0162,match:the soccer ball#0:size-rel,What is the soccer ball's displacement between 1.0s and 1.4s in meters?
+2859,captured_0054ax,D3,vel,1.494,match:the soccer ball#0:size-rel,What is the soccer ball's velocity at 0.5s in m/s?
+2860,captured_0054ax,D3,vel,,track incomplete,What is the velocity of the green ball at 1.0s in m/s?
+2861,captured_0054ax,D3,vel,1.033,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.0s in m/s?
+2862,captured_0054ax,D3,vel,,track incomplete,What is the velocity of the green ball at 1.5s in m/s?
+2863,captured_0054ax,D3,vel,1.4936,match:the pink ball#0:size-rel,What is the velocity of the pink ball at 1.5s in m/s?
+2866,captured_0054b,D3,disp,1.3785,match:the orange ball#0:size+anchor,What is the orange ball's displacement between 0.5s and 1.0s in meters?
+2867,captured_0054b,D3,disp,1.4947,match:the soccer ball#0:size+anchor,What is the soccer ball's displacement between 1.0s and 1.4s in meters?
+2871,captured_0054b,D3,vel,1.1032,match:the soccer ball#0:size+anchor,What is the soccer ball's velocity at 0.5s in m/s?
+2872,captured_0054b,D3,vel,,track incomplete,What is the velocity of the green ball at 1.0s in m/s?
+2873,captured_0054b,D3,vel,1.2183,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.0s in m/s?
+2874,captured_0054b,D3,vel,,track incomplete,What is the velocity of the green ball at 1.5s in m/s?
+2875,captured_0054b,D3,vel,1.156,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.5s in m/s?
+2878,captured_0054bs,D3,disp,1.3793,match:the orange ball#0:size+anchor,What is the orange ball's displacement between 0.5s and 1.0s in meters?
+2879,captured_0054bs,D3,disp,1.4918,match:the soccer ball#0:size+anchor,What is the soccer ball's displacement between 1.0s and 1.4s in meters?
+2883,captured_0054bs,D3,vel,1.1046,match:the soccer ball#0:size+anchor,What is the soccer ball's velocity at 0.5s in m/s?
+2884,captured_0054bs,D3,vel,,track incomplete,What is the velocity of the green ball at 1.0s in m/s?
+2885,captured_0054bs,D3,vel,1.2184,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.0s in m/s?
+2886,captured_0054bs,D3,vel,,track incomplete,What is the velocity of the green ball at 1.5s in m/s?
+2887,captured_0054bs,D3,vel,1.1089,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.5s in m/s?
+2890,captured_0054bx,D3,disp,1.3789,match:the orange ball#0:size+anchor,What is the orange ball's displacement between 0.5s and 1.0s in meters?
+2891,captured_0054bx,D3,disp,1.4941,match:the soccer ball#0:size+anchor,What is the soccer ball's displacement between 1.0s and 1.4s in meters?
+2895,captured_0054bx,D3,vel,1.1017,match:the soccer ball#0:size+anchor,What is the soccer ball's velocity at 0.5s in m/s?
+2896,captured_0054bx,D3,vel,,track incomplete,What is the velocity of the green ball at 1.0s in m/s?
+2897,captured_0054bx,D3,vel,1.225,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.0s in m/s?
+2898,captured_0054bx,D3,vel,,track incomplete,What is the velocity of the green ball at 1.5s in m/s?
+2899,captured_0054bx,D3,vel,1.2008,match:the white ball#0:size+anchor,What is the velocity of the white ball at 1.5s in m/s?
+2905,captured_0061,D3,vel,1.3898,match:the soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.6s in m/s?
+2906,captured_0061,D3,vel,1.3342,match:the soccer ball#0:size+anchor,What is the velocity of the soccer ball at 0.9s in m/s?
+2907,captured_0061,D3,vel,1.3087,match:the basketball#0:size+anchor,What is the velocity of the basketball at 1.1s in m/s?
+2908,captured_0061,D3,vel,1.1068,match:the basketball#0:size+anchor,What is the velocity of the basketball at 1.6s in m/s?
+2912,captured_0061s,D3,vel,1.3224,match:the basketball#0:size+anchor,What is the velocity of the soccer ball at 0.6s in m/s?
+2913,captured_0061s,D3,vel,1.2505,match:the basketball#0:size+anchor,What is the velocity of the soccer ball at 0.9s in m/s?
+2914,captured_0061s,D3,vel,1.4332,match:the basketball#0:size+anchor,What is the velocity of the basketball at 1.1s in m/s?
+2915,captured_0061s,D3,vel,1.0498,match:the basketball#0:size+anchor,What is the velocity of the basketball at 1.6s in m/s?
+2919,captured_0061x,D3,vel,,track incomplete,What is the velocity of the soccer ball at 0.6s in m/s?
+2920,captured_0061x,D3,vel,,track incomplete,What is the velocity of the soccer ball at 0.9s in m/s?
+2921,captured_0061x,D3,vel,1.4365,match:the basketball#0:size+anchor,What is the velocity of the basketball at 1.1s in m/s?
+2922,captured_0061x,D3,vel,1.0489,match:the basketball#0:size+anchor,What is the velocity of the basketball at 1.6s in m/s?

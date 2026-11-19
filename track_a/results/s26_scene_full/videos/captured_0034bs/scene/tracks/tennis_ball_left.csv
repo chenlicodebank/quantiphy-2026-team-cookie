@@ -1,0 +1,50 @@
+frame,time_s,cx_px,cy_px,radius_fit_px,diameter_fit_px,bbox_x0,bbox_y0,bbox_x1,bbox_y1,bbox_w_px,bbox_h_px,mask_area_px,occluded,note
+0,0.0,468.68,286.7,15.93,31.85,448,275,487,303,40,29,751,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+1,0.0417,468.82,286.59,15.71,31.43,448,275,487,303,40,29,735,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+2,0.0833,468.53,286.59,15.72,31.44,448,274,487,301,40,28,753,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+3,0.125,468.47,286.49,15.89,31.78,448,274,487,303,40,30,755,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+4,0.1667,467.62,287.38,15.43,30.85,448,274,485,303,38,30,754,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+5,0.2083,467.98,288.08,15.76,31.53,448,274,487,305,40,32,770,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+6,0.25,467.63,288.2,15.5,31.0,448,274,485,305,38,32,756,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+7,0.2917,468.48,288.27,15.65,31.3,450,274,487,305,38,32,771,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+8,0.3333,468.48,288.27,15.65,31.3,450,274,487,305,38,32,770,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+9,0.375,468.48,288.27,15.65,31.3,450,274,487,305,38,32,770,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+10,0.4167,468.48,288.27,15.65,31.3,450,274,487,305,38,32,770,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+11,0.4583,468.4,288.29,15.67,31.34,450,274,487,305,38,32,770,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+12,0.5,468.46,288.26,15.71,31.43,450,274,487,305,38,32,774,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+13,0.5417,468.49,288.34,15.78,31.56,450,274,487,305,38,32,782,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+14,0.5833,468.46,288.26,15.71,31.43,450,274,487,305,38,32,774,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+15,0.625,468.27,288.34,15.64,31.28,450,274,487,305,38,32,767,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+16,0.6667,468.26,288.39,15.67,31.34,450,274,487,305,38,32,771,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+17,0.7083,468.26,288.39,15.67,31.34,450,274,487,305,38,32,771,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+18,0.75,467.94,288.24,15.64,31.29,448,274,487,305,40,32,761,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+19,0.7917,467.6,288.32,15.48,30.96,448,274,485,305,38,32,756,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+20,0.8333,467.6,288.28,15.46,30.92,448,274,485,305,38,32,755,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+21,0.875,467.6,288.29,15.46,30.93,448,274,485,305,38,32,753,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+22,0.9167,467.62,288.27,15.39,30.78,448,274,485,305,38,32,743,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+23,0.9583,467.94,288.28,15.48,30.96,449,274,485,305,37,32,764,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+24,1.0,468.34,287.13,15.12,30.23,450,274,484,301,35,28,742,0,lower part of ball removed by segmentation (table corner edge); centre from circle fit of upper arc
+25,1.0417,472.6,284.16,15.55,31.1,454,272,489,299,36,28,783,0,
+26,1.0833,485.93,283.17,15.66,31.32,468,270,502,299,35,30,802,0,
+27,1.125,497.79,282.09,16.78,33.57,480,266,515,299,36,34,930,0,
+28,1.1667,510.31,282.08,16.24,32.47,494,266,527,297,34,32,871,0,
+29,1.2083,522.28,281.56,16.4,32.79,505,266,539,297,35,32,883,0,
+30,1.25,533.84,280.78,15.85,31.69,518,265,551,295,34,31,828,0,
+31,1.2917,543.96,280.58,15.74,31.49,528,266,560,295,33,30,827,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+32,1.3333,555.06,279.9,16.62,33.24,538,264,570,295,33,32,782,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+33,1.375,566.21,279.76,16.87,33.74,550,264,580,289,31,26,558,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+34,1.4167,576.36,278.73,16.55,33.09,560,263,591,285,32,23,401,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+35,1.4583,586.37,279.08,16.93,33.86,572,263,599,279,28,17,244,1,mostly hidden behind soccer ball (only top cap visible); centre less reliable (+-3 px)
+36,1.5,606.95,277.96,16.7,33.41,594,262,621,271,28,10,217,1,mostly hidden behind soccer ball (only top cap visible); centre less reliable (+-3 px); dropped capture frame between 35 and 36 (double displacement)
+37,1.5417,617.16,277.18,16.45,32.9,604,261,632,279,29,19,335,1,mostly hidden behind soccer ball (only top cap visible); centre less reliable (+-3 px)
+38,1.5833,626.54,276.38,15.69,31.38,613,261,642,287,30,27,474,1,lower part hidden behind soccer ball; centre from circle fit of visible arc; collision frame
+39,1.625,622.25,275.57,15.69,31.39,609,260,639,285,31,26,440,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+40,1.6667,618.2,274.72,15.64,31.27,604,259,633,279,30,21,389,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+41,1.7083,616.1,274.2,15.6,31.2,602,259,631,279,30,21,387,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+42,1.75,614.83,272.53,14.69,29.37,600,258,631,279,32,22,391,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+43,1.7917,613.17,273.19,15.58,31.16,599,258,631,277,33,20,385,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+44,1.8333,611.69,272.74,15.31,30.63,597,258,627,275,31,18,360,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+45,1.875,610.1,271.58,14.9,29.8,596,257,625,275,30,19,365,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+46,1.9167,608.91,270.45,14.32,28.64,594,256,623,273,30,18,362,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+47,1.9583,607.08,270.54,14.75,29.51,593,256,623,273,31,18,376,1,lower part hidden behind soccer ball; centre from circle fit of visible arc
+48,2.0,605.72,270.63,14.98,29.97,592,256,621,273,30,18,374,1,lower part hidden behind soccer ball; centre from circle fit of visible arc

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0032_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "A3MX",
+ "fps": 30.0,
+ "frames": 130,
+ "duration_s": 4.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1714,
+  "question": "What is the acceleration of the orange car at 2s in m/s^2?",
+  "prior": "gravity acc = 9.8m/s^2",
+  "depth_info": "t=1s, distance_ball_camera = 13.7978 m\nt=2s, distance_ball_camera = 13.8028 m\nt=1.5s, distance_orange_car_camera = 10.1755m\nt=2s, distance_orange_car_camera = 10.4022m\nt=2.5s, distance_green_car_camera = 4.3204m\nt=3s, distance_green_car_camera = 6.9142m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0145_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MX",
+ "fps": 24.0,
+ "frames": 29,
+ "duration_s": 1.2083,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1849,
+  "question": "What is the diameter of the tire in meters?",
+  "prior": "length of the rocket = 2.9m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

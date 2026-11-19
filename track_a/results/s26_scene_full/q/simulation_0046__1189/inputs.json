@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0046.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 33.0,
+ "frames": 99,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 766,
+ "question": {
+  "id": 1189,
+  "question": "What is the height of the first step in front of the door of the nearer house in meters?",
+  "prior": "diameter of the moving bicycle wheel = 0.65m",
+  "depth_info": "t=1s, distance_bike_camera = 12.6215m\nt=2s, distance_bike_camera = 13.2055m\nt=1s, distance_human_camera = 14.7728m\nt=2s, distance_human_camera = 15.1766m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 33.0
+ }
+}

@@ -1,0 +1,59 @@
+{
+ "wall_s": 61,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 18,
+  "duration_ms": 60144,
+  "total_cost_usd": 0.344348,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 22,
+  "cache_creation_input_tokens": 22201,
+  "cache_read_input_tokens": 283460,
+  "output_tokens": 5498,
+  "output_tokens_details": {
+   "thinking_tokens": 1044
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 22201,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 511,
+    "cache_read_input_tokens": 33361,
+    "cache_creation_input_tokens": 1007,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1007
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "a",
+ "audit": {
+  "tool_calls": 17,
+  "flags": []
+ },
+ "video": "internet_0023",
+ "ids": [
+  2119
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 2,
+ "trigger": "time base: answered at the file rate on a video whose question_fps differs; re-asked under the question_fps-only prompt (#36 / #37, board reads #188 / #189)",
+ "stream": "streams_a/internet_0023__q2119__a2.jsonl"
+}

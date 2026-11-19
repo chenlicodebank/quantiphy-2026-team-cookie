@@ -1,0 +1,46 @@
+{
+  "video": "simulation_0195.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 30.0,
+  "frames": 100,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, pixel (i,j) centre at integer coords; positions are sub-pixel circle fits to the object silhouette (threshold max(RGB) > 18 on near-black space background)",
+  "camera": {
+    "motion": "static (planet centre constant to +-0.05 px over all 100 frames; no background features move)",
+    "perspective_cues": "none (black space background, no ground plane or horizon). Only cue: moon apparent diameter shrinks ~27.9 -> ~26.6 px (about -4.8 %) over the clip, so the moon is moving slightly away from the camera; planet apparent size is constant.",
+    "focal_length": "unknown; estimate per question from depth_info + known size (sphere: diameter_px ~ f * D / depth)"
+  },
+  "objects": [
+    {
+      "name": "planet",
+      "description": "large banded Jupiter-like gas giant (cream/brown bands, red spot lower left), centre of image, pole tilted towards camera",
+      "moves": false,
+      "note": "origin fixed; surface texture rotates slowly in place (spin), centre does not move",
+      "visible_frames": [0, 99],
+      "image_centre_px": [941.26, 489.60],
+      "diameter_px_circle_fit": 282.66,
+      "bbox_px": {"x0": 800, "y0": 348, "x1": 1083, "y1": 631},
+      "extent_px": {"width": 284, "height": 284, "area_equiv_diameter": 283.5},
+      "track_file": "tracks/planet.csv"
+    },
+    {
+      "name": "moon",
+      "description": "small grey-brown cratered sphere (Io/Callisto-like moon), below-right of planet",
+      "moves": true,
+      "visible_frames": [0, 99],
+      "occluded": "never (never overlaps planet or frame edge)",
+      "start_px": [1127.74, 878.96],
+      "end_px": [1475.61, 773.71],
+      "diameter_px_start_end": [27.9, 26.6],
+      "track_file": "tracks/moon.csv",
+      "motion_summary_px": "moves right and up along a gently curving (concave-up in image, turning upward) arc, consistent with part of an orbit around the planet seen obliquely; per-frame pixel step decreases smoothly from ~4.2 px (start) to ~3.1 px (end); heading turns from -8 deg to -27 deg (image coords, negative = upward); image distance to planet centre grows 431.7 -> 605.2 px"
+    }
+  ],
+  "events": [
+    {"event": "moon in motion for the whole clip (no start/stop, bounce or contact)", "frames": [0, 99], "t": [0.0, 3.3]},
+    {"event": "no contact / occlusion between moon and planet", "frames": [], "t": []}
+  ]
+}

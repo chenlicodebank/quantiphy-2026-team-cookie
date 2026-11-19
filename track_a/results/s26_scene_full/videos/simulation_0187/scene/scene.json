@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0187.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 60,
+  "duration_s": 2.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (upper-wall phase correlation vs frame 59: |shift| < 0.03 px at frames 0, 20, 40)",
+    "projection_note": "perspective render viewed side-on: the truck's cab FRONT face is visible while the truck is left of image centre and its REAR face while right of centre; silhouette edges therefore differ from side-plane points by up to ~90 px near the frame edges. The truck crosses at constant image height/scale (top 352, tyre bottom 939 in all frames), i.e. motion is in a plane facing the camera.",
+    "least_distorted_frame": 42,
+    "horizon_or_floor_line": "wall/floor junction is a horizontal line at y ~ 690-700 (no tilt)"
+  },
+  "objects": [
+    {
+      "name": "truck",
+      "description": "white airport catering truck (high-loader): white box body, white cab on the right (front), cab-top platform with railings, dark chassis, 2 axles, fold-down tail-lift platform at the rear (left). The only moving object.",
+      "moves": true,
+      "direction": "left -> right (+x), purely horizontal, accelerating from rest at about frame 0",
+      "visible_frames": "0-58 (frames 0-2 only a <12 px sliver of the cab front at the left edge; whole truck inside the image only in frames 40-44; front leaves the right edge at frame 45; rear tail lift last seen frame 58; gone at 59)",
+      "track_file": "tracks/truck.csv",
+      "reference_point": "ref_x_px = centre of the side-view bounding box (tail-lift tip to front-most point) = x 946.5 at frame 42; ref_y_px = 645.5 (vertical bbox centre). The rig root position is unknown; for a rigid 2D translation every listed point (wheels, box edges, centre) has the same per-frame displacement.",
+      "sizes_px_at_frame_42": {
+        "side_length_tail_lift_tip_to_front_most": 1507,
+        "box_rear_edge_to_cab_nose_bumper": 1368,
+        "box_rear_edge_to_front_most_(mirror/railing)": 1388,
+        "cargo_box_length_rear_edge_to_front_edge": 1078,
+        "wheelbase_rear_to_front_axle": 725,
+        "tyre_diameter": 150,
+        "height_railing_top_to_tyre_bottom": 587,
+        "height_box_top_to_tyre_bottom": 536,
+        "cargo_box_height_top_to_bottom": 354,
+        "points_x": {"tail_lift_tip": 193, "box_rear": 312, "rear_wheel_centre": 770, "box_front": 1390, "front_wheel_centre": 1495, "cab_nose": 1680, "front_most_mirror_railing": 1700},
+        "points_y": {"railing_top": 352, "box_top": 403, "box_bottom": 757, "wheel_centre": 862, "tyre_bottom": 939},
+        "width_across_(depth)": "not observable in this side view"
+      },
+      "size_change_over_time": "none in side-plane features (box edge-to-edge length 1389-1391 px in frames 40-44, height constant all clip)"
+    },
+    {"name": "hangar_back_wall", "moves": false, "description": "grey hangar wall of tall panelled doors with vertical white pillars and a row of small dark vent rectangles at y ~585-605; fills the image above y ~690", "visible_frames": "all"},
+    {"name": "floor", "moves": false, "description": "light-grey concrete floor below y ~690-700; the truck's shadow falls on it (below/ahead of the truck, y ~880-1040)", "visible_frames": "all"}
+  ],
+  "events": [
+    {"event": "motion start (from rest, inferred)", "frame": 0, "time_s": 0.0, "note": "per-frame displacement grows ~2.05 px per frame from ~0 at frame 0; a quadratic through frames 14-57 has its zero-velocity vertex at frame 0.16"},
+    {"event": "cab front first appears at left edge", "frame": 0, "time_s": 0.0},
+    {"event": "tail-lift tip enters (whole truck in frame)", "frame": 40, "time_s": 1.333},
+    {"event": "last frame with whole truck in frame", "frame": 44, "time_s": 1.467},
+    {"event": "front leaves right edge", "frame": 45, "time_s": 1.5},
+    {"event": "truck centre (ref) at image centre x=960", "frame": 42.2, "time_s": 1.407},
+    {"event": "last visible (tail lift sliver)", "frame": 58, "time_s": 1.933},
+    {"event": "truck gone", "frame": 59, "time_s": 1.967},
+    {"event": "no bounce / contact / direction change", "frame": null}
+  ]
+}

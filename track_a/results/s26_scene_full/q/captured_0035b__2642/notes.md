@@ -1,0 +1,21 @@
+# q_2642: basketball velocity at 1.4 s (cm/s)
+
+- Question fps = file fps = 24, so t = 1.4 s is frame 34 (round 33.6).
+- Camera: f = 0.5959 x 1280 = 763 px, principal point (640, 360).
+- **depth_info labels.** The last line says "soccer_ball" twice at t = 1.4 s, so one of the two lines must be the basketball. I checked against apparent size:
+  - Soccer ball: k = 2.477 x 52.5 px (smoothed diameter at frame 22) gives 2.37 m at frame 34 (54.8 px), which matches the 2.373 line.
+  - Basketball: from its size it should be about 2.53-2.56 m, which is nearer 2.602 than 2.373.
+  - So basketball: 2.7777 m at frame 22 and 2.602 m at frame 34.
+- **Centres.** I checked the record's circle-fit centres (`scene/tracks/basketball.csv`) on frame 34 (`frames/f34.png`). As a second route I computed my own orange-mask centroids (`measure.py`), which agree to within about 1-2 px.
+- **3D positions.** Each centre is back-projected along its ray, using Euclidean distance to the ball centre. I tried three depth models:
+  - depth linear in time through the two given values;
+  - k / D_px (apparent size);
+  - a + b / D_px passing exactly through both given values.
+- **Results at frame 34** (per-frame speeds are about 100-112 cm/s on clean frames):
+  - forward difference 34→35: 105-117 cm/s;
+  - backward difference: 102-112 cm/s;
+  - clean smoothed velocity (frames 30-35, or 30-39 with the 35→36 step left out): 103-112 cm/s, centre about 107.
+  - 5-frame centred smoothing that includes the 35→36 step: 122-127 cm/s.
+- **Caveat: dropped frame.** One source frame is missing between frames 35 and 36: the step there is twice the normal size, about 205 cm/s if read as one frame. The true physical speed is about 107 cm/s. A reference made with 5-frame smoothing around frame 34 would include that doubled step and give about 125 cm/s.
+- **Answer.** I chose 117 cm/s, between the two readings, so it is within about 10 % of either.
+- **Confidence:** moderate.

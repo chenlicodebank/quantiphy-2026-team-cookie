@@ -1,0 +1,96 @@
+{
+  "video": "simulation_0180.mp4",
+  "source": "simulation",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "camera": {
+    "motion": "static (phase correlation of wall/ride region vs frame 0: |shift| < 0.02 px over all frames)",
+    "principal_point_assumed_px": [960, 540],
+    "focal_length": "unknown - estimate from depth_info + a known size",
+    "view": "slightly elevated, looking roughly perpendicular at a back wall; floor tiles visible, wall/floor line slopes gently down to the right (about y 730 at x 300 to y 790 at x 1900)",
+    "perspective_cues": "floor tile grid with orange border tiles; tile seams converge toward a vanishing point far up-left; back-wall base line is nearly horizontal so the wall is nearly fronto-parallel"
+  },
+  "objects": [
+    {
+      "name": "shopping_cart",
+      "description": "the only moving object: grey/silver wire shopping cart with red handle and dark wheels, handle on the left, basket forward to the right",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "occluded": "never; it passes in FRONT of the helicopter ride platform from about frame 40 on (basket wires overlap the platform in the image, low contrast)",
+      "track_file": "tracks/cart.csv",
+      "reference_point": "origin unknown; bbox centre (bbox_cx, bbox_cy) recommended; bottom_cx/bottom_y (wheel-bottom line) and wheels_cx/wheels_cy also given",
+      "apparent_size_px": {
+        "frame_0": {"bbox_w": 273, "bbox_h": 283},
+        "frame_30": {"bbox_w": 273, "bbox_h": 290},
+        "frame_59": {"bbox_w": 269, "bbox_h": 311},
+        "trend": "bbox height grows ~10% (283 -> 311) as the cart moves right and slightly toward the camera; width stays ~270-274 px"
+      },
+      "motion_summary_px": "starts at rest at frame 0 and accelerates steadily to the right (and slightly down / toward camera); bbox centre x 358 -> 1371, y 818 -> 873; per-frame x step grows from ~0-1 px (frames 0-2) to ~37 px (frame 59)"
+    },
+    {
+      "name": "helicopter_ride",
+      "description": "pink and yellow coin-operated kiddie helicopter ride on a platform, centre-right against the wall",
+      "moves": false,
+      "visible_frames": [0, 59],
+      "extents_px_frame0": {
+        "whole_ride_incl_rotor": {"x": [830, 1487], "y": [334, 789], "w": 658, "h": 456},
+        "main_rotor_blade": {"x": [830, 1323], "y": [334, 375], "w": 494},
+        "pink_body": {"x": [934, 1423], "y": [368, 653], "w": 490, "h": 286},
+        "pink+yellow_body_without_rotor": {"x": [932, 1485], "y": [368, 789], "w": 554, "h": 422}
+      },
+      "note": "no rocking/rotor motion detected (background difference zero in this region)"
+    },
+    {
+      "name": "ride_platform",
+      "description": "rectangular base under the ride: grey grated top, blue band, dark bottom",
+      "moves": false,
+      "extents_px_frame0": {"x": [793, 1450], "y": [725, 877], "front_edge_w": 653, "blue_band_y": [780, 843]}
+    },
+    {
+      "name": "coin_box",
+      "description": "small orange/dark-blue box behind left side of the ride",
+      "moves": false,
+      "extents_px_frame0": {"x": [870, 935], "y": [608, 730]}
+    },
+    {
+      "name": "wall_vent",
+      "description": "white louvred vent with a plug/cable above it on the back wall",
+      "moves": false,
+      "extents_px_frame0": {"x": [571, 679], "y": [157, 241], "w": 108, "h": 84, "with_plug_top_y": 107}
+    },
+    {
+      "name": "entrance_door",
+      "description": "glass door with wooden frame and 'Food Vault' sign at far left",
+      "moves": false,
+      "extents_px_frame0": {"x": [0, 270], "y": [85, 805], "wood_frame_x": [0, 135]}
+    },
+    {
+      "name": "door_mat",
+      "description": "dark ribbed floor mat in front of the door, lower left",
+      "moves": false,
+      "extents_px_frame0": {"x": [0, 430], "y": [800, 1025]}
+    },
+    {
+      "name": "floor_tiles",
+      "description": "light grey square tiles with orange border tile strips (one strip along the wall at y~740-810, one nearer the camera at y~935-1010 turning down at x~600 and x~1420-1530)",
+      "moves": false,
+      "note": "tile spacing usable as a perspective grid; tile size in world is unknown"
+    },
+    {
+      "name": "ceiling_soffit",
+      "description": "dark grey ceiling band at top right",
+      "moves": false,
+      "extents_px_frame0": {"x": [1120, 1920], "y": [0, 90]}
+    }
+  ],
+  "events": [
+    {"event": "cart start of motion (from rest)", "frame": 0, "time_s": 0.0, "note": "x steps 0,1,2 px in frames 1-3, consistent with starting from rest at frame 0"},
+    {"event": "cart begins passing in front of ride platform (image overlap)", "frame": 40, "time_s": 1.667},
+    {"event": "cart still moving / accelerating at end of clip", "frame": 59, "time_s": 2.458}
+  ],
+  "no_events": "no bounce, impact, contact or direction reversal; motion direction stays to the right, slightly downward in image"
+}

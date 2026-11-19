@@ -1,0 +1,44 @@
+{
+ "video": "captured_0062x.mp4",
+ "source": "lab (captured; SAM2-segmented: background replaced by black, watermark 'Modified with Segment Anything 2 Demo' at bottom-right x>=1030, y>=690)",
+ "scene": "3D",
+ "fps": 24.0, "frames": 49, "duration_s": 2.0417, "width": 1280, "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (all four static objects keep their centroid within 1 px over all 49 frames; background is black so no other check possible)",
+  "intrinsics_from_benchmark": "lab camera: f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+  "view": "oblique, looking down onto a floor; image-up = away from the camera. Floor itself is masked out (black), so no horizon/vanishing point visible. Perspective evidence: the moving board shrinks as it moves up the image (length 324 -> 206 px), and its far edge is shorter than its near edge (trapezoid)."
+ },
+ "objects": [
+  {"name": "white_board", "description": "flat white rectangular board/tray with two small grey knobs/handles on its far corners; the only large white object", "moves": true,
+   "visible_frames": "0-48 (frames 0-19 its near edge is cut by the bottom image edge and partly by the watermark box)",
+   "track": "tracks/white_board.csv"},
+  {"name": "blue_bin", "description": "dark blue waste bin/bucket with yellow and white confetti pattern, upper left", "moves": false, "visible_frames": "0-48"},
+  {"name": "blue_tote_bag", "description": "blue fabric tote bag with pink round logo ('MARINE'), black handle, lying flat, right of centre", "moves": false, "visible_frames": "0-48"},
+  {"name": "small_white_box", "description": "small white/printed carton (medicine or snack box) lying diagonally, centre-left; small, do not confuse with the board", "moves": false, "visible_frames": "0-48"},
+  {"name": "teddy_bear", "description": "brown/orange teddy bear lying on the floor, bottom centre", "moves": false, "visible_frames": "0-48"}
+ ],
+ "static_objects_px_frame47": "see static.json (centroid, bbox, min-area-rect length/width/angle, area)",
+ "static_objects_summary": {
+  "blue_bin": {"centroid": [337.5, 156.3], "bbox": [288, 110, 378, 209], "w": 91, "h": 100},
+  "blue_tote_bag": {"centroid": [837.3, 329.2], "bbox": [771, 295, 895, 371], "w": 125, "h": 77},
+  "small_white_box": {"centroid": [516.7, 495.5], "bbox": [491, 464, 542, 527], "minrect_len": 68.7, "minrect_wid": 30.7},
+  "teddy_bear": {"centroid": [635.0, 623.8], "bbox": [580, 577, 692, 662], "minrect_len": 117.3, "minrect_wid": 75.5}
+ },
+ "white_board_size_px": {
+  "frame0_at_rest_truncated": {"far_edge": 266, "left_edge_visible": 176, "minrect_len": 324, "note": "near edge cut off by the image bottom"},
+  "frame20_first_full": {"minrect_len": 333, "minrect_wid": 177.5, "far_edge": 240, "near_edge": 306},
+  "frame48_end": {"minrect_len": 206, "minrect_wid": 88, "far_edge": 165, "near_edge": 194, "bbox": [435, 217, 650, 335]}
+ },
+ "events": [
+  {"event": "board at rest", "frames": "0-15", "t": "0.000-0.625"},
+  {"event": "board starts moving (pushed/slid away from camera, toward upper left)", "frame": 16, "t": 0.667, "note": "first visible shift 0.8 px at 16, 6.5 px at 17"},
+  {"event": "board fully inside frame (near edge leaves image bottom)", "frame": 20, "t": 0.833},
+  {"event": "peak image-plane centroid step (~25.6 px/frame; frames 17-19 biased by truncation)", "frame": 21, "t": 0.875},
+  {"event": "image step falls to ~16 px/frame at frames 25-26, rises again to ~20 px/frame at frames 28-29 (second push or re-acceleration), then decays from ~15 to ~12.3 px/frame by frame 48 (part of that decay is perspective shrinking)", "frames": "24-48"},
+  {"event": "anomalous double step (31 px, ~2x the ~15 px neighbours) between frames 35 and 36 - likely a dropped frame in the recording", "frame": 36, "t": 1.5},
+  {"event": "board passes left of and closest to blue_tote_bag (no contact)", "frames": "36-40"},
+  {"event": "board still moving at last frame", "frame": 48, "t": 2.0}
+ ],
+ "files": {"tracks": "tracks/white_board.csv", "static": "static.json", "notes": "notes.md", "scripts": "scripts/"}
+}

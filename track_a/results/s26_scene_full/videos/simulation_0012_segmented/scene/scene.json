@@ -1,0 +1,72 @@
+{
+  "video": "simulation_0012_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by white)",
+  "scene": "2D",
+  "fps": 22.0,
+  "frames": 61,
+  "width": 1920,
+  "height": 1954,
+  "time_convention": "t = frame / 22.0, frame 0 at t = 0",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of building region (y 0-600, x 450-1300) vs frame 0: |dx|,|dy| <= 0.18 px in all frames; see tracks/background_shift.csv",
+    "view": "the bird is seen from directly above/below (plan view of the spread wings); its motion is a plane facing the camera, no visible perspective change on the bird (body length constant ~129 px)"
+  },
+  "objects": [
+    {
+      "name": "bird",
+      "description": "single large dark grey/black bird of prey (hawk/eagle/crow-like) seen in plan view, wings spread and flapping, head pointing +x (right). Only moving object.",
+      "moves": true,
+      "visible_frames": "0-60 (all), never occluded, fully inside frame",
+      "track_file": "tracks/bird.csv",
+      "reference_point_recommended": "cx_centroid, cy_centroid (mask centroid). Alternatives: body_mid_x/body_y (midpoint of the beak tip and tail tip on the body row, steadier against wing flapping); bbox_cx/bbox_cy",
+      "motion_summary_px": "flies left to right (+x) almost horizontally; body_mid_x 749 -> 1718 px, body_y 1108 -> 1112 px. Per-frame step about 7 px at the start, rising to about 20 px by frame ~13, roughly constant about 20 px for frames 13-45, then slowing to about 6 px at frame 60",
+      "sizes_px": {
+        "wingspan_axis": "image y (vertical) = wingspan_px_y column; varies with flapping",
+        "wingspan_max_px": 255, "wingspan_max_frame": 18,
+        "wingspan_min_px": 124, "wingspan_min_frames": [9, 25, 58],
+        "wingspan_local_maxima_frames": {"0": 252, "18": 255, "33": 254, "50": 247},
+        "wingspan_local_minima_frames": {"9": 124, "25": 124, "42": 126, "58": 124},
+        "body_length_beak_to_tail_px": {"median": 129, "range": [123, 136]},
+        "bbox_length_x_px": {"median": 129, "range": [124, 140]},
+        "wingbeat_period_frames": "about 16-17 frames between wingspan minima (9, 25, 42, 58)"
+      }
+    },
+    {
+      "name": "wooden_building",
+      "description": "static remnant of the original background not removed by segmentation: weathered vertical wooden planks (wall/shed seen from above or the front) with a slanted plank/beam ledge at its bottom edge, top of image",
+      "moves": false,
+      "visible_frames": "0-60",
+      "image_extent_px": {"x0": 400, "x1": 1385, "y0": 0, "y1": 791, "note": "cut off at top edge; includes debris below"},
+      "parts_px": {
+        "plank_wall": "x about 420-1340, y 0 to about 620 (cut at top)",
+        "bottom_beam_ledge": "long slanted plank from about (400,675) to (1385,650), about 985 px long",
+        "small_cross_beam": "short light beam at about x 655-860, y 450-530",
+        "dark_box_under_ledge": "dark wooden box/crate at about x 590-930, y 600-700"
+      }
+    },
+    {
+      "name": "debris_patch",
+      "description": "small static grey fragment below the building at about x 830-980, y 735-792 (segmentation leftover); its size flickers frame to frame (larger mask in frames 0, 7, 8, 10, 20, 33). Not a real moving object.",
+      "moves": false,
+      "visible_frames": "0-60"
+    }
+  ],
+  "events": [
+    {"event": "bird visible and already flying at the start", "frame": 0, "t": 0.0},
+    {"event": "bird speeds up from about 7 px/frame to about 20 px/frame", "frames": "0-13", "t": "0-0.59"},
+    {"event": "skipped source frame (double step about 37 px, wing pose jumps)", "frame": 19, "t": 0.864},
+    {"event": "skipped source frame (double step about 36 px, wing pose jumps)", "frame": 43, "t": 1.955},
+    {"event": "bird slows from about 18-20 px/frame to about 6 px/frame", "frames": "45-60", "t": "2.05-2.73"},
+    {"event": "wings fully spread (wingspan maxima)", "frames": [0, 18, 33, 50]},
+    {"event": "wings folded/most compact (wingspan minima)", "frames": [9, 25, 42, 58]},
+    {"event": "no bounce, impact or contact; the bird never touches the building", "frame": null}
+  ],
+  "files": {
+    "tracks/bird.csv": "per-frame bird track",
+    "tracks/background_shift.csv": "per-frame camera/background shift vs frame 0",
+    "scripts/measure.py": "bird segmentation, tracking, overlays, background shift",
+    "scripts/debris.py": "debris-region flicker check",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

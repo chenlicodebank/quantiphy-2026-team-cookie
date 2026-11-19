@@ -1,0 +1,72 @@
+{
+  "video": "simulation_0157.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 48,
+  "duration_s": 2.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the seabed band (y 780-1080) vs frame 0: |shift| <= 0.33 px every frame (scripts/bg.py); seabed outline identical in frames 0 and 47",
+    "perspective": "side view of underwater scene; seabed dunes in the lower quarter (crest near y~800 at x 800-1100). The turtle swims horizontally (y constant within ~1.6 px) and its rest-pose size is constant once fully in frame -> treat as motion in a plane facing the camera, one px scale."
+  },
+  "objects": [
+    {
+      "name": "turtle",
+      "description": "the only animal / moving object: a dark-blue sea turtle (leatherback-like, ridged carapace), side view, head pointing LEFT, swimming leftward across mid-frame at y~490-625",
+      "moves": true,
+      "visible_frames": "0-47 (all)",
+      "partially_out_of_frame": "frames 0-20: rear part cut by the right image edge (x=1919); fully visible from frame 21",
+      "occluded": "never",
+      "track_file": "tracks/turtle.csv",
+      "reference_points": {
+        "shell_x, shell_y (RECOMMENDED for displacement/speed)": "carapace template-matching track, integrated from per-frame shell displacements and anchored to the mask centroid at frame 47; rigid, unaffected by flipper strokes. Frames 0-~10 its value lies right of the visible part (body centre still off-screen).",
+        "shell_dx, shell_dy": "carapace displacement from frame i-1 to i (px), directly measured",
+        "mask_cx, mask_cy": "centroid of the full segmented mask (includes flippers; biased while truncated, frames 0-20, and wobbles with the flipper stroke)",
+        "bbox_*": "bounding box of the full mask (flippers included)"
+      },
+      "size_px_when_fully_visible": {
+        "rest_pose_frames": "40-46 (flippers folded back)",
+        "bbox_length_x_px": "298-312 (mean ~305) head tip to rear-flipper tip; 323 at frame 47 where the far front flipper starts to swing forward; 314-326 during frames 21-36",
+        "bbox_height_y_px": "130-131 at frames 40-47 (y 493-623); up to ~215 at frames 21-23 when the front flipper is stroked down",
+        "carapace_plus_head_length_px": "~270-280 (the 41-px-opened 'body' x-extent at frames 42-46; less reliable)",
+        "body_height_px": "~105 (body_y0..body_y1 at frames 39-46, shell top y~493 to belly y~597)",
+        "note": "Blender world AABB of an animated mesh changes with the flipper pose; pick the frame/pose the question implies. Extent across the image plane (depth) is not observable."
+      },
+      "position_examples": {
+        "frame_0": "visible head tip x=1776, y~550; shell_x 1952.7 (off-screen)",
+        "frame_24": "shell (1687.1, 547.1); bbox 1542-1847 x 493-700",
+        "frame_47": "shell = mask centroid (932.8, 548.2); bbox 776-1097 x 482-623"
+      }
+    },
+    {
+      "name": "seabed",
+      "description": "pale sandy dunes across the bottom of the frame, lit by moving teal caustic light patches",
+      "moves": false,
+      "visible_frames": "0-47",
+      "extent_px": "spans full width x 0-1919; top edge ~y 800 (crest x 800-1100), ~y 830 at x=0, ~y 870 at x=1900; to bottom of frame y=1079",
+      "note": "caustic spots (teal ellipses) and light shafts from the surface shimmer/move; they are lighting, not objects"
+    },
+    {
+      "name": "water / light shafts",
+      "description": "blue water background with vertical sun rays; static camera, rays flicker slightly",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "turtle already moving leftward at frame 0 (shell displacement frame 0->1 = -0.71 px), carapace displacement per frame grows steadily every frame to -42.6 px at frame 47 (speeding up throughout, no stop, no reversal)", "frame": 0, "time_s": 0.0},
+    {"event": "front flippers begin downward/backward power stroke (bbox bottom moves down from y 595)", "frame": 2, "time_s": 0.083},
+    {"event": "front flipper stroke at its lowest (bbox bottom y ~735)", "frame": 15, "time_s": 0.625, "note": "frames 13-19 bottom y 731-737"},
+    {"event": "turtle fully inside the frame (bbox right edge leaves x=1919)", "frame": 21, "time_s": 0.875},
+    {"event": "flippers returned to folded rest pose along body (bbox height back to ~130 px)", "frame": 39, "time_s": 1.625},
+    {"event": "far front flipper starts next forward swing (left bbox edge jumps ahead of head)", "frame": 47, "time_s": 1.958}
+  ],
+  "files": {
+    "tracks/turtle.csv": "per-frame turtle measurements (48 rows)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "bg.py (camera check), seg.py (first segmentation test), track.py (mask track -> turtle.csv), shellshift.py (carapace template track, adds shell_* columns), probe16.py (noise probe)"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0226.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, full-resolution pixels",
+  "view": "Top-down (bird's-eye) camera looking straight down at a paved promenade beside water; motion is on the ground plane, which faces the camera (2D).",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the pavement region (y 0-450, x 450-1900) vs frame 0: shift 0.00 px in every frame; frame differences only at the animal (plus faint grass sway at x<120, y~600)",
+    "perspective": "near-orthographic top view; pavement groove spacing is uniform (144.7 px) across the frame, so one px scale holds on the ground plane. Raised parts (lounger backrests) appear slightly flared."
+  },
+  "moving_objects": [
+    {
+      "name": "animal",
+      "description": "the only moving object: a small black four-legged animal (dog or cat silhouette seen from above, head to the right, thin curved tail to the left), walking along the pavement just above the water edge",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "occluded_frames": [],
+      "track_file": "tracks/animal.csv",
+      "reference_point": "body_cx, body_cy = centroid of the body mask with the thin tail removed (proxy for the rig root/pelvis-body centre, seen from above). full_cx/full_cy include the tail.",
+      "direction": "+x (rightwards), essentially straight: net dx = +266.4 px, dy = -3.5 px over frames 0-49",
+      "pixel_step_per_frame": {"mean": 5.46, "std": 0.71, "min": 4.13, "max": 7.56, "note": "the std comes from the gait (body centroid shifts with leg/head pose); a linear fit of body_cx vs frame gives 5.47 px/frame with a negligible quadratic term (-0.0005 px/frame^2), i.e. constant walking speed"},
+      "head_tip_x_step_mean_px_per_frame": 5.47,
+      "positions_px": {
+        "frame0_body_centroid": [575.2, 570.0],
+        "frame49_body_centroid": [841.7, 566.6]
+      },
+      "extents_px": {
+        "body_length_no_tail_mean": 85.3,
+        "body_length_no_tail_range": [83, 89],
+        "length_with_tail_mean": 107.5,
+        "length_with_tail_range": [105, 110],
+        "width_across_mean": 22.1,
+        "width_range": [21, 23],
+        "height": "not observable (top view)"
+      }
+    }
+  ],
+  "static_objects": [
+    {"name": "lounger_front_left", "description": "wooden sun lounger, front row, left; backrest at top (y~124-250), seat/foot towards y~462", "bbox_px": [742, 124, 944, 462], "length_px": 338, "width_px": 202},
+    {"name": "lounger_front_middle", "description": "wooden sun lounger, front row, middle", "bbox_px": [1012, 124, 1215, 462], "length_px": 338, "width_px": 203},
+    {"name": "lounger_front_right", "description": "wooden sun lounger, front row, right; backrest flares to x 1270-1487, seat x 1272-1452", "bbox_px": [1270, 124, 1487, 462], "length_px": 338, "width_px": "180 (seat) / 217 (backrest top)"},
+    {"name": "loungers_back_row", "description": "three more wooden loungers cut off by the top image edge", "bboxes_px": [[582, 0, 777, 135], [842, 0, 1036, 135], [1103, 0, 1298, 135]], "note": "only partly visible (y 0-135)"},
+    {"name": "grass_bush", "description": "tall ornamental grass bed at the left edge", "bbox_px": [0, 0, 430, 660], "note": "sways slightly"},
+    {"name": "water", "description": "dark blue water filling the lower part of the frame", "top_edge_y_px": 623, "extent": "y 623-1080, full width"},
+    {"name": "pavement", "description": "rectangular paving slabs separated by dark grooves", "vertical_groove_x_px": [430, 575, 719, 864, 1007, 1154, 1298, 1443, 1588, 1733, 1876], "groove_spacing_px": 144.7, "horizontal_groove_y_px": [75, 341, 604], "pavement_edge_y_px": 623}
+  ],
+  "events": [
+    {"event": "animal walking already at the first frame (no start of motion visible)", "frame": 0, "time_s": 0.0},
+    {"event": "animal still walking at the last frame (no stop)", "frame": 49, "time_s": 2.0417},
+    {"event": "animal head tip (body_x1) passes vertical groove x=719", "frame": 19, "time_s": 0.792, "note": "approximate (+-1 frame), see csv body_x1"},
+    {"event": "no direction changes, bounces or contacts"}
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "video": "simulation_0242.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 50,
+  "frame_time": "t = frame / 24 (frame 0 at t = 0, last frame 49 at t = 2.0417 s)",
+  "image_size_px": [1920, 1080],
+  "units": "pixels (x right, y down, origin top-left of the full-res frame) and seconds; no metric scale recorded",
+  "camera": {
+    "motion": "static (phase correlation of building/roof/grass patches vs frame 0: |shift| < 0.05 px in all 50 frames; scene/camera_shift.json)",
+    "view": "elevated view looking down at a lawn in front of a brick building; building facade is parallel to the image x axis (wall base line nearly horizontal)",
+    "perspective_cues": {
+      "wall_base_line": "y = 0.0033*x + 373 (x 462..1462); ground/wall contact, nearly horizontal",
+      "brick_wall_left_edge": "x ~ 440 at y=100 -> ~462 at y=378 (vertical building edge)",
+      "brick_wall_right_edge": "x ~ 1495 at y=100 -> ~1462 at y=378 (vertical building edge)",
+      "vertical_vanishing_point_approx": [820, 5500],
+      "vertical_vp_note": "vertical edges converge downward -> camera pitched down; VP far below the image (rough, +-1500 px in y). If principal point = image centre (960,540), f / tan(pitch) ~ 5000 px. Horizon is above the image top.",
+      "ground_depth_ordering": "lower in the image = closer to camera: rabbit (feet y~800) nearest, cream horse (hooves y~690) middle, brown horse (hooves y~560) farthest, building wall base y~375 farthest"
+    }
+  },
+  "objects": [
+    {"name": "brown_horse", "kind": "animal (horse), moving",
+     "identify": "chestnut/brown horse with white socks, dark mane/tail, upper-left of the lawn in front of the brick wall; its head renders as a flat grey-brown disc over the wall",
+     "moves": true, "visible_frames": [0, 49], "track": "tracks/brown_horse.csv",
+     "motion": "walks to the right (+x) at a nearly constant image rate ~5.9 px/frame (torso centroid), image y nearly constant; between frame 48 and 49 it JUMPS BACK ~-285 px to almost its frame-0 position (animation loop reset / teleport)",
+     "pixel_size": {"bbox_w_mean": 330, "bbox_w_range": [315, 360], "bbox_h_mean": 257, "bbox_h_range": [240, 273], "axis_length_mean": 356, "note": "bbox_w varies with gait (legs spread); nose-to-tail length ~ 320-345 px; height from hoof to ear tip ~ 250-270 px"}},
+    {"name": "cream_horse", "kind": "animal (horse), moving",
+     "identify": "pale cream/buckskin horse with dark lower legs and dark tail, centre of the lawn; head renders as a flat olive-grey disc",
+     "moves": true, "visible_frames": [0, 49], "track": "tracks/cream_horse.csv",
+     "motion": "walks to the right (+x) at ~10.9 px/frame (torso centroid), image y nearly constant; no reset",
+     "pixel_size": {"bbox_w_mean": 423, "bbox_w_range": [389, 460], "bbox_h_mean": 284, "bbox_h_range": [265, 296], "axis_length_mean": 445}},
+    {"name": "rabbit", "kind": "animal (rabbit/bunny), moving",
+     "identify": "small light-orange rabbit low in the frame (nearest to camera), below the cream horse",
+     "moves": true, "visible_frames": [0, 49], "track": "tracks/rabbit.csv",
+     "motion": "hops to the right (+x) at ~11.3 px/frame mean (torso centroid), periodic hop cycle ~10.3 frames (per-frame dx 7..18 px, peaks near frames 5, 15, 25-26, 36, 46); body stays low (centroid y 766-769, no visible airborne phase)",
+     "pixel_size": {"bbox_w_mean": 87, "bbox_w_range": [78, 105], "bbox_h_mean": 68, "bbox_h_range": [59, 77], "axis_length_mean": 89}},
+    {"name": "building", "kind": "static structure",
+     "identify": "two-storey building at the top: brick ground floor with 3 arched windows, timber-framed light upper storey (cut off by the frame top)",
+     "moves": false,
+     "pixel_extent": {"brick_wall_x_at_top_y95": [440, 1495], "brick_wall_x_at_base_y375": [462, 1462], "brick_wall_height_px": 280,
+                      "brick_wall_top_y": 95, "brick_wall_base_y": 375, "upper_storey_x": [318, 1600], "upper_storey_y": [0, 95]}},
+    {"name": "window_left", "kind": "static", "moves": false, "identify": "left arched window of the brick wall", "bbox_px": [473, 95, 600, 250], "size_px": {"w": 127, "h": 155}},
+    {"name": "window_middle", "kind": "static", "moves": false, "identify": "middle arched window (with visible mullions)", "bbox_px": [903, 95, 1018, 250], "size_px": {"w": 115, "h": 155}},
+    {"name": "window_right", "kind": "static", "moves": false, "identify": "right arched window", "bbox_px": [1325, 95, 1450, 250], "size_px": {"w": 125, "h": 155}},
+    {"name": "lawn", "kind": "ground plane", "moves": false, "identify": "grass field covering the lower 2/3 of the image; building shadow on the left, sunlit sandy/pale ground patch at upper right (x>1470, y<330)"}
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "all three animals already moving (walking/hopping right) at the first frame; no start of motion inside the clip"},
+    {"frame": 49, "t": 2.0417, "what": "brown_horse jumps back: mask centroid x 691.1 (frame 48) -> 408.2 (frame 49), torso_cx 701.7 -> 414.9, i.e. back to its frame-0 position (frame 0: 411.6 / 414.1) - looped animation reset; the 48->49 difference is NOT physical motion"},
+    {"frames": [6, 16, 26, 37, 47], "what": "rabbit hop cycle: largest forward step of the torso centroid arrives at these frames (steps 5->6, 15->16, 25->26/26->27, 36->37, 46->47, ~16-18 px); slowest steps (~7 px) at 2->3, 12->13, 22->23, 43->44; cycle ~10.3 frames = 0.43 s"},
+    {"frame": 49, "t": 2.0417, "what": "end of clip, cream_horse and rabbit still moving; nothing leaves the frame"}
+  ],
+  "apparent_size_vs_time": "all three move roughly parallel to the image x axis (constant image y), so apparent sizes stay nearly constant: brown bbox_h first10/last10 mean 262/248 (gait), cream 282/288, rabbit 67/69; any depth change during the clip is small",
+  "files": {"tracks": "tracks/<object>.csv", "notes": "notes.md", "camera_shift": "camera_shift.json",
+            "backgrounds": "background2_half.jpg (half-res preview of the clean animal-free background; full-res copy regenerated by scripts/background2.py into ../frames/)",
+            "overview": "tracks_overview.jpg", "scripts": "scripts/"}
+}

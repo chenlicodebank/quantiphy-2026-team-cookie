@@ -1,0 +1,19 @@
+{
+ "id": 2035,
+ "video": "internet_0006",
+ "entry_e2": 26.86,
+ "candidates": [
+  {
+   "name": "C1",
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "answer": 26.86,
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight coding agent, two-phase)",
+   "answer": 13.9,
+   "source": "s29_pass_sam3 r1"
+  }
+ ]
+}

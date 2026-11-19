@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0184.mp4",
+ "video_source": "simulation",
+ "video_type": "A3SC",
+ "fps": 24.0,
+ "frames": 45,
+ "duration_s": 1.875,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1433,
+  "question": "What is the height of the box in meters?",
+  "prior": "acceleration of the tool box after 1.25s = 1.58m/s^2",
+  "depth_info": "t = 0s, distance_box_camera = 9.194m      \nt = 0.5s, distance_box_camera = 9.096m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

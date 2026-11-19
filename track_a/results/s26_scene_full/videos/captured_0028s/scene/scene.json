@@ -1,0 +1,68 @@
+{
+  "video": "captured_0028s.mp4",
+  "source": "lab (captured; background replaced by Segment-Anything-2 demo: plain blue sky, watermark 'Modified with Segment Anything 2 Demo' bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "n_frames": 49,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 = t 0",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of table/column region vs frame 0: |dx| <= 0.14 px, |dy| <= 0.53 px over all frames (sub-pixel, compression noise)",
+    "intrinsics_from_benchmark": "Orbbec Femto Mega, HFOV 80 deg: f = 0.5959*1280 = 763 px, principal point ~ (640, 360)",
+    "perspective_cues": "Camera roughly level, slightly above the table-top plane: table top seen as a trapezoid (far edge y~427 x 574-847, 274 px wide; near edge y~489 x 464-951, ~490 px wide). No horizon (sky replaced). Ball grows from ~18 px to ~27-28 px diameter over the clip => it moves toward the camera (depth shrinks to ~0.67 of start by the last apex)."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ball (ping-pong-like), the only moving object; first held still above the table near image centre (hand removed by segmentation), lifted, released, then bounces 3 times on the table top while drifting right and toward the camera",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "mask centroid (mask_cx, mask_cy) = visible centre",
+      "apparent_diameter_px": {
+        "frames_0_21_(slow, unblurred)": "bbox 18-20 x 15-18, width_minor ~17-18, equiv_diam ~18",
+        "frame_32_apex": "bbox 22x21, equiv_diam 22.4",
+        "frame_42_apex": "bbox 26x27, equiv_diam 26.6",
+        "frame_48": "width 28 (vertical length 48 includes motion blur)"
+      },
+      "size_note": "Use width_minor / bbox_w (across the vertical motion) as diameter in fast frames; bbox_h and len_major are stretched by motion blur when falling/rising fast."
+    },
+    {
+      "name": "table",
+      "description": "wooden (tan) square/rectangular table top on a single dark-grey pedestal column, centre of image, static",
+      "moves": false,
+      "visible_frames": "0-48",
+      "pixel_geometry_frame0": {
+        "bbox_x0y0x1y1": [464, 426, 961, 517],
+        "top_surface_far_edge": {"y": 427, "x_left": 574, "x_right": 847, "length_px": 274},
+        "top_surface_near_edge": {"y": 489, "x_left": 464, "x_right": 951, "length_px": 488},
+        "top_surface_apparent_depth_extent_px": "62 (y 427 -> 489, foreshortened)",
+        "front_face_(slab thickness)": "y ~489-505 at left corner, ~489-517 at right; ~15-25 px tall incl. dark underside; full front width at y 500: x 464-961 = 498 px",
+        "row_widths": {"y428": [574, 847], "y440": [548, 863], "y460": [512, 899], "y480": [470, 939], "y490": [464, 951]}
+      }
+    },
+    {
+      "name": "table_column",
+      "description": "dark-grey cylindrical pedestal under the table, static",
+      "moves": false,
+      "visible_frames": "0-48",
+      "pixel_geometry_frame0": {"x_range": [708, 747], "width_px": 39, "y_top": 515, "y_bottom": "cut by image bottom (717)", "visible_height_px": 203, "note": "a wider dark bracket/shadow under the table x ~650-799, y ~505-515"}
+    }
+  ],
+  "events": [
+    {"event": "ball held still (hand invisible)", "frames": "0-11", "t_s": "0.000-0.458", "note": "centroid drifts < 2.5 px (719.1,311.4)->(717.1,312.9)"},
+    {"event": "ball lifted upward slowly (by invisible hand)", "frames": "12-20", "t_s": "0.500-0.833", "note": "y 310.3 -> 291.3, ~2-4 px/frame, not decelerating like free flight"},
+    {"event": "release / top of first drop", "frame": 21, "t_s": 0.875, "note": "highest point y 291.3 at f20-21; free fall visible from f22 (dy 7,15,24,34 px/frame for f22-25); release between f20 and f22"},
+    {"event": "bounce 1 (impact on table top)", "frame": 26, "t_s": 1.083, "note": "lowest sampled centre y 409.4, ball bottom y 426 (table far region); f25 still falling, f27 rising"},
+    {"event": "apex 1", "frame": 32, "t_s": 1.333, "y": 301.3},
+    {"event": "bounce 2", "frame": 36, "t_s": 1.5, "note": "lowest centre y 413.8, bottom y 436; f37 at 407 (impact near f36-37)"},
+    {"event": "apex 2", "frame": 42, "t_s": 1.75, "y": 312.9},
+    {"event": "bounce 3", "frame": 47, "t_s": 1.958, "note": "lowest centre y 436.4, bottom y 457; f48 rising"},
+    {"event": "clip ends with ball rising after bounce 3", "frame": 48, "t_s": 2.0}
+  ],
+  "ball_motion_summary_px": {
+    "horizontal_drift": "x 719 (f0) -> 724 (f21) -> 738 (f26) -> 750 (f32) -> 765 (f42) -> 766 (f48): moves right ~+1.5-2 px/frame during bounces, slowing late",
+    "approach_to_camera": "apparent diameter ~18 px (f0-21) -> ~22.5 (f32) -> ~26.6 (f42); depth ~ inversely proportional"
+  }
+}

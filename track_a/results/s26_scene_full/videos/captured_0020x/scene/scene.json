@@ -1,0 +1,395 @@
+{
+ "video": "captured_0020x.mp4",
+ "source": "lab (captured, real recording; background replaced by flat green via Segment Anything 2)",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (no background visible; both people stand on fixed feet positions, far person feet at y=271 every frame to <1 px)",
+  "intrinsics_hint_from_benchmark": "Orbbec Femto Mega, HFOV 80 deg -> f = 0.5959*1280 = 763 px, principal point ~ (640, 360)",
+  "view": "high camera looking steeply down onto the floor; far person stands upright at top-centre (head/upper body cut by top edge), near person stands at bottom-left, very close to camera, cut by left and bottom edges, appearing strongly slanted (wide-angle + oblique view)",
+  "perspective_cues": {
+   "ground_contact_far_person_feet_px": [
+    730,
+    271
+   ],
+   "ground_contact_near_person_right_shoe_px": [
+    365,
+    690
+   ],
+   "note": "no floor texture or horizon visible (green background); the far person is much smaller (legs+torso ~272 px tall visible) than the near person; objects shrink as they fly from near to far person"
+  }
+ },
+ "objects": {
+  "white_ball": {
+   "description": "small white (slightly grey-shaded) ball, ~30-36 px across; starts in the near person's right hand, thrown underarm up to the far person, who catches it with both hands",
+   "moves": true,
+   "visible_frames": "0-48 (partly covered by hands 0-14 and 26-48)",
+   "track": "tracks/white_ball.csv",
+   "reference_point": "centroid of white mask (visible centre)",
+   "apparent_size_px": {
+    "note": "mask extents; in flight there is motion blur along the motion direction, so width_across is the better diameter estimate; in hands partly occluded",
+    "held_near_person_f0_f11_width_across_range": [
+     29.7,
+     35.4
+    ],
+    "flight": {
+     "f15": {
+      "len_main_axis": 59.1,
+      "width_across": 32.5,
+      "bbox_w": 38.0,
+      "bbox_h": 51.0
+     },
+     "f16": {
+      "len_main_axis": 55.2,
+      "width_across": 35.0,
+      "bbox_w": 40.0,
+      "bbox_h": 48.0
+     },
+     "f17": {
+      "len_main_axis": 51.4,
+      "width_across": 33.4,
+      "bbox_w": 43.0,
+      "bbox_h": 43.0
+     },
+     "f18": {
+      "len_main_axis": 59.3,
+      "width_across": 38.7,
+      "bbox_w": 45.0,
+      "bbox_h": 55.0
+     },
+     "f19": {
+      "len_main_axis": 48.6,
+      "width_across": 34.7,
+      "bbox_w": 40.0,
+      "bbox_h": 39.0
+     },
+     "f20": {
+      "len_main_axis": 40.8,
+      "width_across": 29.1,
+      "bbox_w": 38.0,
+      "bbox_h": 28.0
+     },
+     "f21": {
+      "len_main_axis": 34.2,
+      "width_across": 29.5,
+      "bbox_w": 34.0,
+      "bbox_h": 29.0
+     },
+     "f22": {
+      "len_main_axis": 36.5,
+      "width_across": 27.4,
+      "bbox_w": 35.0,
+      "bbox_h": 28.0
+     },
+     "f23": {
+      "len_main_axis": 36.1,
+      "width_across": 35.0,
+      "bbox_w": 34.0,
+      "bbox_h": 32.0
+     },
+     "f24": {
+      "len_main_axis": 31.4,
+      "width_across": 24.1,
+      "bbox_w": 29.0,
+      "bbox_h": 27.0
+     },
+     "f25": {
+      "len_main_axis": 30.7,
+      "width_across": 21.8,
+      "bbox_w": 29.0,
+      "bbox_h": 26.0
+     }
+    },
+    "diameter_estimate_by_phase_px": {
+     "released_near_f15_f17 (blurred)": "~33 across",
+     "apex_f20_f23": "~28-30",
+     "f24_f25 near catcher": "~22-24 (darker shading, mask conservative)"
+    }
+   }
+  },
+  "yellow_fruit": {
+   "description": "yellow elongated fruit (banana/mango-like, pale yellow with a dark green-brown stem end); starts hanging in the far person's right hand (image-left of her), thrown underarm to the near person, who catches it with both hands near her chest",
+   "moves": true,
+   "visible_frames": "0-3, 8-27, 38-48 (hidden behind far person's leg/hand 4-7, inside near person's hands / behind her hair 28-37)",
+   "track": "tracks/yellow_fruit.csv",
+   "reference_point": "centroid of yellow mask (visible centre)",
+   "apparent_size_px": {
+    "note": "long axis length in flight grows from ~45 to ~80 px as it approaches the near person (and with blur / rotation); width across ~31-35 px in flight",
+    "held_far_person_f0_f3": {
+     "f0": {
+      "len_main_axis": 39.3,
+      "width_across": 17.4,
+      "bbox_w": 30.0,
+      "bbox_h": 32.0
+     },
+     "f1": {
+      "len_main_axis": 46.5,
+      "width_across": 15.5,
+      "bbox_w": 22.0,
+      "bbox_h": 44.0
+     },
+     "f2": {
+      "len_main_axis": 38.9,
+      "width_across": 16.4,
+      "bbox_w": 18.0,
+      "bbox_h": 36.0
+     },
+     "f3": {
+      "len_main_axis": 36.3,
+      "width_across": 15.4,
+      "bbox_w": 16.0,
+      "bbox_h": 36.0
+     }
+    },
+    "flight": {
+     "f12": {
+      "len_main_axis": 44.3,
+      "width_across": 30.8,
+      "bbox_w": 38.0,
+      "bbox_h": 34.0
+     },
+     "f13": {
+      "len_main_axis": 46.1,
+      "width_across": 29.5,
+      "bbox_w": 46.0,
+      "bbox_h": 42.0
+     },
+     "f14": {
+      "len_main_axis": 60.4,
+      "width_across": 34.3,
+      "bbox_w": 55.0,
+      "bbox_h": 51.0
+     },
+     "f15": {
+      "len_main_axis": 58.1,
+      "width_across": 35.5,
+      "bbox_w": 55.0,
+      "bbox_h": 41.0
+     },
+     "f16": {
+      "len_main_axis": 54.5,
+      "width_across": 33.8,
+      "bbox_w": 48.0,
+      "bbox_h": 39.0
+     },
+     "f17": {
+      "len_main_axis": 63.0,
+      "width_across": 35.7,
+      "bbox_w": 57.0,
+      "bbox_h": 41.0
+     },
+     "f18": {
+      "len_main_axis": 30.7,
+      "width_across": 28.8,
+      "bbox_w": 28.0,
+      "bbox_h": 30.0
+     },
+     "f19": {
+      "len_main_axis": 53.5,
+      "width_across": 32.0,
+      "bbox_w": 42.0,
+      "bbox_h": 43.0
+     },
+     "f20": {
+      "len_main_axis": 61.8,
+      "width_across": 31.0,
+      "bbox_w": 49.0,
+      "bbox_h": 47.0
+     },
+     "f21": {
+      "len_main_axis": 65.1,
+      "width_across": 31.1,
+      "bbox_w": 50.0,
+      "bbox_h": 53.0
+     },
+     "f22": {
+      "len_main_axis": 72.0,
+      "width_across": 31.2,
+      "bbox_w": 49.0,
+      "bbox_h": 58.0
+     },
+     "f23": {
+      "len_main_axis": 73.1,
+      "width_across": 31.1,
+      "bbox_w": 47.0,
+      "bbox_h": 61.0
+     },
+     "f24": {
+      "len_main_axis": 76.9,
+      "width_across": 37.1,
+      "bbox_w": 54.0,
+      "bbox_h": 67.0
+     },
+     "f25": {
+      "len_main_axis": 80.5,
+      "width_across": 35.1,
+      "bbox_w": 68.0,
+      "bbox_h": 52.0
+     },
+     "f26": {
+      "len_main_axis": 73.1,
+      "width_across": 33.3,
+      "bbox_w": 68.0,
+      "bbox_h": 34.0
+     }
+    },
+    "held_near_person_f43_f48 (partly in hand)": {
+     "f43": {
+      "len_main_axis": 70.3,
+      "width_across": 32.8,
+      "bbox_w": 62.0,
+      "bbox_h": 50.0
+     },
+     "f44": {
+      "len_main_axis": 77.6,
+      "width_across": 34.4,
+      "bbox_w": 63.0,
+      "bbox_h": 50.0
+     },
+     "f45": {
+      "len_main_axis": 74.9,
+      "width_across": 37.8,
+      "bbox_w": 60.0,
+      "bbox_h": 54.0
+     },
+     "f46": {
+      "len_main_axis": 57.6,
+      "width_across": 36.3,
+      "bbox_w": 50.0,
+      "bbox_h": 52.0
+     },
+     "f47": {
+      "len_main_axis": 77.9,
+      "width_across": 32.3,
+      "bbox_w": 64.0,
+      "bbox_h": 52.0
+     },
+     "f48": {
+      "len_main_axis": 77.4,
+      "width_across": 42.8,
+      "bbox_w": 65.0,
+      "bbox_h": 56.0
+     }
+    }
+   }
+  },
+  "person_near": {
+   "description": "person with long dark-brown hair, dark grey oversized T-shirt, black trousers, white sneakers; bottom-left, close to camera, cut by left/bottom edge; throws the white ball, catches the yellow fruit",
+   "moves": "stands in place (feet fixed), arms move; body leans/turns slightly",
+   "visible_frames": "0-48",
+   "track": "tracks/person_near.csv",
+   "reference_point": "mask centroid (pelvis not reliably visible; body cut by frame)",
+   "extent_px_frame0": {
+    "bbox": [
+     0,
+     130,
+     389,
+     719
+    ],
+    "visible_body_length_diagonal_px": "head top (~0,130) to right shoe tip (~389,660): ~660 px (head partly cut)"
+   }
+  },
+  "person_far": {
+   "description": "person in light grey fitted T-shirt, dark navy/black cargo trousers, white sneakers, wristwatch on left wrist; stands at top-centre facing the camera; throws the yellow fruit, catches the white ball",
+   "moves": "stands in place (feet fixed at ~(730,271)), bends forward and moves arms while catching",
+   "visible_frames": "0-48 (head cut by top edge, visible from chest/shoulders down)",
+   "track": "tracks/person_far.csv",
+   "reference_point": "mask centroid; feet_x/feet_y_lowest = ground contact",
+   "extent_px_frame0": {
+    "bbox": [
+     646,
+     0,
+     753,
+     271
+    ],
+    "visible_height_px": 272,
+    "waistband_y_px": "~65 (top of trousers)",
+    "feet_spacing_px": "shoes at x~715 and ~743, soles y~255-271",
+    "legs_trousers_width_px": "~85 px at hips"
+   }
+  }
+ },
+ "static_objects": "none: background replaced by uniform green; watermark \"Modified with Segment Anything 2 Demo\" box at bottom-right (x 1030-1280, y 690-720) is an overlay, not a scene object",
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "start: near person holds white ball at hip level (306,512); far person holds yellow fruit hanging at (649,133)"
+  },
+  {
+   "frame": 4,
+   "t": 0.1667,
+   "what": "white ball back-swing lowest/rearmost point (275,553), direction reverses (back-swing -> forward swing) at f4-5"
+  },
+  {
+   "frame": 4,
+   "t": 0.1667,
+   "what": "yellow fruit swung back behind far person's leg, hidden f4-f7, reappears f8 (forward swing)"
+  },
+  {
+   "frame": 13,
+   "t": 0.5417,
+   "what": "yellow fruit last frame touching far person's fingers (release between f13 and f14); f14 first free-flight frame"
+  },
+  {
+   "frame": 14,
+   "t": 0.5833,
+   "what": "white ball last frame in contact with near person's hand (release between f14 and f15); f15 first free-flight frame"
+  },
+  {
+   "frame": 22,
+   "t": 0.9167,
+   "what": "white ball apex in image (smallest y=36.7, x=536.6)"
+  },
+  {
+   "frame": 18,
+   "t": 0.75,
+   "what": "yellow fruit highest image point (y=67.6) at f18; note f18 is partly covered by the white ball, f17 y=72.7"
+  },
+  {
+   "frame": 18,
+   "t": 0.75,
+   "what": "the two objects cross in the image; white ball passes in front of (overlaps) the yellow fruit f17-f19"
+  },
+  {
+   "frame": 24,
+   "t": 1.0,
+   "what": "near person's hands first touch the yellow fruit (catch contact f24-f26, gripped f27, then hidden in hands/behind hair f28-f37)"
+  },
+  {
+   "frame": 26,
+   "t": 1.0833,
+   "what": "far person's hand first touches the white ball (catch); f27 ball clasped between both hands"
+  },
+  {
+   "frame": 35,
+   "t": 1.4583,
+   "what": "far person's hands with white ball reach lowest point (y~161 at f35-36) after catch, then rise to waist f48"
+  },
+  {
+   "frame": 38,
+   "t": 1.5833,
+   "what": "yellow fruit visible again in near person's hands; held to end"
+  },
+  {
+   "frame": 48,
+   "t": 2.0,
+   "what": "last frame"
+  }
+ ],
+ "files": {
+  "tracks": [
+   "tracks/white_ball.csv",
+   "tracks/yellow_fruit.csv",
+   "tracks/person_near.csv",
+   "tracks/person_far.csv"
+  ],
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

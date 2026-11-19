@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0034.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1139,
+  "question": "What is the average speed of the boat from the beginning to the end in m/s?",
+  "prior": "height of the person = 1.75m",
+  "depth_info": "t=1s, distance_boat_camera = 96.8995 m\nt=2s, distance_boat_camera = 92.8490 m\nt=1s, distance_human_camera = 92.1861m\nt=2s, distance_human_camera = 92.1960 m\nt=1s, distance_eagle_camera = 91.6867m\nt=2s, distance_eagle_camera = 103.4262m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

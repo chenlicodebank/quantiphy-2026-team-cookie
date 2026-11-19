@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0097.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "n_frames": 41,
+  "frame_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "pixel_convention": "x to the right, y down, origin top-left of the image, full resolution",
+  "background": "flat uniform grey (RGB ~132,126,135), no ground, horizon, markings or other static objects; no shadows",
+  "camera": {
+    "motion": "static (background is featureless and constant; object shapes/sizes constant; no shift detectable)",
+    "perspective": "pure side view, both objects move horizontally in the image plane; apparent sizes constant over the clip (airplane 800 x 239 px, car 121 x 41 px), so each object stays at constant depth. Pixel length ratio airplane/car = 800/121 = 6.6, close to a real A320 (~37 m) / Cybertruck (~5.7 m) ratio of ~6.5, so one common scale from the prior's object (2D convention) looks consistent."
+  },
+  "objects": [
+    {
+      "name": "airplane",
+      "description": "white Air China passenger jet (A320-like), red phoenix logo on tail fin, side view, nose pointing right; upper half of frame",
+      "moves": true,
+      "visible_frames": "3-40 (partially: nose enters at left frames 3-17; fully visible 18-38; nose exits right edge from frame 39)",
+      "track_file": "tracks/airplane.csv",
+      "reference_point": "cx_est, cy_est = centre of full-object bounding box (for edge-cut frames reconstructed from the visible nose/tail edge with the full length 800 px)",
+      "full_view_extents_px": {"length_nose_to_tail_tip": 800, "height_fin_top_to_engine_bottom": 239,
+        "bbox_frame24": [360, 269, 1159, 507],
+        "fuselage_vertical_extent": "rows ~394-480 (about 86 px tall), fuselage centre line y ~437",
+        "tail_fin_top_y": 269, "engine_nacelle_bottom_y": 507, "engine_nacelle_x_frame24": [816, 906]},
+      "motion": "moves right (+x) at a constant rate; nose x1 linear fit x1 = 53.41 * frame - 122.4 (residual 0.3 px); centre y constant (bbox centre y 388, fuselage centre ~437)",
+      "extrapolated": "nose at x=0 at frame ~2.3; tail tip at x=0 at frame ~17.2; nose at right edge x=1919 at frame ~38.2. Extrapolated centre x at frame 0 = -522 px (off-screen)"
+    },
+    {
+      "name": "car",
+      "description": "white/silver angular pickup (Tesla Cybertruck-like), side view, front pointing LEFT (sloped nose on left), black wheels; lower right of frame, below the airplane",
+      "moves": true,
+      "visible_frames": "0-40 (always fully visible)",
+      "track_file": "tracks/car.csv",
+      "reference_point": "cx_centroid (smoothest, mask centroid) or cx_bbox; y constant (bbox centre 607, bottom of wheels 627)",
+      "full_view_extents_px": {"length": 121, "length_range": "120-123 frame to frame", "height": 41, "bbox_frame0": [1412, 587, 1533, 627],
+        "wheels_dark_columns_frame24": [1303, 1414]},
+      "motion": "starts at rest (frame 0->1 displacement 0.0 px) and speeds up moving LEFT (-x); per-frame displacement grows roughly linearly from ~0 to ~15 px/frame at frame 40; centroid x goes 1473.96 (f0) -> 1163.77 (f40), net -310.2 px; bbox centre 1472.5 -> 1161.5. Quadratic fit of centroid x (sanity only): x = 1474.7 - 0.349 f - 0.1857 f^2 (resid 0.2 px), i.e. ~0.37 px/frame^2"
+    }
+  ],
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "clip start; car at rest at x_centre ~1472.5; airplane not yet visible"},
+    {"frame": 1, "time": 0.0417, "event": "car begins moving left (first nonzero displacement between frames 1 and 2)"},
+    {"frame": 3, "time": 0.125, "event": "airplane nose first visible at left edge (extrapolated entry frame 2.3)"},
+    {"frame": 18, "time": 0.75, "event": "airplane fully in frame (tail tip leaves left edge at ~17.2)"},
+    {"frame": 39, "time": 1.625, "event": "airplane nose leaves right edge (extrapolated 38.2)"},
+    {"frame": 40, "time": 1.6667, "event": "clip end; car still accelerating left; no contacts, collisions or direction changes in the clip"}
+  ],
+  "notes_file": "notes.md"
+}

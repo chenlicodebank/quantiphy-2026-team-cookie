@@ -1,0 +1,18 @@
+{
+ "video": "internet_0018.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.970032,
+ "frames": 51,
+ "duration_s": 1.7017,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2089,
+  "question": "What is the distance between the two players in meters at the beginning?",
+  "prior": "singles court width = 8.23m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,82 @@
+{
+  "video": "internet_0072.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 26.846729,
+  "frames": 39,
+  "width": 2160,
+  "height": 3840,
+  "time_convention": "t = frame / fps; frame 0 at t = 0",
+  "units": "pixels (full 2160x3840 resolution, x right, y down) and seconds; no metric scale assumed",
+  "description": "Top-down/frontal view of a pink wall lit by a round spotlight. A hand holding a red/pink 'CREDIT CARD' (chip, '0000 0000 0000 0000') sweeps it in from the bottom-right dark corner, up-left into the spotlight, decelerating to rest near the spot's centre. Camera static.",
+  "camera": {
+    "motion": "static",
+    "evidence": "half-max bounding box of the spotlight disc constant to within one 4-px sample over all 39 frames (x 100-2040, y 1092-3008); centroid shifts only 10-25 px when the hand/arm occlusion enters (scene/tracks/spotlight.csv)",
+    "per_frame_shift_px": 0
+  },
+  "objects": [
+    {
+      "name": "card",
+      "aka": "credit card, red card, pink card",
+      "identify": "the only saturated red/pink rectangle; text 'CREDIT CARD', gold chip on its left, 16 zeros; held at its right end between thumb and fingers",
+      "moves": true,
+      "visible_frames": "0-38 (frames 0-7 dark and motion blurred in the vignetted corner; clear from frame 8)",
+      "track": "tracks/card.csv",
+      "reference_point": "visible centre (mask centroid frames 8-38; by-eye centre frames 0-7)",
+      "pixel_size_at_rest_frames_33_38": {
+        "length_px_horizontal_long_axis": 432,
+        "length_range_px": [430, 435],
+        "height_px_short_axis": 300,
+        "height_range_px": [294, 316],
+        "note": "long axis nearly horizontal (tilt ~1-2 deg). Length = left edge (x~929) to right edge (x~1362), right end partly under the thumb but its corners are visible. Card is held at an angle so aspect 1.44 (not ISO 1.586)."
+      },
+      "apparent_length_vs_time": "grows from ~380 px (frames 8-13) to ~412 (frames 14-23) to ~432 (frames 30-38): card was tilted/nearer camera early and/or motion blur; prefer the rest value 432 px for a scale"
+    },
+    {
+      "name": "hand",
+      "aka": "hand and forearm holding the card",
+      "identify": "skin-coloured hand entering from the right/bottom-right, thumb on top of the card's right end",
+      "moves": true,
+      "visible_frames": "0-38",
+      "track": "moves rigidly with the card (use tracks/card.csv); not separately tracked",
+      "pixel_size_frame_38": "hand from card's right end (x~1340) to wrist ~x1900; forearm leaves frame at right edge around y 2700-3300"
+    },
+    {
+      "name": "card_shadow",
+      "identify": "dark rectangle on the wall offset to the left of the card",
+      "moves": true,
+      "visible_frames": "1-38",
+      "note": "frame 38: shadow left edge x~824, i.e. ~105 px left of the card's left edge; same height as the card; moves with the card. Excluded from the card mask."
+    },
+    {
+      "name": "spotlight",
+      "aka": "circle of light, lit disc on the wall",
+      "moves": false,
+      "visible_frames": "0-38",
+      "track": "tracks/spotlight.csv",
+      "frame0_half_max_disc": {"centre_px": [1064, 2042], "x0": 104, "x1": 2036, "y0": 1096, "y1": 3004, "diameter_x_px": 1932, "diameter_y_px": 1908},
+      "note": "soft edge: diameter depends on threshold (half of 1st-99th percentile grey level)"
+    },
+    {
+      "name": "wall",
+      "aka": "background / surface",
+      "moves": false,
+      "note": "uniform pink wall, no markings"
+    }
+  ],
+  "events": [
+    {"event": "card already moving at frame 0 (motion starts before the clip)", "frame": 0, "time_s": 0.0},
+    {"event": "card enters the bright spotlight area", "frame": 8, "time_s": 0.298},
+    {"event": "card centre passes into the disc interior; per-frame step falls below 50 px", "frame": 16, "time_s": 0.596},
+    {"event": "card comes essentially to rest (step < 7 px/frame from frame 32, <5 px from frame 36)", "frame": 36, "time_s": 1.341},
+    {"event": "end of clip, card held still near spot centre at (1135, 2058)", "frame": 38, "time_s": 1.415}
+  ],
+  "motion_summary_px": {
+    "direction": "up-left, monotonic deceleration, no reversal; path slightly curved (steeper at start)",
+    "start_frame0_centre": [1855, 3685],
+    "frame8_centre": [1589.3, 2801.1],
+    "end_frame38_centre": [1134.5, 2058.3],
+    "per_frame_step_px": "see step_px column of tracks/card.csv (~100-135 px/frame frames 1-8, ~60 at 11-14, ~25 at 20-23, ~12 at 28-31, <7 after 32)"
+  },
+  "files": {"card_track": "tracks/card.csv", "card_mask_raw": "tracks/card_raw.csv", "spotlight": "tracks/spotlight.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

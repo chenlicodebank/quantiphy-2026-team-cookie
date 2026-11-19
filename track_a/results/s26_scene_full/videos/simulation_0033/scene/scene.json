@@ -1,0 +1,75 @@
+{
+  "video": "simulation_0033.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 30.005455,
+  "frames": 54,
+  "frame_time": "t = frame / 30.005455 ; frame = round(t * fps). Last frame 53 = 1.766 s",
+  "image_size_px": [1080, 1080],
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (phase correlation of the wall vs frame 0: |shift| < 0.02 px in every frame)",
+    "orientation": "level, image plane parallel to the building facade and the street (facade verticals vertical, window widths identical in both rows, all ground lines horizontal)",
+    "horizon_y_px_estimate": 540,
+    "horizon_note": "no visible horizon; for a level camera it is at the principal-point row (assumed image centre y=540). Ground surfaces (sidewalk top, road) are seen from above, consistent with that.",
+    "principal_point_assumed": [540, 540]
+  },
+  "moving_objects": {
+    "orange_car": {
+      "description": "orange sports sedan (fastback, dark wheels with red brake calipers), far lane, drives RIGHT to LEFT, decelerating the whole clip; never stops",
+      "track": "tracks/orange_car.csv",
+      "visible_frames": "0-53 (f0 only a few blurred nose pixels at x>1040; f1-25 rear cut by right edge; f26 fully in frame; f27-37 partly occluded by grey car; f38-53 front cut by left edge)",
+      "reference_point": "ref_x = midpoint between the two wheel axles (wheel centres from Hough circles), ref_y = axle height y=929. Vehicle-root proxy; the rig root is probably near this x (ground level, y~982) - its vertical position is constant so speeds only depend on x",
+      "apparent_size_px": {
+        "wheelbase": 509, "wheel_diameter": 106, "wheel_centre_y": 929,
+        "roof_top_y": 742, "tyre_ground_y": 982, "height_roof_to_ground": 240,
+        "length_bumper_to_bumper": "776-782 (f26 776 unoccluded; f27-30 780-782 rear slightly hidden); perspective adds ~10-20 px of visible front face when car is right of centre and of rear face when left of centre",
+        "front_overhang_wheelcentre_to_bumper": "147 at x~880 (f10) ... 120 at x~300 (f30)",
+        "rear_overhang": "165-175 at f36-53 (car left of centre)"
+      },
+      "apparent_size_change": "none: roof y, ground y, wheel radius (~53 px) constant through the clip -> constant depth, motion parallel to the image plane",
+      "pixel_motion_summary": "front bumper moves ~34 px/frame at f1-5, ~28 px/frame at f20-25; axle midpoint ~26 px/frame at f25, ~20 px/frame at f37; rear bumper ~20 px/frame at f37-40, ~12 px/frame at f50-53 (all leftwards)"
+    },
+    "grey_car": {
+      "description": "dark grey/silver car in the NEAR lane, very close to the camera, heavily motion blurred, drives RIGHT to LEFT much faster than the orange car, passes in front of it",
+      "track": "tracks/grey_car.csv (manual edge readings, +-20-40 px)",
+      "visible_frames": "20-40 (front tip enters at right ~f20, front leaves left edge ~f29, rear bumper leaves left edge ~f41)",
+      "never_fully_in_frame": true,
+      "apparent_size_px": "taller than frame bottom; roof/top edge around y~820 when centred; estimated length ~1450-1500 px (front at f28 ~110, rear at f33 ~1000 plus ~5 frames of motion), very uncertain",
+      "pixel_motion_summary": "front edge ~-115 px/frame (f20-28), rear edge ~-130 px/frame (f33-40)"
+    },
+    "pedestrian": {
+      "description": "man in dark navy jacket, grey trousers, black shoes, blank (white) face, walking slowly LEFT to RIGHT on the sidewalk, close to the wall (behind hydrant and lamp post)",
+      "track": "tracks/pedestrian.csv",
+      "visible_frames": "0-53 (legs partly behind hydrant f0-4; behind lamp pole f25-41, head hidden f34-36; hips/legs hidden by the orange car from ~f31 on)",
+      "reference_point": "ref_x = head centre x (body nearly upright, pelvis x ~ head x within a few px); estimated pelvis y ~765",
+      "apparent_size_px": {"height_head_top_to_sole": "215-221 (head top y 650-654, soles y ~865-871)", "head_width": 25, "shoulder_width_torso": "~40-45"},
+      "pixel_motion_summary": "ref_x 135.5 (f0) -> 174 (f24) -> 236 (f53): ~1.6 px/frame early, ~2.4 px/frame at the end"
+    }
+  },
+  "static_objects": {
+    "lamp_post": {"description": "black cast-iron street lamp on the sidewalk, left of centre", "x_range": [155, 236], "pole_x": [186, 199], "base_x": [162, 216], "top_y": 328, "bottom_y": 893, "height_px": 565, "lantern_head": "x 155-236, y 328-395"},
+    "fire_hydrant": {"description": "white hydrant with rust spots and side nozzles, far left on sidewalk", "x_range": [62, 140], "body_width_px": 50, "top_y": 753, "bottom_y": 891, "height_px": 138},
+    "graffiti_NEOM": {"description": "teal graffiti lettering with black outline on the wall, right of centre", "x_range": [614, 922], "y_range": [605, 791], "width_px": 309, "height_px": 187},
+    "window_lower_left": {"x_range": [254, 370], "y_range": [189, 393], "width_px": 117, "height_px": 205},
+    "window_lower_right": {"x_range": [708, 824], "y_range": [190, 393], "width_px": 117, "height_px": 204},
+    "windows_upper_row": {"note": "cut by the top edge: left x 259-370 (plus white sill to ~372), right x 708-824, panes y 0-74"},
+    "building_wall": {"description": "white-painted brick facade, fronto-parallel; vertical pilaster seams near x ~140, 470, 607, 935, 1065; wall base / grass strip y ~810-828"},
+    "sidewalk": {"y_range": [828, 905], "note": "wet, reflective"},
+    "curb": {"face_y_range": [905, 945], "note": "curb top edge y~905, gutter y~945-955"},
+    "lane_marking": {"y": 959, "note": "thin white line across the whole road"},
+    "road": {"y_range": [955, 1080], "note": "wet asphalt with reflections of the cars"}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "orange car nose appears at right edge; pedestrian already walking right"},
+    {"frame": 20, "t": 0.667, "event": "grey car front enters at right edge (bottom of frame)"},
+    {"frame": 26, "t": 0.867, "event": "orange car entirely in frame (x 272-1047); grey car begins to overlap its lower body"},
+    {"frame": 25, "t": 0.833, "event": "pedestrian starts passing behind the lamp pole (until ~f41)"},
+    {"frame": 29, "t": 0.967, "event": "grey car front leaves left edge"},
+    {"frame": 31, "t": 1.033, "event": "orange car front bumper hidden by grey car (to f37); pedestrian legs hidden by orange car from here on"},
+    {"frame": 38, "t": 1.266, "event": "orange car front bumper reaches/leaves the left edge"},
+    {"frame": 41, "t": 1.366, "event": "grey car rear leaves left edge; orange car unoccluded again (front cut by edge)"},
+    {"frame": 53, "t": 1.766, "event": "clip ends; orange car still moving left (~12 px/frame), decelerating throughout"}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/orange_car.csv", "tracks/pedestrian.csv", "tracks/grey_car.csv"], "scripts": "scripts/"}
+}

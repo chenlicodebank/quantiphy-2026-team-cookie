@@ -1,0 +1,132 @@
+{
+  "video": "internet_0044.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 217,
+  "duration_s": 7.2333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "coordinates": "pixels, x to the right, y DOWN. '_f0' columns = stabilised coords (frame 0 image, camera drift removed); '_raw' = position in that frame's own image. Camera drift is small (<= ~10 px during the ball flight), see camera.",
+  "description": "Handheld-phone-style static shot of a wooden desk. A hand at the lower right holds a white ping-pong ball (Franklin logo), swings up and throws it to the LEFT at about frame 40. The ball bounces 12 times on the desk top, passing IN FRONT of (closer to the camera than) the red kettle, white cylinder, green glass bottle, juice bottle and white bowl, and leaves the image at the left edge (last partly visible frame 147). No other object moves.",
+  "camera": {
+    "type": "nearly static, slow drift (handheld or settling tripod)",
+    "per_frame_file": "tracks/camera_similarity.csv (scale, rotation, translation of frame i vs frame 0; p_frame_i = s*R*p_frame0 + t) and tracks/camera_shift.csv (phase-correlation shifts)",
+    "drift_summary": "translation vs frame 0: frame 41 ~(+1.5,+1) px, frame 100 ~(+4.5,-4.4), frame 147 ~(+9.5,-10), frame 216 ~(+11,-18); rotation <= 0.23 deg; scale 0.9985-1.0001 (no zoom)",
+    "advice": "Use the _f0 columns for motion (background-referenced). Differences raw vs f0 over the whole flight are <= ~10 px in x and y."
+  },
+  "perspective": {
+    "note": "2D scene by label, but it is a real 3D desk viewed roughly horizontally from slightly above. Motion is mainly right-to-left across the image (parallel to the image plane) with vertical bounces. The ball drifts slightly toward the camera as it goes left: table-contact image y of the ball centre rises from ~790 (first bounces) to ~810-819 (last bounces) and its apparent diameter grows from ~73-75 px (frames 50-90) to ~78-80 px (frames 110-140), i.e. ~6% scale change. Annotators used a single planar scale.",
+    "desk_front_edge_y_px": "~1010 (horizontal, bottom of image)",
+    "desk_back_wall_line_y_px": "~640-700 (hidden behind objects)"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "aka": ["ping-pong ball", "table-tennis ball", "white ball"],
+      "distinguish": "small white sphere with black 'Franklin' logo; the only moving object besides the hand",
+      "moves": true,
+      "visible_frames": "0-147 (0-36 held in hand, partly covered by fingers; 37-40 in the throwing hand, blurred; 41-147 free flight / bouncing; 140-147 cut by the left image edge; 148-216 out of frame)",
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre of the ball (centroid of white segmented blob; arc-fit fill where the ball is low-contrast against the white bowl/cylinder)",
+      "apparent_diameter_px": {
+        "recommended": 76,
+        "range": "73-80",
+        "in_hand_frame0": "~78 (fingers cover the right side)",
+        "apex_frames_vertical_extent": {"55": 73, "66": 73, "76": 74, "86": 75.5, "95": 77.5, "104": 75, "112": 77, "120": 79, "128": 82, "135": 79.5},
+        "note": "Horizontal width is inflated by horizontal motion blur (+2..8 px), vertical height by vertical blur near bounces (up to +30 px). Use the minor axis (mask_minor_px) at apex frames for the diameter."
+      }
+    },
+    {
+      "name": "hand",
+      "aka": ["thrower's hand", "person's hand", "arm"],
+      "distinguish": "right side of image, holds the ball, enters from the right edge",
+      "moves": true,
+      "visible_frames": "0-~45 fully (holding 0-36, throw 37-41, leaves through the top-right ~42-46); afterwards only a fingertip at the right edge (x>1880, y~800-890) and the hand's shadow on the table (frames ~46-62)",
+      "track": "tracks/hand.csv (rough skin-colour bbox; frames 0-36 bbox includes the ball; 46-62 bbox is mostly the shadow)"
+    },
+    {
+      "name": "white_bowl", "aka": ["bowl", "wavy white bowl", "ceramic bowl"], "moves": false,
+      "distinguish": "leftmost object, white with wavy rim",
+      "bbox_px_frame0": [117, 648, 500, 812], "width_px": 383, "height_px": 164, "centre_px": [308, 730]
+    },
+    {
+      "name": "juice_bottle", "aka": ["plastic bottle", "iced tea bottle", "yellow-cap bottle"], "moves": false,
+      "distinguish": "plastic bottle with yellow cap and orange/yellow label, second from left",
+      "bbox_px_frame0": [562, 425, 684, 811], "width_px": 122, "height_px": 386, "cap_width_px": 55, "centre_px": [623, 618]
+    },
+    {
+      "name": "green_bottle", "aka": ["wine bottle", "glass bottle", "champagne bottle"], "moves": false,
+      "distinguish": "tall dark-green glass bottle, middle",
+      "bbox_px_frame0": [772, 302, 909, 815], "width_px": 137, "height_px": 513, "neck_width_px": 50, "centre_px": [840, 558]
+    },
+    {
+      "name": "white_cylinder", "aka": ["white cup", "white vase", "white mug without handle", "white jar"], "moves": false,
+      "distinguish": "short white cylinder with diagonal ridges, between green bottle and kettle",
+      "bbox_px_frame0": [979, 603, 1095, 799], "width_px": 116, "height_px": 196, "centre_px": [1037, 701]
+    },
+    {
+      "name": "red_kettle", "aka": ["kettle", "electric kettle", "Tefal kettle"], "moves": false,
+      "distinguish": "red electric kettle (Tefal) with handle on the right",
+      "bbox_px_frame0": [1148, 523, 1503, 811], "width_incl_handle_px": 355, "body_width_excl_handle_px": "~255 (x 1150-1405)", "height_px": 288, "centre_px": [1325, 667]
+    },
+    {
+      "name": "desk_lamp", "aka": ["lamp"], "moves": false,
+      "distinguish": "black articulated desk lamp, right",
+      "shade_bbox_px": [1620, 60, 1828, 230], "base_bbox_px": [1515, 655, 1722, 722], "overall_height_px": "~660 (y 60-722)"
+    },
+    {
+      "name": "monitor", "aka": ["computer monitor", "screen", "Dell monitor"], "moves": false,
+      "distinguish": "large black monitor in the background",
+      "screen_bbox_px": [468, 0, 1336, 500], "width_px": 868, "note": "top edge is cut by the image top"
+    },
+    {
+      "name": "speaker", "aka": ["black box", "black speaker"], "moves": false,
+      "bbox_px": [1795, 518, 1920, 760], "note": "cut by right image edge"
+    },
+    {
+      "name": "flowers", "aka": ["dried roses", "dark red flowers"], "moves": false,
+      "bbox_px": [1775, 322, 1920, 468]
+    },
+    {
+      "name": "desk", "aka": ["table", "wooden desk", "tabletop"], "moves": false,
+      "note": "light wood desk top; ball bounces on it; front edge at y~1010 across the full image width (1920 px)"
+    },
+    {
+      "name": "cables_power_strip", "moves": false,
+      "note": "black cables and a white power strip behind the bowl and juice bottle (x~110-560, y~520-700)"
+    }
+  ],
+  "events": [
+    {"event": "ball held still in hand", "frames": "0-22", "t_s": "0.000-0.733", "ball_centre_f0": [1810, 808]},
+    {"event": "hand repositions ball (lifts/moves right ~40 px)", "frames": "23-36", "t_s": "0.767-1.200"},
+    {"event": "throwing swing (ball in hand, up-left)", "frames": "37-40", "t_s": "1.233-1.333"},
+    {"event": "release (ball leaves hand)", "frame": 40, "t_s": 1.333, "note": "first clearly free frame 41 (t=1.367); +-1 frame"},
+    {"event": "top of thrown arc", "frame": 43, "t_s": 1.433, "y_f0": 437},
+    {"event": "bounce 1 (desk, in front of kettle)", "frame": 49, "t_subframe": 49.15, "t_s": 1.633, "x_f0": 1302},
+    {"event": "bounce 2 (desk, in front of white cylinder)", "frame": 60, "t_subframe": 60.41, "t_s": 2.0, "x_f0": 1080},
+    {"event": "bounce 3 (in front of green bottle)", "frame": 71, "t_subframe": 71.15, "t_s": 2.367, "x_f0": 892},
+    {"event": "bounce 4 (between green bottle and juice bottle)", "frame": 81, "t_subframe": 81.21, "t_s": 2.7, "x_f0": 748},
+    {"event": "bounce 5 (in front of juice bottle)", "frame": 91, "t_subframe": 90.67, "t_s": 3.033, "x_f0": 612},
+    {"event": "bounce 6 (right of bowl)", "frame": 100, "t_subframe": 99.67, "t_s": 3.333, "x_f0": 502},
+    {"event": "bounce 7 (in front of bowl)", "frame": 108, "t_subframe": 108.15, "t_s": 3.6, "x_f0": 405},
+    {"event": "bounce 8 (in front of bowl)", "frame": 116, "t_subframe": 116.10, "t_s": 3.867, "x_f0": 313},
+    {"event": "bounce 9 (in front of bowl)", "frame": 124, "t_subframe": 124.22, "t_s": 4.133, "x_f0": 220},
+    {"event": "bounce 10 (in front of bowl left end)", "frame": 131, "t_subframe": 131.11, "t_s": 4.367, "x_f0": 140},
+    {"event": "bounce 11", "frame": 138, "t_subframe": 138.27, "t_s": 4.6, "x_f0": 59},
+    {"event": "bounce 12 (ball half out of frame)", "frame": 145, "t_s": 4.833, "x_f0": "~10 (truncated)"},
+    {"event": "arc apexes (min image y of ball centre)", "frames": [43, 55, 66, 76, 86, 95, 104, 112, 120, 127, 135, 142]},
+    {"event": "ball starts leaving left edge", "frame": 140, "t_s": 4.667},
+    {"event": "ball fully out of frame", "frame": 148, "t_s": 4.933},
+    {"event": "hand leaves frame (top right) after throw", "frames": "42-46"}
+  ],
+  "contacts": "Ball only contacts the hand and the desk top. It passes in front of all objects; none of them moves, so no ball-object impacts.",
+  "files": {
+    "tracks/ball.csv": "ball per frame",
+    "tracks/hand.csv": "rough hand bbox per frame",
+    "tracks/camera_similarity.csv": "camera drift per frame",
+    "tracks/camera_shift.csv": "phase-correlation shift per frame",
+    "track_overlay.jpg": "ball track drawn on frame 0 (0.6x)",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

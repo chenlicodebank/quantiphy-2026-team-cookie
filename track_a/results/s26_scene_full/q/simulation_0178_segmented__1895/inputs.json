@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0178_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1895,
+  "question": "What is the displacement of the big elephant in meters?",
+  "prior": "speed of the big elephant = 2.313m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

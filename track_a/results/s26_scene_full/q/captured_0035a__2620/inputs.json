@@ -1,0 +1,18 @@
+{
+ "video": "captured_0035a.mp4",
+ "video_source": "lab",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2620,
+  "question": "What is the velocity of the basketball at 1.6s in cm/s?",
+  "prior": "diameter of the basketball = 23.2 cm",
+  "depth_info": "t=0.6s, distance_soccer_ball_camera = 2.7580 m\nt=0.6s, distance_basketball_camera = 2.2700 m\nt=1.6s, distance_soccer_ball_camera = 3.0520 m\nt=1.6s, distance_soccer_ball_camera = 2.4120 m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

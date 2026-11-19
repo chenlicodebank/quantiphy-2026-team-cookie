@@ -1,0 +1,214 @@
+{
+ "video": "simulation_0216.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "size_px": [
+  1920,
+  1080
+ ],
+ "time_convention": "t = frame / 24; frame = round(t*24); frame 0 .. 49 (t 0 .. 2.0417 s)",
+ "camera": {
+  "motion": "static",
+  "max_background_shift_px": 0.042,
+  "view": "fronto-parallel view of a living-room wall; floor visible at the bottom; the cat walks left->right parallel to the wall/image plane in front of the furniture",
+  "perspective": "essentially none for in-plane motion; cat path is horizontal at constant depth (paw contact line y~1020 every frame, apparent body length constant ~245 px)"
+ },
+ "objects": {
+  "cat": {
+   "moving": true,
+   "desc": "black cat with white paws/socks, white-grey face/chest, tail raised upright; the only moving object",
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded": "never (it walks in front of bench and TV stand); its long shadow falls to the right onto the TV stand / floor",
+   "track": "tracks/cat.csv",
+   "reference_point": "torso_cx, torso_cy = centroid of the body blob (fur mask opened with 31 px ellipse: body+head, no legs/tail/ears) - best proxy for the rig root/pelvis horizontal position; root likely sits nearer the hips, but for horizontal walking speed all body points move together",
+   "recommended_position_columns": "body_x_matched / body_y_matched (cumulative upper-body shape-matching shifts, anchored at torso centroid of frame 0; per-frame step noise ~1 px) for speeds; torso_cx/torso_cy (centroid, per-frame noise ~3-5 px from leg/neck shape changes) as a cross-check",
+   "mean_px_per_frame_torso_x": 17.61,
+   "mean_px_per_frame_matched": 17.73,
+   "matched_step_px_min_max": [
+    13.9,
+    20.0
+   ],
+   "nose_x_manual_frame0_to_49_px": 870,
+   "torso_x_first_last": [
+    393.3,
+    1256.3
+   ],
+   "net_torso_displacement_px_0_49": 863.0,
+   "manual_keyframe_readings": {
+    "0": {
+     "nose_x": 529,
+     "rump_x": 281,
+     "ear_tip_y": 849,
+     "tail_tip": [
+      null,
+      797
+     ],
+     "hind_paw_back_x": 219,
+     "paw_bottom_y": 1020,
+     "nose_to_rump_px": 248,
+     "paw_to_ear_height_px": 171,
+     "paw_to_tailtip_height_px": 223
+    },
+    "20": {
+     "nose_x": 881,
+     "rump_x": 643,
+     "ear_tip_y": 849,
+     "tail_tip": [
+      583,
+      797
+     ],
+     "hind_paw_back_x": 553,
+     "paw_bottom_y": 1020,
+     "nose_to_rump_px": 238,
+     "paw_to_ear_height_px": 171,
+     "paw_to_tailtip_height_px": 223
+    },
+    "40": {
+     "nose_x": 1237,
+     "rump_x": 992,
+     "ear_tip_y": 851,
+     "tail_tip": [
+      940,
+      799
+     ],
+     "hind_paw_back_x": 939,
+     "paw_bottom_y": 1020,
+     "nose_to_rump_px": 245,
+     "paw_to_ear_height_px": 169,
+     "paw_to_tailtip_height_px": 221
+    },
+    "49": {
+     "nose_x": 1399,
+     "rump_x": 1151,
+     "ear_tip_y": 851,
+     "tail_tip": [
+      1095,
+      805
+     ],
+     "hind_paw_back_x": 1097,
+     "paw_bottom_y": 1017,
+     "nose_to_rump_px": 248,
+     "paw_to_ear_height_px": 166,
+     "paw_to_tailtip_height_px": 212
+    }
+   },
+   "typical_extents_px": {
+    "nose_to_rump_body_length": 245,
+    "body_length_incl_hind_legs (bbox_x1-bbox_x0, tail is upright)": "~285-300 (varies with stride)",
+    "height_paw_to_ear_tip": 170,
+    "height_paw_to_tail_tip": "~215-223",
+    "torso_depth_back_to_belly": "~100-110"
+   }
+  },
+  "bench": {
+   "moving": false,
+   "desc": "wooden slatted side table/bench at far left, lower shelf, 4 splayed legs",
+   "frame": 49,
+   "bbox_px": [
+    25,
+    780,
+    492,
+    992
+   ],
+   "length_px": 467,
+   "height_px": 212,
+   "top_surface_front_edge_y": 800
+  },
+  "tv_stand": {
+   "moving": false,
+   "desc": "long dark wood media console with black curved metal legs, centre",
+   "frame": 0,
+   "bbox_px": [
+    650,
+    780,
+    1423,
+    990
+   ],
+   "length_px": 773,
+   "height_px_total": 210,
+   "cabinet_body_y": [
+    780,
+    915
+   ]
+  },
+  "tv": {
+   "moving": false,
+   "desc": "black flat-screen TV on the stand",
+   "frame": 0,
+   "screen_bbox_px": [
+    814,
+    528,
+    1213,
+    758
+   ],
+   "width_px": 399,
+   "height_px_screen": 230,
+   "height_incl_feet_px": 262,
+   "feet_bottom_y": 790
+  },
+  "vase": {
+   "moving": false,
+   "desc": "white/blue patterned ceramic vase on the left end of the stand",
+   "frame": 49,
+   "bbox_px": [
+    681,
+    573,
+    781,
+    792
+   ],
+   "width_px": 100,
+   "height_px": 219
+  },
+  "lamp": {
+   "moving": false,
+   "desc": "table lamp with pleated white conical shade and copper base, right end of stand",
+   "frame": 0,
+   "bbox_px": [
+    1239,
+    501,
+    1451,
+    789
+   ],
+   "height_px": 288,
+   "shade_width_px": 212,
+   "shade_y": [
+    501,
+    609
+   ],
+   "base_width_px": 50
+  },
+  "mirror": {
+   "moving": false,
+   "desc": "tall floor mirror in light wooden frame leaning against the wall, far right",
+   "frame": 0,
+   "bbox_px": [
+    1578,
+    390,
+    1845,
+    968
+   ],
+   "height_px": 578,
+   "width_px_top": 237,
+   "width_px_bottom": 247
+  },
+  "floor": {
+   "moving": false,
+   "desc": "light tan floor; cat paw contact line y ~1020; wall/floor junction behind furniture ~y 950-968"
+  },
+  "window_light": {
+   "moving": false,
+   "desc": "sunlit patches and diagonal window-frame shadows on the wall (static)"
+  }
+ },
+ "events": {
+  "motion": "cat walks at roughly steady pace for the whole clip (frames 0-49); no start, stop, turn, jump or contact events",
+  "gait": "torso_cy oscillates by ~10 px; local minima (body highest) near frames 6, 15, 24, 34, 43 -> stride period ~9.3 frames (~0.39 s)",
+  "direction": "left -> right (+x) throughout",
+  "passes": "cat in front of bench legs frames 0-~12; in front of TV stand from ~frame 15 on (body x 650-1423)"
+ }
+}

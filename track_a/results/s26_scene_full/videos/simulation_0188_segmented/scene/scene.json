@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0188_segmented.mp4",
+  "source": "segmentation (Blender simulation render, background replaced by plain white)",
+  "scene_type": "3D",
+  "fps": 30.0, "frames": 60, "width": 1920, "height": 1080,
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (image coords, x right, y down, origin top-left) and seconds; no metric scale estimated",
+  "objects": [
+    {
+      "name": "truck",
+      "aliases": ["catering truck", "airport catering high-loader", "lorry", "vehicle"],
+      "description": "White/grey box truck with a white MAN-style cab facing right and a raised grey railing/stair platform on top of the box above the cab (aircraft catering truck). Only object in the video.",
+      "moves": true,
+      "visible_frames": [0, 58],
+      "fully_in_view_frames": [34, 43],
+      "clipping": "frames 0-33 rear part cut off by left image edge; frames 44-58 front cut off by right image edge; frame 58 only a tiny remnant (rear corner, 3865 px); frame 59 empty",
+      "track_file": "tracks/truck.csv",
+      "reference_point_note": "Blender vehicle root is not visible. Best proxies: axles_mid (midpoint of front and rear wheel hubs, at axle height) or a single wheel hub. Ground-contact proxies: *_tyre_bottom_y under each hub. Mask centroid/bbox are only meaningful in fully_in_view frames 34-43.",
+      "parts": {
+        "front_hub": "centre of the front (steer) wheel hub, below the cab",
+        "rear_hub": "centre of the rear wheel hub, under the box",
+        "front_bumper_right": "right-most point of the front bumper (yellow marker light corner), the truck's leading point in the image",
+        "box_rear_top / box_rear_bottom": "top and bottom of the rear vertical edge of the cargo box (near side)",
+        "stairs_top": "top rail of the platform/railing structure above the cab, near its left post"
+      }
+    }
+  ],
+  "static_objects": "none - the background was replaced by uniform white; no ground, markings, shadows or other objects are visible",
+  "measurements_at_frame_34_px": {
+    "note": "frame 34 is the first frame with the whole truck in view (smallest full view); frame 43 the last (largest)",
+    "frame34": {"bbox": [38, 353, 1149, 933], "bbox_w": 1112, "bbox_h": 581, "length_bumper_to_boxrear": 1129, "box_rear_edge_height": 292, "wheelbase_hub_to_hub": 498, "front_wheel_radius_hub_to_ground": 69, "rear_wheel_radius_hub_to_ground": 61, "overall_height_top_of_stairs_to_front_tyre_bottom": 581},
+    "frame43": {"bbox": [458, 320, 1835, 998], "bbox_w": 1378, "bbox_h": 679, "length_bumper_to_boxrear": 1384, "box_rear_edge_height": 328, "wheelbase_hub_to_hub": 668, "front_wheel_radius_hub_to_ground": 79.5, "rear_wheel_radius_hub_to_ground": 70.6}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "truck essentially at rest / starting to move: front hub moves 0.56 px from frame 0 to 1, 1.7 px from 1 to 2, then the per-frame step grows steadily (speeding up throughout the clip, no braking, no direction change)"},
+    {"frame": 25, "t": 0.833, "event": "rear wheel hub enters the image at the left edge"},
+    {"frame": 34, "t": 1.133, "event": "rear of the box clears the left image edge: whole truck in view (frames 34-43)"},
+    {"frame": 44, "t": 1.467, "event": "front bumper reaches the right image edge; truck starts leaving the view"},
+    {"frame": 47, "t": 1.567, "event": "front wheel hub leaves the image at the right edge"},
+    {"frame": 55, "t": 1.833, "event": "rear wheel hub leaves the image at the right edge"},
+    {"frame": 58, "t": 1.933, "event": "last frame with any of the truck visible (tiny rear-corner remnant)"},
+    {"frame": 59, "t": 1.967, "event": "truck completely out of view"}
+  ],
+  "camera": {
+    "motion": "assumed static (simulation convention: camera fixed within a clip). Cannot be verified from the image because the background is uniform white; the truck's vanishing point stays constant (see below), consistent with a fixed camera and a straight-driving truck.",
+    "vanishing_point_truck_length_direction_px": [-3030, 538],
+    "vp_note": "intersection of the box top edge line and the hub-to-hub line, frames 16-56: x between -2930 and -3170, y 534-548 (median about -3030, 538). Stable => the truck does not yaw; it drives straight along its own axis (front hub trajectory also points at this VP). The VP lies at y ~ 538 ~ image centre row 540, so the horizon of the (invisible) ground plane is at y ~ 538 and the camera is close to level (no pitch, no visible roll).",
+    "motion_direction_in_image": "right and slightly down (toward the camera): front hub goes from (52, 801) at frame 0 to (1484, 918) at frame 43; the truck approaches the camera, so its apparent size grows",
+    "apparent_size_change": "wheelbase hub-to-hub 331 px (f0, rear hub extrapolated) -> 374 (f20) -> 498 (f34) -> 668 (f43) -> 914 (f50) -> 1273 (f57, extrapolated); box rear edge height 225 (f0, extrapolated) -> 248 (f20) -> 292 (f34) -> 328 (f43) -> 375 (f50) -> 447 (f57); front wheel radius 54.7 (f0) -> 58.9 (f20) -> 69 (f34) -> 79.5 (f43) -> 84.8 (f46). Per-frame values in tracks/truck.csv. Length-like measures grow faster than heights because the truck is also seen less foreshortened as it comes nearer and moves right."
+  }
+}

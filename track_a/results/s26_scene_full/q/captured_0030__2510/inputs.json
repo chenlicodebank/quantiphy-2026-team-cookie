@@ -1,0 +1,18 @@
+{
+ "video": "captured_0030.mp4",
+ "video_source": "lab",
+ "video_type": "S3SC",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2510,
+  "question": "What is the velocity of the red ball at 0.6s in cm/s?",
+  "prior": "diameter of the red ball = 7cm",
+  "depth_info": "t=0.2s, distance_ball_camera=0.8715s\nt=0.4s, distance_ball_camera=1.1660m\nt=0.6s, distance_ball_camera=1.3720m\nt=0.8s, distance_ball_camera=1.3150m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,29 @@
+{
+  "video": "simulation_0251_segmented.mp4",
+  "source": "segmentation (simulation footage, background replaced by white)",
+  "scene": "2D",
+  "fps": 24.0, "frames": 51, "duration_s": 2.125, "width": 1920, "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 is t=0",
+  "camera": {"static": true, "background": "uniform white (segmentation), no ground, horizon or other features; no background shift measurable or expected"},
+  "objects": [
+    {
+      "name": "ball",
+      "description": "the only object: a light-grey (RGB ~234) disc/sphere mask on a white background; frame 0 shows a small darker grey sliver at the left edge",
+      "moves": true,
+      "visible_frames": [0, 50],
+      "partially_out_of_frame": [0, 1],
+      "track_file": "tracks/ball.csv",
+      "reference_point": "cx,cy = bbox midpoint (= centre of the disc, the object origin); for clipped frames 0-1 cx = bbox_x1 - 24",
+      "diameter_px": {"median_bbox": 49.0, "range_bbox_width_x": [48, 55], "range_bbox_height_y": [46, 51], "note": "edges are soft/low contrast; true diameter about 49 +/- 2 px; equivalent-area diameter ~49-50 px"},
+      "motion": "straight horizontal motion to the right along y ~ 555-557 px; enters from the left edge at frame 0; still on screen moving at frame 50 (cx = 1451); per-frame step falls from ~33 px/frame (frames 2-10) to ~26 px/frame (frames 45-50), i.e. steady deceleration; vertical drift < 2 px over the clip",
+      "positions_key": {"f2": [49.0, 555.0], "f10": [310.5, 555.0], "f20": [619.0, 556.5], "f30": [913.0, 557.0], "f40": [1191.0, 557.0], "f50": [1451.0, 556.5]}
+    }
+  ],
+  "static_objects": [],
+  "events": [
+    {"event": "ball enters frame from left edge (already moving)", "frame": 0, "time": 0.0},
+    {"event": "ball fully inside frame", "frame": 2, "time": 0.0833},
+    {"event": "clip ends with ball still moving right, decelerating, no contact/bounce", "frame": 50, "time": 2.0833}
+  ],
+  "no_events": "no bounce, impact, collision, direction change or stop in the clip"
+}

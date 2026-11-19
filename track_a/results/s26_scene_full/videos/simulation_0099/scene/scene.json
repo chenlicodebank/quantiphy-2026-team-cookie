@@ -1,0 +1,78 @@
+{
+  "video": "simulation_0099.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (image x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (background difference frame 0 vs 72 in object-free regions: mean 0.36 / 0.53 grey levels; no pan, no shake)",
+    "background_shift_px_per_frame": [0, 0],
+    "perspective": "2D side view: both objects move horizontally in planes facing the camera; horizon is a straight horizontal line at y=567. Apparent sizes are constant over time (shark length 274+-2 px, boat hull top edge fixed at y=367-368), so a single px scale applies to each object. Whether boat and shark share one depth/scale is unknown (they are separate layers: sea surface above y=673, underwater blue band below)."
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red-and-white fishing boat with hull number 'AH805', white wheelhouse, mast, stern railings; floats on the grey sea surface in the upper part of the frame; bow points right",
+      "moves": true,
+      "motion": "translates to the RIGHT, horizontal only; at rest frames 0-1, then constant 17.88 px/frame (std 0.11) through frame 72",
+      "visible_frames": [0, 72],
+      "fully_in_frame_x": "frames 0-47 (bow reaches the right edge at frame 48); mast top is cut by the top image edge in every frame where the mast is visible (mast leaves frame at frame 68-69)",
+      "track_file": "tracks/boat.csv",
+      "reference_point": "ref_x = 657.5 (midpoint of stern 228 and bow 1087 at frame 0) + measured shift of the stern rail post; ref_y = 488 (midpoint of hull top at bow y=367 and visible keel y~610). The true Blender origin is not visible; since motion is pure horizontal translation, any rigid point gives the same displacement.",
+      "extents_frame0_px": {
+        "overall_length_x_mask": 860,
+        "overall_length_note": "stern x=228 (mask, incl. soft edge; stern hull edge at 50% contrast x=237) to bow tip x=1087",
+        "red_hull_band_x": [232, 1087],
+        "red_hull_band_y": [367, 527],
+        "hull_top_at_bow_y": 367,
+        "visible_keel_bottom_y_approx": 610,
+        "reflection_bottom_y": 673,
+        "mast_top_y": "<=0 (cut by top edge); mast x ~705-722, centre 711.9",
+        "visible_height_from_top_edge_to_keel": "~610 (lower bound of true height; mast truncated)",
+        "wheelhouse_box_approx": {"x": [640, 818], "y": [238, 400]},
+        "stern_rail_post_x": 252.6,
+        "rudder_approx": {"x": [255, 290], "y": [563, 640]}
+      }
+    },
+    {
+      "name": "shark",
+      "description": "grey shark (white belly, dorsal fin) swimming underwater in the blue band in the lower part of the frame; nose points left",
+      "moves": true,
+      "motion": "translates to the LEFT, horizontal only (centroid y 905.4+-0.2); at rest frames 0-1, then constant 10.76 px/frame (std ~0.08) through frame 72",
+      "visible_frames": [0, 72],
+      "fully_in_frame": "frames 0-63; nose touches the left image edge from frame 64 (cut afterwards)",
+      "track_file": "tracks/shark.csv",
+      "reference_point": "ref_x/ref_y = bbox centre at frame 0 (810.5, 904.0) + sub-pixel template shift of the shark's body",
+      "extents_px": {
+        "length_nose_to_tail_tip": "274 +-2 (frames 0-63)",
+        "height_dorsal_tip_to_pectoral_fin": 107,
+        "bbox_frame0": [674, 851, 947, 957],
+        "main_axis_angle_deg": "about -2 (practically horizontal)"
+      }
+    },
+    {
+      "name": "horizon / sea surface",
+      "moves": false,
+      "description": "sky (grey gradient) meets the sea at y=567 (straight, horizontal across the full width); sea surface band y=567-673",
+      "visible_frames": [0, 72]
+    },
+    {
+      "name": "underwater blue band",
+      "moves": false,
+      "description": "flat blue region from y=674 to the bottom edge (y=1079), where the shark swims",
+      "visible_frames": [0, 72]
+    }
+  ],
+  "events": [
+    {"event": "both boat and shark at rest (frames 0 and 1 identical)", "frames": [0, 1], "times_s": [0.0, 0.0417]},
+    {"event": "motion starts: boat moves right, shark moves left (first displacement between frame 1 and 2)", "frame": 2, "time_s": 0.0833},
+    {"event": "boat bow reaches right image edge (bow x=1910 at frame 47)", "frame": 48, "time_s": 2.0},
+    {"event": "shark nose reaches left image edge (nose x=8 at frame 63)", "frame": 64, "time_s": 2.6667},
+    {"event": "boat mast (centre x=711.9+17.88*(f-1)) reaches the right edge at frame 68 and is gone at frame 69; rigging lines leave by frame 70 (bbox top jumps from 0 to 231)", "frame": 68, "time_s": 2.8333},
+    {"event": "clip ends, both still moving at constant pixel speed", "frame": 72, "time_s": 3.0}
+  ],
+  "notes": "see notes.md"
+}

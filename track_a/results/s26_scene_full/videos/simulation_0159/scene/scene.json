@@ -1,0 +1,80 @@
+{
+ "video": "simulation_0159.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 41,
+ "time_of_frame_i_s": "i / 24",
+ "image_size_px": [1920, 1080],
+ "units": "pixels (x right, y down, origin top-left of the 1920x1080 frame) and seconds; no metric scale assumed",
+ "camera": {
+  "motion": "static (water background mean abs difference between frame 0 and frames 1..40 < 2 grey levels in object-free regions; seabed outline identical in all frames)",
+  "background_shift_px_per_frame": [0, 0],
+  "principal_point_assumed_px": [960, 540],
+  "focal_length": "unknown - estimate from given depths + a known size (see notes.md)",
+  "perspective_cues": "No horizon visible (open blue water). Seabed dunes occupy the bottom ~12% of the image (crest line y~915-975 px, x 0-1400; darker far seabed at right, y>1050). Sun rays (god rays) fan down from the top centre (x~900-1100). Camera looks roughly horizontally / slightly upward toward the surface.",
+  "apparent_size_change": {
+   "shark": "grows strongly: body-core height (fins removed) 154 px at f0 -> 175 px f20 -> 263 px f36 -> 319 px f40 (factor ~2.07 f0->f40); full mask length (fully visible frames) 554 px f20 -> 858 px f36 -> 901 px f37. The shark comes closer to the camera while swimming right-to-left.",
+   "turtle": "roughly constant: body-core height 98 px f0, 115 px f20, 113 px f36, 115 px f40 (varies +-15% with flipper strokes); shell top y stays at 645-658 px. Turtle stays at roughly constant depth; may approach slightly (~10-15%)."
+  }
+ },
+ "objects": [
+  {
+   "name": "shark",
+   "description": "great white shark, large grey-blue body with white belly, dorsal fin and crescent tail; the upper animal (y ~0-430 px)",
+   "moves": true,
+   "visible_frames": [0, 40],
+   "fully_inside_image_frames": [20, 37],
+   "cut_by_frame_edge": "frames 0-19 tail beyond right edge (x=1919); frames 38-40 snout beyond left edge (x=0) and at f40 dorsal fin at top edge",
+   "heading": "swims right-to-left (snout to the left), slightly upward in the image, toward the camera",
+   "track_file": "tracks/shark.csv",
+   "reference_point": "mask centroid (cx,cy) and body-core centroid (core_cx,core_cy; fins/tail removed by morphological opening) - proxy for the rig origin, which is not visible",
+   "key_values_px": {
+    "f0": {"core_c": [1797, 337], "bbox": [1660, 204, 1919, 421], "snout_x": 1660},
+    "f20": {"core_c": [1546, 315], "bbox": [1340, 168, 1896, 428], "mask_len": 554, "mask_width": 256},
+    "f24": {"core_c": [1405, 303], "bbox": [1170, 148, 1781, 422], "mask_len": 608},
+    "f30": {"core_c": [1099, 277], "bbox": [829, 108, 1509, 412], "mask_len": 681},
+    "f36": {"core_c": [632, 237], "bbox": [251, 48, 1112, 400], "mask_len": 858, "mask_width": 343},
+    "f37": {"core_c": [527, 227], "bbox": [129, 34, 1031, 398], "mask_len": 901},
+    "f40": {"core_c": [256, 205], "bbox": [0, 0, 763, 389], "note": "truncated"}
+   }
+  },
+  {
+   "name": "turtle",
+   "description": "sea turtle (blue-grey shell, long front flippers), the lower animal (y ~645-875 px), smaller on screen",
+   "moves": true,
+   "visible_frames": [0, 40],
+   "fully_inside_image_frames": [0, 40],
+   "heading": "swims right-to-left (head/front flippers to the left), nearly horizontal, flapping front flippers",
+   "track_file": "tracks/turtle.csv",
+   "reference_point": "mask centroid and body-core centroid (shell/body after removing flippers; steadier than the full-mask centroid)",
+   "key_values_px": {
+    "f0": {"core_c": [1721, 696], "bbox": [1531, 645, 1836, 749], "mask_len": 306},
+    "f20": {"core_c": [1620, 700], "bbox": [1479, 645, 1747, 869]},
+    "f40": {"core_c": [1267, 717], "bbox": [1049, 658, 1423, 787], "mask_len": 378}
+   }
+  },
+  {
+   "name": "seabed",
+   "description": "sandy seabed dunes along the bottom of the frame with animated light caustics (bright cyan patches near x~950-1070,y~930-1000 and x~200-350,y~940)",
+   "moves": false,
+   "visible_frames": [0, 40],
+   "outline_px": [[0, 960], [150, 948], [330, 935], [500, 955], [700, 975], [900, 945], [1000, 926], [1150, 914], [1250, 935], [1320, 975], [1400, 1050], [1920, 1062]]
+  },
+  {
+   "name": "light_rays",
+   "description": "sun rays / god rays from the surface, vertical bright bands, flicker slightly; not objects",
+   "moves": "flicker only",
+   "visible_frames": [0, 40]
+  }
+ ],
+ "events": [
+  {"frame": 0, "t_s": 0.0, "event": "both animals already swimming leftward; shark image motion very slow at start (~1-2 px/frame) and accelerates monotonically"},
+  {"frame": 0, "t_s": 0.0, "event": "turtle flippers horizontal (start of downstroke ~f3-f5)"},
+  {"frame": 20, "t_s": 0.833, "event": "shark tail fully enters image (shark fully visible f20-f37)"},
+  {"frame": 21, "t_s": 0.875, "event": "turtle flippers at lowest point (bbox bottom y~873 px, f21-f24); upstroke afterwards"},
+  {"frame": 38, "t_s": 1.583, "event": "shark snout reaches left image edge (x=0); shark starts leaving image"},
+  {"frame": 40, "t_s": 1.667, "event": "last frame; shark dorsal fin touches top edge; turtle flippers back near horizontal"}
+ ],
+ "no_contacts": "the shark and turtle never touch or overlap in the image (shark always above y~430, turtle below y~640)"
+}

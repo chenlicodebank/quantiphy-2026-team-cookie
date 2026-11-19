@@ -1,0 +1,61 @@
+{
+  "video": "simulation_0275.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t*24); frame 0 is t=0",
+  "units": "pixels and seconds; no metric scale guessed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the raccoon-free top strip (rows 0-600) against frame 0: |shift| < 0.25 px for every frame tested (0,10,...,70,71)",
+    "per_frame_background_shift_px": "0 (within 0.25 px)"
+  },
+  "background": {
+    "description": "seamless grey studio cyclorama (dark vignetted wall, lighter floor), no markings, no other objects",
+    "wall_floor_soft_transition_y_px": 859,
+    "ground_contact_line_y_px": 865,
+    "ground_contact_line_note": "top of the raccoon's dark contact shadow when feet are down; the ground line where its feet touch. Horizontal, constant over the clip -> motion is in a plane facing the camera, no visible perspective change of the raccoon (bbox width stays 316-333 px)."
+  },
+  "objects": [
+    {
+      "name": "raccoon",
+      "description": "single grey raccoon with ringed (banded) tail and pale face/snout, running in profile left->right (facing +x / right)",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "occluded_frames": [],
+      "track_file": "tracks/raccoon.csv",
+      "reference_point": "cx_mask, cy_mask = centroid of the segmented silhouette (stand-in for the rig origin; the true rig root is not visible, see notes). Horizontal motion is identical for any body-fixed point up to gait wobble.",
+      "extent_summary_px": {
+        "bbox_width_nose_to_tail_tip": {"median": 328, "min": 310, "max": 333},
+        "bbox_height_including_raised_tail_and_feet": {"median": 124, "min": 116, "max": 143},
+        "body_length_without_tail_approx": {"median": 210, "range": [188, 239], "reliability": "rough, +-25 px (tail-base split by column thickness, hind legs confuse it)"},
+        "tail_length_approx": {"median": 115, "range": [91, 133], "reliability": "rough, +-25 px"},
+        "frame0_bbox": [534, 722, 863, 864],
+        "frame71_bbox": [2112, 743, 2429, 864]
+      },
+      "motion_summary_px": {
+        "direction": "+x (rightwards), essentially horizontal; centroid y bobs between ~781 and ~795 with the gait",
+        "cx_mask_frame1": 711.94,
+        "cx_mask_frame71": 2293.12,
+        "net_dx_frames_1_to_71": 1581.18,
+        "mean_dx_per_frame_frames_1_to_71": 22.59,
+        "per_frame_dx_range": [20.1, 25.2],
+        "note": "pace is close to uniform (quadratic fit of cx_mask vs frame gives a2 = 0.0014 px/frame^2, i.e. negligible acceleration); per-frame centroid steps fluctuate +-2.5 px with the gait"
+      }
+    }
+  ],
+  "events": [
+    {"event": "frames 0 and 1 are identical (raccoon has not moved yet); motion starts between frame 1 and frame 2", "frame": 1, "t": 0.0417},
+    {"event": "steady gallop/run left->right through the end of the clip; no stop, bounce, turn or contact with other objects", "frames": [2, 71]},
+    {"event": "gait cycle: bbox height peaks (tail raised, back arched) at frames 0-1, 16-17, 32, 47, 62-63 -> stride period ~15.3 frames (~0.64 s)", "frames": [1, 16, 32, 47, 62]},
+    {"event": "raccoon exits nothing / enters nothing: fully in frame the whole clip (x from 534 to 2429)"}
+  ],
+  "files": {
+    "tracks/raccoon.csv": "per-frame track of the raccoon",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "bg.py (median background), track.py (segmentation + CSV + overlays), summary.py, static_and_plot.py, probe.py"
+  }
+}

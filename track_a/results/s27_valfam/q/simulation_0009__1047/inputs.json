@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0009.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 22.853042,
+ "frames": 66,
+ "duration_s": 2.888,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1047,
+  "question": "What is the width (shorter side) of the wooden pier in meters?",
+  "prior": "speed of the boat = 1.5 m/s",
+  "depth_info": "t=0s, distance_boat_camera =11.827 m\nt=1s, distance_boat_camera = 13.154m\ndistance_pier_camera = 18.920m\ndistance_stairs_camera = 23.125m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

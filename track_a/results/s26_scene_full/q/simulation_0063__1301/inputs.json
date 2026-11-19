@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0063.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1301,
+  "question": "What is the height of the traffic light in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 16.6692m\nt=1.58s, distance_human_camera = 15.5003m\nt=0.58s, distance_yellow_car_camera = 24.8414m\nt=1.58s, distance_yellow_car_camera = 22.9530m\nt=0.58s, distance_white_car_camera = 29.2444m\nt=1.58s, distance_white_car_camera = 29.8093m\nt=0.58s, distance_bike_camera = 27.7544m\nt=1.58s, distance_bike_camera = 29.4124m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

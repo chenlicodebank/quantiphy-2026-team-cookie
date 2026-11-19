@@ -1,0 +1,54 @@
+{
+  "video": "internet_0067.mp4",
+  "source": "internet",
+  "scene": "2D",
+  "fps": 30.0,
+  "frames": 12,
+  "size_px": [3840, 2160],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (full 3840x2160 resolution) and seconds",
+  "camera": {
+    "motion": "static (hand-held/tripod, negligible drift)",
+    "background_shift_vs_frame11_px": {"0": [3.0, -1.5], "1": [2.7, -0.7], "2": [2.3, -0.6], "3": [1.6, -0.6], "4": [1.8, -0.5], "5": [1.8, -0.4], "6": [1.3, -0.4], "7": [0.9, -0.4], "8": [0.6, -0.3], "9": [0.3, -0.2], "10": [0.1, -0.1], "11": [0, 0]},
+    "note": "shift <= 3 px over the clip, far below the object's ~540-870 px/frame motion; no correction needed",
+    "view": "low camera at floor level, looking horizontally at a wall; floor recedes upward to the wall at y~960"
+  },
+  "objects": {
+    "cup": {
+      "description": "the only moving object: a small cup/pot-shaped object, black rounded top and white lower body (looks like a white cup holding a black ball / black-topped toy), dragged left-to-right across the wooden floor by a dark cord attached at its right side",
+      "moves": true,
+      "visible_frames": [1, 2, 3, 4, 5, 6, 7],
+      "fully_in_frame": [3, 4, 5, 6],
+      "track": "tracks/cup.csv",
+      "reference_point": "top_halfmax_cx (horizontal centre of the black top, blur-robust) for x; cy = bbox centre for y",
+      "x_centre_px": {"1": 70, "2": 265, "3": 703, "4": 1240, "5": 1962, "6": 2833, "7": 3635},
+      "x_centre_note": "frames 1, 2, 7 are clipped by the image edge, so their centres are biased (towards the inside of the image); use frames 3-6 for clean motion",
+      "length_px_along_motion": {"value": 545, "range": [516, 570], "method": "half-max width of the black top's darkness profile, frames 3-6 (motion-blur robust); blurred mask bbox width is 596-686"},
+      "height_px": {"value": 620, "range": [604, 644], "method": "mask bbox height (top of black dome to bottom of white body), frames 3-6; grows slowly as the object moves slightly down-image / toward camera"},
+      "bbox_frame4": [934, 992, 1530, 1616],
+      "motion_direction": "left to right (+x), slight downward drift in image (cy 1278 -> 1340 over frames 3-6)"
+    },
+    "cord": {
+      "description": "dark thin cable/string attached to the right side of the cup, pulled toward the right; lies on the floor in frame 0 from the left edge (y~1130-1200) and later stretches up to the right edge",
+      "moves": true,
+      "visible_frames": [0, 1, 2, 3, 4, 5, 6, 7],
+      "note": "not tracked (thin, motion-blurred); it is the pulling agent"
+    },
+    "floor": {"description": "light-brown wood floor/table, the plane of motion", "moves": false, "image_region_y": [960, 2160]},
+    "wall": {"description": "plain off-white/grey wall, background", "moves": false, "image_region_y": [0, 840]},
+    "rail": {"description": "long white/grey tube (whiteboard tray or baseboard rail) along the wall base spanning the full image width", "moves": false, "y_px": [840, 960], "length_px": ">3840 (exceeds frame)"},
+    "bracket_left": {"description": "black bracket/clip on the rail, left", "moves": false, "bbox_px": [630, 840, 692, 915]},
+    "bracket_right": {"description": "black bracket/clip on the rail, right", "moves": false, "bbox_px": [3080, 880, 3142, 955]},
+    "bracket_spacing_px": 2450
+  },
+  "events": [
+    {"event": "cord already moving/lying on floor, cup not yet in view", "frame": 0, "time": 0.0},
+    {"event": "cup enters at left edge", "frame": 1, "time": 0.0333},
+    {"event": "cup fully in frame (first)", "frame": 3, "time": 0.1},
+    {"event": "cup fully in frame (last)", "frame": 6, "time": 0.2},
+    {"event": "cup leaving at right edge", "frame": 7, "time": 0.2333},
+    {"event": "cup gone; empty scene", "frame": 8, "time": 0.2667}
+  ],
+  "per_frame_x_displacement_of_centre_px": {"3->4": 537, "4->5": 722, "5->6": 871},
+  "notes_file": "notes.md"
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0169.mp4",
+ "video_source": "simulation",
+ "video_type": "S2SS",
+ "fps": 24.0,
+ "frames": 80,
+ "duration_s": 3.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 406,
+  "question": "What is the acceleration of the astronaut at time 2s in m/s^2?",
+  "prior": "height of the astronaut = 2.2m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

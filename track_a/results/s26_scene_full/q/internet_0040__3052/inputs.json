@@ -1,0 +1,18 @@
+{
+ "video": "internet_0040.mp4",
+ "video_source": "internet",
+ "video_type": "S2SS",
+ "fps": 24.406118,
+ "frames": 28,
+ "duration_s": 1.1473,
+ "width": 2160,
+ "height": 3840,
+ "question": {
+  "id": 3052,
+  "question": "What is the displacement of credit card from rom start to 0.73s in cm?",
+  "prior": "width of credit card = 83.98 mm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

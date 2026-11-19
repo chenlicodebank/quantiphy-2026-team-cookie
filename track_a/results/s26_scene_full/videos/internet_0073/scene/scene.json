@@ -1,0 +1,60 @@
+{
+  "video": "internet_0073.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 25.111529,
+  "frames": 138,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t * fps)",
+  "description": "Night-time loading dock. A long blue roller/belt conveyor runs left-to-right across the image (top surface at y~405-412) into the open rear of a truck on the right. Parcels lie on the belt and are carried to the RIGHT at a steady rate during the whole clip. Three workers stand behind the belt (only upper bodies visible). Hand-held/drifting camera: slow pan of ~-17 px (x) and ~-7 px (y) over the clip, plus ~0.3% scale change and ~0.56 deg roll.",
+  "camera": {
+    "static": false,
+    "motion": "slow smooth drift. Image content moves left ~0.12 px/frame and up ~0.05 px/frame on average; total by frame 137: centre shift (-16.8, -6.8) px, scale 0.9967, rotation +0.56 deg. No shake/jumps.",
+    "file": "tracks/camera.csv (per frame affine A,t mapping frame-0 coords to current-frame coords: p_cur = [[a11,a12],[a21,a22]] p0 + [tx,ty]; centre_dx/dy = shift of the image centre)",
+    "compensation": "every parcel/person track also gives cx_bg, cy_bg = reference point mapped back to frame-0 background coordinates (use these for motion; image coords include the camera drift)",
+    "perspective": "belt edge is nearly horizontal across the image and all parcels sit on the same belt at about the same depth -> planar (2D) treatment is reasonable along the belt. The belt continues into the truck on the right (x>~900); the yellow bag there moves ~7% more px/frame than the others, suggesting that end of the belt is slightly closer to the camera or a separate faster segment."
+  },
+  "moving_objects": {
+    "white_pouch_left": {"desc": "white plastic mailer pouch, flat, leftmost parcel at frame 0", "bbox_f0": [54, 380, 140, 409], "length_px": 86, "height_px": 29, "frames": [0, 137], "track": "tracks/white_pouch_left.csv"},
+    "white_box": {"desc": "white-wrapped rectangular box (2nd from left at frame 0), immediately left of the grey pouch", "bbox_f0": [139, 362, 228, 406], "length_px": 89, "height_px": 44, "frames": [0, 137], "track": "tracks/white_box.csv"},
+    "grey_pouch": {"desc": "greyish-white soft bag right of white_box (left tail tucked behind white_box)", "bbox_f0": [215, 361, 300, 401], "length_px": 85, "height_px": 40, "frames": [0, 137], "track": "tracks/grey_pouch.csv"},
+    "flat_white_pouch": {"desc": "small very flat white envelope/pouch lying between grey_pouch and red_parcel", "bbox_f0": [290, 385, 372, 405], "length_px": 82, "height_px": 20, "frames": [0, 137], "track": "tracks/flat_white_pouch.csv"},
+    "red_parcel": {"desc": "red/pink plastic-wrapped box, brick shaped", "bbox_f0": [369, 352, 462, 400], "length_px": 93, "height_px": 48, "frames": [0, 137], "track": "tracks/red_parcel.csv"},
+    "cardboard_box": {"desc": "beige/brown taped cardboard box, flat, right of red_parcel", "bbox_f0": [490, 367, 594, 401], "length_px": 104, "height_px": 34, "frames": [0, 137], "track": "tracks/cardboard_box.csv"},
+    "blue_bag": {"desc": "blue plastic sack, soft/crumpled, below the dark-shirt worker at frame 0", "bbox_f0": [730, 357, 862, 405], "length_px": 132, "height_px": 48, "frames": [0, 137], "track": "tracks/blue_bag.csv", "note": "deformable; outline varies a few px"},
+    "yellow_bag": {"desc": "large bright-yellow plastic bag on the belt in front of the truck (rightmost moving parcel); NOT the static yellow bag inside the truck", "bbox_f0": [912, 290, 1085, 411], "length_px": 173, "height_px": 121, "frames": [0, 113], "fully_visible_frames": [0, 56], "track": "tracks/yellow_bag.csv", "note": "passes behind the truck door pillar (x~1205-1232) from frame ~57; track stops at 113 (<30% visible); part of it is still seen until the end, overlapping the static truck yellow bag"},
+    "brown_box": {"desc": "dark brown/maroon box entering from the left edge", "bbox_f137": [148, 360, 228, 400], "length_px": 80, "height_px": 40, "frames": [28, 137], "fully_visible_frames": [58, 137], "first_appears_at_left_edge_frame": "~16", "track": "tracks/brown_box.csv"},
+    "pink_pouch": {"desc": "pink plastic pouch entering from the left edge late in the clip", "bbox_f137": [1, 350, 114, 397], "length_px": 113, "height_px": 47, "frames": [92, 137], "fully_visible_frames": [137, 137], "first_appears_at_left_edge_frame": "~74", "track": "tracks/pink_pouch.csv"},
+    "person_white_shirt": {"desc": "worker in white T-shirt bending over behind the belt, centre of image; legs hidden", "bbox_f0": [627, 258, 700, 392], "visible_height_px": 134, "frames": [0, 137], "moves": "small posture changes only, stays at x~620-700", "track": "tracks/person_white_shirt.csv"},
+    "person_dark_shirt": {"desc": "worker in dark navy T-shirt (face blurred at start) standing in the yellow doorway frame right of centre", "bbox_f0": [770, 252, 822, 372], "visible_height_px": 120, "frames": [0, 137], "moves": "arm/body movements, turns toward camera ~f117; stays at x~770-822", "track": "tracks/person_dark_shirt.csv"},
+    "person_striped_shirt": {"desc": "third worker (striped/beige shirt, face blurred) emerging from behind person_dark_shirt and walking left", "bbox_f137": [700, 245, 748, 378], "visible_height_px": 133, "frames": [113, 137], "first_seen_frame": "~111 (partly behind person_dark_shirt until ~117)", "track": "tracks/person_striped_shirt.csv"}
+  },
+  "static_objects_frame0": {
+    "conveyor_belt": {"desc": "blue belt conveyor; top running surface edge (white line) y~405-412 from x<0 to x~1215 (enters truck); blue side panel from y~412 to ~528 (height ~115 px at x~430); belt line shows a joint at x~580-600", "extent_px": {"x": [0, 1215], "y": [400, 530]}},
+    "yellow_stripe_1": {"desc": "vertical yellow stripe on conveyor side panel (left one)", "bbox": [423, 417, 442, 525], "width_px": 19, "height_px": 108},
+    "yellow_stripe_2": {"desc": "vertical yellow stripe on conveyor side panel (right one, split at y~488)", "bbox": [533, 417, 547, 525], "width_px": 14, "height_px": 108, "centre_spacing_from_stripe_1_px": 107.5},
+    "yellow_horizontal_stripes": {"desc": "two horizontal yellow bands on the conveyor end inside the truck", "upper_bbox": [989, 420, 1216, 432], "lower_bbox": [985, 460, 1216, 472], "length_px": 228},
+    "white_label_carton": {"desc": "white carton with black labels standing on boxes behind the belt (left)", "bbox": [233, 275, 348, 368], "width_px": 115, "height_px": 93},
+    "cardboard_stack_left": {"desc": "brown cardboard boxes stacked at left behind belt", "bbox": [148, 250, 265, 355]},
+    "tire_stack": {"desc": "dark pile of black bundles/tyres behind belt", "bbox": [200, 130, 510, 380]},
+    "yellow_doorway_cabinet": {"desc": "yellow-framed doorway/cabinet with grey door behind dark-shirt worker", "bbox": [770, 115, 925, 375], "width_px": 155},
+    "truck": {"desc": "truck body (white-grey wall) at right; red/orange door pillar at x~1215-1232", "bbox": [920, 0, 1280, 720], "door_pillar_x": [1215, 1232]},
+    "yellow_bag_in_truck": {"desc": "static yellow bag lying inside the truck right of the moving yellow_bag", "bbox": [1095, 287, 1222, 392]},
+    "white_carton_in_truck": {"desc": "white/grey cartons on the truck floor below the conveyor", "bbox": [1025, 475, 1210, 550]},
+    "dock_ramp": {"desc": "grey dock plate/ramp on the ground at the bottom centre", "bbox": [525, 565, 1000, 720]},
+    "green_exit_sign": {"desc": "small green lit sign in the dark background", "bbox": [740, 205, 760, 245]}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "belt already running; all parcels already moving right (motion continues through frame 137, no start/stop seen)"},
+    {"frame": 16, "t": 0.637, "what": "brown_box right edge appears at the left image edge (extrapolated, +-3 frames; tracked from 28, fully visible from 58)"},
+    {"frame": 57, "t": 2.27, "what": "yellow_bag right edge reaches the truck door pillar; increasingly occluded afterwards"},
+    {"frame": 74, "t": 2.95, "what": "pink_pouch right edge appears at the left image edge (extrapolated, +-3 frames; tracked from 92, fully visible only at 137)"},
+    {"frame": 111, "t": 4.42, "what": "person_striped_shirt emerges from behind person_dark_shirt (tracked 113-137, walks left ~50 px)"},
+    {"frame": 113, "t": 4.50, "what": "yellow_bag track ends (<30% visible behind pillar)"},
+    {"frame": 117, "t": 4.66, "what": "person_dark_shirt turns toward the camera"}
+  ],
+  "track_columns": {
+    "parcels": "frame,t,cx_img,cy_img (visible-centre reference = centre of full rigid bbox, image coords),bbox_x0..y1 (full bbox, may extend outside image/behind pillar),visible_x0,visible_x1,visible_cx (clipped to image edge / pillar),cx_bg,cy_bg (reference point in frame-0 background coords, camera drift removed),left_edge_bg,right_edge_bg,length_px (along belt = motion direction),height_px,ncc,visible_frac,occluded",
+    "people": "frame,t,cx_img,cy_img,bbox_x0..y1,cx_bg,cy_bg,visible_width_px,visible_height_px,ncc,occluded(always 1: legs hidden)"
+  }
+}

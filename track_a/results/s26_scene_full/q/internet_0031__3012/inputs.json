@@ -1,0 +1,18 @@
+{
+ "video": "internet_0031.mp4",
+ "video_source": "internet",
+ "video_type": "S2MS",
+ "fps": 29.804822,
+ "frames": 173,
+ "duration_s": 5.8044,
+ "width": 540,
+ "height": 960,
+ "question": {
+  "id": 3012,
+  "question": "What is the width of football pitch in meters?",
+  "prior": "length of the goal frame = 7.32m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

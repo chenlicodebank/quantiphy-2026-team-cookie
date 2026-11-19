@@ -1,0 +1,97 @@
+{
+  "video": "simulation_0212.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; no metric scale is assumed anywhere",
+  "camera": {
+    "motion": "static (background plate matches every frame outside the animals; no pan, zoom or shake detected)",
+    "per_frame_background_shift_px": [0, 0],
+    "perspective_cues": {
+      "back_wall_floor_line": "skirting/floor boundary of back wall, y = 905 - 0.068*x (from (0,905) to the room corner); rises to the right, so the back wall recedes to the right (right side farther from camera)",
+      "room_corner_vertical": "x ~ 1690, meets floor at y ~ 790",
+      "right_wall_floor_line": "from corner (1690,790) to image right edge at y ~ 790-800 (nearly horizontal)",
+      "horizon": "not visible; camera looks slightly downward (floor occupies lower ~20% of image, floor lines converge to the right/up)",
+      "depth_ordering_cue": "feet y on the floor: larger y = closer to camera. Cat feet go from y~959 (frame 0) to y~880 (frame 49): the cat walks right AND away from the camera. Dog feet go from y~899 to y~960: the dog walks left AND toward the camera."
+    },
+    "focal_length": "unknown; estimate from the question's depth_info + a known size"
+  },
+  "objects": [
+    {
+      "name": "cat",
+      "description": "black cat with white paws/leg tips; head is rendered as a flat grey patch; tail raised; the smaller animal",
+      "moves": true,
+      "frames_visible": "0-49 (partly hidden behind the dog 24-44, mostly hidden 28-40)",
+      "track": "tracks/cat.csv",
+      "motion": "walks continuously from image left to right (and away from camera) for the whole clip; never stops",
+      "apparent_size": "full bbox height 262 px (f0) -> ~190 px (f45-49); bbox width 365 px (f0) -> ~250 px (f45-49); torso core height (core_y1-core_y0) ~173 px (f0) -> ~130 px (f49). Shrinks because it moves away from the camera."
+    },
+    {
+      "name": "dog",
+      "description": "brindle (brown-striped) dog with white paws and white tail tip, head lowered (sniffing); a translucent grey-beige cone/patch covers its head/face; the larger animal",
+      "moves": true,
+      "frames_visible": "0-49, never occluded (it passes IN FRONT of the cat)",
+      "track": "tracks/dog.csv",
+      "motion": "walks from right (in front of the side table) to left and toward the camera; slow at frames 0-8 (core x ~5-7 px/frame), faster ~9-40 (~12-21 px/frame), slows strongly from ~41 and nearly stops at frames 45-49 (~1-5 px/frame)",
+      "apparent_size": "full bbox height 268 px (f0) -> ~307-319 px (f40-49); torso-core width (core_x1-core_x0, head+body w/o tail) ~330 px (f0) -> ~430-450 px (f40-49). Grows because it comes toward the camera."
+    },
+    {
+      "name": "side_table",
+      "description": "wooden (reddish-brown) side table with slatted top and lower shelf, right of centre against back wall",
+      "moves": false,
+      "frames_visible": "0-49 (dog in front of it frames ~0-25)",
+      "image_extent_px": {"top_left_x": 1287, "top_right_x": 1668, "top_surface_y": 655, "apron_bottom_y": 682, "leg_bottoms": {"rear_left": [1335, 825], "front_left": [1410, 840], "right": [1625, 822]}, "length_along_top_px": 381, "height_px_front_leg": 185, "lower_shelf_y": 780},
+      "clear_frame": "49 (or background plate)"
+    },
+    {
+      "name": "table_lamp",
+      "description": "lamp on the left of the table top: white pleated cone shade, tall dark-brown tapered wooden base",
+      "moves": false,
+      "image_extent_px": {"shade_x": [1273, 1466], "shade_y": [398, 497], "base_x": [1348, 1390], "base_y": [497, 660], "total_height_px": 262, "shade_width_px": 193}
+    },
+    {
+      "name": "vase_large",
+      "description": "blue-and-white patterned porcelain vase on the right of the table top, in front of the mirror",
+      "moves": false,
+      "image_extent_px": {"x": [1500, 1590], "y": [468, 634], "height_px": 166, "max_width_px": 90}
+    },
+    {
+      "name": "vase_small_or_reflection",
+      "description": "second blue-and-white vase seen at x 1440-1478 between lamp and large vase, inside the mirror frame; partly hidden by the lamp; it is probably the reflection of the large vase in the mirror (ambiguous)",
+      "moves": false,
+      "image_extent_px": {"x": [1440, 1478], "y": [538, 650], "visible_height_px": 112}
+    },
+    {
+      "name": "mirror",
+      "description": "tall rectangular mirror with light wooden frame, leaning against the back wall behind the table",
+      "moves": false,
+      "image_extent_px": {"top_left": [1397, 308], "top_right": [1563, 318], "bottom_y_approx": 810, "x_range": [1395, 1600], "height_px": 500, "width_px_top": 166},
+      "note": "bottom hidden behind the table; the mirror may show reflections"
+    },
+    {
+      "name": "room",
+      "description": "light grey/beige plastered back wall with white skirting, right side wall from corner x~1690, beige carpet floor",
+      "moves": false,
+      "image_extent_px": {"back_wall_floor_line": "y = 905 - 0.068 x", "corner_x": 1690}
+    }
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip start: both animals already walking (cat at left facing right, dog at right in front of the table facing left)"},
+    {"frame": 9, "t": 0.375, "event": "dog speeds up (core x step grows from ~5-7 to ~13-16 px/frame); approximate"},
+    {"frame": 24, "t": 1.0, "event": "cat and dog masks first touch in the image (crossing begins; dog passes in front of cat)"},
+    {"frame": 28, "t": 1.1667, "event": "cat mostly hidden behind dog (until frame 40)"},
+    {"frame": 41, "t": 1.7083, "event": "cat body re-emerges on the right of the dog; dog decelerating"},
+    {"frame": 45, "t": 1.875, "event": "cat fully visible again; dog nearly stopped (core x steps <~5 px/frame through 49)"},
+    {"frame": 49, "t": 2.0417, "event": "clip end; cat still walking right"}
+  ],
+  "files": {
+    "tracks/cat.csv": "per-frame cat mask stats",
+    "tracks/dog.csv": "per-frame dog mask stats",
+    "notes.md": "method, column meanings, reliability",
+    "scripts/": "bg.py (background plate), seg.py (foreground mask), track.py (cat/dog split + stats + overlays), finalize.py (occlusion flags), bgcrop.py / montage.py / probe.py (inspection helpers)"
+  }
+}

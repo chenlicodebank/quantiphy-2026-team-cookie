@@ -1,0 +1,75 @@
+{
+ "video": "simulation_0233.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "frame_time": "t = frame / 24; time t -> frame round(24 t)",
+ "image_size_px": [1920, 1080],
+ "units": "pixels, seconds; image x right, y down; no metric scale assumed",
+ "view": "straight top-down (bird's-eye) view of a classroom floor; motion plane = horizontal table top, parallel to the image plane",
+ "camera": {
+  "static": true,
+  "evidence": "background mean abs diff frame0/49 vs 24 < 1 grey level (render noise); phase correlation shift frame0->49 = (0.49, -0.01) px",
+  "per_frame_shift_px": [0, 0]
+ },
+ "objects": [
+  {
+   "name": "cat",
+   "description": "black cat (white muzzle/nose tip visible in frames 0-44; from frame 45 the head renders as a flat grey-brown blob - render artifact) walking left to right along the top of the table, seen from above, tail trailing to the left",
+   "moves": true,
+   "visible_frames": "0-49 (partially cut by the left image edge in frames 0-21: only the head/front at first; tail tip enters at frame 22; fully in view frames 22-49)",
+   "track": "tracks/cat.csv",
+   "direction": "+x (rightwards), essentially straight; image y of body centre stays 528-535",
+   "pixel_sizes_when_fully_visible": {
+    "length_nose_to_tail_tip_px": "324-339 (median ~331), frames 22-49, tail curls so it varies",
+    "torso_length_head_front_to_rump_px": "~238-246 at frames with legs together (e.g. 23-26, 32-34, 41-44); up to ~295 with hind legs stretched back (gait)",
+    "body_width_across_px": "64-68 (bbox_y1-bbox_y0+1 incl. small leg/ear bumps), stable",
+    "height": "not observable (top-down view)"
+   },
+   "reference_point_advice": "origin (rig root) not visible; use a rigidly carried point. head_front_robust_x advances very uniformly (~13.55 px/frame, frames 0-44; (713-49)/49); torso_mid_x and body_cx wobble with the gait and with partial visibility before frame 22. For speeds prefer the slope of head_front_robust_x (or of tail-independent points after frame 22). Mean tail-tip slope frames 22-49 = 13.96 px/frame."
+  },
+  {
+   "name": "table",
+   "description": "large light-wood rectangular table top on the left; the cat walks on it",
+   "moves": false,
+   "visible_frames": "0-49",
+   "image_extent_px": {"x0": 0, "x1": 714, "y0": 366, "y1": 848},
+   "pixel_sizes": {"visible_length_x_px": ">=715 (cut by left image edge, true length unknown)", "width_y_px": 482},
+   "notes": "right edge x=714 is the end of the cat's path: nose reaches x=713 at the last frame 49; two table legs visible just right of the edge at y~395 and ~795"
+  },
+  {
+   "name": "student_chair_desk",
+   "description": "tan school chair with attached writing tablet, on the floor at right, seen from above",
+   "moves": false,
+   "visible_frames": "0-49",
+   "image_extent_px": {"whole_incl_frame": [1540, 502, 1835, 718], "seat": [1587, 550, 1762, 715], "writing_tablet": [1595, 502, 1835, 540]},
+   "pixel_sizes": {"seat_x_px": 176, "seat_y_px": 166, "tablet_length_x_px": 241, "tablet_depth_y_px": 39, "whole_x_px": 296, "whole_y_px": 217},
+   "notes": "measured by eye on a 2x zoomed grid, +-3 px; on the floor, i.e. farther from the camera than the table top (different scale)"
+  },
+  {
+   "name": "chalkboard",
+   "description": "green board strip along the top of the image with a wooden frame and a chalk tray/ledge below it",
+   "moves": false,
+   "image_extent_px": {"green_y0": 93, "green_y1": 199, "x": "0-1919 (full width)", "chalk_tray_y": "~205-265, x ~283-1785"},
+   "notes": "on the wall; seen edge-on-ish from above, not in the table plane"
+  },
+  {
+   "name": "floor",
+   "description": "reddish parquet floor (square parquet tiles ~100 px), bright light spot centre-bottom",
+   "moves": false
+  },
+  {
+   "name": "cat_shadow",
+   "description": "soft dark shadow of the cat cast upward (smaller y) onto the table, moves with the cat; not part of the cat mask",
+   "moves": true
+  }
+ ],
+ "events": [
+  {"event": "cat already walking at constant pace at first frame", "frame": 0, "time": 0.0},
+  {"event": "cat's tail tip enters the image (cat fully visible from here)", "frame": 22, "time": 0.9167},
+  {"event": "cat's head starts rendering grey (artifact, not a physical event)", "frame": 45, "time": 1.875},
+  {"event": "cat's head front reaches table right edge (x=713 vs edge 714); clip ends, cat still walking", "frame": 49, "time": 2.0417}
+ ],
+ "no_events": "no start/stop, bounce, jump or direction change; motion is a steady walk to the right for the whole clip"
+}

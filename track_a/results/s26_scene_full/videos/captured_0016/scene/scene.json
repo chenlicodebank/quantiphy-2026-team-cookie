@@ -1,0 +1,69 @@
+{
+  "video": "captured_0016.mp4",
+  "source": "lab",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; container timestamps are uniform (512/12288 s steps)",
+  "camera": {
+    "motion": "static (phase correlation of background patches between consecutive frames: |shift| <= 0.1 px)",
+    "intrinsics_from_protocol": {"focal_px": 763, "hfov_deg": 80, "principal_point_px": [640, 360], "note": "Orbbec Femto Mega RGB, f = 0.5959 x width"},
+    "view": "high camera looking obliquely down onto a carpeted floor; right wall runs away from camera to upper-left",
+    "post_processing": "'Segment Anything 2 Demo' effect: background heavily blurred, the ball and the two people kept sharp with a light glow/halo of ~5-10 px around the ball",
+    "perspective_cues": {
+      "right_wall_floor_junction_line": {"points_px": [[720, 110], [940, 271], [1100, 388], [1260, 506]], "approx_line": "y = 0.733 x - 418", "note": "dark baseboard, measured on the median background; hidden behind receiver between x~950-1090"},
+      "wall_corner_vertical_edge": {"x_px": 705, "y_range_px": [0, 100], "note": "approximate, blurred"},
+      "far_floor_edge": "reddish/brown band along y~170-200 from x~230 to ~700 (blurred, approximate)",
+      "horizon": "above the top of the image (camera pitched down)"
+    }
+  },
+  "objects": {
+    "ball": {
+      "description": "white football (soccer ball) with black pentagon panels and a black 'Franklin' logo panel; the only ball; thrown by the person on the left to the person on the right",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre = centre of the mask extent box",
+      "apparent_size_px": {
+        "held_frames_0_16_sharp": {"bbox_w": "124-127", "bbox_h": "107-111", "min_area_rect_len": "124-131", "min_area_rect_wid": "103-109", "note": "ball near left image edge; off-axis projection stretches it ~10% along the radial (mostly horizontal) direction; bottom edge partly behind fingers"},
+        "wind_up_frames_19_25": {"bbox_w": "118-132", "bbox_h": "99-112", "note": "blurred, near hands/dark trousers"},
+        "flight_streak_frames_27_35": {"bbox": "~130 x ~110", "note": "motion blur streak along the motion direction; width across motion ~90-113"},
+        "flight_frames_37_41_least_blur": {"bbox_w": "104 -> 85", "bbox_h": "95 -> 87"},
+        "caught_frames_44_48": {"bbox_w": "64-74", "bbox_h": "60-70", "note": "partly behind receiver's hands"},
+        "trend": "apparent diameter shrinks from ~110-125 px (held, near camera) to ~65-70 px (at the receiver): ball ends ~1.7-1.8x farther from the camera than at the start"
+      }
+    },
+    "thrower": {
+      "description": "person on the left edge, light grey T-shirt, dark trousers, glasses, face blurred; only partly in frame (head, torso, arms); holds and throws the ball underhand",
+      "moves": "torso nearly static; arms swing (wind-up frames 14-24, throw 25-30, arms extended after release)",
+      "visible_frames": [0, 48],
+      "track": "tracks/thrower.csv (light-grey shirt box; coarse)",
+      "image_extent_frame0_px": {"head": "x 0-80, y 40-240", "shirt_torso": "x 0-170, y 286-535", "full_body_visible": false}
+    },
+    "receiver": {
+      "description": "person on the right standing by the wall, dark grey oversized T-shirt, black trousers with white drawstrings, white sneakers, long dark hair, face blurred; catches the ball",
+      "moves": "feet static (shoe centroids drift <= 3 px, at the catch); arms rise from ~frame 36 and catch the ball at frames 43-44",
+      "visible_frames": [0, 48],
+      "track": "tracks/receiver.csv (shoe centroids per frame)",
+      "image_extent_frame0_px": {"x_range": [924, 1230], "y_top": "cut by image top (y=0, head partly outside)", "feet_bottom_y": 435, "left_shoe_centroid": [941, 385], "right_shoe_centroid": [984, 423], "shirt_x_range": [1027, 1212], "trousers_waist_y": 255},
+      "note": "full standing height NOT measurable: top of the head is at/above the image top edge"
+    },
+    "floor": {"description": "grey carpet, blurred", "moves": false},
+    "right_wall": {"description": "light grey wall panel with dark baseboard on the right side", "moves": false},
+    "floor_marks": {"description": "white tape mark at bottom right (x~880-980, y~650-700); small light strip at (x~620-700, y~395-410); reddish marks near the far wall; all blurred", "moves": false},
+    "background_clutter": {"description": "blurred: exercise balls, a chair/table, seated people's legs, white box at top centre (x~600-660, y~40-130)", "moves": false}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "ball held in both hands of thrower at (317.5, 544.5)"},
+    {"frame": 13, "t": 0.5417, "event": "small lift ends: ball highest in held phase (334.5, 518.5); direction reverses (wind-up starts ~frame 14-16)"},
+    {"frame": 24, "t": 1.0, "event": "lowest point of wind-up (272.5, 601.5); swing reverses to forward/upward"},
+    {"frame": 30, "t": 1.25, "event": "release (hand contact last seen frames 29-30; ball clearly free from frame 31; +-1 frame)"},
+    {"frame": 37, "t": 1.5417, "event": "apex of the arc in the image (cy ~71.5 at frames 36-38)"},
+    {"frame": 36, "t": 1.5, "event": "ANOMALY: image step 35->36 (~93 px) is about twice the neighbouring steps (~50 and ~34 px); possibly a dropped capture frame between 35 and 36"},
+    {"frame": 43, "t": 1.7917, "event": "catch contact: receiver's forearms touch the ball"},
+    {"frame": 44, "t": 1.8333, "event": "ball secured between receiver's forearms/hands; then carried down-right to frame 48"}
+  ],
+  "files": {"ball": "tracks/ball.csv", "ball_held_mask": "tracks/ball_mask.csv", "ball_flight_mask": "tracks/ball_flight_mask.csv", "receiver": "tracks/receiver.csv", "thrower": "tracks/thrower.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

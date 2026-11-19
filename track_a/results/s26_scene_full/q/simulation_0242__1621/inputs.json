@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0242.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1621,
+  "question": "What is the length of the brown horse in meters?",
+  "prior": "speed of the brown horse = 0.874m/s",
+  "depth_info": "t=0s, distance_brown_horse_camera=16.288m   \nt=1.0s, distance_brown_horse_camera=16.112m \nt=0s, distance_white_horse_camera=14.941m  \nt=1.0s, distance_white_horse_camera=14.957m\nt=0s, distance_rabbit_camera=14.257m  \nt=1.0s, distance_rabbit_camera=14.412m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,5 @@
+{"answer": 14.5, "decision": "new", "follows": null,
+ "crux": "the rear end of the length: the pod rear tips (10.7) or the end of the central fuselage with its ventral fin, about 4.9-5.0 m further aft",
+ "fault_found": "C2/C3/C6 ended the length at the pod tips. The fuselage end (RC) and the fin bottom (VB) triangulate 14.3-14.4 m behind the pod front, against 9.4 m for both pod tips (all rms < 2 px), and they move 5 pct more pixels than the right pod tip, so they are nearer the camera",
+ "closure_pct": 0.3, "confidence": "medium", "verified_previous": true,
+ "lesson": "When a candidate ends a length at a point that looks like the object's end in the image, triangulate every candidate end point of a translating rigid object from its parallax; a nearer component can hide behind an apparent tip, and several points that look adjacent at one frame can separate by metres in depth."}

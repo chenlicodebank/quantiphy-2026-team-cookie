@@ -1,0 +1,92 @@
+{
+  "video": "simulation_0227.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (motion parallel to the image plane, sideways to the right)",
+  "fps": 24.0,
+  "frames": 50,
+  "frame_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; last frame 49 at t = 2.0417 s",
+  "units": "pixels (x right, y down, full-resolution frame) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the upper image (house/trees) vs frame 0: |shift| < 0.02 px in x and y over all 50 frames",
+    "view": "frontal view of a pool deck: house facade behind, deck with sun loungers, pool coping edge, water in the foreground; deck edge and coping run horizontally across the image"
+  },
+  "moving_objects": {
+    "cat": {
+      "description": "black cat with white paws (tuxedo-like), small, walking on the deck just behind the pool coping edge, facing and moving to the right (+x)",
+      "track_file": "tracks/cat.csv",
+      "visible_frames": "0-49 (whole clip), never occluded",
+      "reference_point": "body_cx, body_cy = centroid of the dark body after a 9x9 opening (tail and legs removed) - best proxy for the animal's root/pelvis-body centre; cx, cy = centroid of the full mask incl. tail/paws",
+      "pixel_size_typical": {
+        "full_bbox_w_median": 98.5, "full_bbox_w_range": [87, 111],
+        "full_bbox_h_median": 57, "full_bbox_h_range_note": "47-76; larger when the raised tail is above the head",
+        "height_paw_to_head_median": 54, "height_paw_to_head_range": [45, 59],
+        "torso_len_body_mask_median": 73,
+        "len_rump_to_nose_median": 84.5, "len_rump_to_nose_range": [72, 98],
+        "paw_bottom_y_median": 918.5
+      },
+      "motion_summary_px": {
+        "body_centre_start_f0": [571.7, 886.1], "body_centre_end_f49": [835.3, 885.9],
+        "net_dx": 263.5, "path_length_body_centre": 269.9, "median_step_per_frame": 5.41,
+        "note": "steady walk to the right the whole clip (~5.4 px/frame); vertical bob of the body centre +-2 px from gait"
+      }
+    },
+    "flamingo_float": {
+      "description": "pink inflatable flamingo pool ring (ring + long neck with dark beak), floating in the pool in front of the coping, head on the right side, drifting to the right (+x)",
+      "track_file": "tracks/flamingo_float.csv",
+      "visible_frames": "0-49 (whole clip), never occluded (its water reflection is below it, excluded)",
+      "reference_point": "ref_cx, ref_cy = centre of the float's bounding box (ring left edge .. ring right edge, head top .. ring bottom at waterline), = frame-0 box translated by sub-pixel template-matching shift (tm_dx, tm_dy). Rigid translation, so any fixed point of the float has the same displacement.",
+      "pixel_size_frame0": {
+        "x0": 643, "x1": 801, "y0_head_top": 887, "y1_ring_bottom_at_waterline": 1018,
+        "width_x": 159, "height_y_above_water": 132,
+        "neck_head_x_range_frame0": [738, 795],
+        "note": "size constant through the clip (rigid, no rotation or depth change seen; mask width median 159 px)"
+      },
+      "motion_summary_px": {
+        "ref_centre_start_f0": [722.0, 952.5], "ref_centre_end_f49": [1151.0, 952.5],
+        "net_dx": 429.0, "path_length": 429.3,
+        "per_frame_step_px_frames_1_to_49": [0.53, 1.26, 2.07, 2.97, 3.96, 5.15, 6.29, 7.34, 7.99, 8.56, 9.41, 9.8, 10.27, 10.35, 10.61, 10.86, 11.39, 11.63, 11.74, 12.39, 12.62, 13.22, 13.49, 13.64, 13.37, 13.27, 12.81, 12.7, 12.49, 12.43, 12.42, 12.34, 11.95, 11.32, 10.46, 10.05, 9.66, 9.63, 9.38, 8.91, 8.19, 6.96, 5.68, 4.66, 3.92, 3.18, 2.74, 1.99, 1.25],
+        "vertical": "dy within +-1.1 px (bobbing), essentially horizontal motion"
+      }
+    }
+  },
+  "events": [
+    {"event": "float starts moving from (near) rest", "frame": 0, "t": 0.0, "note": "step 0.53 px in frame 0->1, then accelerating smoothly"},
+    {"event": "float maximum per-frame displacement (peak speed)", "frame": 24, "t": 1.0, "note": "13.64 px/frame between frames 23->24; plateau ~12.4-13.6 px/frame frames 21-31"},
+    {"event": "float decelerating", "frame_range": [25, 49], "note": "step falls to 1.25 px/frame at frame 49; not fully stopped at clip end"},
+    {"event": "cat walking", "frame_range": [0, 49], "note": "already walking at frame 0, still walking at frame 49, constant pace, no direction change"},
+    {"event": "contacts/collisions", "note": "none; cat and float never overlap in the image (cat is on the deck behind, float in the water in front)"}
+  ],
+  "static_objects": {
+    "sun_loungers_front_row": {
+      "count": 3, "frame": 0, "note": "light wooden loungers, backrest up, seen from the foot end; x extents = width across the lounger; y = backrest top to leg bottom (approx +-3 px)",
+      "left":   {"x": [764, 946], "y": [734, 900], "width_px": 182},
+      "middle": {"x": [1004, 1189], "y": [734, 900], "width_px": 185},
+      "right":  {"x": [1215, 1432], "y": [734, 900], "width_px": 217, "note": "wider because its side is seen at an angle"}
+    },
+    "sun_loungers_back_row": {
+      "count": 3, "frame": 0, "note": "partly hidden behind the front row; approx",
+      "left":   {"x": [652, 826], "y_top": 713, "y_leg_bottom": 858},
+      "middle": {"x": [873, 1016], "y_top": 713},
+      "right":  {"x": [1063, 1222], "y_top": 713}
+    },
+    "pool_coping": {
+      "description": "light stone coping blocks along the pool edge, front face facing the camera",
+      "top_edge_y": 926, "waterline_y": "~980 at x=900, ~970 at x=1300, ~963 at x=1700 (rippled)",
+      "joint_x": [482, 633, 781, 931, 1082, 1232, 1382, 1533, 1681, 1831],
+      "block_length_px": 150.0, "note": "regular joints, mean spacing 149.9 px (148-151); left of x~480 the coping is overgrown by grass"
+    },
+    "deck": {"description": "large grey stone deck tiles between house and coping; cat walks at y~865-920 (paws ~918)"},
+    "house": {"description": "modern house: frosted-glass panel box (x~565-975, y 0-358), dark wood-clad upper box (x~980-1730), glass walls with curtains below, glazed corner at right x~1735-1920"},
+    "trees": {"description": "tall pine trunks left of the house (x 0-560), grass/lawn bottom-left"},
+    "water": {"description": "pool water with animated ripples, y > ~970"}
+  },
+  "depth_notes": "2D scene: one metres-per-pixel scale from the prior object. Caveat: cat (on the deck, behind the coping) and float (in the water, in front of the coping) are at slightly different depths; no strong perspective visible.",
+  "files": {
+    "tracks/cat.csv": "per-frame cat track (50 rows)",
+    "tracks/flamingo_float.csv": "per-frame float track (50 rows)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

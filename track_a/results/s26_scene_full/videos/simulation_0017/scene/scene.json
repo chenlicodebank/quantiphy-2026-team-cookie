@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0017.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 33.038926,
+  "frames": 101,
+  "time_of_frame_i": "t = i / fps, frame 0 at t=0; last frame 100 at t=3.0267 s",
+  "image_size_px": [1080, 1080],
+  "units": "pixels, seconds; no metric scale assumed",
+  "image_orientation": "The image is rolled ~90 deg: world UP points to image +x (right). The person stands with feet at image x~355-382 and head top at x~705; the floor/rug/sofa are at the left, the shelving wall at the right. Walking = motion along image +y (top -> bottom).",
+  "camera": {
+    "motion": "static (phase correlation of the shelf region x>800 vs frame 0: |shift| < 0.03 px all frames; mean abs grey diff < 0.85)",
+    "perspective_cues": "Shelf grid (cubbies) seen nearly frontally: vertical shelf dividers at image y ~165-210, ~375-415, ~575-620, ~780-825, ~985-1030 and column edges at x ~480/640, ~705/865, ~930/1080 run parallel to the image axes -> wall nearly parallel to the image plane. Sofa / rug at left are seen obliquely (rug is a trapezoid, x 108-250). No horizon visible. Person's head width (~47 px) and head-top x (~705) stay constant over the walk -> the walk is nearly parallel to the image plane at almost constant camera distance.",
+    "principal_point_assumed": [540, 540]
+  },
+  "objects": {
+    "human": {
+      "kind": "person (male, white/light-blue short-sleeve T-shirt, blue jeans, white sneakers, dark hair, grey untextured face)",
+      "unique": true,
+      "moves": true,
+      "visible_frames": "0-100 (frames 0-4 partly cut by the top image border)",
+      "track": "tracks/human.csv",
+      "reference_point": "pelvis estimate: pelvis_x = head_top_x(median-7) - 0.47*350 px; pelvis_y = centre of the hip band (skin pixels removed), median-5 + mean-5 smoothed",
+      "motion": "walks steadily from image top (pelvis y~20 at f0) to y~748 at f100 along +y, pelvis x constant ~540; ~7.3 px/frame (net 728 px in 100 frames). Walks in front of the dark grey block and the chair/sculpture (frames ~40-75).",
+      "apparent_size_px": {
+        "standing_height_head_top_to_feet": "~350 px in frames 0-20 (feet clearly visible, x0~352-368, head top ~705-712); ~327 px median frames 25-100 (lowest foot at x~380-382)",
+        "head_width_across_body_axis": "~47 px, constant (49 early, 46-47 later)",
+        "stride_extent_along_walk": "bbox_h column: 80-150 px over the gait cycle (min at legs together, max at full stride)"
+      }
+    },
+    "sofa": {"moves": false, "desc": "long dark-grey sofa with 4 light blue-grey cushions, left of centre, running top to bottom", "bbox_px": {"x": [250, 385], "y": [12, 1060]}, "cushions_px": {"x": [300, 385], "y_each": [[50, 330], [300, 535], [535, 775], [740, 1020]]}, "length_px_along_y": 1048, "depth_px_along_x": 135, "accuracy": "+-5 px"},
+    "rug": {"moves": false, "desc": "dark charcoal rug/platform at far left under the sofa (trapezoid)", "bbox_px": {"x": [108, 250], "y": [125, 945]}, "length_px_along_y": 820},
+    "grey_block": {"moves": false, "desc": "dark grey box (side table/ottoman) between sofa and chair", "bbox_px": {"x": [380, 478], "y": [405, 655]}, "size_px": {"along_x(height)": 98, "along_y": 250}},
+    "light_plinth": {"moves": false, "desc": "light grey block behind/under the chair", "bbox_px": {"x": [478, 535], "y": [420, 645]}},
+    "chair_sculpture": {"moves": false, "desc": "grey curved armchair/sculpture with a pointed wing, centre of image", "bbox_px": {"x": [532, 783], "y": [436, 640]}, "size_px": {"along_x(height)": 251, "along_y(width)": 204}},
+    "painting_upper": {"moves": false, "desc": "framed abstract painting (orange/black splash) in a shelf cubby above the chair", "bbox_px": {"x": [468, 615], "y": [295, 400]}},
+    "painting_lower": {"moves": false, "desc": "framed abstract painting (orange/blue splash) below the chair", "bbox_px": {"x": [468, 615], "y": [665, 782]}},
+    "small_grey_cube": {"moves": false, "desc": "small grey cube side table at the bottom", "bbox_px": {"x": [414, 478], "y": [885, 1020]}},
+    "metal_decor": {"moves": false, "desc": "silver twisted decor object on a shelf at the bottom", "bbox_px": {"x": [490, 622], "y": [930, 990]}},
+    "small_black_white_object": {"moves": false, "desc": "small cup/vase below the metal decor", "bbox_px": {"x": [480, 525], "y": [1003, 1025]}},
+    "shelving_wall": {"moves": false, "desc": "white grid of cubbies with dark wood backs filling the right side", "cell_columns_x": [[480, 640], [705, 865], [930, 1080]], "cell_rows_y": [[0, 165], [210, 375], [415, 575], [620, 780], [825, 985]], "cell_pitch_px": {"x": 225, "y": 205}}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "human already walking, partly cut at top border (pelvis y~20)"},
+    {"frame": 5, "t": 0.151, "event": "human body fully inside frame"},
+    {"frame_range": [40, 75], "t_range": [1.211, 2.270], "event": "human passes in front of the grey block and the chair/sculpture"},
+    {"frame": 100, "t": 3.027, "event": "end of clip, human still walking (pelvis y~748)"},
+    {"note": "no start/stop, no direction change: constant-direction walk along +y for the whole clip"}
+  ],
+  "files": {"track": "tracks/human.csv", "raw_track": "tracks/human_raw.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

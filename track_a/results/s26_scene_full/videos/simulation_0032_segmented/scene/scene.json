@@ -1,0 +1,77 @@
+{
+  "video": "simulation_0032_segmented.mp4",
+  "source": "segmentation (Blender simulation, background replaced by white)",
+  "scene": "3D",
+  "fps": 30.0,
+  "frames": 130,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame = round(t*30)",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale guessed",
+  "blank_frames": {"frames": [128, 129], "note": "fully black (end of render); no objects visible"},
+  "camera": {
+    "motion": "static (the player stands in the same pixels to within 1-2 px for frames 54-127; there are no background features because the background is plain white)",
+    "perspective_cues": "none visible: no ground, horizon or vanishing points. Depth cue is only the apparent size: ball diameter ~35.1 px in flight (frames 24-78, constant to within 1 px, so near-constant camera distance), ~33.4 px after it drops through the hoop (frames 101-127), so the ball is ~5% farther from the camera there than at release. The player is ~217 px tall (head top to soles) standing.",
+    "focal_length": "unknown; estimate from the given depth_info plus a known size: f_px = size_px * depth / size_world"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "basketball, red/maroon, the only round red object; apparent diameter ~35 px (flight), ~33.4 px (after the hoop)",
+      "moves": true,
+      "visible_frames": "0-94 (0-23 held in hands, 79-94 bottom part hidden behind the invisible hoop rim), hidden 95-99, 100-127 visible (100 partly covered by net holes)",
+      "track": "tracks/ball.csv",
+      "reference_point": "sphere centre (= the object origin)",
+      "size_px": {"diameter_flight_mean": 35.06, "diameter_flight_std": 0.84, "diameter_after_net_mean": 33.41, "w_median_flight": 36, "h_median_flight": 34}
+    },
+    {
+      "name": "player",
+      "description": "basketball player, black jersey number 23 and black shorts, dark skin, face blanked (light grey), white shoes; the only person; stands around x~1230",
+      "moves": true,
+      "visible_frames": "0-127 (lower body missing from the segmentation in frames 42-53)",
+      "track": "tracks/player.csv",
+      "reference_point": "pelvis proxy (pelvis_x, pelvis_y): y = head_top + 0.47*(feet_y - head_top), x = mask mean in that row band; also bbox, centroid, head_top_y, feet_y, foot positions",
+      "size_px": {
+        "standing_frames_56_127": {"bbox_h_median": 217, "bbox_w_median": 59, "head_top_y": 583, "feet_y": 799, "pelvis_proxy": [1229.4, 685.0]},
+        "crouched_frame_0": {"bbox": [1149, 607, 1236, 800], "h": 194, "note": "knees bent, holding the ball at waist height"},
+        "max_bbox_h_arms_up": "243 px (frames 25, 29; includes raised shooting arm)",
+        "min_head_to_feet": "192 px (frames 1-2, crouch)"
+      }
+    },
+    {
+      "name": "hoop (invisible)",
+      "description": "the hoop/rim and net are not drawn (removed with the background), but they hide the ball: the ball is cut along a horizontal edge at y~493-499 for x~695-740 in frames 79-94, is fully hidden in 95-99, and net strands make holes in the ball at frame 100 (net fragments visible at y 502-540)",
+      "moves": false,
+      "image_position_px": {"rim_front_edge_y": 495, "rim_centre_x_approx": 714, "net_bottom_y_approx": 545},
+      "reliability": "inferred only from where the ball disappears; rim width unknown (> ball width 35 px)"
+    },
+    {
+      "name": "floor (invisible)",
+      "description": "not drawn; implied by the ball bounce (ball lowest centre y 760.9-762.2, bottom ~778-780) and the player's soles at y~799 (the player is nearer the camera than the bounce point)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "start: player crouched, holding the ball at waist height, nearly still", "frames": "0-2", "t": "0-0.067"},
+    {"event": "ball starts moving (shooting motion begins)", "frame": 3, "t": 0.1},
+    {"event": "player starts to rise from the crouch (bbox top / pelvis move up)", "frame": 5, "t": 0.167},
+    {"event": "ball raised above head (set point), ball nearly still at x~1210-1215, y~560", "frames": "16-19", "t": "0.533-0.633"},
+    {"event": "release: last frame the ball touches the hand = 23, first frame the ball is a separate blob = 24", "frame": 24, "t": 0.8},
+    {"event": "player's left foot is off the bottom band (one foot lifted / small hop); feet_y highest (smallest y) 786 at frame 33 vs 799 standing", "frames": "23-37", "t": "0.767-1.233", "reliability": "ambiguous whether this is a real jump"},
+    {"event": "ball apex in image (minimum cy 447.2; cy within 1 px of that over frames 51-60)", "frame": 59, "t": 1.967},
+    {"event": "player lowers arms / follow-through ends; standing still from here", "frame": 54, "t": 1.8},
+    {"event": "ball reaches the rim: bottom starts to be hidden", "frame": 79, "t": 2.633},
+    {"event": "ball fully hidden in the hoop/net", "frames": "95-99", "t": "3.167-3.3"},
+    {"event": "ball reappears below the net (cy 562)", "frame": 100, "t": 3.333},
+    {"event": "ball hits the floor (lowest cy 760.9) = bounce", "frame": 120, "t": 4.0},
+    {"event": "rebound apex (cy 730.7)", "frame": 123, "t": 4.1},
+    {"event": "second floor contact (cy 762.2, frames 126-127 identical)", "frame": 126, "t": 4.2},
+    {"event": "video turns black", "frame": 128, "t": 4.267}
+  ],
+  "files": {
+    "tracks/ball.csv": "final ball track (all 130 frames)",
+    "tracks/player.csv": "final player track (all 130 frames)",
+    "tracks/ball_stage1.csv, tracks/player_stage1.csv": "intermediate outputs of scripts/track2.py (ball.csv/player.csv derive from them)",
+    "summary_stats.json": "apparent ball diameter stats, hoop edge, apex, player standing size",
+    "notes.md": "method and reliability"
+  }
+}

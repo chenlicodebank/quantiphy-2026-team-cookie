@@ -1,0 +1,447 @@
+{
+ "video": "simulation_0223.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 45,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24; frame 0 at t=0",
+ "camera": {
+  "motion": "static (mean abs grey diff outside moving column <=0.35/255 between consecutive frames, 0.46 frame0 vs 44)",
+  "view": "near top-down view of a xiangqi board on tatami; 2D scene, motion in the board plane; image +y = direction of motion",
+  "perspective_note": "slight perspective: glyph (top face) centre drifts ~0.0038*(y-170) px relative to silhouette bbox centre (~ -0.6 px at y=156, +2.8 px at y=968); apparent diameter of moving piece constant 86-87 px over the board (no size change)"
+ },
+ "moving_objects": [
+  {
+   "name": "red_general",
+   "desc": "red-glyph 帥/帅 general (light wooden disc with red character), the centre (5th) piece of the top (red) back row; the only object that moves",
+   "track": "tracks/red_general.csv",
+   "reference_point": "silhouette bbox centre in image (= disc centre; best proxy for origin)",
+   "visible_frames": "0-41 fully (40-41 over tatami rim/off-board), 42 sliver at bottom edge, 43-44 out of frame",
+   "size_px": {
+    "diameter_x": 87,
+    "diameter_y": 86,
+    "note": "mask bbox frames 0-39: width 86-87 (x 916-1002), height 85-87"
+   },
+   "path": "straight line along the board's empty centre file, x = 959.2 +/-0.1 px, y increasing (top->bottom of image), from y=156 (frame 0) to y=968 (frame 39), leaves the board bottom edge (~y 1008-1017) at about frame 40-41 and the image at frame 42-43",
+   "start_px": [
+    959.0,
+    156.0
+   ],
+   "last_full_on_board_px": [
+    959.0,
+    968.0
+   ]
+  }
+ ],
+ "events": [
+  {
+   "event": "at rest",
+   "frames": "0-1",
+   "note": "frame0 y=156.05, frame1 y=156.01 (mask centroid)"
+  },
+  {
+   "event": "motion start",
+   "frame_approx": 1.3,
+   "note": "first detectable displacement frame1->2 (+0.76 px); increments then grow ~1.1-1.2 px per frame each frame (steady speed-up, no direction change)"
+  },
+  {
+   "event": "crosses board bottom rim / leaves board onto tatami",
+   "frame_approx": "40-41",
+   "t_s": "~1.67-1.71"
+  },
+  {
+   "event": "leaves image",
+   "frame": 43,
+   "t_s": 1.7917,
+   "note": "frame 42 only a 14 px sliver visible (y 1066-1079)"
+  },
+  {
+   "event": "duplicate frames in video",
+   "frames": [
+    [
+     9,
+     10
+    ],
+    [
+     11,
+     12
+    ],
+    [
+     18,
+     19
+    ],
+    [
+     20,
+     21
+    ],
+    [
+     28,
+     29
+    ],
+    [
+     34,
+     35
+    ]
+   ],
+   "note": "each pair shows the identical image; the first of each pair shows the position belonging to the next frame (step skipped). See notes.md"
+  }
+ ],
+ "static_objects": {
+  "board": {
+   "desc": "dark red-brown xiangqi board with orange rim",
+   "inner_edges_px_gradient": {
+    "left": 449,
+    "right": 1479,
+    "top": 80,
+    "bottom": 1008
+   },
+   "outer_rim_px_visual": {
+    "left": 448,
+    "right": 1490,
+    "top": 73,
+    "bottom": 1017
+   },
+   "size_px": {
+    "width_outer": 1042,
+    "height_outer": 944
+   },
+   "note": "board edges +/-8 px (rim is a bevel)"
+  },
+  "pieces": [
+   {
+    "name": "red_chariot_L",
+    "centre_px": [
+     600.5,
+     156.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "red_horse_L",
+    "centre_px": [
+     690.5,
+     155.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "red_elephant_L",
+    "centre_px": [
+     775.5,
+     155.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "red_advisor_L",
+    "centre_px": [
+     869.5,
+     156.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "red_advisor_R",
+    "centre_px": [
+     1049.5,
+     156.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "red_elephant_R",
+    "centre_px": [
+     1138.5,
+     158.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "red_horse_R",
+    "centre_px": [
+     1228.5,
+     156.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "red_chariot_R",
+    "centre_px": [
+     1319.5,
+     154.5
+    ],
+    "diameter_px": [
+     84,
+     84
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "red_cannon_L",
+    "centre_px": [
+     688.5,
+     322.0
+    ],
+    "diameter_px": [
+     84,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "red_cannon_R",
+    "centre_px": [
+     1227.5,
+     322.0
+    ],
+    "diameter_px": [
+     84,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "red_soldier_1",
+    "centre_px": [
+     601.0,
+     412.0
+    ],
+    "diameter_px": [
+     85,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "red_soldier_2",
+    "centre_px": [
+     780.5,
+     412.5
+    ],
+    "diameter_px": [
+     84,
+     84
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "red_soldier_3",
+    "centre_px": [
+     1138.0,
+     412.0
+    ],
+    "diameter_px": [
+     83,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "red_soldier_4",
+    "centre_px": [
+     1319.5,
+     412.0
+    ],
+    "diameter_px": [
+     84,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_soldier_1",
+    "centre_px": [
+     601.0,
+     664.0
+    ],
+    "diameter_px": [
+     85,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_soldier_2",
+    "centre_px": [
+     782.5,
+     664.0
+    ],
+    "diameter_px": [
+     84,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_soldier_3",
+    "centre_px": [
+     1139.0,
+     664.0
+    ],
+    "diameter_px": [
+     83,
+     83
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_soldier_4",
+    "centre_px": [
+     1318.0,
+     663.5
+    ],
+    "diameter_px": [
+     83,
+     84
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_cannon_L",
+    "centre_px": [
+     693.5,
+     753.5
+    ],
+    "diameter_px": [
+     84,
+     84
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_cannon_R",
+    "centre_px": [
+     1229.0,
+     753.5
+    ],
+    "diameter_px": [
+     83,
+     84
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_chariot_L",
+    "centre_px": [
+     603.0,
+     917.5
+    ],
+    "diameter_px": [
+     83,
+     84
+    ],
+    "note": "isolated: centre/diameter from light-disc mask"
+   },
+   {
+    "name": "black_horse_L",
+    "centre_px": [
+     692.5,
+     917.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "black_elephant_L",
+    "centre_px": [
+     781.5,
+     917.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "black_advisor_L",
+    "centre_px": [
+     869.5,
+     918.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "black_advisor_R",
+    "centre_px": [
+     1048.5,
+     917.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "black_elephant_R",
+    "centre_px": [
+     1137.5,
+     917.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "black_horse_R",
+    "centre_px": [
+     1226.5,
+     917.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   },
+   {
+    "name": "black_chariot_R",
+    "centre_px": [
+     1314.5,
+     917.5
+    ],
+    "diameter_px": null,
+    "note": "touching neighbours: centre from Hough circle"
+   }
+  ],
+  "piece_diameter_px_typical": "83-85 (isolated static pieces, light-disc mask); moving general 86-87",
+  "piece_spacing_px": {
+   "columns": "x = 600.5, 690.5, 775-781, 869.5, 959(general), 1049, 1138, 1228, 1319: ~89.8 px per file",
+   "rows_y": [
+    156,
+    322,
+    412,
+    664,
+    753.5,
+    917.5
+   ]
+  },
+  "white_go_bowl": {
+   "desc": "dark bowl of white go stones, left of board, partly under board edge",
+   "centre_px_approx": [
+    392,
+    467
+   ],
+   "diameter_px_approx": 175
+  },
+  "black_go_bowl": {
+   "desc": "dark bowl of black go stones, right-bottom of board, partly under board edge",
+   "centre_px_approx": [
+    1553,
+    915
+   ],
+   "diameter_px_approx": 195
+  },
+  "tatami_borders": {
+   "desc": "dark green tatami edge strips",
+   "horizontal_band_y": [
+    655,
+    700
+   ],
+   "near_vertical_strip_x": "~1780-1840 at top, slanting to ~1900 at bottom"
+  },
+  "board_text": "engraved characters 楚河/漢界-style on the centre column (y~290-420 and ~670-800), static markings"
+ },
+ "notes": "notes.md"
+}

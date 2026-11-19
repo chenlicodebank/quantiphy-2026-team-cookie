@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0074.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MS",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1375,
+  "question": "What is the acceleration of the white car at 2.0s in m/s^2?",
+  "prior": "length of the white car = 6m",
+  "depth_info": "t=0.58s, distance_human_camera = 37.0747m\nt=1.58s, distance_human_camera = 37.8958m\nt=0.58s, distance_yellow_car_camera = 31.0495m\nt=1.58s, distance_yellow_car_camera = 30.4267m\nt=0.58s, distance_white_car_camera = 31.2826m\nt=1.58s, distance_white_car_camera = 27.7202m\nt=0.58s, distance_bike_camera = 28.6001m\nt=1.58s, distance_bike_camera = 24.5118m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

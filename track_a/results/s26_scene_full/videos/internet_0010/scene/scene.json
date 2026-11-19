@@ -1,0 +1,519 @@
+{
+ "video": "internet_0010.mp4",
+ "source": "internet",
+ "scene": "2D",
+ "fps": 29.662162,
+ "frames": 97,
+ "width": 3840,
+ "height": 2160,
+ "time_convention": "t = frame / fps, frame 0 at t = 0",
+ "coordinates": "full-res image px, x right, y DOWN. *_bg columns = image coords minus camera shift (camera.csv) = frame-0 background coordinates; use them for motion because the camera pans.",
+ "files": {
+  "camera": "scene/camera.csv",
+  "tracks": [
+   "scene/tracks/ball.csv",
+   "scene/tracks/ball_auto.csv (raw tracker output)",
+   "scene/tracks/blacktee_redshorts.csv",
+   "scene/tracks/shooter_grey_tank.csv",
+   "scene/tracks/big_guy_dark_tee_cap.csv",
+   "scene/tracks/red_tracksuit.csv",
+   "scene/tracks/yellow_shorts.csv",
+   "scene/tracks/white_shirt.csv",
+   "scene/tracks/red_shirt.csv",
+   "scene/tracks/bald_black_shirt.csv"
+  ],
+  "notes": "scene/notes.md"
+ },
+ "camera": {
+  "type": "handheld, pans to the right following the ball (scene content moves LEFT in the image); a ROTATION, so the shift is non-uniform: at the end about -200 px at the image centre, about -240 px near x~1000 and x~3050, about -265 px near the left/right edges. Use the homography (h00..h22 in camera.csv, frame i -> frame 0) or scene/scripts/camlib.py to_bg(); all *_bg columns already use it.",
+  "centre_shift_frame0_to_frameN_px": {
+   "0": [
+    0.0,
+    0.0
+   ],
+   "8": [
+    -15.63,
+    2.53
+   ],
+   "16": [
+    -9.75,
+    -5.42
+   ],
+   "24": [
+    -17.64,
+    0.03
+   ],
+   "32": [
+    -43.3,
+    2.35
+   ],
+   "40": [
+    -76.86,
+    -2.56
+   ],
+   "48": [
+    -118.23,
+    -8.96
+   ],
+   "56": [
+    -156.62,
+    -6.51
+   ],
+   "64": [
+    -188.14,
+    6.34
+   ],
+   "72": [
+    -202.33,
+    4.46
+   ],
+   "80": [
+    -200.43,
+    4.56
+   ],
+   "88": [
+    -201.5,
+    4.05
+   ],
+   "96": [
+    -198.14,
+    4.33
+   ]
+  },
+  "pan_phases": "f0-26 small hand jitter (|dx| < 20 px); f26-70 pan (centre shift reaches about -200 px; fastest about -5 px/frame at f40-56); f70-96 nearly still",
+  "note": "ORB+RANSAC homography on background (sky/palms/buildings/pole), direct to frame 0. Validated by template-matching static objects (restroom sign, black trash can, backboard logo, hoop pole, far court line, mural): predicted vs measured shift agree within 1-3 px (one motion-blurred frame 11 px)."
+ },
+ "objects": {
+  "ball": {
+   "desc": "basketball (brown/orange), the only ball in play; dribbled and shot by shooter_grey_tank",
+   "moves": true,
+   "visible_frames": "0-94 (94 partly behind red_tracksuit), hidden 95-96",
+   "track": "scene/tracks/ball.csv",
+   "diameter_px_BEST": {
+    "value": 45.0,
+    "uncertainty": 1.5,
+    "how": "full outline incl. dark shaded edge, against clear sky: f49 45.7 (bbox 46x44), f51 45.5 (46x45), f52 45.9 (46x45), f75 45.1 (44x45), f76 45.2, f77 45.2 (45x45); Hough circle fits mostly 44.6-47.8; visual zoom f51 ~44-46, f6 (dribble) ~42-46. No measurable change of apparent size along the flight. See tracks/ball_diameter.csv."
+   },
+   "colour_core_mask_diameter_px (UNDERESTIMATES, do not use as ball size)": {
+    "dribble_f0_9_mask": {
+     "frames": [
+      0,
+      9
+     ],
+     "n": 10,
+     "median": 42.1,
+     "mean": 42.3,
+     "min": 40.5,
+     "max": 44.8
+    },
+    "in_hands_f15_44_mask (may include skin)": {
+     "frames": [
+      15,
+      44
+     ],
+     "n": 30,
+     "median": 37.2,
+     "mean": 37.2,
+     "min": 33.8,
+     "max": 43.2
+    },
+    "flight_first_part_f47_60": {
+     "frames": [
+      47,
+      60
+     ],
+     "n": 14,
+     "median": 34.9,
+     "mean": 35.3,
+     "min": 32.3,
+     "max": 39.0
+    },
+    "flight_near_hoop_f70_80": {
+     "frames": [
+      70,
+      80
+     ],
+     "n": 11,
+     "median": 32.3,
+     "mean": 33.3,
+     "min": 29.9,
+     "max": 37.3
+    },
+    "falling_below_net_f86_90": {
+     "frames": [
+      86,
+      90
+     ],
+     "n": 5,
+     "median": 37.3,
+     "mean": 35.6,
+     "min": 31.0,
+     "max": 38.5
+    },
+    "flight_bbox_max_side_median_f47_80": 38.5,
+    "note": "diam_eq = sqrt(4*area/pi) of the orange colour mask = only the lit orange core; the dark shaded rim of the ball is excluded, so it is ~10 px smaller than the real outline. The colour-mask centroid is biased ~3-4 px toward the lit (upper-right) side relative to the outline centre, a near-constant offset."
+   },
+   "apex": {
+    "raw_image": {
+     "frame": 65,
+     "y": 886.5
+    },
+    "background_compensated": {
+     "frame": 65,
+     "y_bg": 874.4
+    }
+   }
+  },
+  "shooter_grey_tank": {
+   "desc": "man in grey/blue sleeveless tank top, black shorts, face blurred; left-centre of the court; dribbles at f0-14 and takes the jump shot",
+   "moves": true,
+   "visible_frames": "0-~83 (then behind blacktee_redshorts)",
+   "track": "scene/tracks/shooter_grey_tank.csv"
+  },
+  "blacktee_redshorts": {
+   "desc": "tall young man, black T-shirt, dark-red shorts, white socks; leftmost player; walks slowly right, faster after f64",
+   "moves": true,
+   "visible_frames": "0-96",
+   "track": "scene/tracks/blacktee_redshorts.csv"
+  },
+  "big_guy_dark_tee_cap": {
+   "desc": "large man, dark grey T-shirt, black shorts, black Nike cap, black elbow sleeve, knee brace, white sneakers; nearest to camera; walks away/right across the court the whole clip (apparent height shrinks 657 -> 517 px)",
+   "moves": true,
+   "visible_frames": "0-96",
+   "track": "scene/tracks/big_guy_dark_tee_cap.csv"
+  },
+  "red_tracksuit": {
+   "desc": "man in red hoodie (white NYK letters) and red track pants, curly black hair, checkered slip-on shoes; walks right f0-32, turns back left f40-64, then mostly in place",
+   "moves": true,
+   "visible_frames": "0-96",
+   "track": "scene/tracks/red_tracksuit.csv"
+  },
+  "yellow_shorts": {
+   "desc": "man with white tank top / tattoos and yellow-black basketball shorts, face blurred; right of red_tracksuit; often hidden behind him",
+   "moves": true,
+   "visible_frames": "0-~9 and 47-~73 clearly; partly/fully hidden 10-46 and 74-96",
+   "track": "scene/tracks/yellow_shorts.csv"
+  },
+  "white_shirt": {
+   "desc": "young man in white/pink T-shirt with pink-white tie-dye shorts and orange-pink shoes; behind big_guy at the start",
+   "moves": true,
+   "visible_frames": "0 and 40-88 clearly; 1-39 mostly behind big_guy",
+   "track": "scene/tracks/white_shirt.csv"
+  },
+  "red_shirt": {
+   "desc": "young man in red T-shirt, black shorts, white leggings, yellow shoes; far side, mostly behind big_guy",
+   "moves": true,
+   "visible_frames": "0 and 56-96; 1-55 largely hidden",
+   "track": "scene/tracks/red_shirt.csv"
+  },
+  "bald_black_shirt": {
+   "desc": "bald man in black T-shirt and black shorts, far background near the bleachers, walks slowly left",
+   "moves": true,
+   "visible_frames": "8-40 boxed (later hidden behind others)",
+   "track": "scene/tracks/bald_black_shirt.csv"
+  },
+  "seated_man_left": {
+   "desc": "man in dark clothes and cap sitting/leaning against the restroom building wall, far left",
+   "moves": false,
+   "f0_box_px": [
+    693,
+    1512,
+    751,
+    1645
+   ],
+   "note": "shifts with camera pan only"
+  },
+  "background_pedestrians": {
+   "desc": "woman in maroon top standing by the HEIDI stand, people on bleachers and boardwalk, person in blue shirt walking far right (f56-96), people in orange near the hoop pole; not tracked",
+   "moves": "some, slightly"
+  },
+  "backboard": {
+   "desc": "glass backboard of the court hoop, seen obliquely from the left-front",
+   "moves": false,
+   "f80_corners_px": {
+    "top_left": [
+     2367,
+     1008
+    ],
+    "top_right": [
+     2524,
+     928
+    ],
+    "bottom_right": [
+     2530,
+     1146
+    ],
+    "bottom_left_est": [
+     2369,
+     1180
+    ]
+   },
+   "f80_extents_px": {
+    "left_edge_height": 172,
+    "right_edge_height": 218,
+    "horizontal_span_foreshortened": 157
+   },
+   "note": "right (white) edge includes the board thickness/frame seen from the side; board strongly foreshortened, its pixel width is NOT its true width"
+  },
+  "rim": {
+   "desc": "orange hoop rim with white net",
+   "moves": false,
+   "f92_px": {
+    "left_end": [
+     2351,
+     1129
+    ],
+    "right_end_at_bracket": [
+     2423,
+     1131
+    ],
+    "centre_est": [
+     2387,
+     1136
+    ],
+    "horizontal_extent": 72,
+    "vertical_extent_ellipse": 18,
+    "net_bottom_y": 1210
+   },
+   "centre_in_frame0_bg_coords": [
+    2597.4,
+    1123.7
+   ],
+   "note": "rim seen nearly edge-on; right side merges with the orange bracket, horizontal extent uncertain +-8 px"
+  },
+  "hoop_pole": {
+   "desc": "grey steel pole holding the backboard (two upper braces + lower horizontal arm)",
+   "moves": false,
+   "ground_base_in_frame0_bg_coords": [
+    3068.1,
+    1746.9
+   ],
+   "f80_px": {
+    "top": [
+     2775,
+     994
+    ],
+    "ground_base": [
+     2822,
+     1745
+    ],
+    "visible_height": 751,
+    "width_near_base": 40,
+    "lower_arm_y": 1165
+   },
+   "note": "pole stands behind the backboard; its base is the nearest ground reference to the hoop. Rim y (1136) is about 609 px above the pole base y (1745) at f80, but the rim is closer to the camera than the pole so this is only approximate as a rim height."
+  },
+  "trash_can_black": {
+   "desc": "black metal trash can on the court edge left of the hoop pole",
+   "moves": false,
+   "f80_box_px": [
+    2356,
+    1531,
+    2431,
+    1644
+   ],
+   "height_px": 113,
+   "width_px": 75,
+   "f80_box_in_frame0_bg_coords": [
+    2570.8,
+    1524.0,
+    2650.8,
+    1639.8
+   ]
+  },
+  "trash_can_green": {
+   "desc": "green trash can in front of the white bleachers, left-centre",
+   "moves": false,
+   "f8_box_px": [
+    1444,
+    1564,
+    1502,
+    1657
+   ],
+   "height_px": 93,
+   "width_px": 58
+  },
+  "bleachers": {
+   "desc": "white metal bleachers behind the court centre",
+   "moves": false,
+   "f8_box_px_approx": [
+    1706,
+    1460,
+    2056,
+    1657
+   ]
+  },
+  "restroom_building": {
+   "desc": "grey Venice Beach public restroom building with blue sign, left background",
+   "moves": false
+  },
+  "court_markings": {
+   "desc": "blue-grey court; white key / free-throw circle and three-point arc lines in the foreground and around red_tracksuit; dark blue arc (old marking) lower left",
+   "moves": false
+  },
+  "palm_trees": {
+   "desc": "many palm trees in the background; one tall palm enters at the right edge from ~f48 due to the pan",
+   "moves": false
+  }
+ },
+ "people_key_heights_px": {
+  "blacktee_redshorts": [
+   479.1,
+   484.9,
+   482.6,
+   479.1,
+   477.9,
+   482.6,
+   494.2,
+   480.2,
+   494.2,
+   488.4,
+   488.4,
+   476.7,
+   479.1
+  ],
+  "shooter_grey_tank": [
+   337.2,
+   331.4,
+   331.4,
+   331.4,
+   337.2,
+   325.6,
+   366.3,
+   348.8,
+   360.5,
+   354.7,
+   348.8
+  ],
+  "big_guy_dark_tee_cap": [
+   657.0,
+   645.3,
+   627.9,
+   616.3,
+   601.2,
+   587.2,
+   581.4,
+   564.0,
+   558.1,
+   540.7,
+   529.1,
+   523.3,
+   517.4
+  ],
+  "red_tracksuit": [
+   546.5,
+   546.5,
+   540.7,
+   534.9,
+   531.4,
+   517.4,
+   500.0,
+   494.2,
+   494.2,
+   505.8,
+   511.6,
+   517.4,
+   511.6
+  ],
+  "yellow_shorts": [
+   345.3,
+   343.0,
+   331.4,
+   337.2,
+   331.4,
+   331.4
+  ],
+  "white_shirt": [
+   465.1,
+   436.0,
+   441.9,
+   418.6,
+   430.2,
+   430.2,
+   424.4,
+   418.6
+  ],
+  "red_shirt": [
+   361.6,
+   325.6,
+   331.4,
+   331.4,
+   331.4,
+   331.4,
+   319.8
+  ],
+  "bald_black_shirt": [
+   302.3,
+   293.0,
+   296.5,
+   304.7,
+   308.1
+  ]
+ },
+ "events": [
+  {
+   "event": "clip start: shooter holding ball at right hand, starting a dribble (ball moving down)",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "ball bounces on the ground (dribble), lowest centre y=1737",
+   "frame": 9,
+   "time": 0.3034
+  },
+  {
+   "event": "ball back in shooter hands (gather), starts upward shooting motion",
+   "frame": 14,
+   "time": 0.472
+  },
+  {
+   "event": "ball raised to set point above head (centre y ~1406-1418, nearly still f33-41)",
+   "frame": 34,
+   "time": 1.1462
+  },
+  {
+   "event": "shooter feet leave ground (small hop, lowest shoe point rises ~20-25 px)",
+   "frame": 46,
+   "time": 1.5508,
+   "note": "approx +-1 frame; landing ~f52-54"
+  },
+  {
+   "event": "release: last fingertip contact f46, first free-flight frame f47",
+   "frame": 46.5,
+   "time": 1.5677
+  },
+  {
+   "event": "ball apex (background-compensated)",
+   "frame": 65,
+   "time": 2.1913
+  },
+  {
+   "event": "camera pan in progress",
+   "frame": "28-70"
+  },
+  {
+   "event": "ball reaches the rim (front of rim)",
+   "frame": 82,
+   "time": 2.7645
+  },
+  {
+   "event": "ball inside net; horizontal direction reverses (x max at f83 then decreasing)",
+   "frame": 83,
+   "time": 2.7982
+  },
+  {
+   "event": "ball exits bottom of net (made basket)",
+   "frame": 85,
+   "time": 2.8656
+  },
+  {
+   "event": "ball falls toward ground, passes behind red_tracksuit; hidden from f95",
+   "frame": 94,
+   "time": 3.169
+  },
+  {
+   "event": "red_tracksuit reverses walking direction (right -> left)",
+   "frame": "~34-40"
+  }
+ ]
+}

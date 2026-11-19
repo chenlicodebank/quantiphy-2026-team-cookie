@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0059.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1249,
+  "question": "What is the height of the turning yellow car in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 30.9678m\nt=1.58s, distance_human_camera = 29.8174m\nt=0.58s, distance_yellow_car_camera = 38.5961m\nt=1.58s, distance_yellow_car_camera = 35.3917m\nt=0.58s, distance_white_car_camera = 43.8120m\nt=1.58s, distance_white_car_camera = 43.0028m\nt=0.58s, distance_bike_camera = 40.8706m\nt=1.58s, distance_bike_camera = 40.4042m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0022.mp4",
+ "video_source": "simulation",
+ "video_type": "S2SS",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "question": {
+  "id": 1099,
+  "question": "What is the speed of the boat at 1.0s in m/s?",
+  "prior": "length of the boat = 10m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

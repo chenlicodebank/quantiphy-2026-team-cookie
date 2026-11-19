@@ -1,0 +1,60 @@
+{
+  "video": "captured_0035as.mp4",
+  "source": "lab (real Orbbec Femto Mega RGB recording; people + balls segmented with SAM2 and pasted on a synthetic static blue-white gradient background; watermark 'Modified with Segment Anything 2 Demo' bottom-right, x 1030-1280, y 692-720)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static: background pixels identical across frames (temporal std 0.7 grey levels in empty region); no pan, zoom or shake",
+    "intrinsics_from_benchmark_convention": {"f_px": 762.8, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "view": "elevated, looking down-forward onto a floor that is NOT visible (background replaced). Far person stands near top of image, near person at right edge close to camera. No horizon, vanishing points or floor markings remain; image y increases toward the camera.",
+    "perspective_cues": "only apparent ball sizes: soccer ball ~46 px diameter at the far person's feet (frames 0-4, 44-48), ~52-55 px near frames 15-22 (closest point, blurred); basketball ~82-84 px held beside the near person (frames 0-7), ~69-70 px after frame 17. Persons are cut by image borders."
+  },
+  "timing_anomaly": "Both balls move ~2x their neighbouring per-frame step between frames 11->12 and 35->36 (soccer 37.5 vs ~19 px; basketball 48 vs ~19 px; 36: 8.2/10.0 vs ~4.5/5 px). The capture almost certainly dropped one frame at each of these points. Tracks keep the file's frame indices (t = i/24) as the benchmark convention does.",
+  "objects": {
+    "soccer_ball": {
+      "description": "white football with black pentagons; starts at rest at the FAR person's left foot (image-left shoe), kicked toward the camera/right, collides with the basketball, rebounds back to the far person who stops it with her foot",
+      "moves": true, "visible_frames": "0-48", "track": "tracks/soccer_ball.csv",
+      "reference_point": "visible centre of the ball (mask centroid; manual circle centre in frames 0-11, 47-48)",
+      "diameter_px": {"at_rest_frames_0_4": 46, "frames_12_19_minor_axis_blurred": "51-54 (major 60-64 is motion blur)", "frames_24_30": "~48-50", "frames_36_48": "43-46"},
+      "start_position_px": [352.5, 303.5],
+      "end_position_px_frame48": [470.5, 323.0]
+    },
+    "basketball": {
+      "description": "orange Wilson basketball; held by the NEAR person's left hand against her thigh (image right-bottom), kicked by her foot toward the far person (up-left), hits the soccer ball, then rolls slowly left",
+      "moves": true, "visible_frames": "0-48", "track": "tracks/basketball.csv",
+      "reference_point": "fit_cx, fit_cy = circle fitted to the ball edge that borders background (robust to the occluding leg/hand/foot); cx, cy = centroid of the visible orange mask",
+      "diameter_px": {"held_frames_0_7": "82-84 (right part hidden behind the thigh)", "frames_12_16": "73-75", "frames_17_48": "69-70"},
+      "start_position_px": [884.5, 616.3],
+      "end_position_px_frame48": [518.7, 465.0]
+    },
+    "far_person": {
+      "description": "person in light-grey T-shirt and dark blue-grey jeans, white sneakers, standing near the top-left of the image (farther from camera); head cut off by the top border; kicks the soccer ball at frames 4-11 and stops it at frames 47-48",
+      "moves": true, "visible_frames": "0-48 (truncated at top border y=0)", "track": "tracks/far_person.csv",
+      "reference_point": "centroid of visible mask (head out of frame, so not the true body centre)",
+      "extent_px": {"bbox_x": "313-512", "bbox_y_bottom(feet)": "311-333", "visible_height": "312-334 (from y=0 to feet)", "visible_width": "123-196 (legs apart during kick)"}
+    },
+    "near_person": {
+      "description": "long dark-haired person in dark-grey oversized T-shirt (print 'MASON...') and black trousers, at the right edge close to the camera, back/side to camera; holds then kicks the basketball (right leg raised frames 9-22)",
+      "moves": true, "visible_frames": "0-48 (truncated at right x=1279 and bottom y=719 borders)", "track": "tracks/near_person.csv",
+      "reference_point": "centroid of visible mask (truncated person)",
+      "extent_px": {"bbox_x0": "786-915", "bbox_top(head)": "98-109", "visible_height": "611-622 (head to bottom border)"}
+    }
+  },
+  "static_objects": "none visible: floor, walls and furniture were removed by the background replacement; the only static element is the watermark box",
+  "events": [
+    {"event": "soccer ball at rest at far person's foot", "frames": "0-4", "t": "0.000-0.167"},
+    {"event": "far person kicks soccer ball (contact; ball blurred, merged with shoe)", "frames": "4/5 start of motion, contact until ~9", "t": "0.17-0.38"},
+    {"event": "basketball held still beside near person's thigh", "frames": "0-7", "t": "0.000-0.292"},
+    {"event": "near person's foot kicks basketball (start of motion frame 8, foot in contact frames 8-11, free from frame 12)", "frames": "8-11", "t": "0.333-0.458"},
+    {"event": "dropped capture frame (both balls jump 2x)", "frames": "between 11 and 12", "t": "0.458-0.500"},
+    {"event": "balls collide (soccer ball reverses direction, basketball slows from ~18 to ~5 px/frame and turns left)", "frames": "19 -> 20 (in contact 19-21)", "t": "0.792-0.833"},
+    {"event": "dropped capture frame", "frames": "between 35 and 36", "t": "1.458-1.500"},
+    {"event": "far person's foot touches/stops returning soccer ball", "frames": "47-48", "t": "1.958-2.000"}
+  ],
+  "files": {"notes": "notes.md", "tracks": "tracks/*.csv", "scripts": "scripts/*.py"}
+}

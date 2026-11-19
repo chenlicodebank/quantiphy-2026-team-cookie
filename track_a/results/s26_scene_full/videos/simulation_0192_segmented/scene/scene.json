@@ -1,0 +1,113 @@
+{
+  "video": "simulation_0192_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by white)",
+  "scene_type": "2D",
+  "fps": 120.0,
+  "frames": 200,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 120; frame = round(t * 120); t=0 is frame 0",
+  "pixel_convention": "x right, y down, origin top-left, pixel centres at integer coordinates",
+  "camera": {
+    "motion": "static (static truck regions differ < 3 grey levels between frame 0 and 199; truck edges identical to 1 px)",
+    "view": "straight-on view of the rear of a box truck; the box falls in the image plane. Mild perspective: the box's underside is visible while it is high in the frame (up to ~34 px tall at frame 0, vanishing as it reaches the roof), so the camera is roughly at truck-roof height (~y 525-535). Box width stays 280.5 +- 0.5 px during the fall -> the box moves at constant depth (planar motion)."
+  },
+  "objects": [
+    {
+      "name": "box",
+      "description": "brown cardboard box with one dark open flap sticking up at its top right; the only object above the truck",
+      "moves": true,
+      "visible_frames": [0, 199],
+      "track": "tracks/box.csv",
+      "reference_point": "centre of the front face: cx = (left_x+right_x)/2, cy = front_top_y + 205.3/2",
+      "size_px": {
+        "front_face_width": 280.8,
+        "front_face_height": 205.3,
+        "front_face_height_note": "measured at rest (frames 74-199, no underside visible); while falling the visible height includes the greyish underside (236.5 px total at frame 0)",
+        "full_mask_incl_flap_at_rest": {"x0": 805, "x1": 1088, "y0": 308, "y1": 527, "w": 284, "h": 220},
+        "flap_sticks_up_above_front_top_px": 13
+      },
+      "positions_px": {
+        "start_frames_0_4": {"cx": 946.6, "cy": 165.1, "front_top_y": 62.43},
+        "rest_frames_74_199": {"cx": 946.9, "cy": 424.05, "front_top_y": 321.4, "front_bottom_y": 526.7},
+        "vertical_drop_of_reference_point_px": 258.97,
+        "horizontal_drift_px": "< 1 (pure vertical fall)"
+      }
+    },
+    {
+      "name": "tail_lift_platform",
+      "description": "dark (near-black, mottled) tail-lift / loading platform at the bottom of the rear door opening; lies flat (seen nearly edge-on as a thin dark strip at y~1020-1028) then folds up about its bottom hinge (y~1028) to close against the door",
+      "moves": true,
+      "visible_frames": [0, 199],
+      "track": "tracks/tail_lift_platform.csv",
+      "reference_point": "top (free) edge y = top_y (sub-pixel); hinge line y = 1028; cx,cy = centre of its visible projection",
+      "size_px": {
+        "width_at_hinge": 248.5,
+        "top_edge_width": "249 when near-vertical, up to ~280 when tilted ~45 deg (free edge nearer the camera); occasional larger values 290-330 at frames 72-78 are the side arm/shadow merging",
+        "visible_height_hinge_to_top_at_frame_199": 220.6,
+        "note": "still rotating at frame 199, so 220.6 px is a lower bound on the platform depth (hinge-to-free-edge length)"
+      }
+    },
+    {
+      "name": "truck_rear_body",
+      "description": "white rear of a box truck (cargo box) with yellow outline stripe, centred bottom of frame",
+      "moves": false,
+      "visible_frames": [0, 199],
+      "extents_px": {"x0": 661, "x1": 1227, "width": 566, "roof_top_y": 533.5, "bottom_y": 1046, "height": 512.5, "centre": [944, 790]}
+    },
+    {
+      "name": "rear_door_opening",
+      "description": "grey roller door in a dark frame in the middle of the truck rear",
+      "moves": false,
+      "extents_px": {"outer_frame_x0": 820, "outer_frame_x1": 1066, "outer_width": 246, "top_y": 599, "bottom_y": 1026, "height": 427, "inner_grey_panel": "x ~826-1050, y ~624-1025"}
+    },
+    {
+      "name": "yellow_outline_stripe",
+      "description": "yellow reflective stripe framing the truck rear",
+      "moves": false,
+      "extents_px": {"x0": 684, "x1": 1201, "y0": 558, "y1": 1017, "width": 517, "height": 459}
+    },
+    {
+      "name": "red_white_chevron_panels",
+      "description": "two vertical red/white (yellow) warning-chevron panels at the lower left and lower right corners",
+      "moves": false,
+      "extents_px": {"left": {"x0": 694, "x1": 723, "y0": 872, "y1": 1007}, "right": {"x0": 1164, "x1": 1191, "y0": 872, "y1": 1007}, "each_w": 28, "each_h": 136}
+    },
+    {
+      "name": "red_lamp_handle",
+      "description": "small red lamp/handle left of the door, x 796-815, y 928-967 (20 x 40 px); partly hidden behind the platform's left side arm after ~frame 150",
+      "moves": false
+    },
+    {
+      "name": "doll_plates",
+      "description": "yellow 'DOLL' text plates at the bottom left (x~735-800) and bottom right (x~1070-1150), y ~983-1003",
+      "moves": false
+    },
+    {
+      "name": "top_light",
+      "description": "small grey light/bracket at the top centre of the truck rear, x ~905-955, y ~545-585",
+      "moves": false
+    },
+    {
+      "name": "under_truck_shadow_chassis",
+      "description": "dark chassis/shadow below the truck, y ~1046-1080, x ~710-1190; a light grey bumper bar at y ~1048-1055 between x ~805-1085 appears once the platform lifts",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "box at rest (held) before release", "frames": [0, 4], "t_s": [0.0, 0.0333]},
+    {"event": "box release / start of fall (first displacement at frame 5)", "frame": 4, "t_s": 0.0333},
+    {"event": "box first contact with truck roof", "frame": 61, "t_s": 0.5083, "uncertainty_frames": 1, "note": "front_top 315.4 at frames 60-61, 320.4 at frame 62 (lowest/compressed), so impact between frames 60 and 62"},
+    {"event": "box small rebound peak (~2 px up)", "frames": [67, 71], "t_s": [0.5583, 0.5917]},
+    {"event": "box settled at rest on roof", "frame": 74, "t_s": 0.6167},
+    {"event": "platform starts to tilt (edge-on strip widens)", "frame": 52, "t_s": 0.4333, "uncertainty_frames": 5},
+    {"event": "platform top edge visibly rising", "frame": 59, "t_s": 0.4917},
+    {"event": "platform still rising (decelerating) at end of clip", "frame": 199, "t_s": 1.6583}
+  ],
+  "files": {
+    "tracks/box.csv": "per-frame box track (all 200 frames)",
+    "tracks/tail_lift_platform.csv": "per-frame platform track (all 200 frames)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

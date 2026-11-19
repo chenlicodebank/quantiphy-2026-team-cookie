@@ -1,0 +1,53 @@
+{
+  "video": "simulation_0298.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.005263,
+  "frames": 73,
+  "duration_s": 3.041,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / fps; frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels and seconds; no metric scale guessed",
+  "camera": {
+    "motion": "static (background is uniform purple RGB ~(164,88,194) with no features; nothing in the frame changes except the truck, so no pan or shake is detectable or expected)",
+    "view": "top-down (bird's-eye) view of the truck; motion plane = image plane",
+    "perspective_note": "mild perspective: truck's apparent length is 534 px when centred in the image (frames 23-32) and grows towards the edges (560 px at frame 0, x~1511; 545 px at frame 47, x~274) because the tall truck's side faces show at oblique angles. Width is constant (~160 px body)."
+  },
+  "objects": [
+    {
+      "name": "truck",
+      "description": "fire-rescue truck seen from above: white/grey cab roof with 'FIRE-RESCUE' lettering and a red light bar at the front (left), dark chassis, dark-blue flat bed with red trim and a red crane/hose fitting behind the cab, magenta tail lights at the rear (right). Only object in the scene.",
+      "moves": true,
+      "direction": "leftwards (-x), cab first; vertical position constant at y ~539.5",
+      "visible_frames": "0-68 (fully inside frame 0-47; cut by the left image edge 48-68; gone 69-72)",
+      "track_file": "tracks/truck.csv",
+      "reference_point": "ref_x, ref_y = bbox centre (frames 0-47); frames 48-68 = rear edge x1 minus a quadratic-in-x1 fit of (x1 - bbox centre) from frames 0-47 (+-2 px)",
+      "size_px": {
+        "length_along_motion_centre_of_image": 534,
+        "length_range_frames_0_47": [534, 560],
+        "length_at_frame_0": 560,
+        "length_at_frame_47": 545,
+        "body_width_no_mirrors": 160,
+        "body_width_range": [157, 160],
+        "cab_width": 160,
+        "width_including_mirrors": "184-191 (mirrors stick out ~13-15 px each side)",
+        "height": "not observable (top-down view)",
+        "clear_frame": 24,
+        "clear_frame_bbox_x0y0x1y1": [608, 446, 1141, 633]
+      }
+    }
+  ],
+  "static_objects": "none: background is a uniform purple plane with no markings",
+  "events": [
+    {"event": "truck already moving at the first frame (no visible start of motion)", "frame": 0, "t": 0.0},
+    {"event": "front edge reaches left image edge (x0 = 2 at frame 47, 0 at frame 48)", "frame": 48, "t": 1.9996},
+    {"event": "last frame with any part of the truck visible (rear sliver, 5 px)", "frame": 68, "t": 2.8327},
+    {"event": "truck fully out of frame", "frame": 69, "t": 2.8744}
+  ],
+  "motion_observation": "straight horizontal motion, no direction change, no bounce/contact. Per-frame displacement of the reference point is near constant (~26.3-26.5 px/frame; bbox centre 1511.5 -> 274.0 over frames 0-47), i.e. no visible acceleration. Answering sessions should fit their own model from tracks/truck.csv.",
+  "files": {
+    "tracks/truck.csv": "final per-frame track (all 73 frames)",
+    "tracks/truck_raw.csv": "raw segmentation output (bbox, mask centroid, extents) before reference-point handling",
+    "scripts/": "measure.py (segmentation), finalize.py (track + widths), overlay.py (visual check), background.py (background/camera check)"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "video": "simulation_0136.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 60,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t*24)",
+  "units": "pixels (x right, y down, origin top-left) and seconds",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of background rows 0-480 between frame 0 and frames 2/29/59: shift < 0.005 px",
+    "view": "orthographic-looking straight-on view of a kitchen counter scene; all motion is horizontal in a plane facing the camera"
+  },
+  "objects": [
+    {
+      "name": "blue_cup",
+      "description": "dark-blue tapered tumbler/cup (wide top ~121 px, narrower bottom), the only moving object",
+      "moves": true,
+      "visible_frames": "5-57 (partly cut by left edge 5-6, by right edge 52-57; off-screen 0-4 and 58-59)",
+      "track": "tracks/blue_cup.csv",
+      "reference_point": "cx_est, cy_est (mask minAreaRect centre; edge frames estimated)",
+      "size_px_upright": {"height": 256, "width_top": 121, "note": "frames 7-28, tilt < 3.5 deg; bbox 120-124 x 256-259"},
+      "size_px_tilted": "frames 30-51 cup tilts up to ~11 deg (top leaning right); minAreaRect length stays 256-261, width across grows 121->139",
+      "centre_y_px": 649.5,
+      "bottom_y_px": 778,
+      "top_y_px": 520
+    },
+    {
+      "name": "red_toaster",
+      "description": "red two-slot toaster, upper left",
+      "moves": false,
+      "bbox_px": [52, 110, 485, 407],
+      "size_px": {"width": 434, "height": 298, "note": "red body only; feet extend to y~420, white back plate to x~500"},
+      "centre_px": [268, 258]
+    },
+    {
+      "name": "cooktop",
+      "description": "black Miele induction cooktop panel, right, below the hood",
+      "moves": false,
+      "bbox_px_black_glass": [1215, 440, 1850, 700],
+      "bbox_px_with_grey_frame": [1203, 440, 1863, 715],
+      "size_px": {"width_glass": 635, "width_with_frame": 660},
+      "note": "top part hidden behind the hood (hood bottom edge y~440)"
+    },
+    {
+      "name": "burner_left",
+      "description": "large white ring on the cooktop, left",
+      "moves": false, "centre_px": [1360, 540], "radius_px": 124, "diameter_px": 248
+    },
+    {
+      "name": "burner_right",
+      "description": "smaller white ring on the cooktop, right",
+      "moves": false, "centre_px": [1722, 556], "radius_px": 108, "diameter_px": 216
+    },
+    {
+      "name": "range_hood",
+      "description": "black perforated hood/panel, upper right, runs off right edge",
+      "moves": false, "bbox_px": [1226, 0, 1919, 440], "note": "extends beyond right image edge"
+    },
+    {
+      "name": "outlet_plate",
+      "description": "grey wall/edge plate with two sockets, top centre-left",
+      "moves": false, "bbox_px": [560, 85, 792, 118], "size_px": {"width": 232, "height": 33}
+    },
+    {
+      "name": "left_appliance",
+      "description": "dark silver appliance edge at the far left (cut by image edge)",
+      "moves": false, "bbox_px": [0, 220, 65, 712]
+    },
+    {
+      "name": "counter_surface",
+      "description": "pale green-beige counter/backdrop the cup moves across; front edge where wood floor begins",
+      "moves": false, "front_edge_y_px": 757
+    },
+    {
+      "name": "wood_floor",
+      "description": "brown wood planks below y~760; plank seams at y~945 and vertical seams x~67, ~1110 (upper row), ~590, ~1630 (lower row)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "cup enters from left edge", "frame": 5, "t": 0.2083},
+    {"event": "cup fully in view", "frame": 7, "t": 0.2917},
+    {"event": "fast nearly-uniform motion ~74 px/frame (frames 7-13), then deceleration", "frame_start_decel": 13, "t": 0.5417},
+    {"event": "deceleration ends, cup reaches cooktop left edge (x0~1208 at frame 29); afterwards ~25 px/frame nearly constant", "frame": 28, "t": 1.1667, "note": "transition is gradual, frames ~26-29"},
+    {"event": "cup starts tilting (tilt from ~-1 to -8 deg) while sliding over the cooktop", "frame": 31, "t": 1.2917},
+    {"event": "cup starts leaving at right edge", "frame": 52, "t": 2.1667},
+    {"event": "cup fully gone", "frame": 58, "t": 2.4167}
+  ]
+}

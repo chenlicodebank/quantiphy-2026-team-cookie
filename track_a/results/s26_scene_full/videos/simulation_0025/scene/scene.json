@@ -1,0 +1,161 @@
+{
+ "video": "simulation_0025.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "width": 960,
+ "height": 960,
+ "time_convention": "t = frame / 25; frame = round(t*25)",
+ "camera": {
+  "motion": "static",
+  "max_abs_shift_px": 0.012,
+  "per_frame_shift_file": "scene/camera_shift.csv",
+  "perspective": "level-looking camera facing a cliff across a beach; foreground water y>600, beach y~500-605 recedes upward; horizon hidden behind cliff (would be above y~250). Principal point assumed (480,480). Focal length unknown - estimate from depth_info + known size."
+ },
+ "objects": {
+  "person": {
+   "moves": true,
+   "kind": "human (adult, white T-shirt, dark trousers)",
+   "frames_visible": [
+    0,
+    74
+   ],
+   "track": "scene/tracks/person.csv",
+   "distinguish": "only person; on the beach near image centre, walks from x~560 to x~520 (to image left) and slightly toward the camera (feet y 581->592)",
+   "reference_point": "pelvis estimate = 0.53*mask height above lowest mask pixel; x = mean of mask in that row band",
+   "pelvis_start_px": [
+    559.1113986013987,
+    552.3025874125877
+   ],
+   "pelvis_end_px": [
+    521.7689510489511,
+    561.9683216783224
+   ],
+   "height_px": {
+    "min": 53.0,
+    "max": 57.0,
+    "median": 55.0
+   },
+   "width_px": {
+    "min": 14.0,
+    "max": 17.0,
+    "median": 15.0
+   },
+   "height_px_first5_mean": 54.4,
+   "height_px_last5_mean": 55.0,
+   "notes": "walks the whole clip, no stop; gait legs cross so width varies 11-18 px; ground shadow to the right and a reflection blob below feet excluded"
+  },
+  "bird": {
+   "moves": true,
+   "kind": "dark bird (eagle/raptor-like) flapping",
+   "frames_visible": [
+    0,
+    66
+   ],
+   "fully_in_frame": [
+    0,
+    62
+   ],
+   "track": "scene/tracks/bird.csv",
+   "distinguish": "only flying animal; dark silhouette in front of the cliff, flies left->right at y~355-410",
+   "reference_point": "mask centroid (cx,cy); smoothed cx_smooth/cy_smooth",
+   "start_px": [
+    232.92,
+    379.76
+   ],
+   "last_full_px": [
+    914.51,
+    383.33
+   ],
+   "bbox_width_px_full_frames": {
+    "min": 21.0,
+    "max": 52.0,
+    "median": 40.0
+   },
+   "bbox_height_px_full_frames": {
+    "min": 7.0,
+    "max": 31.0,
+    "median": 19.0
+   },
+   "max_wingspan_px_approx": 52.27,
+   "wingbeat_height_peaks_frames": [
+    1,
+    12,
+    26,
+    50
+   ],
+   "mean_dx_px_per_frame": 10.993387096774192,
+   "notes": "wing shape changes every frame so centroid jitters ~2-4 px vs body; exits right edge: touches x=959 from frame 63, last seen frame 66, gone from frame 67"
+  },
+  "cliff": {
+   "moves": false,
+   "desc": "large sandstone cliff spanning full width behind beach",
+   "top_y_px": "about 250 (left) to 290 (right); small plateau block at x 0-137, y 228-248",
+   "base_y_px": "about 500 at x 0-470; behind sand slope on right",
+   "x_px": [
+    0,
+    959
+   ]
+  },
+  "beach": {
+   "moves": false,
+   "desc": "flat pale sand between cliff and water",
+   "y_px": [
+    500,
+    605
+   ],
+   "notes": "water edge y~575 at left, ~600-605 under the person"
+  },
+  "right_rock": {
+   "moves": false,
+   "desc": "white rounded rock/dune at right edge",
+   "bbox_px": [
+    810,
+    455,
+    959,
+    582
+   ]
+  },
+  "water": {
+   "moves": true,
+   "desc": "rippling sea in foreground (texture animates, not an object)",
+   "y_px": [
+    600,
+    959
+   ]
+  },
+  "columns_at_cliff_base": {
+   "moves": false,
+   "desc": "vertical stripe pattern at the cliff foot",
+   "bbox_px": [
+    185,
+    462,
+    460,
+    500
+   ]
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "clip start: person already walking, bird already flying"
+  },
+  {
+   "frame": 63,
+   "t": 2.52,
+   "what": "bird reaches right image edge"
+  },
+  {
+   "frame": 66,
+   "t": 2.64,
+   "what": "bird last visible (partial)"
+  },
+  {
+   "frame": 74,
+   "t": 2.96,
+   "what": "clip end, person still walking"
+  }
+ ]
+}

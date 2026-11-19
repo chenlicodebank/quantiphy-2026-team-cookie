@@ -1,0 +1,53 @@
+{
+ "video": "simulation_0121.mp4",
+ "source": "simulation (Blender render)",
+ "scene_type": "2D (motion in a plane facing the camera; front view of a Newton's cradle)",
+ "fps": 30.007503,
+ "frames": 80,
+ "size_px": [1920, 1080],
+ "time_convention": "t = frame / fps, frame 0 at t = 0",
+ "units": "pixels (image x right, y DOWN) and seconds; no metric scale assumed",
+ "camera": {
+  "motion": "static (phase-correlation shift of the upper background vs frame 0 <= 0.035 px over all frames)",
+  "perspective": "near-frontal view; all five balls hang in one plane at the same depth (same pixel radius ~81.5 px); a single px scale applies to all balls. The base plate is seen slightly from above (trapezoid), not needed for ball motion."
+ },
+ "glitch_frames": {
+  "1": "render glitch: frame 1 shows the stand with NO balls in place (only a stray half-ball near the base at x~560-720, y~860-960). Ball positions at frame 1 are unknown (visible=0 in tracks). If a question needs frame 1, interpolate between frames 0 and 2 (ball1 moves only ~0.6 px between frames 0 and 2; balls 2-5 are at rest)."
+ },
+ "objects": {
+  "ball1": {"desc": "leftmost chrome ball; the one pulled out to the LEFT at the start and released; strikes the row", "moves": true, "visible_frames": "0, 2-79", "track": "tracks/ball1.csv"},
+  "ball2": {"desc": "second chrome ball from left (rest x~806)", "moves": "slightly (<=9.1 px drift after impact)", "visible_frames": "0, 2-79", "track": "tracks/ball2.csv"},
+  "ball3": {"desc": "middle chrome ball (rest x~974)", "moves": "slightly (<=5 px drift after impact)", "visible_frames": "0, 2-79", "track": "tracks/ball3.csv"},
+  "ball4": {"desc": "fourth chrome ball from left (rest x~1143)", "moves": "slightly (<=17.3 px drift after impact)", "visible_frames": "0, 2-79", "track": "tracks/ball4.csv"},
+  "ball5": {"desc": "rightmost chrome ball; swings out to the RIGHT after the impact and swings back", "moves": true, "visible_frames": "0, 2-79", "track": "tracks/ball5.csv"},
+  "ball_size_all": {"diameter_px": 163.0, "radius_px": 81.5, "note": "all five balls identical in size; fixed radii used in fits: 81.45, 81.50, 81.50, 81.75, 82.65 (ball5 slightly inflated by motion blur and ring overlap; best common value 163 +- 1 px diameter)"},
+  "pendulum_arcs": {
+   "ball1_swing_in": {"frames": [0, 27], "pivot_px": [640.6, 240.4], "arm_length_px": 543.2, "rms_residual_px": 0.13},
+   "ball5_swing_out_and_back": {"frames": [28, 79], "pivot_px": [1312.6, 251.7], "arm_length_px": 539.9, "rms_residual_px": 0.28},
+   "note": "arm length = pivot to ball centre (string + ball radius), from a circle fit to the ball-centre path. The strings are V-shaped pairs hanging from the two top rods (front rod y~206-217, back rod y~253-262)."
+  },
+  "string_attachment_points_px": {"upper_rod": [[795, 220], [975, 220], [1158, 220], [1340, 220]], "lower_rod": [[655, 262], [817, 265], [973, 265], [1130, 265], [1287, 267]], "note": "approximate, read from frame 0 grid"},
+  "frame_loop": {"desc": "static dark stadium-shaped metal loop (stand) around the balls, passes IN FRONT of ball1 (frames 0-~19) and ball5 at rest/near rest", "moves": false, "outer_x_extent_at_y580": [303, 1549], "width_px": 1246, "top_y": 206, "bottom_y": "~950 (merges with base bar)", "height_px": "~745"},
+  "top_rods": {"front_rod_y": [206, 217], "front_rod_x_extent": [592, 1400], "back_rod_y": [253, 262], "back_rod_x_extent": [606, 1301]},
+  "base_plate": {"desc": "dark wooden rectangular base, seen slightly from above (trapezoid)", "moves": false, "front_bottom_edge_x": [428, 1524], "front_edge_length_px": 1096, "back_top_edge_x_at_y915": [499, 1449], "y_range": [883, 990]},
+  "background": "light pink-grey wall with window-blind reflections, white floor with ball reflections; nothing else"
+ },
+ "rest_positions_px": {
+  "ball1_at_bottom_of_swing": [637.5, 783.0],
+  "ball2": [806.0, 791.0], "ball3": [974.3, 791.0], "ball4": [1143.1, 791.1], "ball5": [1312.1, 791.8],
+  "centre_spacing_px": 168.4,
+  "note": "balls 2-5 hang at y~791; ball1's lowest point is y~783 (8 px higher, its pivot is higher). Neighbour centre spacing ~168.4 px > diameter 163, i.e. a ~5 px visible surface gap between hanging balls."
+ },
+ "events": [
+  {"event": "ball1 released from rest (held out at left, upper-left of loop)", "frame": 0, "t_s": 0.0, "pos_px": [287.6, 653.5]},
+  {"event": "frame 1 render glitch (no balls)", "frame": 1, "t_s": 0.0333},
+  {"event": "ball1 strikes the row (impact); ball1 stops at bottom, ball5 launched", "frame_between": [27, 28], "t_s_approx": 0.92, "note": "ball1 moving ~22 px/frame up to frame 26->27 (21.5), 16.5 px in 27->28 then ~0.9 px/frame; ball5 moves 4.3 px in 27->28 and 22.5 px/frame from 28->29"},
+  {"event": "ball5 first moves", "frame": 28, "t_s": 0.9331},
+  {"event": "balls 2-4 begin a small drift (ball2, ball1 leftward; ball4 rightward)", "frame": 28},
+  {"event": "ball5 reaches maximum excursion (turning point, highest point)", "frame": 54, "t_s": 1.7996, "pos_px": [1658.5, 666.2], "rise_above_rest_px": 125.7, "horizontal_from_rest_px": 346.4},
+  {"event": "ball1 / ball2 / ball3 / ball4 reverse their slow drift", "frames": {"ball1": "~52-55 (min x 622.7)", "ball2": "~53-57 (min x 796.9)", "ball3": "~57-61 (min x 969.4)", "ball4": "~53 (max x 1160.4)"}},
+  {"event": "ball5 swinging back left, still moving ~21.9 px/frame at last frame; next impact would be just after the video ends (~frame 81)", "frame": 79, "pos_px": [1353.5, 789.9]}
+ ],
+ "ball1_drop_px": {"start_y": 653.5, "lowest_y": 783.0, "vertical_drop_px": 129.5, "horizontal_travel_px": 349.9},
+ "files": {"tracks": "tracks/ball1..ball5.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

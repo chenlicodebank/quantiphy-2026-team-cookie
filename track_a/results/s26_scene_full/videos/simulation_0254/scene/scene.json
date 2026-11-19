@@ -1,0 +1,41 @@
+{
+ "video": "simulation_0254.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "pixel_convention": "x right, y DOWN, origin top-left, full-resolution pixels",
+ "camera": {"motion": "static (no pan/shake; background identical across frames, static edges at fixed pixels)",
+            "notes": "near-frontal view of an incline in front of a back wall; floor visible as a strip below y~1005 (wall/floor junction). Treat as 2D plane; the ball rolls in a plane roughly facing the camera."},
+ "objects": [
+  {"name": "ball", "description": "small olive/yellow-green sphere (only saturated object in the scene)", "moves": true,
+   "visible_frames": [18, 59], "partially_cut_frames": [18],
+   "track": "tracks/ball.csv", "reference_point": "mask centroid (cx, cy) = sphere centre",
+   "diameter_px": {"value": 23.5, "range": [22, 26], "how": "bbox w/h and equiv-circle diameter of colour mask, frames 19-59; slightly larger (~24-25) on the upper ramp, ~23 near the bottom (lighting/shading at mask edge, not perspective)"}},
+  {"name": "incline / ramp", "description": "long straight dark-grey strip running from top-left (x~300,y=0) down to the floor at about (1355,1003); the ball rolls along it. Below/left of it a large light-grey face (the ramp body/side).", "moves": false,
+   "edge_upper_fit": "y = 0.9741*x - 319.9 (44.25 deg below horizontal)",
+   "edge_lower_fit": "y = 0.9693*x - 248.9 (44.11 deg)",
+   "strip_width_px": {"vertical": 67, "perpendicular": 48},
+   "ball_path_on_ramp": "y = 0.9727*x - 300.5 (44.21 deg below horizontal, down to the right), residual 0.3 px",
+   "foot_px": [1355, 1003], "visible_length_along_path_px": "from top edge of frame (x~309,y=0) to foot (x~1355) = ~1500 px along the slope (hypot(1046,1018)~1460 to the foot along ball path)",
+   "notes": "top end of the ramp is above the frame (not visible). Below the foot the strip bends steeper to (1385,1080)."},
+  {"name": "floor", "description": "horizontal ground strip at the bottom of the image; wall/floor junction line at y ~1005 (x 1450-1900). Ball rolls on it with centre at y~1048.", "moves": false},
+  {"name": "back wall", "description": "uniform grey background with a vignette gradient", "moves": false},
+  {"name": "dark wedge bottom-left", "description": "dark triangular region in the lower-left corner (from (0,860) to (240,1080)); another face/shadow of the ramp body or a second block; static, nothing interacts with it", "moves": false}
+ ],
+ "events": [
+  {"event": "ball enters frame (top edge, already rolling down the ramp)", "frame": 18, "t": 0.75},
+  {"event": "first fully visible frame", "frame": 19, "t": 0.7917},
+  {"event": "ball rolls down the incline with steadily increasing pixel step (~33 px/frame at f20 to ~66 px/frame at f47; increments ~1.2-1.3 px/frame per frame, i.e. uniform acceleration along a straight 44.2 deg line)", "frames": [19, 47]},
+  {"event": "last frame on ramp line", "frame": 47, "t": 1.9583},
+  {"event": "reaches ramp foot / impacts floor; direction changes from 44 deg downslope to horizontal right", "frame": 48, "t": 2.0, "notes": "foot passed between f47 and f48; f48 centre already at floor level (cy 1049.5)"},
+  {"event": "small hop after impact: centre rises ~12 px, peak cy 1037.3 at f51-52, back on floor (cy~1048) by f55", "frames": [48, 55]},
+  {"event": "rolls right along floor at roughly constant ~43-44 px/frame, slowly decreasing", "frames": [55, 59]},
+  {"event": "end of clip, ball still visible near right edge (cx 1888)", "frame": 59, "t": 2.4583}
+ ],
+ "frames_0_17": "ball not in view (above the top edge); no motion anywhere in the scene"
+}

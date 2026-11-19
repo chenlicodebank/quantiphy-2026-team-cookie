@@ -1,0 +1,49 @@
+{
+  "video": "captured_0016x.mp4",
+  "source": "lab (captured; background replaced by flat green with SAM2 - 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame = round(t*24)",
+  "camera": {
+    "motion": "static (background is uniform green, but the catcher's feet/shoes stay at the same pixels (bbox_y1 = 437, x0 = 924) in all frames, so no pan/shake)",
+    "intrinsics_lab_convention": {"f_px": 763.0, "cx": 640, "cy": 360, "note": "Orbbec Femto Mega, HFOV 80 deg, f = 0.5959*1280"},
+    "perspective": "No floor, wall or horizon visible (green background). Depth cues only from apparent size: ball circle radius shrinks from ~64 px (in thrower's hands, near camera) to ~31-34 px (in catcher's hands, far). Catcher's shoes at image y ~385-437 mark her floor contact; camera is looking down slightly (catcher's figure is foreshortened / leaning in image)."
+  },
+  "objects": {
+    "ball": {
+      "description": "white soccer ball with black pentagons and a black 'Franklin'-style logo, the only ball; thrown from the near person (left) to the far person (right)",
+      "moves": true, "visible_frames": "0-48 (partly covered by hands 0-31 and 41-48)",
+      "track": "tracks/ball.csv",
+      "reference_point": "visible ball centre (x,y): circle fit to the ball outline; frames 27-36 (motion blur) use the centroid of the blurred ball blob",
+      "apparent_diameter_px": {"frames_0-18": "~125-129 (r 62-65)", "frame_26": 110, "flight_32-36_blurred": "~98-117 (circle r 49-59, blob 100x125 smeared)", "frame_38": 94, "frame_40": 87, "frame_42_catch": 81, "frames_44-48": "~63-73"}
+    },
+    "thrower": {
+      "description": "near person at the left edge, light grey T-shirt, dark trousers, glasses, face blurred; holds the ball at waist then throws underhand with both arms",
+      "moves": true, "visible_frames": "0-48 (always truncated by left and bottom image edges; only torso/arms/head-side visible)",
+      "track": "tracks/thrower.csv",
+      "reference_point": "centroid of visible mask (pelvis not visible)"
+    },
+    "catcher": {
+      "description": "far person at the right, dark grey short-sleeve shirt, black trousers with white drawstrings, white sneakers, long hair, face blurred; head cut by the top image edge",
+      "moves": "stands in place; arms move to catch (from ~frame 36), ball held in front of her waist after frame 42",
+      "visible_frames": "0-48",
+      "track": "tracks/catcher.csv",
+      "static_extents_px": {"bbox_frame0": [924, 0, 1237, 437], "visible_height_px": 438, "note": "top of head is above the frame (mask touches y=0), so 438 px is a lower bound on full body height; shoes at x~925-1010, y~378-437"},
+      "reference_point": "centroid of visible mask (ball removed)"
+    }
+  },
+  "events": [
+    {"name": "ball held by thrower, small wind-up sway", "frames": "0-26", "t": "0-1.083", "detail": "ball centre rises from y 546 (f0) to y 518 (f13-15), then dips to lowest y 604 at frame 24 (wind-up)"},
+    {"name": "throw (forward/upward swing) starts", "frame": 25, "t": 1.042, "detail": "ball starts moving right/up; strong blur from frame 27"},
+    {"name": "release (last hand contact)", "frame": 31, "t": 1.292, "detail": "hand touches ball in 31, clear gap in 32; release between frames 31 and 32 (~1.31 s)"},
+    {"name": "free flight", "frames": "32-40", "t": "1.333-1.667"},
+    {"name": "image-space apex of ball (minimum y)", "frame": 38, "t": 1.583, "y_px": 70.6, "detail": "y within 1 px over frames 37-38; true 3D apex not resolved"},
+    {"name": "catcher starts raising arms", "frame": 36, "t": 1.5},
+    {"name": "catch contact (catcher's hands touch ball)", "frame": 41, "t": 1.708},
+    {"name": "ball secured and carried down to waist", "frames": "42-48", "t": "1.75-2.0"}
+  ],
+  "files": {"notes": "notes.md", "scripts": "scripts/", "tracks": ["tracks/ball.csv", "tracks/thrower.csv", "tracks/catcher.csv"]}
+}

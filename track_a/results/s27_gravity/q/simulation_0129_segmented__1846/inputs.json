@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0129_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "A2MX",
+ "fps": 24.0,
+ "frames": 40,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1846,
+  "question": "What is the diameter of the ball in meters?",
+  "prior": "gravity acc = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

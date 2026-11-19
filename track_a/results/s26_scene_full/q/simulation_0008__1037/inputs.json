@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0008.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 22.802381,
+ "frames": 66,
+ "duration_s": 2.8944,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1037,
+  "question": "What is the width of the wooden pier in meters?",
+  "prior": "height of boat = 0.75m",
+  "depth_info": "t=0s, distance_boat_camera = 7.452 m\nt=1s, distance_boat_camera = 6.655m\ndistance_pier_camera = 11.579m\ndistance_stairs_camera = 17.623m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

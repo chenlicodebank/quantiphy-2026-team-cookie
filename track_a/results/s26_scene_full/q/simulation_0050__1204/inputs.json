@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0050.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 33.0,
+ "frames": 99,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 766,
+ "question": {
+  "id": 1204,
+  "question": "What is the width of the telephone booth in meters?",
+  "prior": "speed of the walking person = 1.236m/s",
+  "depth_info": "t=1s, distance_bike_camera = 11.8960 m\nt=2s, distance_bike_camera = 14.6419 m\nt=1s, distance_human_camera = 15.8652 m\nt=2s, distance_human_camera = 16.6708 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 33.0
+ }
+}

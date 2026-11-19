@@ -1,0 +1,73 @@
+{
+  "video": "captured_0029.mp4",
+  "source": "lab",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (phase correlation of upper background vs frame 0: |shift| <= 0.1 px for all frames)",
+    "intrinsics_from_benchmark": {"fx_px": 763, "hfov_deg": 80, "principal_point_px": [640, 360], "note": "Orbbec Femto Mega, focal = 0.5959 x width"},
+    "perspective_cues": "camera roughly at table-top height looking along the table; table top is a strongly foreshortened trapezoid (front edge long and low in image, back edge short and high). Back edge of table / base of white board at y ~455-462 is the far end of the ball's path."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "yellow-green tennis ball, the only moving prop",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre (circle fit to the ball contour; upper contour only while held, frames 0-18)",
+      "apparent_diameter_px": {"frame_0_held": 112, "frame_16": 110, "frame_24": 48, "frame_28_30_smallest": 40, "frame_36": 44, "frame_48": 48},
+      "image_position_px": {"frame_0": [1173, 574], "frame_17_last_in_hand": [1153, 568], "frame_30_farthest": [708.5, 437.5], "frame_48_last": [515.5, 453.7]}
+    },
+    {
+      "name": "hand_person",
+      "description": "person at the right edge of frame; their hand holds the ball at the front-right corner of the table (frames 0-17) and pushes/rolls it onto the table; the head/hair (dark) is visible at the right edge roughly frames 15-36, hand gone from view after ~frame 23",
+      "moves": true,
+      "visible_frames": [0, 40],
+      "track": null,
+      "note": "only partially in frame; not tracked"
+    },
+    {
+      "name": "table",
+      "description": "wooden table, brown top with dark-brown front edge, grey central pedestal leg",
+      "moves": false,
+      "top_corners_px_frame48": {"front_left": [210, 539], "front_right": [1138, 588], "back_left": [420, 455], "back_right": [918, 462]},
+      "front_edge_length_px": 929,
+      "back_edge_length_px": 498,
+      "front_edge_thickness_px": {"left_end": 30, "right_end": 32},
+      "pedestal_leg_px": {"x": [628, 690], "y_top": 600, "y_bottom": "below 720 (cut off)"}
+    },
+    {
+      "name": "white_board",
+      "description": "white rectangular panel standing at the back edge of the table; the ball reaches it (direction change) at frame ~30",
+      "moves": false,
+      "bbox_px_frame48": [423, 333, 917, 457],
+      "width_px": 495,
+      "height_px": 125,
+      "note": "top edge y 334 (left) to 344 (right); bottom hidden by table back edge"
+    },
+    {
+      "name": "tripod",
+      "description": "black tripod with a small camera/sensor (cyan light) on top, behind the white board",
+      "moves": false,
+      "top_px": [688, 70],
+      "legs_base_y_px": 333,
+      "spread_px": [625, 740]
+    },
+    {"name": "tv_screen", "description": "black wall-mounted TV/monitor top-right with a bright light reflection", "moves": false, "bbox_px": [1005, 0, 1280, 125]},
+    {"name": "partition_walls", "description": "grey fabric partition panels forming the room background", "moves": false},
+    {"name": "left_tripod_leg", "description": "black tripod leg / stand entering from the left edge (x 0-140, y 290-720)", "moves": false},
+    {"name": "floor_cables", "description": "orange/red cables on the floor at the bottom of the frame", "moves": false}
+  ],
+  "events": [
+    {"name": "ball_held", "frames": [0, 16], "t": [0.0, 0.667], "note": "small hand wobble only (<= 6 px/frame)"},
+    {"name": "release_start_of_motion", "frame": 17, "t": 0.708, "note": "first clear move at 16->17 (11 px), ball free of fingers by frame 18-19; uncertainty +-1 frame"},
+    {"name": "fastest_image_motion", "frame": 19, "t": 0.792, "note": "image step 77 px; ball decelerating in image afterwards as it recedes"},
+    {"name": "impact_back_board_direction_change", "frame": 30, "t": 1.25, "note": "image y minimum and apparent size minimum (frames 28-30); after this the ball comes back toward the camera (size grows 41 -> 48 px) while still moving left"},
+    {"name": "probable_dropped_frame", "frame": 36, "t": 1.5, "note": "image step 35->36 is 21 px vs ~10 px for all neighbouring steps; timestamps are regular, so the recording likely skipped one capture frame here"},
+    {"name": "end_of_video_ball_still_moving", "frame": 48, "t": 2.0}
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "video": "simulation_0145_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by plain white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 29,
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "image_size_px": [1920, 1080],
+  "units": "pixels (x right, y down) and seconds; no metric scale guessed",
+  "camera": {
+    "motion": "static (frames 0 and 28 differ only by segmentation edge noise on the truck outline; truck bbox constant 568..1288 x 380..867 in all frames)",
+    "view": "side view of the truck, horizontal camera; truck faces left (cab at left)",
+    "ground_line_y_px": 867,
+    "ground_note": "no ground or horizon is visible (white background); the wheel bottoms at y = 866-867 mark the ground line"
+  },
+  "objects": [
+    {
+      "name": "rocket",
+      "aliases": ["missile", "projectile"],
+      "description": "slender grey rocket fired from the launch pod at the truck's rear; flies up and to the left in a straight line and leaves through the top edge of the image",
+      "moves": true,
+      "visible_frames": "3-25 (nose appears at the pod mouth in frame 3; partly inside the pod in frames 3-11; whole rocket visible in frames 15-22; cut by the top image edge in frames 23-25; gone in frames 26-28). Frames 0-2: hidden inside the pod",
+      "track_file": "tracks/rocket.csv",
+      "reference_point": "estimated geometric centre (midpoint of nose-tail along the axis) = proxy for the object origin",
+      "size_px": {
+        "length_along_axis": 221.9,
+        "length_uncertainty": 3,
+        "length_note": "median nose-to-tail over frames 15-20 and 22 (individual frames 220.4-226.6; frames 14 and 21 read 235-237 because of a bluish plume/nozzle blob at the tail)",
+        "diameter_across_axis": 17.1,
+        "diameter_note": "median mask width over frames 15-20 (16.5-17.8 px)",
+        "axis_aligned_bbox_full_rocket": "about 183.5 x 153 px (w x h) while fully visible, frames 15-20",
+        "length_horizontal_projection": 172.6,
+        "length_vertical_projection": 139.6
+      },
+      "motion_path": {
+        "type": "straight line along the launch axis",
+        "axis_point_px": [697.19, 228.77],
+        "unit_direction_of_motion": [-0.77758, -0.62878],
+        "angle_above_horizontal_deg": 38.96,
+        "heading": "up and to the left",
+        "pod_mouth_px": [982.8, 459.7],
+        "note": "along coordinate in the csv: s such that position = axis_point + s * direction"
+      }
+    },
+    {
+      "name": "launcher_truck",
+      "aliases": ["truck", "rocket launcher vehicle", "HIMARS-like launcher"],
+      "description": "olive-green 6-wheel truck: cab at left, flat chassis, tilted launch pod at the rear",
+      "moves": false,
+      "visible_frames": "0-28",
+      "bbox_px": [568, 380, 1288, 867],
+      "overall_length_x_px": 720,
+      "overall_height_px": 487,
+      "body_length_x_px": 672,
+      "body_length_note": "front of cab (x=568) to rear mudflap/frame (x=1240), rows 760-867, excluding the overhanging pod corner",
+      "root_proxy_note": "the vehicle's root is not observable; the bbox centre is about (928, 624) and the wheel-axle midline is about y=821",
+      "static": true
+    },
+    {
+      "name": "cab",
+      "part_of": "launcher_truck",
+      "bbox_px": [568, 630, 769, 759],
+      "width_x_px": 201,
+      "top_y_px": 630,
+      "height_above_ground_px": 237,
+      "note": "the top y=630 includes a small beacon; roof line is about y=640"
+    },
+    {
+      "name": "front_wheel",
+      "part_of": "launcher_truck",
+      "centre_px": [702.5, 820.5],
+      "diameter_px": 98.8,
+      "bottom_y_px": 866
+    },
+    {
+      "name": "middle_wheel",
+      "description": "first rear axle",
+      "part_of": "launcher_truck",
+      "centre_px": [1033.5, 819.5],
+      "diameter_px": 100.8,
+      "bottom_y_px": 867
+    },
+    {
+      "name": "rear_wheel",
+      "description": "rear-most axle",
+      "part_of": "launcher_truck",
+      "centre_px": [1149.5, 823.5],
+      "diameter_px": 94.4,
+      "diameter_note": "the Hough fit is probably low; the visible tyre spans about x=1100-1197 (about 97-100 px)",
+      "bottom_y_px": 867
+    },
+    {
+      "name": "wheel_spacing",
+      "front_to_middle_axle_px": 331,
+      "middle_to_rear_axle_px": 116,
+      "front_to_rear_axle_px": 447
+    },
+    {
+      "name": "launch_pod",
+      "aliases": ["launcher box", "rocket pod"],
+      "part_of": "launcher_truck",
+      "description": "tilted grey-green box with a dark block at its upper-left end (the launch opening); raised at about 39 deg, parallel to the rocket's flight path",
+      "min_area_rect": {"centre": [1116.6, 594.2], "length_px": 381.9, "width_px": 85.5, "long_axis_angle_above_horizontal_deg": 39.0,
+                        "corners": [[1238.1, 747.6], [941.2, 507.4], [995.0, 440.9], [1291.9, 681.1]]},
+      "moves": false
+    },
+    {
+      "name": "launch_rail_arm",
+      "aliases": ["hook", "guide arm"],
+      "part_of": "launcher_truck",
+      "description": "thin L-shaped arm extending up-left from the top of the pod along the launch axis; the rocket slides along it",
+      "bbox_px": [922, 380, 996, 455],
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "rocket hidden inside the pod", "frames": "0-2", "t_s": "0-0.083"},
+    {"event": "rocket nose first emerges from the pod mouth (launch seen)", "frame": 3, "t_s": 0.125, "note": "motion starts at or before this frame; the start inside the pod is not observable"},
+    {"event": "rocket tail leaves the pod mouth (fully out, release)", "frame": 12, "t_s": 0.5, "note": "the tail crosses the mouth between frames 11 and 12 (estimated tail along = -394.6 at frame 11 and -357.0 at frame 12; mouth at -367.3)"},
+    {"event": "rocket nose reaches the top image edge", "frame": 22, "t_s": 0.917},
+    {"event": "rocket completely out of frame", "frame": 26, "t_s": 1.083, "note": "last visible frame is 25 (only the tail, about 43 px)"},
+    {"event": "no bounce, impact or direction change; the truck never moves", "frame": null}
+  ],
+  "perspective": "2D side view: the rocket flies in a plane facing the camera, parallel to the truck's side; there is no visible change of depth, and the rocket's length and width stay constant (220-227 px, about 17 px) while fully visible"
+}

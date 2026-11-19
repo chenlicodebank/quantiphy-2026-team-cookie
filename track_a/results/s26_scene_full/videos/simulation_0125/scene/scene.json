@@ -1,0 +1,65 @@
+{
+  "video": "simulation_0125.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 71,
+  "duration_s": 2.9583,
+  "width": 1080,
+  "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_coords": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (mean abs RGB diff of the upper image between frame 0 and frame 70 = 0.44/765; no shift)",
+    "view": "frontal, roughly orthographic-looking view of a gabled house facade; motion of the man is parallel to the facade, i.e. in a plane facing the camera",
+    "horizon_or_vanishing": "no usable vanishing points; facade verticals and horizontals are image-aligned. Deck front edge visible at y ~ 900-960."
+  },
+  "moving_objects": [
+    {
+      "name": "man",
+      "description": "the only moving object: an adult man (light grey T-shirt, dark blue jeans, dark shoes, face blurred) walking from left to right along the porch in front of the house",
+      "moves": true,
+      "visible_frames": "0-70 (whole clip)",
+      "track_file": "tracks/man.csv",
+      "reference_point": "pelvis_x_smooth, pelvis_y_smooth (recommended): estimated hip point = horizontal mid-point of the mask on the row 47% of bbox height above the bbox bottom, smoothed with a 7-frame local quadratic. Raw pelvis_x/pelvis_y (jittery +-3 px from hands at hip level) and centroid_x/y (mask centroid, smooth) are also given.",
+      "motion_summary_px": {
+        "pelvis_x_frame0": 363.5, "pelvis_x_frame70": 750.0,
+        "direction": "+x (left to right), essentially horizontal; pelvis_y stays 761-777",
+        "head_top_y_range": [657, 663],
+        "feet_bottom_y_unoccluded": "869-879 (dark shoe soles on dark deck, +-5 px)"
+      },
+      "size_px": {
+        "bbox_height_unoccluded_range": [209, 223],
+        "bbox_height_note": "head top to lowest foot; largest (~222-223) mid-stride frames 12-20; 209-212 when the mask misses part of the shoe soles; frames 47-52 feet hidden by the left lounge chair (198-205, not valid heights)",
+        "bbox_width_range": [52, 114],
+        "bbox_width_note": "varies with stride: ~52-56 legs together, ~108-114 at full stride"
+      },
+      "occlusion": "frames 47-52: feet/lower legs hidden behind the left lounge chair (occluded=1 in the csv). Otherwise fully visible (at frame 0 he is just right of the potted plant: bbox x0 = 325 vs pot x1 = 323).",
+      "mean_pelvis_step_px_per_frame": "about 5.5 px/frame (363.5 -> 750.0 over 70 frames); per-frame steps vary 3-8.6 px with gait"
+    }
+  ],
+  "static_objects": [
+    {"name": "house", "description": "gabled cabin with dark (black) outer frame and brown wood-clad facade", "bbox_px": {"x0": 150, "x1": 925, "y0": 28, "y1": 905}, "notes": "roof apex ~ (535, 28); eave corners ~ (150, 405) and (922, 405); facade width ~775 px, height apex-to-base ~877 px; +-8 px (read off a grid)"},
+    {"name": "upper_left_window", "description": "square lit window, upper floor left", "glass_bbox_px": {"x0": 393, "y0": 313, "x1": 509, "y1": 436, "w": 117, "h": 124}, "frame_bbox_px_approx": {"x0": 383, "y0": 302, "x1": 520, "y1": 446}},
+    {"name": "upper_right_window", "description": "tall lit window of two stacked panes, upper floor right", "glass_bbox_px": {"x0": 605, "y0": 313, "x1": 694, "y1": 537, "w": 90, "h": 225}, "frame_bbox_px_approx": {"x0": 600, "y0": 302, "x1": 698, "y1": 545}},
+    {"name": "left_door", "description": "narrow lit glazed door, ground floor left (man walks past it early)", "glass_bbox_px": {"x0": 393, "y0": 637, "x1": 472, "y1": 857, "w": 80, "h": 221}, "frame_bbox_px": {"x0": 382, "y0": 626, "x1": 484, "y1": 864, "w": 103, "h": 239}},
+    {"name": "right_glass_door", "description": "large lit glazed door/window, ground floor right (man walks in front of it in the second half)", "glass_bbox_px": {"x0": 569, "y0": 638, "x1": 737, "w": 169, "y1_approx": 857}, "frame_bbox_px": {"x0": 557, "y0": 626, "x1": 764, "y1": 869, "w": 208, "h": 244}, "notes": "bottom of glass partly hidden by the left lounge chair"},
+    {"name": "potted_plant", "description": "monstera-like plant in a black pot on legs, porch far left", "pot_bbox_px": {"x0": 271, "y0": 786, "x1": 323, "y1": 867, "w": 53, "h": 82}, "whole_plant_bbox_px_approx": {"x0": 220, "y0": 713, "x1": 360, "y1": 867}},
+    {"name": "lounge_chair_left", "description": "dark tubular lounge chair, in front of the right glass door; hides the man's feet at frames 47-52", "bbox_px_approx": {"x0": 588, "y0": 828, "x1": 680, "y1": 925, "w": 92, "h": 97}},
+    {"name": "lounge_chair_right", "description": "dark tubular lounge chair at the right end of the porch", "bbox_px_approx": {"x0": 862, "y0": 828, "x1": 952, "y1": 930, "w": 90, "h": 102}},
+    {"name": "fire_pit", "description": "round light-grey concrete fire bowl with flickering flame, on the deck in front", "bbox_px_approx": {"x0": 708, "y0": 900, "x1": 835, "y1": 935, "w": 127, "h": 35}, "flame_bbox_px_approx": {"x0": 755, "y0": 887, "x1": 785, "y1": 910}, "notes": "flame flickers (only non-human pixel change)"},
+    {"name": "wall_lamp_left", "description": "vertical wall sconce left of the left door", "bbox_px_approx": {"x0": 210, "y0": 645, "x1": 230, "y1": 698}},
+    {"name": "pendant_lamp_center", "description": "small lantern lamp between the two ground-floor doors", "bbox_px_approx": {"x0": 500, "y0": 657, "x1": 537, "y1": 692}},
+    {"name": "wall_lamp_right", "description": "vertical wall sconce right of the large glass door", "bbox_px_approx": {"x0": 843, "y0": 645, "x1": 862, "y1": 698}},
+    {"name": "deck_porch", "description": "dark wooden porch floor / platform the man walks on", "bbox_px_approx": {"x0": 120, "y0": 860, "x1": 1080, "y1": 960}, "notes": "man's feet touch it at y ~869-879"},
+    {"name": "mountains_rocks", "description": "grey rocky mountain slope background and boulders in the foreground", "notes": "static background"}
+  ],
+  "events": [
+    {"event": "man walking already at frame 0 and still walking at frame 70; no start/stop, no direction change", "frame": 0, "time_s": 0.0},
+    {"event": "man passes in front of left door (pelvis x within 393-472)", "frames": "8-22"},
+    {"event": "man passes below centre lamp (pelvis x 510-526)", "frames": "29-31"},
+    {"event": "man enters region in front of right glass door (pelvis x > 569)", "frame": 38},
+    {"event": "feet hidden behind left lounge chair", "frames": "47-52"},
+    {"event": "clip end, man at pelvis x ~750", "frame": 70, "time_s": 2.9167}
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "video": "captured_0047x.mp4",
+  "source": "lab (captured; background replaced by chroma green via Segment Anything 2 - watermark bottom-right)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "camera": {
+    "motion": "static (no background texture is left, but the squatting person's feet/head stay fixed to within ~1-2 px over all 49 frames)",
+    "intrinsics_from_benchmark": {"focal_px": 763, "cx": 640, "cy": 360, "hfov_deg": 80},
+    "perspective_cues": "No floor/horizon visible (green background). The floor contact line is implied by the ball bottom (y~555 at rest) and the person's shoes (y~543). The ball rolls toward the camera: its apparent diameter grows from 117.5 px to ~420 px, so its depth shrinks ~3.6x (depth ~ focal * true_diameter / pixel_diameter)."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "large dark-grey (slightly bluish) exercise / gym ball with specular highlights; the only ball",
+      "moves": true,
+      "visible_frames": "0-46 (frame 46 only a sliver at the bottom-left edge; gone in 47-48)",
+      "reference_point": "centre of a circle fitted to the ball silhouette outline (cx, cy in tracks/ball.csv)",
+      "at_rest": {"frames": "0-13", "centre_px": [570.1, 496.6], "diameter_px": 117.6, "visible_bbox": [511, 438, 630, 552], "bottom_y_px": 555.4},
+      "track": "tracks/ball.csv"
+    },
+    {
+      "name": "person",
+      "description": "one person (face masked green), long dark hair, black T-shirt and black trousers, white shoes, squatting behind the ball and pushing it toward the camera",
+      "moves": "stays squatting in place (feet fixed); only arms/torso move: hands on ball 0-17, arms thrown up 18-30, arms lowered/crossed 38-48",
+      "visible_frames": "0-48",
+      "reference_point": "centroid of the person mask (cx, cy) - shifts mainly due to arm motion; legs/feet fixed",
+      "static_extents_px": {"squat_bbox_frame_40": [506, 348, 639, 543], "squat_height_px": 196, "width_px_arms_down": 128, "head_top_y": 348, "feet_bottom_y": 543, "shoe_x_approx": [600, 632]},
+      "track": "tracks/person.csv"
+    }
+  ],
+  "static_objects": "none visible (background removed); watermark box 'Modified with Segment Anything 2 Demo' at x 1030-1280, y 690-720 is not a scene object",
+  "events": [
+    {"name": "ball at rest held by person's hands", "frames": "0-13", "t": "0.000-0.542"},
+    {"name": "ball starts moving (push begins)", "frame": 14, "t": 0.583, "note": "centre moves 1.1 px at 14, 2.5 at 15, 6.2 at 16; start between frames 13 and 14"},
+    {"name": "hands slide over top of ball / last hand contact (release)", "frame": 17, "t": 0.708, "note": "hands on top of ball at 17, clearly off by 18 (t=0.75)"},
+    {"name": "arms thrown up after release", "frames": "19-30"},
+    {"name": "ball silhouette separates from person silhouette in image", "frame": 28, "t": 1.167},
+    {"name": "ball first touches bottom image edge", "frame": 33, "t": 1.375},
+    {"name": "last frame with ball centre fit (centre still inside image ~y 896 is extrapolated)", "frame": 45, "t": 1.875},
+    {"name": "ball last visible (sliver)", "frame": 46, "t": 1.917},
+    {"name": "ball out of view", "frames": "47-48"}
+  ],
+  "ball_apparent_diameter_px_selected": {"0": 117.1, "13": 117.2, "16": 120.0, "18": 131.2, "20": 135.2, "24": 149.5, "28": 178.7, "32": 206.3, "36": 233.6, "40": 305.3, "44": 407.0, "45": 420.4},
+  "files": {"tracks": ["tracks/ball.csv", "tracks/person.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

@@ -1,0 +1,259 @@
+{
+ "video": "captured_0035b.mp4",
+ "source": "lab (real recording, Orbbec Femto Mega RGB)",
+ "scene": "3D",
+ "fps": 24.0,
+ "n_frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame_i": "i / 24",
+ "camera": {
+  "motion": "static (phase correlation of upper wall region: |shift| < 0.5 px every frame)",
+  "intrinsics_by_benchmark_convention": {
+   "f_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "view": "high oblique, looking down into a room corner; floor fills most of the frame",
+  "video_artifacts": "background blurred by a \"Segment Anything 2 Demo\" effect (watermark bottom-right x>1030,y>690); people and balls stay sharp with a faint white halo; frame 36 follows a DROPPED source frame (both balls move ~2x their usual step 35->36 and the frame difference doubles); frames 0-10 are nearly identical (static scene before the kicks); possibly also an irregular step 11->12."
+ },
+ "files": {
+  "basketball": "tracks/basketball.csv",
+  "soccer_ball": "tracks/soccer_ball.csv",
+  "person_A": "tracks/person_A.csv (keyframes only)",
+  "person_B": "tracks/person_B.csv (keyframes only)"
+ },
+ "inventory": [
+  {
+   "name": "basketball",
+   "desc": "orange basketball with black seams",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "role": "at rest near person_B's feet (centre ~(829,280)) until frame 11; kicked by person_B toward lower-left; rolls across the floor, grazes the soccer ball (frames ~24-26), keeps rolling and is caught/picked up by person_A's hands from frame ~45",
+   "apparent_diam_px": {
+    "at_rest_f0_10": 53.1,
+    "f20": 60,
+    "f30": 67,
+    "f44_46": 72.5,
+    "note": "grows as the ball approaches the camera; moving-frame values include ~1-3 px motion blur"
+   }
+  },
+  {
+   "name": "soccer_ball",
+   "desc": "white soccer ball with black pentagons (the white ball)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "role": "at rest at person_A's right foot, bottom of frame (centre ~(439,680)) until frame 11; kicked by person_A up-right (away from camera); deflected by the basketball at frames ~24-26 to a down-right direction, slows and keeps rolling to ~(777,526) at frame 48",
+   "apparent_diam_px": {
+    "at_rest_f0_10": 68.9,
+    "f20_25": 53,
+    "f30_38": 54,
+    "f42_48": 58,
+    "note": "shrinks as it rolls away then grows slightly as it comes back toward the camera after the deflection"
+   }
+  },
+  {
+   "name": "person_A",
+   "desc": "girl on the left: long brown hair, dark-grey T-shirt, black trousers, white sneakers; face blurred",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "role": "kicks the soccer ball with her right foot (frame 11-12), then steps forward/bends and picks up the basketball (45-48)",
+   "truncation": "feet/legs cut by the bottom border, left side cut by the left border from ~frame 13; head visible (top ~y 95-255)"
+  },
+  {
+   "name": "person_B",
+   "desc": "person on the right by the back wall: light-grey top, blue-grey loose jeans, white sneakers with black stripes, watch on left wrist",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "role": "kicks the basketball with the left foot (frame 11-12), then stands, shifting slightly left (bbox x0 870 -> 790)",
+   "truncation": "head and shoulders out of frame (top border); visible from chest down; feet at y ~255-322"
+  },
+  {
+   "name": "floor",
+   "desc": "grey carpet floor (ground plane)",
+   "moves": false
+  },
+  {
+   "name": "back_walls",
+   "desc": "two light-grey panelled walls meeting at a vertical corner (x ~560-600 px, y 0-190)",
+   "moves": false
+  },
+  {
+   "name": "wall_floor_lines",
+   "desc": "dark baseboard lines where walls meet floor",
+   "moves": false
+  },
+  {
+   "name": "grey_objects_left_edge",
+   "desc": "blurred light-grey object/railing at left edge (x<60, y 450-650), and a dark round object at the far right edge (x>1200, y~380-420)",
+   "moves": false
+  }
+ ],
+ "static_objects": {
+  "left_wall_base_line": {
+   "y = a*x + b": [
+    -0.5366,
+    518.0
+   ],
+   "x_range": [
+    280,
+    590
+   ]
+  },
+  "right_wall_base_line": {
+   "y = a*x + b": [
+    0.1998,
+    70.6
+   ],
+   "x_range": [
+    620,
+    1270
+   ]
+  },
+  "floor_corner_px": [
+   607.6,
+   192.0
+  ],
+  "vertical_wall_corner": "x ~562 at y=10 to ~600 at y=160 (tilted: camera roll / downward pitch)",
+  "basketball_rest_position_px": [
+   828.9,
+   281.5
+  ],
+  "soccer_ball_rest_position_px": [
+   438.8,
+   680.4
+  ]
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "both balls at rest; both people standing"
+  },
+  {
+   "frame": 11,
+   "t": 0.4583,
+   "what": "kicks: person_A's right foot contacts soccer ball (ball starts to move, ~5 px); person_B's foot reaches basketball (ball still at rest in this frame)"
+  },
+  {
+   "frame": 12,
+   "t": 0.5,
+   "what": "both balls clearly moving (first frame of basketball motion); soccer ball still touching the follow-through foot in 12-13"
+  },
+  {
+   "frame": 14,
+   "t": 0.5833,
+   "what": "both balls free of the feet"
+  },
+  {
+   "frame": 24,
+   "t": 1.0,
+   "what": "balls come into contact (gap ~0 px in image); soccer ball topmost point of its path (cy min ~463-466 at 24-25)"
+  },
+  {
+   "frame": 25,
+   "t": 1.0417,
+   "what": "collision / deflection: soccer ball direction changes from up-right (~(+9,-8) px/frame) to down-right (~(+5,+5) px/frame) and its step drops from ~12 to ~7 px/frame; basketball barely deflected (keeps ~12 px/frame toward lower-left)"
+  },
+  {
+   "frame": 28,
+   "t": 1.1667,
+   "what": "balls clearly separated (image gap 0 px at 27, 11 px at 28); negative image gaps at 25-26 = overlap in the image (soccer ball nearer the camera)"
+  },
+  {
+   "frame": 36,
+   "t": 1.5,
+   "what": "VIDEO GLITCH: dropped frame before 36 (double displacement 35->36 for both balls)"
+  },
+  {
+   "frame": 45,
+   "t": 1.875,
+   "what": "person_A's hand reaches the basketball (contact/catch begins); ball occluded by hands 46-48"
+  },
+  {
+   "frame": 48,
+   "t": 2.0,
+   "what": "end: basketball held by person_A at ~(350,545); soccer ball still rolling at ~(777,526)"
+  }
+ ],
+ "ball_contact_check": {
+  "20": {
+   "centre_dist_px": 150.1,
+   "sum_radii_px": 56.5,
+   "gap_px": 93.5
+  },
+  "21": {
+   "centre_dist_px": 122.5,
+   "sum_radii_px": 55.9,
+   "gap_px": 66.6
+  },
+  "22": {
+   "centre_dist_px": 99.4,
+   "sum_radii_px": 58.2,
+   "gap_px": 41.1
+  },
+  "23": {
+   "centre_dist_px": 75.1,
+   "sum_radii_px": 58.5,
+   "gap_px": 16.6
+  },
+  "24": {
+   "centre_dist_px": 54.7,
+   "sum_radii_px": 54.3,
+   "gap_px": 0.4
+  },
+  "25": {
+   "centre_dist_px": 44.8,
+   "sum_radii_px": 57.4,
+   "gap_px": -12.5
+  },
+  "26": {
+   "centre_dist_px": 49.1,
+   "sum_radii_px": 58.8,
+   "gap_px": -9.7
+  },
+  "27": {
+   "centre_dist_px": 58.4,
+   "sum_radii_px": 58.1,
+   "gap_px": 0.2
+  },
+  "28": {
+   "centre_dist_px": 71.3,
+   "sum_radii_px": 59.9,
+   "gap_px": 11.4
+  },
+  "29": {
+   "centre_dist_px": 85.6,
+   "sum_radii_px": 59.7,
+   "gap_px": 26.0
+  },
+  "30": {
+   "centre_dist_px": 100.0,
+   "sum_radii_px": 60.0,
+   "gap_px": 40.0
+  },
+  "31": {
+   "centre_dist_px": 115.9,
+   "sum_radii_px": 59.2,
+   "gap_px": 56.8
+  }
+ },
+ "perspective": {
+  "ground_plane": "floor; both balls roll on it, so ball image y increases with proximity to the camera",
+  "apparent_size_trend": "basketball D 53 px (rest, far) -> ~72 px (f44-46, near); soccer D 69 px (rest, very near, bottom edge) -> ~52 px (f21-31, far) -> ~58 px (f42-48)",
+  "use": "with f=763 px, depth Z ~= f * true_diameter / pixel_diameter; back-project centre (u,v) with (u-640)/f*Z, (v-360)/f*Z"
+ }
+}

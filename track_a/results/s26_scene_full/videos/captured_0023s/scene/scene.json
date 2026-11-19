@@ -1,0 +1,77 @@
+{
+ "video": "captured_0023s.mp4",
+ "source": "lab (captured, background replaced by a blue backdrop - 'Modified with Segment Anything' watermark bottom right)",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "image_size": [1280, 720],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (phase correlation of table/ramp region vs frame 0: |shift| < 0.1 px at frames 12, 24, 36, 48)",
+  "intrinsics_from_benchmark_convention": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+  "perspective": {
+   "table_top_is_trapezoid": "front edge ~640 px wide (x 280-923 at y~535-539), back edge ~327 px (x ~440-767 at y ~442; the board stands in front of its middle)",
+   "vanishing_point_of_table_side_edges_px": [603, 347],
+   "vanishing_point_uncertainty": "+-40 px in x, +-25 px in y (rounded corners and noisy matte along the back edge; using back corners (500,436)/(765,442) instead gives (644,370))",
+   "horizon_y_px_approx": "350-370",
+   "note": "horizon close to the principal point row (360) -> optical axis roughly horizontal if the table is level; the camera is a little above the table top (top surface visible). The book slides towards the camera (down the image) and grows"
+  }
+ },
+ "objects": {
+  "book": {
+   "description": "closed book / thick notebook, pale blue-grey cover (top face), cream page block, a thin yellow-green bookmark string sticking out of its LEFT end (visible on the table from ~f34)",
+   "role": "the only moving object; sits on top of the inclined white board, slides down it towards the camera, drops onto the table top and stops in front of the board",
+   "moves": true,
+   "visible_frames": "0-48 (all), never occluded",
+   "track_file": "tracks/book.csv",
+   "reference_point": "centre of the bounding box of the whole visible book (cover + page block) = ref_x, ref_y",
+   "start_rest": {"frames": "0-20", "ref_px": [592.0, 370.0], "bbox": [530, 350, 654, 390], "length_px": 125, "height_px": 41},
+   "end_rest": {"frames": "37-48", "ref_px": [564.5, 496.5], "bbox": [478, 482, 652, 511], "length_px": 175, "height_px": 30,
+                "note": "left edge 474-478 jitters with the bookmark string; true page-block left edge ~480 (zoom). cover top ~479-482, bottom contact line 508-511"},
+   "apparent_length_change": "horizontal length (long axis, across the motion direction) 125 px on the ramp top -> 175 px at rest on the table: ratio 1.40, i.e. it ends ~1.4x closer to the camera"
+  },
+  "ramp_board": {
+   "description": "white rigid board (inclined plane) leaning on/standing on the table, top edge far from the camera, bottom edge on the table near the camera; appears as a trapezoid",
+   "moves": false,
+   "frame_measured": 48,
+   "bbox": [494, 356, 675, 483],
+   "corners_px": {"top_left": [519, 357], "top_right": [659, 359], "bottom_right": [673, 479], "bottom_left": [494, 480]},
+   "top_edge_width_px": 141,
+   "bottom_edge_width_px": 179,
+   "image_height_px": 123,
+   "note": "bottom edge shows a dark line at y 482-484 (centre columns); the book covers its top edge region in frames 0-22"
+  },
+  "table": {
+   "description": "wooden table, brown top (wood grain, glossy - reflects the white board), dark front face, single dark grey pedestal leg",
+   "moves": false,
+   "frame_measured": 48,
+   "top_bbox": [280, 434, 923, 563],
+   "front_left_corner_px": [280, 535],
+   "front_right_corner_px": [921, 531],
+   "back_left_corner_px_approx": [440, 442],
+   "back_right_corner_px_approx": [767, 442],
+   "front_top_edge_y_center_px": 529,
+   "front_face_thickness_px": "~30 (y ~530-560)",
+   "front_edge_width_px": 643,
+   "row_extents": "see static_measure.json (left/right edge x every 5 rows)",
+   "leg": {"bbox": [604, 560, 651, 719], "width_px": 42, "note": "runs off the bottom of the frame"},
+   "note": "back edge outline is noisy (segmentation matte); back corners +-8 px"
+  }
+ },
+ "events": [
+  {"event": "book at rest on top of the ramp", "frames": "0-20", "t_s": "0.000-0.833"},
+  {"event": "start of sliding (first centre displacement, release)", "frame": 21, "t_s": 0.875, "note": "bbox moves first at f21 (+1.5 px down); onset between f20 and f21"},
+  {"event": "accelerating slide down the ramp, toward the camera", "frames": "21-30", "note": "per-frame vertical centre step grows 1.5,3,4.5,5,7.5,8.5,10.5,12,14,15.5 px"},
+  {"event": "front (lower) end of the book reaches the bottom of the ramp / table", "frame": 30, "t_s": 1.25, "note": "bbox bottom 481 = ramp bottom edge 480-483; book yaws ~8 deg in the image at f29-31 (right end lower)"},
+  {"event": "book leaves the ramp and drops onto the table top (impact)", "frames": "31-33", "t_s": "1.292-1.375", "note": "lies flat (tilt 0, height 32 px) by f33"},
+  {"event": "slides on the table and stops", "frames": "33-37", "note": "steps 10.5, 7, 2.5, 3.5, 2 px; at rest from f37 (t = 1.542 s)"},
+  {"event": "at rest on the table in front of the ramp", "frames": "37-48", "t_s": "1.542-2.000"}
+ ],
+ "files": {
+  "tracks/book.csv": "per-frame track of the book",
+  "static_measure.json": "raw static-object measurements and camera-shift check",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts"
+ }
+}

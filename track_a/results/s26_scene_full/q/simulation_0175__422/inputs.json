@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0175.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 24.0,
+ "frames": 40,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 422,
+  "question": "What is the diameter of the rear wheels on an aircraft landing gear in meters?",
+  "prior": "speed of the airplane = 153.582m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

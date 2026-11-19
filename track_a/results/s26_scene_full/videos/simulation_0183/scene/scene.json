@@ -1,0 +1,57 @@
+{
+ "video": "simulation_0183.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 45,
+ "size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "pixel_coords": "x right, y down, origin top-left, full resolution",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of the wall patch x1000-1900,y0-500 vs frame 0: |shift| < 0.02 px in all 45 frames (tracks/crate_mask.csv cam_shift_x/y)",
+  "perspective": "near-orthographic side view of a wall; the ramp top surface is seen slightly from above (its back edge at 29.6 deg, front-face lower edge ~26.9 deg); treat motion as in one plane facing the camera, one px scale"
+ },
+ "moving_objects": {
+  "crate": {
+   "description": "the only moving object: black hard-case crate / equipment box with green lid, red light and 'DS' labels on its front; falls from upper left onto the blue ramp and slides down it to the right",
+   "track_file": "tracks/crate.csv",
+   "visible_mask_file": "tracks/crate_mask.csv",
+   "visible_frames": [0, 44],
+   "reference_point": "centre of the crate's projected rectangle (template-fit, rigid), = crate origin for a 2D scene",
+   "size_px_frame0": {"length_horizontal": 335, "height_vertical": 190, "note": "axis-aligned at frame 0 (angle 0), against plain wall: bbox x404-738, y235-424 (threshold 40); looser threshold 30 gives 341 x 191 (x403-743) incl. soft right edge. Use ~335-340 px length, ~190 px height"},
+   "position_frame0_px": [571.0, 329.5],
+   "position_frame44_px": [1263.5, 911.6],
+   "angle_deg": "0 while falling (frames 0-7), tilts 1.7 -> 27.5 deg over frames 8-13, rocks up to 32.7 deg (frames 15-19), settles at 28.4 +/- 0.3 deg from frame 22 (= slide direction)",
+   "occlusion": "frames 0-7 unoccluded; from ~frame 8 on the lower edge of the crate is hidden behind / merges with the dark blue ramp front (flag occluded=1 from frame 12 in crate.csv); never leaves the frame"
+  }
+ },
+ "events": [
+  {"name": "release / start of fall", "frame": 0, "time_s": 0.0, "note": "first y-steps 2.4, 6.7, 11.1, 15.5 px... (first step ~half of the per-frame increase) => starts from rest at frame 0"},
+  {"name": "free fall (vertical, x constant at 571.0)", "frames": [0, 7], "time_s": [0.0, 0.2917]},
+  {"name": "first contact with ramp (lower-right corner hits ramp top)", "frame": 8, "time_s": 0.3333, "note": "between frames 7 and 8: x starts to move, angle 1.7 deg, vertical step drops 28.4 -> 24.0 -> 14.2 px"},
+  {"name": "crate tips onto ramp (rotation 0 -> 27.5 deg)", "frames": [8, 13], "time_s": [0.3333, 0.5417]},
+  {"name": "crate flat on ramp, vertical drop stops (impact of full face)", "frame": 14, "time_s": 0.5833, "note": "step changes from (8.7,24.8) to (11.9,5.0) px between frames 13 and 14"},
+  {"name": "rocking/settling on ramp", "frames": [14, 22], "time_s": [0.5833, 0.9167], "note": "angle 29.8 -> 32.7 -> 28.4 deg"},
+  {"name": "steady slide down ramp along 28.4 deg, speeding up", "frames": [22, 44], "time_s": [0.9167, 1.8333], "note": "per-frame step grows ~20 -> ~33 px; still on the ramp and moving at the last frame (has not reached the floor)"}
+ ],
+ "static_objects": {
+  "blue_ramp": {"description": "long dark-blue ramp/conveyor from the shelf at upper left (x~320,y~540) down to the floor at lower right (x~1300-1400,y~950-1080)", "top_back_edge": "y = 452.8 at x400, 679.8 at x800, 906.9 at x1200 (slope 0.568, 29.6 deg)", "front_face_lower_edge": "y = 655 at x400, 858 at x800, 1060 at x1200 (approx, 26.9 deg)", "crate_slide_direction_deg": 28.4, "vertical_thickness_px_at_x1000": 166, "length_px_visible": "~1150 along the slope (x~320 -> ~1330)"},
+  "shelf_platform_left": {"description": "wooden plank shelf top at upper left the ramp starts from", "bbox_px": [0, 530, 405, 590]},
+  "blue_post_left": {"description": "dark-blue vertical post under the shelf", "bbox_px": [262, 590, 335, 1080]},
+  "cardboard_boxes_left": {"description": "orange cardboard box 'PIZZA TOPPING Hot and Spicy 8 x 500 ml' (x0-290,y0-530) and smaller box 'SEEDLESS JAFFAS' (x285-405,y325-530) on the shelf", "bbox_px_big": [0, 0, 290, 530], "bbox_px_small": [285, 325, 405, 530], "note": "cut by top/left image border"},
+  "orange_frame_left": {"description": "orange open frame (ladder/chair-like) at lower left", "bbox_px": [4, 624, 219, 1079], "note": "cut by left and bottom border"},
+  "sign_take_care": {"description": "orange sign 'TAKE CARE WHEN STACKING CRATES' on the wall", "bbox_px": [1297, 575, 1482, 762], "w_px": 185, "h_px": 187, "note": "manual from grid; colour-threshold core 1312-1473 x 578-752"},
+  "wall_vent": {"description": "metal louvre vent low on the wall at right", "bbox_px": [1670, 857, 1857, 945], "w_px": 187, "h_px": 88},
+  "wooden_floor": {"description": "wooden floor at lower right", "top_edge_y_px": 950, "x_range_px": [1300, 1920]},
+  "brick_wall": {"description": "grey breeze-block wall background", "block_pitch_px": "rows ~95-100 px high (block courses at y~105,200,300,395,490,585,680,775,870)"}
+ },
+ "files": {
+  "tracks/crate.csv": "final per-frame crate track (template fit)",
+  "tracks/crate_mask.csv": "per-frame visible-mask measurements + camera shift check",
+  "tracks/crate_phase1.csv": "intermediate: frame-0 template fit (good for frames 0-12 only)",
+  "static_auto.json": "automatic ramp/sign measurements",
+  "background.jpg": "median background (half resolution)",
+  "scripts/": "track.py, fit_template.py, fit_slide.py, static.py"
+ }
+}

@@ -1,0 +1,260 @@
+{
+ "video": "simulation_0206.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 30,
+ "width": 2124,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels (image coords, x right, y down) and seconds; no metric scale assumed",
+ "camera": {
+  "motion": "static",
+  "evidence": "frame 0 vs frame 29 differ only where the typewriter was/is (0 changed pixels elsewhere)",
+  "per_frame_shift_px": [
+   0,
+   0
+  ],
+  "focal_length": "unknown",
+  "perspective_cues": "oblique view of a desk; desk top front edge runs from near corner (700,885) to right end (~1980,650), left edge from (470,690) to (700,885); horizon above the frame (looking slightly down at desk); principal point assumed at image centre (1062,540)"
+ },
+ "objects": [
+  {
+   "name": "typewriter",
+   "moving": true,
+   "visible_frames": "0-29",
+   "description": "black/dark-brown manual typewriter; only moving object. Starts in the air at top centre (partly cut by image top in frames 0-1), falls ~vertically onto the desk behind the front paper sheet, tumbles/rocks (rear lifts, frames 11-18) and comes to rest at frame ~23 between back paper/keys and the red alarm clock.",
+   "track": "tracks/typewriter.csv",
+   "reference_point": "ref_x, ref_y = bounding-box centre (proxy for object origin/centre)",
+   "apparent_size": "bbox width ~290-297 px during the whole fall (frames 0-9, nearly constant -> roughly constant depth); bbox height grows 116 (f2) -> 168 (f9) as it rotates/is seen more from above; at rest bbox 277 x 172 px (x 1095-1371, y 524-695), mask major axis 286 px at -167 deg, minor 161 px",
+   "occlusion": "never occluded by other objects; it occludes the back paper/keys and part of the red alarm clock when at rest"
+  },
+  {
+   "name": "desk",
+   "moving": false,
+   "description": "large dark-wood writing desk with green leather top and gold-tooled border; drawers in front",
+   "extent_px": {
+    "top_left_corner": [
+     470,
+     690
+    ],
+    "top_near_corner": [
+     700,
+     885
+    ],
+    "top_right_end": [
+     1980,
+     650
+    ],
+    "front_edge_len_px": 1301,
+    "left_edge_len_px": 302
+   },
+   "note": "legs/bottom cut by image bottom; height not measurable"
+  },
+  {
+   "name": "bankers_lamp",
+   "moving": false,
+   "description": "brass lamp with green glass shade, left on the book stack",
+   "bbox_px": [
+    655,
+    302,
+    860,
+    635
+   ],
+   "height_px": 333,
+   "shade_width_px": 205
+  },
+  {
+   "name": "book_stack",
+   "moving": false,
+   "description": "two flat books (brown, dark) plus one tilted book leaning on top, left of desk under the lamp",
+   "bbox_px": [
+    615,
+    535,
+    870,
+    728
+   ]
+  },
+  {
+   "name": "standing_letter",
+   "moving": false,
+   "description": "handwritten cream letter standing upright leaning against the books",
+   "bbox_px": [
+    883,
+    505,
+    997,
+    705
+   ],
+   "height_px": 200,
+   "width_px": 114
+  },
+  {
+   "name": "ashtray",
+   "moving": false,
+   "description": "small round silver ashtray at front left of desk",
+   "bbox_px": [
+    818,
+    712,
+    890,
+    752
+   ],
+   "width_px": 72
+  },
+  {
+   "name": "front_paper_sheet",
+   "moving": false,
+   "description": "flat cream paper sheet lying at front centre of desk (in front of typewriter landing spot)",
+   "bbox_px": [
+    1053,
+    670,
+    1255,
+    740
+   ]
+  },
+  {
+   "name": "back_paper_with_keys",
+   "moving": false,
+   "description": "flat paper with keys/eyeglasses on it, back centre; covered by typewriter after landing",
+   "bbox_px": [
+    1063,
+    600,
+    1225,
+    640
+   ],
+   "visible_frames": "0-10 fully, partly after"
+  },
+  {
+   "name": "red_alarm_clock",
+   "moving": false,
+   "description": "red twin-bell alarm clock, back of desk right of landing spot",
+   "bbox_px": [
+    1233,
+    488,
+    1318,
+    600
+   ],
+   "height_px": 112,
+   "width_px": 85,
+   "note": "partly occluded by typewriter from frame ~10"
+  },
+  {
+   "name": "picture_frame",
+   "moving": false,
+   "description": "small gilt photo frame with portrait, right of clock",
+   "bbox_px": [
+    1337,
+    493,
+    1410,
+    585
+   ],
+   "height_px": 92,
+   "width_px": 73
+  },
+  {
+   "name": "rotary_telephone",
+   "moving": false,
+   "description": "dark teal rotary-dial telephone at back right",
+   "bbox_px": [
+    1430,
+    445,
+    1610,
+    600
+   ],
+   "width_px": 180,
+   "height_px": 155
+  },
+  {
+   "name": "brass_stand",
+   "moving": false,
+   "description": "thin vertical brass rod with round base just right of the phone (pen/candle stand)",
+   "bbox_px": [
+    1548,
+    470,
+    1608,
+    620
+   ]
+  },
+  {
+   "name": "revolver",
+   "moving": false,
+   "description": "small revolver with brown grip lying on a paper slip, right centre",
+   "bbox_px": [
+    1350,
+    603,
+    1505,
+    650
+   ],
+   "paper_slip_bbox_px": [
+    1320,
+    620,
+    1420,
+    645
+   ]
+  },
+  {
+   "name": "left_chair",
+   "moving": false,
+   "description": "dark wooden spindle-back chair at far left, foreground",
+   "bbox_px": [
+    120,
+    370,
+    500,
+    1080
+   ],
+   "note": "seat cut by image bottom"
+  },
+  {
+   "name": "back_chair",
+   "moving": false,
+   "description": "wooden spindle-back chair behind the desk (back, blurred)",
+   "bbox_px": [
+    985,
+    305,
+    1290,
+    610
+   ]
+  },
+  {
+   "name": "wall_and_floor",
+   "moving": false,
+   "description": "teal wall; dark floor; orange-brown blurred object at bottom right/bottom centre (out of focus furniture)"
+  }
+ ],
+ "events": [
+  {
+   "event": "start of fall (release from rest in air)",
+   "frame": 0,
+   "time_s": 0.0,
+   "evidence": "bottom edge moves 6 px f0->f1, 18 px f1->f2, then +~11 px/frame each frame: velocity extrapolates to 0 at frame ~0"
+  },
+  {
+   "event": "last fully airborne frame",
+   "frame": 10,
+   "time_s": 0.4167,
+   "evidence": "gap and shadow visible beneath typewriter (bottom edge ~668)"
+  },
+  {
+   "event": "impact with desk top",
+   "frame": 11,
+   "time_s": 0.4583,
+   "evidence": "first frame resting on desk (bottom ~700); impact between frames 10 and 11"
+  },
+  {
+   "event": "tumble: rear lifts / tips forward",
+   "frames": "11-16",
+   "time_s": "0.458-0.667",
+   "evidence": "box top rises 532 -> 483 (f15), shape changes"
+  },
+  {
+   "event": "falls back and rocks",
+   "frames": "16-23",
+   "time_s": "0.667-0.958"
+  },
+  {
+   "event": "comes to rest (end of motion)",
+   "frame": 23,
+   "time_s": 0.9583,
+   "evidence": "bbox constant within 1 px from frame 23/24 to 29"
+  }
+ ]
+}

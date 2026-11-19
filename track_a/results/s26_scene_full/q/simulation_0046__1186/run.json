@@ -1,0 +1,68 @@
+{
+ "wall_s": 505,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 32,
+  "duration_ms": 241852,
+  "total_cost_usd": 0.9850905999999999,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 32,
+  "cache_creation_input_tokens": 52811,
+  "cache_read_input_tokens": 584673,
+  "output_tokens": 22277,
+  "output_tokens_details": {
+   "thinking_tokens": 12605
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 52811,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 683,
+    "cache_read_input_tokens": 60058,
+    "cache_creation_input_tokens": 2647,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 2647
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 31,
+  "flags": [
+   {
+    "tool": "Bash",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_partial"
+    ],
+    "words": [],
+    "input": "{\"command\": \"P=~/miniforge3/envs/ml/bin/python; K=/private/tmp/qp_blind/scene_full_partial 2>/dev/null; K=/private/tmp/qp_blind/scene_full_b/tools/framekit2.py; $P $K frame simulation_0046.mp4 --t 0 --crop 1120 440 1210 560 --scale 6 --grid 10 --out frames/gr.png 2>/dev/null; $P $"
+   }
+  ]
+ },
+ "video": "simulation_0046",
+ "ids": [
+  1186
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0046__q1186.jsonl"
+}

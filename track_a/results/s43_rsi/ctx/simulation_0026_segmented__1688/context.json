@@ -1,0 +1,44 @@
+{
+ "id": 1688,
+ "video": "simulation_0026_segmented",
+ "submitted": 9.62549,
+ "submitted_is": "a fixed-rule blend exp(0.5 ln A + 0.5 ln B) of the Claude line's answer A = 10.9 and an earlier DeepSeek median B = 8.5; the rule blends every row of its population where the two differ by less than about 50 pct, so it is no judgement about this question",
+ "deepseek_median": 8.5,
+ "candidates": [
+  {
+   "name": "C1",
+   "kind": "claude",
+   "answer": 10.4,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "kind": "claude",
+   "answer": 10.9,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_59 real-scale re-ask, real-scale re-ask (26_59, --real-scale, user go 2026-10-20) - stage 1",
+   "source": "s26_reask_1020 attempt 2"
+  },
+  {
+   "name": "C3",
+   "kind": "deepseek",
+   "answer": 8.5,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r1",
+   "source": "s37_test_repeats r1"
+  },
+  {
+   "name": "C4",
+   "kind": "deepseek",
+   "answer": 7.45,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r2",
+   "source": "s37_test_repeats r2"
+  },
+  {
+   "name": "C5",
+   "kind": "deepseek",
+   "answer": 9.0,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r3",
+   "source": "s37_test_repeats r3"
+  }
+ ]
+}

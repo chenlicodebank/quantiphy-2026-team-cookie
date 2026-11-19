@@ -1,0 +1,95 @@
+{
+  "video": "internet_0056.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 58,
+  "duration_s": 1.9333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "coordinates": "pixels, x to the right, y down, raw image coordinates of each frame. To remove camera drift use x - bg_dx, y - bg_dy (frame-0 scenery coordinates); columns bg_dx/bg_dy are in every track file.",
+  "summary": "Handheld, nearly static camera on a sunny campus plaza (palm trees, sandstone building with arcade on the right, row of wooden bollards). A person (cream cap, white long-sleeve top, khaki cargo trousers) rides a dark grey/black electric kick scooter from left to right across the whole clip, side-on to the camera, from sunlit pavement into the shadow of the building. A second person (dark clothes, backpack) walks slowly to the right in the background beside the building and disappears behind a dark pillar.",
+  "camera": {
+    "motion": "handheld, slow smooth drift; no pan of significance",
+    "bg_shift_file": "tracks/camera_shift.csv",
+    "bg_shift_range_px": {"dx": [-7.39, 0.0], "dy": [-2.75, 1.04]},
+    "bg_shift_frame57_px": [-7.39, 1.04],
+    "note": "shift = median displacement of 8 static background patches relative to frame 0 (template matching, subpixel). Patch disagreement grows to ~1.7 px by the end (tiny rotation/parallax). Compared with the rider's ~620 px travel the drift is ~1%, but subtract it for exact work."
+  },
+  "objects": [
+    {
+      "name": "scooter_rider",
+      "description": "Person on electric kick scooter (rider + scooter treated as one moving object; scooter sub-points recorded separately). Rider: cream/beige cap, white long-sleeve top, khaki cargo trousers, white shoes. Scooter: dark grey/black, small rear wheel with fender, larger black front wheel, tall stem with handlebar.",
+      "moves": true,
+      "visible_frames": [0, 57],
+      "track": "tracks/scooter_rider.csv",
+      "reference_point": "cx, cy = centre of the clean bounding box (scooter rear tyre edge .. max(front tyre edge, handlebar), cap top .. wheel bottoms). Alternatives in the file: body_centroid (mask centroid above the wheels), rear_axle, front_axle, scooter_front_x (front tyre's leading edge), scooter_rear_x.",
+      "direction": "left to right, side-on to camera (motion almost purely horizontal; ground line y ~758-759 px throughout)",
+      "start_px_frame0": {"cx": 281.3, "cy": 656.7, "scooter_rear_x": 221.3, "scooter_front_x": 341.4},
+      "end_px_frame57": {"cx": 895.4, "scooter_rear_x": 831.4, "scooter_front_x": 959.3},
+      "scooter_length_px": {
+        "definition": "horizontal distance from rear tyre's rear edge to front tyre's front edge (wheel to wheel, the scooter's overall length along the motion direction; handlebar sits above the front wheel and does not extend it)",
+        "recommended_px": 127.0,
+        "recommended_range_frames": "20-57 (stable 126-128 px)",
+        "early_frames_px": "~119-122 in frames 0-10, ~124 at frame 15 (apparent length grows while the rider moves from the left edge towards the image centre; checked by eye on 6x zooms)",
+        "manual_checks_px": {"f0": 119, "f8": 122, "f15": 122, "f22": 127, "f30": 127, "f38": 127.5, "f45": 127, "f57": 128},
+        "uncertainty_px": 2
+      },
+      "wheel_axle_distance_px": "~99 (frames 20-57), ~92-95 early",
+      "wheel_diameter_px": {"rear": "~25-26", "front": "~28-29"},
+      "rider_height_px": {
+        "definition": "cap top to ground (bottom of scooter wheels) = height_top_to_ground_px; the person stands on the deck (~10-12 px above ground), so person-only height is about 10-12 px less",
+        "values": "205 px at frame 0 rising to 215 px at frame 57",
+        "uncertainty_px": 3
+      },
+      "bbox_width_px": "~120 at frame 0, ~127 from frame 20 on (= scooter length; handlebar does not extend past the front wheel)",
+      "occlusion": "none: rider passes IN FRONT of bollard_3 (frames ~36-48) and bollard_4 (frames ~50-57) and the palm trunk/lamp post",
+      "shadow": "rider casts a ground shadow to the left/behind in the sunlit part (frames 0-~45); excluded from the box/scooter edges"
+    },
+    {
+      "name": "pedestrian_backpack",
+      "description": "Background pedestrian in dark clothing with a backpack, near the building arcade right of centre (x ~1270-1440, y ~570-675 px); small (~100 px tall).",
+      "moves": true,
+      "visible_frames": [0, 57],
+      "track": "tracks/pedestrian_backpack.csv",
+      "reference_point": "centroid of the visible mask",
+      "direction": "walks slowly to the right (x 1290 -> 1437) along the building",
+      "occlusion": "frames 0-15 fully visible (head to feet, ~103 px tall); frames 16-49 legs hidden by bushes (occluded=1); frames 50-57 going behind a dark pillar/lamp post at x~1440 (occluded=2, only a sliver visible, track meaningless for position)"
+    }
+  ],
+  "static_objects": {
+    "note": "positions in frame-0 image coords (pixels), read on 4x zooms of the median background, +-1.5 px. Bollards are wooden posts with a red band near the top; numbered left to right.",
+    "bollard_1": {"x": [7.5, 32.5], "top_y": 657.5, "bottom_y": 756, "width_px": 25, "height_px": 98.5, "where": "far left edge, sunlit"},
+    "bollard_2": {"x": [189, 213], "top_y": 654.5, "bottom_y": 754, "width_px": 24, "height_px": 99.5, "where": "left, just behind (left of) the rider at frame 0"},
+    "bollard_3": {"x": [660, 682], "top_y": 647.5, "bottom_y": 744, "width_px": 22, "height_px": 96.5, "where": "left of centre, sunlit, rider passes in front at frames ~36-48"},
+    "bollard_4": {"x": [862, 884], "top_y": 644, "bottom_y": 740, "width_px": 22, "height_px": 96, "where": "centre, in shade, rider in front of it at end"},
+    "bollard_5": {"x": [1056, 1079], "top_y": 639.5, "bottom_y": 737.5, "width_px": 23, "height_px": 98},
+    "bollard_6": {"x": [1252.5, 1275], "top_y": 636, "bottom_y": 734, "width_px": 22.5, "height_px": 98},
+    "bollard_7": {"x": [1521, 1552.5], "top_y": 640.5, "bottom_y": 762.5, "width_px": 31, "height_px": 122, "where": "right, closer to camera (on a different, nearer line)"},
+    "white_post": {"x": [1624.5, 1662.5], "top_y": 701, "bottom_y": 799, "width_px": 38, "height_px": 98, "where": "white bollard with red band, right, on base plate, closer to camera"},
+    "bollard_8": {"x": [1762.5, 1804], "top_y": 671, "bottom_y": 848, "width_px": 41, "height_px": 177, "where": "far right, nearest to camera"},
+    "bollard_row_note": "bollards 1-6 stand on one line roughly parallel to the image plane at about the rider's depth (their bottoms y 734-756, the rider's ground line y ~758, slightly nearer); bollards 7, white_post, 8 are on a diagonal line receding towards the camera on the right.",
+    "golf_carts": {"x": [1195, 1275], "y": [580, 640], "note": "two parked white utility carts at the far end of the walkway by the building, static"},
+    "building": "sandstone building with red tile roof and arcade, right half of frame (x > 1145); windows at ~1245-1285 and 1318-1357, y 335-395",
+    "palm_trees": "large palm left (trunk x ~460-530, y 290-690), large palm right in front of building (trunk x ~1440-1530), several distant palms",
+    "lamp_posts": "dark pole x ~535-555 (y 270-690); small lamps at x ~618, 678",
+    "bike_rack": "parked bicycles x ~560-640, y ~610-660",
+    "ground": "asphalt road in foreground, mostly in the building's shadow (diagonal shadow edge from ~x 480,y 780 up-right); drainage grate strip y ~740 from x ~780 to 1350; faint yellow crossing marks y ~800 x 1000-1600; sunlit pale pavement behind the bollards"
+  },
+  "events": [
+    {"event": "rider already moving at frame 0 and keeps moving right to the last frame (no start/stop, no direction change)", "frames": [0, 57]},
+    {"event": "rider's front wheel reaches the building's shadow on the ground (lighting change, not a physical event)", "frame_approx": 20},
+    {"event": "rider passes in front of bollard_3 (overlap in x)", "frames_approx": [36, 48]},
+    {"event": "rider fully in shade", "frame_approx": 50},
+    {"event": "rider starts overlapping bollard_4 (in front of it)", "frame_approx": 50},
+    {"event": "pedestrian's legs hidden by bushes", "frame_approx": 16},
+    {"event": "pedestrian goes behind dark pillar at x~1440", "frames_approx": [50, 57]}
+  ],
+  "files": {
+    "tracks/scooter_rider.csv": "per-frame rider+scooter measurements, 58 rows",
+    "tracks/pedestrian_backpack.csv": "per-frame background pedestrian, 58 rows",
+    "tracks/camera_shift.csv": "per-frame background shift relative to frame 0",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts (run in order: camera_shift, build_bg, track (exploratory), track_wheels, wheel_edges, assemble, static_objects)"
+  }
+}

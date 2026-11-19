@@ -1,0 +1,154 @@
+{
+ "video": "simulation_0224.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 45,
+ "size_px": [
+  1920,
+  1080
+ ],
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (background identical in all frames; median-background differencing leaves no residue outside the block)",
+  "view": "side view, roughly fronto-parallel to the ramp; horizon/wall-floor line at y~900 (horizontal); slight perspective on tatami floor lines and on the stand box top"
+ },
+ "pixel_coords": "x right, y down, origin top-left, full-resolution pixels",
+ "objects": {
+  "block": {
+   "desc": "small white/cream rounded rectangular block (soap-bar-like) sliding down the channel on top of the inclined wooden ramp; the only moving object",
+   "moves": true,
+   "visible_frames": "0-44 (40-41 mostly hidden behind ramp lip, 42 partial, 44 mostly out of frame bottom)",
+   "track": "tracks/block.csv",
+   "reference_point": "mask centroid (visible centre ~ object origin)",
+   "pixel_size_sliding_frames_0_38": {
+    "length_along_slope_px": 81.5,
+    "length_spread_px": "80.2-82.7",
+    "thickness_across_slope_px": 32.3,
+    "thickness_spread_px": "31.2-33.6",
+    "bbox_w_px": 77,
+    "bbox_h_px": 55,
+    "note": "lower edge of block may be slightly hidden by the channel wall; length is the reliable dimension"
+   },
+   "pixel_size_free_fall_frame_43": {
+    "length_px": 84.6,
+    "thickness_px": 34.1,
+    "bbox": [
+     381,
+     993,
+     458,
+     1046
+    ]
+   }
+  },
+  "ramp": {
+   "desc": "large inclined wooden (reddish-brown) ramp/board with a grey channel on top, high end at right, low end at left",
+   "moves": false,
+   "top_rail_upper_right_corner_px": [
+    1378,
+    488
+   ],
+   "lower_left_lip_tip_px": [
+    424,
+    962
+   ],
+   "top_edge_length_px": 1065,
+   "top_edge_angle_deg": 26.4,
+   "slope_angle_from_block_path_deg": 25.93,
+   "bbox_px": [
+    420,
+    485,
+    1425,
+    1080
+   ],
+   "note": "slope extends to lower-left; block path is a straight line at the fitted angle"
+  },
+  "stand_box": {
+   "desc": "light beige box/stand under the ramp with black open top",
+   "moves": false,
+   "bbox_px": [
+    515,
+    815,
+    1430,
+    1080
+   ],
+   "black_top_opening_px": {
+    "x": [
+     900,
+     1390
+    ],
+    "y": [
+     815,
+     900
+    ]
+   },
+   "front_face_width_px": 915,
+   "note": "lower part cut by frame edge; partly hidden by ramp"
+  },
+  "hanging_scroll": {
+   "desc": "calligraphy hanging scroll on the back wall (three large black characters)",
+   "moves": false,
+   "bbox_px": [
+    783,
+    0,
+    1112,
+    600
+   ],
+   "width_px": 329,
+   "note": "top cut by frame"
+  },
+  "back_wall": {
+   "desc": "mottled tan wall",
+   "moves": false,
+   "wall_floor_line_y_px": 900
+  },
+  "tatami_floor": {
+   "desc": "tatami mats with dark borders, y>900",
+   "moves": false
+  }
+ },
+ "events": [
+  {
+   "name": "block at rest at top of ramp",
+   "frames": "0-1",
+   "t": [
+    0.0,
+    0.0417
+   ]
+  },
+  {
+   "name": "start of sliding (first visible displacement)",
+   "frame": 2,
+   "t": 0.0833,
+   "note": "s=0.9px at f2, 2.6px at f3; motion begins ~f1-2 from rest"
+  },
+  {
+   "name": "block reaches the lower-left lip and passes behind it",
+   "frame": 40,
+   "t": 1.6667
+  },
+  {
+   "name": "block leaves ramp, falls (projectile) toward floor",
+   "frame": 42,
+   "t": 1.75
+  },
+  {
+   "name": "block exits frame at bottom",
+   "frame": 44,
+   "t": 1.8333
+  }
+ ],
+ "duplicate_frames": {
+  "frames_identical_to_previous": [
+   1,
+   6,
+   13,
+   25,
+   28,
+   35,
+   38,
+   41
+  ],
+  "note": "the encoded video repeats some frames (every ~3-12 frames). Per-frame differences at those frames are 0 and the following step is doubled. Fit s(t) over all frames or skip duplicates when fitting motion."
+ }
+}

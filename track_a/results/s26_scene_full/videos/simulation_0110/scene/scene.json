@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0110.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "image_size": [1920, 1080],
+  "time_convention": "t = frame/24; frame 0 at t=0",
+  "camera": {
+    "static": true,
+    "evidence": "uniform grey background (BGR 206) identical in all frames; no features to pan against; no shake possible to detect but nothing indicates motion",
+    "principal_point_assumed": [960, 540],
+    "focal_length": "unknown - estimate from depth_info + known size in the answering session",
+    "perspective_cues": "none in background (no ground plane, no horizon). Only cue: apparent size of the cells, which shrinks to ~0.49x linearly-in-depth over the clip"
+  },
+  "objects": [
+    {
+      "name": "cell_left",
+      "description": "red blood cell (red biconcave disc, seen obliquely from slightly above) on the LEFT of the image",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "occluded": "never",
+      "track": "tracks/cell_left.csv",
+      "image_motion": "centroid (816.2,585.0) at f0 -> (627.2,503.1) at f71: moves left and up in the image while shrinking; per-frame pixel step decreases from ~5.9 px to ~1.5 px",
+      "apparent_size": {"f0": {"bbox_w": 330, "bbox_h": 182, "area": 49114}, "f71": {"bbox_w": 164, "bbox_h": 86, "area": 11653}},
+      "rel_depth_Z_over_Z0": {"f0": 1.0, "f71": 2.053, "trend": "linear in frame after f1: 0.9858 + 0.01505*frame"}
+    },
+    {
+      "name": "cell_right",
+      "description": "red blood cell (same shape/colour as cell_left) on the RIGHT of the image",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "occluded": "never",
+      "track": "tracks/cell_right.csv",
+      "image_motion": "centroid (1184.6,585.4) at f0 -> (1162.4,517.3) at f71: moves mainly up in the image (small leftward drift) while shrinking",
+      "apparent_size": {"f0": {"bbox_w": 328, "bbox_h": 180, "area": 47856}, "f71": {"bbox_w": 160, "bbox_h": 86, "area": 11303}},
+      "rel_depth_Z_over_Z0": {"f0": 1.0, "f71": 2.052, "trend": "linear in frame after f1: 0.9858 + 0.01506*frame (same as cell_left)"}
+    }
+  ],
+  "static_objects": "none (plain grey backdrop only)",
+  "events": [
+    {"event": "both cells static between frame 0 and frame 1 (zero displacement)", "frame": 0, "time": 0.0},
+    {"event": "start of motion of both cells (first nonzero displacement f1->f2)", "frame": 1, "time": 0.0417},
+    {"event": "cells recede from the camera at a steady rate and drift apart in the image; no contact, bounce or direction change", "frames": [1, 71]},
+    {"event": "end of clip, still moving", "frame": 71, "time": 2.9583}
+  ],
+  "pairwise": {
+    "pixel_separation_centroids": {"f0": 368.5, "f12": 414.3, "f24": 451.6, "f36": 480.4, "f48": 503.0, "f60": 521.4, "f71": 535.4},
+    "note": "pixel separation grows while both shrink, so the world separation grows strongly (approx proportional to separation*rel_depth: 368.5 -> ~1099 in f0-depth pixel units)"
+  }
+}

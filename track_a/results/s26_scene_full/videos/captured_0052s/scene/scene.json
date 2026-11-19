@@ -1,0 +1,339 @@
+{
+ "video": "captured_0052s.mp4",
+ "source": "lab (captured, Orbbec Femto Mega RGB, background replaced by a sky-like gradient via Segment Anything 2 - see watermark)",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame": "t = frame / 24",
+ "units": "pixels, seconds; image coords x right, y down, origin top-left",
+ "camera": {
+  "static": true,
+  "evidence": "centroids of the static basketball and shoe stay constant to +-0.3 px over all 49 frames (tracks/static_check.csv); no per-frame shift",
+  "intrinsics_from_benchmark_convention": {
+   "focal_px": 762.8,
+   "cx": 640,
+   "cy": 360,
+   "hfov_deg": 80
+  },
+  "perspective_cues": "original background removed (uniform blue-white gradient), so no floor, horizon or vanishing lines are visible. Camera looks down onto a floor: nearer floor objects appear lower in the image (shoe and basketball near the bottom are nearer than the bin/person). Floor contact rows: person feet y~535-551, bin bottom y=591, shoe bottom y=687, basketball bottom cut at 719. The exercise ball rolls toward the camera: its apparent diameter grows from 128 px (rest, frames 0-18) to ~228 px (frame 35) and >300 px before it leaves the bottom-left of the frame."
+ },
+ "objects": {
+  "exercise_ball": {
+   "description": "large dark-grey (charcoal) inflatable exercise/gym ball with white specular highlights; the only object that travels",
+   "moves": true,
+   "visible_frames": [
+    0,
+    45
+   ],
+   "track": "tracks/exercise_ball.csv (reference point columns ref_x, ref_y)",
+   "at_rest_frame0": {
+    "ref_x": 615.5,
+    "ref_y": 506.0,
+    "ref_method": "chord",
+    "max_row_width": 128.0,
+    "vis_height": 128.0,
+    "circle_diam": 123.57
+   },
+   "frame35_last_reliable": {
+    "ref_x": 422.5,
+    "ref_y": 642.0,
+    "ref_method": "chord",
+    "max_row_width": 228.0,
+    "vis_height": 192.0,
+    "circle_diam": 255.63
+   },
+   "apparent_size_over_time": [
+    {
+     "frame": 0,
+     "t": 0.0,
+     "apparent_diameter_px": 128,
+     "reliable": true
+    },
+    {
+     "frame": 3,
+     "t": 0.125,
+     "apparent_diameter_px": 129,
+     "reliable": true
+    },
+    {
+     "frame": 6,
+     "t": 0.25,
+     "apparent_diameter_px": 129,
+     "reliable": true
+    },
+    {
+     "frame": 9,
+     "t": 0.375,
+     "apparent_diameter_px": 128,
+     "reliable": true
+    },
+    {
+     "frame": 12,
+     "t": 0.5,
+     "apparent_diameter_px": 129,
+     "reliable": true
+    },
+    {
+     "frame": 15,
+     "t": 0.625,
+     "apparent_diameter_px": 124,
+     "reliable": true
+    },
+    {
+     "frame": 18,
+     "t": 0.75,
+     "apparent_diameter_px": 130,
+     "reliable": true
+    },
+    {
+     "frame": 21,
+     "t": 0.875,
+     "apparent_diameter_px": 143,
+     "reliable": true
+    },
+    {
+     "frame": 24,
+     "t": 1.0,
+     "apparent_diameter_px": 148,
+     "reliable": true
+    },
+    {
+     "frame": 27,
+     "t": 1.125,
+     "apparent_diameter_px": 163,
+     "reliable": true
+    },
+    {
+     "frame": 30,
+     "t": 1.25,
+     "apparent_diameter_px": 181,
+     "reliable": true
+    },
+    {
+     "frame": 33,
+     "t": 1.375,
+     "apparent_diameter_px": 209,
+     "reliable": true
+    },
+    {
+     "frame": 35,
+     "t": 1.4583,
+     "apparent_diameter_px": 228,
+     "reliable": true
+    },
+    {
+     "frame": 36,
+     "t": 1.5,
+     "apparent_diameter_px": 253,
+     "reliable": false
+    },
+    {
+     "frame": 38,
+     "t": 1.5833,
+     "apparent_diameter_px": 283,
+     "reliable": false
+    },
+    {
+     "frame": 39,
+     "t": 1.625,
+     "apparent_diameter_px": 291,
+     "reliable": false
+    },
+    {
+     "frame": 42,
+     "t": 1.75,
+     "apparent_diameter_px": 304,
+     "reliable": false
+    },
+    {
+     "frame": 45,
+     "t": 1.875,
+     "apparent_diameter_px": 64,
+     "reliable": false
+    }
+   ],
+   "notes": "held by the person (partly behind the person's arms at the top, touching the bin on its right) in frames 0-20; pushed off and rolls toward the camera and to the left (image down-left). Cut by the bottom image edge from frame 32; from frame 36 the silhouette is strongly flattened/widened by wide-angle perspective near the image corner and the centre is uncertain; frames 39-45 centre is extrapolated. Leaves the frame after frame 45."
+  },
+  "person": {
+   "description": "person in black hoodie and dark trousers, face masked white (anonymised); crouching behind the ball, left of the blue bin",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/person.csv (visible bbox centre cx_vis, cy_vis; mask centroid mask_cx, mask_cy)",
+   "notes": "stays in place (no locomotion): holds the ball frames 0-20, releases ~21, flings arms up/out frames 22-33, then stays crouched with hands down. Lower body hidden behind the ball in frames 0-~22; full crouched figure (head top to feet) visible frames 29-48, bbox height ~187-204 px.",
+   "full_figure_frame48": {
+    "bbox_x0": "559",
+    "bbox_y0": "354",
+    "bbox_x1": "680",
+    "bbox_y1": "554",
+    "bbox_w": "122",
+    "bbox_h": "201"
+   }
+  },
+  "recycling_bin": {
+   "ref_frame": 48,
+   "bbox": [
+    681,
+    485,
+    775,
+    591
+   ],
+   "bbox_width_px": 95,
+   "bbox_height_px": 107,
+   "centre_bbox": [
+    728.0,
+    538.0
+   ],
+   "centroid": [
+    727.0,
+    536.0
+   ],
+   "area_px": 8981,
+   "main_axis_angle_deg": 90.7,
+   "length_main_axis_px": 106.6,
+   "width_across_px": 94.1,
+   "max_row_width_px": 94,
+   "touches_image_border": false,
+   "description": "blue rectangular recycling bin with white recycle logo and yellow decals, right of the person",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "notes": "slightly tapered (wider at top); top rim at y~487; person's hand/leg touches its left side in several frames"
+  },
+  "basketball": {
+   "ref_frame": 0,
+   "bbox": [
+    756,
+    623,
+    847,
+    719
+   ],
+   "bbox_width_px": 92,
+   "bbox_height_px": 97,
+   "centre_bbox": [
+    801.5,
+    671.0
+   ],
+   "centroid": [
+    801.7,
+    671.8
+   ],
+   "area_px": 7312,
+   "main_axis_angle_deg": 65.1,
+   "length_main_axis_px": 104.9,
+   "width_across_px": 90.5,
+   "max_row_width_px": 92,
+   "touches_image_border": true,
+   "description": "orange basketball on the floor, bottom centre-right",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "notes": "bottom edge touches the image border (y=719), so the vertical extent may be cut by ~0-5 px; width 92 px is the reliable diameter"
+  },
+  "shoe": {
+   "ref_frame": 0,
+   "bbox": [
+    250,
+    627,
+    318,
+    687
+   ],
+   "bbox_width_px": 69,
+   "bbox_height_px": 61,
+   "centre_bbox": [
+    284.0,
+    657.0
+   ],
+   "centroid": [
+    286.3,
+    657.4
+   ],
+   "area_px": 2148,
+   "main_axis_angle_deg": 140.9,
+   "length_main_axis_px": 85.3,
+   "width_across_px": 36.1,
+   "max_row_width_px": 52,
+   "touches_image_border": false,
+   "description": "white sneaker with black stripes lying on the floor, bottom left",
+   "moves": false,
+   "visible_frames": "0-34 and 44-48 fully; 35-43 mostly hidden behind the rolling exercise ball",
+   "notes": "oriented diagonally (toe up-right); length along main axis ~85 px"
+  }
+ },
+ "events": [
+  {
+   "event": "exercise ball at rest, held by the person (centre wobble <= 6 px)",
+   "frames": [
+    0,
+    17
+   ],
+   "t": [
+    0.0,
+    0.7083
+   ]
+  },
+  {
+   "event": "exercise ball starts moving (centre starts descending/moving left)",
+   "frame": 18,
+   "t": 0.75,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "person releases the ball (hands leave the ball)",
+   "frame": 21,
+   "t": 0.875,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "person arms raised/out",
+   "frames": [
+    22,
+    33
+   ],
+   "t": [
+    0.9167,
+    1.375
+   ]
+  },
+  {
+   "event": "exercise ball first touches bottom image edge",
+   "frame": 32,
+   "t": 1.3333
+  },
+  {
+   "event": "exercise ball occludes the shoe",
+   "frames": [
+    35,
+    43
+   ],
+   "t": [
+    1.4583,
+    1.7917
+   ]
+  },
+  {
+   "event": "exercise ball last visible (sliver bottom-left)",
+   "frame": 45,
+   "t": 1.875
+  },
+  {
+   "event": "no bounce, no collision with other objects observed; ball rolls continuously from release until it exits"
+  }
+ ],
+ "files": {
+  "tracks/exercise_ball.csv": "ball per frame",
+  "tracks/person.csv": "person per frame",
+  "tracks/static_check.csv": "per-frame centroids and visible fraction of bin, basketball, shoe",
+  "static_objects.json": "static object pixel extents",
+  "notes.md": "methods and reliability",
+  "scripts/": "all measurement code (run_all.py)"
+ }
+}

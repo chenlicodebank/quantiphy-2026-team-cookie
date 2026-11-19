@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0137.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 60.0,
+ "frames": 100,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 332,
+  "question": "What is the length of the house in meters?",
+  "prior": "speed of the bird = 9.146m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 60.0
+ }
+}

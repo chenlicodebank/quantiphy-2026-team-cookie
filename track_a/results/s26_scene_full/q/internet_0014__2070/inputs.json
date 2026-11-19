@@ -1,0 +1,18 @@
+{
+ "video": "internet_0014.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.764032,
+ "frames": 287,
+ "duration_s": 9.6425,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 2070,
+  "question": "What is the initial distance between the two players in meters?",
+  "prior": "center circle radius = 9.15m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

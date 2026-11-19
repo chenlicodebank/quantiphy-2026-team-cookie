@@ -1,0 +1,182 @@
+{
+ "video": "simulation_0239.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "view": "top-down (bird's-eye) view of a house with two horses walking on the lawn below it; image +x = right, +y = down",
+ "camera": {
+  "motion": "static",
+  "bg_shift_px_vs_frame0": "below 0.02 px in x, constant 0.5 px y offset artefact of phase correlation (no motion)",
+  "perspective": "near-orthographic overhead view of the ground plane; the house roof is much closer to the camera than the ground, so its outline shows perspective (roof edges slant toward the apex at x~1025,y~19). Both horses are on the same ground plane at similar depth; one scale for the ground should apply to both."
+ },
+ "objects": [
+  {
+   "name": "brown_horse",
+   "description": "chestnut/brown horse with white face blaze, upper one (y~776), just below the house roof edge",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "heading": "walking to +x (right), head at the right end",
+   "track_file": "tracks/brown_horse_mask.csv",
+   "event_loop_reset": "animation loop: at frame 49 (t=2.042 s) it jumps back to its frame-0 position (torso_cx 878->753). Treat frames 0-48 as the continuous walk; frame 49 is a teleport, not motion.",
+   "full_extent_nose_to_rump_px_frame0": {
+    "x0": 695,
+    "x1": 838,
+    "length": 143,
+    "y0": 755,
+    "y1": 795,
+    "width": 40
+   },
+   "summary_frames_0_48": {
+    "torso_center_first": [
+     745.9,
+     776.0
+    ],
+    "torso_center_last": [
+     863.9,
+     778.0
+    ],
+    "net_displacement_px": 118.0,
+    "path_length_px_framewise": 124.4,
+    "mean_px_per_frame": 2.59,
+    "mask_length_px_median": 144.0,
+    "mask_width_px_median": 39.3,
+    "bbox_h_px_median": 39.0
+   }
+  },
+  {
+   "name": "white_horse",
+   "description": "white/cream horse, lower one (y~865), larger and faster; dark tail at its left (rear) end, greyish muzzle at right",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "heading": "trotting/walking to +x (right), head at the right end",
+   "track_file": "tracks/white_horse_mask.csv",
+   "full_extent_tail_to_muzzle_px_frame0": {
+    "x0": 892,
+    "x1": 1067,
+    "length": 175,
+    "body_without_tail_x0": 903,
+    "y0": 843,
+    "y1": 893,
+    "width": 50
+   },
+   "summary_frames_0_49": {
+    "torso_center_first": [
+     969.4,
+     868.1
+    ],
+    "torso_center_last": [
+     1192.8,
+     861.3
+    ],
+    "net_displacement_px": 223.4,
+    "path_length_px_framewise": 225.0,
+    "mean_px_per_frame": 4.59,
+    "mask_length_px_median": 138.2,
+    "mask_width_px_median": 48.8,
+    "bbox_h_px_median": 48.0
+   }
+  },
+  {
+   "name": "house",
+   "description": "single house seen from above: cross-shaped tiled roof (main block running top-bottom, cross gable running left-right in the middle)",
+   "moves": false,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "roof_outline_frame0_px": {
+    "bbox": [
+     616,
+     19,
+     1427,
+     745
+    ],
+    "centroid": [
+     1024.3,
+     394.3
+    ],
+    "main_block_x": [
+     660,
+     1363
+    ],
+    "main_block_width_px": 703,
+    "main_block_y": [
+     19,
+     745
+    ],
+    "main_block_height_px": 726,
+    "cross_gable_x": [
+     616,
+     1427
+    ],
+    "cross_gable_length_px": 811,
+    "cross_gable_y_at_x625": [
+     346,
+     421
+    ],
+    "cross_gable_y_at_x650": [
+     272,
+     519
+    ],
+    "cross_gable_y": [
+     270,
+     520
+    ],
+    "cross_gable_width_px": 250,
+    "note": "roof is above ground and closer to camera, so its pixel size is NOT on the ground-plane scale; eaves corners at top are at y~90 (x 662/1363) and ridge apex y~19 at x~1025 (perspective)"
+   }
+  },
+  {
+   "name": "lawn_and_trees",
+   "description": "grass lawn (bright yellow-green at right, dark under tree shadows at left/bottom); trees only as shadows",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "both horses already moving right at clip start (no start/stop inside clip)"
+  },
+  {
+   "frame": 49,
+   "t": 2.0417,
+   "what": "brown horse teleports back to its start position (animation loop reset)"
+  },
+  {
+   "what": "no contacts/collisions; horses never overlap; white horse stays fully inside the frame"
+  }
+ ],
+ "relative_positions_frame0_torso_px": {
+  "brown": [
+   745.9,
+   776.0
+  ],
+  "white": [
+   969.4,
+   868.1
+  ],
+  "distance_px": 241.8
+ },
+ "relative_positions_frame48_torso_px": {
+  "brown": [
+   863.9,
+   778.0
+  ],
+  "white": [
+   1188.6,
+   861.0
+  ],
+  "distance_px": 335.1
+ }
+}

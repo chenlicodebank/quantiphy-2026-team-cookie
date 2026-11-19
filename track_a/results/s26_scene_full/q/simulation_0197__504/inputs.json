@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0197.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MS",
+ "fps": 30.0,
+ "frames": 50,
+ "duration_s": 1.6667,
+ "width": 2560,
+ "height": 2560,
+ "question": {
+  "id": 504,
+  "question": "What is the speed of the bubble at time 1s in m/s?",
+  "prior": "the horizontal width of the “skynova” text on the bottle = 0.00188m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0067.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1360,
+  "question": "What is the height of the purple car in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 21.6770m\nt=1.58s, distance_human_camera = 22.7825m\nt=0.58s, distance_yellow_car_camera = 14.7874m\nt=1.58s, distance_yellow_car_camera = 18.3786m\nt=0.58s, distance_white_car_camera = 10.6240m\nt=1.58s, distance_white_car_camera = 12.8097m\nt=0.58s, distance_bike_camera = 14.1413m\nt=1.58s, distance_bike_camera = 17.8223m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

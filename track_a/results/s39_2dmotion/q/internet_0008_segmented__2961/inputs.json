@@ -1,0 +1,18 @@
+{
+ "video": "internet_0008_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 240,
+ "duration_s": 10.0,
+ "width": 960,
+ "height": 540,
+ "question": {
+  "id": 2961,
+  "question": "What is the average speed of the sailboat in m/s?",
+  "prior": "sailboat length = 12m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

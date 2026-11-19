@@ -1,0 +1,5 @@
+{"answer": 0.31, "decision": "switch", "follows": "C3",
+ "crux": "all candidates use the flamingo float (only red/accelerating object; no chess piece visible); they part on the time stencil at t=1 s, 0.5 frame from the smoothstep inflection",
+ "fault_found": "C1 evaluated the instantaneous d2x/dt2 at frame 24 (reproduced 0.10-0.13) instead of the convention (v24-v23)*fps whose stencil is centred on frame 23 (0.29-0.33 over four reference points incl. template matching); C2 gave the ramp-phase magnitude, not the value at t=1 s",
+ "closure_pct": 0.5, "confidence": "medium", "verified_previous": true,
+ "lesson": "When verifying an earlier round's stencil-based fault proof, re-track the object with a method independent of its mask (e.g. subpixel template matching) and evaluate the convention's exact discrete stencil on a fitted ease model, since raw one-frame second differences are noise-dominated."}

@@ -1,0 +1,71 @@
+{
+  "video": "captured_0039.mp4",
+  "source": "lab (captured; 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "units": "pixels and seconds; image coords x right, y down, origin top-left",
+  "camera": {
+    "motion": "static (background diff between consecutive frames ~0.02-0.08 grey levels mean in static regions; no pan/shake)",
+    "intrinsics_from_benchmark": {"focal_px": 762.8, "principal_point_px": [640, 360], "hfov_deg": 80, "note": "Orbbec Femto Mega, f = 0.5959 * width"},
+    "perspective": {
+      "ground_plane": "table top (horizontal), quad given in static_objects.table",
+      "depth_vanishing_point_px": [698, 349],
+      "horizon_y_px_near_centre": 349,
+      "horizon_note": "intersection of table side edges gives the depth VP; front/back edges converge far to the left (~x=-3700,y=325) so horizon is nearly level (slope ~0.005), ~11 px above the principal point => camera pitched down ~0.8 deg; approximate (+-10 px)",
+      "camera_roll": "table front edge slopes down to the right (536->586 over x 212->1137) mostly because the table is yawed relative to the camera"
+    }
+  },
+  "moving_objects": [
+    {
+      "name": "ball",
+      "description": "small white ping-pong ball (orange/black logo visible while at rest), the only moving object",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "ref_x, ref_y = centre of circle fitted to the upper ~60% of the ball outline (f0-40); bbox centre for f41-44 (motion blurred while falling)",
+      "visible_frames": [0, 44],
+      "out_of_view_frames": [45, 48],
+      "apparent_diameter_px": {"f0-18_at_rest": 23.0, "f19": 24.4, "f25": 29.5, "f30": 34.5, "f35": 39.8, "f40": 48.1, "f41": 49.2, "f43_width_across_blur": 52.5},
+      "apparent_size_note": "ball approaches the camera: diameter grows ~23 -> 48 px (f18 -> f40), i.e. depth roughly halves (Z proportional to 1/diameter for a sphere)",
+      "moves": true
+    }
+  ],
+  "static_objects": [
+    {"name": "table", "description": "wooden table (light-brown top, dark front face) in the middle of the frame; ball rolls on it",
+     "top_corners_px": {"back_left": [430, 452], "back_right": [917, 467], "front_right": [1137, 586], "front_left": [212, 536]},
+     "front_face_thickness_px": {"at_left_corner": 32, "at_right_corner": 36},
+     "front_edge_y_at_x": "y = 536 + 0.054*(x-212) (e.g. y~550 at x=470 where the ball leaves the table)",
+     "bbox_xyxy": [210, 452, 1140, 622],
+     "visible_frames": [0, 48]},
+    {"name": "pink_bottle", "description": "pink insulated bottle/thermos with cream band near top, standing on table behind cards, left of white cup",
+     "bbox_xyxy": [640, 330, 690, 479], "width_px": 50, "height_px": 149, "band_y_px": [345, 357], "visible_frames": [0, 48]},
+    {"name": "white_cup", "description": "white tumbler/cup (wider at top) right of the pink bottle",
+     "bbox_xyxy": [724, 375, 795, 498], "top_width_px": 71, "bottom_width_px": 53, "height_px": 123, "visible_frames": [0, 48]},
+    {"name": "card_tent", "description": "two playing cards leaning against each other (tent), blue-striped back facing camera, in front of the pink bottle",
+     "bbox_xyxy": [656, 416, 712, 500], "front_card_corners_px": {"top_left": [675, 418], "top_right": [695, 416], "bottom_right": [712, 499], "bottom_left": [690, 500]},
+     "front_card_long_side_px": 84, "front_card_short_side_px": 21, "visible_frames": [0, 48]},
+    {"name": "flat_cards", "description": "playing cards lying flat (spread deck) on table in front of the card tent",
+     "bbox_xyxy": [642, 499, 745, 515], "length_px": 103, "visible_frames": [0, 48]},
+    {"name": "phone", "description": "dark blue flat rectangle (phone or card case) lying on the table near the front edge, yellow sticker on its right end",
+     "bbox_xyxy": [519, 532, 620, 552], "length_px": 101, "depth_extent_px": 20, "yellow_sticker_bbox_xyxy": [588, 533, 616, 540], "visible_frames": [0, 48]},
+    {"name": "tripod", "description": "black tripod behind the table, blue light/sensor on top at (688,70)",
+     "bbox_xyxy": [590, 60, 760, 455], "approximate": true, "visible_frames": [0, 48]},
+    {"name": "person", "description": "person seated behind/under the table: only legs/knees under the table and a hand (fingertips behind the ball f0-~20, then withdrawing) are visible",
+     "bbox_xyxy": [455, 585, 790, 720], "approximate": true, "visible_frames": [0, 48], "moves": "hand only, briefly (releases the ball)"},
+    {"name": "monitor", "description": "dark wall-mounted screen top right with a bright light reflection", "bbox_xyxy": [1005, 0, 1280, 125], "approximate": true},
+    {"name": "left_stand", "description": "dark tripod/light-stand poles at the left image edge", "bbox_xyxy": [0, 280, 140, 690], "approximate": true},
+    {"name": "wall_panels", "description": "grey partition panels forming the room background"}
+  ],
+  "events": [
+    {"event": "ball at rest on the back of the table, held/steadied by a hand behind it", "frames": [0, 18], "t": [0.0, 0.75]},
+    {"event": "segmentation artefact: ball greyed out (outline visible, ball still at rest)", "frame": 10, "t": 0.4167},
+    {"event": "release / start of motion (first clear displacement)", "frame": 19, "t": 0.7917, "note": "f18 shows <1 px change; motion clearly starts between f18 and f19"},
+    {"event": "ball rolls on table toward camera and to the left (image direction ~ down-left)", "frames": [19, 40], "t": [0.7917, 1.6667]},
+    {"event": "probable dropped/irregular frame: image displacement f35->f36 is ~12 px vs ~5.5 px for neighbours", "frame": 36, "t": 1.5},
+    {"event": "ball reaches the table front edge and rolls off", "frames": [40, 41], "t": [1.6667, 1.7083], "note": "f40 ball bottom ~546 px, edge at ~550 px; f41 centre already near the edge line"},
+    {"event": "falling in front of the table front face (strong motion blur)", "frames": [42, 44], "t": [1.75, 1.8333]},
+    {"event": "ball leaves the image through the bottom edge", "frame": 45, "t": 1.875},
+    {"event": "end of video", "frame": 48, "t": 2.0}
+  ]
+}

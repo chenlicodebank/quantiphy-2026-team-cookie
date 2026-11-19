@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0088.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 30,
+ "duration_s": 1.25,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 133,
+  "question": "What is the width (wingspan) of the big bird in meters?",
+  "prior": "speed of the big bird = 17.98m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

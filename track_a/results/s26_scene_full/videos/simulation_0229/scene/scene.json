@@ -1,0 +1,71 @@
+{
+  "video": "simulation_0229.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (motion in a plane facing the camera; plane's pixel length is constant ~140 px across the frame)",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y DOWN (image rows); origin top-left of the full 1920x1080 image",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of rows 0-280, cols 200-1700 vs frame 0: |shift| <= 0.03 px for all 50 frames (scene/scripts/camera_shift.json)",
+    "view": "frontal view of a classroom front wall; blackboard roughly parallel to the image plane"
+  },
+  "moving_objects": {
+    "paper_airplane": {
+      "description": "small white/cream folded paper airplane seen from the side, nose pointing right (direction of travel), wider folded wing/tail part at the left (rear) end; the only moving object",
+      "track_file": "tracks/paper_airplane.csv",
+      "visible_frames": "enters from the left image edge about frame 9-10 (very faint, in the bright light beam); segmented frames 11-41; full extent visible 13-36; leaves through the right image edge during frames 38-41; gone from frame 42",
+      "recommended_reference_point": "ref_x_px, ref_y_px (midpoint of nose and tail tips along the plane axis; = bbox centre within ~2-5 px in frames 13-36)",
+      "pixel_size": {
+        "length_nose_to_tail_px": "140 +/- 3 (median of nose_tail_len_px over frames 14-35 = 2 x 70.3); a mask from blurred diff, so ~2-4 px larger than the sharp silhouette (sharp-threshold mask gave 133-140)",
+        "bbox_width_px_frames_14_33": "137-146",
+        "height_across_axis_px": "about 10-15 px for the sharp body (thin side view), 18-30 px for the blurred mask incl. raised wing tip at the rear; bbox_h 18-45 px depending on tilt",
+        "size_change_over_time": "none systematic (length 135-146 px in all full-view frames) -> constant depth, planar motion"
+      },
+      "path_summary_px": "ref point (171,610) @f11 -> (311,539) @f13 -> apex y~343 @f22-24 (x~953-1096) -> (1634,486) @f33 -> (1776,561) @f36 -> right edge ~f41 (x~1900+, y~660-680). Moves right throughout; rises until ~f23, then descends (arc). Body axis tilt (image, y down) goes from about -12 deg (nose up) at f13 to about +19 deg (nose down) at f38, fit: angle = 1.185*frame - 27.35 deg",
+      "x_step_px_per_frame_approx": "~70-73 early (f13-22), ~65 at f25, ~55 at f30, ~45-49 at f33-36 (for orientation only; derive speeds yourself from the csv)"
+    }
+  },
+  "static_objects": {
+    "blackboard": {
+      "description": "large dark olive-green chalkboard in a light-orange wooden frame, centre of the front wall",
+      "green_surface_px": {"x0": 342, "x1": 1669, "y0": 315, "y1": 716, "width": 1327, "height": 401},
+      "outer_frame_px": {"x0": 320, "x1": 1692, "y0": 296, "y1": 739, "width": 1372, "height": 443},
+      "frame_bar_thickness_px": "about 19-23",
+      "note": "edges within +/-2 px; left edge washed out by light beam (measured at row 500 and visually)"
+    },
+    "wall_clock": {
+      "description": "round wall clock, dark thin ring with pale face, right of the blackboard top corner",
+      "ring_extent_px": {"x0": 1710, "x1": 1816, "y0": 236, "y1": 347},
+      "centre_px": [1763, 292],
+      "diameter_px": "about 105-110 (+/-5)",
+      "moves": false,
+      "note": "frame 0 differs slightly from all later frames on the ring (render/encode artefact), no motion"
+    },
+    "teacher_desk_counter": {"description": "long pale wooden counter/desk in front of the board, left half", "bbox_px": {"x0": 75, "x1": 780, "y0": 755, "y1": 1080}, "top_edge_y": 760, "width_px": 705, "note": "bottom cut by the image, washed out by the light beam"},
+    "chair_front_centre": {"description": "orange-brown chair seen from behind (backrest), lower centre-left", "backrest_bbox_px": {"x0": 678, "x1": 925, "y0": 865, "y1": 1080}, "note": "cut by bottom image edge"},
+    "student_desk_centre": {"description": "pale desk just behind chair_front_centre", "bbox_px": {"x0": 658, "x1": 920, "y0": 897, "y1": 1080}},
+    "chair_front_right": {"description": "orange-brown chair backrest, lower right", "backrest_bbox_px": {"x0": 1350, "x1": 1620, "y0": 885, "y1": 1080}},
+    "student_desk_right": {"description": "pale desk behind chair_front_right", "bbox_px": {"x0": 1303, "x1": 1620, "y0": 893, "y1": 1080}},
+    "chair_back_right": {"description": "light/pale chair further back, right, near the wall", "bbox_px": {"x0": 1600, "x1": 1795, "y0": 735, "y1": 1000}},
+    "desk_far_left": {"description": "partial desk at left image edge", "bbox_px": {"x0": 0, "x1": 260, "y0": 880, "y1": 1080}},
+    "desk_far_right": {"description": "partial desk/chair at right image edge", "bbox_px": {"x0": 1875, "x1": 1920, "y0": 880, "y1": 1080}},
+    "ceiling_light_panels": {"description": "rectangular fluorescent panels in the ceiling grid", "approx_px": [[45, 55, 225, 88], [645, 52, 792, 88], [1230, 52, 1388, 88], [1810, 52, 1920, 88]]},
+    "light_beams": {"description": "diagonal bright sun-beam bands across the left of the image (static lighting, not objects); the plane is low-contrast inside them (frames 9-14)"}
+  },
+  "events": [
+    {"event": "plane first (faintly) visible at left image edge", "frame": 10, "time_s": 0.4167, "note": "+/-1 frame; frame 9 doubtful"},
+    {"event": "first segmented frame", "frame": 11, "time_s": 0.4583},
+    {"event": "plane fully in view (nose and tail clear)", "frame": 13, "time_s": 0.5417},
+    {"event": "plane enters the dark board area", "frame": 14, "time_s": 0.5833},
+    {"event": "top of the arc (min image y of ref point, ~343 px)", "frame": 23, "time_s": 0.9583, "note": "flat between frames 22 and 24"},
+    {"event": "nose crosses the board's right frame / tail leaves board", "frame": 34, "time_s": 1.4167, "note": "nose over wall from ~f34, whole plane over pale wall from ~f36"},
+    {"event": "nose reaches right image edge", "frame": 38, "time_s": 1.5833},
+    {"event": "last segmented frame (only tail inside image)", "frame": 41, "time_s": 1.7083},
+    {"event": "plane gone", "frame": 42, "time_s": 1.75}
+  ],
+  "no_events": "no bounce, impact or contact; the plane flies freely in front of the board and leaves the frame on the right"
+}

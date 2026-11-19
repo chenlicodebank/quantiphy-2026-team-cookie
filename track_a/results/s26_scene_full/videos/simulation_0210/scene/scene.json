@@ -1,0 +1,155 @@
+{
+ "video": "simulation_0210.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24; frame 0 at t=0",
+ "camera": {
+  "static": true,
+  "note": "background median-subtraction leaves no residual on furniture; frame-to-frame background shift 0 px"
+ },
+ "floor_wall_boundary_y_px": 955,
+ "moving_objects": [
+  {
+   "name": "cat",
+   "moves": true,
+   "frames_visible": [
+    0,
+    49
+   ],
+   "track": "tracks/cat.csv",
+   "description": "black cat with light-grey/white head and white paws, walking left-to-right along the floor in front of the wall; only animal / only moving object",
+   "reference_point_note": "rig origin not visible; cx_mask/cy_mask = mask centroid (best origin proxy), cx_bbox/cy_bbox = bbox centre (includes tail), cx_torso/cy_torso = centre of black torso band",
+   "bbox_length_px_incl_tail": {
+    "min": 301.0,
+    "max": 323.0,
+    "median": 307.5,
+    "mean": 308.9
+   },
+   "bbox_height_px": {
+    "min": 212.0,
+    "max": 226.0,
+    "median": 220.0,
+    "mean": 218.9
+   },
+   "body_length_rump_to_nose_px": {
+    "min": 258.0,
+    "max": 309.0,
+    "median": 279.0,
+    "mean": 279.8
+   },
+   "torso_height_px": {
+    "min": 67.0,
+    "max": 95.0,
+    "median": 84.5,
+    "mean": 83.7
+   },
+   "start": {
+    "frame": 0,
+    "cx_mask": 375.7,
+    "cy_mask": 935.4
+   },
+   "end": {
+    "frame": 49,
+    "cx_mask": 1253.0,
+    "cy_mask": 934.4
+   },
+   "net_dx_mask_px_0_to_49": 877.3,
+   "per_frame_dx_mask_px": {
+    "min": 13.399999999999977,
+    "max": 21.0,
+    "median": 18.300000000000068,
+    "mean": 17.9
+   },
+   "net_dx_bbox_px_0_to_49": 872.5,
+   "vertical_motion": "cy_mask oscillates 929-936 px with gait; no net vertical motion"
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "table_bench",
+   "description": "brown wooden slatted low table/bench at right, holds lamp and vases",
+   "bbox_px": [
+    1455,
+    790,
+    1920,
+    1000
+   ],
+   "top_length_px": "~465 (right end touches/cut by frame edge at x~1915)",
+   "height_px": 210,
+   "top_y_px": 790,
+   "leg_feet_y_px": 1000
+  },
+  {
+   "name": "lamp",
+   "description": "table lamp on left end of table: white pleated conical shade, dark brown tapered base",
+   "bbox_px": [
+    1410,
+    512,
+    1625,
+    800
+   ],
+   "height_px": 288,
+   "shade_width_px": 215,
+   "shade_height_px": 108,
+   "base_width_px": 43,
+   "base_height_px": 180
+  },
+  {
+   "name": "mirror",
+   "description": "tall rectangular mirror with light wood frame leaning against wall behind table",
+   "bbox_px": [
+    1632,
+    400,
+    1900,
+    978
+   ],
+   "height_px": 578,
+   "width_top_px": 240,
+   "note": "leans: bottom wider/shifted right; partly hidden by table and vases"
+  },
+  {
+   "name": "vase_large",
+   "description": "front/right blue-and-white patterned vase on table (taller)",
+   "bbox_px": [
+    1721,
+    586,
+    1825,
+    800
+   ],
+   "height_px": 214,
+   "width_px": 104
+  },
+  {
+   "name": "vase_small",
+   "description": "left/rear blue-and-white vase on table, partly hidden by large vase",
+   "bbox_px": [
+    1667,
+    604,
+    1722,
+    800
+   ],
+   "height_px": 196,
+   "visible_width_px": 55
+  },
+  {
+   "name": "wall",
+   "description": "plain grey-beige wall, y<955"
+  },
+  {
+   "name": "floor",
+   "description": "grey-brown floor, y>955"
+  }
+ ],
+ "events": [
+  {
+   "event": "cat walking at steady pace for whole clip",
+   "frame_start": 0,
+   "frame_end": 49,
+   "note": "already moving at frame 0 and still moving at frame 49; no stops, no turns, no contact with furniture"
+  }
+ ]
+}

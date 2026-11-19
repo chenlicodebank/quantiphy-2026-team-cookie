@@ -1,0 +1,46 @@
+{
+  "video": "simulation_0273.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of bottom band and left strip vs frame 0: |shift| < 0.07 px for all sampled frames; background pixels identical up to compression noise",
+    "per_frame_shift_px": [0, 0]
+  },
+  "objects": [
+    {
+      "name": "phoenix",
+      "description": "the only moving object: a fantasy bird (phoenix) with green body/neck, green-purple-pink flapping wings and a long red/pink tail with eye-spot (peacock-like) feathers ending in a golden flame-like tip; seen in side view, head pointing LEFT",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/phoenix.csv",
+      "motion": "flies leftward across the frame (head x 1404 -> 158 px) at nearly constant height (head y 663-687 px), flapping wings; leftward speed increases over the clip",
+      "head_mean_speed_px_per_frame": {"frames 0-24": 5.58, "frames 24-48": 17.88, "frames 48-71": 29.70, "frames 0-71": 17.55},
+      "extents_px": {
+        "bbox_w (head tip to tail tip, horizontal = body/main axis)": {"min": 550, "median": 600, "max": 634},
+        "bbox_h (vertical, dominated by wing pose)": {"min": 232, "median": 400.5, "max": 458},
+        "note": "bbox_w is the full body length incl. tail (main axis is horizontal); bbox_h is the vertical wing extent; side view so true wingspan (into the depth) is not visible"
+      },
+      "reference_point_recommendation": "head_x/head_y (leftmost mask pixel = beak tip) is the steadiest body-fixed point; cx_green/cy_green (green body pixels) is near the body/pelvis but jitters with wing pose; cx_mask/cy_mask (whole-mask centroid) swings strongly with the wings and tail. The Blender rig origin is not visible; it is presumably on the body, which translates like the head."
+    },
+    {
+      "name": "sky_background",
+      "description": "static backdrop: pink/peach sunset sky with a large grey cloud bank across the upper-left/centre (about x 200-1900, y 100-700) and a smaller pink cloud right of centre (about x 1950-2350, y 500-750). No ground, no horizon line, no other objects.",
+      "moves": false,
+      "visible_frames": [0, 71]
+    }
+  ],
+  "events": [
+    {"event": "frames 0 and 1 are (nearly) identical: motion starts after frame 1", "frame": 1, "time_s": 0.0417},
+    {"event": "wing-beat: bbox_h minima (wings passing horizontal / mid-stroke)", "frames": [9, 21, 34, 46, 59, 71]},
+    {"event": "wing-beat: bbox_h maxima (wings fully down)", "frames": [12, 37, 62], "note": "also large at 0-4, 25-29, 49-54 (wings up)"},
+    {"event": "wing-beat period approx 12.4 frames = 0.52 s (about 1.9 beats/s), about 5.7 beats in clip"},
+    {"event": "bird still in frame at last frame (71); never leaves or is occluded"}
+  ],
+  "perspective": "2D scene: flight is in a plane facing the camera; the bird's apparent size (bbox_w 550-634, no trend) does not change with time, so one metres-per-pixel scale applies."
+}

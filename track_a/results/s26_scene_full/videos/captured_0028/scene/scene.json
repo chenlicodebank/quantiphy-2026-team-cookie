@@ -1,0 +1,76 @@
+{
+  "video": "captured_0028.mp4",
+  "source": "lab (captured; background outside ball/table blurred, 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame = round(t*24); frame 0 at t=0",
+  "camera": {
+    "motion": "static (tripod-mounted; table edges and background fixed across all frames)",
+    "intrinsics_from_benchmark": "Orbbec Femto Mega RGB, HFOV 80 deg: f = 0.5959*1280 = 763 px, principal point ~ (640, 360)",
+    "perspective": "camera looks slightly down at a tabletop; tabletop front edge (~y 484-497) much wider in px than back edge (~y 420-430) => strong perspective, table close to camera. Image y of a point on the tabletop increases as it comes toward the camera."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ping-pong-type ball (only white round object), held in the person's right-hand fingertips above the table, then dropped and bounces on the tabletop",
+      "moves": true,
+      "visible_frames": "0-48 (all), never occluded",
+      "track": "tracks/ball.csv",
+      "reference_point": "center_x, center_y (visible centre; see notes)",
+      "apparent_diameter_px": {"frames_0_21": 17, "frames_28_33": "20-22", "frames_38_42": "24-25", "frame_47": "~25-27 (blurred)"},
+      "apparent_size_note": "diameter (bbox_w, horizontal, unaffected by vertical blur) grows ~17 -> ~25 px: ball moves toward the camera during the bounces; depth ~ f*D/width_px"
+    },
+    {
+      "name": "table",
+      "description": "wooden (light-brown) tabletop on a single dark central post, centre of image",
+      "moves": false,
+      "visible_frames": "0-48",
+      "tabletop_top_surface_frame0_px": {
+        "front_left_corner": [464, 484],
+        "front_right_corner_approx": [965, 497],
+        "back_left_corner": [564, 430],
+        "back_right_corner_approx": [850, 425],
+        "back_edge_mid_y": 420,
+        "front_edge_length_px": 501,
+        "back_edge_length_px": 286,
+        "depth_extent_px_at_x700": "424 to 488 (64 px)",
+        "front_edge_thickness_px": "~20 (y ~485-505 left, ~497-518 right)",
+        "bbox_including_edge": [464, 420, 993, 518]
+      },
+      "post": "dark vertical pole below the top, x ~ 710-750, from y ~515 to image bottom",
+      "note": "right back corner partially hidden by the person's hand/arm; corners approximate +-5 px"
+    },
+    {
+      "name": "person",
+      "description": "person with long dark hair (face blurred/masked) standing behind the table, leaning forward; right hand holds and drops the ball; left hand rests near table right edge",
+      "moves": "slightly (arm/hand raise the ball frames 12-21, then hand moves away/down); body roughly static",
+      "visible_frames": "0-48",
+      "approx_bbox_px": [700, 170, 1000, 700],
+      "note": "heavily blurred by the background replacement; not tracked"
+    },
+    {
+      "name": "tripod_light_stand",
+      "description": "background tripod stand with a light on top (blurred), behind table, top at ~ (688, 70)",
+      "moves": false
+    },
+    {
+      "name": "wall_panels / floor",
+      "description": "grey wall panels and grey/red carpet floor, blurred",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball held still in fingertips", "frames": "0-11", "t_s": "0.000-0.458"},
+    {"event": "hand raises ball (slow upward motion ~2-3 px/frame)", "frames": "12-20", "t_s": "0.500-0.833"},
+    {"event": "release (top of lift, ball starts falling from rest)", "frame": 21, "t_s": 0.875, "uncertainty": "+-1 frame"},
+    {"event": "1st bounce on tabletop", "frame": 26, "t_s": 1.083, "ball_bottom_y": 420},
+    {"event": "1st apex", "frame": 32, "t_s": 1.333, "center_y": 301.5},
+    {"event": "2nd bounce on tabletop", "frame": 36, "t_s": 1.5, "note": "contact between 36 and 37 (36.3 approx)", "ball_bottom_y": 428},
+    {"event": "2nd apex", "frame": 42, "t_s": 1.75, "center_y": 312.5},
+    {"event": "3rd bounce on tabletop", "frame": 47, "t_s": 1.958, "ball_bottom_y": 454},
+    {"event": "ball rising again, clip ends", "frame": 48, "t_s": 2.0}
+  ]
+}

@@ -1,0 +1,95 @@
+{
+ "video": "simulation_0294.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame/24; frame 0 at t=0",
+ "camera": {
+  "motion": "static (per-pixel background median clean; floor/backdrop boundary and shadow band fixed)",
+  "background_shift_px": 0
+ },
+ "objects": [
+  {
+   "name": "butterfly",
+   "desc": "single blue (morpho-like) butterfly, black body/legs/antennae, seen side-on, head pointing left, flying right-to-left",
+   "moves": true,
+   "visible_frames": "0-71 (partly cut by left frame edge from frame 64 on)",
+   "track": "tracks/butterfly.csv",
+   "reference_point": "body_x / body_y (body centre, origin proxy)",
+   "motion_summary_px": {
+    "body_x_f0": 2310.8,
+    "body_x_f71": 147.5,
+    "mean_dx_per_frame_f1_to_71": -30.9,
+    "body_y_approx": 665.4,
+    "vertical_motion": "none detectable (leg tips bottom at y=717-719 in every frame; body_y sd 4 px, noise from wing shading)"
+   },
+   "extents_px": {
+    "bbox_width_min_unclipped": 388,
+    "bbox_width_max": 525,
+    "bbox_height_min": 85,
+    "bbox_height_max": 336,
+    "body_length_head_to_abdomen_tip": "~145-155 (frames 0 and 12, zoomed)",
+    "note": "bbox_w = horizontal extent incl. wings/antennae; seen side-on so this is the front-to-back extent, not the true wingspan (wingspan lies along the viewing direction)"
+   }
+  },
+  {
+   "name": "butterfly_shadow",
+   "desc": "soft bluish-grey shadow on the floor below the butterfly (y~1185-1278)",
+   "moves": true,
+   "visible_frames": "0-71 (very faint when wings are raised; leaves frame at left at end)",
+   "track": "tracks/butterfly_shadow.csv"
+  },
+  {
+   "name": "floor",
+   "desc": "flat light-grey floor plane (seamless studio)",
+   "moves": false,
+   "image_region": "y > ~937 to bottom"
+  },
+  {
+   "name": "backdrop",
+   "desc": "grey gradient backdrop/wall, darker towards the top",
+   "moves": false,
+   "image_region": "y < ~937"
+  }
+ ],
+ "events": [
+  {
+   "event": "frames 0 and 1 identical (duplicated first frame); motion visible from frame 1->2",
+   "frame": 1,
+   "t": 0.0417
+  },
+  {
+   "event": "wings flat/horizontal (bottom of downstroke)",
+   "frames": [
+    0,
+    1,
+    19,
+    20,
+    21,
+    40,
+    41,
+    42,
+    61,
+    62,
+    63
+   ]
+  },
+  {
+   "event": "wings fully raised (max bbox height)",
+   "frames": [
+    8,
+    30,
+    51
+   ]
+  },
+  {
+   "event": "butterfly begins to leave frame at left edge",
+   "frame": 64,
+   "t": 2.6667
+  }
+ ],
+ "wingbeat_period_frames": "~21 (flat at 0-1, 19-21, 40-42, 61-63)"
+}

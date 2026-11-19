@@ -1,0 +1,63 @@
+{
+  "video": "internet_0042.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down drone view, with mild perspective: see camera.perspective)",
+  "fps": 28.703764,
+  "frames": 44,
+  "duration_s": 1.5329,
+  "image_size_px": [2160, 3840],
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "pixel_coords": "x right, y down, full-resolution pixels",
+  "description": "Near-nadir drone shot of a suspension-bridge deck (grey asphalt, monochrome footage). Two cars drive downward (toward image bottom, +y) in the same left lane, one behind the other: a white car entering at the top and a dark car leaving at the bottom. No other vehicles or people.",
+  "objects": [
+    {"name": "white_car", "moves": true, "track": "tracks/white_car.csv",
+     "identify": "white SUV/estate with roof rails and two roof bars, upper car; front (grille, number plate) faces image bottom = direction of travel",
+     "visible_frames": "0-43 (rear cut by the top edge in frames 0-10; fully visible 11-43)",
+     "lane_x_px": "centre x ~1050 -> 1036 (drifts 14 px left over the clip)",
+     "length_px_full": {"value": 457, "frames": "11-17 (raw)", "range_raw": "457 (f11-17) -> 435 (f43); background-stabilised 457 -> 446", "measured": "bumper to bumper along y (the motion direction)"},
+     "body_width_px": 172, "width_with_mirrors_px": 196,
+     "image_motion": "front edge moves +27..+35 px/frame in y (apparent speed rises through the clip), x nearly constant"},
+    {"name": "dark_car", "moves": true, "track": "tracks/dark_car.csv",
+     "identify": "black/dark-grey SUV/estate with light roof rails, lower car, ahead of the white car in the same lane; front faces image bottom",
+     "visible_frames": "0-34 (fully visible 0-20; front cut by the bottom edge from frame 21; last sliver at 34; gone from 35)",
+     "lane_x_px": "centre x ~1007 -> 998",
+     "length_px_full": {"value": 472, "frames": "0-20 median", "range_raw": "458-491, noisy: dark front bumper merges with its dark shadow/road; length grows ~467 -> ~486 as it moves down (perspective)", "measured": "bumper to bumper along y"},
+     "body_width_px": 203, "width_with_mirrors_px": 214,
+     "image_motion": "rear edge (clean) moves +36.5 px/frame (35-38) in y, steady"},
+    {"name": "bridge_deck", "moves": false,
+     "identify": "grey asphalt roadway between two white kerbs/walkways",
+     "extent": "inner kerb edges at frame 0: y=100: x 551-1868 (1317 px); y=1900: x 509-1882 (1373 px); y=3700: x 446-1920 (1474 px); full table scripts/road_width_vs_y.csv"},
+    {"name": "left_kerb_walkway", "moves": false, "identify": "white strip on the left edge of the deck, x ~400-550 (wider toward bottom)"},
+    {"name": "right_kerb_walkway", "moves": false, "identify": "white strip on the right edge of the deck, x ~1870-1990"},
+    {"name": "left_lane_line", "moves": false, "identify": "thin light line left of the cars' lane; x 827 (y=100) -> 756 (y=3700) at frame 0"},
+    {"name": "centre_double_line", "moves": false, "identify": "double white line right of the cars' lane, lines at x ~1202/1218 (y=250) -> ~1170/1194 (y=3700)"},
+    {"name": "right_lane_line", "moves": false, "identify": "light line in the right carriageway, x ~1597 (top) -> 1616 (bottom)"},
+    {"name": "cars_lane", "moves": false, "identify": "lane between left_lane_line and centre_double_line where both cars drive",
+     "width_px": "~375 at y=250, ~380 at y=1000, ~390 at y=2200, ~405 at y=3100, ~414 at y=3700 (frame 0, left line to inner edge of double line)"},
+    {"name": "suspension_hangers_cables", "moves": false, "identify": "thin white diagonal/vertical cables over the dark water on both sides of the deck (x<450 and x>1990)"},
+    {"name": "water", "moves": false, "identify": "dark water on both sides of the bridge"}
+  ],
+  "events": [
+    {"event": "clip start: both cars already moving downward", "frame": 0, "t": 0.0},
+    {"event": "white car fully inside frame (rear edge leaves top border)", "frame": 11, "t": 0.3832},
+    {"event": "dark car front bumper reaches bottom border (starts leaving)", "frame": 21, "t": 0.7316},
+    {"event": "dark car last visible (rear sliver ~20 px)", "frame": 34, "t": 1.1845},
+    {"event": "dark car gone", "frame": 35, "t": 1.2194},
+    {"event": "camera starts slow zoom-out/drift", "frame": 24, "t": 0.8361},
+    {"event": "clip end, white car still moving", "frame": 43, "t": 1.4981}
+  ],
+  "no_events": "no stops, contacts, lane changes or direction reversals; both cars keep driving straight down the lane",
+  "camera": {
+    "type": "drone, nearly static",
+    "motion": "frames 0-23: static to <1 px. From ~frame 24 a slow zoom-out (or climb): background scale factor (frame i -> frame 0) 1.0009 @27, 1.0058 @33, 1.0151 @39, 1.0250 @43, plus <=8 px drift and ~0.1 deg rotation. Per-frame similarity transforms in scripts/camera_motion.csv (columns a,b,tx,c,d,ty map frame-i pixels to frame-0 pixels). Track columns stab_* are positions mapped into frame-0 coordinates.",
+    "perspective": "camera slightly tilted: ground scale grows toward the image bottom. Deck width 1317 px at y=100 -> 1474 px at y=3700 (+12%), approx deck_width(y) = 1317 + 0.0436*y at frame 0. Objects lower in frame appear larger (dark car ~472 px vs white car ~450 px).",
+    "apparent_size_over_time": "white car length 457 (f11-17) -> 435 raw / 446 stabilised (f43); dark car ~467 (f0) -> ~486 (f20)."
+  },
+  "files": {
+    "tracks": ["tracks/white_car.csv", "tracks/dark_car.csv"],
+    "camera_motion": "scripts/camera_motion.csv",
+    "camera_shift_translation_only": "scripts/camera_shift.csv",
+    "deck_width_vs_row": "scripts/road_width_vs_y.csv",
+    "notes": "notes.md"
+  }
+}

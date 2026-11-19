@@ -1,0 +1,83 @@
+{
+  "video": "internet_0035.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 22.297248,
+  "frames": 36,
+  "duration_s": 1.6145,
+  "image_size_px": [3840, 2160],
+  "units": "pixels (full 3840x2160 frame, x right, y down) and seconds; time = frame / 22.297248",
+  "summary": "Static close-up of a white tiled wall with a white suction-cup toilet-roll holder. A right hand slides an empty grey-brown cardboard toilet-paper tube to the right along the holder's horizontal arm, the tube clears the arm's end-plate at frame ~24.8, then hand and tube swing down-right and leave the frame at the bottom right (tube gone after frame 32, hand after frame 33).",
+  "camera": {
+    "motion": "static",
+    "evidence": "7 grout-line probes drift < 1.2 px over the whole clip (scene/camera_shift.json); no background compensation needed",
+    "exposure": "mean grey rises steadily 175 -> 189 (auto exposure / lighting), irrelevant to geometry",
+    "perspective": "near fronto-parallel view of a flat wall; tile grout lines are not perfectly straight/parallel (lower horizontal grout y 1733 at left -> 1772 at right; tile widths 1550-1630 px), so ~2-5% scale variation across the frame from tile laying/lens; the tube moves ~2-15 cm in front of the wall (on the holder arm), at roughly constant depth"
+  },
+  "objects": [
+    {
+      "name": "tube",
+      "aka": "empty toilet-paper roll / cardboard tube / cardboard roll core",
+      "appearance": "grey-brown cardboard cylinder with a diagonal spiral seam, held by its right end in the right hand",
+      "moves": true,
+      "visible_frames": [0, 32],
+      "track": "tracks/tube.csv",
+      "size_px": {
+        "length_end_to_end": 555,
+        "length_note": "horizontal extent from left end (x 1716) to the open right end (x 2271) at frame 0, row y=1300; the only frame where both ends are visible. Axis tilt ~ -4 deg so along-axis length ~557. Consistent with frame 22 (left end 2196, right end hidden ~2755). Uncertainty +-10 px.",
+        "diameter": 260,
+        "diameter_note": "top-to-bottom silhouette at frames 15-25 (unoccluded part): 258-264 px; frames 0-14 partly covered by fingers (240-250 measured, less reliable); frames 26-31 motion blur inflates to 265-280",
+        "visible_mask_length": "564-610 px along PCA axis, frames 0-28 (includes end ellipse; fingers hide the right end)"
+      },
+      "reference_point": "ctr_est_x/ctr_est_y in tube.csv = left end + 277.5 px in x, vertical middle of silhouette; left_end_x is the most reliable single coordinate (always visible, sharp until frame ~28)"
+    },
+    {
+      "name": "hand",
+      "aka": "right hand and forearm of the person (only arm visible; dark grey-green sleeve at right edge)",
+      "appearance": "skin-coloured right hand entering from the right edge, gripping the tube's right end between thumb and fingers",
+      "moves": true,
+      "visible_frames": [0, 33],
+      "track": "tracks/hand.csv",
+      "note": "mask = skin pixels (hand + forearm), truncated by the right/bottom image edge, so bbox right side and centroid are not of the whole hand; leftmost_x = fingertip/thumb tip"
+    },
+    {
+      "name": "holder",
+      "aka": "toilet-roll holder (white plastic, suction-cup mounted)",
+      "moves": false,
+      "position_px": "suction cup disk x 1451-1740, y 905-~1195 (diameter ~290 px, centre ~(1596,1050)); vertical struts x 1525-1666, y ~1150-1290; horizontal arm from base left edge x 1516 to end-plate outer face x 2339 (823 px), arm band y 1291-1418 (~127 px visible thickness); end-plate (upturned lip at free end) x 2326-2339, y 1233-1434 (~200 px tall)",
+      "note": "partly hidden by the tube and hand in frames 0-24; measured at frame 35"
+    },
+    {
+      "name": "tiles",
+      "aka": "white rectangular wall tiles (staggered/brick bond) with dark grey grout",
+      "moves": false,
+      "position_px": "vertical grout x: top row 262.8, 1812.5, 3441.5; middle row 998.5, 2606.8; bottom row 253.7, 1800.8, 3430.9. Horizontal grout y: upper line 687 (x~300) -> 680 (x~3500); lower line 1733 (x~300) -> 1772 (x~3500)",
+      "size_px": "tile width 1550 (top row, x 263-1813), 1629 (top row, 1813-3442), 1608 (middle row, 998-2607), 1547 / 1630 (bottom row); tile height (between horizontal grout lines) 1046 at x~300, 1064 at x~900, 1078 at x~1500, 1089 at x~2200, 1088 at x~2900, 1091 at x~3500"
+    },
+    {
+      "name": "sleeve",
+      "aka": "dark grey-green shirt sleeve at the right edge",
+      "moves": true,
+      "visible_frames": "0-~20 at right edge (x > 3400)",
+      "note": "only enters the record via hand.csv sleeve_x0/sleeve_y0"
+    }
+  ],
+  "events": [
+    {"event": "clip start: tube already on the holder arm, held in hand, already moving right slowly", "frame": 0, "time": 0.0},
+    {"event": "tube motion start (left_end_x starts increasing: +2 px frame 0->1, +12 px/frame from frame 1->2)", "frame": 1, "time": 0.0448},
+    {"event": "tube's left end passes the holder arm's end-plate (x 2339): tube leaves the holder", "frame": 24.8, "time": 1.112, "note": "left_end_x 2288 at frame 24, 2352 at frame 25"},
+    {"event": "after release from the arm the tube is carried down-right (direction change from ~horizontal to ~down-right ~50 deg below horizontal)", "frame": 26, "time": 1.166},
+    {"event": "tube reaches bottom image edge, partly out of frame", "frame": 31, "time": 1.390},
+    {"event": "tube last visible (partly)", "frame": 32, "time": 1.435},
+    {"event": "hand last visible (fingertips at bottom-right corner)", "frame": 33, "time": 1.480},
+    {"event": "only static wall and holder visible", "frames": [34, 35]}
+  ],
+  "files": {
+    "tracks/tube.csv": "tube per frame 0-35 (visible 0-32)",
+    "tracks/tube_raw.csv": "raw mask measurements from segment.py (frame 33 entry is a false detection; use tube.csv)",
+    "tracks/hand.csv": "hand/forearm skin mask per frame (visible 0-33)",
+    "camera_shift.json": "grout-line positions per frame (camera stability) and mean brightness",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

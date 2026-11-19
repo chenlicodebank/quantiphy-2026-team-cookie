@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0010.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 22.892308,
+ "frames": 59,
+ "duration_s": 2.5773,
+ "width": 1920,
+ "height": 1954,
+ "question": {
+  "id": 1053,
+  "question": "What is the width between the two widest eaves of the small house in meters?",
+  "prior": "length of the bird = 1.19m",
+  "depth_info": "t=0s, distance_bird_camera = 34.584m\nt=1s, distance_bird_camera = 33.999m\ndistance_cart_camera = 30.374m\ndistance_house_camera = 55.083m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

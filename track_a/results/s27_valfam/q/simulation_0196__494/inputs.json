@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0196.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MS",
+ "fps": 30.0,
+ "frames": 50,
+ "duration_s": 1.6667,
+ "width": 2560,
+ "height": 2560,
+ "question": {
+  "id": 494,
+  "question": "What is the horizontal length of the droplet in meters?",
+  "prior": "speed of the bubble in the drop = 0.00144m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

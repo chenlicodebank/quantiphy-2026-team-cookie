@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0211.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MS",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1603,
+  "question": "What is the distance in meters between the black cat and the camera at 0.5 s?",
+  "prior": "speed of the black cat = 0.94m/s",
+  "depth_info": "t=0s, distance_black_cat_camera = 4.199m  \nt=1.0s, distance_black_cat_camera = 4.481m  \ndistance_floor_mirror_bottom_center_camera = 6.407m  \ndistance_closest_wooden_bench_leg_camera = 5.69m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

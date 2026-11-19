@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0186.mp4",
+ "video_source": "simulation",
+ "video_type": "A3SC",
+ "fps": 24.0,
+ "frames": 40,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1438,
+  "question": "What is the height of the box in meters?",
+  "prior": "acceleration of the gift box after 1s = 3.18m/s^2",
+  "depth_info": "t = 0s, distance_gift_box_camera = 9.859m   \nt = 0.5s, distance_gift_box_camera = 9.741m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0030.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 29.1532,
+ "frames": 42,
+ "duration_s": 1.4407,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3006,
+  "question": "What is the speed of the boat between 0.5s to 1.37s in m/s?",
+  "prior": "length of the speedboat = 3.2 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

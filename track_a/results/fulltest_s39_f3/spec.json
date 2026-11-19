@@ -1,0 +1,101 @@
+{
+ "base": "results/fulltest_s39_f2/track_a_s39_f2.csv",
+ "files": {
+  "E2": "results/fulltest_s27_e2/track_a_s27_e2.csv",
+  "R39_4": "results/s39_2dmotion/collected.csv",
+  "Blat": "results/fulltest_s37_b9lat/track_b_s33_b9lat.csv",
+  "F1": "results/fulltest_s39_f1/track_a_s39_f1.csv"
+ },
+ "steps": [
+  {
+   "name": "s2_revert_acc_fusion",
+   "op": "copy",
+   "from": "E2",
+   "cats": [
+    "S2"
+   ]
+  },
+  {
+   "name": "s2_sam3_reanswer_39_4",
+   "op": "copy",
+   "from": "R39_4",
+   "cats": [
+    "S2"
+   ]
+  },
+  {
+   "name": "s3_nonlab_conf_fuse",
+   "op": "fuse",
+   "a": "E2",
+   "b": "Blat",
+   "wA": 0.5,
+   "cap": 0.4,
+   "cats": [
+    "S3"
+   ],
+   "sources": [
+    "simulation",
+    "segmentation",
+    "internet"
+   ],
+   "conf": {
+    "sure": 0.2,
+    "hi": 0.3,
+    "unsure_lo": -0.2,
+    "floor": 0.3
+   }
+  },
+  {
+   "name": "d3_nonlab_conf_fuse",
+   "op": "fuse",
+   "a": "E2",
+   "b": "Blat",
+   "wA": 0.7,
+   "cap": 0.4,
+   "cats": [
+    "D3"
+   ],
+   "sources": [
+    "simulation",
+    "segmentation",
+    "internet"
+   ],
+   "conf": {
+    "sure": 0.2,
+    "hi": 0.3,
+    "unsure_lo": -0.2,
+    "floor": 0.3
+   }
+  },
+  {
+   "name": "d2_nonlab_conf_fuse",
+   "op": "fuse",
+   "a": "E2",
+   "b": "Blat",
+   "wA": 0.7,
+   "cap": 0.4,
+   "cats": [
+    "D2"
+   ],
+   "sources": [
+    "simulation",
+    "segmentation",
+    "internet"
+   ],
+   "exclude_ids": [
+    2267,
+    2270,
+    2272,
+    2275,
+    2277,
+    2280
+   ],
+   "conf": {
+    "sure": 0.2,
+    "hi": 0.3,
+    "unsure_lo": -0.2,
+    "floor": 0.3
+   }
+  }
+ ]
+}

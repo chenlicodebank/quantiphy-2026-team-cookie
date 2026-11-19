@@ -1,0 +1,59 @@
+{
+  "video": "captured_0010.mp4",
+  "source": "lab",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (background phase-correlation shift vs frame 0 < 0.15 px in every frame; scripts/camera_check.py)",
+    "intrinsics_lab_convention": {"f_px": 762.75, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "view": "slightly elevated, looking down at a room corner; floor visible in lower half, grey wall panels behind",
+    "perspective_cues": "floor plane occupies y > ~450 px; wall/floor junction runs diagonally from ~(560,330) towards ~(1280,520) behind the person; the pendulum swings mostly along the camera depth axis, so the ball's apparent size changes by ~1.4x across a swing"
+  },
+  "objects": {
+    "ball": {
+      "description": "small bright orange/red ball (pendulum bob) hanging on a thin light string from the person's outstretched right hand",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "occluded_frames": [],
+      "track": "tracks/ball.csv",
+      "reference_point": "centroid of the orange colour mask (visible centre)",
+      "apparent_diameter_px": {"far_end_min": 26.2, "near_end_max": 37.0, "note": "strict-mask equivalent diameter; bbox 26-28 px far, 36-41 px near; true edge probably 1-2 px larger (blurred rim)"},
+      "image_motion_px": {"x_range": [637.05, 680.27], "y_range": [301.83, 393.51]}
+    },
+    "string": {
+      "description": "thin light-coloured string from the pinch of the hand to the top of the ball (pendulum string)",
+      "moves": true,
+      "track": "tracks/string.csv",
+      "pivot_px": {"x": 636.5, "y": 228, "spread_px": 3, "note": "hand pinch point, nearly fixed: x ~639 in frames 10-26, ~634 in frames 38-48; y 224-230"},
+      "pivot_to_ball_centre_image_px": {"near_half_of_swing": [148, 172], "far_end": "foreshortened to ~20-50 px (string points away from camera)"}
+    },
+    "person_holding": {
+      "description": "standing woman in light-blue denim overalls and black top, face blurred, right arm extended to her right (image left) holding the pendulum string; stands right of the ball",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "extents_px_frame24": {"head_top_y": 18, "feet_bottom_y": 617, "height_px": 599, "body_x_range": [755, 910], "x_range_incl_arm": [615, 933], "note": "edges soft (image blurred), +-5 px"},
+      "note": "holds still; only the hand drifts ~5 px left over the clip"
+    },
+    "seated_person": {"description": "person in grey shirt seated at a desk in the background left (blurred)", "moves": "slightly (background, not tracked)", "bbox_px": [150, 130, 480, 430]},
+    "monitor": {"description": "computer monitor on desk, background", "moves": false, "bbox_px": [400, 70, 500, 175]},
+    "black_pole": {"description": "vertical dark pole/stand behind the ball", "moves": false, "x_px": [675, 700], "y_px": [0, 500]},
+    "diagonal_black_bar": {"description": "dark diagonal bar/stand at right edge", "moves": false, "from_px": [1270, 130], "to_px": [1050, 560]},
+    "tripod": {"description": "dark tripod legs, bottom left", "moves": false, "bbox_px": [60, 480, 330, 720]},
+    "white_panel": {"description": "white curtain/panel at left edge", "moves": false, "bbox_px": [0, 30, 130, 450]},
+    "floor_markings": {"description": "reddish markings/tape on the grey carpet floor, around and left of the person", "moves": false, "region_px": [300, 400, 760, 600]}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip starts with ball already swinging, moving away from camera (up in image)"},
+    {"frame": 3, "t": 0.125, "event": "far turning point (min image y 301.8, min x 637.1, small apparent size)"},
+    {"frame": 17, "t": 0.708, "event": "near turning point (local min image y 378.0 at f17, max x 680.3 at f16-17, max apparent size)"},
+    {"frame": 32, "t": 1.333, "event": "far turning point (image y 302.6; f32-33 nearly equal)"},
+    {"frame": 46, "t": 1.917, "event": "near turning point (image y 381.2 at f46, 381.5 at f47; x max 670.2 at f47)"},
+    {"frame": 48, "t": 2.0, "event": "clip ends, ball still swinging"}
+  ],
+  "swing": {"period_frames_approx": 29.5, "period_s_approx": 1.23, "note": "from turning points f3->f32.5 and f17->f46.5; half-swing ~14.5 frames. Lowest point of the arc is between turning points (approx f10, f24-25, f39-40); image-y maxima at f12-13, f22, f41-42 are shifted by perspective"},
+  "files": {"notes": "notes.md", "tracks": ["tracks/ball.csv", "tracks/string.csv"], "scripts": "scripts/"}
+}

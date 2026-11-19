@@ -1,0 +1,39 @@
+{
+  "video": "simulation_0041_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by white)",
+  "scene": "2D",
+  "fps": 24.0, "frames": 72, "duration_s": 3.0, "width": 1080, "height": 1080,
+  "pixel_coords": "x right, y down, origin top-left, pixels; time = frame/24",
+  "camera": {"static": true, "background": "uniform white, no features; no pan/shake measurable (nothing static to reference) - assumed fixed as in all simulation clips",
+             "view": "oblique from above (boat deck and person's head/shoulders visible), treated as 2D plane per inputs.json"},
+  "objects": {
+    "boat": {
+      "description": "red-and-white fishing boat (red hull, white deck, red cabin roof, mast), lower part of frame, bow pointing left-up",
+      "moves": true, "visible_frames": [0, 71],
+      "track": "tracks/boat.csv",
+      "reference_point": "use tm_cx,tm_cy (bbox centre of the frame-0 mask + template-matched translation; robust to left-edge truncation from frame 63). cx,cy = mask centroid (biased after frame 63). bbox centre includes mast; hull centre/origin may differ by a constant offset, which does not affect displacements/speeds",
+      "frame0_extents_px": {"bbox": [347, 841, 683, 1074], "bbox_w": 337, "bbox_h": 234,
+                            "bow_tip": [347, 924], "stern_tip": [682, 1055], "bow_to_stern_length": 359.7, "hull_axis_angle_deg": 21.4,
+                            "min_area_rect_long": 338.1, "min_area_rect_short": 186.1, "principal_axis_len": 360.7, "principal_axis_width": 200.9},
+      "motion_summary_px": {"start_frame": 1, "frame0_to_1": "static (0.1 px)", "per_frame_step_mean": 5.8, "direction": "left and slightly up (~(-5.6,-1.6) px/frame), roughly constant",
+                            "net_displacement_f1_to_f71_tm": [-396.1, -111.1]},
+      "edge_truncation": "touches left image edge from frame 63 onward (bow leaving frame); bbox/centroid/extents unreliable there; still fully rigid so tm_* valid"
+    },
+    "person": {
+      "description": "single walking human (white shirt, dark trousers), small, upper-left-centre at x~360, walking down the image (toward camera/bottom)",
+      "moves": true, "visible_frames": [0, 71],
+      "track": "tracks/person.csv",
+      "reference_point": "cx,cy = mask centroid (~waist/pelvis; pelvis is roughly at y0+0.5..0.55*bbox_h)",
+      "extents_px": {"bbox_h_min": 39, "bbox_h_max": 51, "bbox_h_median": 46.5, "bbox_w": "18-20", "frame0_bbox": [349, 367, 367, 408]},
+      "motion_summary_px": {"start_frame": 1, "net_displacement_f0_to_f71": [7.9, 107.1], "per_frame_step_mean": 1.5, "direction": "down (+y), slight drift right; step size oscillates 0.6-2.7 px/frame with gait"},
+      "note": "image height oscillates with gait (legs swing); feet/head foreshortened by oblique view"
+    }
+  },
+  "static_objects": "none (white background only)",
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "frame 0 and frame 1 nearly identical: both objects start moving at frame 1 (t=0.042 s)"},
+    {"frame": 63, "time": 2.625, "event": "boat bow reaches left image edge (mask truncated from here)"},
+    {"frame": 71, "time": 2.958, "event": "last frame; both still moving"}
+  ],
+  "no_contact": "boat and person never touch or overlap"
+}

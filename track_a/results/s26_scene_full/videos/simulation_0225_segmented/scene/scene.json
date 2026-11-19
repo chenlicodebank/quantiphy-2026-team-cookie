@@ -1,0 +1,56 @@
+{
+ "video": "simulation_0225_segmented.mp4",
+ "source": "segmentation (Blender simulation with background replaced by white)",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "image_size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels (x right, y down) and seconds; no metric scale",
+ "camera": {
+  "motion": "static (background median-stable; only the cat changes between frames)",
+  "background": "plain white; no ground, horizon or shadows visible",
+  "perspective": "mild: loungers are seen slightly from above in two rows (back row tops y~714, front row tops y~734; back-row legs end y~856-870, front-row legs y~900). The cat's apparent size is constant over the clip (length ~107 px, height ~76 px), so it moves at constant depth, parallel to the image plane. Treat as one planar scale."
+ },
+ "objects": {
+  "cat": {
+   "description": "black-and-white cat (black body and tail, white head/face and paws), the only moving object; walks left to right in front of (closer to the camera than) the front row of loungers",
+   "moves": true,
+   "visible_frames": [0, 49],
+   "occluded": "never; it passes in front of the front-left lounger's left leg at frames ~27-30 and ~45-49",
+   "track_file": "tracks/cat.csv",
+   "reference_point": "mask centroid (ref_x, ref_y) as proxy for the animal's origin/pelvis-body centre; bbox centre also given",
+   "start_px": [570.4, 892.1],
+   "end_px": [836.2, 889.7],
+   "net_displacement_px": [265.8, -2.4],
+   "path_length_px_centroid": 272.6,
+   "mean_dx_per_frame_px": 5.40,
+   "size_px": {"length_bbox_median": 107, "length_range": [103, 123], "height_bbox_median": 76, "height_range": [71, 84],
+               "note": "length = horizontal bbox width, nose to back of tail base/tail; height = tail tip/ears to paws; varies with gait and tail pose"}
+  },
+  "lounger_front_left": {"description": "pink-brown wooden sun lounger, front row, left (cat walks in front of it at the end)", "moves": false,
+   "bbox_px": [762, 735, 947, 901], "width_px": 185, "height_px": 167, "leg_outer_span_px": [764, 946], "backrest_top_y": 735, "leg_bottom_y": 901},
+  "lounger_front_middle": {"description": "same lounger model, front row, middle", "moves": false,
+   "bbox_px": [1000, 733, 1191, 903], "width_px": 191, "height_px": 170, "leg_outer_span_px": [1005, 1189]},
+  "lounger_front_right": {"description": "same lounger model, front row, right (rightmost object)", "moves": false,
+   "bbox_px": [1217, 734, 1431, 901], "width_px": 215, "height_px": 168, "leg_outer_span_px": [1249, 1431],
+   "note": "seat slopes out to the right so its bbox is wider than its leg span"},
+  "lounger_back_left": {"description": "same lounger model, back row, left (leftmost lounger; right part hidden behind front-left)", "moves": false,
+   "bbox_px_visible": [652, 714, 825, 856], "width_px_visible": 174, "height_px": 143},
+  "lounger_back_middle": {"description": "back row, middle, mostly hidden behind front loungers and the blue object; only its top (y~714) visible", "moves": false,
+   "bbox_px_visible_top": [873, 714, 1015, 735]},
+  "lounger_back_right": {"description": "back row, right, partly hidden", "moves": false,
+   "bbox_px_visible": [1063, 714, 1215, 870]},
+  "blue_object": {"description": "dark-blue/steel-blue soft object (cushion/bag-like) behind the loungers, top centre: a taller rounded block on the left plus a lower elongated part on the right", "moves": false,
+   "bbox_px": [972, 644, 1151, 731], "width_px": 180, "height_px_visible": 88,
+   "parts": {"tall_block": [972, 644, 1057, 731], "low_part": [1062, 668, 1151, 711]},
+   "note": "bottom hidden behind the back/front loungers"},
+  "dark_object": {"description": "small dark grey round item (pot/stool/base) visible in the gap between front-left and front-middle loungers", "moves": false,
+   "bbox_px_visible": [948, 815, 998, 853], "note": "mostly occluded; identity unclear"}
+ },
+ "events": [
+  {"event": "cat walking throughout", "frames": [0, 49], "times_s": [0.0, 2.0417], "note": "already walking at frame 0 and still walking at frame 49; steady rightward pace (~5.4 px/frame, first half 5.5, second half 5.3); vertical centroid oscillates 884-892 px with the gait"},
+  {"event": "cat head reaches front-left lounger's left leg (passes in front of it)", "frame": 27, "time_s": 1.125}
+ ]
+}

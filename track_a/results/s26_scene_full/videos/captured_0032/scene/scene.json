@@ -1,0 +1,207 @@
+{
+ "video": "captured_0032.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (no pan/shake; static balls/background constant to <0.5 px over frames 0-21)",
+  "intrinsics_lab_convention": {
+   "fx_px": 763,
+   "fy_px": 763,
+   "cx_px": 640,
+   "cy_px": 360,
+   "note": "from benchmark convention: HFOV 80 deg, f = 0.5959 x 1280"
+  },
+  "perspective": {
+   "table_depth_axis_vanishing_point_px": [
+    707,
+    341
+   ],
+   "horizon_y_px_approx": 341,
+   "note": "camera looks slightly downward at the table from in front; table side edges converge to ~(707,341); near table edge tilted ~1.4 deg (left end higher)"
+  }
+ },
+ "objects": {
+  "yellow_ball": {
+   "desc": "yellow-green tennis ball (felt), larger ball; starts at right-back of tabletop",
+   "moves": true,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "tracks/yellow_ball.csv",
+   "reference_point": "centroid of saturated-yellow mask (visible centre)",
+   "pixel_diameter": {
+    "static_frames_0_21": {
+     "bb_w": 30,
+     "bb_h": 26,
+     "eq_diam": 27.4,
+     "note": "right hand fingers touch/cover a little; true ~29-30 px"
+    },
+    "frame_30": "bb 38x30 (h less blurred: ~30)",
+    "frame_38": "bb 42x38 eq 41",
+    "frame_41": "bb 44x42 eq 43"
+   },
+   "apparent_size_trend": "grows ~27-30 px (f0-21) -> ~42-44 px (f41): ball approaches camera while rolling left; ~45-48 px while falling (blur inflates)"
+  },
+  "white_ball": {
+   "desc": "small white ball (ping-pong / golf-ball size), starts left-back of tabletop, ~130 px left of yellow ball",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "hidden_frames": [
+    31
+   ],
+   "track": "tracks/white_ball.csv",
+   "reference_point": "centroid of white (low-saturation bright) mask",
+   "pixel_diameter": {
+    "static_frames_0_28": {
+     "bb_w": 16,
+     "bb_h": 13,
+     "eq_diam": 15.0,
+     "note": "fingers hide part of lower edge"
+    },
+    "frame_40": "bb 25x18 eq 21.6",
+    "frame_48": "bb 29x23 eq 26.2"
+   },
+   "apparent_size_trend": "grows ~15 px -> ~26 px (f48): approaches camera while rolling right; mask may include a bright specular/reflection band, bb_w inflated by blur"
+  },
+  "person": {
+   "desc": "seated person behind the table (face/body pixelated), hands rest on far table edge; right hand pushes yellow ball (f~21-22), left hand pushes white ball (f~29-30)",
+   "moves": "hands only (small)",
+   "visible_frames": [
+    0,
+    48
+   ],
+   "image_extent_px": "head ~ (650-760, 380-430) behind table, knees/legs x 600-830 y 505-720"
+  },
+  "table": {
+   "desc": "rectangular wooden tabletop on a single central dark pedestal, centre of image",
+   "moves": false,
+   "corners_px_approx": {
+    "far_left": [
+     560,
+     428
+    ],
+    "far_right": [
+     850,
+     428
+    ],
+    "near_left_top": [
+     464,
+     485
+    ],
+    "near_right_top": [
+     963,
+     497
+    ],
+    "near_left_bottom": [
+     465,
+     507
+    ],
+    "near_right_bottom": [
+     963,
+     519
+    ]
+   },
+   "near_edge_length_px": 499,
+   "far_edge_length_px": 290,
+   "front_face_thickness_px": "20-22",
+   "pedestal_column_px": "x ~690-760, y 510-720 (behind person legs)",
+   "accuracy": "+-4 px (hands and person blur the far edge)"
+  },
+  "camera_tripod": {
+   "desc": "black tripod behind the table with a small camera (white/blue top) on it",
+   "moves": false,
+   "camera_box_px": [
+    672,
+    65,
+    710,
+    97
+   ],
+   "head_to_feet_px": "top y~65, feet y~660 (left foot ~(517,660), right foot ~(843,697))"
+  },
+  "left_tripod_leg": {
+   "desc": "black tripod/light-stand leg entering from left image edge, x 0-150, y 300-720",
+   "moves": false
+  },
+  "tv_screen": {
+   "desc": "black wall-mounted screen top-right",
+   "box_px": [
+    1008,
+    0,
+    1280,
+    125
+   ],
+   "moves": false
+  },
+  "wall_panels": {
+   "desc": "grey padded wall panels, vertical seams; room corner at x~820 (ceiling junction y~150)",
+   "moves": false
+  },
+  "floor_cables": {
+   "desc": "red/orange and black cables on grey carpet in front of table, x 0-1000, y 560-700",
+   "moves": false
+  },
+  "watermark": {
+   "desc": "text 'Modified with Segment Anything 2 Demo' bottom-right",
+   "moves": false
+  }
+ },
+ "events": [
+  {
+   "event": "yellow ball starts rolling (pushed by right hand)",
+   "frame": 22,
+   "t": 0.9167
+  },
+  {
+   "event": "white ball starts moving (pushed right by left hand)",
+   "frame": 29,
+   "t": 1.2083,
+   "note": "clear motion by frame 30"
+  },
+  {
+   "event": "yellow ball passes in front of white ball (no contact seen; they move in opposite directions)",
+   "frames": [
+    30,
+    32
+   ]
+  },
+  {
+   "event": "dropped frame in recording between frames 35 and 36 (both balls jump ~2x normal step)",
+   "frames": [
+    35,
+    36
+   ]
+  },
+  {
+   "event": "yellow ball reaches left side edge of tabletop / leaves table",
+   "frame": 41,
+   "t": 1.7083,
+   "note": "vertical image motion starts 41->42"
+  },
+  {
+   "event": "yellow ball falling",
+   "frames": [
+    42,
+    47
+   ]
+  },
+  {
+   "event": "yellow ball leaves image at bottom edge",
+   "frame": 48,
+   "t": 2.0
+  },
+  {
+   "event": "white ball still rolling right/toward camera at clip end",
+   "frame": 48,
+   "t": 2.0
+  }
+ ]
+}

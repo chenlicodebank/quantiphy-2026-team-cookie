@@ -1,0 +1,18 @@
+{
+ "video": "internet_0045.mp4",
+ "video_source": "internet",
+ "video_type": "V2MS",
+ "fps": 30.013298,
+ "frames": 45,
+ "duration_s": 1.4993,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3089,
+  "question": "What is the distance between the kettle and the plate in cm?",
+  "prior": "velocity of the rolling cylinder = 107.3 cm/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

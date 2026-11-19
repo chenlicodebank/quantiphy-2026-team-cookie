@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0023_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V3MX",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "question": {
+  "id": 1672,
+  "question": "What is the average speed of the boat in m/s?",
+  "prior": "speed of the eagle = 11.84m/s",
+  "depth_info": "t=1s, distance_eagle_camera = 116.0475m\nt=2s, distance_eagle_camera = 108.2756m\nt=1s, distance_boat_camera = 103.1570 m\nt=2s, distance_boat_camera = 106.0906 m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

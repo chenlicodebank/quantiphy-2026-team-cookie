@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0052.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 30.003297,
+ "frames": 91,
+ "duration_s": 3.033,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1214,
+  "question": "What is the length of the orange car in meters?",
+  "prior": "acceleration of the orange car = -2.86m/s^2",
+  "depth_info": "t=0s, distance_orange_car_camera = 17.260m\nt=1s, distance_orange_car_camera = 15.436m\nt=1s, distance_green_car_camera = 10.250m\nt=2s, distance_green_car_camera = 12.768m\ndistance_fire_hydrant_camera = 17.737m\ndistance_right_streetlight_camera = 17.594m\ndistance_left_streetlight_camera = 17.706m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

@@ -1,0 +1,175 @@
+{
+ "video": "internet_0059.mp4",
+ "source": "internet",
+ "scene": "2D",
+ "fps": 30.0,
+ "frames": 123,
+ "width": 1920,
+ "height": 1080,
+ "time_of_frame": "t = frame / 30",
+ "units": "pixels and seconds; no metric scale assumed",
+ "camera": {
+  "type": "handheld, nearly static, slow drift (no zoom: poster sizes constant within ~1%)",
+  "shift_file": "tracks/camera_shift.csv (dx,dy = image shift of wall vs frame 0, px; background coords = image - (dx,dy))",
+  "shift_range_px": {
+   "dx": [
+    -20.3,
+    2.3
+   ],
+   "dy": [
+    -11.0,
+    26.1
+   ]
+  },
+  "during_ball_flight_f63_115": "dx goes +2.3 -> -20.3, dy +6.7 -> +26.1 (f90) -> +8.9; use cx_bg/cy_bg for motion"
+ },
+ "objects": [
+  {
+   "name": "basketball",
+   "desc": "dark red-brown basketball, the only moving object; thrown from the left (thrower out of view)",
+   "moves": true,
+   "visible_frames": [
+    [
+     63,
+     98
+    ],
+    [
+     103,
+     115
+    ]
+   ],
+   "track": "tracks/ball.csv",
+   "diameter_px": {
+    "best": 121,
+    "range": [
+     119,
+     127
+    ],
+    "note": "least-blurred frames 88-90 give 121-123 x 122-123; minor mask axis median 122; bbox_w is inflated by horizontal motion blur (up to ~139)"
+   }
+  },
+  {
+   "name": "left_poster",
+   "desc": "tallest framed poster (two text sheets, blue glare), left",
+   "moves": false,
+   "bbox_f0": [
+    433,
+    260,
+    702,
+    653
+   ],
+   "width_px": 270,
+   "height_px": 394
+  },
+  {
+   "name": "middle_poster",
+   "desc": "wide framed poster (two sheets 'Your Rights and Responsibilities as a Patient'), centre",
+   "moves": false,
+   "bbox_f0": [
+    745,
+    399,
+    1127,
+    652
+   ],
+   "width_px": 383,
+   "height_px": 254
+  },
+  {
+   "name": "right_poster",
+   "desc": "smallest framed poster (two sheets), right",
+   "moves": false,
+   "bbox_f0": [
+    1163,
+    478,
+    1415,
+    650
+   ],
+   "width_px": 253,
+   "height_px": 173
+  },
+  {
+   "name": "wall_outlet",
+   "desc": "white electrical outlet low on wall below middle poster",
+   "moves": false,
+   "approx_bbox_f81": [
+    878,
+    1018,
+    912,
+    1075
+   ],
+   "note": "approximate, from grid view"
+  },
+  {
+   "name": "wall",
+   "desc": "plain greyish wall, the background plane; ball shadow faintly visible on it",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "ball enters frame (left edge, lower left)",
+   "frame": 63,
+   "time": 2.1
+  },
+  {
+   "event": "ball fully inside frame",
+   "frame": 66,
+   "time": 2.2
+  },
+  {
+   "event": "apex of flight (min cy, image coords)",
+   "frame": 79,
+   "time": 2.6333
+  },
+  {
+   "event": "apex of flight (background coords cy_bg)",
+   "frame": 79,
+   "time": 2.6333
+  },
+  {
+   "event": "ball top touches/cut by top image edge",
+   "frames": [
+    77,
+    80
+   ]
+  },
+  {
+   "event": "ball passes over right poster (colour-mask only)",
+   "frames": [
+    91,
+    94
+   ]
+  },
+  {
+   "event": "ball leaves through bottom edge (last visible)",
+   "frame": 98,
+   "time": 3.2667
+  },
+  {
+   "event": "bounce on floor (out of view, between)",
+   "frames": [
+    99,
+    102
+   ],
+   "time_approx": 3.35
+  },
+  {
+   "event": "ball re-enters from bottom edge moving up/right",
+   "frame": 103,
+   "time": 3.4333
+  },
+  {
+   "event": "ball leaves through right edge (last visible)",
+   "frame": 115,
+   "time": 3.8333
+  }
+ ],
+ "files": {
+  "notes": "notes.md",
+  "tracks": [
+   "tracks/ball.csv",
+   "tracks/camera_shift.csv"
+  ],
+  "scripts": "scripts/"
+ }
+}

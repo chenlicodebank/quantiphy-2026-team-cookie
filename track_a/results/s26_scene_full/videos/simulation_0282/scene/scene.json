@@ -1,0 +1,58 @@
+{
+  "video": "simulation_0282.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 is t = 0",
+  "pixel_axes": "x right, y down, origin top-left, units px",
+  "camera": {
+    "motion": "static (background patches identical to frame 0 within 0.1 grey level in all frames)",
+    "view": "looking straight down (top view) at a plain light-grey ground / backdrop with strong vignette; dragon seen from above flying parallel to the image plane",
+    "perspective_notes": "No ground features, horizon or vanishing points. 2D scene: a single px->m scale applies. Mild apparent-size changes (template scale 0.94-1.06, mostly pose-driven; ~+4% during the glide as the dragon moves from x~600 to x~200, possibly lens/radial stretch near the image edge)."
+  },
+  "objects": [
+    {
+      "name": "dragon",
+      "description": "single dark-grey winged dragon (bat-like wings, long spiky tail, light-grey cone-shaped snout tip), the only object in the scene; head points left (-x), tail right",
+      "moves": true,
+      "visible_frames": "0-71 (cut by right image edge frames 0-3: tail tip beyond x=2559; cut by left edge from frame 64: wings/head leave; body point leaves the frame between frames 69 and 70; frame 71 shows only the tail)",
+      "track_file": "tracks/dragon.csv",
+      "reference_point": "body_x, body_y = torso/hip centre (the bulge between wing roots and hind legs, on the spine), tracked by template matching; best proxy of the rig origin",
+      "motion_summary_px": "moves left almost uniformly: body_x 2362 (f0) -> 53.7 (f68) -> -46.3 (f71, extrapolated by tail template); per-frame step 32.4-36.7 px, mean 34.42 px/frame over frames 1->71 (std 1.0); frames 0 and 1 nearly identical (step 0.5 px). body_y gentle bob: 721 (f0) -> 735.6 (f15) -> 708.4 (f41) -> 716 (f52) -> 714.8 (f71). Net displacement f0->f71 = 2408 px, path length = 2410 px.",
+      "sizes_px": {
+        "wingspan_y_extent_max": {"value": 1033, "frame": 0, "note": "wings fully spread down-stroke start; 1000 at f26, 915 at f37, 870 at f13"},
+        "wingspan_y_extent_min": {"value": 292, "frame": 42, "note": "wings raised toward camera (foreshortened); 317 at f17. Swept-back V pose minima: 502 at f8, 505 at f32"},
+        "wingspan_glide": {"value": 897, "frames": "51-70", "note": "constant while gliding with wings held spread"},
+        "x_extent_range": {"min": 401, "max": 743, "note": "bbox length along flight (x) incl. wings; 743 at f33 when wings sweep back past the head; see csv"},
+        "nose_to_tail_tip_glide_f52": {"value": 471, "nose_x": 418, "tail_tip_x": 888, "note": "snout tip of the light-grey cone to tail tip, frame 52, measured on zoomed image (+-5 px); nose is 182 px left of body point, tail tip 288 px right"},
+        "head_plus_torso_template_box": "frame 52: x 440-700, y 680-760"
+      },
+      "events": [
+        {"frame": 0, "time": 0.0, "event": "start; wings fully spread (wingspan 1033 px)"},
+        {"frame": 1, "time": 0.0417, "event": "frame 1 nearly identical to frame 0 (body moves 0.5 px); steady leftward motion starts frame 1->2"},
+        {"frame": 8, "time": 0.333, "event": "wings swept back (V), wingspan local min 502"},
+        {"frame": 13, "time": 0.542, "event": "wingspan local max 870"},
+        {"frame": 17, "time": 0.708, "event": "wings raised, wingspan local min 317"},
+        {"frame": 26, "time": 1.083, "event": "wingspan local max 1000"},
+        {"frame": 32, "time": 1.333, "event": "wings swept back (V), local min 505"},
+        {"frame": 37, "time": 1.542, "event": "wingspan local max 915"},
+        {"frame": 42, "time": 1.75, "event": "wings raised, global min 292"},
+        {"frame": 51, "time": 2.125, "event": "flapping ends; glide with wings spread (897 px) until end"},
+        {"frame": 64, "time": 2.667, "event": "dragon starts leaving the left image edge (wing leading edge at x=0)"},
+        {"frame": 70, "time": 2.917, "event": "body point crosses x=0 (between f69 x=21.4 and f70 x=-12.5)"},
+        {"frame": 71, "time": 2.958, "event": "last frame, only tail visible"}
+      ],
+      "direction_changes": "none in x (always leftward); y drifts down (+y) to f15 then up (-y) to f41 then back down to ~716"
+    }
+  ],
+  "static_objects": "none: uniform grey background with vignette (darker corners), soft shadow of the dragon offset to the left of it (not an object)",
+  "files": {
+    "tracks/dragon.csv": "main per-frame track (body point, bbox, extents, edge flags)",
+    "tracks/dragon_body_template.csv": "torso template match result all frames (valid 0-66; 67-71 invalid, ncc<0.65)",
+    "tracks/dragon_raw.csv": "raw mask measurements (mask centroid, bbox, spine row, rough nose/tail columns)",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

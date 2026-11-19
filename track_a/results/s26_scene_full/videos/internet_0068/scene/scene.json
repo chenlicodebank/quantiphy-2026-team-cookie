@@ -1,0 +1,87 @@
+{
+  "video": "internet_0068.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 100,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "coordinate_frames": {
+    "raw": "pixel coords of each decoded frame (x right, y down)",
+    "ref": "pixel coords of frame 99 (camera settled). Every frame i is registered to it by a similarity transform A_i (scene/tracks/camera.csv, a00..a12 maps ref -> raw frame i). Use ref coords for motion (background-stabilised)."
+  },
+  "description": "Static camera-ish (hand-held drift) side view of a wooden floor in front of a grey wall with a white baseboard rail. A toy acorn (black knitted cap with stem on a white cup) is pulled by a brown string from left to right across the frame, entering at the left edge at frame 53 and leaving at the right edge after frame 74. The string lies on the floor from frame 0, is tugged at frames ~42-52 and is gone after the acorn leaves.",
+  "objects": [
+    {
+      "name": "acorn",
+      "description": "toy acorn: black knitted cap with a short black stem on top, white/light-grey cup (bowl) below; only object that translates. Pulled by the string attached on its right side.",
+      "moves": true,
+      "visible_frames": [53, 74],
+      "fully_visible_frames": [59, 72],
+      "partially_visible": "53-58 entering at left edge (x_min=0); 73-74 leaving at right edge (x_max=1919)",
+      "track_file": "tracks/acorn.csv",
+      "reference_point": "ref_bbox_cx, ref_bbox_cy = centre of the bounding box (stem top to cup bottom, cap left to cap right). ref_stem_x = stem knob centre x (sharpest horizontal marker).",
+      "size_px_fully_visible": {
+        "bbox_width_along_motion_median": 346,
+        "bbox_width_range": [329, 367],
+        "bbox_height_stem_top_to_cup_bottom_median": 420,
+        "bbox_height_range": [418, 427],
+        "note": "width includes horizontal motion blur (object moves ~85-145 px/frame); width grows 329->367 from frame 65 to 72 as speed rises while height stays ~420 => same depth, the growth is blur. Cap is the widest part; the cup is narrower (~300 px)."
+      },
+      "motion_direction": "left to right, horizontal in image (ref y of bbox centre constant ~741 +-2 px)"
+    },
+    {
+      "name": "string",
+      "description": "thin brown/grey cord lying on the floor, attached to the right side of the acorn cap, runs off the right edge of the frame; it is the pulling line.",
+      "moves": true,
+      "visible_frames": [0, 75],
+      "notes": "frames 0-41: lies on floor from left edge (y~555-600 raw) rising to right edge (y~520); small twitches. Frame 44-47: whipped up toward the baseboard (taut). Frames 49-75: drawn rightwards with the acorn. Not tracked (thin, no definite reference point)."
+    },
+    {
+      "name": "baseboard_rail",
+      "description": "white/light-grey horizontal rail/baseboard along the wall-floor junction with a dark lower lip; spans the full width.",
+      "moves": false,
+      "ref_position": "top edge y~483-486 (x 150-900), dark lower edge / floor contact y~503-514 (lower toward the right: ~503 at x=150, ~510 at x=900, ~513 at x=1850) - slight tilt of the camera/wall",
+      "length_px": "full frame width (1920+)"
+    },
+    {
+      "name": "bracket_left",
+      "description": "black clip/bracket on the rail, left",
+      "moves": false,
+      "ref_bbox_body": [324, 457, 363, 500],
+      "note": "body ~39 px wide, ~43 px tall; its curved foot extends right to ~x 393 at y~510"
+    },
+    {
+      "name": "bracket_right",
+      "description": "black clip/bracket on the rail, right",
+      "moves": false,
+      "ref_bbox_body": [1636, 479, 1673, 517],
+      "note": "body ~37 px wide, ~38 px tall; bracket centres are ~1311 px apart horizontally (L ~(344,478), R ~(1655,498))"
+    },
+    {"name": "floor", "description": "light wooden floor/table top with horizontal grain, occupies y > ~510", "moves": false},
+    {"name": "wall", "description": "plain grey wall, y < ~483", "moves": false},
+    {"name": "acorn_shadow", "description": "soft shadow cast to the lower-left of the acorn cup, moves with it; excluded from the mask", "moves": true}
+  ],
+  "events": [
+    {"event": "string twitches slightly (first visible string motion)", "frames": [1, 3]},
+    {"event": "string tugged / whipped up toward baseboard (pulling starts in earnest)", "frame": 44, "t": 1.4667},
+    {"event": "acorn first appears at left edge", "frame": 53, "t": 1.7667},
+    {"event": "acorn fully inside frame", "frame": 59, "t": 1.9667},
+    {"event": "anomalous frame (cup shows a leaf pattern, smoother cap; likely edited/interpolated frame; position still consistent)", "frame": 61, "t": 2.0333},
+    {"event": "acorn last fully inside frame", "frame": 72, "t": 2.4},
+    {"event": "acorn touches right edge", "frame": 73, "t": 2.4333},
+    {"event": "acorn last visible (sliver/shadow possibly at 75)", "frame": 74, "t": 2.4667},
+    {"event": "acorn moves continuously rightwards with increasing per-frame displacement (stem x steps ~85 px at frame 60 to ~144 px at frame 72); no bounce or reversal seen", "frames": [53, 74]}
+  ],
+  "camera": {
+    "static": false,
+    "motion": "hand-held drift: raw frame vs frame 99 shifted by ~+12..14 px in y (frames 0-60), decaying to 0 by frame ~90; x shift 0..+6 px (max ~frame 68); rotation 0.33 deg at start -> 0 by frame ~45; scale 0.999-1.006. Per-frame transform in tracks/camera.csv.",
+    "effect_on_acorn_track": "raw and ref x differ by only 3-8 px; use ref coords."
+  },
+  "files": {
+    "acorn_track": "tracks/acorn.csv",
+    "camera": "tracks/camera.csv",
+    "notes": "notes.md",
+    "scripts": "scripts/"
+  }
+}

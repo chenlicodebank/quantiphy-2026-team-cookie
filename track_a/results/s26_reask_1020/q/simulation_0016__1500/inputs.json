@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0016.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 33.004425,
+ "frames": 97,
+ "duration_s": 2.939,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1500,
+  "question": "What is the length of the bench seat in the atrium in meters?",
+  "prior": "speed of the person = 1.3m/s",
+  "depth_info": "t=1s, distance_human_camera = 9.24m\nt=2s, distance_human_camera = 9.14m\ndistance_pedestal_square_base_of_the_central_sculpture_camera = 9.967m\ndistance_left_bench_seat_camera = 10.63m\ndistance_right_bench_seat_camera = 10.59m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 33.0
+ }
+}

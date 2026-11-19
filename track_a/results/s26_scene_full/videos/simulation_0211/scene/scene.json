@@ -1,0 +1,92 @@
+{
+  "video": "simulation_0211.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 50,
+  "frame_range": [0, 49],
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of furniture region (x1250-1720, y280-860) vs frame 0 at frames 10,20,30,40,49: |shift| <= 0.01 px",
+    "perspective": {
+      "back_wall_floor_line": "y = -0.07531*x + 909.21 (fit x 620-1260, max resid 0.9 px); rises to the right -> back wall recedes to the right",
+      "right_wall_floor_line": "y = 0.12786*x + 565.15 (fit x 1730-1910)",
+      "room_corner_floor_px": [1693.5, 781.7],
+      "cat_ground_contact_line": "lowest mask row vs torso x: y = -0.0974*x + 1003.3 (slightly steeper than the wall line)",
+      "horizon_y_estimate_px": "about 590-620 (intersection of cat path line with back-wall line at (4258, 588) if the cat walks parallel to the wall; 611 from sqrt(mask area) vs contact-row fit). Weak; another estimate from torso length gives 742. Treat as +-60 px.",
+      "principal_point_assumed": [960, 540],
+      "focal_length": "unknown - estimate from a question's depth_info"
+    }
+  },
+  "objects": [
+    {
+      "name": "cat",
+      "description": "black domestic cat with white paws and a plain grey (untextured-looking) head, tail raised in a curve; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "track_file": "tracks/cat.csv",
+      "motion": "walks continuously to the right (image +x) and slightly away from the camera (rises in image, shrinks) for the whole clip; no start/stop inside the clip",
+      "reference_point": "torso_cx/torso_cy (centroid of the dark torso after removing legs, tail, head) is the best proxy for the rig root/pelvis-body centre; mask_cx/mask_cy and bbox centre also given",
+      "frame0": {"bbox": [204, 697, 581, 969], "torso_centre": [407.0, 842.0], "torso_len_axis": 261.8, "torso_height": 141, "bbox_w": 378, "bbox_h": 273},
+      "frame49": {"bbox": [1102, 680, 1361, 881], "torso_centre": [1234.0, 787.6], "torso_len_axis": 175.8, "torso_height": 98, "bbox_w": 260, "bbox_h": 202},
+      "apparent_size_change": "shrinks steadily: torso length 262->176 px (x0.67), sqrt(mask area) 189->138 (x0.73), bbox height 273->202 (x0.74) from frame 0 to 49 -> depth grows roughly 1.35-1.5x",
+      "image_displacement_torso_f0_to_f49_px": [827.0, -54.4],
+      "occlusion": "none; at frames ~45-49 its head overlaps the table's left leg/shelf in the image but the cat is in front"
+    },
+    {
+      "name": "side_table",
+      "description": "reddish-brown wooden side table with splayed legs and a lower shelf, right of centre against the back wall",
+      "moves": false,
+      "frame": 0,
+      "bbox_px": [1288, 652, 1667, 839],
+      "width_px": 380, "height_px": 188,
+      "top_slab_px": [1288, 652, 1667, 699],
+      "legs_bottom_y_px": "front-left leg foot ~ (1410, 839); back-right leg foot ~ (1630, 822)"
+    },
+    {
+      "name": "table_lamp",
+      "description": "lamp on the left of the table top: white pleated conical shade, dark brown tapered wooden base",
+      "moves": false,
+      "frame": 0,
+      "bbox_px": [1276, 399, 1466, 664],
+      "shade_px": {"bbox": [1276, 399, 1466, 491], "width": 191, "height": 93},
+      "base_px": {"approx_bbox": [1348, 500, 1392, 662], "width": 44, "height": 162}
+    },
+    {
+      "name": "mirror",
+      "description": "tall rectangular floor mirror with light wood frame, leaning against the back wall behind the table",
+      "moves": false,
+      "frame": 0,
+      "approx_bbox_px": [1395, 307, 1600, 820],
+      "width_px": 205, "height_px": 513,
+      "note": "manual read from zoomed grid, +-4 px; lower part hidden behind the table"
+    },
+    {
+      "name": "vase",
+      "description": "blue-and-white porcelain vase standing on the right half of the table top",
+      "moves": false,
+      "frame": 0,
+      "approx_bbox_px": [1501, 469, 1588, 653],
+      "width_px": 87, "height_px": 184,
+      "note": "manual, +-4 px. A second, smaller-looking vase at x~1438-1478, y~535-653 is its reflection in the mirror, not a separate object"
+    },
+    {"name": "back_wall", "description": "plain light-grey wall facing camera", "moves": false, "floor_line": "y = -0.07531*x + 909.21"},
+    {"name": "right_wall", "description": "side wall at the right edge from x~1694", "moves": false, "floor_line": "y = 0.12786*x + 565.15"},
+    {"name": "floor", "description": "beige-grey carpet floor, no markings", "moves": false}
+  ],
+  "events": [
+    {"event": "cat walking (already in motion at first frame)", "frame": 0, "t": 0.0},
+    {"event": "cat still walking at last frame (no stop observed)", "frame": 49, "t": 2.0417},
+    {"event": "cat's nose passes the table's left edge x=1288 in the image (bbox_x1 > 1288)", "frame": 44, "t": 1.8333},
+    {"event": "cat's head overlaps the table's left leg/shelf in the image (cat in front) - visual overlap only, no contact", "frame": 47, "t": 1.9583}
+  ],
+  "files": {
+    "tracks/cat.csv": "per-frame cat track",
+    "notes.md": "methods and reliability",
+    "scripts/": "segment_cat.py, static_objects.py, perspective.py and their raw outputs"
+  }
+}

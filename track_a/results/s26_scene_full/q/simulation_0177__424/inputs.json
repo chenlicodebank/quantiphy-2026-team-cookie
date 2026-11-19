@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0177.mp4",
+ "video_source": "simulation",
+ "video_type": "V2SC",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 424,
+  "question": "What is the displacement of the elephant in meters?",
+  "prior": "speed of the elephant = 1.424m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

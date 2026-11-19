@@ -1,0 +1,65 @@
+{
+  "video": "simulation_0041.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame = round(t*24); t=0 is frame 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale recorded",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the rock outcrop region (x 500-1080, y 0-220) between frame 0 and frames 1,10,30,50,71: shift < 0.01 px",
+    "view": "high, nearly top-down (slightly oblique) aerial view of a beach; objects show their tops and a little of their sides (person seen head-to-feet foreshortened, boat shows hull side). Treated as 2D per inputs.json: one px scale for the whole ground/water plane",
+    "perspective_notes": "no visible horizon; apparent sizes of both moving objects stay constant over the clip (boat bbox width 327-333 px, person height ~45 px), consistent with a single scale"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "fishing boat: white/grey deck, red hull bottom and red cabin roof, mast with rigging, name 'AH808'-like lettering on the hull side; the only vessel. Bow points left (image -x, slightly up), stern right.",
+      "moves": true,
+      "visible_frames": "0-71 (fully in frame 0-62; bow cut by the left image edge from frame 63 on)",
+      "track_file": "tracks/boat.csv",
+      "reference_point": "ref_x/ref_y = centroid of the boat silhouette (incl. cabin and mast) in the frame-30 template, moved by rigid template matching (sub-pixel). Template centroid at frame 30 = (354.6, 945.0). Valid also when the boat is partly outside the frame.",
+      "motion": "pure translation, no rotation (|rot| < 0.06 deg); straight line toward image direction -164.3 deg (left and slightly up: per frame about dx -5.7, dy -1.6 px); ~5.9 px/frame throughout (frames 2-36 mean 5.93, frames 36-71 mean 5.86 px/frame); net displacement frame 0->71 = 412.7 px, path 412.9 px",
+      "size_px_frame30": {
+        "bbox_w_incl_mast": 330, "bbox_h_incl_mast": 236,
+        "bbox_median_frames0_61": [330, 237.5],
+        "bow_tip_to_stern_px": 341.9,
+        "bow_tip_xy": [184, 881], "stern_xy": [513, 974], "bow_stern_axis_deg": 15.8,
+        "mask_pca_length_px_median": 353.0,
+        "mask_pca_width_px_median_incl_cabin_mast": 199.4,
+        "hull_width_across_bow_stern_axis_px": "about 100-110 px over the after half of the hull (excludes cabin/mast); cabin region up to ~130 px, with mast ~197 px",
+        "mast_tip_xy_frame30": [327, 793]
+      }
+    },
+    {
+      "name": "person",
+      "description": "the single walking human on the sand: white T-shirt, dark grey trousers, dark hair; casts a long dark shadow to the upper right (shadow is NOT included in the mask)",
+      "moves": true,
+      "visible_frames": "0-71",
+      "track_file": "tracks/person.csv",
+      "reference_point": "ref_x/ref_y = centroid of the person mask (shadow excluded); pelvis_est = bbox centre x, y0 + 0.48*bbox height (hip-level guess). Both jitter +-1-2 px with the gait.",
+      "motion": "walks toward the bottom of the image (direction +86.2 deg, i.e. down and very slightly right) the whole clip, ~1.5 px/frame (9-frame-smoothed centroid 1.50 px/frame); centroid net displacement frame 0->71 = 106.3 px (from (359.4,387.8) to (366.5,493.8))",
+      "size_px": {
+        "apparent_height_head_to_feet_median": 45, "height_p10_p90": [39, 48], "height_min_max": [37, 50],
+        "width_median": 18, "width_min_max": [16, 20],
+        "note": "seen from above-front, so pixel height is a foreshortened standing height; legs are as dark as the shadow, so the lowest foot is sometimes cut or merged (+-3 px)"
+      }
+    }
+  ],
+  "static_objects": [
+    {"name": "rock_outcrop", "description": "rocky/eroded cliff top with a white sandy top, top centre-right, cut by the top image edge", "bbox_px_approx": [478, 0, 1010, 220], "notes": "lower edge roughly through (600,190),(700,215),(790,200),(900,110),(1000,30); measured by eye on a 100-px grid at frame 0"},
+    {"name": "dry_sand_beach", "description": "light pink sand area occupying the upper-left/centre; the person walks on it", "outline_px_approx": "edge from (0,470) down to a lowest tip near (400,722), then up through (520,690),(600,640),(700,560),(800,400),(890,300),(950,200),(1030,20)"},
+    {"name": "wet_sand_shallow_band", "description": "darker brownish band between the dry sand and the green water", "notes": "boundary to green water is diffuse; roughly 50-150 px wide"},
+    {"name": "water", "description": "green sea in the lower part and right side; the boat floats on it", "notes": "small animated ripples; no other floating objects"}
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "clip start; boat ref (520.4, 991.6), person centroid (359.4, 387.8)"},
+    {"frame": 1, "t": 0.0417, "event": "frame 1 is a near-duplicate of frame 0 for the WHOLE image (mean abs grey diff 0.04 vs ~1.3-1.4 for every other consecutive pair): boat and person displacement 0.00 px between frames 0 and 1. Both objects move from frame 2 on (boat ~5.9 px/frame, person ~1.5 px/frame). A one-frame backward-difference speed at frame 1 is therefore 0."},
+    {"frame": 63, "t": 2.625, "event": "boat bow reaches the left image edge (mask bbox x0 = 0 from here on; mask extents/centroid truncated, ref_x/ref_y from template still valid)"},
+    {"frame": 71, "t": 2.9583, "event": "clip end; both objects still moving"}
+  ],
+  "no_events": "no contact, impact, bounce or direction change; boat and person never come close (boat-person ref distance 625 px at frame 0, 457 px at frame 71)"
+}

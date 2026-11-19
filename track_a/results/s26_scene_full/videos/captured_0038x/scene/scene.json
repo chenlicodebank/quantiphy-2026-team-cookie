@@ -1,0 +1,58 @@
+{
+  "video": "captured_0038x.mp4",
+  "source": "lab (real Orbbec Femto Mega recording, background removed with Segment Anything 2 -> black background)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "width": 1280,
+  "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (no pan/shake; table pixels identical across frames, mean |frame diff| ~0.15 grey levels outside the ball)",
+    "intrinsics_from_benchmark": "f = 0.5959 * 1280 = 763 px, principal point ~(640, 360)",
+    "perspective": "camera slightly above table height looking at a square table from a corner-ish oblique view; table top is a foreshortened quadrilateral, depth increases upward in the image. Ball rolls left->right along the near half of the table, image y increasing 488->512 (slightly toward the camera)."
+  },
+  "objects": {
+    "ball": {
+      "description": "white / cream ball (ping-pong-ball-like), the only moving object",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "track": "tracks/ball.csv",
+      "reference_point": "visible centre: x = template-match centre, y = midpoint of top and bottom edges",
+      "apparent_size_px": {
+        "vertical_diameter": "33-34 at rest (frames 0-11, x~278), 36-38 in frames 15-29 (x 410-640), 34-36 in frames 36-48 (x 770-966); underside is shaded and blends with the table, so heights may be ~2-4 px short",
+        "horizontal_width_static": "40-42 (frames 0-11; left edge partly cut by segmentation)",
+        "horizontal_width_moving": "48-53 incl. ~16 px/frame motion blur; not a size measure",
+        "best_diameter_estimate_px": "~38-41"
+      },
+      "position_frame0_px": [278.5, 488.5],
+      "position_frame48_px": [966.3, 512.5]
+    },
+    "pink_bottle": {"description": "tall pale-pink cylindrical thermos bottle, back-centre of table, left of the cup", "moves": false,
+      "bbox_px": [642, 330, 690, 478], "width_px": 48, "height_px": 148, "centre_px": [666, 404], "note": "bottom partly hidden behind the standing card"},
+    "white_cup": {"description": "white tumbler/cup (wider at the top), right of the pink bottle", "moves": false,
+      "bbox_px": [724, 375, 794, 497], "top_width_px": 71, "bottom_width_px_approx": 54, "height_px": 123, "centre_px": [758.5, 433.6]},
+    "standing_card": {"description": "playing card leaning against the pink bottle (white with grey-blue pattern)", "moves": false,
+      "corners_px": {"top_left": [673, 418], "top_right": [695, 416], "bottom_right": [710, 497], "bottom_left": [692, 499]},
+      "long_side_px": 82, "short_side_px": 21},
+    "lying_cards": {"description": "two/three playing cards lying flat on the table in front of the bottle/cup; the ball passes in front of / over them in frames 29-35", "moves": false,
+      "bbox_px": [642, 498, 751, 521], "width_px": 110, "height_px": 24, "centre_px": [696.6, 507.9]},
+    "dark_card": {"description": "dark navy card / phone-like flat object lying near the front edge, with a yellow sticker at its right end", "moves": false,
+      "bbox_px": [518, 533, 619, 551], "width_px": 102, "height_px": 19, "centre_px": [565.5, 542.7]},
+    "yellow_sticker": {"description": "yellow label on the dark card", "moves": false, "bbox_px": [588, 532, 615, 541]},
+    "table": {"description": "square wooden table, brown top, single dark pedestal leg", "moves": false,
+      "top_corners_px_approx": {"left": [209, 545], "back_left": [448, 450], "back_right": [905, 466], "front_right": [1141, 590]},
+      "front_face_thickness_px": "~25 (front-left edge 545->570 at x 209-230)",
+      "overall_bbox_px": [209, 440, 1141, 623]},
+    "table_leg": {"description": "dark grey cylindrical pedestal leg below the table centre", "moves": false,
+      "bbox_px": [619, 613, 697, 719], "width_px": 59, "note": "cut by the bottom image border"}
+  },
+  "events": [
+    {"name": "ball at rest at the left end of the table", "frames": "0-11", "t": "0.000-0.458", "note": "x jitters 275.7-278.6 px (segmentation/tiny wobble)"},
+    {"name": "start of motion (launch)", "frame": 12, "t": 0.5, "note": "motion begins between frames 11 and 12; first step is ~48 px, steps then shrink 33, 28, 25, 19, 16 px and stay ~16 px/frame from frame 17 on. No hand visible (segmented out)."},
+    {"name": "ball passes in front of the lying playing cards", "frames": "29-35", "t": "1.208-1.458"},
+    {"name": "probable dropped capture frame", "frames": "35->36", "note": "x step 32.7 px vs ~16 px in neighbouring frames, container timestamps are uniform"},
+    {"name": "end of clip, ball still rolling right", "frame": 48, "t": 2.0}
+  ]
+}

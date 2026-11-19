@@ -1,0 +1,40 @@
+{
+  "video": "simulation_0114_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by white)",
+  "scene_type": "2D",
+  "fps": 24.0, "frames": 80, "width": 1080, "height": 1920,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_axes": "x right, y down (image rows); +y = downward on screen",
+  "camera": {
+    "motion": "static (rendered fixed camera; background is uniform white so no texture to check, but the plane's x stays at 671 +/- 1 px, so there is no sideways drift)",
+    "view": "planar, top-down / face-on view of the plane's planform (no visible perspective, constant apparent size)"
+  },
+  "objects": [
+    {
+      "name": "airplane",
+      "description": "the only object: small yellow/orange propeller-style plane seen from directly above (planform), nose pointing DOWN the image, tail (small horizontal stabiliser) at the top, straight wings across",
+      "moves": true,
+      "visible_frames": "0-78 (fully in frame 0-75; nose cut by the bottom edge in 76; only the tail visible in 77-78; gone in 79)",
+      "track_file": "tracks/airplane.csv",
+      "reference_point": "ref_x, ref_y = bbox centre of the frame-0 mask (tail tip to nose, wingtip to wingtip), carried to later frames by template matching. Likely origin location; the alternative mask centroid in frame 0 is (671.2, 168.5), 8.5 px lower, and the wing line is at y = 176 in frame 0",
+      "size_px_frame0_static_sharp": {
+        "wingspan_x": 167, "length_tail_to_nose_y": 107,
+        "approx_tailplane_span": 55, "approx_fuselage_width": 13, "approx_wing_chord": 19,
+        "height": "not visible (top view)",
+        "note": "Frame 0 is sharp. Later frames have vertical motion blur, so the mask length grows to 109-114 px; wingspan stays 165-168 px. Use frame 0 (or frames 0-10) for sizes."
+      },
+      "position_frame0_px": {"ref": [671.0, 160.0], "bbox": [588, 107, 754, 213]},
+      "motion_summary": "Straight vertical drop: moves only +y (down the screen), x constant at 671. Speeds up steadily from rest at frame 0. Per-frame step is about 0.5 px at frame 1, about 13 px at frame 20, about 46 px at frame 75. A quadratic in frame number fits ref_y with RMS 1.1 px (QA only, not a model to use).",
+      "orientation": "no visible rotation (wingspan constant, nose always down)"
+    }
+  ],
+  "static_objects": "none: the background is uniform white (segmentation). There is no ground, horizon or markings.",
+  "events": [
+    {"event": "start of motion / release from rest", "frame": 0, "t": 0.0, "note": "displacement 0->1 is ~0.5 px and grows linearly, so the plane starts at (or very near) rest at frame 0"},
+    {"event": "nose reaches the bottom image edge", "frame": 76, "t": 3.1667},
+    {"event": "wings out of frame, only tail visible", "frame": 77, "t": 3.2083},
+    {"event": "last visible sliver (tail tip)", "frame": 78, "t": 3.25},
+    {"event": "unrelated mountain/snow image (segmentation artefact, not part of the scene)", "frame": 79, "t": 3.2917}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/airplane.csv"], "scripts": "scripts/"}
+}

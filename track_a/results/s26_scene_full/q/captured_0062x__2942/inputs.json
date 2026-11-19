@@ -1,0 +1,18 @@
+{
+ "video": "captured_0062x.mp4",
+ "video_source": "lab",
+ "video_type": "V3MX",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2942,
+  "question": "What is the width of the blue shoppingbag in cm?",
+  "prior": "velocity of the whiteboard at 1.4s = 1.9339m/s",
+  "depth_info": "t=1.4s, distance_white_board_camera = 2.8150m\ndistance_blue_shopping_bag_camera = 3.3070m\ndistance_white_box_camera = 2.0820m\ndistance_trashbin_camera = 2.3030m\ndistance_mario_toy_camera = 2.0160m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

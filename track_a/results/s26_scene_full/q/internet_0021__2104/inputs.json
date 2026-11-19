@@ -1,0 +1,18 @@
+{
+ "video": "internet_0021.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.553957,
+ "frames": 107,
+ "duration_s": 3.6205,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2104,
+  "question": "What is the average speed of the airplane in m/s?",
+  "prior": "length of the airplane = 40m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 25.0
+ }
+}

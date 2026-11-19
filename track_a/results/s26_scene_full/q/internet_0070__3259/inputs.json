@@ -1,0 +1,18 @@
+{
+ "video": "internet_0070.mp4",
+ "video_source": "internet",
+ "video_type": "V2SC",
+ "fps": 29.970032,
+ "frames": 185,
+ "duration_s": 6.1728,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3259,
+  "question": "What is the length of the speedboat in meters?",
+  "prior": "velocity of the speedboat at 1.00s = 11 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

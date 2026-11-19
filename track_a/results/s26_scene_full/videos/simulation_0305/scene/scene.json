@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0305.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "active_image_area": {"note": "black letterbox bars above y=80 and below y=1359; picture occupies rows 80..1359 (1280 rows), all 2560 columns", "y_min": 80, "y_max": 1359},
+  "principal_point_guess_px": [1280, 720],
+  "pixel_units": "pixels in the full 2560x1440 frame; x right, y down; time t = frame/24",
+  "camera": {
+    "motion": "static (fixed render camera); background gradient and vignette identical in all frames; empty-region mean difference to the median background stays within +/-0.3 grey levels except when the shadow passes through it",
+    "perspective_cues": "featureless light-grey ground plane seen obliquely; ground brightens toward the bottom (near camera) and fades into a dark band near the top (around y~150-300) acting as a soft horizon/background; no lines, markings or vanishing points. The aircraft recedes from the camera (apparent size shrinks ~31% over the clip) while moving up-left in the image."
+  },
+  "objects": [
+    {
+      "name": "aircraft",
+      "description": "single dark grey sci-fi/jet fighter-like aircraft (twin engine pods, swept wings, vertical fins) flying above the ground, seen from below/side, long axis nearly horizontal in the image (~5 deg tilt); the only object in the scene; it moves toward the upper-left of the image (away from the camera and to the left)",
+      "moving": true,
+      "visible_frames": [0, 71],
+      "track": "tracks/aircraft.csv",
+      "reference_point": "cx,cy = mask centroid (proxy for the rigid object's origin/centre); bbox_cx,bbox_cy = bbox centre",
+      "apparent_size_px": {
+        "frame0":  {"bbox_w": 658, "bbox_h": 283, "len_main_axis": 664.9, "width_across": 278.9},
+        "frame24": {"bbox_w": 571, "bbox_h": 214, "len_main_axis": 577.1, "width_across": 205.0},
+        "frame48": {"bbox_w": 502, "bbox_h": 171, "len_main_axis": 506.6, "width_across": 157.7},
+        "frame71": {"bbox_w": 455, "bbox_h": 143, "len_main_axis": 457.7, "width_across": 129.1}
+      },
+      "image_motion": "centroid from (1664.5,848.9) at frame 1 to (772.8,348.7) at frame 71; smooth, direction roughly constant (up-left, about 29 deg above the -x axis), pixel steps shrink from ~23 px/frame to ~8.7 px/frame as it recedes"
+    },
+    {
+      "name": "aircraft_shadow",
+      "description": "soft dark shadow of the aircraft cast on the ground plane, below and left of the aircraft; NOT a separate object",
+      "moving": true,
+      "visible_frames": [0, 71],
+      "partially_out_of_frame": "frames 0-18 (cut by the bottom letterbox edge y=1359)",
+      "track": "tracks/aircraft_shadow.csv"
+    },
+    {
+      "name": "ground",
+      "description": "uniform light-grey infinite ground plane, no markings",
+      "moving": false
+    }
+  ],
+  "events": [
+    {"event": "frames 0 and 1 are identical (aircraft at the same pixel position); motion visible from frame 1->2 onwards", "frame": 1, "t": 0.0417},
+    {"event": "aircraft moves continuously up-left / away from camera until the last frame; no bounce, contact or direction change", "frame_range": [1, 71]},
+    {"event": "shadow fully inside the picture from frame 19", "frame": 19, "t": 0.7917}
+  ]
+}

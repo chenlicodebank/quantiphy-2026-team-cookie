@@ -1,0 +1,18 @@
+{
+ "video": "internet_0002.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 19.612613,
+ "frames": 36,
+ "duration_s": 1.8356,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2019,
+  "question": "What is the length of the red car in meters?",
+  "prior": "lane width = 3.66m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

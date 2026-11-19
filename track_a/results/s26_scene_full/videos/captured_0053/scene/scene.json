@@ -1,0 +1,213 @@
+{
+ "video": "captured_0053.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 48,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (phase-correlation shift of wall and floor patches vs frame 0 <= 0.08 px every frame, see tracks/camera_shift.csv)",
+  "intrinsics_lab_convention": {
+   "fx_px": 763.0,
+   "fy_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "view": "elevated, looking down-forward onto a carpeted floor of a corridor/room; frame timestamps uniform (1/24 s)",
+  "perspective_cues": {
+   "ground_plane": "grey striped carpet fills y~150-720; stripes roughly horizontal",
+   "wall_floor_edge_right": "dark baseboard line from about (700,90) to (1280,500) (right wall)",
+   "left_wall": "grey partition at x<130",
+   "far_end": "table, two people and a tripod at y<200 (far background)"
+  }
+ },
+ "moving_objects": {
+  "blue_car": {
+   "description": "toy / RC car with a blue cover decorated with white and yellow patches, dark wheels; the only moving object",
+   "track_file": "tracks/blue_car.csv",
+   "visible_frames": [
+    0,
+    47
+   ],
+   "occluded": "never",
+   "reference_point": "cx,cy = centroid of the full car mask (visible centre); bbox_cx/bbox_cy = bbox centre",
+   "motion": "already moving at frame 0 and still moving at frame 47; drives away from the camera toward the upper-left (towards the far end of the room), roughly straight",
+   "first_frame": {
+    "cx": 894.4,
+    "cy": 449.7,
+    "x0": 810.0,
+    "y0": 370.0,
+    "x1": 973.0,
+    "y1": 517.0,
+    "bbox_w": 164.0,
+    "bbox_h": 148.0,
+    "minrect_len": 158.9,
+    "minrect_wid": 124.1
+   },
+   "last_frame": {
+    "cx": 538.7,
+    "cy": 225.4,
+    "x0": 476.0,
+    "y0": 176.0,
+    "x1": 598.0,
+    "y1": 273.0,
+    "bbox_w": 123.0,
+    "bbox_h": 98.0,
+    "minrect_len": 122.1,
+    "minrect_wid": 86.4
+   },
+   "apparent_size_trend": "mask min-area-rect length 159->122 px, width 124->86 px, bbox width 164->123 px from frame 0 to 47: shrinks ~0.75x because it moves away (depth grows ~1.3x)"
+  }
+ },
+ "static_objects": {
+  "basketball": {
+   "cx": 986.7,
+   "cy": 369.1,
+   "x0": 952,
+   "y0": 340,
+   "x1": 1020,
+   "y1": 399,
+   "bbox_w": 69,
+   "bbox_h": 60,
+   "minrect_len": 68.0,
+   "minrect_wid": 58.4,
+   "minrect_angle": -86.2,
+   "area_px": 3259,
+   "equiv_diam": 64.4,
+   "note": "orange Wilson basketball by the right wall; diameter ~64-69 px (bbox_w 69 includes slight blur; bottom is shaded)"
+  },
+  "white_cup": {
+   "cx": 564.7,
+   "cy": 429.7,
+   "x0": 552,
+   "y0": 410,
+   "x1": 578,
+   "y1": 446,
+   "bbox_w": 27,
+   "bbox_h": 37,
+   "minrect_len": 33.7,
+   "minrect_wid": 27.3,
+   "minrect_angle": -77.7,
+   "area_px": 570,
+   "equiv_diam": 26.9,
+   "note": "small white cylindrical cup/can standing on floor, centre-left"
+  },
+  "white_stick_mid": {
+   "cx": 666.0,
+   "cy": 402.8,
+   "x0": 623,
+   "y0": 392,
+   "x1": 709,
+   "y1": 413,
+   "bbox_w": 87,
+   "bbox_h": 22,
+   "minrect_len": 88.5,
+   "minrect_wid": 5.3,
+   "minrect_angle": -12.5,
+   "area_px": 442,
+   "equiv_diam": 23.7,
+   "note": "thin white stick/tape strip lying on floor right of the cup; length ~88 px"
+  },
+  "white_box_card": {
+   "cx": 665.7,
+   "cy": 612.1,
+   "x0": 629,
+   "y0": 573,
+   "x1": 709,
+   "y1": 653,
+   "bbox_w": 81,
+   "bbox_h": 81,
+   "minrect_len": 81.5,
+   "minrect_wid": 76.9,
+   "minrect_angle": -4.0,
+   "area_px": 3629,
+   "equiv_diam": 68.0,
+   "note": "white rectangular box/card lying on floor near bottom centre; ~81 x 77 px"
+  },
+  "white_stick_bottom": {
+   "cx": 924.6,
+   "cy": 690.3,
+   "x0": 866,
+   "y0": 659,
+   "x1": 979,
+   "y1": 719,
+   "bbox_w": 114,
+   "bbox_h": 61,
+   "minrect_len": 125.8,
+   "minrect_wid": 13.3,
+   "minrect_angle": -30.4,
+   "area_px": 1255,
+   "equiv_diam": 40.0,
+   "note": "white stick at bottom edge, partly cut by frame bottom (length >= 126 px visible)"
+  },
+  "yellow_bit": {
+   "cx": 913.3,
+   "cy": 569.3,
+   "x0": 910,
+   "y0": 566,
+   "x1": 917,
+   "y1": 573,
+   "bbox_w": 8,
+   "bbox_h": 8,
+   "minrect_len": 7.0,
+   "minrect_wid": 7.0,
+   "minrect_angle": -90.0,
+   "area_px": 53,
+   "equiv_diam": 8.2,
+   "note": "tiny yellow object on floor (~8 px)"
+  },
+  "wall_socket_plate": {
+   "cx": 1239.3,
+   "cy": 369.4,
+   "x0": 1231,
+   "y0": 361,
+   "x1": 1249,
+   "y1": 378,
+   "bbox_w": 19,
+   "bbox_h": 18,
+   "minrect_len": 17.3,
+   "minrect_wid": 15.0,
+   "minrect_angle": -51.3,
+   "area_px": 225,
+   "equiv_diam": 16.9,
+   "note": "small white plate on right wall"
+  },
+  "people_background": {
+   "note": "two people at the far end (one seated at x~430-560, one standing x~600-670, y 0-195); static during clip; partly cut by the top edge"
+  },
+  "tripod": {
+   "note": "black tripod at upper left x~130-300, y 0-270"
+  },
+  "table": {
+   "note": "wooden table/cabinet at upper left x~100-310, y 0-130"
+  },
+  "white_bag": {
+   "note": "white/blue bag with a tennis ball on the floor at x~330-430, y~110-185"
+  },
+  "orange_cables": {
+   "note": "red/orange cables along floor at far end and along right wall"
+  }
+ },
+ "events": [
+  {
+   "event": "car in motion from the first frame (no start of motion visible)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "car still moving at last frame (no stop)",
+   "frame": 47,
+   "t": 1.9583
+  },
+  {
+   "event": "larger-than-neighbour image steps between frames 11->12 and 35->36 (~2x usual); timestamps are uniform so this may be a dropped capture frame or a real jolt",
+   "frames": [
+    12,
+    36
+   ]
+  }
+ ]
+}

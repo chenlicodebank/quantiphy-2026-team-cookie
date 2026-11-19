@@ -1,0 +1,51 @@
+{
+  "video": "captured_0010X.mp4",
+  "source": "lab (captured; background replaced by pure white, i.e. segmentation-style rendering of a lab clip)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 = t 0",
+  "camera": {
+    "motion": "static (background is uniform white; pendulum pivot stays at ~(637,229) +-4 px in all frames)",
+    "intrinsics_from_benchmark_convention": {"fx_px": 763, "fy_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "perspective_cues": "No ground plane, horizon or furniture visible (background removed). Only depth cue is the ball's apparent size (equiv. diameter ~29-31 px at far end of swing, ~40-42 px at near end)."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "aka": "pendulum bob",
+      "description": "small ball hanging on a string; red/orange in frames 0-11, rendered as a pale pink (~RGB 246,236,230) flat mask from frame 12 to 48 (same object, appearance change is a segmentation artifact)",
+      "moves": true,
+      "visible_frames": "0-48",
+      "track": "tracks/ball.csv",
+      "reference_point": "centroid of the filled ball mask (cx, cy)",
+      "apparent_diameter_px": {"min": 28.7, "max": 42.5, "far_end_frames_3_and_32_33": "~29-32", "near_end_frames_16_18_and_45_48": "~40-41"}
+    },
+    {
+      "name": "string",
+      "aka": "pendulum string / rod",
+      "description": "thin dark grey string from a fixed pivot at image top (~x 637, y 229) down to the ball; pivot support itself not visible",
+      "moves": true,
+      "visible_frames": "0-48",
+      "track": "tracks/string.csv",
+      "pivot_px": [637, 229],
+      "pivot_to_ball_centre_px": {"min": 60.0, "max": 165.6, "note": "varies strongly because the swing is mostly toward/away from the camera (foreshortening)"}
+    },
+    {
+      "name": "watermark",
+      "description": "small grey text box bottom-right (~x 1030-1279, y 690-719), overlay, not a physical object",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball already swinging at frame 0 (moving away/up in image)", "frame": 0, "t": 0.0},
+    {"event": "far turning point 1 (ball highest in image, smallest)", "frame": 3, "t": 0.125},
+    {"event": "lowest image position / passing nearest bottom of swing", "frame": 12, "t": 0.5, "note": "image-y max 392 at frames 12 and 22"},
+    {"event": "near turning point 1 (ball largest, image-y local minimum ~378)", "frame": 17, "t": 0.708, "range": "16-18"},
+    {"event": "far turning point 2", "frame": 33, "t": 1.375, "range": "32-33"},
+    {"event": "near turning point 2 (approx)", "frame": 46, "t": 1.917, "range": "45-47"},
+    {"event": "appearance switch red -> pale mask", "frame": 12, "t": 0.5}
+  ],
+  "notes": "notes.md"
+}

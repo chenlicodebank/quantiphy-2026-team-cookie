@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0015.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 33.0033,
+ "frames": 100,
+ "duration_s": 3.03,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1082,
+  "question": "What is the speed of the human at 1.0s in m/s?",
+  "prior": "height of the person = 1.87m",
+  "depth_info": "t=0s, distance_human_camera = 12.26m\nt=1s, distance_human_camera = 10.97m\ndistance_the_pedestal_of_the_central _sculpture_and_camera = 9.460m\ndistance_the_central_sculpture_camera = 9.460m\ndistance_the_nearest_freestanding_art_display_panel = 11.874m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 33.0
+ }
+}

@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0177.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, full-resolution pixels",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of background (x 900-1900, y 560-1080) vs frame 0: |shift| < 0.02 px in all frames (columns bg_shift_x/y in tracks/elephant.csv)",
+    "perspective": "rolling grass hills, hill crest/horizon roughly y~600 at left edge rising to y~470 near x~1500; elephant walks parallel to the image plane (apparent size constant), so one px scale applies to the elephant"
+  },
+  "objects": [
+    {
+      "name": "elephant",
+      "description": "single grey-brown African-type elephant (with tusks, curled trunk, thin tail), the only moving object; walks left-to-right, side view, facing right",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "occlusion": "never occluded by objects; feet partly hidden by grass (bottom ~5-10 px uncertain)",
+      "track_file": "tracks/elephant.csv",
+      "reference_point": "ref_x, ref_y = body (torso) centroid: frame-0 core-mask centroid (355.46, 740.27) + cumulative torso template shift. Best proxy for the rig root / origin.",
+      "position_frame0_px": [355.46, 740.27],
+      "position_frame59_px": [563.59, 737.37],
+      "net_displacement_px_f0_to_f59": 208.2,
+      "path_length_px_f0_to_f59": 208.4,
+      "mean_step_px_per_frame": 3.53,
+      "step_range_px_per_frame": [3.13, 3.95],
+      "alternative_displacement_checks_px": {
+        "rump_edge_core_x0": 208.0,
+        "top_of_back_silhouette_alignment": 214.1
+      },
+      "direction": "+x (rightward), vertical drift within +-5 px (gait bob / template noise)",
+      "sizes_px": {
+        "body_length_rump_to_head_front_excl_trunk_tusk_tail": {"f0": 240, "f30": 242, "f59": 237, "typical": 240, "uncertainty": 6},
+        "length_rump_to_tusk_tip": {"f0": 285, "f30": 279, "f59": 280, "typical": 281, "uncertainty": 6},
+        "length_tail_tip_to_tusk_tip": {"f30": 308, "f59": 340, "note": "tail swings; at f0 tail hangs behind hind leg so not separable"},
+        "height_top_of_back_or_head_to_feet": {"f0": 187, "f30": 183, "f59": 182, "typical": 184, "note": "top ~655 px, feet bottom ~838-845 px (grass hides soles)"},
+        "core_mask_extent_columns": "core_x0..core_x1 / core_y0..core_y1 per frame (body without tail/tusk; x1 jumps when trunk merges)"
+      }
+    },
+    {
+      "name": "grass_ground",
+      "description": "green grassy rolling hills filling the lower ~55% of frame; light dry patches",
+      "moves": false
+    },
+    {
+      "name": "sky_clouds",
+      "description": "blue sky with white cumulus clouds, upper ~45% of frame (static backdrop)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "elephant walking throughout (already moving at frame 0, still moving at frame 59)", "frame_start": 0, "frame_end": 59, "time_start_s": 0.0, "time_end_s": 2.4583},
+    {"event": "no starts, stops, impacts, bounces or direction changes observed", "frame": null}
+  ]
+}

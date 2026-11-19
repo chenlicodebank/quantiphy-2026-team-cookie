@@ -1,0 +1,55 @@
+{
+  "video": "simulation_0179.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of upper image (y<600) vs frame 0, every 3rd frame: |shift| < 0.01 px in all frames",
+    "view": "side view of a shop entrance; cart moves parallel to the image x axis at constant image row (constant depth), consistent with the 2D label"
+  },
+  "moving_objects": [
+    {
+      "name": "shopping_cart",
+      "description": "grey wire shopping cart with red handle and red seat, black castors; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "track_file": "tracks/shopping_cart.csv",
+      "reference_point": "bbox_cx/bbox_cy (centre of full-cart pixel bbox) recommended as proxy of the rigid-object origin; wheels_cx = centre of castor extents (y>=840) is an alternative; both give the same frame-to-frame x displacement within ~0.5 px",
+      "motion": "pure horizontal translation to the right (+x); bbox top y=637 and bottom y=884 constant every frame; starts from rest and speeds up steadily (per-frame dx grows from 0 at frame 1 to ~30 px at frame 59); never stops, still fully in frame at frame 59 (right edge x=1874)",
+      "pixel_size": {
+        "length_px_frame0": 223,
+        "height_px": 248,
+        "length_range_px": [220, 235],
+        "note": "length = full x extent handle tip to basket front; grows slightly 221->235 px as the cart moves right (more of its side/end visible off-axis); at frame 0 length 223 px, height 248 px (y 637-884). Wheelbase (outer castor x extent) 184-206 px. Depth/width across the image not measurable in this side view."
+      },
+      "position_frame0": {"bbox": [740, 637, 962, 884], "bbox_centre": [851.0, 760.5]},
+      "position_frame59": {"bbox": [1640, 637, 1874, 884], "bbox_centre": [1757.0, 760.5]},
+      "net_x_displacement_px_0_to_59": 906.0
+    }
+  ],
+  "static_objects": [
+    {"name": "helicopter_kiddie_ride", "description": "pink and yellow toy helicopter ride on a blue/steel platform, right of centre", "bbox_px_frame0": [1135, 318, 1665, 715], "length_px": 530, "height_px": 397, "reliability": "+-5 px, read off grid"},
+    {"name": "helicopter_rotor", "description": "yellow main rotor blade on top of helicopter", "bbox_px_frame0": [1135, 318, 1482, 357], "length_px": 347},
+    {"name": "ride_platform", "description": "blue/steel base the helicopter stands on", "bbox_px_frame0": [1085, 655, 1668, 778], "length_px": 583, "height_px": 123, "note": "cart passes in front of it frames ~33-59"},
+    {"name": "coin_machine", "description": "small orange box with black front at left end of platform", "bbox_px_frame0": [1085, 572, 1175, 680], "length_px": 90, "height_px": 108},
+    {"name": "doormat", "description": "dark striped floor mat in front of doors, left", "bbox_px_frame0": [300, 770, 740, 955], "note": "trapezoid in perspective; far edge ~ x 445-740 at y 772, near edge ~ x 300-670 at y 955"},
+    {"name": "wall_vent", "description": "grey wall vent with sensor/cable above it", "bbox_px_frame0": [778, 162, 883, 238], "length_px": 105, "height_px": 76, "sensor_above": [840, 115, 882, 160]},
+    {"name": "entrance_doors", "description": "glass doors with wooden frames and 'Food Vault' sign, far left", "bbox_px_frame0": [0, 50, 465, 1080], "door_frame_post_x": [200, 280], "exit_sign": [328, 70, 400, 115]},
+    {"name": "floor_tiles", "description": "light grey floor tiles with orange border tiles", "note": "orange tile row along wall at y~712-722; orange row at y~855-870 (x>1100); orange row at y~960-985 (x 665-1235) with tiles ~110-115 px wide; floor recedes in perspective (grout lines converge), so tile sizes vary with position"},
+    {"name": "wall_baseboard", "description": "grey baseboard where wall meets floor", "y_px": [678, 700]}
+  ],
+  "events": [
+    {"event": "cart at rest", "frames": [0, 1], "times_s": [0.0, 0.0417], "note": "x identical in frames 0 and 1"},
+    {"event": "cart starts moving (+x)", "frame": 2, "time_s": 0.0833, "note": "first non-zero displacement between frames 1 and 2 (1 px); motion onset is between frame 1 and 2 (could be at frame 0-1 with sub-pixel motion)"},
+    {"event": "cart begins passing in front of ride platform (image overlap only, no contact)", "frame": 22, "time_s": 0.9167, "note": "cart right edge x1=1088 reaches platform left edge x~1085 at frame 22; handle tip (x0) overlaps orange machine frames ~35-38; cart is nearer the camera, never occluded"},
+    {"event": "end of clip, cart still moving and accelerating", "frame": 59, "time_s": 2.4583}
+  ],
+  "no_bounces_impacts_or_direction_changes": true,
+  "perspective": "2D scene label; floor shows perspective (converging grout lines) but the cart moves at constant depth along image x, so one px scale applies to the cart's motion"
+}

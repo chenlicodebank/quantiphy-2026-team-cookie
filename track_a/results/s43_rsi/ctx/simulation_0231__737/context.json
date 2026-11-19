@@ -1,0 +1,44 @@
+{
+ "id": 737,
+ "video": "simulation_0231",
+ "submitted": 0.455,
+ "submitted_is": "the Claude line's answer 0.455, unchanged",
+ "deepseek_median": 0.671,
+ "candidates": [
+  {
+   "name": "C1",
+   "kind": "claude",
+   "answer": 0.485,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run",
+   "source": "s26_scene_full attempt 1"
+  },
+  {
+   "name": "C2",
+   "kind": "claude",
+   "answer": 0.455,
+   "who": "Claude Opus 5.5 (Claude Code agent), 26_30 per-question run, width re-run under --size-names (user ok 2026-10-18)",
+   "source": "s26_scene_full attempt 2"
+  },
+  {
+   "name": "C3",
+   "kind": "deepseek",
+   "answer": 0.672,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r1",
+   "source": "s37_test_repeats r1"
+  },
+  {
+   "name": "C4",
+   "kind": "deepseek",
+   "answer": 0.5,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r2",
+   "source": "s37_test_repeats r2"
+  },
+  {
+   "name": "C5",
+   "kind": "deepseek",
+   "answer": 0.671,
+   "who": "DeepSeek-V4.1-Flash-1017 (open-weight agent with SAM 3 tools), run r3",
+   "source": "s37_test_repeats r3"
+  }
+ ]
+}

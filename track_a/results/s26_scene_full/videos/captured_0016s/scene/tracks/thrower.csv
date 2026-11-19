@@ -1,0 +1,50 @@
+frame,time_s,ref_x,ref_y,bbox_x0,bbox_y0,bbox_x1,bbox_y1,mask_area_px,mask_height_px,mask_width_px,occluded,note
+0,0.0,127.7,522.1,0.0,41.0,383.0,719.0,95520,678.0,383.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+1,0.0417,129.6,524.1,0.0,44.0,386.0,719.0,95340,675.0,386.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+2,0.0833,132.8,529.1,0.0,49.0,389.0,719.0,94103,670.0,389.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+3,0.125,134.6,532.3,0.0,52.0,391.0,719.0,93381,667.0,391.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+4,0.1667,136.2,536.1,0.0,54.0,392.0,719.0,92307,665.0,392.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+5,0.2083,137.3,539.1,0.0,61.0,393.0,719.0,91476,658.0,393.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+6,0.25,138.3,542.0,0.0,65.0,392.0,719.0,90697,654.0,392.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+7,0.2917,138.9,543.8,0.0,67.0,393.0,719.0,90263,652.0,393.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+8,0.3333,139.5,545.2,0.0,68.0,393.0,719.0,90029,651.0,393.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+9,0.375,139.6,545.8,0.0,72.0,394.0,719.0,89534,647.0,394.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+10,0.4167,140.1,546.4,0.0,74.0,395.0,719.0,89435,645.0,395.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+11,0.4583,140.3,546.4,0.0,76.0,397.0,719.0,89312,643.0,397.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+12,0.5,141.4,546.3,0.0,79.0,399.0,719.0,89682,640.0,399.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+13,0.5417,141.7,546.4,0.0,79.0,399.0,719.0,89544,640.0,399.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+14,0.5833,141.5,546.2,0.0,79.0,399.0,719.0,89623,640.0,399.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+15,0.625,140.6,545.9,0.0,79.0,397.0,719.0,89436,640.0,397.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+16,0.6667,139.3,545.0,0.0,79.0,395.0,719.0,89508,640.0,395.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+17,0.7083,137.2,544.3,0.0,75.0,389.0,719.0,89139,644.0,389.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+18,0.75,134.6,543.3,0.0,72.0,383.0,719.0,88742,647.0,383.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+19,0.7917,130.7,541.3,0.0,69.0,374.0,719.0,88346,650.0,374.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+20,0.8333,125.2,535.0,0.0,66.0,364.0,719.0,89235,653.0,364.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+21,0.875,119.6,529.8,0.0,61.0,353.0,719.0,88396,658.0,353.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+22,0.9167,115.8,524.0,0.0,57.0,344.0,719.0,88638,662.0,344.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+23,0.9583,112.4,518.0,0.0,53.0,337.0,719.0,89418,666.0,337.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+24,1.0,110.2,511.6,0.0,52.0,334.0,719.0,91260,667.0,334.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+25,1.0417,110.7,506.7,0.0,43.0,339.0,719.0,94074,676.0,339.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+26,1.0833,117.5,504.9,0.0,40.0,353.0,719.0,99703,679.0,353.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+27,1.125,129.2,504.4,0.0,36.0,385.0,719.0,107301,683.0,385.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+28,1.1667,145.9,500.8,0.0,34.0,436.0,719.0,115710,685.0,436.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+29,1.2083,162.0,491.7,0.0,33.0,495.0,719.0,122225,686.0,495.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+30,1.25,173.7,481.2,0.0,32.0,548.0,719.0,128368,687.0,548.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt; mask includes the ball in her hands
+31,1.2917,163.9,495.1,0.0,31.0,602.0,719.0,114286,688.0,602.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+32,1.3333,157.6,500.3,0.0,34.0,558.0,719.0,112154,685.0,558.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+33,1.375,158.9,503.2,0.0,37.0,551.0,719.0,111290,682.0,551.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+34,1.4167,158.1,507.0,0.0,40.0,533.0,719.0,109629,679.0,533.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+35,1.4583,153.3,509.6,0.0,43.0,505.0,719.0,107398,676.0,505.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+36,1.5,142.3,510.1,0.0,41.0,457.0,719.0,104196,678.0,457.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+37,1.5417,148.9,493.9,0.0,37.0,427.0,719.0,113203,682.0,427.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+38,1.5833,142.5,495.3,0.0,34.0,401.0,719.0,111393,685.0,401.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+39,1.625,136.2,494.1,0.0,20.0,377.0,719.0,110092,699.0,377.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+40,1.6667,130.2,490.9,0.0,0.0,359.0,719.0,110018,719.0,359.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+41,1.7083,125.2,488.3,0.0,0.0,345.0,719.0,109198,719.0,345.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+42,1.75,122.5,486.5,0.0,0.0,340.0,719.0,108715,719.0,340.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+43,1.7917,120.6,485.9,0.0,0.0,339.0,719.0,107800,719.0,339.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+44,1.8333,120.2,485.8,0.0,0.0,342.0,719.0,107375,719.0,342.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+45,1.875,119.7,486.9,0.0,0.0,347.0,719.0,106022,719.0,347.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+46,1.9167,120.1,488.8,0.0,0.0,353.0,719.0,105155,719.0,353.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+47,1.9583,120.8,491.5,0.0,0.0,359.0,719.0,104060,719.0,359.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt
+48,2.0,122.4,495.3,0.0,0.0,367.0,719.0,103381,719.0,367.0,1,mostly outside the frame (left/bottom edges); mask misses parts of the light-grey shirt

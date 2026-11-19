@@ -1,0 +1,18 @@
+{
+ "video": "captured_0009s.mp4",
+ "video_source": "lab",
+ "video_type": "A3SS",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2181,
+  "question": "What is the basketball's initial distance from the floor in cm?",
+  "prior": "acceleration = 9.8 m/s^2",
+  "depth_info": "t=0.0s, distance_ball_camera = 1.3210m\nt=0.0s, distance_floor_camera = 2.0285m\nt=1.8s, distance_ball_camera = 1.5835m\nt=1.92s (max rebounce), distance_ball_camera=1.5795m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0054.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MC",
+ "fps": 30.003,
+ "frames": 100,
+ "duration_s": 3.333,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 29,
+  "question": "What is the width of the green car in meters?",
+  "prior": "acceleration of the orange car = -2.86m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

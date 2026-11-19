@@ -1,0 +1,92 @@
+{
+ "wall_s": 1255,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 115,
+  "duration_ms": 961118,
+  "total_cost_usd": 4.196550200000001,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 122,
+  "cache_creation_input_tokens": 162934,
+  "cache_read_input_tokens": 5687051,
+  "output_tokens": 87759,
+  "output_tokens_details": {
+   "thinking_tokens": 52250
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 162934,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 749,
+    "cache_read_input_tokens": 171250,
+    "cache_creation_input_tokens": 3557,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 3557
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 113,
+  "flags": [
+   {
+    "tool": "Bash",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_b;"
+    ],
+    "words": [],
+    "input": "{\"command\": \"P=/private/tmp/qp_blind/scene_full_b; for t in 0.5833 1.5833; do ~/miniforge3/envs/ml/bin/python $P/tools/framekit2.py frame $P/simulation_0063/q_1301/simulation_0063.mp4 --t $t --crop 360 760 540 870 --scale 4 --grid 10 --out $P/simulation_0063/q_1301/frames/feet_$t."
+   },
+   {
+    "tool": "Write",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_b"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_b/simulation_0063/q_1301/crops.py\", \"content\": \"import subprocess, sys\\nP='/private/tmp/qp_blind/scene_full_b'\\nV=P+'/simulation_0063/q_1301/simulation_0063.mp4'\\nO=P+'/simulation_0063/q_1301/frames/'\\njobs=[('0.5833','360 760 540 870','4"
+   },
+   {
+    "tool": "Write",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_b"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_b/simulation_0063/q_1301/othertl.py\", \"content\": \"import av, numpy as np, subprocess, sys\\nD='/private/tmp/qp_blind/scene_full_b/simulation_0063/q_1301/'\\nP='/private/tmp/qp_blind/scene_full_b'\\n# zoom crops for reading tops/bases "
+   },
+   {
+    "tool": "Write",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_b"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_b/simulation_0063/q_1301/curbzoom.py\", \"content\": \"import subprocess, sys\\nD='/private/tmp/qp_blind/scene_full_b/simulation_0063/q_1301/'\\nP='/private/tmp/qp_blind/scene_full_b'\\nfor t,cr,sc,name in (('0','960 880 1060 940','6','cu"
+   }
+  ]
+ },
+ "video": "simulation_0063",
+ "ids": [
+  1301
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0063__q1301.jsonl"
+}

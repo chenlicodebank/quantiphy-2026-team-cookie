@@ -1,0 +1,59 @@
+{
+ "wall_s": 42,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 14,
+  "duration_ms": 41174,
+  "total_cost_usd": 0.2771472,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 22,
+  "cache_creation_input_tokens": 19093,
+  "cache_read_input_tokens": 255876,
+  "output_tokens": 3657,
+  "output_tokens_details": {
+   "thinking_tokens": 478
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 19093,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 401,
+    "cache_read_input_tokens": 30214,
+    "cache_creation_input_tokens": 1046,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1046
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "a",
+ "audit": {
+  "tool_calls": 13,
+  "flags": []
+ },
+ "video": "internet_0008_segmented",
+ "ids": [
+  2963
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 2,
+ "trigger": "time base: answered at the file rate on a video whose question_fps differs; re-asked under the question_fps-only prompt (#36 / #37, board reads #188 / #189)",
+ "stream": "streams_a/internet_0008_segmented__q2963__a2.jsonl"
+}

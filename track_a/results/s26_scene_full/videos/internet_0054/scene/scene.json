@@ -1,0 +1,101 @@
+{
+  "video": "internet_0054.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 94,
+  "duration_s": 3.1333,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / 30; frame 0 at t = 0; time t -> frame round(30 t)",
+  "units": "pixels (full 3840x2160 image coords, x right, y down) and seconds; no metric scale",
+  "description": "Side view of a person (beige cap, white long-sleeve top, khaki trousers, light shoes, face blurred) riding a black two-wheel electric kick scooter from right to left along a light paved path in front of hedges and a wooden pergola with four benches; a green sports court with a white centre circle and centre line is in the foreground; a beige multi-storey building and trees in the background. The rider is in view and moving the whole clip.",
+  "camera": {
+    "type": "nearly static handheld/tripod with slow drift (small pan + roll)",
+    "background_shift_px": "background at the rider's depth moves +31 px in x (to the right) and +6 (x=1300) to +16 (x=2900) px in y from frame 0 to 93, smoothly (~0.34 px/frame in x); roll ~0.36 deg; scale change < 0.1 %",
+    "per_frame_file": "camera_affine.csv (affine frame0 -> frame i; 'band' = fit on hedges/benches at rider depth, 'top' = building)",
+    "effect": "rider moves ~16.6 px/frame leftward; the pan adds ~+0.34 px/frame (about 2 %). Stabilised coordinates (*_stab columns, in frame-0 pixel coords) remove it; raw image coords are also given."
+  },
+  "perspective": "Effectively 2D side view: rider moves parallel to the image plane, but drifts slightly toward the camera: ground-contact y goes 1122.5 -> 1137 and apparent scooter length 181 -> 193.5 px (~ +6 %) from frame 0 to 93. Court markings in the foreground are strongly foreshortened (circle 1353 px wide x 228 px tall) and lie at a different (nearer) depth than the rider.",
+  "objects": [
+    {
+      "name": "rider_scooter",
+      "parts": "rider (person) + black e-scooter they stand on; tracked as one object",
+      "distinguish": "the only moving object; white top, beige cap, khaki trousers; scooter black with grey spoked rear wheel",
+      "moves": true,
+      "visible_frames": [0, 93],
+      "occluded_frames": [],
+      "direction": "right to left (-x) the whole clip, nearly constant pixel velocity",
+      "track_file": "tracks/rider_scooter.csv",
+      "reference_point": "cx,cy = centre of the bounding box of rider+scooter (front tyre front edge .. rear tyre rear edge, cap top .. lowest tyre bottom). Alternatives in the file: front/rear wheel axle centres, torso point (upper chest), all also camera-stabilised.",
+      "sizes_px": {
+        "scooter_length_front_tyre_to_rear_tyre": "181 (frame 0) -> 186-188 (frame 45-60) -> 193.5 (frame 93); per frame in scooter_len_px; +-3 px",
+        "wheelbase_axle_to_axle": "141 (frame 0) -> 147 (frame 60) -> 151 (frame 93); per frame in wheelbase_px",
+        "wheel_diameter": "about 38-43 px (fitted tyre radius 18.5-21.5 px)",
+        "overall_height_cap_top_to_tyre_bottom": "304.5 (frame 0) -> 318 (frame 93); per frame height_px",
+        "person_height_cap_top_to_shoe_sole_on_deck": "about 279 px at frame 0 (818 -> ~1097) and about 292 px at frame 93 (819 -> ~1111); manual, +-4 px",
+        "handlebar_top_y": "about 940 (frame 0; grips ~ 120 px above deck)",
+        "person_shoulder_width_side_view": "n/a (side view)"
+      }
+    },
+    {
+      "name": "bench_1", "distinguish": "leftmost of the four wooden benches under the pergola", "moves": false,
+      "frame": 0, "x_range": [1172, 1455], "length_px": 283, "y_top_backrest": 943, "y_feet": 1087, "height_px": 144,
+      "note": "left half in deep shadow; extents read manually from zoom; rider passes in front of it from about frame 80 on"
+    },
+    {
+      "name": "bench_2", "distinguish": "second bench from left, left of the central pergola post", "moves": false,
+      "frame": 0, "x_range": [1515, 1788], "length_px": 274, "y_top_backrest": 948, "y_feet": 1086, "height_px": 138
+    },
+    {
+      "name": "bench_3", "distinguish": "third bench, right of the central pergola post", "moves": false,
+      "frame": 0, "x_range": [1860, 2128], "length_px": 269, "y_top_backrest": 948, "y_feet": 1086, "height_px": 138
+    },
+    {
+      "name": "bench_4", "distinguish": "rightmost bench", "moves": false,
+      "frame": 0, "x_range": [2186, 2465], "length_px": 280, "y_top_backrest": 950, "y_feet": 1086, "height_px": 136
+    },
+    {
+      "name": "pergola", "distinguish": "ivy-covered wooden pergola over the benches; dark central post", "moves": false,
+      "frame": 0, "x_range_canopy": [890, 2730], "y_canopy_top": 495, "central_post_x": [1800, 1840], "post_bottom_y": 1090,
+      "note": "approximate (manual from contact frames, +-15 px)"
+    },
+    {
+      "name": "path", "distinguish": "light beige paved strip the rider rides on, between hedge base and court", "moves": false,
+      "frame": 0, "light_strip_y_at_x": {"300": [1094, 1159], "1300": [1087, 1158], "2300": [1088, 1159], "3300": [1102, 1167], "3700": [1102, 1173]}
+    },
+    {
+      "name": "court_centre_circle_outer", "distinguish": "large white ellipse (circle seen obliquely) on the green court", "moves": false,
+      "frame": 0, "x_range": [1156, 2508], "width_px": 1353, "y_range": [1310, 1537], "height_px": 228
+    },
+    {
+      "name": "court_centre_circle_inner", "distinguish": "small dashed white ellipse inside the outer one", "moves": false,
+      "frame": 0, "x_range": [1616, 2056], "width_px": 441, "y_range": [1364, 1437], "height_px": 74
+    },
+    {
+      "name": "court_centre_line", "distinguish": "white line running from the path down to the bottom edge, through the circle centre", "moves": false,
+      "frame": 0, "x_at_y": {"1200": [1820, 1831], "1600": [1833, 1860], "2000": [1850, 1891], "2150": [1855, 1902]},
+      "note": "width grows 12 -> 48 px toward the bottom (perspective)"
+    },
+    {
+      "name": "hedges", "distinguish": "trimmed green hedges left (x 0-900) and right (x 2900-3770) of the pergola, behind the path", "moves": false,
+      "frame": 0, "right_hedge": {"x_range": [2900, 3770], "y_top": 790, "y_bottom": 1095}, "note": "approximate"
+    },
+    {
+      "name": "building", "distinguish": "beige 4-storey building with tiled roof, top left", "moves": false,
+      "frame": 0, "x_range": [40, 1865], "y_roof_top": 0, "y_base": 760, "note": "approximate; extends beyond top edge"
+    }
+  ],
+  "events": [
+    {"event": "rider in motion from first frame (already moving at frame 0)", "frame": 0, "t": 0.0},
+    {"event": "rider front tyre passes the central pergola post (x~1820)", "frame": 60, "t": 2.0, "note": "front tyre front edge 1832 at frame 60"},
+    {"event": "rider still moving at last frame (no stop, no direction change)", "frame": 93, "t": 3.1}
+  ],
+  "files": {
+    "tracks/rider_scooter.csv": "final per-frame track (94 rows)",
+    "tracks/wheels_circlefit.csv": "tyre circle fits (centre, radius) per frame",
+    "tracks/parts_raw.csv": "NCC template tracks (front wheel, rear wheel - drifts, torso)",
+    "camera_affine.csv": "per-frame camera affine",
+    "camera_shift.json": "per-frame phase-correlation shift of the building region vs frame 0",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

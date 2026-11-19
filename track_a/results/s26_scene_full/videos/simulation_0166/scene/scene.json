@@ -1,0 +1,80 @@
+{
+  "video": "simulation_0166.mp4",
+  "source": "simulation",
+  "scene_label": "2D (inputs.json); the render is a perspective street view, but both movers travel parallel to the image plane along one cross street at nearly the same depth",
+  "fps": 24.0,
+  "frames": 80,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "units": "pixels (x right, y down, origin at top-left of the image) and seconds; t = frame/24",
+  "camera": {
+    "motion": "static: phase correlation on a static region, max |shift| < 0.08 px over all 80 frames",
+    "perspective": {
+      "main_street_vanishing_point_px": [990, 598],
+      "horizon_y_px_approx": 598,
+      "cross_street": "runs horizontally across the image between y~700 (far edge/stop line) and y~752 (near white line, x 1050-1500); both movers ride along it left to right",
+      "ground_contact_y_px": {"van_tyres": 743, "cyclist_tyres": 738},
+      "relative_depth_note": "rows below horizon: van 145, cyclist 140 -> cyclist about 3-4 % farther from the camera than the van (small; a single px scale is the 2D convention)"
+    },
+    "apparent_size_change": "none: rigid template matches with no scale change; side-view length of the van and cyclist constant within +-2 px whenever unoccluded (van appears longer when left of centre because its front face becomes visible, see notes)"
+  },
+  "moving_objects": {
+    "van": {
+      "description": "white police van (Belgian-style blue chevron stripes, 'Police' on side, blue flashing light bar on roof, blue flashing lights in front grille); drives left to right along the cross street, the larger of the two movers, behind the cyclist",
+      "visible_frames": [21, 79],
+      "fully_inside_frame_from": 39,
+      "track_file": "tracks/van.csv",
+      "reference_point": "centre of the rigid side-view body box (ref_x, ref_y); also mid-axle ground point (midaxle_ground_x, ground_y=743)",
+      "side_view_size_px_at_frame_66_near_image_centre": {
+        "length_bumper_to_bumper": 438, "x_range": [748, 1185],
+        "height_ground_to_roof": 188, "roof_y": 556, "ground_y": 743,
+        "height_ground_to_lightbar_top": 200, "lightbar_top_y": 544,
+        "wheel_diameter": 68, "wheelbase_axle_to_axle": 275,
+        "rear_wheel_centre": [840, 710], "front_wheel_centre": [1115, 710]
+      },
+      "pixel_motion": "uniform horizontal, +27.00 px/frame (std 0.15) over frames 21-79, no vertical motion (dy = 0)"
+    },
+    "cyclist": {
+      "description": "person on a bicycle (light blue/grey helmet with orange light, green backpack, dark top, orange shorts, yellow basket on handlebar, white/pink bike); rides left to right ahead of the van",
+      "visible_frames": [0, 79],
+      "fully_inside_frame_from": 6,
+      "track_file": "tracks/cyclist.csv",
+      "reference_point": "centre of the rigid side-view box of person+bike (ref_x, ref_y); pelvis is near (ref_x - 10, 660) - the saddle/hip sits about 10 px behind the box centre",
+      "side_view_size_px_at_frame_45_near_image_centre": {
+        "length_wheel_to_wheel_overall": 163, "x_range": [820, 982],
+        "height_ground_to_helmet_top": 163, "top_y": 576, "ground_y": 738,
+        "wheel_diameter": 66, "wheelbase_hub_to_hub": 95,
+        "rear_hub": [854, 706], "front_hub": [949, 706]
+      },
+      "pixel_motion": "uniform horizontal, +21.03 px/frame (std 0.35) over frames 0-79, no vertical motion"
+    }
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "cyclist already moving, front half entering at left image edge"},
+    {"frame": 6, "t": 0.25, "event": "cyclist fully inside the frame"},
+    {"frame": 21, "t": 0.875, "event": "van front appears at left image edge (already moving at full speed)"},
+    {"frame": 39, "t": 1.625, "event": "van rear inside the frame (whole van visible, lower part behind left fence)"},
+    {"frame": 78, "t": 3.25, "event": "van front (template box) 4.6 px behind cyclist rear wheel"},
+    {"frame": 79, "t": 3.2917, "event": "van front and cyclist rear wheel overlap in the image (-1.3 px); cyclist is ~5 px higher (farther) so this is image overlap, not confirmed contact"},
+    {"frame": 79, "t": 3.2917, "event": "video ends; both still moving at constant pixel speed, neither stops, turns or leaves the frame"}
+  ],
+  "static_objects": {
+    "main_street": {"desc": "road running away from camera to the vanishing point (990,598)", "near_width_px": "at y=1050 from left kerb x~150 to right kerb x~1900+"},
+    "main_street_centre_lines": {"desc": "yellow double centre line: solid line + dashed line", "solid": "(1040,755)->(1195,1080) near part; far part (980,600)->(1030,700)", "dashes": "x 1010-1095, y 760-1080; dash length grows from ~8 px (y 760) to ~20 px (y 1060)"},
+    "cross_street": {"desc": "horizontal road the movers use", "far_edge_y": 703, "near_edge_white_line_y": 752, "white_stop_line_right": "x 1050-1500 at y~752"},
+    "left_lamp_pole": {"desc": "grey vertical lamp pole in front of the cross street, left", "x_range": [205, 232], "bottom_y": 790, "top": "above image top", "occludes": "cyclist frames 8-17, van frames 30-47"},
+    "pole_x545": {"desc": "dark pole by the corner shop (traffic light/sign pole)", "x_range": [538, 557], "bottom_y": 782, "occludes": "cyclist frames 24-32, van frames 42-58"},
+    "traffic_light_right": {"desc": "black traffic-light pole with red light, right sidewalk", "x_range": [1652, 1673], "bottom_y": 760, "head_box": [1655, 518, 1680, 578], "red_light_centre": [1660, 532], "occludes": "cyclist front from frame 77"},
+    "left_foreground_fence": {"desc": "dark spiked metal fence along the left near sidewalk, diagonal", "top_line": "(0,~745)->(590,~650)", "occludes": "lower parts of both movers while x < ~600"},
+    "right_foreground_fence": {"desc": "dark metal fence at right edge", "x_range": [1695, 1920], "top_y": "~665-690", "bottom_y": "~800-865", "occludes": "cyclist front tip at frame 79 only"},
+    "far_fences": {"desc": "low dark picket fences behind the cross street", "left": "x 0-590, y 640-700", "right": "x 1410-1920, y 630-700"},
+    "right_sidewalk": {"desc": "light grey sidewalk/kerb at right", "region": "x 1500-1920, y 745-900"},
+    "corner_shop": {"desc": "corner shop with red window frames and lit interior, left", "box": [395, 490, 655, 640]},
+    "dark_building_left": {"desc": "tall dark multi-storey building, left", "box": [322, 92, 690, 640]},
+    "grey_building_far_left": {"desc": "low grey tiled building, far left", "box": [0, 128, 390, 640]},
+    "white_houses_right": {"desc": "row of white stone houses with dark roofs, right", "box": [1220, 350, 1920, 640]},
+    "bunting": {"desc": "strings of red and white triangular pennants across the street; nearest string spans the image top (y 0-190), others at y~300-480", "note": "static (no motion in median background diff)"},
+    "street_lamps": {"desc": "lamp posts along the main street", "approx_x": [210, 680, 780, 830, 1160, 1400, 1495, 1660]}
+  },
+  "files": {"tracks": ["tracks/van.csv", "tracks/cyclist.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

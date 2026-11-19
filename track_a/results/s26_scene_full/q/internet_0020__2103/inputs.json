@@ -1,0 +1,18 @@
+{
+ "video": "internet_0020.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 19.594595,
+ "frames": 19,
+ "duration_s": 0.9697,
+ "width": 4096,
+ "height": 2160,
+ "question": {
+  "id": 2103,
+  "question": "What is the velocity of the picked bottle at 0.50s in cm/s?",
+  "prior": "height of the picked bottle = 11.7cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 25.0
+ }
+}

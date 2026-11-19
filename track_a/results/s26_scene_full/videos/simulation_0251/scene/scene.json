@@ -1,0 +1,86 @@
+{
+ "video": "simulation_0251.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 51,
+ "width_px": 1920,
+ "height_px": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels and seconds; image coords x right, y down, origin top-left",
+ "camera": {
+  "motion": "static (no pan/shake; median-background differencing leaves no residual outside the ball)",
+  "view": "frontal view of a grey studio backdrop: wall on top, floor below; the wall/floor boundary is a soft horizontal band at y ~ 544-556 px",
+  "perspective": "2D scene, ball moves parallel to the image plane; apparent ball size constant (fixed-radius circle fits all frames)"
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "description": "white/light-grey ball with black five-pointed stars (the only object in the scene)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    50
+   ],
+   "fully_visible_frames": [
+    2,
+    50
+   ],
+   "partial_frames": {
+    "0": "only ~16% visible at left edge",
+    "1": "~76% visible at left edge"
+   },
+   "track_file": "tracks/ball.csv",
+   "reference_point": "centre of fitted silhouette circle (= sphere origin)",
+   "diameter_px": 50.0,
+   "diameter_uncertainty_px": 2.0,
+   "motion": "rolls left to right along the floor, near-horizontal (cy ~ 557-562 px), decelerating smoothly; does not stop by the last frame",
+   "cx_first_full_frame_2_px": 46.5,
+   "cx_last_frame_50_px": 1452.62,
+   "net_horizontal_displacement_frames_2_to_50_px": 1406.12
+  },
+  {
+   "name": "backdrop_wall",
+   "description": "uniform grey vertical backdrop, upper part of image (y < ~545)",
+   "moves": false,
+   "visible_frames": [
+    0,
+    50
+   ]
+  },
+  {
+   "name": "floor",
+   "description": "uniform grey floor plane, lower part of image (y > ~555); ball rolls on it; soft shadow under ball",
+   "moves": false,
+   "visible_frames": [
+    0,
+    50
+   ]
+  }
+ ],
+ "events": [
+  {
+   "event": "ball enters frame from left edge (already moving)",
+   "frame": 0,
+   "time_s": 0.0
+  },
+  {
+   "event": "ball fully inside frame",
+   "frame": 2,
+   "time_s": 0.08333333333333333
+  },
+  {
+   "event": "no bounce, impact, contact or direction change; continuous rolling with gradual slowing",
+   "frame": null
+  },
+  {
+   "event": "video ends, ball still moving (cx ~1453 px)",
+   "frame": 50,
+   "time_s": 2.0833333333333335
+  }
+ ],
+ "per_frame_horizontal_step_px": {
+  "frames_2_12_mean": 32.425,
+  "frames_40_50_mean": 26.03699999999999
+ }
+}

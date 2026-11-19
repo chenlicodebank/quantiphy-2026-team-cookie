@@ -1,0 +1,80 @@
+{
+  "video": "captured_0029x.mp4",
+  "source": "lab (captured, Orbbec Femto Mega RGB; background removed with Segment Anything 2 -> black background)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of a ball-free strip (x 200-950, y 575-720) vs frame 0: dx in [-0.12, 0.16] px, dy in [0, 0.25] px over all frames (scene/table_measure.json camera_shift_per_frame)",
+    "intrinsics_from_benchmark": {"focal_px": 762.8, "formula": "0.5959 x 1280", "principal_point_px": [640, 360], "hfov_deg": 80},
+    "perspective": {
+      "table_top_side_edges_vanishing_point_px": [711, 355],
+      "table_front_and_back_edges": "nearly parallel to image x axis (slopes ~0.05 and ~0.04), i.e. table front edge roughly perpendicular to the optical axis",
+      "table_plane_horizon_y_px": 355,
+      "note": "horizon of the table-top plane is near the image centre row; camera looks slightly down onto the table from a little above it"
+    }
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "yellow-green tennis ball; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track_file": "tracks/ball.csv",
+      "reference_point": "visible centre = centre of a circle fitted to the yellow mask contour (cx, cy); diam_px = fitted circle diameter",
+      "pixel_diameter_examples": {"frames_0_11_held": 98.8, "frame_17": 97.9, "frame_22": 63.6, "frame_25": 49.9, "frames_29_32_min": 41.4, "frame_40": 46.3, "frame_48": 51.2},
+      "phases": [
+        {"frames": [0, 11], "state": "held still in a hand (hand removed by segmentation) just right of the table's front-right corner, close to the camera; centre ~ (1167-1177, 563), diameter ~99 px"},
+        {"frames": [12, 17], "state": "hand starts the throw: ball moves slightly left and away (diameter 99 -> 94 px)"},
+        {"frames": [17, 18], "state": "release (between frames 17 and 18; frame 18 first strongly blurred free-flight frame)"},
+        {"frames": [18, 24], "state": "ball flies / travels quickly up-left in the image and away from camera over the table (diameter 97 -> 55 px), strong motion blur 18-21"},
+        {"frames": [25, 30], "state": "ball reaches the far (back) part of the table; it sits on the table at the back edge; still receding; minimum apparent size ~41 px at frames 29-32 (farthest from camera)"},
+        {"frames": [30, 48], "state": "ball rolls left along the far part of the table top and slightly toward the camera (diameter 41 -> 51 px), ~10.5 px/frame leftward; still moving at the last frame"}
+      ]
+    },
+    {
+      "name": "hand",
+      "description": "the thrower's hand; segmented out (black), only visible as a black notch under the ball and small skin-coloured remnants in frames 0-19",
+      "moves": true,
+      "visible_frames": "not visible (masked)",
+      "track_file": null
+    },
+    {
+      "name": "table",
+      "description": "rectangular wooden table top (light brown wood grain) on a single dark pedestal; static",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "measured_frame": 45,
+      "silhouette_bbox_px": [208, 450, 1141, 623],
+      "top_surface_corners_px": {"back_left": [453, 450], "back_right": [915, 468], "front_right_top": [1130, 585], "front_left_top": [209, 540]},
+      "front_edge_bottom_corners_px": {"front_left_bottom": [210, 565], "front_right_bottom": [1140, 623]},
+      "edge_lengths_px": {"front_edge_top": 922, "back_edge": 462, "left_side": 260, "right_side": 245},
+      "front_edge_thickness_px": {"left_end": 25, "right_end": 37, "middle_x700": 30},
+      "note": "back-right corner is rounded (hull points (901,467)-(937,477)); the near-right corner region was partly mis-segmented in frames 18-20"
+    },
+    {
+      "name": "pedestal",
+      "description": "dark grey cylindrical table leg/column under the table centre; static; cut off by the image bottom",
+      "moves": false,
+      "visible_frames": [0, 48],
+      "bbox_px_f45": [620, 613, 695, 719],
+      "width_px": 60,
+      "note": "column itself ~630-690 px wide-range; bracket under the table slightly wider (603-700)"
+    }
+  ],
+  "events": [
+    {"name": "ball held still", "frames": [0, 11], "time_s": [0.0, 0.4583]},
+    {"name": "throw motion begins (hand moves ball)", "frame": 12, "time_s": 0.5},
+    {"name": "release", "frame": 18, "time_s": 0.75, "uncertainty": "between frames 17 and 18 (+-1 frame)"},
+    {"name": "largest image displacement per frame (~74 px)", "frame": 19, "time_s": 0.7917},
+    {"name": "ball arrives on the far part of the table top", "frame": 25, "time_s": 1.0417, "uncertainty": "+-2 frames; contact not directly visible (no bounce visible)"},
+    {"name": "farthest from camera / direction change (stops receding, starts moving left and slightly toward camera)", "frame": 30, "time_s": 1.25, "uncertainty": "+-2 frames (min diameter frames 29-32)"},
+    {"name": "possible dropped/duplicated frame (20 px step vs ~10.5 neighbouring steps)", "frames": [35, 36]},
+    {"name": "end of clip, ball still rolling", "frame": 48, "time_s": 2.0}
+  ],
+  "files": {"ball_track": "tracks/ball.csv", "ball_raw_measurements": "tracks/ball_raw.csv", "table_and_camera": "table_measure.json", "notes": "notes.md", "scripts": "scripts/"}
+}

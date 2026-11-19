@@ -1,0 +1,81 @@
+{
+  "video": "simulation_0190_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by pure white)",
+  "scene_type": "2D",
+  "fps": 120.0,
+  "frames": 401,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 120; frame 0 at t = 0",
+  "units": "pixels, seconds; image y grows downward (upward motion = decreasing y)",
+  "camera": {
+    "motion": "static (lower chassis/bumper template offset < 0.1 px over all 401 frames)",
+    "view": "straight-on rear view of a truck; the moving parts move vertically in a plane facing the camera"
+  },
+  "objects": [
+    {
+      "name": "container",
+      "aliases": ["truck box body", "cargo box", "lifting body", "truck bed"],
+      "description": "large white/light-grey rear box body of the truck with yellow border, red/white chevron markings, 'DOLL' labels and a central roller door (upper part light, lower part dark)",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "track": "tracks/container.csv",
+      "ref_point": "centre of the rear-face mask bbox (rigid-body origin proxy)",
+      "extent_px": {"width": 567.5, "height": 510.5, "note": "constant within +-1 px over the clip"},
+      "position_f0": {"bbox": [661, 339, 1227, 850], "centre": [944.0, 594.5]},
+      "position_f400": {"bbox": [661, 260, 1228, 769], "centre": [944.5, 514.5]},
+      "net_shift_px": {"dx": 0.0, "dy": -79.95, "source": "template match, subpixel"}
+    },
+    {
+      "name": "cardboard_box",
+      "aliases": ["box", "package", "carton", "crate"],
+      "description": "brown cardboard box with an open dark lid flap, resting on top of the container, centred at x~946",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "track": "tracks/cardboard_box.csv",
+      "ref_point": "centre of the box-body mask bbox (lid flap excluded)",
+      "extent_px": {"width": 279, "width_range": [276, 280], "height_f0": 168, "height_f400": 150, "height_incl_lid_flap_f0": 190,
+                    "note": "apparent height shrinks ~10% over the clip (perspective/tilt of the top face; width constant)"},
+      "position_f0": {"bbox": [808, 166, 1087, 333], "centre": [947.5, 249.5]},
+      "position_f400": {"bbox": [808, 104, 1085, 253], "centre": [946.5, 178.5]},
+      "relation": "rides on the container (bottom edge 3-7 px above container top edge all clip); moves with it",
+      "net_shift_px": {"bottom_edge_dy": -82, "container_dy": -80}
+    },
+    {
+      "name": "hazard_bar",
+      "description": "yellow/black diagonal-striped bar below the container (rear underrun/lift bar); rigidly attached to the container",
+      "moves": true,
+      "visible_frames": [0, 400],
+      "track": "tracks/hazard_bar.csv",
+      "extent_px": {"width": 285, "height": 31},
+      "position_f0": {"bbox": [802, 896, 1086, 926]},
+      "net_shift_px": {"dy": -79.91}
+    },
+    {
+      "name": "truck_lower_chassis",
+      "aliases": ["truck", "chassis", "bumper", "rear lights"],
+      "description": "black truck chassis with rear bumper, two red/white tail lamps and two small white reversing lights; bottom of image",
+      "moves": false,
+      "visible_frames": [0, 400],
+      "extent_px": {"bumper_width_row1020": 543, "width_row930": 548, "bbox_y_ge_900": [669, 900, 1217, 1044]},
+      "tail_lamps_approx_bbox": {"left": [683, 918, 763, 945], "right": [1125, 918, 1200, 945]},
+      "note": "part of the dark chassis between container and bumper (cross-member at y~855-900 in f0) moves up with the container; lamps/bumper are static"
+    },
+    {
+      "name": "roller_door",
+      "description": "door opening in the container rear face (moves with container)",
+      "moves": true,
+      "position_f0_approx_bbox": [821, 404, 1066, 830],
+      "extent_px": {"width": 245, "height": 426},
+      "note": "visual estimate +-3 px; upper half light, lower half dark"
+    }
+  ],
+  "whole_truck_silhouette": {"f0": [660, 144, 1231, 1044], "f400": [660, 80, 1229, 1044],
+                             "note": "includes lid flap on top; height f0 = 901 px, f400 = 965 px"},
+  "events": [
+    {"event": "container+box start rising", "frame": 5, "time_s": 0.042,
+     "note": "dy < -0.2 px first at frame 6, frames 0-4 static within 0.06 px; already ~10 px/s soon after onset"},
+    {"event": "rise continues (speeding up) to end of clip", "frame": 400, "time_s": 3.333,
+     "note": "no stop, bounce or direction change; purely vertical (|dx| < 0.2 px)"}
+  ],
+  "ground_or_background": "none (pure white segmentation background); no ground markings"
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0200.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MS",
+ "fps": 60.0,
+ "frames": 14,
+ "duration_s": 0.2333,
+ "width": 2560,
+ "height": 2560,
+ "question": {
+  "id": 526,
+  "question": "What is the diameter of the bottle's body in meters?",
+  "prior": "acceleration of the droplet = 9.7m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 60.0
+ }
+}

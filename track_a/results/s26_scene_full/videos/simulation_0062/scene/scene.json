@@ -1,0 +1,182 @@
+{
+ "video": "simulation_0062.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2160,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "units": "pixels (original 2160x1080 image coords, x right, y down) and seconds",
+ "camera": {
+  "motion": "static (phase correlation of background between frames 0/35/71 < 0.01 px)",
+  "horizon_y": 540,
+  "street_vanishing_point": [
+   1078,
+   539
+  ],
+  "notes": "vanishing point of the receding street (road edges) at ~(1078,539) = image centre (1080,540): level camera looking along the street, principal point at the image centre is consistent. Pedestrian pelvis stays at y~545 while they approach -> camera height ~ pedestrian pelvis height. Objects lower in the image (larger ground_y) are nearer: ground contact y: van 615, cyclist 626, taxi 633->712, pedestrian 672->707."
+ },
+ "objects": {
+  "pedestrian": {
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/pedestrian.csv",
+   "desc": "adult man, white T-shirt, blue jeans, white mannequin face; walks on the near-left sidewalk toward the camera and leftward",
+   "ref_point": "ref_x/ref_y = pelvis estimate (row at 47% of the bbox height from the top; x = mask mean in that row band)",
+   "apparent_size": "height 242 px (f0) -> 306 px (f71), grows as he approaches"
+  },
+  "taxi": {
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/taxi.csv",
+   "desc": "yellow NYC-style taxi (Ford Crown Victoria type) with roof TAXI sign; side view driving right at start, turns left (toward the camera) and approaches head-on",
+   "ref_point": "ref = bbox centre (vehicle root unknown; ground_y = tyre bottoms); mask_cx/cy also given",
+   "apparent_size": "bbox w 414 (side, f0) -> ~250-260 (front, f50-56) -> 311 (f71); h 170 -> 256"
+  },
+  "van": {
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/van.csv",
+   "desc": "white cargo van (Chevrolet Express type) with brown rear windows; drives left-to-right across the scene on the cross street behind the taxi and the cyclist",
+   "ref_point": "ref = centre of the full (template-reconstructed) bbox; rigid translation, constant image scale",
+   "apparent_size": "constant: length 453 px (rear bumper to front bumper), height 162.5 px (roof 452.5 to tyre bottom 615)"
+  },
+  "cyclist": {
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/cyclist.csv",
+   "desc": "rider in dark clothes on a bicycle with white-rimmed wheels, riding left-to-right on the cross street, nearer than the van",
+   "ref_point": "ref = bbox centre of rider+bike; pelvis_x/y = rider saddle/pelvis estimate",
+   "apparent_size": "constant: bike length 134 px (rear rim to front rim), total height 138 px (head top to tyre bottom)"
+  }
+ },
+ "static_objects": {
+  "lamp_post_near_left": {
+   "bbox": [
+    230,
+    185,
+    469,
+    685
+   ],
+   "width_px": 240,
+   "height_px": 501,
+   "desc": "double-lantern lamp post on the near-left corner; pole x~354, base y~682"
+  },
+  "litter_bin": {
+   "bbox": [
+    352,
+    550,
+    444,
+    684
+   ],
+   "width_px": 93,
+   "height_px": 135,
+   "desc": "dark green slatted bin next to the lamp post (bin body ~362-434 x, 560-672 y on the frame)"
+  },
+  "traffic_light_near_left": {
+   "bbox_signal_and_pole": [
+    470,
+    217,
+    624,
+    638
+   ],
+   "top_incl_sign_y": 140,
+   "pole_x": 555,
+   "base_y": 637,
+   "desc": "twin traffic-light heads + pedestrian signal, near-left corner"
+  },
+  "traffic_light_far_left": {
+   "head_bbox": [
+    768,
+    337,
+    814,
+    443
+   ],
+   "top_incl_sign_y": 295,
+   "base_y": 597,
+   "pole_x": 783,
+   "desc": "far-left corner traffic light with pedestrian-crossing sign on top"
+  },
+  "traffic_light_far_right": {
+   "head_bbox": [
+    1583,
+    347,
+    1652,
+    432
+   ],
+   "top_incl_sign_y": 302,
+   "base_y": 597,
+   "pole_x": 1615,
+   "desc": "far-right corner traffic light"
+  },
+  "traffic_light_near_right": {
+   "bbox_signal_and_pole": [
+    1950,
+    175,
+    2099,
+    642
+   ],
+   "top_incl_sign_y": 122,
+   "pole_x": 2025,
+   "base_y": 640,
+   "desc": "near-right traffic light with red triangular pedestrian-crossing warning sign on top"
+  },
+  "street_lamps_receding": {
+   "desc": "rows of identical small lamp posts along both sides of the receding street, converging to (1078,539)"
+  },
+  "roads": {
+   "desc": "cross street (horizontal in image, the van/cyclist travel on it, taxi turns off it) and receding street toward the vanishing point; sidewalks with red brick planters at near-left and far corners"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "event": "frames 0 and 1 are identical for every object (duplicate first frame); motion visible from frame 1->2"
+  },
+  {
+   "frame": 1,
+   "event": "van starts moving from rest (per-frame x step: 0.0, 1.4, 1.8, 2.4, 3.0, 3.4 ...), then accelerates steadily to the end"
+  },
+  {
+   "frame": 1,
+   "event": "cyclist already moving at frame 1, steady rightward ~17.81 px/frame (frames 1-71), constant image height"
+  },
+  {
+   "frame": 51,
+   "event": "taxi bbox centre reaches its right-most image x (982); taxi has turned from driving rightwards (side view, frames 0-~35) to driving toward the camera (front view from ~frame 44); after this its image x drifts slowly left while it keeps approaching (ground_y rises to the end)"
+  },
+  {
+   "frame": 10,
+   "event": "cyclist rear wheel clears the van front bumper in the image (frames 0-9 the cyclist overlaps the van front, partly hidden behind the taxi)"
+  },
+  {
+   "frame": 56,
+   "event": "van front bumper reaches the cyclist rear wheel in the image (van, behind the cyclist, starts overtaking it); cyclist occludes van from here"
+  },
+  {
+   "frame": 65,
+   "event": "van front passes the cyclist front wheel in the image"
+  },
+  {
+   "frame": 57,
+   "event": "van rear clears the taxi right edge in the image (taxi no longer overlaps the van)"
+  },
+  {
+   "frame": 71,
+   "event": "end of clip: all four objects still moving"
+  }
+ ]
+}

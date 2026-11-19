@@ -1,0 +1,75 @@
+{
+  "video": "simulation_0083.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y down; no metric scale assumed",
+  "view": "orthographic-looking top-down view of a uniform light-grey ground plane (bg ~157 grey); two cars drive in opposite directions on parallel horizontal lanes. Very mild perspective near the image edges (apparent car length grows by up to ~4% at x<300 or x>1600).",
+  "camera": {
+    "motion": "static (phase correlation of a car-free background band gives 0.00 px shift for all frames)",
+    "per_frame_background_shift_px": [0, 0]
+  },
+  "objects": {
+    "yellow_car": {
+      "description": "yellow (gold) sedan/coupe, upper lane (y ~358-473), nose pointing LEFT, drives left (-x). Has dark glass roof, side mirrors at y=358 and ~473.",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/yellow_car.csv",
+      "reference_point": "centre of mask bounding box (ref_x, ref_y) = proxy for the object origin",
+      "size_px": {
+        "length_along_motion_x": 270,
+        "length_note": "270 px for frames 0-31 (car centre x 863..562); 272 for x 550..290; 274-277 for frames 59-71 near the left edge (perspective/side visible). Use 270 as the rest length.",
+        "width_incl_mirrors_y": 116,
+        "body_width_without_mirrors_y": "94 (median per-column), up to 100 at wheel arches",
+        "height": "not observable (top-down view)"
+      },
+      "lane_y_px": 415.5,
+      "position_frame0_px": [862.5, 416.5],
+      "position_frame71_px": [162.0, 415.5]
+    },
+    "black_car": {
+      "description": "black-and-white car (black rear half/roof, white/silver front half and nose), lower lane (y ~482-598), nose pointing RIGHT, drives right (+x). Side mirrors at y~482 and ~598.",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/black_car.csv",
+      "reference_point": "centre of mask bounding box (ref_x, ref_y) = proxy for the object origin",
+      "size_px": {
+        "length_along_motion_x": 269,
+        "length_note": "268-270 px for car centre x 980..1330 (frames 15-40); grows to 271-277 for x 1340..1610 and 278-281 for frames 65-71 near the right edge (perspective). 270-274 in frames 0-14 when side by side with the yellow car. Use ~269 as rest length.",
+        "width_incl_mirrors_y": 116,
+        "body_width_without_mirrors_y": "93 (median per-column), up to 100 at wheel arches",
+        "height": "not observable (top-down view)"
+      },
+      "lane_y_px": 539.5,
+      "position_frame0_px": [784.5, 539.5],
+      "position_frame71_px": [1761.0, 540.0]
+    },
+    "ground": {
+      "description": "uniform light-grey plane filling the whole image; no markings, no lines, no other props. Soft dark blob shadows around each car (darker by <= ~30 grey levels, extending ~50-100 px).",
+      "moves": false
+    }
+  },
+  "relations": {
+    "lane_separation_y_px": 124,
+    "frame0_centre_offset_px": {"dx_yellow_minus_black": 78.0, "dy": -124.0, "distance": 146.5},
+    "frame71_centre_offset_px": {"dx_yellow_minus_black": -1599.0, "dy": -124.5, "distance": 1603.8},
+    "cars_overlap_in_x": "frames 0-15 (side by side, yellow ahead of black's nose by ~77 px at start); from frame 16 they are apart in x and separate further"
+  },
+  "events": [
+    {"event": "both cars stationary (frame 1 is pixel-identical to frame 0)", "frame": 0, "time_s": 0.0},
+    {"event": "start of motion of both cars (first nonzero displacement between frames 1 and 2)", "frame": 2, "time_s": 0.0833, "note": "already at full per-frame displacement at frame 2: yellow -10 px, black +13..14 px; no ramp-up visible"},
+    {"event": "cars stop overlapping in x (start side by side and diverge; first frame with yellow bbox_x1 < black bbox_x0)", "frame": 16, "time_s": 0.667, "note": "they never pass each other: yellow is already left-of/ahead of black's rear at start and drives left, black drives right"},
+    {"event": "end of clip, both still moving at constant per-frame displacement, both fully in frame", "frame": 71, "time_s": 2.9583}
+  ],
+  "track_observations": "From frame 2 to 71 the yellow car's ref_x decreases by exactly 10 px every frame (852.5 -> 162.0, 690.5 px in 69 frames); the black car's ref_x increases by 13.96 px/frame on average (797.5 -> 1761.0; rear edge 663 -> 1621 = 13.88 px/frame, front edge 932 -> 1901 = 14.04 px/frame, difference from edge-perspective growth). No vertical motion (y constant within 1 px). No direction changes, no contact.",
+  "files": {
+    "tracks/yellow_car.csv": "per-frame track of the yellow car",
+    "tracks/black_car.csv": "per-frame track of the black car",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

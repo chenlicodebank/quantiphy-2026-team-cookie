@@ -1,0 +1,60 @@
+{
+  "video": "simulation_0203.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 30,
+  "duration_s": 1.25,
+  "image_size_px": [2124, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (frame-to-frame differences are zero outside the falling glass apart from faint render noise near the alarm clock x1217-1264 y916-955 and telephone/chair x1339-1557)",
+    "view": "frontal, slightly elevated view of a desk against a plain teal wall; desk top recedes (back edge y~945, front edge y~1045-1060); the falling object moves in a vertical plane facing the camera, just in front of the desk-top back half"
+  },
+  "moving_objects": [
+    {
+      "name": "magnifying_glass",
+      "description": "the only moving object: magnifying glass (pale silver/blue metal ring with clear lens, white ferrule, tan wooden handle with dark end cap pointing right). Starts in the air above the desk centre, falls straight down (no noticeable horizontal drift), lands on the desk top in front of the eyeglasses/paper card, rebounds/tips once and comes to rest.",
+      "track_file": "tracks/magnifying_glass.csv",
+      "visible_frames": "0-29 (never occluded)",
+      "reference_point": "ref_x, ref_y = bounding-box centre of the whole object (ring + handle). lens_centre_x/y = rough centre of the lens ring where it can be read (frames 0-10 and 18-29). Blender origin is not visible; for a vertical-drop question the x choice does not matter and vertical motion of bbox centre and lens centre is the same while the object does not rotate (frames 0-10).",
+      "pixel_size": {
+        "overall_length_handle_tip_to_ring_edge_px": "162 +-2 (frames 0-3, 6-10 where the glass is close to horizontal; bbox_w 161-164). Frames 4-5 read 152-153 because the glass is slightly yawed/tilted; at rest on the desk 154 (bbox 974-1127; perspective, lying on desk slightly rotated).",
+        "lens_ring_diameter_px": "~104 (rest frame 24, horizontal extent of ring x974-1078); ring seen as ellipse ~38 px tall at rest",
+        "thickness_edge_on_px": "19-22 (frames 6-8, glass seen exactly edge-on: ring rim height + handle)",
+        "handle_length_px": "~60 including ferrule (x ~1080-1141 in frames 0-10)"
+      },
+      "apparent_size_change": "none beyond rotation (2D scene, constant depth)"
+    }
+  ],
+  "events": [
+    {"event": "start of motion / release", "frame": 0, "time_s": 0.0, "note": "already moving slowly at frame 0->1 (bbox centre drops 8 px), essentially released at rest at ~frame 0"},
+    {"event": "free fall (vertical)", "frames": "0-10", "note": "bbox centre y: 200.5, 208.5, 228, 261, 308, 367.5, 440, 524.5, 621, 732.5, 857.5; ring left edge constant at x 979-980 (no horizontal motion)"},
+    {"event": "first impact with desk", "frame": 11, "time_s": 0.4583, "note": "frame 10 bottom y=877 still in air, frame 11 resting on desk top (bottom y~1018). Contact between frames 10 and 11; frame 11 is the first contact frame"},
+    {"event": "max compression/lowest pose of first contact", "frame": 12, "time_s": 0.5},
+    {"event": "rebound: handle tips up (ring edge stays on desk)", "frames": "13-16", "note": "handle highest at frame 15 (t=0.625), cap top y~931"},
+    {"event": "second impact (handle falls back onto desk)", "frame": 18, "time_s": 0.75},
+    {"event": "small rocking/settling", "frames": "19-23"},
+    {"event": "end of motion / at rest", "frame": 24, "time_s": 1.0, "note": "frame-to-frame difference falls to ~0 from frame 25"}
+  ],
+  "static_objects": [
+    {"name": "desk", "desc": "dark green leather-top wooden desk across the bottom of the frame", "extent_px": "top surface back edge y~945 (x~250-1900), front edge y~1045-1060; right front corner exits frame at x~1980,y1080; spans whole width"},
+    {"name": "desk_lamp", "desc": "banker's lamp with green glass shade, brass stand, left side on the books", "bbox_px": [315, 530, 575, 885], "notes": "shade x345-570 y530-620 (width ~225 px); stand pole x~420"},
+    {"name": "book_stack", "desc": "two/three brown leather books under the lamp, left", "bbox_px": [335, 865, 500, 995]},
+    {"name": "small_wooden_box", "desc": "small reddish wooden box behind typewriter", "bbox_px": [520, 800, 580, 860]},
+    {"name": "typewriter", "desc": "black vintage typewriter, left-centre", "bbox_px": [515, 900, 830, 1040], "notes": "width ~315 px, height ~140 px"},
+    {"name": "typewriter_paper", "desc": "handwritten sheet sticking up out of the typewriter", "bbox_px": [575, 780, 715, 905]},
+    {"name": "ashtray", "desc": "small metal ashtray front-left", "bbox_px": [405, 980, 485, 1020]},
+    {"name": "paper_card_front", "desc": "white card in front of/under typewriter", "bbox_px": [735, 995, 885, 1045]},
+    {"name": "eyeglasses_and_card", "desc": "dark folded eyeglasses + white paper card behind the landing spot of the magnifying glass", "bbox_px": [915, 950, 1100, 980]},
+    {"name": "alarm_clock", "desc": "red twin-bell alarm clock, right of centre", "bbox_px": [1170, 825, 1270, 950], "notes": "width ~100, height ~125"},
+    {"name": "picture_frame", "desc": "gold photo frame with silhouette portrait", "bbox_px": [1300, 840, 1390, 955]},
+    {"name": "telephone", "desc": "black rotary telephone, right", "bbox_px": [1430, 790, 1650, 995]},
+    {"name": "pen_in_stand", "desc": "gold dip pen in brass stand in front of telephone", "bbox_px": [1490, 795, 1570, 1010]},
+    {"name": "scissors_inkwell_card", "desc": "scissors/keys, small dark inkwell (x1320-1365,y980-1015) on a card, between clock and phone", "bbox_px": [1190, 960, 1365, 1015]},
+    {"name": "chair_left", "desc": "blurred wooden chair back behind desk, left", "bbox_px": [270, 690, 650, 950]},
+    {"name": "chair_right", "desc": "blurred wooden chair back behind desk, right", "bbox_px": [1270, 695, 1655, 940]}
+  ],
+  "files": {"track": "tracks/magnifying_glass.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

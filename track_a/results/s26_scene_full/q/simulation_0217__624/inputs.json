@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0217.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 624,
+  "question": "What is the length of the TV in meters?",
+  "prior": "speed of the black cat = 0.94m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

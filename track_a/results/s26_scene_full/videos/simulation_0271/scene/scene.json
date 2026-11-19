@@ -1,0 +1,62 @@
+{
+  "video": "simulation_0271.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y downward; no metric scale recorded",
+  "camera": {
+    "motion": "static (uniform grey background RGB ~194, no texture; nothing to pan against, and no evidence of camera motion)",
+    "view": "bird seen from directly above/below (top-down planar view); motion in the image plane",
+    "perspective_cues": "none (no ground, horizon or vanishing points); single depth plane -> one metres-per-pixel scale"
+  },
+  "objects": [
+    {
+      "name": "phoenix",
+      "description": "the only object: a phoenix / peacock-like bird with green-purple-dark wings, dark green body spine and long orange peacock-eye tail feathers; head (beak) points LEFT, tail right",
+      "moves": true,
+      "visible_frames": "0-71 (fully in frame 0-69; frames 70-71 head/beak leaves the left edge, x-extent cut)",
+      "track_file": "tracks/phoenix.csv",
+      "reference_point": "ref_x, ref_y: beak tip x and spine (body axis) row; beak tip moves rigidly with body (checked by template matching, agreement ~1-3 px/frame). Origin of the rig is an unknown fixed offset behind the beak along the spine (wing roots are ~200-270 px behind the beak tip); this offset does not affect displacements/speeds.",
+      "motion": "flies horizontally LEFT along y ~ 720-729 px, accelerating overall, with a flapping-dependent speed ripple",
+      "positions_px": {
+        "ref_x_frame0": 1597, "ref_x_frame24": 1408, "ref_x_frame48": 838, "ref_x_frame69": 4,
+        "ref_x_frame71_extrapolated": -76.1,
+        "ref_y_range": [719, 729.5]
+      },
+      "mean_per_frame_dx_px": {
+        "frames_1_25": 8.2, "frames_26_50": 24.6, "frames_51_69": 40.7
+      },
+      "extents_px": {
+        "length_x_beak_to_tail_tip": "690-746 (varies with tail pose; median ~715; frames 0-69 only)",
+        "wingspan_y_max": 1008, "wingspan_y_max_frames": [21, 46, 71],
+        "wingspan_y_min": 374, "wingspan_y_min_frames": [12, 37, 62],
+        "span_y_frame0": 429,
+        "note": "span_y_px is the full vertical mask extent (wing tip to wing tip, or tail feathers when wings are folded)"
+      },
+      "flap_cycle": {
+        "period_frames": 25,
+        "span_peaks_frames": [10, 21, 35, 46, 60, 71],
+        "span_minima_frames": [12, 25, 37, 50, 62],
+        "note": "pattern repeats every 25 frames (~1.04 s); two span peaks per cycle (930 px and 1008 px)"
+      }
+    }
+  ],
+  "static_objects": [],
+  "events": [
+    {"frame": 0, "time_s": 0.0, "event": "phoenix visible, nearly stationary (dx 0 px between frames 0 and 1), then starts moving left"},
+    {"frame": 17, "time_s": 0.708, "event": "local speed minimum (beak dx ~1-3 px/frame), also at frame 20"},
+    {"frame": 30, "time_s": 1.25, "event": "speed reaches ~25-30 px/frame"},
+    {"frame": 55, "time_s": 2.292, "event": "speed reaches ~40-46 px/frame"},
+    {"frame": 70, "time_s": 2.917, "event": "beak/head crosses the left image edge (x-extent cut from here)"}
+  ],
+  "files": {
+    "tracks/phoenix.csv": "per-frame track of the phoenix",
+    "tracks/phoenix_body_shift.csv": "per-frame body template shift (cross-check / extrapolation for frames 70-71)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "probe.py, track.py, body_shift.py, merge_ref.py"
+  }
+}

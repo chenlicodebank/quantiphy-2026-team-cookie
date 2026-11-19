@@ -1,0 +1,137 @@
+{
+ "video": "internet_0021_segmented.mp4",
+ "source": "segmentation (internet footage, sky replaced by white)",
+ "scene": "2D",
+ "fps": 29.970629,
+ "frames": 107,
+ "width": 850,
+ "height": 478,
+ "time_rule": "t = frame / fps; frame = round(t*fps)",
+ "camera": {
+  "type": "handheld/slow pan, no zoom",
+  "note": "background (buildings) drifts left ~15 px and down ~4-6 px over the clip (camera pans slightly right/up following the plane); scale stays 1.000+-0.002, rotation <0.25 deg. Per-frame shift in tracks/camera_affine.csv and columns bg_shift_x/y and *_bgcomp in airplane.csv.",
+  "total_bg_shift_x_px": -15.177,
+  "total_bg_shift_y_px": 3.668
+ },
+ "objects": [
+  {
+   "name": "airplane",
+   "desc": "single dark twin-engine jet airliner (737-like), flying left->right, nose to the right, slightly climbing in image (y 192->186). Only moving object.",
+   "moves": true,
+   "visible_frames": [
+    0,
+    104
+   ],
+   "fully_visible_frames": [
+    0,
+    89
+   ],
+   "partially_cut_by_right_edge_frames": [
+    90,
+    104
+   ],
+   "track": "tracks/airplane.csv",
+   "frame0": {
+    "bbox": [
+     356,
+     183,
+     425,
+     201
+    ],
+    "length_nose_to_tail_px": 70,
+    "height_fin_to_belly_px": 19,
+    "centre": [
+     390.5,
+     192.0
+    ]
+   },
+   "last_full_frame": {
+    "frame": 89,
+    "length_px": 89,
+    "height_px": 23,
+    "centre": [
+     804.0,
+     186.0
+    ]
+   },
+   "length_px_by_frame_sample": {
+    "0": 70.0,
+    "10": 73.0,
+    "20": 72.0,
+    "30": 75.0,
+    "40": 78.0,
+    "50": 80.0,
+    "60": 80.0,
+    "70": 84.0,
+    "80": 87.0
+   },
+   "apparent_size_note": "nose-to-tail pixel length grows 70 px (f0) -> 88 px (f85): plane gets closer / turns more side-on; use the length at the frame the question refers to, or the f0 value 70 px (mean over full frames given in notes)."
+  },
+  {
+   "name": "left_tall_building_block",
+   "moves": false,
+   "desc": "dark multi-storey apartment blocks at left, roof ~y 290-320",
+   "x_range": [
+    0,
+    432
+   ],
+   "width_px": 433,
+   "top_y_min": 286,
+   "top_y_median": 310.0,
+   "visible_height_px_from_median_top_to_bottom": 167
+  },
+  {
+   "name": "middle_low_houses",
+   "moves": false,
+   "desc": "lower houses with pitched roofs in the middle gap",
+   "x_range": [
+    433,
+    600
+   ],
+   "width_px": 168,
+   "top_y_min": 330,
+   "top_y_median": 378.0,
+   "visible_height_px_from_median_top_to_bottom": 99
+  },
+  {
+   "name": "right_building_block",
+   "moves": false,
+   "desc": "apartment block at right with a lit mast/antenna on roof (x~730, top y~293) and a red vertical sign (x~735, y~365-390)",
+   "x_range": [
+    601,
+    849
+   ],
+   "width_px": 249,
+   "top_y_min": 293,
+   "top_y_median": 330.0,
+   "visible_height_px_from_median_top_to_bottom": 147
+  },
+  {
+   "name": "sky",
+   "moves": false,
+   "desc": "replaced by flat white background (segmentation)"
+  }
+ ],
+ "events": [
+  {
+   "event": "airplane in steady flight from first frame (already moving at frame 0)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "airplane nose reaches right image edge (exit begins)",
+   "frame": 90,
+   "t": 3.0029
+  },
+  {
+   "event": "last frame with tail fin visible",
+   "frame": 104,
+   "t": 3.4701
+  },
+  {
+   "event": "airplane fully out of frame",
+   "frame": 105,
+   "t": 3.5034
+  }
+ ]
+}

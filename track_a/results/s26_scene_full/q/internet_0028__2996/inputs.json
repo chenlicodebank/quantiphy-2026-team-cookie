@@ -1,0 +1,18 @@
+{
+ "video": "internet_0028.mp4",
+ "video_source": "internet",
+ "video_type": "V2MC",
+ "fps": 20.528302,
+ "frames": 93,
+ "duration_s": 4.5303,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2996,
+  "question": "What is the length of the orange suitcase in meters?",
+  "prior": "velocity of the conveyer belt = 0.5 m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

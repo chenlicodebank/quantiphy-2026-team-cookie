@@ -1,0 +1,45 @@
+{
+  "video": "simulation_0116.mp4",
+  "source": "simulation",
+  "scene": "2D",
+  "fps": 24.006002,
+  "frames": 32,
+  "width": 1386,
+  "height": 1920,
+  "time_of_frame": "t = frame / 24.006002 (frame 0 at t=0)",
+  "pixel_coords": "x right, y DOWN, original resolution, origin top-left",
+  "camera": {"motion": "static (no pan/shake; background identical across frames apart from the ball and its shadow)",
+             "view": "fronto-parallel view of a flat building facade; ball falls in a plane parallel to the wall, so one metres-per-pixel scale applies"},
+  "moving_objects": {
+    "football": {
+      "description": "American football (dark brown leather, white stripes near each tip), the only moving object; right side of the frame in front of the blue corrugated wall, x ~1036",
+      "visible_frames": "0-31 (all), never occluded",
+      "track_file": "tracks/football.csv",
+      "reference_point": "mask centroid (cx, cy) = proxy for the object's origin (centre of a symmetric rigid ball)",
+      "orientation": "long axis roughly vertical throughout; ball tumbles slowly (white stripe at the bottom tip in frame 0, at the top tip by ~frame 20+)",
+      "pixel_size_frame0": {"length_long_axis_px": 63, "width_px": 39, "bbox_w": 40, "bbox_h": 64},
+      "pixel_size_median_all_frames": {"length_long_axis_px": 61, "width_px": 39},
+      "motion": "starts essentially at rest at frame 0 (y 228.5 -> 229.7 between frames 0 and 1) and falls straight down with steadily increasing speed; horizontal drift < 2 px. Per-frame dy grows ~3.3 px/frame each frame (vertical pixel displacement frame 30->31 ~96 px).",
+      "start_y_px": 228.5, "end_y_px": 1730.9, "total_vertical_drop_px_frame0_to_31": 1502.4
+    }
+  },
+  "events": [
+    {"event": "release / start of fall (ball at rest at top)", "frame": 0, "t": 0.0},
+    {"event": "ball passes level of top landing platform underside (y~640)", "frame": 16, "t": 0.6665},
+    {"event": "last frame; ball bottom (y=1763) reaches the base of the wall / ground line (~1765-1770); no bounce or impact visible within the clip", "frame": 31, "t": 1.2913}
+  ],
+  "static_objects": {
+    "fire_escape_stairs": {"description": "yellow steel staircase with three landings, left/centre", "bbox_px": [0, 280, 980, 1910]},
+    "top_landing": {"description": "upper yellow landing with orange mesh floor", "bbox_px": [617, 483, 980, 642], "width_px": 363},
+    "middle_landing": {"description": "middle landing in front of the middle door", "bbox_px": [617, 1030, 980, 1285], "width_px": 363},
+    "bottom_landing": {"description": "ground-level landing at the stair foot", "bbox_px": [633, 1715, 950, 1910]},
+    "door_top": {"description": "yellow door, top storey", "bbox_px": [650, 280, 805, 500], "width_px": 155, "note": "lower part hidden behind landing railing"},
+    "door_middle": {"description": "yellow door with dark glass panel, middle storey", "bbox_px": [650, 825, 805, 1167], "width_px": 155, "height_px": 342},
+    "door_bottom": {"description": "yellow door with dark glass panel, ground storey", "bbox_px": [650, 1375, 805, 1717], "width_px": 155, "height_px": 342},
+    "window": {"description": "square window with yellow frame, upper left", "bbox_px": [163, 303, 328, 467], "width_px": 165, "height_px": 164},
+    "beige_panel": {"description": "sky/landscape-coloured rectangle at right edge (gap in wall)", "bbox_px": [1242, 1308, 1386, 1558]},
+    "ground": {"description": "dark asphalt ground at bottom", "y_top_px": 1768},
+    "wall": {"description": "blue corrugated metal facade, fills background"}
+  },
+  "static_extents_reliability": "read off a 100 px grid, about +/-5 px"
+}

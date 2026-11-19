@@ -1,0 +1,92 @@
+{
+ "wall_s": 998,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 20,
+  "duration_ms": 245168,
+  "total_cost_usd": 2.22784,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 24,
+  "cache_creation_input_tokens": 32068,
+  "cache_read_input_tokens": 857421,
+  "output_tokens": 22182,
+  "output_tokens_details": {
+   "thinking_tokens": 14247
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 32068,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 689,
+    "cache_read_input_tokens": 93272,
+    "cache_creation_input_tokens": 6597,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 6597
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 56,
+  "flags": [
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output\"}"
+   },
+   {
+    "tool": "Monitor",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output"
+    ],
+    "words": [],
+    "input": "{\"description\": \"wait for recon.py background output\", \"timeout_ms\": 600000, \"command\": \"until [ -s /private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output ]; do sleep 2; done; echo ready\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-b-simulation-0299-q-1451/cc4086ec-3a27-44e8-9cce-976702ae6fbf/tasks/bjr16qbfd.output\"}"
+   }
+  ]
+ },
+ "video": "simulation_0299",
+ "ids": [
+  1451
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/simulation_0299__q1451.jsonl"
+}

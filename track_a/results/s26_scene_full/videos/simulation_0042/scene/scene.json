@@ -1,0 +1,86 @@
+{
+  "video": "simulation_0042.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "units": "pixels and seconds only; no metric scale estimated",
+  "view": "high, nearly top-down (bird's-eye) view of a sandy beach with a rocky headland (top right), shallow water / sea (bottom and right). Camera tilted slightly: vertical structures (boat mast, cabin) lean toward the image TOP, so the camera looks somewhat 'up-image'; lower image rows are closer to the camera.",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the cliff patch and of a shoreline patch against frame 0: max |shift| 0.08 px over all 72 frames (scripts/camera.py)",
+    "duplicate_frames": "frames 0 and 1 are identical (mean abs diff 0.05 grey levels, i.e. codec noise); everything is static between them, motion starts at frame 1->2",
+    "perspective_cues": "no horizon visible. Near-nadir view; ground (beach/sea surface) is roughly the image plane. Lower image = slightly nearer: boat hull length shrinks 348.6 px (frame 0-5) -> ~344-346 px (frames 40-62) as it moves up-left; bird's peak wingspan grows from 54.7 px (frame 5, y~388) to 56.3 px (frame 31, y~500) to 62.4 px (frame 54, y~600)."
+  },
+  "objects": [
+    {
+      "name": "bird",
+      "description": "single dark (black) flying bird, seen from above with wings spread; only animal in the scene",
+      "moves": true,
+      "visible_frames": "0-67 (partly cut by left edge at frames 0-1, by right edge at frame 67; absent 68-71)",
+      "track": "tracks/bird.csv",
+      "reference_point": "centroid of the dark silhouette (~body centre)",
+      "motion_summary_px": "flies left -> right and slightly downward across the image: (5,360) at f0 -> (1062,646) at f66; ~16.5-17.6 px per frame, nearly constant; heading 2-30 deg below +x (wavy path). Flaps wings: span across flight peaks at frames 5 (54.7 px), 31 (56.3 px), 54 (62.4 px); minima ~31.6 px (f24), ~34.6 px (f20), ~35.9 px (f46). Body length along flight ~25-30 px.",
+      "occlusion": "none; enters/exits at image edges"
+    },
+    {
+      "name": "bird_shadow",
+      "description": "soft dark shadow of the bird on the sand, up-right of the bird early on (at (363,315) when bird is at the left edge)",
+      "moves": true,
+      "visible_frames": "0-28 on sand (tracked); continues faintly over shallow water after frame 28 (not tracked)",
+      "track": "tracks/bird_shadow.csv",
+      "reference_point": "centroid of the shadow blob"
+    },
+    {
+      "name": "boat",
+      "description": "small fishing boat: red hull, white/grey deck, red cabin roof with white mast, railings at the stern, teal hatch; bow points left (upper-left), stern lower-right; its dark shadow falls to the upper right on the water",
+      "moves": true,
+      "visible_frames": "0-71; fully visible 0-62; bow cut by left image edge from frame 63",
+      "track": "tracks/boat.csv",
+      "reference_point": "centroid of the hull mask (mast removed) = cx_px,cy_px; cx_ref_px,cy_ref_px = same but edge-corrected for frames 63-71 by shifting the frame-62 centroid with the stern (bbox right/bottom edge) motion",
+      "motion_summary_px": "drifts bow-first to the left and slightly up: centroid (516,992) f0 -> (171,895) f62; ~5.9 px/frame, steady (no start/stop inside the clip). Direction ~16 deg above -x; hull axis at ~20 deg.",
+      "size_px": "hull length along main axis 344-350 px (frame 2-62, mean ~346.5), width across ~148-150 px (includes deck/railing seen from above and some cabin side), image bbox height ~182-186 px (hull), mast top ~47-51 px above the hull mask top (mast_top_y_px column). Mast appears ~100 px long from cabin roof to tip (foreshortened)."
+    },
+    {
+      "name": "boat_shadow",
+      "description": "large dark shadow of the boat (and long thin mast shadow) on the water to the upper right of the boat; moves with the boat",
+      "moves": true,
+      "visible_frames": "0-71",
+      "track": "not tracked separately (moves rigidly with the boat)"
+    },
+    {
+      "name": "sand_beach",
+      "description": "large light-tan sandy beach covering the upper-left 2/3 of the image, U-shaped lower edge",
+      "moves": false,
+      "extent_px": "dry sand: x 0 to ~1000 (at top), lower tip at about (400,720); including the pale submerged/wet sand fringe: bbox x 0-1041, y 0-799, lowest point (436,799). Right edge of sand mask per row: y100->983, y300->908, y400->832, y500->761, y600->707, y700->575 (includes wet fringe).",
+      "measured_frame": 30
+    },
+    {
+      "name": "rocky_headland",
+      "description": "rocky cliff / outcrop with white-capped top and dark brown crevices at the top centre-right, cut by the top image edge",
+      "moves": false,
+      "extent_px": "visual outline approx x 480-1010, y 0-225 (bottom tip near (700,220)); darkest textured part x 657-889, y 80-225",
+      "measured_frame": 12
+    },
+    {
+      "name": "sea_water",
+      "description": "green shallow sea / water in the lower and right part of the image",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "clip start; frames 0 and 1 identical", "frame": 0, "t_s": 0.0},
+    {"event": "motion visible from frame 1 to 2 for both bird and boat", "frame": 2, "t_s": 0.0833},
+    {"event": "bird fully inside image (left edge cleared)", "frame": 2, "t_s": 0.0833},
+    {"event": "bird wings at maximum spread (span peak)", "frames": [5, 31, 54], "t_s": [0.2083, 1.2917, 2.25]},
+    {"event": "bird wings at minimum spread", "frames": [11, 24, 46], "t_s": [0.4583, 1.0, 1.9167]},
+    {"event": "bird shadow leaves the dry sand onto water", "frame": 28, "t_s": 1.1667},
+    {"event": "bird passes over the shoreline (sand -> water)", "frame": "~45", "t_s": 1.875},
+    {"event": "boat last fully visible frame (bow reaches left edge at 63)", "frame": 62, "t_s": 2.5833},
+    {"event": "bird starts leaving at the right edge (last frame 67, partial)", "frame": 67, "t_s": 2.7917},
+    {"event": "bird gone", "frame": 68, "t_s": 2.8333}
+  ]
+}

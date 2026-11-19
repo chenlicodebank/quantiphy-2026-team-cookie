@@ -1,0 +1,18 @@
+{
+ "video": "internet_0073.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 25.111529,
+ "frames": 138,
+ "duration_s": 5.4955,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 3280,
+  "question": "What is the distance between the red package and the blue bag in meters?",
+  "prior": "velocity of the conveyor belt = 0.3m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

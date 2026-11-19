@@ -1,0 +1,67 @@
+{
+  "video": "simulation_0117.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.020228,
+  "frames": 19,
+  "duration_s": 0.791,
+  "image_size_px": [1920, 1920],
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "pixel_axes": "x right, y DOWN, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of region x 1100-1900 vs frame 0: |shift| < 0.11 px in every frame",
+    "view": "frontal, wall-and-door plane facing the camera; no visible perspective convergence"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small yellow-green ball (tennis-ball-like, seam visible), looks dark olive in shadow and light yellow-green in the lit spot on the door",
+      "moves": true,
+      "visible_frames": "0-18 (frames 0-1 partly cut off by the top image edge)",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "ref_cx_px, ref_cy_px (blob centroid; for clipped frames 0-1, bottom edge - 22 px)",
+      "diameter_px": 45.0,
+      "diameter_px_range": "44-47 (bbox), slight blur growth to 46-47 in frames 12-16",
+      "path": "straight vertical fall at x = 1017.1 +/- 0.2 px, y increasing (downward) every frame"
+    },
+    {
+      "name": "door",
+      "description": "brown wood-grain door with frame, centre-left of image, lit by a white spotlight",
+      "moves": false,
+      "visible_frames": "0-18",
+      "outer_frame_bbox_px": [697, 372, 1412, 1846],
+      "outer_width_px": 715,
+      "outer_height_px": 1474,
+      "notes": "left jamb inner edge x~714; a vertical seam/groove (separate narrow left panel) at x~820-823; top edge y~372-375; bottom = floor line y~1846-1849; right edge x~1409-1412 (low contrast, +/-3 px)"
+    },
+    {
+      "name": "door_handle",
+      "description": "black vertical smart-lock handle on the left part of the door",
+      "moves": false,
+      "bbox_px": [826, 1036, 862, 1224],
+      "width_px": 37,
+      "height_px": 189,
+      "centre_px": [844, 1130]
+    },
+    {
+      "name": "floor",
+      "description": "grey floor strip along the bottom of the image",
+      "moves": false,
+      "wall_floor_boundary_y_px": 1848,
+      "notes": "floor visible y 1848-1919; ball does not reach it within the clip"
+    },
+    {
+      "name": "wall",
+      "description": "dark olive-grey wall filling the background",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball visible at top, nearly at rest / start of fall", "frame": 0, "t_s": 0.0, "note": "frame-0->1 displacement only ~4.6 px, then grows ~11 px/frame each frame; release essentially at or just before frame 0"},
+    {"event": "ball fully inside image", "frame": 2, "t_s": 0.0833},
+    {"event": "ball passes door top edge (y=372)", "frame": "between 7 (y=275) and 8 (y=357); bottom crosses at frame 8", "t_s": "~0.33"},
+    {"event": "last frame, ball still falling, bottom at y=1797, ~49 px above floor line", "frame": 18, "t_s": 0.7494}
+  ],
+  "no_events": "no bounce, impact, contact or direction change within the clip"
+}

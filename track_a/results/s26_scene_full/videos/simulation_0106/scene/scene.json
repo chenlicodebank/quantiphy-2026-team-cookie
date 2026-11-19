@@ -1,0 +1,67 @@
+{
+  "video": "simulation_0106.mp4",
+  "source": "simulation",
+  "scene_type_declared": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "resolution": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin at top-left pixel; units px",
+  "camera": {
+    "motion": "static (uniform grey background RGB 206,206,206, corners constant all 72 frames; no texture to track, no pan possible to detect but none indicated)",
+    "background": "flat uniform light grey, no ground plane, horizon or vanishing points",
+    "perspective_note": "Declared 2D, but apparent sizes change slowly: left virus grows ~+0.22 px/frame in body radius (123.8 -> ~133.5 px over frames 1-48), right virus shrinks ~-0.16 px/frame (139.1 -> ~131 px over frames 1-44). Pixel step per frame changes in the same sense (left 11.5 -> ~12.9 px/frame, right 11.5 -> ~10.3 px/frame). Consistent with the left one moving slightly toward the camera and the right one slightly away (or a perspective camera viewing slightly off-plane motion). See notes.md."
+  },
+  "objects": [
+    {
+      "name": "virus_left_small",
+      "description": "Spiky virus particle (coronavirus-like): dark blue-teal spherical body with ~40 dark-red-tipped spikes. The LEFT and slightly SMALLER of the two (at frame 0 body radius 123.8 px vs 139.1 px).",
+      "moves": true,
+      "motion": "moves straight UP (and very slightly left, ~-0.4 px/frame in x) from frame 1 on, exits through the top edge; also rotates slowly",
+      "visible_frames": [0, 68],
+      "fully_in_frame": [0, 27],
+      "track_file": "tracks/virus_left_small.csv",
+      "reference_point": "centre of the spherical body (circle fit to body outline) = object origin",
+      "ref_reliable_frames": [0, 50],
+      "frame0": {"ref_xy": [721.57, 570.37], "body_radius": 123.78, "body_diameter": 247.6,
+                  "bbox_xyxy_incl_spikes": [468, 318, 986, 831], "bbox_w": 519, "bbox_h": 514},
+      "frame27": {"ref_xy": [711.5, 259.0], "body_radius": 129.95, "bbox_w": 534, "bbox_h": 528},
+      "size_note": "Full extent incl. spikes (proxy for world AABB) ~519x514 px at frame 0 growing to ~534x528 px at frame 27. Body (sphere without spikes) diameter 247.6 px at frame 0."
+    },
+    {
+      "name": "virus_right_large",
+      "description": "Spiky virus particle identical in style: dark blue-teal body, dark-red-tipped spikes. The RIGHT and slightly LARGER of the two.",
+      "moves": true,
+      "motion": "moves straight DOWN (and very slightly left, ~-0.4 px/frame in x) from frame 1 on, exits through the bottom edge; also rotates slowly",
+      "visible_frames": [0, 68],
+      "fully_in_frame": [0, 13],
+      "track_file": "tracks/virus_right_large.csv",
+      "reference_point": "centre of the spherical body (circle fit to body outline) = object origin",
+      "ref_reliable_frames": [0, 45],
+      "frame0": {"ref_xy": [1244.5, 643.75], "body_radius": 139.11, "body_diameter": 278.2,
+                  "bbox_xyxy_incl_spikes": [974, 360, 1540, 938], "bbox_w": 567, "bbox_h": 579},
+      "frame13": {"ref_xy": [1239.83, 778.99], "body_radius": 137.42, "bbox_w": 559, "bbox_h": 572},
+      "size_note": "Full extent incl. spikes ~567x579 px at frame 0 shrinking to ~559x572 px at frame 13. Body diameter 278.2 px at frame 0."
+    }
+  ],
+  "static_objects": "none (empty uniform grey background)",
+  "pairwise": {
+    "frame0_centre_distance_px": 528.05,
+    "frame0_centre_dx_dy_px": [522.93, 73.38],
+    "note": "the two viruses' spike tips interleave around x~970-986 at frames 0-1 (near contact, not occluding each other's bodies); they separate vertically from frame 2"
+  },
+  "events": [
+    {"event": "both stationary", "frames": [0, 1], "note": "frames 0 and 1 are identical"},
+    {"event": "start of motion (both)", "frame": 1, "time_s": 0.0417, "note": "first displacement between frame 1 and 2; each moves ~11.5 px in frame 1->2, i.e. starts already at speed (no visible ramp-up)"},
+    {"event": "left virus spikes reach top edge", "frame": 28, "time_s": 1.1667},
+    {"event": "left virus body touches top edge", "frame": 37, "time_s": 1.5417},
+    {"event": "left virus centre leaves frame (y<0)", "frame": 48, "time_s": 2.0},
+    {"event": "right virus spikes reach bottom edge", "frame": 14, "time_s": 0.5833},
+    {"event": "right virus body touches bottom edge", "frame": 28, "time_s": 1.1667},
+    {"event": "right virus centre leaves frame (y>1079)", "frame": 42, "time_s": 1.75},
+    {"event": "remaining spike tips render pale/greyish", "frames": [61, 68]},
+    {"event": "both last visible", "frame": 68, "time_s": 2.8333},
+    {"event": "empty frames", "frames": [69, 71]}
+  ]
+}

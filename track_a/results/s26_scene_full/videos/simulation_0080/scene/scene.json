@@ -1,0 +1,125 @@
+{
+ "video": "simulation_0080.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 29,
+ "width": 1920,
+ "height": 1080,
+ "time_of_frame": "t = frame / 24",
+ "camera": {
+  "motion": "static (uniform grey floor, no texture; no shift detectable; both objects only)",
+  "view": "top-down (orthographic-looking) view onto the ground plane; image x/y = ground-plane axes",
+  "note": "frame 0 and frame 1 are identical (rendered duplicate); motion starts between frames 1 and 2"
+ },
+ "objects": [
+  {
+   "name": "cyclist",
+   "aliases": [
+    "bicycle",
+    "bike",
+    "rider",
+    "person on bicycle"
+   ],
+   "description": "person in black clothing riding a light-blue/cyan bicycle, seen from above, heading -x (left)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    24
+   ],
+   "fully_in_frame": [
+    0,
+    16
+   ],
+   "leaves_frame": "front reaches x=0 at frame 17; gone after frame 24",
+   "track": "tracks/cyclist.csv",
+   "reference_point": "root_x/root_y = bicycle bbox centre (rear edge minus half length when clipped)",
+   "pixel_size_full_frames": {
+    "bike_length_px_along_x": {
+     "min": 376.0,
+     "max": 381.0,
+     "mean": 378.5
+    },
+    "width_across_px_handlebar_and_arms": {
+     "min": 116.0,
+     "max": 118.0,
+     "mean": 117.0
+    },
+    "note": "length = front wheel tip to rear rack/wheel tip; width is handlebar span incl. rider hands. Height not visible (top-down)."
+   }
+  },
+  {
+   "name": "walker",
+   "aliases": [
+    "pedestrian",
+    "person",
+    "man in white shirt",
+    "human"
+   ],
+   "description": "person in pale lavender/white shirt, dark trousers, dark hair, walking +x (right) above the cyclist path",
+   "moves": true,
+   "visible_frames": [
+    0,
+    28
+   ],
+   "track": "tracks/walker.csv",
+   "reference_point": "pelvis_x/pelvis_y = centre of shirt (torso) bbox; head_cx/head_cy also given",
+   "pixel_size": {
+    "shirt_shoulder_span_y_px": "~108-112 (shirt_y1-shirt_y0, frames 0-10,15-28)",
+    "torso_depth_x_px": "~50-56 (shirt_x1-shirt_x0)",
+    "stride_extent_x_px (bbox_w)": {
+     "min": 102.0,
+     "max": 220.0,
+     "mean": 171.0
+    },
+    "bbox_h_px (arms incl.)": {
+     "min": 99.0,
+     "max": 134.0,
+     "mean": 126.2
+    },
+    "note": "top-down: standing height is NOT measurable in pixels; bbox_w oscillates with stride (feet apart max ~220 px)"
+   }
+  },
+  {
+   "name": "ground",
+   "description": "uniform grey floor, no markings, no static props",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "start of motion (both objects)",
+   "frame": 1,
+   "time": 0.041666666666666664,
+   "note": "frames 0,1 identical; first displacement at frame 2"
+  },
+  {
+   "event": "cyclist front reaches left image edge",
+   "frame": 17,
+   "time": 0.7083333333333334
+  },
+  {
+   "event": "cyclist fully out of frame",
+   "frame": 25,
+   "time": 1.0416666666666667
+  },
+  {
+   "event": "walker still walking at end",
+   "frame": 28,
+   "time": 1.1666666666666667
+  },
+  {
+   "event": "cyclist and walker pass each other in x (root_x == pelvis_x)",
+   "frame": "between 0 and 1 (cyclist starts at x~928, walker at x~947)",
+   "note": "they are on separate parallel lanes ~200 px apart in y; no contact"
+  }
+ ],
+ "files": {
+  "notes": "notes.md",
+  "tracks": [
+   "tracks/cyclist.csv",
+   "tracks/walker.csv"
+  ],
+  "scripts": "scripts/"
+ }
+}

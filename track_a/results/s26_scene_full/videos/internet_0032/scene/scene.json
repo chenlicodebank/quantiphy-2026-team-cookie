@@ -1,0 +1,100 @@
+{
+  "video": "internet_0032.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 29.851282,
+  "frames": 220,
+  "duration_s": 7.3699,
+  "image_size": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+  "description": "Static shot of a calm lake at dusk. A small wooden rowing boat with two seated people (dark silhouettes) moves steadily from right to left across the middle of the frame, bow pointing left, slowly drifting towards the camera (apparent size grows ~16%). Far shoreline with treelines on the horizon, reeds in the bottom-left foreground.",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the horizon/treeline band (rows 300-470) vs frame 0: |dx|,|dy| <= 0.18 px over all frames (scene/tracks/camera_shift.csv)",
+    "background_shift_px": "none (<0.2 px)"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "aka": "rowing boat / rowboat / canoe with two people",
+      "distinguish": "only vessel in the scene; dark hull silhouette in mid-frame, bow (pointed, raised) on the LEFT, stern on the right",
+      "moves": true,
+      "visible_frames": [0, 219],
+      "track": "tracks/boat.csv",
+      "reference_point": "cx_hull, cy_hull = centre of hull box (bow tip to stern, gunwale-top to waterline); also bbox centre and mask centroid",
+      "hull_length_px_bow_to_stern": {"frame0": 212, "frame110": 232, "frame219": 247, "median": 232},
+      "hull_height_px_waterline_to_top": {"frame0": 34, "frame219": 40},
+      "full_silhouette_height_incl_people_px": {"frame0": 56, "frame219": 60},
+      "image_position": {"frame0_bow_x": 761, "frame0_stern_x": 972, "frame219_bow_x": 419, "frame219_stern_x": 666, "waterline_y": 539},
+      "motion": "leftward (-x), nearly constant: centre moves -328.5 px over 219 frames (mean -1.50 px/frame); per-frame pixel rate grows from ~-1.36 to ~-1.62 px/frame as the boat gets nearer; vertical centre steady (cy 519.5-522.5)"
+    },
+    {
+      "name": "person_left_rower",
+      "aka": "rower / front person / person on the left",
+      "distinguish": "left (bow-side) seated figure, holds the oars; at frame 0 at x~849",
+      "moves": true,
+      "visible_frames": [0, 219],
+      "track": "tracks/person_left_rower.csv",
+      "size_px": "visible height from waterline (y 540) to head top ~56-59 px; above the gunwale ~22-25 px; seated, legs hidden"
+    },
+    {
+      "name": "person_right_stern",
+      "aka": "passenger / person on the right / stern person",
+      "distinguish": "right (stern-side) seated figure, slightly hunched; at frame 0 at x~947",
+      "moves": true,
+      "visible_frames": [0, 219],
+      "track": "tracks/person_right_stern.csv",
+      "size_px": "visible height from waterline to head top ~52-56 px"
+    },
+    {
+      "name": "oars",
+      "distinguish": "thin dark poles held by the left rower, dipping into the water on both sides; too thin to segment reliably",
+      "moves": true,
+      "visible_frames": [0, 219],
+      "track": null
+    },
+    {
+      "name": "boat_reflection",
+      "distinguish": "dark mirror image of boat and people directly below the waterline (y > 540); NOT part of the boat",
+      "moves": true, "track": null
+    },
+    {
+      "name": "far_shore_left_treeline",
+      "moves": false,
+      "image_extent_px": {"x": [0, 720], "y": [370, 440], "length_px": 720, "height_px": 70},
+      "note": "visual estimate from frame 0, cut by left frame edge"
+    },
+    {
+      "name": "far_shore_right_treeline",
+      "moves": false,
+      "image_extent_px": {"x": [1480, 1920], "y": [390, 462], "length_px": 440, "height_px": 72},
+      "note": "visual estimate, cut by right frame edge; low distant shore between 720 and 1480 at y~415-450"
+    },
+    {
+      "name": "horizon_waterline",
+      "moves": false,
+      "image_position": "far shore meets water at y~440 (left) to ~455 (right); nearly horizontal"
+    },
+    {
+      "name": "reeds",
+      "moves": false,
+      "image_extent_px": {"x": [0, 430], "y": [450, 1080]},
+      "note": "foreground reeds, bottom-left; sway slightly"
+    },
+    {"name": "lake_water", "moves": false, "note": "fills y>440; ripples/sun reflections move but are not objects"},
+    {"name": "sky_clouds", "moves": false, "note": "clouds y<350, essentially static over 7 s"}
+  ],
+  "events": [
+    {"event": "boat already moving left at frame 0 and keeps moving through the last frame (no start/stop, no direction change)", "frames": [0, 219], "t": [0.0, 7.3364]}
+  ],
+  "perspective": "nominally 2D (side view). Boat heads left and also slowly approaches the camera: hull length 212 -> 247 px (+16.5%), hull height 34 -> 40 px, so pixel scale changes ~16% across the clip. Annotator convention: one scale factor from the prior object's pixel length (e.g. boat bow-to-stern length).",
+  "files": {
+    "tracks/boat.csv": "per-frame boat measurements",
+    "tracks/person_left_rower.csv": "per-frame left person",
+    "tracks/person_right_stern.csv": "per-frame right person",
+    "tracks/camera_shift.csv": "per-frame background shift vs frame 0",
+    "notes.md": "methods and reliability",
+    "scripts/": "all measurement scripts"
+  }
+}

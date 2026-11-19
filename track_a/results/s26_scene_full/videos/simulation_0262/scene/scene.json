@@ -1,0 +1,55 @@
+{
+  "video": "simulation_0262.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "width_px": 1080,
+  "height_px": 1920,
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, origin top-left of the 1080x1920 frame, full resolution",
+  "camera": {
+    "motion": "static (frame 49 vs frame 0 background abs diff mean 0.25/255, p99.9 = 4)",
+    "per_frame_shift_px": [0, 0],
+    "view": "near-frontal, roughly horizontal camera; the cup's underside shows when it is high in the frame and the lid's top surface shows when it is low, so the camera sits at roughly mid-frame height",
+    "floor_backdrop_seam_y_px": 1534,
+    "floor_seam_note": "faint horizontal brightness change where the floor meets the seamless backdrop (gradient max at y 1534-1535 in every column); the floor is the lighter band below it"
+  },
+  "objects": {
+    "cup": {
+      "description": "disposable coffee cup: red body with a tan/beige sleeve band and a light grey/white lid; the only object in the scene",
+      "moves": true,
+      "visible_frames": [2, 49],
+      "partially_out_of_frame_top": [2, 5],
+      "track_file": "tracks/cup.csv",
+      "reference_point": "cx, cy = centre of the full-cup bbox (lid top to cup bottom, x-extent including the lid rim); best image proxy for the rigid object's origin",
+      "motion": "falls straight down (x stays at 575-577 px), no visible rotation, lands upright on the floor, short squash/stretch rebound, then rests",
+      "rest_pose_frames": [24, 49],
+      "rest_position_px": {"cx": 575.8, "cy": 1775.5, "bottom_y": 1847, "top_y": 1704},
+      "rest_size_px": {"height_incl_lid": 144, "width_max_lid_rim": 96, "body_width_below_lid": 87, "lid_band_height": 18},
+      "in_flight_size_px": {"height_bbox": "173 (f6) shrinking to 150 (f15-18): perspective, the underside ellipse is seen high in the frame", "width_max": "94-97", "body_width": "87-94"},
+      "apparent_size_change": "width constant (+-2 px), so the cup stays at one depth (planar 2D motion); height changes only from the viewing angle and from the landing squash/stretch"
+    },
+    "floor": {
+      "description": "light beige floor / seamless backdrop (cyclorama); seam at y about 1534",
+      "moves": false,
+      "visible_frames": [0, 49]
+    },
+    "cup_shadow": {
+      "description": "soft grey contact shadow under the cup once it is near or on the floor (frames about 17-49); not part of the cup and excluded from the cup's extents",
+      "moves": false
+    }
+  },
+  "events": [
+    {"name": "cup already falling when first visible (released before the clip or above the frame)", "frame": 2, "t": 0.0833, "note": "bottom edge appears at y = 0-1; it has already moved down about 29 px by frame 3"},
+    {"name": "cup fully inside frame", "frame": 6, "t": 0.25},
+    {"name": "last airborne frame", "frame": 18, "t": 0.75, "bottom_y": 1782},
+    {"name": "impact with floor (first contact frame)", "frame": 19, "t": 0.7917, "bottom_y": 1847, "note": "contact happens between frames 18 and 19; extrapolating the bottom edge puts it about 0.3 frame after f18 (t about 0.76 s)"},
+    {"name": "squash at impact", "frame": 19, "height_px": 147},
+    {"name": "stretch / rebound (bottom stays on the floor, top rises about 14 px)", "frames": [20, 22], "height_px": 157},
+    {"name": "settle", "frames": [23, 24], "note": "height 149 then 143; at rest from frame 24"},
+    {"name": "at rest", "frames": [24, 49], "note": "only +-1 px jitter in the bbox after this"}
+  ],
+  "fall_bottom_edge_y_px": {"2": 1, "3": 30, "4": 69, "5": 119, "6": 181, "7": 252, "8": 335, "9": 429, "10": 534, "11": 650, "12": 777, "13": 913, "14": 1065, "15": 1227, "16": 1401, "17": 1586, "18": 1782, "19": 1847},
+  "fall_top_edge_y_px": {"6": 9, "7": 82, "8": 168, "9": 264, "10": 372, "11": 490, "12": 621, "13": 762, "14": 914, "15": 1078, "16": 1251, "17": 1437, "18": 1632, "19": 1701}
+}

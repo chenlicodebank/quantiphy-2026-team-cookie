@@ -1,0 +1,89 @@
+{
+  "video": "simulation_0209.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 30,
+  "duration_s": 1.25,
+  "image_size_px": [2124, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (mean abs diff of wall/desk corner patches vs frame 0 < 1 grey level in all frames)",
+    "view": "elevated, looking slightly down at a desk standing in front of a plain blue-grey wall; desk seen obliquely (long axis runs from lower-left to upper-right)",
+    "principal_point_assumed": [1062, 540],
+    "focal_length": "unknown - estimate from depth_info + a known size",
+    "perspective": {
+      "desk_top_corners_px_frame0": {
+        "left_corner": [458, 693],
+        "front_left_corner": [700, 890],
+        "front_right_corner": [1995, 655],
+        "back_corner": [1600, 527],
+        "accuracy_px": 10
+      },
+      "vanishing_point_long_edges_px": [7130, -277],
+      "vanishing_point_short_edges_px": [-636, -197],
+      "horizon": "line through the two vanishing points, ~200-280 px ABOVE the top of the image (camera tilted down); rough (+-50 px) because corners are only +-10 px",
+      "vertical": "desk legs and the fall direction are close to image-vertical"
+    }
+  },
+  "objects": [
+    {
+      "name": "typewriter",
+      "description": "black/dark-brown vintage portable typewriter with cream round keys; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 29],
+      "partly_out_of_frame": "frames 0-1: top (paper bail) cut by top image edge (y0 = 0)",
+      "track": "tracks/typewriter.csv",
+      "reference_point": "cx,cy = mask centroid (proxy for the rigid-body origin/centre); bbox_cx,bbox_cy = bbox centre",
+      "apparent_size_px": {
+        "in_air_frames_2_9_bbox_w": "303 -> 293 (slight shrink while falling)",
+        "in_air_bbox_h": "117 -> 150 (grows as it falls: the camera looks down on it more steeply and it tilts slightly, so more of its top/front shows)",
+        "at_rest_frames_24_29": {"bbox": [1094, 524, 1366, 692], "bbox_w": 273, "bbox_h": 169, "minrect_len": 283.5}
+      }
+    },
+    {
+      "name": "desk",
+      "description": "large dark-wood writing desk (pedestal desk with drawers, brass handles) with green leather inlay top; the typewriter lands on it",
+      "moves": false,
+      "visible_frames": [0, 29],
+      "extents_px_frame0": {
+        "front_long_edge_top (700,890)-(1995,655)": 1316,
+        "back_long_edge_top (458,693)-(1600,527)": 1154,
+        "left_short_edge_top (458,693)-(700,890)": 312,
+        "right_short_edge_top (1600,527)-(1995,655)": 415,
+        "image_bbox_of_visible_desk": [455, 525, 2000, 1080],
+        "note": "legs/bottom cut off by image bottom (y = 1080); desk height not measurable"
+      }
+    },
+    {
+      "name": "revolver",
+      "description": "small dark revolver with brown wooden grip lying on the desk top, right of the impact point, on top of a paper",
+      "moves": false,
+      "visible_frames": [0, 29],
+      "bbox_px": [1390, 605, 1506, 645],
+      "length_px": 116,
+      "note": "only shading changes when the typewriter shadow/reflection passes; no displacement"
+    },
+    {
+      "name": "paper",
+      "description": "cream-coloured paper/envelope under the revolver's barrel",
+      "moves": false,
+      "visible_frames": [0, 29],
+      "bbox_px_frame0": [1321, 615, 1412, 644],
+      "note": "left part covered by the typewriter after landing (frames ~11-29)"
+    },
+    {
+      "name": "wall",
+      "description": "plain blue-grey backdrop wall behind the desk",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "release / start of fall (typewriter starts from ~rest at top of frame)", "frame": 0, "t": 0.0, "note": "bottom edge y1 diffs 7,18,30 px/frame for frames 0-3 -> zero speed at ~frame 0"},
+    {"event": "free fall, nearly vertical (x drifts < 10 px)", "frames": [0, 9]},
+    {"event": "impact with desk top", "frame": 10, "t": 0.4167, "note": "frame 9 bottom y=561 still in air; frame 10 bottom ~705 (motion-blurred) at desk; contact between 9 and 10, closer to 10"},
+    {"event": "rebound/tip: typewriter rocks back, front lifts, rotates", "frames": [11, 17], "note": "bbox top rises from 533 (f11) to 482 (f15), back to 528 (f19)"},
+    {"event": "settles, small slide/rotation", "frames": [18, 23]},
+    {"event": "at rest (mask identical)", "frame": 24, "t": 1.0}
+  ]
+}

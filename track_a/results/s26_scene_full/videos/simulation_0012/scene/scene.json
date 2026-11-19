@@ -1,0 +1,54 @@
+{
+  "video": "simulation_0012.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 22.925373,
+  "frames": 61,
+  "duration_s": 2.6608,
+  "image_size_px": [1920, 1954],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; frame for time t = round(t * fps)",
+  "units": "pixels (x right, y down), seconds; no metric scale estimated",
+  "view": "straight top-down (nadir) view of a garden yard; the bird flies in a horizontal plane parallel to the image; ground objects at a lower depth than the bird (bird is above ground, its shadow is offset to the left)",
+  "camera": {"motion": "static", "evidence": "median background of 11 frames is sharp; static objects do not move between frames 0 and 60 (checked visually)", "per_frame_shift_px": [0, 0]},
+  "moving_objects": {
+    "bird": {
+      "description": "large dark crow/raven-like bird (black-grey wings, light grey fan tail, dark beak), seen from above with wings spread and flapping; the only moving object",
+      "visible_frames": [0, 60],
+      "track_file": "tracks/bird.csv",
+      "reference_point": "x,y = body centre (midpoint of beak tip and tail tip on the body line); body_x = beak_x - 65 (robust alternative where the tail is merged with the shadow); cx,cy = mask centroid",
+      "heading": "always flying toward +x (image right), body line horizontal at y ~ 1107-1115",
+      "body_length_px": {"median_beak_to_tail": 130, "range_clean_frames": [123, 138]},
+      "wingspan_px_across_body (bbox_h / span_px)": {"max": 258, "max_frames": [0, 1, 17, 33, 49, 50], "min": 125, "min_frames": [9, 25, 42, 58], "note": "flapping: span oscillates with a period of ~16-17 video frames"},
+      "path_px": {"start_frame0": [748, 1108], "end_frame60": [1716, 1112], "net_dx": 968, "net_dy": 4},
+      "motion_summary_px_per_frame": "beak-tip step ~7-8 px/frame at frames 1-4, rising steadily to ~18-20 px/frame by frame ~16-20, roughly constant ~19-20 px/frame frames 20-45, then decreasing to ~13 px/frame (47-51) and ~7-9 px/frame (52-60)",
+      "frame_spacing_anomalies": "double-size steps (~36-42 px instead of ~18-20) between frames 18->19 and 42->43: the video appears to drop a source frame there (61 frames at 22.925 fps vs. likely 64 source frames at 24 fps; a third drop is probably in frames 50-58 where the step is small and noisy)"
+    },
+    "bird_shadow": {
+      "description": "bird-shaped dark green shadow on the ground, offset left (and slightly down) of the bird; only visible on sunlit ground",
+      "track_file": "tracks/bird_shadow.csv",
+      "visible_frames": "partly from ~frame 2, clearly separate frames 28-46, fades into shaded grass by frame 50",
+      "offset_from_bird_centroid_px": "when the whole shadow is on sunlit ground (frames 30-36) shadow centroid - bird centroid ~ (-142, +30); at other frames the visible part of the shadow is clipped by the tree-shade boundary (on its left side early, right side late), so the centroid offset is not meaningful (listed values -17..-256 px in x)"
+    }
+  },
+  "static_objects_frame0_px": {
+    "wooden_shed": {"desc": "wooden plank shed/hut roof seen from above, top-centre-left; crossed eave beams at its lower edge", "bbox": [400, 0, 1375, 690], "plank_roof_bbox": [420, 0, 1340, 640], "note": "cut by top image edge"},
+    "barrels": {"desc": "two wooden barrels side by side under the shed eave", "left_centre": [1072, 705], "right_centre": [1153, 712], "diameter_px": 77},
+    "crate_steps": {"desc": "stacked wooden crates / steps below the shed door", "bbox": [825, 695, 980, 790]},
+    "white_flower_bush": {"desc": "small white-flower bush on ground above the bird's start", "bbox": [705, 868, 780, 945], "centre": [742, 906]},
+    "lilac_flower_bush": {"desc": "blue/lilac-flower bush right of centre; the bird flies past just below/over it at the end", "bbox": [1563, 945, 1780, 1108], "centre": [1670, 1025]},
+    "wooden_cart": {"desc": "wooden hand cart lower right (box body + two wheels + two handles pointing left)", "bbox_incl_handles": [1365, 1245, 1722, 1440], "box_body_bbox": [1487, 1285, 1720, 1425], "length_px_incl_handles": 357, "width_px_wheel_to_wheel": 195},
+    "wooden_fence": {"desc": "rustic wooden fence running from the top edge (x~1560-1650) down then diagonally to (1330, 878)", "endpoints_approx": [[1650, 0], [1580, 640], [1330, 878]]},
+    "tree_canopy": {"desc": "large leafy tree top-left", "bbox": [0, 0, 545, 785]},
+    "hedge": {"desc": "green hedge/bush at the left edge", "bbox": [0, 940, 380, 1290]},
+    "ground": {"desc": "grass with dappled tree shadows (dark green) and sunlit patches (yellow); no markings"}
+  },
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "bird visible at start, flying right, wings fully spread (max span)"},
+    {"frame": 19, "time": 0.829, "event": "apparent double step (dropped source frame between 18 and 19)"},
+    {"frame": 20, "time": 0.872, "event": "bird reaches cruising speed ~19-20 px/frame (accelerating before)"},
+    {"frame": 43, "time": 1.876, "event": "apparent double step (dropped source frame between 42 and 43)"},
+    {"frame": 46, "time": 2.007, "event": "bird starts slowing down; enters shaded grass near the lilac bush"},
+    {"frame": 60, "time": 2.617, "event": "last frame; bird still flying right at ~8-11 px/frame"}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/bird.csv", "tracks/bird_shadow.csv"], "scripts": "scripts/"}
+}

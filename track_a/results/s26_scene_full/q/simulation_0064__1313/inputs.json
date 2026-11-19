@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0064.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1313,
+  "question": "What is the diameter of the bicycle wheel in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 38.3473m\nt=1.58s, distance_human_camera = 38.7220m\nt=0.58s, distance_yellow_car_camera = 35.5258m\nt=1.58s, distance_yellow_car_camera = 33.0077m\nt=0.58s, distance_white_car_camera = 38.1362m\nt=1.58s, distance_white_car_camera = 34.0492m\nt=0.58s, distance_bike_camera = 33.9976m\nt=1.58s, distance_bike_camera = 28.6807m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

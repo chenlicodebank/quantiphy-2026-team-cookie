@@ -1,0 +1,72 @@
+{
+  "video": "internet_0060.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.013643,
+  "frames": 110,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t=0; frame for time t = round(t*fps)",
+  "units": "pixels and seconds; image x right, y down; no metric scale assumed",
+  "probable_orientation": "Footage appears rotated 90 deg: the free-flying packet accelerates uniformly toward +x (per-frame dx grows ~21->162 px over frames 52-65), so image +x is most likely physical DOWN (gravity) and the black strip + wood at right is the floor/ground side. Image y is then a horizontal direction. This is an interpretation, not a measurement.",
+  "objects": [
+    {
+      "name": "packet",
+      "description": "small square pink/red foil sachet with white Japanese text (the only pink object)",
+      "moves": true,
+      "visible_frames": [0, 109],
+      "track": "tracks/packet.csv",
+      "size_px_at_rest": {"frames": "79-99", "bbox_w": 100, "bbox_h": 100, "minrect_len": 99, "minrect_wid": 98, "note": "square ~99-100 px side, lying flat in image plane on the black strip; best size reference"},
+      "size_px_in_flight": {"frames": "56-64", "bbox_w": "108-113 (motion blur along x)", "bbox_h": "96-102"},
+      "size_px_in_hand": {"frames": "0-51", "note": "partly hidden by fingers at the left image edge; mask/bbox unreliable for size"}
+    },
+    {
+      "name": "hand",
+      "description": "person's hand (skin) at left image edge holding the packet, frames 0-~58; arm/hand re-enters from lower left moving toward lower centre frames ~97-109",
+      "moves": true,
+      "visible_frames": [0, 109],
+      "track": "tracks/hand.csv (coarse skin-mask bbox only)"
+    },
+    {
+      "name": "black_strip",
+      "description": "vertical black band (baseboard / floor edge) right of the grey wall",
+      "moves": false,
+      "frame0_left_edge_x": {"y0": 1326, "y100": 1327, "y300": 1328, "y500": 1330, "y700": 1334, "y900": 1338, "y1079": 1341},
+      "frame0_right_edge_x": {"y0": 1460, "y100": 1462, "y300": 1466, "y500": 1468, "y700": 1471, "y900": 1475, "y1079": 1478},
+      "width_px": "134-138 (horizontal, ~constant)",
+      "tilt": "edges lean ~15 px right over 1080 rows (~0.8 deg)",
+      "spans": "full image height"
+    },
+    {
+      "name": "wood_surface",
+      "description": "light-brown wooden planks right of the black strip (likely floor)",
+      "moves": false,
+      "frame0_extent_x": "from black strip right edge (~1460-1478) to image right edge 1919, visible width ~442-460 px; full height"
+    },
+    {
+      "name": "grey_wall",
+      "description": "plain light grey surface occupying x 0-~1326; faint dark specks; soft grey shadows of the person in lower-left/lower part",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"name": "packet held still in hand", "frames": [0, 51], "note": "centroid drifts only ~8 px"},
+    {"name": "release / start of free motion", "frame": 52, "time_s": 1.7325, "note": "first frame packet moves away from hand (cx 75->92); +-1 frame"},
+    {"name": "free flight toward +x (accelerating)", "frames": [52, 64], "note": "cy nearly constant ~597-612"},
+    {"name": "first contact with black strip (impact)", "frame": 65, "time_s": 2.1657, "note": "frame 64 right edge x~1201 well left of strip (~1318); frame 65 right edge ~1367 overlaps strip; contact occurs between 64 and 65"},
+    {"name": "maximum +x / rebound start", "frame": 66, "time_s": 2.199, "note": "cx 1373 then decreases"},
+    {"name": "rebound apex (minimum x)", "frames": [69, 70], "note": "cx ~1313, packet tumbling"},
+    {"name": "second landing", "frames": [73, 74], "note": "cx back to ~1384"},
+    {"name": "comes to rest", "frame": 78, "time_s": 2.5988, "note": "after this only camera drift (packet cx 1383->1367, cy 969->963 by f109)"},
+    {"name": "hand/arm re-enters lower left", "frames": [97, 109]}
+  ],
+  "camera": {
+    "motion": "handheld slow drift, smooth, no shake: background moves ~-26 to -28 px in x and ~-12 to -14 px in y between frame 0 and 109 (about -0.25 px/frame in x)",
+    "file": "tracks/camera.csv",
+    "note": "strip_dx/dy (phase correlation on strip+wood, rows 0-420) and wall_dx/dy (high-passed wall texture) agree within ~2-3 px; wood_* columns invalid after frame 37 (resp<0.05). Black strip left edge moved -26 px (top) / -30 px (bottom) by f109, so a tiny rotation/zoom is present."
+  },
+  "tracks": {
+    "packet": "tracks/packet.csv",
+    "hand": "tracks/hand.csv",
+    "camera": "tracks/camera.csv"
+  }
+}

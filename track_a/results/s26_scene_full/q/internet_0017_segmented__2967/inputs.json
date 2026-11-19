@@ -1,0 +1,18 @@
+{
+ "video": "internet_0017_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MS",
+ "fps": 30.0003,
+ "frames": 34,
+ "duration_s": 1.1333,
+ "width": 1280,
+ "height": 674,
+ "question": {
+  "id": 2967,
+  "question": "What is the length of the keyboard in cm?",
+  "prior": "credit card width = 5.4cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

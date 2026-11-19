@@ -1,0 +1,182 @@
+{
+ "video": "simulation_0228.mp4",
+ "source": "simulation",
+ "scene_type": "2D (top-down camera)",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_of_frame": "t = frame / 24",
+ "camera": {
+  "motion": "static (no pan/shake; static-deck phase correlation frame0 vs 25/49 identical)",
+  "view": "looking straight down (orthographic-like top view); x right, y down in image",
+  "perspective": "negligible in-plane; dog (on deck top) and ring (on water, slightly lower) are at slightly different heights - treat as one plane unless told otherwise"
+ },
+ "moving_objects": {
+  "dog": {
+   "description": "black dog (only dark animal), seen from above, walking left->right along the deck just above the pool edge, head to the right, thin tail to the left",
+   "track": "tracks/dog.csv",
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded": "never",
+   "reference_point": "cx,cy = centroid of full dark mask (incl. tail); body_cx,body_cy = centroid without tail",
+   "size_px": {
+    "length_incl_tail_median": 108,
+    "length_incl_tail_range": [
+     105,
+     112
+    ],
+    "body_length_no_tail_median": 82,
+    "body_length_no_tail_range": [
+     80,
+     92
+    ],
+    "width_median": 25,
+    "width_range": [
+     22,
+     28
+    ],
+    "height": "not observable (top view)"
+   }
+  },
+  "swim_ring": {
+   "description": "pink inflatable swim ring (torus) with a short tube/handle pointing into the hole toward the right; floating on the dark pool water, drifting left->right",
+   "track": "tracks/swim_ring.csv",
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded": "never",
+   "reference_point": "cx,cy = centre of ellipse fitted to outer contour (= torus centre)",
+   "size_px": {
+    "outer_bbox_w": 144.5,
+    "outer_bbox_h": 134,
+    "ellipse_major": 139.6,
+    "ellipse_minor": 131.7,
+    "circle_fit_outer_diameter": 135.6,
+    "inner_hole_diameter_approx": 66,
+    "note": "bbox_w 144-145 px horizontal (x) vs 134 px vertical (y); max horizontal extent includes the shaded left rim"
+   }
+  }
+ },
+ "static_objects": {
+  "pool_edge": {
+   "y_px": 623.5,
+   "note": "deck/water boundary, horizontal straight line across the frame (x 430..1920; left of 430 grass overhangs)"
+  },
+  "deck_coping_joint": {
+   "y_px": 603,
+   "note": "horizontal joint ~20 px above pool edge"
+  },
+  "deck_joint_horizontal_upper": {
+   "y_px": 341
+  },
+  "deck_tile_vertical_joints_x": [
+   430,
+   575,
+   719,
+   864,
+   1007,
+   1154,
+   1298,
+   1443,
+   1588,
+   1733,
+   1876
+  ],
+  "deck_tile_pitch_px": 144.6,
+  "deck_tile_size_px": {
+   "w": 144.6,
+   "h_between_joints_341_603": 262
+  },
+  "grass_bed": {
+   "x_px": [
+    0,
+    430
+   ],
+   "y_px": [
+    0,
+    660
+   ],
+   "note": "ornamental grass, left edge of frame"
+  },
+  "lounger_front_left": {
+   "bbox_px": [
+    742,
+    123,
+    944,
+    462
+   ],
+   "length_px": 339,
+   "width_px": 202,
+   "note": "wooden sun lounger, backrest (top, y<250) raised"
+  },
+  "lounger_front_mid": {
+   "bbox_px": [
+    1012,
+    123,
+    1215,
+    462
+   ],
+   "length_px": 339,
+   "width_px": 203
+  },
+  "lounger_front_right": {
+   "bbox_px": [
+    1272,
+    123,
+    1487,
+    462
+   ],
+   "length_px": 339,
+   "width_px": "215 at backrest, ~180 at foot",
+   "note": "backrest at head end appears wider/skewed"
+  },
+  "lounger_back_row": {
+   "note": "three loungers cut off by the top frame edge",
+   "bboxes_px": [
+    [
+     580,
+     0,
+     778,
+     135
+    ],
+    [
+     843,
+     0,
+     1035,
+     128
+    ],
+    [
+     1100,
+     0,
+     1298,
+     132
+    ]
+   ],
+   "width_px": [
+    198,
+    192,
+    198
+   ]
+  },
+  "water": {
+   "y_px": [
+    624,
+    1080
+   ],
+   "note": "dark blue pool water, small ripples"
+  }
+ },
+ "events": {
+  "dog": "walking right at a nearly steady ~5.4 px/frame for the whole clip (frame 0-49); slight lateral sway cy 566-571 (gait); no start/stop inside the clip",
+  "swim_ring": "drifts right; nearly at rest at start (~0.4 px/frame frames 0-1), speeds up (step rises ~1 px/frame per frame over frames 1-12, then more slowly) to a broad maximum ~11.5-12.1 px/frame over frames 20-29 (peak step 12.1 at frame 23, t=0.958 s), then slows smoothly to ~0.7 px/frame at frame 49; small up/down bob of cy (719.9..727.9 px); handle slowly rotates from ~17 deg to ~11 deg",
+  "no_contact": "dog and ring never touch; ring stays in water, dog on deck"
+ },
+ "files": {
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

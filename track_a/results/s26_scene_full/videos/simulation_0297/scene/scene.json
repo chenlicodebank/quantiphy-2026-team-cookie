@@ -1,0 +1,79 @@
+{
+  "video": "simulation_0297.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "units": "pixels (x right, y down, full 2560x1440 resolution) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the sea-floor strip between frames: shifts < 0.3 px, random (caustic animation only); static objects keep identical positions in all frames",
+    "background_shift_per_frame_px": [0, 0],
+    "notes": "underwater scene; animated light caustics on the floor and an animated water surface at the top change pixel values but do not move the camera"
+  },
+  "perspective": {
+    "floor_far_edge_y_px": 775,
+    "water_surface_band": "rows 0 to about 290 show the water surface from below",
+    "comment": "2D video: the creature moves horizontally in a plane facing the camera, at constant image row. The sea floor recedes to its far edge at y ~775, so floor objects at different image heights are at slightly different depths; the creature, its shadow and the kelp/rock are all treated as at the same plane for a single scale"
+  },
+  "objects": {
+    "creature": {
+      "description": "jellyfish-like creature: a translucent white/blue mesh bell (lens/half-dome shape, pink dots on its surface) seen side-on, a green core ball on the bell's left (trailing) side, and three tentacles trailing to the right: an upper tentacle curving up into a pale-green hook, a straight horizontal tentacle at y ~762 ending in two pale blobs, and a lower tentacle curving down to a pale-green hook (its middle part is barely visible against the floor). The creature moves to the RIGHT; the tentacles point right, i.e. they lead and the bell (with the core ball at its left side) trails.",
+      "moves": true,
+      "visible_frames": "0-71 (all); tentacle tips leave the right image edge from frame ~66 (straight tentacle) and ~71 (upper hook)",
+      "track_file": "tracks/creature.csv",
+      "reference_point": "centre of the green core ball (ref_x, ref_y), the best origin proxy: it moves on a straight horizontal line (y 758.8 +- 0.9 px) while the bell outline pulses; the shadow below it moves with the same x",
+      "motion_summary_px": {
+        "ref_x_frame0": 596.5, "ref_x_frame71": 2063.3,
+        "ref_y_mean": 758.8, "ref_y_std": 0.9,
+        "dx_per_frame_mean_frames1_71": 20.97,
+        "dx_per_frame_std": 1.1,
+        "linear_fit_x_vs_frame": "x = 573.7 + 20.968*frame (frames 1-71), rms residual 1.25 px; quadratic term 0.0009 px/frame^2 (negligible)",
+        "net_displacement_px_frame0_to_71": 1466.8,
+        "path_length_px_frame0_to_71": 1468.0
+      },
+      "size_px": {
+        "core_ball_diameter": "about 50-60 px (matched-disk radius 29-31 px; partly hidden behind the mesh on its right side)",
+        "bell_height": "pulses: about 280 px (frame 12, top 617 bottom 895) to about 390 px (frame 45, top 563 bottom 955); see bell_height_px_eye",
+        "bell_width_horizontal": "bell_width_px column (bell_left_x to bell_right_x); about 170 px for frames 6-30, rising to ~200-225 px for frames 40-60 (includes a faint trailing mesh on the left)",
+        "whole_creature_length": "bell left edge to straight-tentacle tip: about 600-700 px (whole_length_px column), e.g. frame 24: 1051 to 1603",
+        "whole_creature_height": "upper hook top (~515-530) to lower hook bottom (~990-1018): about 470-500 px"
+      }
+    },
+    "creature_shadow": {
+      "description": "small dark elongated shadow on the sea floor directly below the core ball (y ~1036-1058, ~50 px long, ~6 px tall)",
+      "moves": true,
+      "visible_frames": "0-29, 33-71 (lost over the rock shadow region frames 30-32)",
+      "track_file": "tracks/shadow.csv",
+      "notes": "its x matches the core x within ~2 px (fit 20.97 px/frame), independent confirmation of the core motion"
+    },
+    "kelp_left": {"description": "tall kelp plant, far left", "moves": false, "bbox_px": [495, 455, 575, 990], "base_px": [540, 988], "height_px": 535, "notes": "top is faint; height +-15 px"},
+    "kelp_flowers": {"description": "short kelp with purple flowers, left of the coral", "moves": false, "bbox_px": [720, 760, 780, 980], "base_px": [745, 978], "height_px": 220, "notes": "thin top may reach ~700"},
+    "coral_fan": {"description": "black branching coral in front of the rock's left end", "moves": false, "bbox_px": [885, 815, 1140, 975], "length_px": 255, "height_px": 160},
+    "kelp_behind_coral": {"description": "kelp rising behind the coral", "moves": false, "bbox_px": [1010, 580, 1065, 970], "height_px": 390, "notes": "base hidden by the coral"},
+    "kelp_thin_mid": {"description": "thin kelp at the rock's left top", "moves": false, "bbox_px": [1090, 670, 1115, 900]},
+    "rock": {"description": "large porous blue coral rock (arched, with a dark cave under it), centre of the floor", "moves": false, "bbox_px": [1080, 825, 1392, 978], "length_px": 312, "height_px": 153, "centre_px": [1236, 902]},
+    "kelp_right": {"description": "kelp right of the rock", "moves": false, "bbox_px": [1420, 650, 1485, 968], "base_px": [1440, 965], "height_px": 315},
+    "sea_floor": {"description": "sandy floor with moving caustics; far edge at y ~775", "moves": false},
+    "water_surface": {"description": "rippled surface seen from below at the top of the frame (rows 0-290)", "moves": "texture animates only"}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "start of clip; frames 0 and 1 are virtually identical (mean abs diff 0.14 vs 2.3 for later pairs): creature does not move between frame 0 and 1"},
+    {"frame": 1, "t": 0.0417, "event": "creature starts moving right at full speed (~21 px/frame from frame 1->2 on; no visible acceleration phase)"},
+    {"frame": "12-36", "t": "0.50-1.50", "event": "bell passes in front of the coral fan and rock (no contact; creature is in front, not occluded)"},
+    {"frame": "~12 and ~45", "event": "bell pulsation extremes: smallest (height ~280 px) near frame 12, largest (~390 px) near frame 45; bell top y: 591 (f0) -> 629 (f22) -> 563 (f45) -> 610 (f71)"},
+    {"frame": 66, "t": 2.75, "event": "straight-tentacle tip reaches the right image edge"},
+    {"frame": 71, "t": 2.9583, "event": "end of clip; creature still moving right at constant speed, core at x 2063"}
+  ],
+  "files": {
+    "tracks/creature.csv": "main per-frame track (reference point, bell edges, tentacle tips, shadow, whole box)",
+    "tracks/core_ball_matched.csv": "raw core-ball matched-filter output",
+    "tracks/creature_features.csv": "raw bell / pink-dot / tentacle-tip measurements",
+    "tracks/shadow.csv": "floor shadow track",
+    "tracks/bell_bottom_profile.csv": "automatic bell-bottom estimates (unreliable, biased high; superseded by eye readings)",
+    "tracks/creature_raw.csv, tracks/ball_raw.csv": "first-pass segmentations (superseded)"
+  }
+}

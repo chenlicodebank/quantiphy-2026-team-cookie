@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0065.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1329,
+  "question": "What is the average speed of the bicycle from the beginning to the end in m/s?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 25.3568m\nt=1.58s, distance_human_camera = 25.9200m\nt=0.58s, distance_yellow_car_camera = 23.7441m\nt=1.58s, distance_yellow_car_camera = 27.0055m\nt=0.58s, distance_white_car_camera = 21.3649m\nt=1.58s, distance_white_car_camera = 25.2551m\nt=0.58s, distance_bike_camera = 25.3360m\nt=1.58s, distance_bike_camera = 30.4344m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

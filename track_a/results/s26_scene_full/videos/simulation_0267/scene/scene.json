@@ -1,0 +1,131 @@
+{
+ "video": "simulation_0267.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (phase correlation of sky vs empty last frame: shift < 0.03 px all frames)",
+  "horizon_row_px": 1204,
+  "horizon_note": "sea horizon, nearly horizontal across the image; far background only (HDRI-like sky + sea), no ground plane under the car"
+ },
+ "objects": [
+  {
+   "name": "flying_car",
+   "description": "single futuristic hover/flying car: dark grey-black upper shell, white/silver underside machinery, two small antennas on the roof rear, faces LEFT (nose on the left), seen side-on",
+   "moves": true,
+   "visible_frames": [
+    0,
+    67
+   ],
+   "fully_in_frame_frames": [
+    10,
+    52
+   ],
+   "clipped": "frames 0-9 tail beyond right image edge; frames 53-67 nose beyond left edge; gone from frame 68",
+   "track_file": "tracks/flying_car_final.csv",
+   "reference_point": "ref_x, ref_y = image position of the car centre (midpoint of nose tip and tail tip; vertical = template-carried bbox centre row ~887)",
+   "motion": "pure horizontal translation to the LEFT (-x), y constant within ~0.5 px, no rotation, no visible change of apparent scale (<1-2%); at rest frames 0-1, then speeds up steadily (per-frame dx grows ~1.1 px/frame each frame) until it leaves the frame",
+   "size_px_fully_visible_frames_10_52": {
+    "bbox_length_x": {
+     "median": 1009.0,
+     "min": 982.0,
+     "max": 1031.0
+    },
+    "bbox_height_y_incl_antennas": {
+     "median": 314.0,
+     "min": 299.0,
+     "max": 318.0
+    },
+    "mask_length_main_axis": {
+     "median": 1018.2,
+     "min": 992.0,
+     "max": 1039.8
+    },
+    "mask_width_across_axis": {
+     "median": 260.2,
+     "min": 251.7,
+     "max": 266.4
+    },
+    "main_axis_angle_deg": "171-172 (axis tilted: nose lower than tail by ~8 deg in the image)"
+   },
+   "size_px_clear_frame_24": {
+    "x0": 1252,
+    "x1": 2269,
+    "y0": 731,
+    "y1": 1044,
+    "bbox_length": 1018,
+    "bbox_height": 314,
+    "ref_x": 1760.5,
+    "ref_y": 887.0
+   },
+   "body_height_without_antennas_px_approx": "about 270 (antenna tips add ~30-45 px above the roof; bbox_h includes them)",
+   "path_px": {
+    "start_ref_x_frame0": 2091.0,
+    "last_ref_x_frame67_extrapolated": -424.0,
+    "path_length_frames_0_67_px": 2515.0,
+    "frames_used": [
+     0,
+     67
+    ]
+   }
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "sky_clouds",
+   "description": "cloudy sunset sky background (pink/grey clouds), static",
+   "moves": false
+  },
+  {
+   "name": "sea",
+   "description": "sea / water surface below horizon row ~1204 px, slight haze; very faint temporal shimmer only",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "car at rest (no displacement)",
+   "frames": [
+    0,
+    1
+   ],
+   "times_s": [
+    0.0,
+    0.0417
+   ]
+  },
+  {
+   "event": "motion start (first displacement, ~2 px)",
+   "frame": 2,
+   "time_s": 0.0833,
+   "note": "motion starts between frame 1 and 2; consistent with constant acceleration from rest starting at about frame 1"
+  },
+  {
+   "event": "car fully inside the image",
+   "frames": [
+    10,
+    52
+   ]
+  },
+  {
+   "event": "nose reaches left image edge",
+   "frame": 53,
+   "time_s": 2.2083
+  },
+  {
+   "event": "last visible (tail tip only)",
+   "frame": 67,
+   "time_s": 2.7917
+  },
+  {
+   "event": "car gone",
+   "frame": 68,
+   "time_s": 2.8333
+  }
+ ],
+ "notes_file": "notes.md"
+}

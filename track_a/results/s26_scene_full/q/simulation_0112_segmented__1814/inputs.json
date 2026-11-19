@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0112_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 55,
+ "duration_s": 2.2917,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1814,
+  "question": "What is the diameter of the wheel in meters?",
+  "prior": "speed of the car = 6.66m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

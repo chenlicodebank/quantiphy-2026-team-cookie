@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0142.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 80,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y downward; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the ceiling region against frame 0: |shift| < 0.02 px in every frame (scripts/camcheck.py); small brightness steps at frames 18, 36, 54 are video-compression keyframe changes, not motion",
+    "per_frame_background_shift_px": 0.0,
+    "view": "side view of a walk parallel to the image plane; floor tile joints converge to a vanishing point near x ~ 905-915 px above the floor line (one-point perspective of the floor), but the man walks at constant depth: feet on y = 899-905 px all clip, apparent height constant"
+  },
+  "objects": [
+    {
+      "name": "man",
+      "description": "the only person and the only moving object: adult man, navy/white vertically striped long-sleeve shirt, dark trousers, dark shoes, short brown hair, face blurred/grey",
+      "moves": true,
+      "visible_frames": [0, 79],
+      "track_file": "tracks/man.csv",
+      "reference_point": "pelvis_x, pelvis_y (pelvis estimate, see notes); head_cx is the smooth raw signal it is derived from",
+      "motion": "walks left to right the whole clip, already walking at frame 0 and still walking at frame 79; moves ~18.8 px/frame on average (pelvis_x 201.4 at f0 -> 1685.4 at f79)",
+      "occlusion": "frames 77-79: front hand and front foot hidden by the near white wall at x >= 1800 (bbox_x1 clipped at 1800); otherwise fully visible",
+      "standing_height_px": "492 (head top y=414 to sole y=905, frames 0, 25, 74-75 when the head is highest); minimum bbox height 468 (f8, f33), max 492",
+      "width_px_range": "105 (f49, legs together) to 310 (f5-6, full stride)",
+      "feet_ground_y_px": 905
+    },
+    {"name": "back_wall", "description": "dark wood-panelled wall behind the man", "moves": false,
+     "extent_px": {"x": [114, 1799], "y_top_panel": 494, "y_floor_line": 800, "panel_height_px": 306}},
+    {"name": "floor", "description": "light grey glossy tiled floor, reflective (faint mirror image of the man)", "moves": false,
+     "extent_px": {"y": [800, 1079], "x": [114, 1799]}, "tile_joints": "joints converge toward vanishing point near x~910; joint spacing along y=800 about 60 px"},
+    {"name": "windows", "description": "row of white (overexposed) window openings above the wall, with blue strip and black top beam", "moves": false,
+     "extent_px": {"black_beam_y": [288, 302], "blue_strip_y": [305, 322], "opening_y": [340, 475], "sill_y": [476, 494]},
+     "mullions_x": [[137, 177], [905, 946], [1290, 1323], [1674, 1715]], "note": "outer mullions slanted"},
+    {"name": "white_arch_left", "description": "white curved arch/rib coming down from the ceiling, left one", "moves": false,
+     "extent_px": {"foot_x": [497, 640], "foot_bottom_y": 560}, "note": "behind the man (man passes in front of it ~frames 22-30)"},
+    {"name": "white_arch_right", "description": "white curved arch/rib, right one", "moves": false,
+     "extent_px": {"foot_x": [1306, 1419], "foot_bottom_y": 560}, "note": "behind the man (~frames 58-66)"},
+    {"name": "ceiling", "description": "grey wooden plank vaulted ceiling", "moves": false, "extent_px": {"y": [0, 288], "x": [114, 1799]}},
+    {"name": "near_white_walls", "description": "white wall/frame edges in the foreground at both image sides", "moves": false,
+     "extent_px": {"left_x": [0, 113], "right_x": [1800, 1919]}, "note": "right one occludes the man in frames 77-79"}
+  ],
+  "events": [
+    {"event": "motion", "frame": 0, "t": 0.0, "note": "man already walking at frame 0 (pelvis moves ~18 px in the first frame); no start or stop inside the clip"},
+    {"event": "occlusion_start", "frame": 77, "t": 3.2083, "note": "front of the man reaches the right foreground wall x=1800"},
+    {"event": "end_of_clip_still_walking", "frame": 79, "t": 3.2917},
+    {"event": "max_stride (widest bbox, double support)", "frames": [5, 18, 30, 43, 55, 67]},
+    {"event": "legs together / mid-stance (narrowest bbox)", "frames": [11, 24, 36, 49, 61, 73]},
+    {"event": "head highest (head_top_y minimum 414-418)", "frames": [0, 12, 25, 37, 50, 62, 74]},
+    {"event": "head lowest (head_top_y 432-433)", "frames": [6, 18, 31, 43, 55, 67, 79]},
+    {"step_period_frames": 12.4, "note": "one step every ~12.4 frames (0.52 s); one gait cycle ~24.8 frames"}
+  ]
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0099_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MX",
+ "fps": 24.0,
+ "frames": 73,
+ "duration_s": 3.0417,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1791,
+  "question": "What is the height of the shark in meters?",
+  "prior": "length of the boat = 10m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

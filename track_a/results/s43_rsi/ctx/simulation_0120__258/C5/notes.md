@@ -1,0 +1,9 @@
+Scale from the prior: the moving round robot vacuum travels 201.7 px/s = 1 m/s, so the floor scale is 201.7 px/m (checked: robot diameter 69.9 px -> 0.35 m, coffee table 165 px -> 0.82 m, rug 332x551 px -> 1.65x2.73 m). The camera looks straight down (rug/table project as exact rectangles, robot stays circular), so the floor maps affinely and the left wall plane sits at X=(295.5-540)/201.7=-1.21 m (wall/floor junction measured as a perfectly vertical line at u=295.5). SAM 3 'TV' (0.945) is the black panel with the clock digits on that wall; its long edges are unforeshortened (404 px at u=145, 337 px at u=205) while its height is foreshortened. Pinhole: L = len_px*|Xw|/|u-cx| gives 1.240 m (top edge) and 1.219 m (bottom edge), mean 1.21 m; the two independent edges agree to 1.7% and imply a plausible 16:9 panel with f~1240 px. Naive single floor-scale reading would give 2.0 m, implausible for a TV and ignoring the clear perspective.
+
+Final message:
+**Answer: 1.21 m** (TV length).
+
+Method summary:
+- **Scale**: the moving round robot vacuum (the "ball" in scene/notes.md) travels 201.7 px/s = 1 m/s → 201.7 px/m on the floor. Verified against the robot's own 0.35 m diameter, the 0.82 m coffee table and the 1.65 × 2.73 m rug.
+- **Camera**: straight-down view (rug and table project as exact axis-aligned rectangles, robot stays circular), so the floor mapping is affine; the left wall's floor junction is a perfectly vertical line at u = 295.5 → wall plane at X = −1.21 m.
+- **TV**: SAM 3 "TV" (0.945) is the black clock panel on that wall. Its long side is unforeshortened (404 px far edge at u=145, 337 px near edge at u=205) while its height is heavily foreshortened. Pinhole geometry L = len_px·|X_wall|/|u−cx| gives 1.240 m and 1.219 m from the two independent long edges → 1.21 m (range 1.17–1.26 m). A naive single floor-scale reading would give 2.0 m, which is implausible for a TV and ignores the clear perspective.

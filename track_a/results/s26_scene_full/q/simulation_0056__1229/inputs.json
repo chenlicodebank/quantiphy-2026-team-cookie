@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0056.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 29.993562,
+ "frames": 62,
+ "duration_s": 2.0671,
+ "width": 2048,
+ "height": 2048,
+ "question": {
+  "id": 1229,
+  "question": "What is the average speed of the green car from 0.0s to 1.0s in m/s?",
+  "prior": "acceleration of the orange car = -2.86m/s^2",
+  "depth_info": "t=0s, distance_orange_car_camera = 19.377m\nt=1s, distance_orange_car_camera = 11.858m\nt=0s, distance_green_car_camera = 28.684m\nt=1s, distance_green_car_camera = 17.388m\nt=0s, distance_human_camera = 4.786m\nt=1s, distance_human_camera = 5.159m\ndistance_fire_hydrant_camera = 4.721m\ndistance_near_streetlight_camera = 5.201m\ndistance_far_streetlight_camera =13.174m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

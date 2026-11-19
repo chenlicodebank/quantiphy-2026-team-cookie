@@ -1,0 +1,87 @@
+{
+  "video": "simulation_0175.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 40,
+  "duration_s": 1.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y downward; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the rock region vs frame 0: |dx| <= 0.5 px, |dy| < 0.01 px over all 40 frames",
+    "horizon_row_px": 895,
+    "horizon_note": "sea/sky line at y ~ 893-897, straight and level; camera looks roughly horizontally"
+  },
+  "objects": [
+    {
+      "name": "airplane",
+      "description": "white twin-engine regional/business jet (rear-mounted engines, T-tail, red/gold cheat line), landing gear down, flying right-to-left in the sky near the top of the frame, seen in side view (nose pointing left)",
+      "moves": true,
+      "visible_frames": "1-39 (enters at right edge frame 1, fully in frame 9-31, leaves left edge; last sliver frame 39; absent frame 0)",
+      "track_file": "tracks/airplane.csv",
+      "reference_point": "ref_x = bbox centre of nose tip..tail tip (extrapolated with the full length for partial frames), ref_y = 138 (bbox vertical centre); the airplane origin is assumed at its geometric centre",
+      "pixel_size_full_view": {
+        "length_nose_to_tail_px": 466,
+        "length_range_px": [458, 474],
+        "height_incl_fin_and_gear_px": 95,
+        "bbox_y_range_px": [91, 185],
+        "fuselage_body_height_px": "~38 (y ~123-161 at frame 18)",
+        "measured_frames": "9-31"
+      },
+      "motion_summary_px": {
+        "direction": "-x (leftward), horizontal; vertical drift 0 px",
+        "per_frame_shift_px": "61.5 +- 0.2 (cross-correlation, frames 4-38), no measurable change over the clip",
+        "ref_x_linear_fit": "ref_x(frame) ~ 2174.6 - 61.66*frame (edge based, +-4 px residual)",
+        "example_positions": {"frame 9": [1628.5, 138], "frame 18": [1069.5, 138], "frame 24": [698.5, 138], "frame 31": [273.0, 138]}
+      }
+    },
+    {
+      "name": "airplane_shadow",
+      "description": "faint dark patch on the sea surface below/right of the island, moving left with the airplane (likely the airplane's shadow)",
+      "moves": true,
+      "visible_frames": "16-29 reliably (fades into the island's shadow/water texture afterwards; frames 30-33 entries in the csv are unreliable)",
+      "track_file": "tracks/plane_shadow.csv",
+      "motion_summary_px": "y ~ 973, moves ~ -57 px/frame in x; blob ~ 80-95 px wide x 30-40 px tall; low reliability"
+    },
+    {
+      "name": "rock_island",
+      "description": "tall rocky islet with green trees/bushes on top, centre-left of frame, standing on a sand beach",
+      "moves": false,
+      "visible_frames": "0-39",
+      "pixel_extents_frame0": {
+        "bbox_xyxy_px": [624, 531, 1221, 1030],
+        "width_px": 598,
+        "height_top_of_trees_to_rock_base_px": 500,
+        "tall_rock_pillar": "x ~815-1220, top of vegetation y ~531, rock top (bare) y ~640",
+        "low_left_shelf": "x ~624-830, top y ~850"
+      }
+    },
+    {
+      "name": "sand_beach",
+      "description": "pale pink-white sand spit around the base of the island, cut off by the bottom frame edge",
+      "moves": false,
+      "visible_frames": "0-39",
+      "pixel_extents_frame0": {"x_range_px": [460, 1460], "y_range_px": [985, 1080], "note": "extends past bottom edge; approximate (+-10 px)"}
+    },
+    {
+      "name": "sea",
+      "description": "turquoise water filling the lower part of the frame, from the horizon (y ~895) to the bottom; animated ripples",
+      "moves": false
+    },
+    {
+      "name": "sky",
+      "description": "blue sky with a grey-white haze band above the horizon",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "airplane nose enters frame at right edge", "frame": 1, "time_s": 0.0417},
+    {"event": "airplane fully inside frame (tail clears right edge)", "frame": 9, "time_s": 0.375},
+    {"event": "airplane nose reaches left edge", "frame": 32, "time_s": 1.3333, "note": "last fully visible frame 31"},
+    {"event": "airplane last visible (tail sliver)", "frame": 39, "time_s": 1.625},
+    {"event": "airplane passes above island centre (ref_x ~ 922)", "frame": 20.3, "time_s": 0.846, "note": "interpolated"},
+    {"event": "no start/stop, bounce, impact or direction change: airplane moves at constant pixel velocity throughout"}
+  ]
+}

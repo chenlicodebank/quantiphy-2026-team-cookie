@@ -1,0 +1,76 @@
+{
+  "video": "captured_0054bx.mp4",
+  "source": "lab (captured, SAM2-segmented: background replaced by black, people/hands removed)",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (assumed: lab tripod camera; background removed so no background features exist to measure a shift)",
+    "intrinsics_per_benchmark": {"fx_px": 763, "cx_px": 640, "cy_px": 360, "hfov_deg": 80},
+    "perspective_cues": "none visible (no floor, walls or horizon after segmentation). Depth cue = apparent ball diameter (diam_px in tracks), proportional to 1/distance.",
+    "watermark": "text 'Modified with Segment Anything 2 Demo' at bottom-right (x 1035-1272, y 698-712); not an object"
+  },
+  "units": "pixels and seconds; image coords x right, y down, origin top-left",
+  "objects": {
+    "basketball": {
+      "description": "orange Wilson basketball with dark seams; largest object",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track": "tracks/basketball.csv",
+      "summary": "held still at bottom right (f0-4, centre ~(873,666), partly hidden by removed hand and cut at y=584 and by image bottom); thrown up-left and away from camera f5 onward; apparent diameter ~90 px (f0, occluded estimate) -> 77 px (f12) -> 53 px (f38-39); turns around at f39 (x min 400.5, y min 264.8 px) and moves back right/down while growing to ~56-57 px; abrupt slow-down of its image motion at f43",
+      "apparent_diameter_px": {"f0_est": 92, "f12": 77.3, "f20": 67.7, "f30": 59.1, "f39": 53.3, "f48": 56.5}
+    },
+    "soccer_ball": {
+      "description": "white soccer ball with black pentagons; from f32 on the segmentation renders it as a uniform dark-grey disc (same object, continuous track)",
+      "moves": true,
+      "visible_frames": [0, 48],
+      "track": "tracks/soccer_ball.csv",
+      "summary": "held (partly hidden by removed hand; right edge cut at x~933, top cut at y=584) at ~(912-918, 595-619) f0-22 with small jiggle; released ~f23-24 and moves up and slightly left, away from camera, decelerating in the image until the end; apparent diameter 70 px (f26) -> 47 px (f48)",
+      "apparent_diameter_px": {"f25": 66.7, "f26": 70.4, "f30": 64.6, "f40": 54.8, "f48": 47.2}
+    },
+    "yellow_ball": {
+      "description": "small yellow ball (tennis-ball-like); motion-blurred into an elongated blob while fast",
+      "moves": true,
+      "visible_frames": [17, 48],
+      "track": "tracks/yellow_ball.csv",
+      "summary": "enters at left edge f17 (partial), flies right and up away from camera together with the white ball (yellow is the lower/left one early), image-apex f27, falls, bounces at f37 (lowest y 491.7 at x 696), rises again, near second image-apex at f48; across-blur width 47 px (f19-24) -> 24 px (f37-48)",
+      "apparent_diameter_px": {"f20": 46.2, "f27": 37.3, "f33": 31.6, "f37": 24.1, "f45": 23.2, "f48": 23.3}
+    },
+    "white_ball": {
+      "description": "small off-white/grey ball, same size class as the yellow ball; motion-blurred",
+      "moves": true,
+      "visible_frames": [20, 47],
+      "track": "tracks/white_ball.csv",
+      "summary": "enters at f20 just right of the yellow ball, same flight: image-apex f28, bounces at f38 (lowest y 470.0 at x 679), rises; not visible at f48 (vanishes from the segmentation)",
+      "apparent_diameter_px": {"f21": 52.2, "f28": 37.4, "f33": 29.9, "f38": 23.2, "f44": 26.8, "f47": 20.7}
+    }
+  },
+  "static_objects": "none visible: the background (floor, walls, furniture) was removed by segmentation; the hand(s) holding the basketball and soccer ball were also removed",
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "start; basketball and soccer ball held still (touching in the image)"},
+    {"frame": 5, "t": 0.208, "event": "basketball starts moving (release/throw begins; clear motion from f6)"},
+    {"frame": 11, "t": 0.458, "event": "basketball fully visible from here (occluded by removed arm/hand f0-10)"},
+    {"frame": 12, "t": 0.5, "event": "basketball step f11->f12 ~1.6x neighbours: possible dropped frame (uncertain, occlusion ends here)"},
+    {"frame": 17, "t": 0.708, "event": "yellow ball enters from the left edge"},
+    {"frame": 20, "t": 0.833, "event": "white ball appears (next to yellow ball)"},
+    {"frame": 23, "t": 0.958, "event": "soccer ball starts moving up (release ~f23-24); fully visible from f25"},
+    {"frame": 27, "t": 1.125, "event": "yellow ball highest image point (y 237.3)"},
+    {"frame": 28, "t": 1.167, "event": "white ball highest image point (y 197.8)"},
+    {"frame": 32, "t": 1.333, "event": "soccer ball appearance turns dark grey (segmentation artifact)"},
+    {"frame": 36, "t": 1.5, "event": "ALL objects move ~2x their normal step f35->f36: a frame is very likely missing in the recording between f35 and f36"},
+    {"frame": 37, "t": 1.542, "event": "yellow ball bounce (lowest image point, y 491.7)"},
+    {"frame": 38, "t": 1.583, "event": "white ball bounce (lowest image point, y 470.0)"},
+    {"frame": 39, "t": 1.625, "event": "basketball reverses direction (leftmost/highest image point, smallest apparent size 53 px) - likely impact with a wall or similar; then moves toward camera, right and down"},
+    {"frame": 43, "t": 1.792, "event": "basketball image motion abruptly slows (dy +6.8 -> +1.4 px/frame): probable second contact"},
+    {"frame": 47, "t": 1.958, "event": "white ball last visible"},
+    {"frame": 48, "t": 2.0, "event": "end; yellow ball near its second image apex"}
+  ],
+  "files": {
+    "tracks": "tracks/<object>.csv: per frame ref_x, ref_y, diam_px, quality, mask centroid, bbox, area, main-axis length / width, circle fits, occlusion flag",
+    "notes": "notes.md",
+    "scripts": "scripts/"
+  }
+}

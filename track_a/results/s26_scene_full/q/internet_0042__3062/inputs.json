@@ -1,0 +1,18 @@
+{
+ "video": "internet_0042.mp4",
+ "video_source": "internet",
+ "video_type": "S2MS",
+ "fps": 28.703764,
+ "frames": 44,
+ "duration_s": 1.5329,
+ "width": 2160,
+ "height": 3840,
+ "question": {
+  "id": 3062,
+  "question": "What is the length of the black car in meters?",
+  "prior": "length of the white car = 4.572 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

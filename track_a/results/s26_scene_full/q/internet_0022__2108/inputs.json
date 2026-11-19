@@ -1,0 +1,18 @@
+{
+ "video": "internet_0022.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 16.666667,
+ "frames": 36,
+ "duration_s": 2.16,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2108,
+  "question": "What is the diameter of the saucer in mm?",
+  "prior": "width of the mouse = 57mm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 25.0
+ }
+}

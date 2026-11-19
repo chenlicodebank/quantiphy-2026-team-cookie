@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0160.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 30.0,
+ "frames": 40,
+ "duration_s": 1.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 372,
+  "question": "What is the length of the billiard table in meters?",
+  "prior": "diameter of the ball = 0.0757m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

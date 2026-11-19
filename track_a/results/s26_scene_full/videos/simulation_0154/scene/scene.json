@@ -1,0 +1,68 @@
+{
+  "video": "simulation_0154.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 48,
+  "duration_s": 2.0,
+  "width": 1920,
+  "height": 1080,
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, full-resolution pixels (1920x1080)",
+  "camera": {
+    "motion": "static (no pan/zoom/shake). Seabed skyline (dune crest vs water, x 560..1500) has median per-column shift 0 px vs frame 0 in every frame; per-frame background shift = (0, 0).",
+    "view": "side view, underwater; shark swims parallel to the image plane (main axis within ~1-2 deg of horizontal, apparent height constant), so one metres-per-pixel scale applies to the shark."
+  },
+  "objects": [
+    {
+      "name": "shark",
+      "description": "single great-white-style shark, grey-blue back, white belly, dorsal fin, crescent tail; the only moving object. Snout tip is rendered semi-transparent/faded (lighter grey cap ~40-50 px long in front of the opaque head).",
+      "moves": true,
+      "direction": "right to left (negative x), horizontal, constant height in image (centre y ~299)",
+      "visible_frames": "0-46 (absent at 47)",
+      "fully_in_view_frames": "15-30 (both snout tip and tail tip inside the image)",
+      "partial": "frames 0-14: tail cut by right border (snout visible); frames 31-46: snout cut by left border (tail visible)",
+      "track_file": "tracks/shark.csv",
+      "reference_point": "center_x, center_y in shark.csv = horizontal middle of the snout-tip..tail-tip extent and vertical middle of dorsal-fin-tip..lower-tail-lobe extent (stands in for the rig origin / body centre). For partial frames centre is extrapolated from the visible end with the median full length.",
+      "pixel_size_when_fully_visible": {
+        "full_length_snout_tip_to_tail_tip_px": {"median": 915.5, "min": 890, "max": 926, "std": 12, "frames": "15-30", "note": "varies with tail beat and with the faint snout edge"},
+        "opaque_length_px_x_min_to_x_max": {"typical": "865-900", "note": "excludes the faint snout cap"},
+        "height_px_dorsal_fin_tip_to_lower_tail_lobe": {"median": 268, "range": "262-273", "note": "y_min ~162-168 (dorsal fin tip), y_max ~428-434 (lower caudal lobe)"},
+        "body_axis_angle_deg": "178-180 / 0-1 (horizontal)"
+      }
+    },
+    {
+      "name": "seabed",
+      "description": "sandy dunes along the bottom of the frame with animated cyan caustic light patches",
+      "moves": false,
+      "visible_frames": "0-47",
+      "image_position": "occupies y ~797..1080; highest crest at x ~800-1160, y ~797-800; skyline f0 (x,y): (560,864) (640,839) (720,814) (800,798) (960,800) (1040,797) (1120,798) (1280,834) (1360,847) (1440,866); left edge y~835 at x=0",
+      "note": "caustic patches change brightness every frame (lighting, not objects)"
+    },
+    {
+      "name": "particles",
+      "description": "many small bright cyan/white floating specks (marine snow / bubbles), 3-25 px across, all over the water",
+      "moves": "drift very slowly (~0.3 px/frame)",
+      "visible_frames": "0-47",
+      "note": "not tracked individually; distractors only"
+    },
+    {
+      "name": "light_rays",
+      "description": "soft vertical light shafts from the surface (upper image), static",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "shark already in motion at first frame, snout entering from right border", "frame": 0, "time_s": 0.0, "detail": "snout tip x~1777"},
+    {"event": "tail tip enters view (whole shark in frame)", "frame": 15, "time_s": 0.625},
+    {"event": "shark centre crosses image centre x=960", "frame": "23-24", "time_s": "~0.97", "detail": "center_x 933 at f23, 874.5 at f24; centre ~ x 1005 at f22"},
+    {"event": "snout tip reaches left border", "frame": 31, "time_s": 1.292, "detail": "snout_x 59 at f30, cut at f31"},
+    {"event": "tail tip leaves view (shark gone)", "frame": 47, "time_s": 1.958, "detail": "tail_x 60 at f46; absent at f47"},
+    {"note": "motion is continuous and leftward over the whole clip; no stops, no direction changes, no contacts or impacts"}
+  ],
+  "files": {
+    "tracks/shark.csv": "per-frame shark track (frames 0-47)",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts and small json outputs"
+  }
+}

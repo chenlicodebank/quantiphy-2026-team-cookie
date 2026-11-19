@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0120.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MC",
+ "fps": 24.007839,
+ "frames": 49,
+ "duration_s": 2.041,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 260,
+  "question": "What is the side length of the chessboard in meters?",
+  "prior": "speed of the robot cleaner = 1m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

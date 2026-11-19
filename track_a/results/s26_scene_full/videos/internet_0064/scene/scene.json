@@ -1,0 +1,95 @@
+{
+  "video": "internet_0064.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 170,
+  "duration_s": 5.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels and seconds; image coordinates x right, y down, origin top-left",
+  "summary": "Static side view of a light-grey gym wall with a black baseboard and wooden floor. A woman (beige cap, white tank top, olive cargo pants) stands at the far left holding a basketball, dips it (wind-up) and tosses it up and to the right; the ball flies in a parabola across the frame, bounces on the floor at x~1354 (frame 114), bounces a second time near the right edge (frame 145) and leaves the frame on the right (last partial view frame 148). The woman then walks to the right from about frame 118 to the end (still walking at frame 169).",
+  "camera": {
+    "motion": "nearly static handheld/stabilised: slow drift; background content moves ~27 px left and ~8 px up by frame 169, scale 0.992 (~0.8% zoom-out), rotation < 0.25 deg",
+    "per_frame_file": "tracks/camera_shift.csv",
+    "max_shift_px": {"dx": -27.5, "dy": -7.7},
+    "note": "small compared with ball motion (~30 px/frame) but comparable to slow details; cx_bg/cy_bg columns in the track files give positions in frame-0 background coordinates"
+  },
+  "objects": [
+    {
+      "name": "basketball",
+      "description": "the only ball; dark red-brown/orange basketball with black seams",
+      "moves": true,
+      "visible_frames": "0-148 (held in the woman's hands 0-80; free flight 81-148; partly cut by right frame edge 145-148; absent 149-169)",
+      "track": "tracks/ball.csv",
+      "reference_point": "centre of fitted circle (cx, cy)",
+      "pixel_size": {
+        "diameter_free_flight_median_px": 85.0,
+        "diameter_flight1_frames81_112_median_px": 84.4,
+        "diameter_flight1_range_px": [79.4, 85.9],
+        "diameter_flight2_frames116_143_median_px": 86.0,
+        "diameter_held_frames0_75_median_px": 92.1,
+        "note": "held ball is ~7 px larger (it is held in front of the body, closer to the camera, plus hands bias the fit). In flight the diameter dips to ~80 px around frames 104-111 (fast, blurred, colour mask shrinks); best value for a size prior: ~85 px (frames 81-95 and 116-143)."
+      }
+    },
+    {
+      "name": "person",
+      "description": "the only person; woman with beige baseball cap, blurred face, dark ponytail, white/cream tank top, olive-green cargo pants, white sneakers with orange soles; faces right",
+      "moves": true,
+      "visible_frames": "0-169 (whole clip)",
+      "track": "tracks/person.csv",
+      "reference_point": "bbox centre (cx, cy); also head_x (cap/head mean x) and waist_x",
+      "pixel_size": {
+        "height_standing_px": 620,
+        "height_standing_note": "cap top (y~436-446) to shoe sole (y~1052-1063); frames 0-60 median 620, whole clip median 621, walking 606-626",
+        "width_standing_px": 150,
+        "width_note": "front-to-back body width while standing, frames 0-60 (incl. arms); during walking the bbox width (stride + arms) varies 177-330 px"
+      },
+      "actions": "stands holding ball 0-58; wind-up dip 59-73; throw (arms swing up-right) 74-80; release between 80 and 81; arms extended/lowering 81-100; begins walking right ~118-121; walks right to the end (head x ~141 at f120 -> ~706 at f169)"
+    },
+    {
+      "name": "wall",
+      "description": "plain light-grey gym wall filling the background; few marks; faint grey shadows of ball and person and a faint orange 'ghost' smudge trailing the ball",
+      "moves": false
+    },
+    {
+      "name": "baseboard",
+      "description": "black horizontal band at the bottom of the wall, spans the full image width",
+      "moves": false,
+      "pixel_extent_frame0": {"top_edge_y": 979, "bottom_edge_y": 1006, "dark_band_including_floor_gap_y": [979, 1020], "x_span": [0, 1919], "note": "nearly horizontal (top edge y 984 at x=400, 979-981 at x=700-1880)"}
+    },
+    {
+      "name": "floor",
+      "description": "light-brown wooden gym floor, visible strip y ~1015-1080",
+      "moves": false,
+      "pixel_extent_frame0": {"top_edge_y": 1015, "bottom_y": 1079},
+      "ball_bounce_points": "bounce 1 ball centre (1354, 1006), lowest ball edge ~1051 (frame 114); bounce 2 ball centre (1879, 988) (frame 145)"
+    },
+    {
+      "name": "left_edge_patch",
+      "description": "beige/tinted compositing (inpainting) patch hugging the left image edge x<~40 and a faint halo that follows the person; an editing artefact, not an object",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball held still (person standing)", "frames": [0, 58], "t_s": [0.0, 1.933]},
+    {"event": "wind-up: ball lowered/moved left (cy 717 -> 751)", "frames": [59, 71], "t_s": [1.967, 2.367]},
+    {"event": "throw: ball accelerated up-right by hands", "frames": [74, 80], "t_s": [2.467, 2.667]},
+    {"event": "release (last hand contact 80, first free frame 81)", "frame": 80.5, "t_s": 2.683},
+    {"event": "ball apex 1 (min cy 183.0)", "frame": 93, "t_s": 3.1, "note": "93 and 94 nearly equal (183.0 / 183.4)"},
+    {"event": "bounce 1 on floor (lowest ball centre cy 1006)", "frame": 114, "t_s": 3.8},
+    {"event": "ball apex 2 (min cy 536.0)", "frame": 130, "t_s": 4.333},
+    {"event": "bounce 2 on floor near right edge (cy ~988)", "frame": 145, "t_s": 4.833},
+    {"event": "ball starts leaving frame at right edge", "frame": 146, "t_s": 4.867},
+    {"event": "ball last (partly) visible", "frame": 148, "t_s": 4.933},
+    {"event": "person starts walking right", "frame": 119, "t_s": 3.967, "note": "gradual; head x starts creeping ~110, clear acceleration 118-121, ~12 px/frame by 130"},
+    {"event": "person still walking at last frame", "frame": 169, "t_s": 5.633}
+  ],
+  "files": {
+    "tracks/ball.csv": "basketball per frame 0-148",
+    "tracks/person.csv": "person per frame 0-169",
+    "tracks/camera_shift.csv": "background registration per frame 0-169",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

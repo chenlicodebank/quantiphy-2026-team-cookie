@@ -1,0 +1,70 @@
+{
+  "video": "simulation_0111.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (top-down / nadir view onto a canal; motion in the water plane facing the camera)",
+  "fps": 24.0, "frames": 211, "width": 1174, "height": 2048,
+  "time_convention": "t = frame / 24; frame 0 is completely black (mean gray 0); scene content from frame 1",
+  "pixel_axes": "x right, y down, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of bridge band and building facade vs frame 5 at frames 1,100,200,210: shifts < 0.05 px",
+    "view": "looking straight down; no horizon; water, bridge deck and boat all approx. one depth (planar)"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "small white/grey wooden rowboat (pointed at both ends, 3-4 dark seat/thwart openings), the only moving object",
+      "moves": true,
+      "track": "tracks/boat.csv",
+      "visible_frames": "1-109 (full 1-76, bow under bridge 77-109), hidden under bridge 110-169, re-emerges 170-210 (stern hidden 170-202, full 203-210)",
+      "reference_point": "centre of the solid hull (midpoint of the two hull tips), columns cx, cy",
+      "motion_summary_px": "straight down the canal (+y), x constant at 631.3; cy = 5.496*frame + 273.8 (rms 0.65 px over all measured frames 2-210); i.e. ~5.50 px/frame = ~131.9 px/s, constant; no visible acceleration",
+      "size_px": {
+        "hull_length_along_axis": 233, "hull_length_note": "solid hull tip-to-tip, same before (168..401 at frame 1) and after the bridge (1312..1544 at frame 210)",
+        "length_incl_thin_stem_post": 250, "length_incl_note": "pre-bridge mask includes a faint ~16 px thin post at the upper (stern) tip; bbox height y0..y1 = 248-251 at frames 1-60; after the bridge the bbox height is 232",
+        "width": 84.8, "width_note": "across the beam, 84-85 px in all full frames",
+        "bbox_w_x": 84, "bbox_h_y_typical_prebridge": 249,
+        "axis_angle_deg": 93.5, "axis_note": "long axis tilted ~3.5 deg from image vertical (angle measured from +x, y down); orientation unchanged throughout"
+      }
+    },
+    {
+      "name": "bridge", "moves": false,
+      "description": "stone (cobblestone) footbridge crossing the canal across the full image width, slightly tilted (right end lower), white kerbs + green/orange railings on both edges",
+      "extent_px": "upper edge (railing line) y~778 at x=200, 810 at x=600, 834 at x=800, 874 at x=1000; lower edge y~1211 at x=200, 1258 at x=600, 1262 at x=800, 1309 at x=1000; tilt ~6.9 deg; width across bridge (perpendicular, railing to railing) ~437 px (vertical extent ~440-450 px); length = spans whole image width (1174 px, ends not visible)",
+      "at_boat_column_x631": "occludes y 807..1265 (boat bow disappears at y~807, stern reappears at y~1262)"
+    },
+    {
+      "name": "lamp_posts", "moves": false,
+      "description": "4 dark street lamps on the bridge corners, each with a bracket arm (2 on upper/north railing, 2 on lower/south railing)",
+      "approx_positions_px": {"upper_left_base": [255, 765], "upper_left_head": [320, 815], "upper_right_base": [900, 820], "upper_right_head": [835, 865], "lower_left_head": [270, 1185], "lower_left_base": [195, 1220], "lower_right_head": [820, 1240], "lower_right_base": [875, 1280]},
+      "reliability": "+/-10 px, read off frame 42 by eye"
+    },
+    {
+      "name": "bollards", "moves": false,
+      "description": "small dark posts at the water edge of the bridge near the boat's path: one just above the upper railing (~[570,755]) and one just below the lower railing (~[545,1285])",
+      "reliability": "+/-10 px by eye"
+    },
+    {
+      "name": "canal_water", "moves": false,
+      "description": "dark green water channel running top-to-bottom",
+      "extent_px": "upper part (above bridge) water from x~177 to x~1015-1047 (~840-870 px wide); lower part (below bridge) left bank slanted x~100 (y=1400) to x~220 (y=2000), right bank x~920-940 (~710-870 px wide)",
+      "reliability": "+/-15 px (bank edges irregular, walls in shadow)"
+    },
+    {
+      "name": "buildings", "moves": false,
+      "description": "building facades seen from above on both banks: pink building upper-left (x<170, y<760), cream/blue-shuttered upper-right (x>1010, y<800), green/teal lower-left (x<200, y>1290), cream with pink/blue shutters lower-right (x>910, y>1270); flower boxes and window shutters",
+      "reliability": "qualitative"
+    }
+  ],
+  "events": [
+    {"event": "first non-black frame", "frame": 1, "t": 0.0417},
+    {"event": "boat start of motion (frames 1 and 2 show the same position; moves from frame 2->3 on)", "frame": 2, "t": 0.0833},
+    {"event": "boat bow tip reaches upper bridge edge (y~807), begins to be occluded", "frame": 76, "t": 3.1667},
+    {"event": "boat fully hidden under bridge", "frame": 110, "t": 4.5833, "note": "last tiny slivers ~109-113"},
+    {"event": "boat midpoint under bridge centre line (cy~1035 at x=631)", "frame": 139, "t": 5.79, "note": "from linear fit"},
+    {"event": "boat bow reappears below the bridge (y~1262)", "frame": 170, "t": 7.0833, "note": "first reliable partial mask; bow tip first emerges ~frame 166-168"},
+    {"event": "boat fully visible again below bridge", "frame": 203, "t": 8.4583},
+    {"event": "video ends with boat still moving", "frame": 210, "t": 8.75}
+  ],
+  "no_events": "no bounces, contacts, direction changes, rotations or speed changes observed"
+}

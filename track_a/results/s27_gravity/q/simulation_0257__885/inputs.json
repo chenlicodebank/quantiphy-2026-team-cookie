@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0257.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MC",
+ "fps": 24.0,
+ "frames": 40,
+ "duration_s": 1.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 885,
+  "question": "What is the width (longer side) of the table in meters?",
+  "prior": "acceleration of the plant before 0.5s = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

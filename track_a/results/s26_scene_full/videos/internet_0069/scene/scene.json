@@ -1,0 +1,79 @@
+{
+  "video": "internet_0069.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.013158,
+  "frames": 114,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "description": "Static side view (camera at table height) of a wall with a horizontal white rail and a wooden table top. A coffee mug (white rim/handle, dark blurred print, body side faces camera) is pulled by a brown string tied to its handle from left to right across the table, accelerating. The mug enters at the left edge (knot f51, handle f52, body f54) and leaves at the right edge (last sliver f84). Frames 0-50 and 85-113 show only the empty scene (plus string until ~f80 and the mug's shadow at bottom-right after f85).",
+  "objects": [
+    {
+      "name": "mug",
+      "aliases": ["cup", "coffee mug"],
+      "distinguish": "only moving object; cylindrical mug with white rim and handle on its right (leading) side, dark blurred print, string knotted to the handle",
+      "moves": true,
+      "motion": "horizontal translation left->right along the table, speeding up (body left edge moves ~56 px/frame at f55 to ~90 px/frame at f78-80); no rotation, no vertical motion",
+      "visible_frames": "knot 51, handle 52-53, body partial 54-61 (left cut), body fully in view 62-79 (handle cut by right edge from f78), body partial 80-84 (right cut)",
+      "track_file": "tracks/mug.csv",
+      "reference_point": "body_cx = midpoint of body left/right edges (frames 62-79); cy = (rim_top_y+base_bottom_y)/2. Edges (body_x_left trailing, body_x_right leading) are valid also during partial visibility when not cut.",
+      "pixel_size": {
+        "body_width_px": {"value": 425, "range": [419, 459], "note": "body only, measured in band y=720-760; min 419-421 at f69-72 near image centre, grows toward the edges (452 at f62, 459 at f79) from cylinder perspective / blur. Typical value at centre ~420-430."},
+        "length_incl_handle_px": {"value": 595, "range": [585, 630], "note": "body width + handle extension ~170 px (handle outer edge estimated, +/-10 px)"},
+        "handle_extension_px": 170,
+        "height_px": {"value": 570, "note": "rim top y~505 to base bottom y~1075 (frames 67-78); rim top is the far rim edge"}
+      }
+    },
+    {
+      "name": "string",
+      "distinguish": "thin brown cord tied to the mug handle, running to the right edge of frame (puller off-screen right)",
+      "moves": true,
+      "visible_frames": "0-~80 (shifts / tautens slightly during 0-50; moves with the mug; leaves frame with the handle)",
+      "note": "not tracked; its knot coincides with the handle outer edge (handle_x_right_est)"
+    },
+    {
+      "name": "mug_shadow",
+      "distinguish": "soft dark shadow on the table to the lower-left of the mug, moves with it; still visible at bottom-right after the mug leaves (f85-113)",
+      "moves": true,
+      "note": "excluded from the mug extents"
+    },
+    {
+      "name": "wall_rail",
+      "distinguish": "white horizontal tube/rail along the wall-table junction with black clamps",
+      "moves": false,
+      "image_position_f99": "y ~590-650 across the full width; left black clamp x~375-410 (y 588-635); right black clamp x~1562-1592 (y 612-645); long tube segment between clamps ~1160 px long",
+      "reliability": "+/-10 px"
+    },
+    {
+      "name": "table",
+      "distinguish": "light wooden table top, surface from the wall junction y~650 down to the bottom of frame",
+      "moves": false
+    },
+    {
+      "name": "wall",
+      "distinguish": "plain light-gray wall, upper ~55 % of frame",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "string slack/tension changes (string rises slightly)", "frames": "0-50", "note": "subtle"},
+    {"event": "knot/handle of mug enters at left edge", "frame": 51, "time": 1.699},
+    {"event": "mug body leading edge enters", "frame": 54, "time": 1.799},
+    {"event": "mug body fully in view (left edge > 0)", "frame": 62, "time": 2.066},
+    {"event": "mug body leading edge reaches right image edge", "frame": 80, "time": 2.665},
+    {"event": "mug fully gone (last sliver at f84)", "frame": 85, "time": 2.832},
+    {"event": "start/end of motion", "note": "not in view: the mug is already moving when it enters and still moving when it leaves; it accelerates throughout"}
+  ],
+  "camera": {
+    "static": "nearly; slow drift/handheld wobble of a few px plus a small scale change (~0.5 %) around f67-80",
+    "shift_px": "background (rail clamps) offset vs frame 0: |dx| <= 7, dy from +3 to -16 px over the whole clip; during the mug passage (f54-84) |dx| <= 7, |dy| <= 5 px vs mug motion 56-95 px/frame. See tracks/camera.csv and camera_check.csv (per-clamp).",
+    "perspective": "camera at about table height looking horizontally at the wall; mug moves parallel to the image plane at constant depth (height constant 570 px within ~1 %)."
+  },
+  "files": {
+    "tracks/mug.csv": "per-frame mug edges, centre, bbox, flags",
+    "tracks/camera.csv": "per-frame background shift (mean of the reliably matched clamps)",
+    "camera_check.csv": "per-clamp template-match offsets and scores",
+    "raw_body_cols.csv": "raw body column runs",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

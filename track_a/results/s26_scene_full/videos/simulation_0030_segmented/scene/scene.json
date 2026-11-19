@@ -1,0 +1,117 @@
+{
+ "video": "simulation_0030_segmented.mp4",
+ "source": "segmentation (of a Blender simulation)",
+ "scene": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "width": 960,
+ "height": 960,
+ "time_of_frame": "t = frame / 25",
+ "background": "plain white (segmentation replaced background); no ground plane, horizon or vanishing lines visible",
+ "camera": {
+  "static": true,
+  "max_terrain_shift_px_vs_frame0": 0.15,
+  "note": "phase correlation of the terrain region against frame 0 over all 75 frames"
+ },
+ "objects": [
+  {
+   "name": "bird",
+   "description": "single small dark (black/grey-brown) flying bird or bat-like flyer, flapping wings, upper half of image (y~255-310)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    39
+   ],
+   "fully_in_frame": [
+    0,
+    36
+   ],
+   "cut_by_right_edge": [
+    37,
+    39
+   ],
+   "absent": [
+    40,
+    74
+   ],
+   "track": "tracks/bird.csv",
+   "motion": "flies left->right, nearly horizontal in the image; uncut centroid linear fit x = 381.2 + 15.33*frame px, y = 281.2 + 0.127*frame px (frames 0-36); y oscillates ~\u00b112 px with the wing beat",
+   "wingbeat_period_frames": 14,
+   "wingbeat_period_s": 0.56,
+   "apparent_size_px": {
+    "bbox_w_max (wings spread horizontally)": [
+     35.0,
+     31
+    ],
+    "bbox_w_min": [
+     20.0,
+     12
+    ],
+    "bbox_h_max (wings up)": [
+     35.0,
+     24
+    ],
+    "bbox_h_min (wings level)": [
+     9.0,
+     32
+    ],
+    "mask_len_main_axis_max": [
+     39.1,
+     25
+    ],
+    "mask_len_main_axis_min": [
+     24.6,
+     7
+    ],
+    "format": "[value_px, frame]",
+    "trend": "same-phase sizes grow slightly (wings-up bbox_h 32 px @f0, 35 @f23-24; wings-level bbox_w 33 @f5, 35 @f31): the bird is at roughly constant depth, perhaps approaching the camera slightly"
+   }
+  },
+  {
+   "name": "terrain_mound",
+   "description": "pale pink/cream rock or sand mound/landform, centre of image below the bird, with darker eroded texture on its right end",
+   "moves": false,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "bbox_px": {
+    "x0": 228,
+    "x1": 813,
+    "y0": 382,
+    "y1": 511,
+    "width": 586,
+    "height": 130
+   },
+   "mask_centroid_px": [
+    501.7,
+    448.7
+   ],
+   "mask_area_px": 47211,
+   "notes": "long axis is nearly horizontal in the image (bottom edge slopes from (231,478) down to (812,505)); seen obliquely from slightly above, so its image height mixes height and depth extent; mask in terrain_mask.png"
+  }
+ ],
+ "events": [
+  {
+   "event": "bird in flight from first frame (already moving at frame 0)",
+   "frame": 0,
+   "time": 0.0
+  },
+  {
+   "event": "bird starts leaving the frame across the right edge",
+   "frame": 37,
+   "time": 1.48
+  },
+  {
+   "event": "bird last visible (sliver at right edge)",
+   "frame": 39,
+   "time": 1.56
+  },
+  {
+   "event": "no moving objects remain",
+   "frame": 40,
+   "time": 1.6
+  }
+ ],
+ "wingbeat_phases": "wings up (tall bbox): frames ~0, 10-12, 23-25; wings level/spread (flat bbox): frames ~5, 17-18, 31-32"
+}

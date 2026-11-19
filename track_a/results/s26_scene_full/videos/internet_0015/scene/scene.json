@@ -1,0 +1,255 @@
+{
+ "video": "internet_0015.mp4",
+ "source": "internet",
+ "scene_type": "2D",
+ "fps": 29.781337,
+ "frames": 143,
+ "duration_s": 4.8017,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / fps, frame 0 at t = 0",
+ "units": "pixels (image coordinates, x right, y down) and seconds; no metric scale given",
+ "description": "Top-down (nadir) drone view of a straight two-lane road running horizontally across the frame, autumn trees above and below, a dark ditch and a green field lower right. Four road users, all in the upper lane, travel right-to-left (-x) at nearly the same pixel rate (~12 px/frame), one behind the other: silver sedan (lead), dark car, white hatchback, red two-wheeler (last). Tree shade covers the road for x < ~590.",
+ "camera": {
+  "type": "aerial, looking straight down, essentially static",
+  "drift": "slow drift of the background relative to frame 0: dy to about -3 px and dx to about -2 px (left half) / 0 px (right half) by the last frame; < 0.05 px per frame; per-frame values in camera_shift.csv",
+  "perspective": "negligible: road lines horizontal within 1 px across 1920 px; road edge lines parallel; objects keep constant apparent size (all at the same depth, single scale applies)",
+  "motion_compensated_columns": "cx_bgref_px / cy_bgref_px in tracks = position minus background shift (frame-0 background coordinates)"
+ },
+ "objects": {
+  "silver_sedan": {
+   "class": "car (sedan, silver/light grey)",
+   "moving": true,
+   "direction": "-x (leftward), upper lane",
+   "identify": "leading vehicle; at frame 0 the leftmost car, centre x~481; light grey body with dark windows; in tree shade the whole time",
+   "visible_frames": [
+    0,
+    41
+   ],
+   "reference_point": "visible body centre (midpoint of front and rear bumper edges, midpoint of side edges)",
+   "length_px_bumper_to_bumper": 67,
+   "length_px_note": "visual 66-67 (frame 0: x 449-515); half-max edge profile median ~65 (see profile_length_px)",
+   "width_px": 25,
+   "width_note": "visual 24-25 (frame 0: y 532-556), without mirrors"
+  },
+  "dark_car": {
+   "class": "car (dark blue/black)",
+   "moving": true,
+   "direction": "-x, upper lane",
+   "identify": "second vehicle; frame-0 centre x~889; dark body, two white headlights at its left (front) end; long cast shadow up-left while in sunlight; very low contrast once in shade (x<590, from frame ~28)",
+   "visible_frames": [
+    0,
+    73
+   ],
+   "reference_point": "visible body centre",
+   "length_px_bumper_to_bumper": 60,
+   "length_px_note": "visual 60 (frame 0: x 859-919; frame 20: x 626-685); edge profile in sun 61-64 includes some cast shadow at the front",
+   "width_px": 27,
+   "width_note": "visual 26-27 (frame 0: y 529-555)"
+  },
+  "white_hatchback": {
+   "class": "car (white hatchback)",
+   "moving": true,
+   "direction": "-x, upper lane",
+   "identify": "third vehicle; frame-0 centre x~1305; bright white body, dark rear window band; enters the shade at frame ~60",
+   "visible_frames": [
+    0,
+    110
+   ],
+   "reference_point": "visible body centre",
+   "length_px_bumper_to_bumper": 60,
+   "length_px_note": "visual 59-60 (frame 0: x 1275-1334; frame 100: x ~79-138); half-max edge profile 54 (sun) to 58 (shade)",
+   "width_px": 26,
+   "width_note": "visual 25-26 (frame 0: y 529-554)"
+  },
+  "cyclist": {
+   "class": "two-wheeler with rider (red/white; bicycle or motorcycle - keeps pace with the cars)",
+   "moving": true,
+   "direction": "-x, upper lane, near the lane centre / slightly lower than the cars",
+   "identify": "last and smallest road user; frame-0 centre x~1682; red and white rider/vehicle with a long dark shadow up-left; enters shade at frame ~91 where it becomes faint",
+   "visible_frames": [
+    0,
+    136
+   ],
+   "reference_point": "visible centre of rider+vehicle (rear end - 17 px)",
+   "length_px": 34,
+   "length_px_note": "visual 28-35 px (frame 0: x 1665-1699 incl. dark front part; ~28 px at frame 70-81); colour mask 20-26 px misses the dark front; uncertain +-4 px",
+   "width_px": 11,
+   "width_note": "visual 10-12 (frame 0: y 541-552)"
+  },
+  "road": {
+   "moving": false,
+   "identify": "straight asphalt road, horizontal across the whole frame",
+   "upper_edge_line_y": 519.5,
+   "centre_line_A_y": 564,
+   "centre_line_B_y": 572,
+   "lower_edge_line_y": 618.5,
+   "line_width_px": "2-3",
+   "lines": "all solid (no dashes)",
+   "upper_lane": "y 521-563 (edge-line to centre-line spacing 44.5 px); all four road users use it",
+   "lower_lane": "y 573-617 (spacing 46.5 px); empty",
+   "centre_median": "narrow strip between the two centre lines, y 565-571 (line spacing 8 px)",
+   "road_width_edge_line_to_edge_line_px": 99,
+   "asphalt_y_range": [
+    522,
+    616
+   ],
+   "length_visible_px": 1920
+  },
+  "upper_fence": {
+   "moving": false,
+   "identify": "fence/guardrail with vertical posts above the road",
+   "y_range": [
+    488,
+    499
+   ],
+   "post_spacing_px": 17.9
+  },
+  "lower_fence": {
+   "moving": false,
+   "identify": "fence/guardrail with vertical posts below the road",
+   "y_range": [
+    638,
+    652
+   ],
+   "post_spacing_px": 18.4
+  },
+  "roadside_verges": {
+   "moving": false,
+   "identify": "grass/gravel strips with small regularly spaced markers",
+   "y_ranges": [
+    [
+     500,
+     517
+    ],
+    [
+     621,
+     637
+    ]
+   ]
+  },
+  "tree_shade_on_road": {
+   "moving": false,
+   "identify": "shadow of the trees covering the road",
+   "extent": "road in shade for x < ~560-620 (oblique boundary), sunlit to the right"
+  },
+  "trees_upper": {
+   "moving": false,
+   "identify": "autumn tree belt above the road, y < ~470, with a dark diagonal gap/path near x 520-900"
+  },
+  "trees_lower_left": {
+   "moving": false,
+   "identify": "autumn trees below the road, left part (x < ~900)"
+  },
+  "ditch": {
+   "moving": false,
+   "identify": "dark diagonal water ditch/channel below the road, from about (880,690) down-left to (1100,1080) region"
+  },
+  "field_lower_right": {
+   "moving": false,
+   "identify": "green field, lower right quadrant (x > ~1100, y > ~700)"
+  }
+ },
+ "events": {
+  "motion": "all four road users are already moving at frame 0 and keep moving leftward until they leave the frame; no starts, stops, overtakes, contacts or direction changes",
+  "exits_left_edge": {
+   "silver_sedan": {
+    "front_reaches_x0_frame": 37,
+    "last_visible_frame": 41
+   },
+   "dark_car": {
+    "front_reaches_x0_frame": 72,
+    "last_visible_frame": 73
+   },
+   "white_hatchback": {
+    "front_reaches_x0_frame": 107,
+    "last_visible_frame": 110
+   },
+   "cyclist": {
+    "front_reaches_x0_frame": 136,
+    "last_visible_frame": 136
+   }
+  },
+  "enter_tree_shade_frame": {
+   "silver_sedan": 0,
+   "dark_car": 26,
+   "white_hatchback": 61,
+   "cyclist": 91
+  },
+  "entries": "nothing enters the frame during the clip",
+  "initial_gaps_centre_to_centre_px_frame0": {
+   "silver_to_dark": 407.7,
+   "dark_to_white": 415.6,
+   "white_to_cyclist": 376.4
+  }
+ },
+ "track_summary": {
+  "silver_sedan": {
+   "first_frame": 0,
+   "last_frame": 41,
+   "n": 42,
+   "cx_first": 481.3,
+   "cx_last": -19.1,
+   "cy_median": 543.8,
+   "frame_front_reaches_left_edge": 37,
+   "profile_length_median": 64.9,
+   "profile_length_p10_p90": [
+    64.4,
+    65.6
+   ],
+   "profile_width_median": 17.9,
+   "in_shade_from_frame": 0
+  },
+  "dark_car": {
+   "first_frame": 0,
+   "last_frame": 73,
+   "n": 74,
+   "cx_first": 889.0,
+   "cx_last": 13.1,
+   "cy_median": 542.2,
+   "frame_front_reaches_left_edge": 72,
+   "profile_length_median": null,
+   "profile_length_p10_p90": null,
+   "profile_width_median": null,
+   "in_shade_from_frame": 26
+  },
+  "white_hatchback": {
+   "first_frame": 0,
+   "last_frame": 110,
+   "n": 111,
+   "cx_first": 1304.6,
+   "cx_last": -13.3,
+   "cy_median": 540.4,
+   "frame_front_reaches_left_edge": 107,
+   "profile_length_median": 55.9,
+   "profile_length_p10_p90": [
+    53.8,
+    58.0
+   ],
+   "profile_width_median": 21.5,
+   "in_shade_from_frame": 61
+  },
+  "cyclist": {
+   "first_frame": 0,
+   "last_frame": 136,
+   "n": 137,
+   "cx_first": 1681.0,
+   "cx_last": 14.3,
+   "cy_median": 543.5,
+   "frame_front_reaches_left_edge": 136,
+   "profile_length_median": 21.0,
+   "profile_length_p10_p90": [
+    19.0,
+    23.0
+   ],
+   "profile_width_median": 7.0,
+   "in_shade_from_frame": 91
+  }
+ },
+ "files": {
+  "tracks": "scene/tracks/<object>.csv",
+  "camera": "scene/camera_shift.csv",
+  "notes": "scene/notes.md",
+  "scripts": "scene/scripts/"
+ }
+}

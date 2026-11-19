@@ -1,0 +1,18 @@
+{
+ "video": "internet_0032.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 29.851282,
+ "frames": 220,
+ "duration_s": 7.3699,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3020,
+  "question": "What is the acceleration of the boat from 2s-4.5s to 4.5s-7s in m/s^2?",
+  "prior": "length of the boat = 3.5 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

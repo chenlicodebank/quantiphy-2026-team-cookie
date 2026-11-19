@@ -1,0 +1,48 @@
+{
+  "video": "simulation_0177_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by plain white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 60,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t*24); frame 0 is t=0",
+  "camera": {"motion": "static (plain white background, no reference features; no shift detectable, none expected)",
+             "perspective_cues": "none - no ground, horizon or shadow; elephant seen exactly side-on walking to the right; apparent size constant (height 178-190 px, area 30000-32300 px)"},
+  "objects": [
+    {
+      "name": "elephant",
+      "description": "the only object: a dark grey-brown elephant (light grey ear, small tusks, trunk curled forward) walking to the right (+x), side view, facing right",
+      "moves": true,
+      "visible_frames": [0, 59],
+      "occluded_frames": [],
+      "track_file": "tracks/elephant.csv",
+      "reference_point": "rig root unknown in image; use cx_mask/cy_mask (silhouette centroid) or cx_body/cy_body (centroid of mask eroded 15 px, i.e. without trunk/tail/thin legs) as origin proxy. Both oscillate +-1 px/frame with the gait.",
+      "motion_summary_px": {
+        "direction": "horizontal to the right, vertical drift < 4 px",
+        "cx_mask_frame0": 355.85, "cx_mask_frame59": 556.51,
+        "cy_mask_frame0": 740.78, "cy_mask_frame59": 737.56,
+        "net_displacement_0_to_59_px": 200.7,
+        "mean_per_frame_step_px": 3.43,
+        "path_length_mask_centroid_0_to_59_px": 202.2,
+        "note": "steady walk; per-frame centroid steps 2.4-5.0 px (gait jitter), no stops or turns"
+      },
+      "size_px": {
+        "bbox_width_full_range": [284, 348],
+        "bbox_width_frame0": 313, "bbox_width_frame59": 343,
+        "bbox_width_median": 313,
+        "bbox_height_range": [176, 191],
+        "bbox_height_median": 185,
+        "torso_length_range": [227, 244],
+        "torso_length_median": 236,
+        "torso_length_note": "x-extent of columns where the mask is >= 60 px tall (rump to head/forehead, without trunk and tail)",
+        "note": "full bbox width includes curled trunk and swinging tail, so it changes with the gait (min 284 at frames ~18-24, max 348 at ~54). Height = top of back to lowest foot. Rest-pose world AABB length is best approximated by median bbox width ~313 px; see notes."
+      }
+    }
+  ],
+  "static_objects": [],
+  "events": [
+    {"event": "elephant walking already at frame 0, continues to frame 59 (no start/stop in clip)", "frame": 0, "time_s": 0.0},
+    {"event": "end of clip, still walking", "frame": 59, "time_s": 2.4583}
+  ]
+}

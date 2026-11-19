@@ -1,0 +1,18 @@
+{
+ "video": "internet_0072.mp4",
+ "video_source": "internet",
+ "video_type": "S2SS",
+ "fps": 26.846729,
+ "frames": 39,
+ "duration_s": 1.4527,
+ "width": 2160,
+ "height": 3840,
+ "question": {
+  "id": 3273,
+  "question": "What is the moving velocity of the credit card at 1.00s in cm/s?",
+  "prior": "lenth of the credit card = 8.56 cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

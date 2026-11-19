@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0062.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1289,
+  "question": "What is the height of the streetlight in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 17.2804m\nt=1.58s, distance_human_camera = 16.1558m\nt=0.58s, distance_yellow_car_camera = 24.8550m\nt=1.58s, distance_yellow_car_camera = 21.7231m\nt=0.58s, distance_white_car_camera = 30.0650m\nt=1.58s, distance_white_car_camera = 29.3069m\nt=0.58s, distance_bike_camera = 27.1687m\nt=1.58s, distance_bike_camera = 27.0656m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

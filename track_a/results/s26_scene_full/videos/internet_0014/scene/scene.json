@@ -1,0 +1,90 @@
+{
+  "video": "internet_0014.mp4",
+  "source": "internet",
+  "scene_type": "2D (near-nadir top-down drone view of a football pitch; ground plane ~ image plane)",
+  "fps": 29.764032,
+  "frames": 287,
+  "duration_s": 9.6425,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels and seconds; no metric scale assumed",
+  "coordinates": "image px, x right, y down. Tracks give raw (x,y) and drift-corrected frame-0 coords (x_stab,y_stab). Use x_stab,y_stab for motion.",
+
+  "camera": {
+    "motion": "static to within measurement (hovering drone). Slow drift relative to frame 0: max ~2.2 px translation, rotation <= 0.076 deg, scale change <= 0.025% over the whole clip; per-frame change < 0.1 px",
+    "files": ["camera_affine.csv (ECC affine frame0->frame i, per frame)", "camera_shift.csv (phase-correlation translation, per frame)"],
+    "view": "looking straight down; pitch lines are almost exactly axis-aligned (right goal line x=1594 at y~200 vs 1596.5 at y~730: ~0.25 deg tilt); ground scale is uniform across the image (centre circle x/y radii 117.0/117.5 px)"
+  },
+
+  "moving_objects": {
+    "player_A_light": {
+      "description": "person in light/white-orange clothing (light-coloured blob, orange top in late frames), starts at the LEFT of the right penalty spot; the one who kicks the ball",
+      "track": "tracks/player_A_light.csv",
+      "visible_frames": [0, 286],
+      "reference_point": "intensity-weighted centre of the body blob (top-down view, so ~ the body centre over the ground); casts a long shadow toward lower-right that is excluded",
+      "start_px_stab": [1407.2, 521.1], "end_px_stab": [1454.6, 580.8],
+      "extent_px": "top-down body blob: length median 12.4 (p10 10.0, p90 15.8), width median 9.5, bbox ~11x12, area ~57 px. Not a standing height (seen from above).",
+      "occluded_frames": "115-117 and 174-180 (blob touches player B; pixels split by 2-means, centre less reliable ~±2 px)"
+    },
+    "player_B_dark": {
+      "description": "person in dark/black clothing (white limbs/shoes), starts just RIGHT-below the right penalty spot; chases the rolling ball and collects it at the end",
+      "track": "tracks/player_B_dark.csv",
+      "visible_frames": [0, 286],
+      "reference_point": "intensity-weighted centre of the body blob",
+      "start_px_stab": [1462.5, 530.8], "end_px_stab": [1387.3, 653.8],
+      "extent_px": "length median 13.9 (p10 12.2, p90 16.3), width median 10.2, bbox ~13x12, area ~60 px. Seen from above.",
+      "occluded_frames": "115-117 and 174-180 (touching player A)"
+    },
+    "ball": {
+      "description": "small bright yellow football",
+      "track": "tracks/ball.csv",
+      "visible_frames": [150, 285],
+      "hidden": "frames 0-149: not separately visible (with/under player A); frame 286: lost where it reaches the penalty-area line (white line) next to player B",
+      "reference_point": "centre of the bright ball blob",
+      "extent_px": "diameter ~4-5 px (bbox median 4x4, area ~14 px); 5-6 px when blurred",
+      "path": "still at (1451-1453, 563-565) frames ~153-172; rolls down-left (image heading ~117-124 deg, i.e. dx<0, dy>0) frames 173-262; after the touch by B it moves left (heading ~-165 deg) frames 264-285"
+    }
+  },
+
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "both players near the right penalty spot, nearly still"},
+    {"frame": 19, "t": 0.638, "what": "player A begins slow drift right (~0.3-0.7 px/frame) toward the penalty spot"},
+    {"frame": 91, "t": 3.057, "what": "player A turns and moves down-right (~1 px/frame)"},
+    {"frame": 101, "t": 3.393, "what": "player B starts moving (downward, then down-right)"},
+    {"frame": 150, "t": 5.040, "what": "ball first separately visible, just in front of (below) player A"},
+    {"frame": 153, "t": 5.140, "what": "ball at rest at ~(1451.5, 564) until frame 172"},
+    {"frame": 156, "t": 5.241, "what": "player A nearly stops beside the ball (~frames 156-166)"},
+    {"frame": 172, "t": 5.779, "what": "kick: player A's foot contacts the ball (ball blob elongated); ball moves from frame 173 (release)"},
+    {"frame": 174, "t": 5.846, "what": "players A and B touch/merge (174-180); then A goes back up, B runs down-left after the ball"},
+    {"frame": 193, "t": 6.484, "what": "player A nearly stationary at ~(1455,555) until ~213, then drifts right/down"},
+    {"frame": 262, "t": 8.803, "what": "player B reaches the ball (contact ~262-264); ball direction changes from down-left to left"},
+    {"frame": 285, "t": 9.575, "what": "last ball detection (1380.5,645.8), at the penalty-area line, at B's feet"}
+  ],
+
+  "static_objects_px_frame0": {
+    "pitch_outline": "line centres: left goal line x~286, right goal line x~1594 (top) to 1596.5 (bottom); top touchline y~104, bottom touchline y~940-942. Pitch length (goal line to goal line) ~1309 px, width (touchline to touchline) ~836 px",
+    "halfway_line": "x ~940-942 (vertical)",
+    "centre_circle": "centre (941.4, 521.6), radius 116.9 px (diameter ~234)",
+    "centre_spot": "(941, 521)",
+    "right_penalty_area": "x 1377.2 to goal line 1594 (depth ~217 px), y 258.3-783.7 (width ~525 px)",
+    "left_penalty_area": "x 286 to 503.8 (depth ~218 px), y 259.0-786.0 (width ~527 px)",
+    "right_goal_area": "x 1522.6 to 1594 (depth ~71.5 px), y 401.3-640.0 (width ~239 px)",
+    "left_goal_area": "x 286 to 358.4 (depth ~72 px), y 402.7-642.0 (width ~239 px)",
+    "right_penalty_spot": "(1451.4, 522.2): ~143 px from the right goal line; looks like a bright glowing white spot",
+    "left_penalty_spot": "(431.8, 522.0): ~146 px from the left goal line",
+    "penalty_arcs": "right arc reaches x~1329 (left of penalty-area line 1377); left arc reaches x~553",
+    "right_goal": "white frame x 1597-1622 (depth incl. net frame ~26 px), y 470-570 (outer width between posts ~101 px)",
+    "left_goal": "white frame x 259-283 (~25 px deep), y 472-572 (~101 px wide)",
+    "dark_object_by_right_goal": "static dark round object (bag/ball?) at x~1596-1607, y~460-470 (~11 px), next to the top post of the right goal; does not move",
+    "other": "small training goals along top (y~35-45: x~590-635, 760-805, 855-925, 1075-1120, 1305-1380) and bottom (x~755-825, y~1025) edges, and beside the pitch; neighbouring pitch on the right (lines at x~1717 and goal at x~1697-1735, y~467-567); fence/walkway around the pitch"
+  },
+
+  "files": {
+    "tracks/*.csv": "frame,time_s,x,y (raw image px),x_stab,y_stab (frame-0 coords),bbox_x0..y1 (frame-0 coords),length_px,width_px (min-area-rect of mask),area_px,detected,occluded",
+    "camera_affine.csv": "per-frame affine frame0->frame i, scale, rotation",
+    "camera_shift.csv": "per-frame phase-correlation shift",
+    "bg_region.png": "temporal-median background of region x1300-1650, y400-820 (frame-0 coords)",
+    "track_paths.png": "track paths drawn on frame 0 (crop x1340-1500, y490-680, 4x); dots every 30 frames",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

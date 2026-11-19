@@ -1,0 +1,106 @@
+{
+  "video": "internet_0061.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down view of an office chair seat; treat as planar)",
+  "fps": 30.012937,
+  "frames": 116,
+  "duration_s": 3.865,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; frame i <-> t = i / 30.012937",
+  "coordinates": "pixels, x to the right, y down, origin at the top-left of the image. *_stab columns = same point mapped to frame-0 image coordinates (camera drift removed).",
+  "summary": "Handheld camera looks straight down on a mesh office-chair seat (left 2/3 of image) and the lower backrest (right 1/3). A hand on the left holds an acorn-shaped toy (white smooth dome + black textured cap with stem, cap pointing left), throws it to the right at frame ~38/39; it hits the backrest at frame 45, rebounds down-left, curves along the seat, rattles against the bottom seat-frame rail and the seat/back rail corner (frames 58-75), then travels up along the seat/back junction to the top rail (frame ~94), slides back down and is grabbed by the hand re-entering from the top-left (frames 108-115).",
+  "objects": [
+    {
+      "name": "toy_acorn",
+      "aka": ["ball", "acorn", "toy", "object thrown"],
+      "description": "acorn-shaped toy: pale white/blue-grey smooth dome + black textured cap (with a short stem). The only free-moving object. Tumbles, so its outline changes (dome-on, cap-on or side view).",
+      "moves": true,
+      "visible_frames": "0-115 (all); held in hand 0-38; free 39-107; grabbed by hand 108-115 (partly hidden by fingers)",
+      "track_file": "tracks/ball.csv",
+      "reference_point": "visible centre of the whole toy (centre of its silhouette / whole-toy bounding box)",
+      "pixel_size": {
+        "held_in_hand_frame0_bbox_wh": [279, 268],
+        "held_frame0_length_along_axis_px": "279 (cap end to dome end, horizontal = later throw direction; stem adds ~25 px more on the left)",
+        "held_frame0_width_px": "268 (cap diameter; dome alone ~245 tall)",
+        "held_frames_0_38_median_bbox_wh": [288, 261],
+        "on_seat_dome_toward_camera_frames_47_57_median_bbox_wh": [221, 226],
+        "on_seat_frames_79_85_median_bbox_wh": [199, 188],
+        "on_seat_side_view_frames_92_99_bbox_wh": "about 210-236 x 241-261 (cap+dome+stem, long axis vertical)",
+        "note": "Held toy is nearer the camera (raised in the hand) than when lying on the seat, so it appears ~20-30% larger. Sizes in flight 39-46 are inflated by motion blur (up to ~320 px along x)."
+      }
+    },
+    {
+      "name": "hand",
+      "aka": ["thrower's hand", "person", "arm"],
+      "description": "a person's right hand (and later forearm with a white smart-watch band). Only the hand/forearm is visible, never the body.",
+      "moves": true,
+      "visible_frames": "0-42 (holding toy at left edge, releases at ~38/39, withdraws left by 43; fingertips may remain at the very left edge x<40 until ~58); 100-115 (enters from top-left, reaches toy at 108, grabs it 108-115)",
+      "track_file": "tracks/hand.csv (coarse skin bbox; only valid=1 rows)"
+    },
+    {
+      "name": "chair_seat_mesh",
+      "description": "grey striped mesh of the seat, occupying x ~10-1290; horizontal stripes with period ~24-25 px (24 near right/top, 25-26 near left/bottom: mild perspective).",
+      "moves": false,
+      "pixel_extents_frame50": {
+        "seat_mesh_horizontal_extent_px": "from left frame edge x~12 to seat/back rail x~1290 (~1280 px)",
+        "seat_mesh_vertical_span_at_x1000": "y ~125 to ~988 (~863 px)",
+        "seat_mesh_vertical_span_at_x1200": "y ~119 to ~975 (~856 px)",
+        "seat_mesh_vertical_span_at_x600": "y ~5 to ~1056 (nearly full height; seat is waisted, rails curve out of frame at left)"
+      }
+    },
+    {
+      "name": "seat_frame_rails",
+      "description": "dark-grey plastic seat frame: top rail (curving from top-left corner area down to y~120 at x~1200), bottom rail (y~975-1060), left rail at x~0-12, plus small plastic clips at top centre (x~925-1060, y 0-55) and bottom centre (x~960-1240, y~1010-1080). Black gaps between seat and backrest visible behind the rails at top (x~1080-1290, y<60) and bottom.",
+      "moves": false
+    },
+    {
+      "name": "seat_back_rail",
+      "description": "vertical dark plastic rail separating seat mesh and backrest: x ~1290-1325 (near-vertical, slightly curved; x~1275-1310 near top). The toy hits/rolls along it repeatedly.",
+      "moves": false
+    },
+    {
+      "name": "backrest_mesh",
+      "description": "tan/brown sunlit mesh of the backrest, x ~1330-1920, with diagonal stripes (period ~6 px horizontally-aligned slits) converging towards the left; carries large moving shadows (the person). The toy hits it at frame 45.",
+      "moves": false
+    },
+    {
+      "name": "shadows",
+      "description": "large soft shadow of the person on the seat and backrest, moving slightly; the toy casts a dark shadow next to it (often on its lower/right side). Not objects of interest but can confuse segmentation.",
+      "moves": "slowly"
+    }
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "toy held in hand (cap left, dome right), nearly still (drifts < 60 px over 0-38)"},
+    {"frame": 38, "t": 1.266, "event": "throw starts (toy starts moving right; hand opening)"},
+    {"frame": 39, "t": 1.299, "event": "release: first free frame (toy separated from fingers); moves right ~37 px/frame then accelerates in image to ~260 px/frame by 45 (heavy motion blur 39-46)"},
+    {"frame": 45, "t": 1.499, "event": "impact with the backrest: rightmost point of the throw (centre x~1432); direction reverses between 45 and 46"},
+    {"frame": 46, "t": 1.533, "event": "rebound: moving left/down from the backrest"},
+    {"frame": 52, "t": 1.733, "event": "leftmost point of the rebound (x~732, y~735): x-direction reverses; toy curves to the right along the seat"},
+    {"frame": 58, "t": 1.932, "event": "reaches bottom seat-frame rail area (y~920-970) and x reverses (moves left 59-61)"},
+    {"frame": 60, "t": 1.999, "event": "lowest point (y~970), toy touches the bottom image edge 60-63; bounces off the bottom rail"},
+    {"frame": 65, "t": 2.166, "event": "hits the seat/back rail corner (x~1317), x reverses at 66"},
+    {"frame": 69, "t": 2.299, "event": "local leftmost (x~1155), turns right again"},
+    {"frame": 72, "t": 2.399, "event": "hits seat/back rail again (x~1332), reverses"},
+    {"frame": 75, "t": 2.499, "event": "local leftmost (x~1178); from 74 on the toy moves upward (y decreasing) along the seat/back junction (x~1230-1290)"},
+    {"frame": 94, "t": 3.132, "event": "topmost point (y~160) near the top seat-frame rail; motion stops 94-97"},
+    {"frame": 96, "t": 3.199, "event": "toy starts sliding/rolling back down (y increasing ~15-20 px/frame) 96-108"},
+    {"frame": 100, "t": 3.332, "event": "hand re-enters frame at top-left"},
+    {"frame": 108, "t": 3.598, "event": "fingers touch the toy (contact); grabbed 108-115, toy nearly still under the hand (y~430-460 at 110-115)"},
+    {"frame": 115, "t": 3.832, "event": "last frame: toy held by the hand at x~1250, y~441"}
+  ],
+  "camera": {
+    "type": "handheld, looking straight down; small slow drift, no zoom",
+    "file": "tracks/camera_shift.csv",
+    "drift": "image content moves left by ~23 px and down by ~4 px from frame 0 to 100, with ~0.7 deg rotation (scale change <0.5%). Frames 105-115: hand covers landmarks, estimate unreliable (hold the frame-104 values: dx -23.9, dy +0.8, rot 0.9 deg).",
+    "use": "for motion of the toy, the cx_stab/cy_stab columns already remove this drift; the correction is small (<25 px) compared with toy motion (tens to hundreds of px per frame)."
+  },
+  "perspective": "near-orthographic top view of the seat; mild perspective (seat stripe period 24-26 px across the seat). The toy is raised above the seat while held (frames 0-38) and appears ~25% larger than when lying on the seat.",
+  "files": {
+    "tracks/ball.csv": "final per-frame toy track (all 116 frames)",
+    "tracks/ball_raw.csv": "automatic mask measurements (intermediate, less reliable in frames listed in notes)",
+    "tracks/hand.csv": "coarse hand/forearm skin bbox",
+    "tracks/camera_shift.csv": "per-frame camera drift",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all scripts used"
+  }
+}

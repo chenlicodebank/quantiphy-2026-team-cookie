@@ -1,0 +1,18 @@
+{
+ "video": "internet_0006.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.678492,
+ "frames": 172,
+ "duration_s": 5.7954,
+ "width": 1080,
+ "height": 1920,
+ "question": {
+  "id": 2036,
+  "question": "What is the length of the white car in meters?",
+  "prior": "lane width = 3.66m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

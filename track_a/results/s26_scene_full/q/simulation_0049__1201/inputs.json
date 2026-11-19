@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0049.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 33.0,
+ "frames": 99,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1074,
+ "question": {
+  "id": 1201,
+  "question": "What is the diameter of the wheel of the moving bicycle in meters?",
+  "prior": "speed of the bike = 4.87m/s",
+  "depth_info": "t=1s, distance_bike_camera = 14.1134 m\nt=2s, distance_bike_camera = 18.9543 m\nt=1s, distance_human_camera = 19.0411 m\nt=2s, distance_human_camera = 20.2710 m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 33.0
+ }
+}

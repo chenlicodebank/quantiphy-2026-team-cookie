@@ -1,0 +1,64 @@
+{
+  "video": "captured_0028x.mp4",
+  "source": "lab (segmentation-style: background replaced by black; 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static (table mask bbox identical in all 49 frames; centroid std < 0.3 px)",
+    "intrinsics_lab_convention": {"fx_px": 763.0, "fy_px": 763.0, "cx_px": 640, "cy_px": 360, "note": "0.5959 x 1280, HFOV 80 deg, from task conventions"},
+    "perspective_cues": "Table top seen from slightly above: back edge y~425-428 (width ~283 px), front edge y~488-517 (width ~500 px). Front edge slopes down to the right (~13 px over 500 px): slight roll/tilt. No floor or horizon visible (black background)."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small white ball (ping-pong-like), the only moving object; held (hand segmented out) then dropped, bounces 3 times on the table top",
+      "moves": true,
+      "visible_frames": "0-48 (all)",
+      "track": "tracks/ball.csv",
+      "reference_point": "centroid of the visible ball mask (blur-streak centroid in fast frames)",
+      "apparent_diameter_px": {
+        "frames_0_20_held": "~20 wide x 17 tall (top looks flattened - likely fingers removed by segmentation); use width ~20",
+        "frame_20_21_release_apex": "~20 x 17-19",
+        "frame_32_apex1": "~23 x 22",
+        "frame_42_apex2": "~26-27 x 27",
+        "frame_48": "width ~28 (blurred vertically)",
+        "note": "use mask_wid_minor_px (across blur) as diameter in blurred frames; size grows ~20 -> ~28 px => ball moves toward the camera"
+      },
+      "image_path_summary": "cx drifts right 720 -> 767 px over the video; cy apex 292 (f20-21), 302 (f32), 314 (f42); bounce lows at f26, f36, f47"
+    },
+    {
+      "name": "table_top",
+      "description": "light-brown wooden square/rectangular table top, centre of image",
+      "moves": false,
+      "visible_frames": "0-48",
+      "image_position_frame0": {"bbox": [463, 424, 965, 518]},
+      "pixel_extents": {
+        "back_edge": "x ~572..855 at y ~426-429 (rounded corners), length ~283 px",
+        "front_edge_top_surface": "left corner ~(463, 487), right corner ~(962, 498), length ~500 px",
+        "front_edge_bottom_of_slab": "~(465, 505) to (962, 518)",
+        "slab_thickness_front_px": "~12-18",
+        "apparent_depth_extent_px": "~60-70 px vertically (back edge y~426 to front top edge y~487-498)"
+      }
+    },
+    {
+      "name": "table_post",
+      "description": "dark grey cylindrical pedestal under the table top, cut off by the bottom of the frame",
+      "moves": false,
+      "visible_frames": "0-48",
+      "pixel_extents": {"x": [708, 748], "width_px": 40, "y_visible": [518, 719], "visible_height_px": 201}
+    }
+  ],
+  "events": [
+    {"name": "held_still", "frames": "0-11", "t_s": "0.000-0.458", "note": "ball nearly stationary (drifts ~2 px)"},
+    {"name": "lift_start", "frame": 11, "t_s": 0.458, "note": "ball starts moving up ~2-4 px/frame (carried by hidden hand)"},
+    {"name": "release_and_apex0", "frame": 20, "t_s": 0.833, "note": "highest point cy~292 at f20-21 (quadratic fit apex 20.7); free fall clearly from f21-22. Release approx f20 (+-1)"},
+    {"name": "bounce1", "frame": 26, "t_s": 1.083, "note": "blur streak touches table near its back edge (ball bottom y~427); parabola intersection ~26.2"},
+    {"name": "apex1", "frame": 32, "t_s": 1.333, "note": "cy 302.4 (fit apex 31.9)"},
+    {"name": "bounce2", "frame": 36, "t_s": 1.5, "note": "ball bottom y~436; contact between f35 and f37, streak in f36 reaches table"},
+    {"name": "apex2", "frame": 42, "t_s": 1.75, "note": "cy 313.9 (fit apex 41.6)"},
+    {"name": "bounce3", "frame": 47, "t_s": 1.958, "note": "ball bottom y~453 (further forward on table top)"},
+    {"name": "end", "frame": 48, "t_s": 2.0, "note": "ball rising after bounce3"}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/ball.csv"], "scripts": ["scripts/track_ball.py", "scripts/measure_static.py", "scripts/events.py"]}
+}

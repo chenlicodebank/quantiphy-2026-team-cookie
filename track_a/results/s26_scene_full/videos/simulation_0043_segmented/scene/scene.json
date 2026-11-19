@@ -1,0 +1,44 @@
+{
+  "video": "simulation_0043_segmented.mp4",
+  "source": "segmentation (Blender render with background replaced by plain white)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 72, "duration_s": 3.0, "width": 1080, "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 is t = 0",
+  "camera": {
+    "motion": "static (rock mask centroid constant to +-0.05 px over frames 1-71; bbox identical)",
+    "view": "elevated oblique view looking down on the objects (boat deck and cabin roof visible from above); no ground/water plane, horizon or vanishing lines are visible (white background)",
+    "perspective_cues": "only the boat's apparent size: it shrinks ~1.2% (bbox_w 208.1 -> 205.6 px, mask_length 224.3 -> 221.7 px, area 11812 -> 11583 px, means of first/last 10 frames) while it moves up-left in the image, i.e. it moves slightly away from the camera"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "small fishing boat/trawler: white hull with red lower hull stripe, red-roofed white cabin with a thin mast, green-tinted aft deck; bow points left (up-left), stern right",
+      "position": "lower-left part of frame (y ~ 790-1003)",
+      "moves": true,
+      "visible_frames": "0-71 (fully in frame, never occluded, never touches the border)",
+      "track": "tracks/boat.csv",
+      "pixel_size_frame0": {"bbox_w": 210, "bbox_h": 143, "mask_length_main_axis": 226.4, "mask_width_across": 120.0, "main_axis_deg_image": 22.0, "loose_bbox_w": 213, "loose_bbox_h": 144},
+      "pixel_size_frame71": {"bbox_w": 207, "bbox_h": 142, "mask_length_main_axis": 222.4, "mask_width_across": 117.3, "loose_bbox_w": 212, "loose_bbox_h": 145},
+      "motion_summary_px": "near-constant image velocity along its own long axis toward the bow: centroid (441.8, 949.1) at f0 -> (193.9, 877.8) at f71; linear fit dx = -3.53 px/frame, dy = -1.02 px/frame; |step| mean 3.67 px/frame (first half 3.64, second half 3.70); quadratic terms negligible",
+      "net_centroid_displacement_px_f0_to_f71": 258.0,
+      "centroid_path_length_px_f0_to_f71": 260.6
+    },
+    {
+      "name": "rock",
+      "description": "large tan/beige boulder or rocky islet with dark shaded right side; the only other object",
+      "position": "upper-centre of frame",
+      "moves": false,
+      "visible_frames": "0-71",
+      "track": "tracks/rock.csv (constant; included for completeness)",
+      "pixel_size": {"bbox": [391, 12, 883, 451], "bbox_w": 493, "bbox_h": 440, "centroid": [624.8, 204.8], "area_px": 156940, "mask_length_main_axis": 548.6, "mask_width_across": 404.6, "main_axis_deg_image": -37.3},
+      "notes": "top edge at y=12, not cut by the frame border; frame 0 differs slightly in texture from later frames (compression), geometry unchanged"
+    }
+  ],
+  "inter_object_image_distance_px": {
+    "rock_centroid_to_boat_centroid_f0": 766.5,
+    "rock_centroid_to_boat_centroid_f71": 799.1
+  },
+  "events": [
+    {"event": "boat already moving at frame 0 and keeps moving to frame 71; no start/stop, no turn, no contact with the rock", "frame": "0-71"}
+  ]
+}

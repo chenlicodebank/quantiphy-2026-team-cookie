@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0189_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "V2MX",
+ "fps": 120.0,
+ "frames": 401,
+ "duration_s": 3.3417,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1903,
+  "question": "What is the length of the box in meters?",
+  "prior": "speed of the box = 0.094m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 120.0
+ }
+}

@@ -1,0 +1,61 @@
+{
+  "video": "internet_0048.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 109,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 = t 0",
+  "units": "pixels (image coords, x right, y down) and seconds; no metric scale",
+  "summary": "Indoor gym, side view of a wall of 8 tan padded panels above a dark base strip and a glossy wood floor. A dark red-brown basketball is thrown by an off-screen person (only hands visible at the left edge), flies left->right in an arc across the wall, bounces once on the floor at the right (frame 61) and leaves the right edge (frame 65). Afterwards a woman (cap, beige tank top, olive cargo trousers, white trainers with red soles, face blurred) walks in from the left and walks right parallel to the wall until the end. Hand-held camera drifts slowly (no cuts).",
+  "camera": {
+    "motion": "slow smooth drift (hand-held / gimbal): scene content moves left and up; no zoom (scale 1.000-1.002), roll up to 0.23 deg",
+    "shift_of_image_centre_vs_frame0_px": {"f30": [-4.3, -13.0], "f60": [-13.7, -23.3], "f90": [-21.5, -32.6], "f108": [-23.9, -36.9]},
+    "per_frame_file": "tracks/camera_shift.csv (affine m00..m12 maps frame-0 coords -> frame-i coords)",
+    "note": "drift is ~0.2-0.5 px/frame horizontally and ~0.35 px/frame vertically, i.e. <1% of ball motion (~65 px/frame) and ~2% of walker motion (~20 px/frame). Tracks give both raw image coords and camera-compensated (_bg0) coords."
+  },
+  "objects": [
+    {"name": "ball", "kind": "basketball", "moves": true,
+     "appearance": "dark red-brown ball, the only ball in the video",
+     "visible_frames": [33, 65], "fully_visible_frames": [35, 62],
+     "track": "tracks/ball.csv", "reference_point": "visible centre (mask centroid; circle fit / manual where cut or merged)",
+     "diameter_px": {"best": 94, "vertical_bbox_near_apex_f44_50": "93-94", "horizontal_bbox_f44_50": "95-98 (includes motion blur)", "ellipse_minor_axis": "91-95", "equivalent_circle_diam": "94-96 (f43-f52), grows to ~100-103 near f57-60 (blur)"},
+     "motion_blur_px": "along-motion extent exceeds across-motion by ~2-4 px at apex, ~10-15 px at release and before the bounce"},
+    {"name": "walker", "kind": "person (woman)", "moves": true,
+     "appearance": "light beige baseball cap, beige tank top, olive/khaki cargo trousers with cuffed ankles, white trainers with red-orange soles, white wristband on left wrist; face blurred",
+     "visible_frames": [55, 108], "fully_visible_frames": [73, 108],
+     "track": "tracks/person.csv", "reference_point": "head centre (template track, every frame 73-108); also cap top, sole bottom, hip/waist x at sampled frames",
+     "height_px_cap_top_to_floor_contact": {"range_while_walking": "685-718", "min_frames_77_79": 685, "max_frames_91_93": 715, "f90": 711, "note": "she walks, never stands still; posture/bob changes height by ~30 px"},
+     "walking_direction": "left -> right, parallel to the wall (constant depth: floor-contact y stays 867-880)"},
+    {"name": "thrower_hands", "kind": "hands/forearms of an off-screen person", "moves": true,
+     "appearance": "two hands at the left image edge x<100, y~380-520",
+     "visible_frames": [33, 45], "note": "probably the same woman who later walks in; only hands visible; not tracked"},
+    {"name": "wall_pads", "kind": "8 tan padded wall panels (static)", "moves": false,
+     "frame0_coords": {"block_left_x": 99, "block_right_x": "1814 (top) - 1831 (bottom)", "top_y": "~182 (175-185 along length)", "bottom_y": "~812", "seams_x": [312, 532, 748, 961, 1171, 1389, 1610],
+       "panel_width_px": "~213-220 each", "block_width_px": "~1720", "panel_height_px": "~628"}},
+    {"name": "base_strip", "kind": "black/dark-blue rubber base strip below the pads (static)", "moves": false, "frame0_coords": {"y_from": "~823", "y_to": "~860"}, "note": "in later frames ~25-37 px higher because of camera drift"},
+    {"name": "floor", "kind": "glossy wood gym floor (static)", "moves": false, "note": "strong mirror reflections of ball and walker; ground contact line at y~870-880 in frames 60-108"},
+    {"name": "wall_box", "kind": "small grey wall-mounted box/thermostat at left edge (static)", "moves": false, "frame0_coords": {"x": "~0-35 (partly out of frame)", "y": "~415-450"}},
+    {"name": "white_wall", "kind": "white painted wall above/around the pads (static)", "moves": false}
+  ],
+  "events": [
+    {"event": "ball enters frame (left edge, carried by hands)", "frame": 33, "t": 1.100},
+    {"event": "ball release (last frame touching fingers 34, first free frame 35)", "frame": 35, "t": 1.167, "uncertainty_frames": 1},
+    {"event": "ball apex (min y)", "frame": 45, "t": 1.500, "image_xy": [793.4, 304.8]},
+    {"event": "ball bounce on floor (lowest point, contact)", "frame": 61, "t": 2.033, "image_xy": [1812.5, 827.6], "ball_bottom_y": "~870"},
+    {"event": "ball starts leaving right edge", "frame": 63, "t": 2.100},
+    {"event": "ball gone (out right)", "frame": 66, "t": 2.200},
+    {"event": "walker first visible (cap visor at left edge)", "frame": 55, "t": 1.833},
+    {"event": "walker head fully in frame", "frame": 73, "t": 2.433},
+    {"event": "walker footfall: foot planted at sole x~36-51 (already planted when it appears)", "frames": [64, 79]},
+    {"event": "walker footfall: other foot lands at sole x~316-349", "frame": 85, "t": 2.833, "uncertainty_frames": 1, "planted_until": 101},
+    {"event": "walker footfall: foot lands at sole x~626-639", "frame": 99, "t": 3.300, "planted_until": 108},
+    {"event": "walker still walking at end of clip", "frame": 108, "t": 3.600}
+  ],
+  "files": {
+    "tracks/ball.csv": "ball per frame 33-64",
+    "tracks/person.csv": "walker per frame 55-108",
+    "tracks/camera_shift.csv": "camera transform per frame 0-108",
+    "notes.md": "methods, reliability, ambiguities"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "video": "internet_0041.mp4",
+  "source": "internet",
+  "scene_type": "2D",
+  "fps": 23.979144,
+  "frames": 52,
+  "duration_s": 2.1686,
+  "image_size_px": [3840, 2160],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; time t -> frame round(t*fps)",
+  "units": "pixels (full 3840x2160 resolution) and seconds; no metric scale assumed",
+  "description": "Front-on, near-static handheld view of a sandstone two-storey arcade building (arched loggia on both floors) with a paved walkway and a green reflecting pond in front. Three brown dabbling ducks (Pacific-black-duck-like) are in the pond in the lower part of the frame: one sits still on a submerged rock (left), one swims steadily leftward (middle), one swims slowly leftward while dabbling/preening inside its own ripple rings (right).",
+  "camera": {
+    "motion": "nearly static (handheld drift)",
+    "per_frame_shift_file": "tracks/camera.csv",
+    "summary": "Background (facade) shift vs frame 0: dx within -0.2..+0.9 px, dy from 0 to about -6 px by frame 51 (image content moves up). Patch matches at frame 51 give dy -2 px (left, walkway) to -10 px (right, pond edge) and dx -1..+3 px, i.e. a slight roll/tilt. Negligible horizontally relative to duck motion; ref_x_bgcorr / ref_y_bgcorr in the tracks subtract the global shift."
+  },
+  "objects": [
+    {
+      "name": "duck_middle",
+      "kind": "duck (animal), moving",
+      "distinguish": "middle of the three ducks, swimming on open water at y~1880, head to the LEFT, pale cheek with dark eye stripe visible, pale tail tip to the right",
+      "moves": true,
+      "visible_frames": [0, 51],
+      "track": "tracks/duck_middle.csv",
+      "motion": "swims steadily left (-x) through the whole clip; ref_x 2338.8 -> 2164.8 (about -174 px, about -3.4 px/frame, slightly faster at the end); drifts down about +10 px in image (+16 px vs background)",
+      "pixel_size": {"bill_to_tail_length_px": 127, "length_range_px": [116, 130], "visual_bill_to_tail_frame0_px": 130, "height_px_above_waterline": 42, "note": "length = mask bbox width (body axis is horizontal, axis_deg ~ -5..+1); early frames 0-9 under-segment the pale tail tip (116-121 px), frames 12-51 give 124-130 px"}
+    },
+    {
+      "name": "duck_right",
+      "kind": "duck (animal), moving",
+      "distinguish": "right-most duck at x~3180-3360, surrounded by concentric ripple rings, head down/blurred (dabbling or preening), tail up to the right",
+      "moves": true,
+      "visible_frames": [0, 51],
+      "track": "tracks/duck_right.csv",
+      "motion": "drifts/swims slowly left; ref_x 3295.0 -> 3181.9 (about -113 px, about -2.2 px/frame, noisy because body posture changes); ref_y 1898 -> 1918 partly from head going down (mask top drops from y~1870 to ~1895 at frame 27)",
+      "pixel_size": {"body_length_px": 135, "length_range_px": [131, 146], "height_px_above_waterline": 48, "note": "head is mostly underwater or a semi-transparent motion-blurred blob above the body (excluded from mask); length is body+tail"}
+    },
+    {
+      "name": "duck_rock",
+      "kind": "duck (animal), essentially stationary",
+      "distinguish": "left-most duck at x~1795-1900, sitting/standing on a submerged rock (light brown patch under it), head tucked/turned, the largest-looking duck in image",
+      "moves": false,
+      "visible_frames": [0, 51],
+      "track": "tracks/duck_rock.csv",
+      "motion": "stays on the rock; mask centroid drifts only +7 px in x (posture change) and its bbox bottom varies because the mask merges with the rock/reflection",
+      "pixel_size": {"bbox_width_px": 103, "bbox_height_px_frame0": 71, "note": "bbox height 71-74 px in frames 0-8; later 84-88 px because mask leaks onto rock below the body - use ~72 px as the body height"}
+    },
+    {
+      "name": "rock",
+      "kind": "submerged rock / stone under duck_rock, static",
+      "distinguish": "yellow-brown patch just under the water surface beneath duck_rock",
+      "moves": false,
+      "image_extent_px": {"x": [1682, 1957], "y": [1939, 2010], "width_px": 275, "height_px": 70},
+      "reliability": "rough, edges blurred by water"
+    },
+    {
+      "name": "front_columns",
+      "kind": "ground-floor arcade columns (building), static",
+      "distinguish": "large cylindrical sandstone columns at the front of the ground-floor arcade, standing on the walkway",
+      "moves": false,
+      "centres_x_px_frame0": [269, 682, 1089, 1498, 1897, 2298, 2698, 3105, 3508],
+      "spacing_px": 404,
+      "example_column_x1890": {"shaft_width_px": 80, "capital_width_px": 120, "capital_top_y": 1040, "shaft_y": [1080, 1395], "base_bottom_y": 1425, "total_height_px": 385},
+      "reliability": "centres +-5 px (from 200-px grid view and brightness runs of lit shafts at 660,1070,1478,1882,2278,2684,3094,3500 which are the sunlit right halves); widths +-5 px"
+    },
+    {
+      "name": "upper_arches",
+      "kind": "first-floor loggia arches with small columns and lattice balustrade panels, static",
+      "distinguish": "upper storey, y~250-750; floodlights on pillars at x~230, 1890, 3550 (y~310)",
+      "moves": false
+    },
+    {
+      "name": "walkway",
+      "kind": "paved walkway / coping between building and pond, static",
+      "distinguish": "light grey band",
+      "moves": false,
+      "image_extent_px": {"top_y": 1425, "coping_edge_y": [1540, 1555], "water_starts_y": 1560, "spans_full_width": true}
+    },
+    {
+      "name": "pond",
+      "kind": "reflecting pond water surface, static",
+      "distinguish": "green water with reflections of the columns, y 1560..2160 (bottom of frame)",
+      "moves": false
+    },
+    {
+      "name": "ripples",
+      "kind": "concentric ripple rings around duck_right",
+      "moves": true,
+      "note": "rings centred on duck_right, radius up to ~300 px; not tracked"
+    }
+  ],
+  "events": [
+    {"event": "duck_middle swimming left throughout (already moving at frame 0, still moving at frame 51)", "frames": [0, 51]},
+    {"event": "duck_right moving left throughout while dabbling/preening; head goes lower around frames 24-27 (mask top drops ~25 px)", "frames": [0, 51]},
+    {"event": "duck_rock stationary on rock throughout", "frames": [0, 51]},
+    {"event": "no release, bounce, impact or contact events; no object enters or leaves the frame"}
+  ],
+  "files": {
+    "tracks": ["tracks/duck_middle.csv", "tracks/duck_right.csv", "tracks/duck_rock.csv", "tracks/camera.csv"],
+    "notes": "notes.md",
+    "scripts": "scripts/"
+  }
+}

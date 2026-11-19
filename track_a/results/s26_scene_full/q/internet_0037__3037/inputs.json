@@ -1,0 +1,18 @@
+{
+ "video": "internet_0037.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 22.521385,
+ "frames": 164,
+ "duration_s": 7.282,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 3037,
+  "question": "What is the speed of the swimming woman between 2.07s to 5.20s in m/s?",
+  "prior": "height of the swimming woman = 1.63 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "video": "captured_0024x.mp4",
+ "source": "lab",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (phase-correlation shift of table region vs frame 0 within +-0.11 px over all frames)",
+  "intrinsics_from_benchmark": {
+   "fx_fy_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "background": "replaced by black (segmented), only table, ramp, books visible; small \"Modified with Segment...\" watermark bottom right",
+  "perspective": "camera looks slightly down at a square table from its front-left corner; table top edges converge to the right/back; no horizon visible"
+ },
+ "objects": {
+  "book": {
+   "desc": "light-blue-covered book (cream/white page block), the only moving object; slides down the white ramp onto the table",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/book.csv",
+   "reference_point": "centroid of full book mask (cover + page edges), cols cx, cy",
+   "start_rest_frames_0_18": {
+    "center": [
+     783.5,
+     373.0
+    ],
+    "bbox": [
+     720,
+     352,
+     851,
+     396
+    ],
+    "mask_len": 131,
+    "mask_wid": 44
+   },
+   "end_rest_frames_36_48": {
+    "center": [
+     569.5,
+     477.4
+    ],
+    "bbox": [
+     497,
+     458,
+     648,
+     496
+    ],
+    "mask_len": 151,
+    "mask_wid": 29.5,
+    "note": "lying flat on table, long axis nearly horizontal in image (~-81 deg minAreaRect angle i.e. ~9 deg tilt), seen edge-on so width is foreshortened"
+   }
+  },
+  "ramp_board": {
+   "desc": "white flat board (inclined plane), low end on table at left/front, high end propped on the book stack at right",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "corners_px_frame48": {
+    "top_left": [
+     750,
+     360
+    ],
+    "top_right": [
+     858,
+     361
+    ],
+    "bottom_left_on_table": [
+     610,
+     468
+    ],
+    "bottom_right_on_table": [
+     709,
+     489
+    ]
+   },
+   "left_edge_slope_length_px": 177,
+   "bottom_edge_length_px": 101,
+   "top_edge_length_px": 108,
+   "bbox_frame48": [
+    610,
+    359,
+    858,
+    490
+   ],
+   "note": "top part covered by the book in frames 0-27; right edge partly merges with support stack"
+  },
+  "support_books": {
+   "desc": "stack of two books (dark green/grey hardcover bottom with gold title, grey/white top) under the high end of the ramp",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "approx_bbox_px": [
+    745,
+    428,
+    853,
+    488
+   ],
+   "top_book_px": {
+    "x": [
+     790,
+     850
+    ],
+    "y": [
+     428,
+     457
+    ],
+    "color": "grey/white, partly hidden by ramp"
+   },
+   "bottom_book_px": {
+    "x": [
+     747,
+     853
+    ],
+    "y": [
+     453,
+     488
+    ],
+    "length_px": 106,
+    "thickness_px": 35,
+    "color": "dark green-grey hardcover, gold title on spine"
+   },
+   "note": "left part hidden behind ramp; extents approximate (read from grid view, +-3 px)"
+  },
+  "table": {
+   "desc": "square wooden table top on single dark pedestal",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "top_corners_px": {
+    "left": [
+     414,
+     469
+    ],
+    "front": [
+     634,
+     607
+    ],
+    "right": [
+     1103,
+     497
+    ],
+    "back_partly_hidden": [
+     868,
+     450
+    ]
+   },
+   "front_left_edge_px": 259,
+   "front_right_edge_px": 482,
+   "pedestal": "dark cylinder below table, x ~745-800, y ~590-720 (cut by frame bottom)",
+   "bbox_px": [
+    414,
+    450,
+    1103,
+    607
+   ]
+  }
+ },
+ "events": [
+  {
+   "event": "book at rest on upper ramp",
+   "frames": [
+    0,
+    18
+   ]
+  },
+  {
+   "event": "start of motion (release)",
+   "frame": 19,
+   "time_s": 0.792,
+   "note": "frame 18 last unchanged; first sub-pixel/1 px shift at 19, clear by 20-21"
+  },
+  {
+   "event": "book front edge reaches bottom of ramp / leading edge touches table",
+   "frame": 28,
+   "time_s": 1.167,
+   "note": "approx +-1 frame"
+  },
+  {
+   "event": "book tips off ramp onto table (impact, orientation change)",
+   "frames": [
+    28,
+    31
+   ],
+   "time_s": [
+    1.167,
+    1.292
+   ],
+   "note": "mask angle changes from ramp tilt to flat; frame 30 approx main contact"
+  },
+  {
+   "event": "book slides on table, decelerating",
+   "frames": [
+    31,
+    35
+   ]
+  },
+  {
+   "event": "book comes to rest on table",
+   "frame": 36,
+   "time_s": 1.5
+  }
+ ]
+}

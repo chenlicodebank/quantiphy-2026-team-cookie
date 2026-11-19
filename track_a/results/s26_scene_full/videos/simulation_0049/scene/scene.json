@@ -1,0 +1,121 @@
+{
+  "video": "simulation_0049.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 33.0,
+  "frames": 99,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 1074],
+  "time_convention": "t = frame / 33.0, frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (phase correlation of background regions vs frame 0: max |shift| 0.17 px x, 0.01 px y over all 99 frames)",
+    "principal_point_assumed": [960, 537],
+    "focal_length": "unknown - estimate from depth_info + a known size",
+    "perspective": {
+      "road_vanishing_point_px": [975, 530],
+      "road_vanishing_point_uncertainty_px": 20,
+      "note": "from the two road curbs (left curb ~(0,880)->(660,640); right curb ~(1040,1074)->(990,650)). Independent check: the cyclist's tyre-contact y fits y = 537.5 + 19973/(frame+57.4), asymptote 537 (= the road's horizon if he rides straight away at constant speed). Horizon of the road plane ~ y 530-537, i.e. close to the image centre row -> camera close to level. The grey sea/land band at y 612-625 and the road's far end at y ~638 are backdrop/edge, NOT the horizon.",
+      "ground": "flat cobbled road (left/centre) and paved sidewalk (right, raised by a curb); both people move roughly straight away from the camera"
+    }
+  },
+  "objects": [
+    {
+      "name": "cyclist",
+      "description": "man in dark grey/black jacket and light grey trousers riding a blue bicycle in the middle of the road, riding straight away from the camera",
+      "distinguish": "the only person on the road / the only moving bicycle (the brown bicycle at the left is parked)",
+      "moves": true,
+      "visible_frames": [0, 98],
+      "track": "tracks/cyclist.csv",
+      "reference_point": "pelvis estimate: x = centre of the body at saddle level, y = head_top + 0.445*(tyre_bottom - head_top) (just above the saddle; checked visually at frames 0,30,60,98)",
+      "apparent_size": "bbox height (head top to tyre contact) 376 px at f0 -> 352 f4 -> 279 f20 -> 223 f40 -> 186 f60 -> 160 f80 -> 139 f98; width 103 -> 40 px. Apparent size shrinks ~2.7x: depth grows ~2.7x over the clip.",
+      "image_motion": "ref point (871.5,677) at f0 -> (925,588) at f98: drifts right and up toward the vanishing point; motion decelerates in image space as expected for constant-speed recession"
+    },
+    {
+      "name": "pedestrian",
+      "description": "man in white T-shirt, light-blue/grey jeans and brown/white shoes walking on the right sidewalk away from the camera",
+      "distinguish": "the only person on the sidewalk; white shirt",
+      "moves": true,
+      "visible_frames": [0, 98],
+      "track": "tracks/pedestrian.csv",
+      "reference_point": "pelvis estimate: x = centre of hips, y = shirt-bottom (waistband) + 0.04*bbox height",
+      "apparent_size": "bbox height (head top to lowest shoe) 321.5 px f0 -> 295 f20 -> 281 f40 -> 266.5 f60 -> 251 f80 -> 241.5 f98 (includes stride/bobbing, +-3 px). Shrinks 1.33x: depth grows ~1.33x. Shoulder/arm width ~94 px f0 -> ~62 px f98 (varies with arm swing).",
+      "image_motion": "ref point (1185,640) f0 -> (1127.5,619.5) f98: drifts left and up; walks much slower than the cyclist"
+    },
+    {
+      "name": "telephone_booth",
+      "description": "white telephone booth labelled TELEPHONE with a cracked left glass pane, at the far left edge of the right sidewalk",
+      "moves": false,
+      "frame_measured": 0,
+      "bbox_px": [1006, 409, 1109, 659],
+      "height_px": 250, "width_px": 103,
+      "note": "front face width 103 px, top (roof) y 409, base y 659; centre ~(1057, 534)"
+    },
+    {
+      "name": "manhole_cover",
+      "description": "round manhole cover in the road, bottom-left of the cyclist's start position",
+      "moves": false,
+      "frame_measured": 0,
+      "outer_ring_bbox_px": [580, 823, 792, 857],
+      "inner_dark_disc_bbox_px": [598, 830, 773, 852],
+      "centre_px": [686, 840],
+      "note": "ellipse seen in perspective: horizontal outer diameter 212 px (the true diameter, foreshortening is along y), vertical 34 px. Partly crossed by the cyclist's shadow at f0 only."
+    },
+    {
+      "name": "parked_bicycle",
+      "description": "brown/orange bicycle with a front basket parked against the railing on the far-left sidewalk",
+      "moves": false,
+      "frame_measured": 0,
+      "bbox_px": [308, 598, 392, 745],
+      "height_px": 147, "width_px": 84,
+      "note": "seen nearly end-on (wheel ground contact y ~ 742); length along its own axis not measurable"
+    },
+    {
+      "name": "flower_bush",
+      "description": "large green bush with pink/white flowers at the right sidewalk edge, in front of the stairs",
+      "moves": false, "frame_measured": 0,
+      "bbox_px": [1430, 645, 1920, 910],
+      "note": "cut by the right image border"
+    },
+    {
+      "name": "right_stoop_stairs",
+      "description": "stone staircase with balustrade and urn-shaped posts leading to the building door on the right",
+      "moves": false, "frame_measured": 0,
+      "bbox_px": [1270, 420, 1620, 870]
+    },
+    {
+      "name": "left_stoop_stairs_railing",
+      "description": "white house steps with tan wooden railing on the left building, behind the parked bicycle",
+      "moves": false, "frame_measured": 0,
+      "bbox_px": [255, 470, 470, 700]
+    },
+    {
+      "name": "bench_or_step_box",
+      "description": "small low stone box/step at the foot of the right stairs next to the bush",
+      "moves": false, "frame_measured": 0,
+      "bbox_px": [1350, 785, 1465, 875]
+    },
+    {
+      "name": "sidewalk_curb_right",
+      "description": "raised curb between road and right sidewalk",
+      "moves": false, "frame_measured": 0,
+      "polyline_px": [[1040, 1074], [990, 650]]
+    },
+    {
+      "name": "sidewalk_curb_left",
+      "description": "curb of the left sidewalk",
+      "moves": false, "frame_measured": 0,
+      "polyline_px": [[0, 880], [660, 640]]
+    },
+    {
+      "name": "buildings",
+      "description": "dark grey clapboard house at left (x 0-405), blue plastered wall (x 1105-1210) behind the booth, tan shop with yellow 'O LA...' sign (x 1200-1330, y 270-390), grey stone townhouse with arched door (x 1320-1700), tree at far left (x 0-300, y 0-700), white pillar at x ~1690-1730",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "cyclist moving throughout", "frames": [0, 98], "note": "already riding at frame 0 and still riding at frame 98; no start/stop, no turn; pedalling continuously"},
+    {"event": "pedestrian walking throughout", "frames": [0, 98], "note": "already walking at frame 0 and still walking at frame 98; no start/stop; steady gait"},
+    {"event": "no contacts/impacts/bounces", "note": "the two people never touch each other or any object; no occlusions between them"}
+  ]
+}

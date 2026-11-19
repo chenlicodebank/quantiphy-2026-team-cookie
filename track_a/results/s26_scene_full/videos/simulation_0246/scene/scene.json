@@ -1,0 +1,78 @@
+{
+  "video": "simulation_0246.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 75,
+  "duration_s": 2.5,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+  "view": "top-down (camera looking straight down at a flat, featureless beige floor); motion plane = floor plane, facing the camera",
+  "camera": {
+    "static": true,
+    "evidence": "floor intensity in the bottom image corners is constant to +-0 grey levels over all frames; floor shading (radial vignette / bright spot centred near (960,800)) does not move. The dark soft patches in the upper half are the animals' cast shadows (light from lower right) and move with them.",
+    "per_frame_shift_px": [0, 0]
+  },
+  "objects": [
+    {
+      "name": "kudu",
+      "description": "large antelope (greater kudu: long spiral striped horns, big ears, orange-brown body, thin tail with tuft) seen from directly above, head pointing +x (right)",
+      "distinguish": "the big animal in the lower-middle band (midline y ~572); the only large object",
+      "moves": true,
+      "motion": "walks steadily in +x along a straight horizontal line (y constant ~571-573) for the whole clip; gait gives a +-3 px/frame oscillation of the per-frame displacement",
+      "visible_frames": [0, 74],
+      "occluded": false,
+      "track_file": "tracks/kudu.csv",
+      "reference_point": "core_cx, core_cy (centroid of the mask within +-50 px of the body midline: trunk + neck + head + tail, horns excluded). Rig root (pelvis/hip) is not directly visible from above; alternatives in the csv: trunk_cx/cy, mask_cx/cy (whole mask incl. horns), nose_x (snout tip)",
+      "positions_px": {"frame0_core": [669.0, 572.0], "frame74_core": [1340.7, 570.8], "frame0_nose_x": 952, "frame74_nose_x": 1653},
+      "mean_dx_per_frame_px": {"core_cx": 9.08, "trunk_cx": 9.45, "mask_cx": 9.36, "nose_x": 9.47},
+      "extents_px": {
+        "length_along_x_tail_tip_to_nose": {"min": 612, "max": 732, "median": 674, "note": "includes the swinging tail; tail tuft position changes the length by ~100 px"},
+        "width_across_y_horn_tip_to_horn_tip": {"min": 289, "max": 296, "median": 293, "note": "horn spread is the widest part; body (trunk) itself is ~100-115 px wide"},
+        "frame0_bbox_xyxy": [341, 428, 954, 719],
+        "frame74_bbox_xyxy": [934, 426, 1653, 721],
+        "body_without_tail_frame45_approx_x": [881, 1375],
+        "height": "not observable (top-down view)"
+      }
+    },
+    {
+      "name": "rodent",
+      "description": "small orange furry animal (hamster/guinea-pig like) with a pale grey-pink head, seen from above, head pointing +x",
+      "distinguish": "small orange blob in the upper band (y ~347), ahead of and above the kudu; only small object",
+      "moves": true,
+      "motion": "walks in +x along a straight horizontal line (y ~346-348) the whole clip, slightly slower than the kudu",
+      "visible_frames": [0, 74],
+      "occluded": false,
+      "track_file": "tracks/rodent.csv",
+      "reference_point": "cx, cy = centroid of the orange-fur mask (head NOT included, see notes)",
+      "positions_px": {"frame0": [963.7, 347.0], "frame74": [1601.3, 346.3]},
+      "mean_dx_per_frame_px": {"cx": 8.62},
+      "extents_px": {
+        "orange_body_length_x": {"min": 62, "max": 83, "median": 67},
+        "orange_body_width_y": {"min": 39, "max": 48, "median": 43},
+        "head_length_x_visual": "about 25-32 px beyond the orange body (frame 0: full animal x 935..~1025 = ~91 px; frame 25: ~1148..~1240 = ~92 px)",
+        "full_length_estimate": "orange bbox_w + ~28 px, i.e. ~90-95 px typical",
+        "height": "not observable"
+      }
+    },
+    {
+      "name": "floor",
+      "description": "flat featureless beige ground plane filling the whole image, with radial lighting falloff (brightest near (960,800), darker at top corners)",
+      "moves": false,
+      "markings": "none",
+      "extents_px": "fills frame 1920x1080"
+    }
+  ],
+  "relations": {
+    "rodent_minus_kudu_core_px": {"frame0": [294.7, -225.0], "frame74": [260.6, -224.5]},
+    "rodent_vertical_offset_from_kudu_midline_px": "~225 px (rodent above the kudu in the image)",
+    "kudu_nose_vs_rodent": "kudu snout x is 17-101 px to the right of the rodent's left (rear) edge throughout; they never touch (different rows)"
+  },
+  "events": [
+    {"event": "both animals already walking at frame 0 and still walking at frame 74; no start/stop, no direction change, no contact", "frame": null},
+    {"event": "kudu per-frame displacement (core) ranges 6.2-12 px/frame, gait-periodic", "frame": null}
+  ],
+  "perspective": "2D top-down view; both animals walk on the same floor plane, so one metres-per-pixel scale applies to both. No visible perspective convergence (no floor features to check); apparent sizes stay constant over the clip (kudu horn span 289-296 px, rodent body 39-48 px wide).",
+  "files": {"notes": "notes.md", "scripts": "scripts/"}
+}

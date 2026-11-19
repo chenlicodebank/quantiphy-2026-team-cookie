@@ -1,0 +1,400 @@
+{
+ "video": "internet_0031.mp4",
+ "source": "internet",
+ "scene": "2D",
+ "fps": 29.804822,
+ "frames": 173,
+ "width": 540,
+ "height": 960,
+ "view": "near-nadir (top-down) drone view of one end of a football pitch; vertical goal line on the right",
+ "camera": {
+  "type": "static drone hover with slow drift",
+  "drift_px_total": {
+   "dx": 1.57039,
+   "dy": -2.5886
+  },
+  "scale_change": 1.0008,
+  "per_frame": "camera_motion.csv (affine frame-0 -> frame-i)"
+ },
+ "inventory": [
+  {
+   "name": "ball",
+   "desc": "white football, ~3-4 px diameter blob (half-max), dribbled by the yellow player",
+   "moves": true,
+   "visible": "0-172 (merged with player at 10-20, 40-42, 56-66, 156-158)",
+   "track": "tracks/ball.csv"
+  },
+  {
+   "name": "player_yellow",
+   "desc": "player in light yellow/cream kit who starts inside the goal and dribbles the ball out toward the penalty spot (role: possibly the goalkeeper or an attacker; ambiguous)",
+   "moves": true,
+   "visible": "0-172",
+   "track": "tracks/player_yellow.csv"
+  },
+  {
+   "name": "goalkeeper_dark",
+   "desc": "player in dark/black kit standing near the top-left of the goal area in front of the goal (keeper-like position), later walks down-left",
+   "moves": true,
+   "visible": "0-172",
+   "track": "tracks/goalkeeper_dark.csv"
+  },
+  {
+   "name": "goal",
+   "desc": "full-size goal frame on the goal line (right side of the pitch), white",
+   "moves": false
+  },
+  {
+   "name": "dark_object_by_goal",
+   "desc": "dark object (bag/ball bag?) just above the top post, ~(388,408), ~8x8 px",
+   "moves": false
+  },
+  {
+   "name": "penalty_area",
+   "desc": "18-yard box white lines",
+   "moves": false
+  },
+  {
+   "name": "goal_area",
+   "desc": "6-yard box white lines",
+   "moves": false
+  },
+  {
+   "name": "penalty_spot",
+   "desc": "bright worn spot",
+   "moves": false
+  },
+  {
+   "name": "penalty_arc",
+   "desc": "D-arc left of the penalty area",
+   "moves": false
+  },
+  {
+   "name": "touchlines_and_corners",
+   "desc": "pitch boundary lines top y~47, bottom y~883, corner arcs at goal line",
+   "moves": false
+  },
+  {
+   "name": "right_strip_netting_and_small_goals",
+   "desc": "beyond the goal: sunlit orange netting/fence strip x~432-475,y~258-668 with small white training goals at about (452,198), (447,340), (455,632); adjacent pitch with a goal at x~482-522,y~410-511 (right edge)",
+   "moves": false,
+   "reliability": "approx +-5 px"
+  },
+  {
+   "name": "shadows",
+   "desc": "long diagonal tree/structure shadows across the pitch from upper-left to lower-right; players cast long shadows toward +y (down)",
+   "moves": false
+  }
+ ],
+ "static": {
+  "coords": "frame-0 image pixels (x right, y down); camera drift <= 2.6 px, see camera_motion.csv",
+  "goal_line_x_by_row_y": {
+   "70": [
+    380.2,
+    135.56,
+    3
+   ],
+   "150": [
+    380.04,
+    130.93,
+    3
+   ],
+   "250": [
+    379.78,
+    121.44,
+    3
+   ],
+   "330": [
+    380.18,
+    121.8,
+    3
+   ],
+   "600": [
+    382.42,
+    116.49,
+    2
+   ],
+   "700": [
+    383.39,
+    117.8,
+    3
+   ],
+   "800": [
+    384.91,
+    132.0,
+    3
+   ],
+   "860": [
+    385.91,
+    131.28,
+    3
+   ]
+  },
+  "goal": {
+   "post_line_y_top": 414.55,
+   "post_line_y_bottom": 512.47,
+   "mouth_width_px_centre_to_centre": 97.9,
+   "outer_extent_y": [
+    413,
+    514
+   ],
+   "outer_extent_x": [
+    380,
+    409
+   ],
+   "note": "posts seen from above as white horizontal bars at y~414.6 and ~512.4; goal-line bar x~381; a bright band x~394-401 is the elevated crossbar displaced by parallax; back frame x~407-408 => apparent goal depth ~27 px (includes parallax)."
+  },
+  "penalty_area": {
+   "front_line_x_by_y": {
+    "230": [
+     163.53,
+     112.52,
+     2
+    ],
+    "300": [
+     163.52,
+     108.26,
+     2
+    ],
+    "600": [
+     165.64,
+     111.39,
+     3
+    ],
+    "700": [
+     166.81,
+     123.46,
+     3
+    ]
+   },
+   "top_y_by_x": {
+    "200": [
+     201.99,
+     121.52,
+     3
+    ],
+    "250": [
+     201.53,
+     113.67,
+     2
+    ],
+    "300": [
+     201.51,
+     119.19,
+     2
+    ],
+    "350": [
+     201.04,
+     119.29,
+     3
+    ]
+   },
+   "bottom_y_by_x": {
+    "200": [
+     726.74,
+     118.31,
+     3
+    ],
+    "250": [
+     727.07,
+     120.17,
+     3
+    ],
+    "300": [
+     727.26,
+     118.94,
+     3
+    ],
+    "350": [
+     727.5,
+     113.79,
+     2
+    ]
+   },
+   "width_along_goal_line_px": 525.6,
+   "depth_from_goal_line_px": 216.7
+  },
+  "goal_area": {
+   "front_line_x_by_y": {
+    "370": [
+     308.94,
+     121.95,
+     3
+    ],
+    "420": [
+     309.44,
+     103.99,
+     3
+    ],
+    "520": [
+     309.95,
+     109.79,
+     3
+    ],
+    "570": [
+     310.45,
+     106.35,
+     2
+    ]
+   },
+   "top_y_by_x": {
+    "320": [
+     344.94,
+     118.93,
+     3
+    ],
+    "340": [
+     344.65,
+     119.71,
+     2
+    ],
+    "360": [
+     344.51,
+     113.5,
+     2
+    ]
+   },
+   "bottom_y_by_x": {
+    "320": [
+     583.14,
+     112.35,
+     3
+    ],
+    "340": [
+     583.27,
+     112.43,
+     3
+    ],
+    "360": [
+     583.29,
+     111.85,
+     3
+    ]
+   },
+   "width_along_goal_line_px": 238.5,
+   "depth_from_goal_line_px": 70.9
+  },
+  "penalty_spot_xy": [
+   236.99,
+   463.04
+  ],
+  "penalty_spot_to_goal_line_px": 143.9,
+  "penalty_arc": {
+   "leftmost_x": 116.1,
+   "meets_penalty_line_rows_y": [
+    372,
+    557
+   ],
+   "radius_from_spot_px": 120.9
+  },
+  "touchlines": {
+   "top_y_by_x": {
+    "50": [
+     48.67,
+     121.67,
+     3
+    ],
+    "150": [
+     48.07,
+     132.85,
+     3
+    ],
+    "250": [
+     46.66,
+     127.04,
+     3
+    ],
+    "350": [
+     45.71,
+     134.69,
+     3
+    ]
+   },
+   "bottom_y_by_x": {
+    "50": [
+     882.52,
+     120.76,
+     2
+    ],
+    "150": [
+     883.05,
+     133.05,
+     3
+    ],
+    "250": [
+     883.43,
+     127.42,
+     3
+    ],
+    "350": [
+     884.27,
+     127.14,
+     3
+    ]
+   },
+   "separation_px": 836.0
+  },
+  "image_rotation_deg": "markings rotated ~0.4-0.6 deg (goal line x 380.2@y70 -> 385.9@y860; top touchline y 48.7@x50 -> 45.7@x350)"
+ },
+ "events": [
+  {
+   "frame": 0,
+   "time": 0.0,
+   "event": "clip start: ball resting just inside the goal on the goal line area (x~384,y~498); yellow player stands behind it inside the goal; dark player (keeper) standing ~ (349,430) near goal-area top",
+   "reliability": "high"
+  },
+  {
+   "frame": 9,
+   "time": 0.302,
+   "event": "yellow player reaches the ball (ball and player merge, ball nudged ~2 px toward goal frames 0-10)",
+   "reliability": "medium (+-3 frames)"
+  },
+  {
+   "frame": 21,
+   "time": 0.7046,
+   "event": "ball centre crosses goal line (x~380) leaving the goal, ball low-contrast on the white line frames ~17-20",
+   "reliability": "medium (+-2 frames)"
+  },
+  {
+   "frame": 26,
+   "time": 0.8723,
+   "event": "yellow player centre crosses goal line leaving the goal",
+   "reliability": "medium (+-3 frames)"
+  },
+  {
+   "frame": 20,
+   "time": 0.671,
+   "event": "start of dribble: ball moving steadily left (-x) with the yellow player, ~0.5-1.4 px/frame, close control (repeated small touches, not resolvable individually)",
+   "reliability": "medium"
+  },
+  {
+   "frame": 96,
+   "time": 3.221,
+   "event": "ball crosses goal-area front line (x~310)",
+   "reliability": "high (+-1 frame)"
+  },
+  {
+   "frame": 102,
+   "time": 3.4223,
+   "event": "yellow player centre crosses goal-area front line",
+   "reliability": "medium (+-2 frames)"
+  },
+  {
+   "frame": 84,
+   "time": 2.8183,
+   "event": "dark player (keeper) starts moving: from ~(350,431) drifting down-left (toward +y,-x), continuing to clip end",
+   "reliability": "medium (+-6 frames, slow start)"
+  },
+  {
+   "frame": 172,
+   "time": 5.7709,
+   "event": "clip end: ball at (231,467.6 frame-0 coords), ~6 px left/4 px below penalty spot (237,463); ball still moving ~1 px/frame; player right behind it",
+   "reliability": "high"
+  }
+ ],
+ "tracks_columns": {
+  "x_y": "visible centre in raw image px of that frame",
+  "x_stab_y_stab": "same in frame-0 (background-stabilized) coords: use these for motion",
+  "bbox": "raw px",
+  "mask_length_width": "extent along/across mask main axis (top-down footprint incl. limbs, not height)"
+ }
+}

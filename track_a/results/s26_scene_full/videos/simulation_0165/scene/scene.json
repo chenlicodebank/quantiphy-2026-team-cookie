@@ -1,0 +1,64 @@
+{
+  "video": "simulation_0165.mp4",
+  "source": "simulation",
+  "scene_type_declared": "2D",
+  "fps": 24.0,
+  "frames": 80,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, full-resolution 1920x1080) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the lower image band vs frame 0 gives |shift| < 0.02 px at all tested frames; background-difference mask contains only the cyclist (bunting, lamps, trees do not move)",
+    "perspective": "street scene viewed along the road; vanishing point of the road ~ (1000, 590), horizon ~ y 590. The cyclist rides ACROSS the road (left to right, parallel to the image plane) along the far white stop line at y ~705, so it stays at one depth: its pixel size is constant (length 163 px, height 163 px) and its vertical position constant -> treat as 2D motion with one px scale."
+  },
+  "moving_objects": {
+    "cyclist": {
+      "description": "the only moving object: a person in green jacket, light blue/white helmet with orange back, orange/brown shorts, yellow basket/bag on handlebar, riding a light-pink/white bicycle with black tyres; rides left -> right",
+      "track_file": "tracks/cyclist.csv",
+      "visible_frames": "0-79 (all); frames 0-5 cut by left image edge (enters from x=0), frames 14-33 rear/lower part behind the near-left black iron fence and lamp pole, frames 76-79 front wheel behind traffic-light pole (x 1650-1672)",
+      "reference_point": "ref_x/ref_y = midpoint of the two wheel hubs (proxy for the bike root/centre). pelvis_est = rear hub + (44, -46) px (hip on saddle, estimated on frame 60). All candidate points move with the same velocity.",
+      "motion": "uniform straight horizontal motion over the whole clip: x_rear_hub = -92.6 + 21.015*frame, x_front_hub = 2.3 + 21.023*frame (px; residual std 0.6-0.8 px over 44 cleanly measured frames); front bbox edge x1 slope 21.07 px/frame; rear edge x0 slope 20.96 px/frame. y constant (hubs at y 705-707). ~21.0 px/frame = ~504 px/s.",
+      "pixel_size_unoccluded": {
+        "length_px_rear_tyre_to_front_tyre_or_basket": 163,
+        "height_px_helmet_top_to_tyre_bottom": 163,
+        "wheelbase_px_hub_to_hub": 95.5,
+        "tyre_outer_diameter_px": 66,
+        "rider_helmet_top_y": 577,
+        "tyre_bottom_y": 739,
+        "note": "length range 158-168 in clean frames; height 161-164; shadow on ground below/behind is excluded"
+      },
+      "apparent_size_change": "none (constant within +-2 px over frames 6-79)"
+    }
+  },
+  "static_objects": {
+    "road": "asphalt street running away from camera toward vanishing point ~(1000,590); yellow solid double centre line from ~(985,600) to ~(1120,1080) plus yellow dashed line just left of it ((990,600)->(1090,1080)); white edge lines on both sides",
+    "stop_line_far": "white horizontal line across the road at y ~705, x ~600-1400 (cyclist's wheels hubs ride along it); road width along it ~ x 650 -> 1390 (~740 px) at the cyclist's depth (approximate, edges partly hidden)",
+    "near_left_fence": "black iron spiked fence, foreground left, x 0-600, top of posts from y ~640 (far end) to ~740 (x~90); occludes cyclist frames 14-33",
+    "far_left_fence": "small dark picket fence behind cyclist at far left, y ~635-700, x 0-560",
+    "right_fence": "black iron fence foreground right, x 1700-1920, y ~670-800; picket fence along houses y 630-700",
+    "traffic_light_pole": "black pole right, x 1652-1672, from y ~120 (top/arm) to ~760 (base on pavement); signal head x ~1655-1680, y ~515-580 with red light lit at ~(1668,532); occludes cyclist front wheel frames 76-79",
+    "utility_pole_left": "grey pole x 205-230, y 0 -> ~790",
+    "street_lamps": "lamp posts at x ~680 (y 240-700), ~780 (y 350-640), ~1400 (y 240-700), ~1495 (y 200-700), plus far ones near x 1130-1230",
+    "building_left": "dark multi-storey building with red neon shop front, x ~330-690, y ~90-640; lit shop windows x 400-650, y 500-640",
+    "houses_right": "row of white/stone houses with dark roofs, x ~1220-1920, y ~350-700",
+    "bunting": "three strings of red and white triangular flags: near string across top of frame (y 0-190), middle string x 710-1365 y 310-400, far string x 830-1200 y 400-475; static",
+    "sidewalks": "pavement/curb on both sides; right sidewalk near y 700-800 at x 1400-1920"
+  },
+  "events": [
+    {"event": "cyclist enters frame at left edge (already moving)", "frame": 0, "time_s": 0.0},
+    {"event": "cyclist fully inside frame (x0 > 0)", "frame": 6, "time_s": 0.25},
+    {"event": "cyclist passes behind near-left fence/lamp pole", "frames": "14-33", "time_s": "0.583-1.375"},
+    {"event": "cyclist crosses image centre x=960 (ref point)", "frame": 48, "time_s": 2.0},
+    {"event": "front wheel behind traffic-light pole", "frames": "76-79", "time_s": "3.167-3.292"},
+    {"event": "clip ends with cyclist still moving (still in frame, ref x ~1615)", "frame": 79, "time_s": 3.292},
+    {"note": "no start/stop, bounce, impact or direction change; speed constant throughout"}
+  ],
+  "files": {
+    "tracks/cyclist.csv": "final per-frame track (all 80 frames)",
+    "tracks/cyclist_raw.csv": "raw mask/Hough output from scripts/track.py",
+    "notes.md": "method and reliability",
+    "scripts/": "bg.py (camera/motion check), track.py (mask + Hough wheels), finalize.py (final track), check.py"
+  }
+}

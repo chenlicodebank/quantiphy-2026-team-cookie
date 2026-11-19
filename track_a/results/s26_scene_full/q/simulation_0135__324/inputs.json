@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0135.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 60,
+ "duration_s": 2.5,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 324,
+  "question": "What is the length of the toaster in meters?",
+  "prior": "diameter of the cup = 0.087m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

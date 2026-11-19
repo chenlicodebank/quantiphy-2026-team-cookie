@@ -1,0 +1,49 @@
+{
+  "video": "simulation_0169_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by plain white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 80,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 is t = 0",
+  "pixel_convention": "x to the right, y downward, origin top-left, full-resolution pixels",
+  "camera": {
+    "motion": "static (segmented render on uniform white background; no background features exist, so static is assumed per benchmark convention: camera fixed within a clip)",
+    "perspective": "none visible; 2D scene, motion in a plane facing the camera; apparent size of the figure is constant (main-axis length 90.4-93.5 px all clip) so no depth change"
+  },
+  "objects": [
+    {
+      "name": "person",
+      "description": "the only object: a small human figure in a light-grey/white suit with a dark head/helmet (astronaut-like), arm bent across the body; rigid pose, rises almost straight up the image while slowly tilting clockwise (head toward image right)",
+      "moves": true,
+      "visible_frames": [0, 79],
+      "occluded_frames": [],
+      "track_file": "tracks/person.csv",
+      "reference_point": "mask centroid (cx, cy), lies at about waist/hip level of the figure = proxy for the pelvis origin; bbox centre also given",
+      "size_px": {
+        "main_axis_length_body_height": {"mean": 91.4, "range": [90.4, 93.5], "frame0": 90.9},
+        "width_across_axis": {"frame0": 42.7, "range": [42.7, 49.3], "note": "grows slightly late in clip as the figure turns"},
+        "bbox_frame0": {"x0": 1273, "y0": 477, "x1": 1315, "y1": 566, "w": 43, "h": 90},
+        "bbox_frame79": {"x0": 1279, "y0": 207, "x1": 1341, "y1": 289, "w": 63, "h": 83},
+        "mask_area_px": "2486-2765 (mean ~2640)"
+      },
+      "position_px": {
+        "frame0_centroid": [1295.15, 519.07],
+        "frame79_centroid": [1310.2, 244.74],
+        "net_displacement_px": {"dx": 15.05, "dy": -274.33, "length": 274.7}
+      },
+      "orientation": "main axis angle (deg, image coords, 90 = vertical) 94.3 at f0 -> 119.4 at f79; tilt ~25 deg clockwise over the clip"
+    }
+  ],
+  "static_objects": [],
+  "events": [
+    {"event": "at rest (centroid y ~519)", "frames": [0, 2], "t_s": [0.0, 0.083]},
+    {"event": "start of upward motion", "frame": 3, "t_s": 0.125, "note": "per-frame rise 0.3 px (f2-3), 0.9 px (f3-4), growing"},
+    {"event": "speeding up phase", "frames": [3, 33], "note": "per-frame rise grows from ~1 px to ~5.2 px"},
+    {"event": "fastest, roughly constant rise ~5.0-5.5 px/frame", "frames": [30, 47], "t_s": [1.25, 1.958]},
+    {"event": "slowing down phase", "frames": [47, 77], "note": "per-frame rise drops from ~5 px to ~0.5 px"},
+    {"event": "motion stops (top of path, centroid y ~244.7)", "frame": 78, "t_s": 3.25, "note": "f78-79 displacement ~0.06 px; tilt also stops changing"}
+  ],
+  "notes_file": "notes.md"
+}

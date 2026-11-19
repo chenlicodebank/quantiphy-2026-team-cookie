@@ -1,0 +1,68 @@
+{
+ "wall_s": 515,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 37,
+  "duration_ms": 400970,
+  "total_cost_usd": 1.5769114,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 50,
+  "cache_creation_input_tokens": 74406,
+  "cache_read_input_tokens": 1035017,
+  "output_tokens": 38723,
+  "output_tokens_details": {
+   "thinking_tokens": 20467
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 74406,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 821,
+    "cache_read_input_tokens": 82105,
+    "cache_creation_input_tokens": 2195,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 2195
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 36,
+  "flags": [
+   {
+    "tool": "Write",
+    "paths": [
+     "/private/tmp/qp_blind/scene_full_partial"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/qp_blind/scene_full_b/captured_0054bs/q_2886/fit2.py\", \"content\": \"import numpy as np, sys\\nfrom scipy.optimize import least_squares\\nD = '/private/tmp/qp_blind/scene_full_partial'\\nD = '/private/tmp/qp_blind/scene_full_b/captured_0054bs/q_2886/'\\na = np.loa"
+   }
+  ]
+ },
+ "video": "captured_0054bs",
+ "ids": [
+  2886
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/captured_0054bs__q2886.jsonl"
+}

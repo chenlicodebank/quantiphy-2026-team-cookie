@@ -1,0 +1,18 @@
+{
+ "video": "internet_0003.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 18.313953,
+ "frames": 37,
+ "duration_s": 2.0203,
+ "width": 2732,
+ "height": 1440,
+ "question": {
+  "id": 2024,
+  "question": "What is the velocity of the pizza cutter in cm/s at 0.2s?",
+  "prior": "monopoly money width = 7.5cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

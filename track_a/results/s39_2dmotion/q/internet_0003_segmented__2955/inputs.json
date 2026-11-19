@@ -1,0 +1,18 @@
+{
+ "video": "internet_0003_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 48,
+ "duration_s": 2.0,
+ "width": 1280,
+ "height": 674,
+ "question": {
+  "id": 2955,
+  "question": "What is the velocity of the pizza cutter in cm/s at 0.2s?",
+  "prior": "money width = 7.5cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

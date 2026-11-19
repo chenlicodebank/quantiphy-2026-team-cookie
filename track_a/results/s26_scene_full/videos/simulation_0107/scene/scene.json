@@ -1,0 +1,65 @@
+{
+  "video": "simulation_0107.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels, frames, seconds; image x to the right, y downward",
+  "background": "uniform light grey (RGB 206,206,206); no ground, no markings, no other objects",
+  "camera": {"motion": "static (background uniform, no shift measurable; both objects move at constant per-frame steps)", "perspective": "none visible; 2D scene, motion in a plane facing the camera"},
+  "objects": {
+    "virus_small_left": {
+      "description": "smaller spiky virus particle (dark-blue spherical body, ~40 dark-red club-tipped spikes); starts on the LEFT of the pair",
+      "moves": true,
+      "visible_frames": [0, 69],
+      "fully_inside_frame": [0, 31],
+      "body_fully_inside_frame": [0, 40],
+      "track_file": "tracks/virus_small_left.csv",
+      "reference_point": "centre of the spherical body (least-squares circle fit), treated as the object origin",
+      "centre_frame0_px": [694.2, 582.7],
+      "full_mask_extent_frame0_px": {"length_x": 513, "height_y": 515, "bbox": [439, 328, 951, 842]},
+      "full_mask_extent_range_frames0_31": {"length_x": [513, 529], "height_y": [512, 515]},
+      "body_sphere_diameter_px": {"frame0": 243.8, "frame40": 251.0, "note": "fit radius grows 121.9 -> 125.5 px as spikes/roots rotate; spikes not included"},
+      "motion": "constant-velocity straight line to the LEFT (slightly downward): mean step dx = -14.17 px/frame (sd 0.20), dy = +0.14 px/frame, frames 1->40 body-fit",
+      "rotation": "slow rotation of spikes (template-match score falls 1.0 -> 0.72 by frame 32); outline nearly unchanged"
+    },
+    "virus_large_right": {
+      "description": "larger spiky virus particle (same look, ~1.12x larger); starts on the RIGHT of the pair",
+      "moves": true,
+      "visible_frames": [0, 68],
+      "fully_inside_frame": [0, 23],
+      "body_fully_inside_frame": [0, 35],
+      "track_file": "tracks/virus_large_right.csv",
+      "reference_point": "centre of the spherical body (least-squares circle fit), treated as the object origin",
+      "centre_frame0_px": [1307.5, 615.4],
+      "full_mask_extent_frame0_px": {"length_x": 573, "height_y": 581, "bbox": [1034, 331, 1606, 911]},
+      "full_mask_extent_range_frames0_23": {"length_x": [573, 593], "height_y": [578, 581]},
+      "body_sphere_diameter_px": {"frame0": 275.4, "frame35": 283.6, "note": "fit radius grows 137.7 -> 141.8 px with rotation"},
+      "motion": "constant-velocity straight line to the RIGHT (slightly upward): mean step dx = +13.72 px/frame (sd 0.17), dy = -0.73 px/frame, frames 1->35 body-fit; step magnitude ~13.74 px/frame",
+      "rotation": "slow rotation of spikes (template score 1.0 -> 0.70 by frame 33)"
+    }
+  },
+  "size_ratios": {"large_over_small_full_mask_width_frame0": 1.117, "large_over_small_full_mask_height_frame0": 1.128, "large_over_small_body_diameter_frame0": 1.13},
+  "pair_geometry": {
+    "centre_separation_frame0_px": 614.2,
+    "separation_change": "objects move apart: horizontal separation grows ~27.9 px/frame; they never touch or overlap",
+    "gap_between_full_masks_frame0_px": 82
+  },
+  "events": [
+    {"event": "both static: frames 0 and 1 identical", "frame": 0, "t": 0.0},
+    {"event": "motion starts for BOTH (first non-zero displacement, already at full constant step)", "frame": 2, "t": 0.0833, "note": "motion begins between frame 1 (t=0.0417) and frame 2"},
+    {"event": "large: spike tips reach right image edge", "frame": 24, "t": 1.0},
+    {"event": "small: spike tips reach left image edge", "frame": 32, "t": 1.3333},
+    {"event": "large: body sphere reaches right edge", "frame": 36, "t": 1.5},
+    {"event": "small: body sphere reaches left edge", "frame": 41, "t": 1.7083},
+    {"event": "large: centre crosses right edge (x=1920); first frame with centre outside", "frame": 46, "t": 1.9167},
+    {"event": "small: centre crosses left edge (x=0); first frame with centre outside", "frame": 51, "t": 2.125},
+    {"event": "large: last visible pixels", "frame": 68, "t": 2.8333},
+    {"event": "small: last visible pixels", "frame": 69, "t": 2.875},
+    {"event": "empty frames", "frame": 70, "t": 2.9167, "note": "frames 70-71 show only background"}
+  ],
+  "no_events": "no collision, bounce, contact, release or direction change; no acceleration measurable (per-frame steps constant within ~0.2 px)",
+  "notes_file": "notes.md"
+}

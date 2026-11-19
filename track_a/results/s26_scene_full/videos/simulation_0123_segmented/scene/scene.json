@@ -1,0 +1,42 @@
+{
+ "video": "simulation_0123_segmented.mp4",
+ "source": "segmentation (Blender simulation, background replaced by white)",
+ "scene": "2D",
+ "fps": 24.0, "frames": 72, "duration_s": 3.0, "width": 1920, "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "view": "top-down (orthographic-looking) view of objects lying in one plane; no perspective cues; one px scale applies to all objects",
+ "camera": {"static": true, "evidence": "static objects' mask centroids shift < 1 px over all frames (only segmentation edge flicker); no pan/shake"},
+ "pixel_units": "pixels; x right, y down",
+ "objects": [
+  {"name": "teal_block", "description": "small teal/green-blue rectangular block (box/bar), the only coloured and only moving object, below the left sink",
+   "moves": true, "visible_frames": "0-71", "track": "tracks/teal_block.csv",
+   "reference_point": "mask centroid (centroid_x, centroid_y) = rigid-body centre in this top view",
+   "size_px": {"length_along_y_vertical": 78, "width_along_x_motion_dir": 42, "note": "width 42 px at rest (frame 0); 42-46 px while moving (motion blur/edge fringe). Long axis vertical (perpendicular to motion), short axis along motion. No height visible (top view)."},
+   "motion": "at rest frames 0-1, then translates straight right (+x) at an essentially constant ~14.54 px/frame (~349 px/s); y constant at ~586.9 px; still moving at the last frame (71)",
+   "start_px": [412.45, 586.59], "end_px_frame71": [1429.64, 587.05]},
+  {"name": "left_sink", "description": "left of two identical beige rectangular sink/basin panels with a notch in the top edge and a round dark drain hole",
+   "moves": false, "visible_frames": "0-71",
+   "bbox_px": [172, 200, 650, 514], "size_px": {"length_x": 479, "width_y": 315}, "centre_px": [411.0, 357.0],
+   "drain_hole": {"centre_px": [465.2, 366.2], "diameter_px": 36.5}},
+  {"name": "right_sink", "description": "right sink/basin panel, identical to left_sink, with notch and drain",
+   "moves": false, "visible_frames": "0-71",
+   "bbox_px": [1212, 200, 1690, 515], "size_px": {"length_x": 479, "width_y": 316}, "centre_px": [1451.1, 357.2],
+   "drain_hole": {"centre_px": [1501.6, 366.2], "diameter_px": 36.5}},
+  {"name": "tray", "description": "large light-grey rectangular tray/board (white foam-like), top-centre, rotated ~26 deg (long axis rising to the right)",
+   "moves": false, "visible_frames": "0-71",
+   "bbox_px": [709, 39, 1112, 360], "centre_px": [911.0, 198.9],
+   "size_px": {"length_own_axis": 375, "width_own_axis": 189, "axis_angle_deg": "long axis ~26 deg above +x"}},
+  {"name": "pen", "description": "thin yellow-green stick/pen/toothbrush-like object with a white end, between tray and sinks, diagonal (upper-left to lower-right)",
+   "moves": false, "visible_frames": "0-71",
+   "bbox_px": [753, 402, 836, 486], "centre_px": [794.4, 445.5],
+   "size_px": {"length_own_axis": 114, "width_own_axis": 16, "axis_angle_deg": "~45 deg, down-right"}}
+ ],
+ "events": [
+  {"event": "teal_block at rest", "frames": "0-1", "times_s": "0.000-0.042"},
+  {"event": "teal_block starts moving right (motion begins between frame 1 and 2)", "frame": 2, "time_s": 0.0833},
+  {"event": "teal_block passes under left_sink right edge (x=650)", "frame": 18, "time_s": 0.75, "note": "approximate, centroid x crosses 650 between frames 17 and 18; no contact (block is below the sinks, y 548-625 vs sink bottom 514)"},
+  {"event": "teal_block still moving at end of clip", "frame": 71, "time_s": 2.958}
+ ],
+ "no_contacts_or_collisions": true,
+ "files": {"notes": "notes.md", "scripts": "scripts/", "raw_measurements": "scripts/measure_out.json"}
+}

@@ -1,0 +1,99 @@
+{
+ "video": "captured_0009x.mp4",
+ "source": "lab (captured, Orbbec Femto Mega RGB) shown as SAM2 segmentation: background replaced by white",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame / 24; frame 0 = t 0",
+ "camera": {
+  "static": true,
+  "note": "background is blanked (white), so no background reference; lab camera is on a tripod. Intrinsics per benchmark: f = 0.5959*1280 = 762.8 px, principal point ~ (640, 360).",
+  "focal_px": 762.8,
+  "principal_point_px": [
+   640,
+   360
+  ]
+ },
+ "pixel_units": "image pixels, x right, y down, origin top-left",
+ "objects": [
+  {
+   "name": "basketball",
+   "description": "orange basketball with black seams; the only object in the video",
+   "moves": true,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "track": "tracks/basketball.csv",
+   "reference_point": "centre of circle fitted to the outer silhouette (x, y)",
+   "apparent_diameter_px": {
+    "held_f0_26": 137.0,
+    "f32": 123,
+    "f35": 107,
+    "f37_bounce": 93,
+    "f38_40": 100,
+    "f46_apex": 110,
+    "f48": 110,
+    "note": "shrinks while falling -> ball moves away from camera as it drops (camera looks down/forward at it); unblurred frames use diam_circle, blurred frames 32-37 use bbox_w"
+   }
+  },
+  {
+   "name": "hand",
+   "description": "person's hand holding the ball at its lower-left, erased by segmentation (white notch in the ball)",
+   "moves": false,
+   "visible_frames": "not visible itself; its silhouette cuts the ball in frames 0-31"
+  },
+  {
+   "name": "watermark",
+   "description": "grey 'Modified with Segment Anything 2 Demo' box, bottom-right x 1030-1280, y 690-720; not a scene object",
+   "moves": false
+  }
+ ],
+ "static_objects": "none visible (floor, wall, person removed by segmentation)",
+ "events": [
+  {
+   "event": "held nearly still (slow upward drift of ~6 px)",
+   "frames": [
+    0,
+    26
+   ],
+   "t": [
+    0.0,
+    1.0833
+   ]
+  },
+  {
+   "event": "release / start of fall",
+   "frame": 27,
+   "t": 1.125,
+   "note": "centre y 179.7 (f26) -> 182.7 (f27) -> 195.4 (f28); release between f26 and f27"
+  },
+  {
+   "event": "probable dropped recording frame",
+   "frame": 36,
+   "t": 1.5,
+   "note": "pixel step 35->36 (114 px) ~2x neighbours (57, 59 px)"
+  },
+  {
+   "event": "bounce on floor (lowest centre)",
+   "frame": 37,
+   "t": 1.5417,
+   "y_px": 657.8
+  },
+  {
+   "event": "apex of rebound",
+   "frame": 46,
+   "t": 1.9167,
+   "y_px": 481.5
+  },
+  {
+   "event": "falling again",
+   "frames": [
+    47,
+    48
+   ]
+  }
+ ]
+}

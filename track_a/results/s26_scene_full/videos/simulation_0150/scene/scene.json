@@ -1,0 +1,67 @@
+{
+ "video": "simulation_0150.mp4",
+ "source": "simulation (Blender render)",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 42,
+ "duration_s": 1.75,
+ "image_size_px": [1920, 1080],
+ "time_convention": "t = frame / 24; frame 0 is t = 0",
+ "units": "pixels (x right, y down) and seconds; no metric scale assumed",
+ "camera": {
+  "motion": "static (phase correlation frame0 vs frame41 on the upper image: shift (-0.01, 0.00) px; background identical apart from the car)",
+  "view": "level camera looking straight down the parking-garage aisle; light-tube lines converge at a vanishing point ~(960, 540) = image centre, so the optical axis is ~horizontal and parallel to the aisle",
+  "horizon_y_px": 540,
+  "principal_point_assumed": [960, 540],
+  "focal_length": "unknown (estimate from given depth_info + a known size: f_px = pixel_size * depth / world_size)"
+ },
+ "objects": {
+  "car": {
+   "description": "yellow sports coupe (RX-7 style, rear spoiler, white 5-spoke rims); the only moving object",
+   "moves": true,
+   "visible_frames": "0-40 (frame 41: fully hidden behind the left near pillar)",
+   "fully_visible_frames": "22-27 (before 22 the rear is behind the right near pillar at x>=1831; from 28 the front is behind the left near pillar at x<=95)",
+   "track_files": ["tracks/car_track.csv (main)", "tracks/car.csv", "tracks/car_auto.csv", "tracks/car_ref_dims.json"],
+   "motion_summary": "frames 0-13: drives out of the right parking bay (behind the right near pillar), yawing from nose-toward-camera to side-on and moving toward the camera (contact line y 809 -> 877); frames ~14-40: side-on, driving straight to the LEFT across the image at ~constant depth (contact y ~880, wheel axle y ~793), image shift per frame grows 67 px (f12->13) to ~101 px (f27-31), then falls to ~94 px (f36->37) and ~80 px (f38-40, low reliability)",
+   "side_on_pixel_size": {
+    "length_px": 1154,
+    "length_note": "front bumper to rear (spoiler/rear bumper) along x, rows above contact-45 px; frames 22-27: 1161,1154,1153,1154,1158,1153",
+    "height_px": 355,
+    "height_note": "roof top y 528 to ground contact y ~882 (contact from shadow line, +-4 px)",
+    "wheelbase_px": 711.2,
+    "wheelbase_note": "rim-centre to rim-centre, frames 22-27: 713.7,710.8,710.6,711.6,710.3,713.4",
+    "rim_diameter_px": 125,
+    "tyre_outer_diameter_px_approx": 175,
+    "wheel_axle_y_px": 793.5,
+    "body_centre_y_px": 705,
+    "body_centre_minus_wheel_midpoint_x_px": 26,
+    "apparent_size_change": "constant within ~1% from frame ~16 to 37 (constant depth, side-on); before frame 14 the car is yawed and partially hidden, apparent size grows as it approaches"
+   }
+  },
+  "left_near_pillar": {"moves": false, "description": "concrete pillar at the left image edge, closest to camera; occludes the car from frame 28 on", "inner_edge_x_px": 95, "x_range_px": [0, 95], "base_y_px": 935},
+  "right_near_pillar": {"moves": false, "description": "concrete pillar at the right image edge with a red fire extinguisher; occludes the car's rear until frame 21", "inner_edge_x_px": 1831, "x_range_px": [1831, 1920], "base_y_px": 895},
+  "left_mid_pillar": {"moves": false, "description": "second pillar on the left (fire extinguisher on its right face), hazard stripes at its base", "x_range_px": [230, 430], "base_y_px": 770},
+  "right_mid_pillar": {"moves": false, "description": "second pillar on the right with a small yellow 'B1'", "x_range_px": [1497, 1690], "base_y_px": 770},
+  "fire_extinguisher_left": {"moves": false, "description": "red extinguisher on the left mid pillar", "bbox_px": [410, 500, 442, 588], "height_px": 88, "width_px": 32},
+  "fire_extinguisher_right": {"moves": false, "description": "red extinguisher on the right near pillar (closer, larger)", "bbox_px": [1828, 458, 1868, 615], "height_px": 157, "width_px": 40},
+  "B1_sign_back_wall": {"moves": false, "description": "large yellow 'B1' painted on the far back wall", "bbox_px": [880, 428, 1063, 598], "width_px": 183, "height_px": 170},
+  "B1_sign_left_pillar": {"moves": false, "description": "yellow 'B1' on the left near pillar", "bbox_px": [15, 350, 95, 570]},
+  "floor_marking": {"moves": false, "description": "white painted trapezoid (arrow stem) on the floor at bottom centre, cut by the image bottom", "top_edge_y_px": 1000, "top_edge_x_px": [795, 952], "top_width_px": 157},
+  "ceiling_light_left": {"moves": false, "description": "long fluorescent tube, left", "endpoints_px": [[0, 110], [715, 428]]},
+  "ceiling_light_right": {"moves": false, "description": "long fluorescent tube, right", "endpoints_px": [[1178, 428], [1920, 55]]},
+  "back_wall_floor_line": {"moves": false, "y_px": 705, "description": "where the far back wall meets the floor"},
+  "parking_bays": {"moves": false, "description": "green-floored bays left and right behind the pillars; the car emerges from the right bay"}
+ },
+ "events": [
+  {"frame": 0, "t": 0.0, "event": "video starts with the car already moving: front of car visible between right mid pillar and right near pillar (x 1760-1831), nose toward camera"},
+  {"frame_range": [0, 13], "event": "car turns out of the right parking bay into the aisle (yaw change ~90 deg, moving toward camera then left)"},
+  {"frame": 14, "t": 0.583, "event": "car essentially side-on, from here moves straight left at constant depth"},
+  {"frame": 22, "t": 0.917, "event": "rear clears the right near pillar: first fully visible frame"},
+  {"frame": 27, "t": 1.125, "event": "last fully visible frame"},
+  {"frame": 28, "t": 1.167, "event": "front starts disappearing behind the left near pillar"},
+  {"frame_range": [27, 31], "event": "peak image speed ~101 px/frame; afterwards the car slows (shift 94 px at f36->37)"},
+  {"frame_range": [38, 40], "event": "render artifact: visible tail drawn as a smeared yellow blob"},
+  {"frame": 41, "t": 1.708, "event": "car completely hidden behind the left near pillar"}
+ ],
+ "no_bounce_impact_or_contact_events": true
+}

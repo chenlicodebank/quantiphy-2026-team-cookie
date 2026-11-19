@@ -1,0 +1,65 @@
+{
+  "video": "simulation_0237_segmented.mp4",
+  "source": "segmentation (Blender simulation with background replaced by white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 is t=0; last frame 49 is t=2.0417 s",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of building region vs frame 0: |dx| < 0.03 px, |dy| < 0.11 px for all frames (scripts/camera_static.py)",
+    "perspective": "2D scene: building is shown in an oblique corner view (two faces visible, corner at x~1018), but the moving object travels horizontally along an image row (y ~ 776) at constant apparent size, so one metres-per-pixel scale applies to it."
+  },
+  "objects": {
+    "animal": {
+      "description": "Only moving object: small elongated reddish-brown animal-like body (dark red-brown, ~148 x 39 px), lying horizontal just below the building's bottom corner. Whitish/grey pointed tip at its RIGHT end (leading end, direction of travel = +x); small knobs on the top edge (ears/limbs) and a grey blob at the left end in late frames. Exact species unclear (looks like a fox/small mammal or bird body seen in profile).",
+      "moves": true,
+      "visible_frames": [0, 49],
+      "occluded_frames": [],
+      "track_file": "tracks/animal.csv",
+      "reference_point": "mask centroid (cx, cy); bbox centre also given. Origin of the rig is not visible; centroid is the best proxy.",
+      "motion_summary_px": {
+        "centroid_frame0": [753.86, 775.90],
+        "centroid_frame49": [879.38, 776.28],
+        "net_dx_px": 125.5,
+        "net_dy_px": 0.4,
+        "mean_px_per_frame": 2.56,
+        "direction": "rightwards (+x), essentially horizontal; y constant within ~1 px",
+        "bbox_x0_frame0_to_49": [694, 812],
+        "bbox_x1_frame0_to_49": [837, 966]
+      },
+      "size_px": {
+        "main_axis_length_median": 148.0,
+        "main_axis_length_range": [139.1, 165.1],
+        "width_across_axis_median": 39.4,
+        "width_range": [36.2, 42.6],
+        "bbox_height_range": [36, 42],
+        "brown_body_only_length_typical": 128,
+        "note": "length oscillates (gait/limb cycle) with maxima near frames 8, 31, 48 and minima near frames 14, 37; axis angle 0-3 deg (horizontal)."
+      }
+    },
+    "building": {
+      "description": "Large static brick/stone building block in centre-top of frame: dark grey-brown left face and cream right face meeting at a vertical corner at x ~1018; a wider protruding tan horizontal band (overhang) around its middle.",
+      "moves": false,
+      "visible_frames": [0, 49],
+      "bbox_px": {"x0": 621, "x1": 1422, "y0": 24, "y1": 744, "width": 802, "height": 721},
+      "parts_frame0": {
+        "main_block": "x 662-1361 (width 700 px); top edge from y~98 (left end) up to y~24 (corner x 1018) down to y~93 (right end); bottom edge y~712 (left) / 744 (corner) / 713 (right). Corner vertical height ~720 px; side edges ~615 px tall.",
+        "middle_band": "x 621-1422 (width ~800 px) at widest (y~400); spans y ~270-520 (~250 px tall), centre row ~395",
+        "left_face_width_px": 356,
+        "right_face_width_px": 343
+      }
+    },
+    "ground_background": {
+      "description": "No ground or other markings: background replaced by plain white. The animal moves along row y~776, ~30 px below the building's bottom corner (y 744).",
+      "moves": false
+    }
+  },
+  "events": [
+    {"event": "animal already moving at first frame", "frame": 0, "time_s": 0.0},
+    {"event": "animal still moving rightwards at last frame (no stop, bounce or contact observed)", "frame": 49, "time_s": 2.0417},
+    {"event": "animal passes under building's bottom corner (x=1018)?", "frame": null, "time_s": null, "note": "does not happen: centroid reaches only x~879"}
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "video": "simulation_0259.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 40,
+  "width": 1920,
+  "height": 1080,
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, origin top-left of the 1920x1080 frame",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of 4 background patches vs frame 0: <=0.01 px in 3 patches, a constant ~0.5 px in the right/bag patch (render noise, not motion); no pan, no shake",
+    "view": "front view of a blue wall, camera roughly at table height (just above it: table top surface seen slightly from above, cup underside visible when it is high in the frame). The falling motion is a vertical line in the image plane."
+  },
+  "moving_objects": [
+    {
+      "name": "cup",
+      "description": "disposable paper coffee cup with white lid, two red/pink bands and a cream middle sleeve; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 39],
+      "track_file": "tracks/cup.csv",
+      "reference_point": "cx, cy = mask bbox centre (proxy for the object origin/centre). top_y (lid top edge) is the cleanest point for vertical kinematics, see notes",
+      "pixel_size": {
+        "width_px_top_rim": 42.5,
+        "width_px_bottom": 28,
+        "height_px_side_view": 65,
+        "height_note": "65-66 px when the cup is near camera height (frames 13-14, 16-39). In frames 0-12 the silhouette is 74->67 px tall because the cup's underside ellipse is seen from below (perspective), not because the cup is bigger.",
+        "width_note": "42-43 px in every frame (max width = lid rim); the most stable size measurement"
+      },
+      "motion_summary": "dropped from rest at frame 0 (top_y 24, cx 856.5), falls straight down (x constant within 1 px), hits the table at frame 15, bounces up to a peak at frame 18, lands again at frame 20 and rests; slight 3 px leftward creep of the bbox during frames 20-36, then motionless"
+    }
+  ],
+  "events": [
+    {"event": "release / start of fall from rest", "frame": 0, "t": 0.0, "note": "frame0->1 drop is 4 px, frame1->2 11 px: consistent with starting from rest at frame 0"},
+    {"event": "first impact with table top", "frame": 15, "t": 0.5, "note": "last free-fall frame is 14 (bottom_y 779); at frame 15 the cup is ~9 px lower than its rest pose (bottom partly sunk below the table-top line, top_y 816 vs rest 807)"},
+    {"event": "bounce lift-off / moving up", "frame": 16, "t": 0.5333},
+    {"event": "bounce apex", "frame": 18, "t": 0.6, "note": "top_y 791 (16 px above rest top 807); frame 17 is 792"},
+    {"event": "second contact, comes to rest", "frame": 20, "t": 0.6667},
+    {"event": "small sideways creep (x -3 px) then still", "frame_start": 20, "frame_end": 36, "t_start": 0.6667, "t_end": 1.2},
+    {"event": "end of all motion", "frame": 36, "t": 1.2}
+  ],
+  "static_objects": [
+    {"name": "table", "description": "long dark-metal-legged table with glossy grey/wood top; cup lands on it", "top_surface_back_edge_y": 866, "top_front_edge_y": 897, "top_slab_bottom_y": 912, "x_left": 518, "x_right": 1538, "length_px": 1020, "note": "left end hidden behind the AC unit; legs near x 685-700 and 1505-1535 run off the bottom of the frame. Cup rest contact line y = 871."},
+    {"name": "ac_unit", "description": "white LG outdoor air-conditioner unit with round fan grille, bottom-left", "bbox": [135, 760, 640, 1080], "width_px": 505, "height_px_visible": 320, "note": "cut off by the bottom frame edge; fan grille x 147-405, y 783-1070 (~258 px); red LG logo circle centre (489, 830), diameter ~61 px"},
+    {"name": "bag", "description": "large cream/lavender camera bag (Nikon-style) on the right end of the table", "bbox": [1308, 743, 1533, 877], "width_px": 225, "height_px": 134},
+    {"name": "mug", "description": "cream ceramic mug with handle on the right, grey label", "bbox": [1220, 818, 1282, 872], "body_width_px": 45, "width_with_handle_px": 62, "height_px": 54},
+    {"name": "potted_plant", "description": "small succulent in a white pot, between phone and pen", "bbox": [1082, 809, 1129, 870], "pot_width_px": 47, "pot_height_px": 41, "total_height_px": 61},
+    {"name": "phone", "description": "black smartphone lying flat, between plant and mug", "bbox": [1141, 862, 1192, 874], "length_px": 51},
+    {"name": "pen", "description": "thin dark pen lying on the table", "bbox": [992, 863, 1057, 871], "length_px": 65},
+    {"name": "wallet_or_notebook", "description": "small dark flat item (wallet/card holder) left of the pen, right of the cup", "bbox": [910, 861, 971, 872], "length_px": 61},
+    {"name": "window", "description": "white-framed window on the right wall (perpendicular to the back wall)", "bbox": [1630, 0, 1752, 830]},
+    {"name": "wall", "description": "textured blue back wall (background plane of the fall)"}
+  ],
+  "accuracy": {"cup_track_px": "about +/-1 px for edges/bbox; frame 15 mask partly occluded", "static_extents_px": "+/-3 px (read off grid crops)"}
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0019.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 33.264746,
+ "frames": 97,
+ "duration_s": 2.916,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1090,
+  "question": "What is the walking speed of the person at 0.5s in m/s?",
+  "prior": "height of the person = 1.87m",
+  "depth_info": "t=0s, distance_human_camera = 6.84m\nt=1s, distance_human_camera = 6.49m\ndistance_the_nearest_freestanding_art_display_panel = 11.042m\ndistance_the_pedestal_of_the_central_sculpture_and_camera = 5.085m\ndistance_the_central_sculpture_camera = 5.085m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 33.0
+ }
+}

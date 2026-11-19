@@ -1,0 +1,76 @@
+{
+  "video": "simulation_0030.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 25.0,
+  "frames": 75,
+  "duration_s": 3.0,
+  "image_size_px": [960, 960],
+  "time_convention": "t = frame / 25; frame = round(t * 25)",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of island/beach band (y 350-480) vs frame 0: |dx| <= 0.04 px, |dy| <= 0.52 px over all 75 frames (scene/scripts/cam_shift.json); water surface is animated but camera does not move",
+    "horizon_y_px": "~500 (far sea edge at right of island, x>820); beach/water boundary ~525-530 across frame; horizon nearly level",
+    "principal_point_assumed_px": [480, 480],
+    "focal_length": "unknown - estimate from depth_info + known size in the answering session"
+  },
+  "objects": [
+    {
+      "name": "bird",
+      "description": "single dark brown bird (eagle/hawk-like raptor) flapping its wings, flying left-to-right across the sky above the island; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 39],
+      "fully_visible_frames": [0, 36],
+      "partially_out_of_frame": [37, 38, 39],
+      "absent_frames": [40, 74],
+      "track_file": "tracks/bird.csv",
+      "reference_point": "mask centroid (cx, cy) - proxy for the rig origin/body centre; also bbox centre given",
+      "summary_px": {
+        "frame0_centroid": [378.4, 269.7],
+        "frame36_centroid": [927.4, 295.6],
+        "horizontal_pixel_rate_px_per_frame_approx": 15.3,
+        "vertical_motion": "small oscillation: y 270 -> 294 (f9-12) -> 273 (f24) -> 296 (f36); coupled to the wing-beat / slight undulation",
+        "apparent_size": "roughly constant (no clear trend) - bbox width 19-36 px, height 8-34 px depending on wing phase; wings-up (tall) bbox ~25 x 33 px at frames 0, 23-26; wings-level/flat bbox ~30 x 9 px at frames 5, 31-32",
+        "max_bbox_width_px_fully_visible": 36,
+        "max_bbox_height_px": 34,
+        "min_bbox_height_px": 8
+      }
+    },
+    {
+      "name": "island",
+      "description": "large white/snow-covered dome-shaped hill (rock island) in the background centre, rocky brown tail on its right side",
+      "moves": false,
+      "visible_frames": [0, 74],
+      "image_extents_px_frame74": {"x_left": 230, "x_right_at_base": 812, "y_top": 380, "y_base": 505, "width_px": 582, "height_px": 125, "summit_x": 380}
+    },
+    {
+      "name": "beach",
+      "description": "flat pale sand strip at the foot of the island, spanning from the left image edge",
+      "moves": false,
+      "visible_frames": [0, 74],
+      "image_extents_px": {"x_left": 0, "x_right": 870, "y_top": 472, "y_bottom": 530}
+    },
+    {
+      "name": "water",
+      "description": "animated sea/lake surface in foreground, reflecting the island (pinkish reflections)",
+      "moves": "surface animates (waves), no object motion",
+      "visible_frames": [0, 74],
+      "image_extents_px": {"y_top": 528, "y_bottom": 959, "x": [0, 959]}
+    },
+    {
+      "name": "sky",
+      "description": "cloudy blue/white sky (static background image)",
+      "moves": false,
+      "image_extents_px": {"y_top": 0, "y_bottom": 500}
+    }
+  ],
+  "events": [
+    {"event": "bird already flying at start", "frame": 0, "t": 0.0},
+    {"event": "bird wings up (tall pose)", "frames": [0, 1, 9, 10, 23, 24, 25, 26], "note": "approx wing-beat period ~13-14 frames (0.52-0.56 s); wings flat/thin pose at frames 5, 17-18, 31-32"},
+    {"event": "bird starts leaving the right image edge", "frame": 37, "t": 1.48},
+    {"event": "bird last visible (sliver at x 956-959)", "frame": 39, "t": 1.56},
+    {"event": "bird gone", "frame": 40, "t": 1.60}
+  ],
+  "notes_file": "notes.md"
+}

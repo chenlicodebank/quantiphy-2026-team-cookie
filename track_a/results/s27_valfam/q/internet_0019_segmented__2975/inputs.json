@@ -1,0 +1,18 @@
+{
+ "video": "internet_0019_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "A2MC",
+ "fps": 30.0003,
+ "frames": 40,
+ "duration_s": 1.3333,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2975,
+  "question": "What is the initial distance between the passer and the receiver in meters?",
+  "prior": "gravity acc = 9.8m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

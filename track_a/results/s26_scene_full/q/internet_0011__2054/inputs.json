@@ -1,0 +1,18 @@
+{
+ "video": "internet_0011.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 20.428571,
+ "frames": 107,
+ "duration_s": 5.2378,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2054,
+  "question": "What is the average moving speed of the player in white in m/s?",
+  "prior": "court width= 4.88m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 25.0
+ }
+}

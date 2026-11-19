@@ -1,0 +1,210 @@
+{
+ "video": "simulation_0245.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 30.0,
+ "frames": 75,
+ "width": 1080,
+ "height": 1920,
+ "time_convention": "t = frame / fps, frame 0 at t=0",
+ "units": "pixels (image x right, y down) and seconds; no metric scale assumed",
+ "camera": {
+  "static": true,
+  "evidence": "wall/floor brightness profiles identical across frames away from the animals and their shadows (mean abs diff of empty wall < 0.6 grey levels); no pan, zoom or shake; per-frame background shift = 0",
+  "view": "side view, camera roughly level, animals walk left->right parallel to the image plane (2D scene)"
+ },
+ "objects": {
+  "creature": {
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "fully_in_frame": [
+    0,
+    74
+   ],
+   "description": "large fantasy quadruped (horse/antelope-like body, orange-brown coat with darker stripes, pale/white chest ruff, very long curved feathered/ribbed horn sweeping back over the body, long thin tail with tufted tip, dark hooves, pale grey snout). Walks right.",
+   "track": "tracks/creature.csv",
+   "bbox_w_px": {
+    "median": 474.0,
+    "min": 443.0,
+    "max": 514.0
+   },
+   "bbox_h_px (horn tip to hooves)": {
+    "median": 427.0,
+    "min": 422.0,
+    "max": 432.0
+   },
+   "torso_len_px (rump to chest, rows 1330-1400)": {
+    "median": 266.0,
+    "min": 244.5,
+    "max": 276.5
+   },
+   "mask_len_major_px": {
+    "median": 555.6,
+    "min": 532.9,
+    "max": 572.8
+   },
+   "mask_width_minor_px": {
+    "median": 452.1,
+    "min": 407.6,
+    "max": 497.0
+   },
+   "bbox_top_y": {
+    "median": 1123.0,
+    "min": 1120.0,
+    "max": 1128.0
+   },
+   "bbox_bottom_y (hooves)": {
+    "median": 1549.0,
+    "min": 1549.0,
+    "max": 1551.0
+   },
+   "net_dx_px_frame0_to_74": {
+    "centroid": 478.4,
+    "torso_cx": 473.6,
+    "bbox_x0 (tail tip)": 474.0
+   },
+   "per_frame_dx_torso_cx": {
+    "median": 6.3,
+    "min": -1.7,
+    "max": 13.4
+   }
+  },
+  "rabbit": {
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "fully_in_frame": [
+    0,
+    64
+   ],
+   "description": "small orange rabbit on the floor just in front (right) of the creature's front legs, hopping right; partly leaves the frame at the right edge from frame 65",
+   "track": "tracks/rabbit.csv",
+   "bbox_w_px_frames0-64": {
+    "median": 76.0,
+    "min": 68.0,
+    "max": 98.0
+   },
+   "bbox_h_px_frames0-64": {
+    "median": 62.0,
+    "min": 52.0,
+    "max": 72.0
+   },
+   "mask_len_major_px_frames0-64": {
+    "median": 78.7,
+    "min": 69.4,
+    "max": 94.7
+   },
+   "mask_width_minor_px_frames0-64": {
+    "median": 62.0,
+    "min": 51.4,
+    "max": 81.3
+   },
+   "net_dx_centroid_px_frame0_to_64": 431.2,
+   "per_frame_dx_centroid_frames0-64": {
+    "median": 6.7,
+    "min": 3.4,
+    "max": 9.8
+   }
+  },
+  "wall_backdrop": {
+   "moves": false,
+   "description": "seamless olive-grey studio backdrop with a soft spotlight glow, featureless"
+  },
+  "floor": {
+   "moves": false,
+   "description": "studio floor, brightest spotlit band",
+   "wall_floor_crease_y": 1483,
+   "brightest_floor_row_y": 1564,
+   "hoof_contact_line_y": "~1547-1551 (creature bbox bottom); rabbit feet ~1547-1551"
+  },
+  "shadows": {
+   "moves": true,
+   "description": "soft cast shadows of both animals on the floor (y ~1480-1560), travelling with them; excluded from masks"
+  }
+ },
+ "perspective": {
+  "ground_plane": "floor seen at a shallow angle; crease y~1483 acts as horizon-like line",
+  "apparent_size_change": "none measurable: creature bbox_h {'median': 427.0, 'min': 422.0, 'max': 432.0} and torso_len {'median': 266.0, 'min': 244.5, 'max': 276.5} stay constant across the clip; rabbit size constant -> both move parallel to the image plane at fixed depth"
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "both animals already walking/hopping right at the first frame (no start of motion in clip)"
+  },
+  {
+   "frame": 2,
+   "t": 0.0667,
+   "what": "rabbit hop cycle: tall/stretched pose (bbox top highest)"
+  },
+  {
+   "frame": 6,
+   "t": 0.2,
+   "what": "rabbit hop cycle: crouched pose (bbox top lowest)"
+  },
+  {
+   "frame": 14,
+   "t": 0.4667,
+   "what": "rabbit hop cycle: tall/stretched pose (bbox top highest)"
+  },
+  {
+   "frame": 19,
+   "t": 0.6333,
+   "what": "rabbit hop cycle: crouched pose (bbox top lowest)"
+  },
+  {
+   "frame": 27,
+   "t": 0.9,
+   "what": "rabbit hop cycle: tall/stretched pose (bbox top highest)"
+  },
+  {
+   "frame": 32,
+   "t": 1.0667,
+   "what": "rabbit hop cycle: crouched pose (bbox top lowest)"
+  },
+  {
+   "frame": 40,
+   "t": 1.3333,
+   "what": "rabbit hop cycle: tall/stretched pose (bbox top highest)"
+  },
+  {
+   "frame": 45,
+   "t": 1.5,
+   "what": "rabbit hop cycle: crouched pose (bbox top lowest)"
+  },
+  {
+   "frame": 52,
+   "t": 1.7333,
+   "what": "rabbit hop cycle: tall/stretched pose (bbox top highest)"
+  },
+  {
+   "frame": 54,
+   "t": 1.8,
+   "what": "rabbit touches the creature's front hoof (masks merged, frames 54-56, split by erosion); no real contact event visible - overlap in the image only"
+  },
+  {
+   "frame": 58,
+   "t": 1.9333,
+   "what": "rabbit hop cycle: crouched pose (bbox top lowest)"
+  },
+  {
+   "frame": 65,
+   "t": 2.1667,
+   "what": "rabbit mask first touches right image edge (x=1079); rabbit partially out of frame from here to the end"
+  },
+  {
+   "frame": 74,
+   "t": 2.4667,
+   "what": "both still moving at the last frame (no end of motion in clip)"
+  }
+ ],
+ "reference_points": {
+  "creature": "cx_centroid,cy_centroid = mask centroid (best stand-in for rig origin/pelvis horizontally; centroid y ~1320 is mid-trunk). torso_cx = centre of trunk run (rump..chest); cx_bbox = bbox centre (biased by horn/tail/snout).",
+  "rabbit": "cx_centroid,cy_centroid = mask centroid (frames 65-74 biased left because part is out of frame)"
+ }
+}

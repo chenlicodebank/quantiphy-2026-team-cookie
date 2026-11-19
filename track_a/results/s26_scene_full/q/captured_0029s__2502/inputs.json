@@ -1,0 +1,18 @@
+{
+ "video": "captured_0029s.mp4",
+ "video_source": "lab",
+ "video_type": "S3SS",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2502,
+  "question": "What is the distance travelled by the tennis ball when it hits the whiteboard in cm?",
+  "prior": "diameter of the tennis ball = 6.7cm",
+  "depth_info": "t=1.00s, distance_ball_camera=0.901s\nt=1.24s (hit whiteboard), distance_ball_camera=1.1440m\nt=1.6s, distance_ball_camera=1.0270m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

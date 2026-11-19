@@ -1,0 +1,18 @@
+{
+ "video": "captured_0015s.mp4",
+ "video_source": "lab",
+ "video_type": "A2MS",
+ "fps": 24.0,
+ "frames": 73,
+ "duration_s": 3.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2271,
+  "question": "What is the height of the person in cm?",
+  "prior": "Gravity acc = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

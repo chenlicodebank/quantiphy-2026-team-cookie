@@ -1,0 +1,18 @@
+{
+ "video": "captured_0035bs.mp4",
+ "video_source": "lab",
+ "video_type": "S3MS",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2649,
+  "question": "What is the velocity of the baskteball at 0.9s in cm/s?",
+  "prior": "diameter of the basketball = 23.2 cm",
+  "depth_info": "t=0.9s, distance_soccer_ball_camera = 2.4770m\nt=0.9s, distance_basketball_camera = 2.7777m\nt=1.4s, distance_soccer_ball_camera = 2.6020 m\nt=1.4s, distance_soccer_ball_camera = 2.3730 m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "captured_0034b.mp4",
+ "video_source": "lab",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2592,
+  "question": "What is the velocity of the right tennis ball at 1.2s in cm/s?",
+  "prior": "diameter of the tennis ball = 6.7cm",
+  "depth_info": "t=1.2s, distance_right_tennis_ball_camera = 0.7760m\nt=1.2s, distance_left_tennis_ball_camera = 0.7060m\ndistance_pencil_bag_camera = 1.0500m\ndistance_soccer_ball_camera = 0.8940m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

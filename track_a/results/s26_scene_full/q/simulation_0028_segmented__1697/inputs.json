@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0028_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S3MX",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "question": {
+  "id": 1697,
+  "question": "What is the height of the rock in meters?",
+  "prior": "length of the eagle = 0.8m",
+  "depth_info": "t=1s, distance_eagle_camera = 100.1405m\nt=2s, distance_eagle_camera = 99.5206m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

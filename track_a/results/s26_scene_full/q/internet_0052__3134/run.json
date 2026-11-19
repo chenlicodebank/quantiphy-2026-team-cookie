@@ -1,0 +1,68 @@
+{
+ "wall_s": 140,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 20,
+  "duration_ms": 118922,
+  "total_cost_usd": 0.5300345999999999,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 34,
+  "cache_creation_input_tokens": 32052,
+  "cache_read_input_tokens": 484813,
+  "output_tokens": 8826,
+  "output_tokens_details": {
+   "thinking_tokens": 3213
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 32052,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 635,
+    "cache_read_input_tokens": 40057,
+    "cache_creation_input_tokens": 1889,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1889
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "b",
+ "audit": {
+  "tool_calls": 19,
+  "flags": [
+   {
+    "tool": "Bash",
+    "paths": [
+     "/tmp;"
+    ],
+    "words": [],
+    "input": "{\"command\": \"cd /tmp; P=~/miniforge3/envs/ml/bin/python; S=/private/tmp/qp_blind/scene_full_b/internet_0052/q_3134/profile.py; $P $S 20 870 930 2>/dev/null; $P $S 8 1280 1340 2>/dev/null; $P $S 26 950 1010 2>/dev/null\"}"
+   }
+  ]
+ },
+ "video": "internet_0052",
+ "ids": [
+  3134
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_b/internet_0052__q3134.jsonl"
+}

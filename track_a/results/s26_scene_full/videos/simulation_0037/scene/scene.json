@@ -1,0 +1,137 @@
+{
+ "video": "simulation_0037.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "size_px": [
+  1080,
+  1080
+ ],
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of rock block and far dunes vs frame 0: max shift < 0.02 px over all 72 frames",
+  "horizon_y_px": 678,
+  "horizon_note": "far edge of sea meets dune bases at y~676-680, nearly level across image; approximate horizon (true horizon hidden by dunes, may be a few px higher)",
+  "principal_point_assumed": [
+   540,
+   540
+  ]
+ },
+ "objects": [
+  {
+   "name": "human",
+   "description": "single adult walking left-to-right (towards image right) along the wet sand strip at the water edge; white/pale T-shirt, grey jeans, light shoes, blurred/pixelated face",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded_frames": [],
+   "track": "tracks/human.csv",
+   "reference_point": "pelvis estimate (pelvis_x = mask centroid of the hip band, pelvis_y = top + 0.47*height)",
+   "pelvis_start_px": [
+    798.78,
+    713.73
+   ],
+   "pelvis_end_px": [
+    920.37,
+    721.73
+   ],
+   "net_displacement_px": [
+    121.59000000000003,
+    8.0
+   ],
+   "pixel_path_length_px": 132.33109112698202,
+   "mean_px_per_frame_x": 1.712535211267606,
+   "height_px": {
+    "min": 54.0,
+    "max": 62.0,
+    "median": 57.0,
+    "first10_mean": 57.5,
+    "last10_mean": 57.1
+   },
+   "bbox_width_px (stride, along motion)": {
+    "min": 14.0,
+    "max": 35.0,
+    "median": 24.0,
+    "first10_mean": 26.4,
+    "last10_mean": 21.1
+   },
+   "foot_y_px": {
+    "frame0": 744.0,
+    "frame71": 752.0
+   },
+   "apparent_size_change": "standing-height in pixels ~constant (58-59 px early, ~56-57 px late, within +-2 px noise); foot line drifts down 744->752 px, i.e. walk is nearly parallel to the image plane, maybe very slightly towards the camera"
+  },
+  {
+   "name": "pale_rock_block",
+   "description": "large pale cream rock/sand block with flat top and vertical brown striated face, left half of image; human walks to its right, never touches it",
+   "moves": false,
+   "bbox_px": [
+    15,
+    595,
+    715,
+    735
+   ],
+   "length_px": 700,
+   "height_px_at_left_end": 140,
+   "notes": "top at y~595 (x~100-200), slopes down to the right, ends at the dark vertical face near x 700-715, y 715-735; left vertical face x 15-30, y 655-705"
+  },
+  {
+   "name": "sand_strip_beach",
+   "description": "flat pale pink-beige sand bar in front of the rock, with a white wet edge where the human walks",
+   "moves": false,
+   "extent_px": "y ~705-775 at left, narrowing to a strip y ~740-775 under the human; runs across the full width"
+  },
+  {
+   "name": "far_dunes",
+   "description": "ochre sand dunes/hills on the horizon behind the sea",
+   "moves": false,
+   "bbox_px": [
+    0,
+    580,
+    1080,
+    680
+   ]
+  },
+  {
+   "name": "sea_background",
+   "description": "water between the sand strip and the dunes, y ~678-740",
+   "moves": "surface ripples only"
+  },
+  {
+   "name": "sea_foreground",
+   "description": "water in the lower half of the frame (y > ~780) with rippling reflections",
+   "moves": "surface ripples only"
+  },
+  {
+   "name": "sky_clouds",
+   "description": "sky with clouds, y < ~580",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "human walking throughout; motion starts before frame 0 and continues after frame 71",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "gait: body x speeds up/slows slightly each step (pelvis x ~1.4-2.5 px/frame); see csv",
+   "frame": null
+  },
+  {
+   "event": "no contacts, impacts or direction changes; direction constant (+x)",
+   "frame": null
+  }
+ ],
+ "files": {
+  "tracks": [
+   "tracks/human.csv"
+  ],
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

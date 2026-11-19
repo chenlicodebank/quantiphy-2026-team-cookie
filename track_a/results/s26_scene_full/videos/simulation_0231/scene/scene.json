@@ -1,0 +1,191 @@
+{
+ "video": "simulation_0231.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "duration_s": 2.0833,
+ "size_px": [
+  1920,
+  1080
+ ],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels (x right, y down, full-resolution image coordinates) and seconds; no metric scale",
+ "camera": {
+  "motion": "static (mean abs grey difference of the ceiling region between frame 0 and 49 = 0.6 grey levels; no pan, no shake)",
+  "view": "frontal view of a classroom front wall; the wall/blackboard plane is parallel to the image plane (board edges horizontal/vertical). Both moving objects move parallel to this wall, so one px->metre scale applies (2D video)."
+ },
+ "objects": {
+  "cat": {
+   "description": "black-and-white (tuxedo) cat, black body, white paws, tail raised; walks left->right along the top of the teacher's desk",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occlusion": "none (whole cat visible every frame; tail tip over dark board is low contrast in frames ~19-30)",
+   "track_file": "tracks/cat.csv",
+   "reference_point_recommended": "torso_cx (horizontal centre of torso, no tail/legs) with cy_dark (centroid of the near-black body pixels) as vertical; bbox centre and mask centroid also given",
+   "path": "torso_cx 269.5 (f0) -> 703.0 (f49), i.e. 433.5 px in 49 frames (~8.85 px/frame mean), nearly horizontal; feet stay at y ~741 (desk top); vertical body bob of +-3 px with the gait",
+   "sizes_px": {
+    "torso_length_median": 146,
+    "torso_length_range": [
+     140,
+     151
+    ],
+    "bbox_width_incl_tail_median": 185,
+    "bbox_width_range": [
+     178,
+     212
+    ],
+    "bbox_height_incl_raised_tail_median": 140,
+    "bbox_height_range": [
+     123,
+     146
+    ],
+    "height_feet_to_head_top_median": 96,
+    "height_range": [
+     90,
+     104
+    ],
+    "note": "bbox includes the raised tail (tail tip is the top of the bbox, at y ~597-620); height_no_tail = feet to top of head/ears; frame 0 head-top/bbox slightly enlarged by a faint rendering ghost in front of the head (x~330-360)"
+   }
+  },
+  "paper_airplane": {
+   "description": "white paper airplane (pointed nose, folded wing/keel at rear), seen side-on; flies left->right in front of the wall, rising, levelling at the top of the blackboard, then descending",
+   "moves": true,
+   "visible_frames": [
+    7,
+    42
+   ],
+   "partially_visible": "frames 7-9 clipped by left image edge; 39-42 clipped by right edge; 7-12 and 34-42 over the grey wall where it is faint (dark grey, nose tip hard to see)",
+   "track_file": "tracks/paper_airplane.csv",
+   "reference_point_recommended": "cx_best, cy_best (bbox centre where fully visible; centre reconstructed from the visible end +- half the full length otherwise; see best_method)",
+   "sizes_px": {
+    "length_along_axis": 141,
+    "length_range_board_frames": [
+     135,
+     146
+    ],
+    "height_across_axis_strict_mask": 12.5,
+    "note": "length is the full nose-to-tail length on the board (frames 14-33, PCA axis); height (wing/keel thickness seen from side) ~12-13 px with the strict threshold of track.py first pass, 15-23 px with the hysteresis mask (includes anti-aliasing halo)"
+   },
+   "path_summary": {
+    "entry": "frame 7 at left edge, centre est. (-28, 726)",
+    "apex": "frames 23-24, centre y = 341.5-342.5 px (x ~1028-1098)",
+    "exit": "frame 42 last visible pixels at right edge; centre est. (1986, 674); not visible from frame 43",
+    "horizontal_step_px_per_frame": "~64 (f13-14) rising to ~74 (f18-21), then decreasing: 69 (f23), 66 (f25), 60 (f28), 54 (f31), 47 (f33), 42 (f36-37), 39.5 (f37-38)",
+    "pitch": "axis angle (image, + = nose down) goes from -15 deg (f7) through 0 deg at f23-24 to +17 deg (f38); nose follows the flight path"
+   }
+  },
+  "blackboard": {
+   "description": "green chalkboard with wooden (orange-brown) frame on the front wall, centre of image",
+   "moves": false,
+   "green_surface_px": {
+    "x0": 342,
+    "x1": 1670,
+    "y0": 315,
+    "y1": 716,
+    "width": 1328,
+    "height": 401
+   },
+   "outer_frame_px": {
+    "x0": 322,
+    "x1": 1692,
+    "y0": 296,
+    "y1": 737,
+    "width": 1370,
+    "height": 441
+   },
+   "chalk_ledge": "bottom frame/ledge y ~716-737"
+  },
+  "wall_clock": {
+   "description": "round analog wall clock, white face, dark rim, upper right of board",
+   "moves": false,
+   "centre_px": [
+    1758,
+    292
+   ],
+   "diameter_px_horizontal": 108,
+   "diameter_px_vertical": 113
+  },
+  "teacher_desk": {
+   "description": "wooden teacher's desk at left, in front of the board's lower-left part; the cat walks on its top",
+   "moves": false,
+   "top_surface_px": {
+    "x0": 72,
+    "x1": 797,
+    "rear_edge_y": 735,
+    "front_edge_y": 766,
+    "width_front_edge": 725
+   },
+   "front_panel_px": {
+    "x0": 95,
+    "x1": 790,
+    "y0": 766,
+    "y1": 1005
+   },
+   "height_px_top_to_floor": "~240 (front edge 766 to floor contact ~1005)"
+  },
+  "student_chairs_and_desks": {
+   "description": "foreground dark-red/brown student chairs and small wooden student desks along the bottom of the frame (left x 0-260, centre x 660-925, right x 1300-1620, far right x 1875-1920), cut off by the bottom edge; one empty wooden chair against the wall at right (x 1600-1790, y 737-1010)",
+   "moves": false
+  },
+  "ceiling_lights": {
+   "description": "four rectangular ceiling light panels at top (y ~55-90), x ~40-230, 645-800, 1230-1390, 1800-1920",
+   "moves": false
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "cat already walking (mid-stride) on desk top; continues the whole clip, no start/stop"
+  },
+  {
+   "frame": 7,
+   "t": 0.2917,
+   "event": "paper airplane enters at left image edge (y ~713), climbing"
+  },
+  {
+   "frame": 10,
+   "t": 0.4167,
+   "event": "paper airplane fully inside the image (over the grey wall)"
+  },
+  {
+   "frame": 11,
+   "t": 0.4583,
+   "event": "airplane passes above the cat's raised tail (~10-30 px gap, no contact)"
+  },
+  {
+   "frame": 13,
+   "t": 0.5417,
+   "event": "airplane crosses the board's left frame onto the green board"
+  },
+  {
+   "frame": 23,
+   "t": 0.9583,
+   "event": "airplane apex (vertical velocity sign change; centre y min ~342 at frames 23-24), axis horizontal"
+  },
+  {
+   "frame": 33,
+   "t": 1.375,
+   "event": "airplane nose reaches the board's right frame (x ~1690); fully past the board at frame 36"
+  },
+  {
+   "frame": 39,
+   "t": 1.625,
+   "event": "airplane nose leaves the right image edge"
+  },
+  {
+   "frame": 42,
+   "t": 1.75,
+   "event": "last airplane pixels at right edge; gone from frame 43"
+  },
+  {
+   "frame": 49,
+   "t": 2.0417,
+   "event": "clip ends, cat still walking (torso centre x ~703)"
+  }
+ ]
+}

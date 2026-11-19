@@ -1,0 +1,18 @@
+{
+ "video": "captured_0024x.mp4",
+ "video_source": "lab",
+ "video_type": "A3SX",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2455,
+  "question": "What is the velocity of the book at 1.2s in cm/s?",
+  "prior": "t=1.0, book acceleration = 2.8m/s^2",
+  "depth_info": "t=1.0s, distance_book_camera=1.0685m\nt=1.2s, distance_book_camera=0.9770m\ndistance_table_left_camera=1.035m\ndistance_table_right_camera=0.5730m\ndistance_slope_far_camera=1.2430m\ndistance_slope_near_camera=0.9900m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

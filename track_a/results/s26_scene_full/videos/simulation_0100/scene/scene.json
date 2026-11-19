@@ -1,0 +1,79 @@
+{
+  "video": "simulation_0100.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 58,
+  "duration_s": 2.4167,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels and seconds; image x to the right, y downward",
+  "camera": {
+    "motion": "static (clean background identical in frames 0 and 57 where uncovered; horizon and water boundary fixed)",
+    "view": "side view; boat and shark move horizontally in planes facing the camera",
+    "horizon_y_px": 567,
+    "underwater_band_top_y_px": 673,
+    "note": "Upper part: grey sky (y<567) and grey-blue sea surface (567-672). Lower part y>=673: flat blue underwater view (a separate panel/cut-away). The boat and the shark may be at different depths/scales - no perspective cue links them."
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red fishing boat, hull number 'AH805' in yellow, white wheelhouse with two windows, mast with rigging, rail aft; upper half of image",
+      "moves": true,
+      "visible_frames": "0-57 (stern cut by left image edge in frames 0-20; mast top cut by top image edge in all frames)",
+      "fully_visible_length_frames": "21-57",
+      "track": "tracks/boat.csv",
+      "reference_point": "estimated origin = centre of hull bbox: x = midpoint stern..bow, y = 498.5 (hull top 357 .. keel 640). Origin not observable; x-mid of the full boat equals x-mid of the hull.",
+      "motion": "stationary frames 0-1 (identical), then pure horizontal translation to the right, +17.88 px/frame (std 0.04) from frame 1 to 57; no vertical motion (<0.5 px)",
+      "size_px_at_frame_57": {
+        "length_stern_to_bow": 859,
+        "bbox_x": [665, 1523],
+        "hull_top_at_bow_y": 357,
+        "keel_and_rudder_bottom_y": 640,
+        "hull_height_bow_top_to_keel": 283,
+        "wheelhouse_roof_top_y": 237,
+        "wheelhouse_x": [1077, 1253],
+        "mast_x": 1150,
+        "mast_top": "above image (y<0); total height NOT measurable",
+        "visible_height_y0_to_keel": 641,
+        "reflection_below_keel_to_y": 672
+      }
+    },
+    {
+      "name": "shark",
+      "description": "grey/white shark, lower (underwater) half of image, swimming leftward, head pointing left",
+      "moves": true,
+      "visible_frames": "0-57 (always fully visible, no occlusion)",
+      "track": "tracks/shark.csv",
+      "reference_point": "mask centroid (visible centre); bbox centre also given",
+      "motion": "stationary frames 0-1, then horizontal translation to the left, -10.73 px/frame mean (per-frame centroid noise ~0.4 px), y constant 905.5",
+      "size_px": {
+        "length_snout_to_tail_tip": 276,
+        "length_range_over_frames": [270, 278],
+        "height_dorsal_fin_tip_to_pectoral_fin_tip": 106,
+        "body_height_without_fins_approx": 60,
+        "bbox_frame0": [1520, 852, 1797, 957],
+        "bbox_frame57": [926, 852, 1195, 957]
+      }
+    },
+    {
+      "name": "sea_surface_horizon",
+      "description": "horizon line between grey sky and sea surface",
+      "moves": false,
+      "image_y_px": 567
+    },
+    {
+      "name": "underwater_panel",
+      "description": "uniform blue underwater region, y 673-1079, full width",
+      "moves": false,
+      "y_range_px": [673, 1079]
+    }
+  ],
+  "events": [
+    {"event": "both boat and shark start moving", "frame": 1, "t": 0.0417, "note": "frames 0 and 1 identical; first displacement between frame 1 and 2"},
+    {"event": "boat stern enters image (whole boat visible)", "frame": 21, "t": 0.875},
+    {"event": "boat bow tip (bbox x1) reaches shark centroid x", "frame": 40, "t": 1.6667, "note": "crossing at ~frame 39.96; mean hull bow edge (rows 400-600, bow_edge_x_subpix) crosses at ~frame 41.9"},
+    {"event": "boat reference point (hull centre) and shark centroid have equal x (vertically aligned)", "frame": 55, "t": 2.2917, "note": "crossing at ~frame 54.95"},
+    {"event": "end of clip, both still moving", "frame": 57, "t": 2.375}
+  ]
+}

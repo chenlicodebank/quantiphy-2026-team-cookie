@@ -1,0 +1,76 @@
+{
+  "video": "simulation_0217.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24 ; frame 0 = t 0 ; last frame 49 = 2.0417 s",
+  "units": "pixels (image coords, x right, y down) and seconds; no metric scale",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the sofa/right-floor region vs frame 0: |shift| < 0.04 px in all 50 frames",
+    "view": "orthographic-like top-down (bird's-eye) view of a living room; motion is in the floor plane, which faces the camera. Treat as 2D: one px->m scale for the floor plane. Objects on the floor (both animals) are at about the same depth; tall props (lamp top, console top) are slightly closer to the camera.",
+    "lighting_note": "sun patches / window-bar shadows on the floor shift and change brightness during the clip (not camera motion)"
+  },
+  "moving_objects": {
+    "black_animal": {
+      "what": "small all-black quadruped (cat or small dog, long thin tail), seen from above",
+      "tells_apart": "pure black silhouette; upper path at y ~360 px, just below the bench/console; walks LEFT->RIGHT (+x)",
+      "moves": true,
+      "visible_frames": "0-49 (all), never occluded",
+      "track": "tracks/black_animal.csv",
+      "reference_point": "ref_x/ref_y = whole-mask centroid (includes tail). bbox_x1 = nose/front edge (cleanest feature)",
+      "extents_px": {
+        "length_incl_tail_mean": 190, "length_incl_tail_range": [184, 200],
+        "body_length_no_tail_typical": 152, "body_length_no_tail_range": [151, 180],
+        "width_across_body": 38, "width_range_incl_raised_tail": [37, 53],
+        "note": "body length (no tail) is noisy because the morphological tail cut sometimes keeps the tail base; 152 px is the most frequent value"
+      },
+      "path_px": {"start_ref": [563.9, 359.2], "end_ref": [1098.8, 358.5], "net_dx": 535, "net_dy": -1,
+                  "front_edge_x_frame0": 647, "front_edge_x_frame49": 1185},
+      "motion_summary": "already moving at frame 0; straight horizontal line, near-constant ~11 px/frame (front edge: 538 px over 49 frames = 10.98 px/frame); no stop, no turn"
+    },
+    "tan_animal": {
+      "what": "larger tan/brindle (orange-brown striped) quadruped (cat or dog) with tail raised, seen from above; its head renders as an untextured flat grey-brown patch at the front (left) end",
+      "tells_apart": "orange-brown fur; lower path at y ~447 px, above the sofa; walks RIGHT->LEFT (-x)",
+      "moves": true,
+      "visible_frames": "0-49 (all), never occluded (passes just below the black animal around frame 32 without overlap)",
+      "track": "tracks/tan_animal.csv (fur + head patch)  and  tracks/tan_animal_fur_only.csv (fur only, cleaner mask)",
+      "reference_point": "ref_x/ref_y = torso centroid (mask morphologically opened with 21 px disk, removes tail and legs)",
+      "extents_px": {
+        "fur_plus_head_torso_length_typical": 265, "fur_plus_head_torso_length_range": [251, 300],
+        "fur_only_torso_length_typical": 238, "fur_only_torso_length_range": [214, 270],
+        "head_patch_extra_length": "~35-40 px in front of the fur (manual, frame 0: nose/patch edge x~1085, fur front x~1122, rump x~1347)",
+        "width_across_body_fur_only": 96, "width_range": [90, 105],
+        "length_incl_tail_frame0_bbox": "x 1092-1375 (284 px) with tail curled up to y 368",
+        "note": "tail swings (up / back), so bbox and full length including tail vary 230-340 px"
+      },
+      "path_px": {"start_ref": [1239.1, 450.1], "end_ref": [782.6, 450.1], "net_dx": -456, "net_dy": 0},
+      "motion_summary": "starts slowly (~2-5 px/frame over frames 0-6), speeds up to ~12-14 px/frame (frames ~15-36), slows from ~frame 37, nearly stopped by frame 47 (steps 1.9, 0.7, 3.3 px for 46-47, 47-48, 48-49). Per-frame steps are noisy (+/-3 px) due to gait and mask edges."
+    }
+  },
+  "static_objects_frame0_px": {
+    "bench": {"what": "orange-brown wooden slatted bench, top-left", "bbox": [295, 173, 583, 290], "length_x": 288, "width_y": 117, "method": "visual grid"},
+    "console_table": {"what": "long dark-wood low table/console along the top wall", "bbox_approx": [712, 168, 1265, 293], "length_x": 553, "width_y": 125, "method": "visual; right end hidden under lamp, uncertain +/-20"},
+    "vase": {"what": "white-and-blue round vase on the left end of the console", "bbox": [718, 201, 790, 273], "diameter": 72, "centre": [754, 237], "method": "threshold + visual"},
+    "lamp": {"what": "white pleated lampshade (seen from above) at the right end of the console", "bbox": [1116, 152, 1263, 299], "diameter": 148, "centre": [1190, 225], "method": "threshold"},
+    "easel_shelf": {"what": "light-wood A-frame / ladder shelf leaning on the top-right wall", "bbox_approx": [1347, 83, 1612, 220], "method": "visual"},
+    "round_fluffy_rug": {"what": "round white shaggy rug left of the sofa (partly under it)", "bbox_approx": [197, 388, 642, 875], "diameter_y": 487, "method": "visual"},
+    "sofa": {"what": "large cream curved (crescent) modular sofa, lower centre", "bbox_approx": [567, 518, 1447, 998], "length_x": 880, "depth_y": 480, "method": "visual"},
+    "pillows": {"left": {"bbox_approx": [628, 650, 855, 845]}, "right": {"bbox_approx": [1133, 715, 1380, 860]}, "what": "two light grey cushions on the sofa"},
+    "floor_room": {"what": "grey carpet floor bounded by white walls", "floor_left_edge_x": 158, "floor_top_edge_y": 122, "floor_right_edge_x": 1745, "bottom": "beyond frame"},
+    "sunlit_patches": {"what": "diagonal bright sun patches and window-bar shadows on the floor; shape/brightness changes over time"}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "both animals visible and moving; black_animal already at ~11 px/frame, tan_animal slow (~2-5 px/frame)"},
+    {"frame_range": [6, 15], "t_range": [0.25, 0.625], "what": "tan_animal speeding up to cruising ~12-14 px/frame"},
+    {"frame": 32, "t": 1.333, "what": "animals pass each other: ref x positions cross between frames 32 (black 920, tan 925) and 33 (black 931, tan 907); vertical gap between refs ~88 px; masks never touch (no contact)"},
+    {"frame_range": [37, 47], "t_range": [1.542, 1.958], "what": "tan_animal decelerating"},
+    {"frame": 47, "t": 1.958, "what": "tan_animal essentially stopped (ref x 781-783 over frames 46-49)"},
+    {"frame": 49, "t": 2.0417, "what": "end of clip; black_animal still walking right"}
+  ],
+  "files": {"tracks": ["tracks/black_animal.csv", "tracks/tan_animal.csv", "tracks/tan_animal_fur_only.csv"],
+            "notes": "notes.md", "scripts": "scripts/"}
+}

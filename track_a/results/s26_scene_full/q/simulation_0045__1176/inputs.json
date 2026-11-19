@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0045.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 33.0,
+ "frames": 99,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 766,
+ "question": {
+  "id": 1176,
+  "question": "What is the height of the telephone booth in meters?",
+  "prior": "speed of the bike = 4.87m/s",
+  "depth_info": "t=1s, distance_bike_camera = 12.1238m\nt=2s, distance_bike_camera = 16.9027m\nt=1s, distance_human_camera = 17.1691m\nt=2s, distance_human_camera = 18.3768m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 33.0
+ }
+}

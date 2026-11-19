@@ -1,0 +1,96 @@
+{
+ "video": "simulation_0274.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_of_frame": "t = frame / 24",
+ "camera": {
+  "motion": "static",
+  "view": "top-down (looking straight down at a flat featureless grey ground; light vignette)",
+  "bg_shift_px_max_abs": 0.29,
+  "note": "no perspective cues; motion is in the ground plane facing the camera -> single px scale"
+ },
+ "objects": [
+  {
+   "name": "raccoon",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never",
+   "description": "only animal: grey raccoon seen from above, ringed (banded) tail pointing left, light-grey face patch at right; walks left->right along y~729",
+   "track": "tracks/raccoon.csv",
+   "reference_point": "root_x, root_y (body centre, template-registered)",
+   "root_frame0_px": [
+    772.4,
+    729.7
+   ],
+   "root_frame71_px": [
+    2212.6,
+    729.1
+   ],
+   "extents_px": {
+    "nose_to_tail_tip_bbox_w_median": 296.0,
+    "bbox_w_range": [
+     282,
+     304
+    ],
+    "mask_len_main_axis_median": 296.0,
+    "head_body_len_tailbase_to_nose_approx": 189,
+    "tail_len_approx": 102,
+    "body_width_across_median_clean_frames": 62.0,
+    "body_bottom_edge_y": 758.0,
+    "height": "not visible (top-down view)"
+   },
+   "heading_deg_image": 0.0
+  },
+  {
+   "name": "raccoon_shadow",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "description": "dark (~60 grey) side-profile silhouette directly above (smaller y) the raccoon, cast shadow; moves rigidly with it. Contains a light-grey head patch (render artefact). Not an animal.",
+   "track": "tracks/raccoon_shadow.csv",
+   "extents_px": {
+    "bbox_w_median": 299.0,
+    "bbox_h_median": 58.0
+   }
+  },
+  {
+   "name": "ground",
+   "moves": false,
+   "description": "uniform light-grey floor filling the frame, no markings or features"
+  }
+ ],
+ "events": [
+  {
+   "event": "raccoon stationary (frames 0 and 1 nearly identical)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "event": "motion starts (first displacement between frames 1 and 2)",
+   "frame": 2,
+   "t": 0.0833
+  },
+  {
+   "event": "walks steadily right to end of clip, no direction change, still in view",
+   "frame": 71,
+   "t": 2.9583
+  }
+ ],
+ "motion_summary_px": {
+  "root_step_px_per_frame_frames2_71_mean": 20.58,
+  "root_step_std": 1.18,
+  "root_path_length_frames1_71": 1440.5,
+  "root_net_dx_frame0_71": 1440.2,
+  "direction": "+x (image right), dy ~ 0",
+  "gait_period_frames_approx": 15
+ }
+}

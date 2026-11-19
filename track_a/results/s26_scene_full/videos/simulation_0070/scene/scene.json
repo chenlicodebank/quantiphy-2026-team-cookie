@@ -1,0 +1,83 @@
+{
+  "video": "simulation_0070.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2160, 1080],
+  "units": "pixels and seconds; image x right, y down; t = frame / 24; angles in degrees counter-clockwise from image +x (right), i.e. 90 = image up",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of sidewalk regions vs frame 0: max shift 0.008 px over all 72 frames",
+    "view": "top-down (bird's-eye) view of a street intersection; no visible perspective (straight parallel curbs, identical repeated fixtures have identical pixel sizes on both sides), so one px-to-world scale for the whole ground plane",
+    "per_frame_background_shift_px": "0 for all frames"
+  },
+  "moving_objects": {
+    "car": {
+      "description": "peach / cream sedan seen from above, the only vehicle and the largest moving object",
+      "visible_frames": [0, 71],
+      "track_file": "tracks/car.csv",
+      "reference_point": "cx,cy = centroid of the tight body mask (paint + convex hull, shadow excluded); taken as the car's origin (Blender object origin at body centre). front_x/y and rear_x/y = bumper midpoints along the body axis",
+      "size_px": {"length_body_median": 220.1, "length_range": [218.0, 221.1], "width_body_median": 82.0, "width_range": [80.0, 83.2], "note": "length/width from PCA extents of the body mask (bumper to bumper, mirror to mirror ~ incl. 1-2 px blur); minAreaRect len/wid ~1 px smaller (217-219 x 79-81). With soft shadow included (car_with_shadow.csv) ~222 x 91."},
+      "motion": "stationary frames 0-1, then drives up (image -y) along the vertical road while turning right, ends heading right (+x) along the horizontal road. Centroid step is nearly constant (mean 6.83 px/frame frames 2-71, sd ~0.18), heading rotates from 89.8 deg (frame 1) to ~0 deg (frame 66+)",
+      "path_px": {"start_centroid_f0": [990.4, 851.5], "end_centroid_f71": [1371.8, 636.5], "path_length_f0_to_f71": 478.4, "net_displacement_f0_to_f71": 437.8}
+    },
+    "cyclist": {
+      "description": "person riding a bicycle, seen from above (thin dark figure: wheels in front and behind, rider shoulders/arms at middle), the small object moving straight up the left lane of the vertical road at x ~918",
+      "visible_frames": [0, 71],
+      "track_file": "tracks/cyclist.csv",
+      "reference_point": "cx,cy = centroid of the difference mask (rider + bicycle, includes faint shadow). Frames 0-2 flagged occluded=1: car's shadow touches the mask, cx biased ~+2-3 px",
+      "size_px": {"length_along_motion_median": 63.0, "length_range": [57.1, 68.0], "width_median": 21.1, "width_range": [20.0, 26.6], "note": "length oscillates 57-65 px with the pedalling; frames 0-2 widened by the car shadow"},
+      "motion": "stationary frames 0-1, from frame 2 moves straight up (direction 90 +- 2 deg) at an almost constant rate (mean 8.93 px/frame frames 2-71; per-frame centroid steps jitter 7.5-10.3 px because of the pedalling legs)",
+      "path_px": {"start_centroid_f1": [920.5, 828.6], "start_centroid_f3_clean": [918.6, 810.3], "end_centroid_f71": [917.2, 203.9], "path_length_f1_to_f71": 624.9, "net_displacement_f0_to_f71": 624.6}
+    }
+  },
+  "static_objects": {
+    "_note": "measured on the temporal-median background (frames/bg.png); bbox = [x0, y0, x1, y1] inclusive pixels; sizes axis-aligned (all are axis-aligned in the image) unless stated",
+    "road_vertical": {"description": "grey road running up-down", "x_range": [614, 1084], "width_px": 470, "note": "between the curbs of the left and right sidewalk blocks, +-5 px"},
+    "road_horizontal": {"description": "grey road running left-right", "y_range": [289, 756], "width_px": 467},
+    "sidewalk_top_left": {"bbox": [0, 0, 614, 289], "note": "beige block with rounded corner and darker curb"},
+    "sidewalk_top_right": {"bbox": [1084, 0, 2159, 288]},
+    "sidewalk_bottom_left": {"bbox": [0, 756, 614, 1079]},
+    "sidewalk_bottom_right": {"bbox": [1084, 756, 2159, 1079]},
+    "manhole_dark_square": {"description": "dark grey square grate/manhole with red-brown rim on top-right sidewalk", "bbox": [1235, 28, 1321, 117], "size_px": [87, 90], "centre": [1278.4, 71.6]},
+    "brown_square_top_left": {"description": "brown textured square (tree pit / planter) on top-left sidewalk", "bbox": [370, 183, 453, 263], "size_px": [84, 81], "centre": [412.0, 222.3]},
+    "brown_square_bottom_left": {"bbox": [370, 808, 453, 889], "size_px": [84, 82], "centre": [410.8, 849.2]},
+    "brown_square_bottom_right": {"bbox": [1178, 807, 1259, 885], "size_px": [82, 79], "centre": [1218.5, 845.6]},
+    "street_lamps": {"description": "eight identical lamp fixtures seen from above (two round grey heads ~13 px plus a round base joined by a thin arm); span ~55-75 px", "items": [
+      {"name": "lamp_TL", "bbox": [169, 186, 237, 242]},
+      {"name": "lamp_TR1", "bbox": [1396, 185, 1430, 242]},
+      {"name": "lamp_TR2", "bbox": [1705, 185, 1760, 242]},
+      {"name": "lamp_TR3", "bbox": [2015, 186, 2088, 242]},
+      {"name": "lamp_BL", "bbox": [169, 784, 237, 840]},
+      {"name": "lamp_BR1", "bbox": [1396, 785, 1431, 841]},
+      {"name": "lamp_BR2", "bbox": [1706, 784, 1760, 841]},
+      {"name": "lamp_BR3", "bbox": [2015, 785, 2089, 841]}]},
+    "corner_fixtures": {"description": "dark grey boxy fixtures (traffic-signal / utility box like) near each corner of the intersection", "items": [
+      {"name": "fixture_TL", "bbox": [516, 197, 573, 252], "size_px": [58, 56]},
+      {"name": "fixture_TR", "bbox": [1141, 201, 1191, 239], "size_px": [51, 39]},
+      {"name": "fixture_BL", "bbox": [510, 786, 577, 827], "size_px": [68, 42]},
+      {"name": "fixture_BR", "bbox": [1115, 801, 1146, 855], "size_px": [32, 55]}]},
+    "teal_round_object": {"description": "small teal round object (bollard / hydrant / bin) on bottom-right sidewalk", "bbox": [1332, 795, 1351, 813], "diameter_px": 19, "centre": [1340.8, 804.2]},
+    "white_ball": {"description": "white sphere lying on the horizontal road near the right edge; does not move", "centre": [2028.8, 432.4], "diameter_px": 19.3, "bright_core_bbox": [2020, 423, 2038, 441], "bbox_with_shadow": [2010, 423, 2039, 443]},
+    "rock_cluster": {"description": "cluster of 3 grey rocks on the horizontal road near the right edge, below the ball; does not move", "bbox": [2026, 596, 2093, 651], "size_px": [68, 56], "centre": [2062.0, 622.8]}
+  },
+  "events": [
+    {"event": "car and cyclist both stationary (frames 0 and 1 are identical)", "frame": 0, "t": 0.0},
+    {"event": "motion start of car and cyclist (first displacement is frame 1 -> 2)", "frame": 2, "t": 0.0833},
+    {"event": "car starts rotating right (heading 89.8 at f1, 89.1 at f3, 88.5 at f4, then ~1-2.5 deg/frame)", "frame": 3, "t": 0.125},
+    {"event": "car heading 45 deg (mid-turn)", "frame": 29, "t": 1.2083},
+    {"event": "car heading within 1 deg of horizontal (turn essentially finished)", "frame": 61, "t": 2.5417},
+    {"event": "car heading 0 deg (aligned with horizontal road), keeps driving right to the end", "frame": 66, "t": 2.75},
+    {"event": "car passes the cyclist's x without contact: closest approach in frames 0-2 (gap between car body left edge x~950 and cyclist right edge x~930 ~ 20 px); no collision, no contact in the clip", "frame": 0, "t": 0.0},
+    {"event": "clip ends, both still moving", "frame": 71, "t": 2.9583}
+  ],
+  "files": {
+    "tracks/car.csv": "car per frame (tight body mask)",
+    "tracks/car_with_shadow.csv": "car per frame from the loose difference mask (body + soft shadow), for reference only",
+    "tracks/cyclist.csv": "cyclist per frame",
+    "notes.md": "method, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0067.mp4",
+  "source": "simulation",
+  "scene": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2160, 1080],
+  "time_convention": "t = frame / 24; frame = round(t * 24)",
+  "units": "pixels (original 2160x1080 image coordinates, x right, y down) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static (phase correlation of a static region vs frame 0: |shift| < 0.01 px for all sampled frames)",
+    "duplicate_first_frame": "frames 0 and 1 are identical (mean abs diff 0.03 grey levels); every object is at the same place in frames 0 and 1, motion visible from frame 1->2",
+    "view": "elevated view looking down onto a four-way intersection (city street, sidewalks, traffic lights)",
+    "perspective": {
+      "vp_east_west_road_px": [2697, -43],
+      "vp_east_west_road_note": "intersection of curb lines (1377,241)-(2003,106), (1536,505)-(2064,256), (0,534)-(329,464), (1635,186)-(2158,73); spread of estimates +-10 px",
+      "vp_vertical_px": [1075, 2604],
+      "vp_vertical_note": "from the two traffic-light poles (356,442)-(473,794) and (1614,527)-(1701,192); rough (two lines only)",
+      "focal_px_estimate": 1100,
+      "focal_note": "f^2 = -(VP1-c).(VPvert-c) with principal point c=(1080,540) -> f ~ 1100 px (HFOV ~ 89 deg). Cross-check: the implied second ground VP (~(119,-47)) lies on the diagonal road's curbs (355,51)-(1016,318) and (1546,544)-(2159,792), which extend to (112,-47) and (85,-47). Treat as ~10% uncertain; prefer calibrating from given depths.",
+      "horizon_y_px": -47,
+      "horizon_note": "nearly horizontal, just above the top of the image (y ~ -47); camera pitched down ~28 deg",
+      "diagonal_road_vp_px_estimate": [110, -47]
+    }
+  },
+  "moving_objects": {
+    "van": {"desc": "large white cargo van (Chevy Express type), the biggest object; starts in the right foreground and drives away toward the upper-left road", "visible_frames": "0-71", "track": "tracks/van.csv", "notes": "bbox clipped by the bottom/right image edges in frames 0-14; never occluded"},
+    "taxi": {"desc": "yellow/orange taxi sedan with a roof sign; starts behind (above) the van, drives away then turns right toward the right-hand road, ends near the right traffic light", "visible_frames": "0-71", "track": "tracks/taxi.csv", "notes": "partly hidden by the van and by the cyclist in frames 0-14; occlusion flag also set 26-43 (van rear near its lower edge); pole/ped-signal of the right traffic light in front of its rear end in the last frames"},
+    "cyclist": {"desc": "man in a dark suit and jeans on a bicycle, starts in front of the taxi's front-left, rides toward the upper-left ahead of/left of the van, disappears behind the van (frames ~40-70, head/shoulders visible above its roof) and reappears at its rear right corner at frame 71", "visible_frames": "0-71 (partly occluded 0-15 and 36-71)", "track": "tracks/cyclist.csv", "notes": "reference point = top of the head; full rider+bike extent reliable only frames 16-35"},
+    "pedestrian": {"desc": "man in a white T-shirt and blue jeans walking on the right sidewalk, near the green trash bin, away from the camera (toward the upper right)", "visible_frames": "0-71", "track": "tracks/pedestrian.csv", "notes": "never occluded; walks slowly (~1-4 px/frame)"}
+  },
+  "static_objects": {
+    "purple_sedan": {"desc": "dark purple/navy classic sedan parked on the far side of the intersection, facing left", "bbox_px": [1253, 241, 1447, 334], "length_px_front_to_rear": 194, "height_px_roof_to_front_wheel_bottom": 93, "front_wheel_ground_px": [1330, 333], "rear_wheel_ground_px": [1415, 315], "moves": false},
+    "green_convertible": {"desc": "teal/green convertible in the left foreground, cut off by the left image edge", "bbox_px": [0, 675, 297, 864], "clipped": "left edge", "front_wheel_ground_px": [165, 850], "moves": false},
+    "traffic_light_left_foreground": {"desc": "big double traffic-light head on a pole in the left foreground, pedestrian signal (green walker) lower on the same pole", "heads_bbox_px": [270, 502, 551, 767], "ped_signal_bbox_px": [459, 805, 535, 896], "pole_top_px": [356, 416], "pole_base_px": [556, 1037]},
+    "traffic_light_left_far": {"desc": "traffic light with green lamp and a triangular pedestrian-crossing sign on top, on the upper-left sidewalk", "bbox_px": [178, 113, 302, 448], "pole_base_px": [313, 448]},
+    "traffic_light_center_far": {"desc": "traffic light with sign at the far corner (top centre)", "bbox_px": [1021, 65, 1075, 297], "pole_base_px": [1048, 294]},
+    "traffic_light_right": {"desc": "traffic light with triangular sign and red pedestrian signal on the right sidewalk corner", "bbox_px": [1625, 151, 1744, 529], "pole_base_px": [1617, 527]},
+    "trash_bin": {"desc": "green trash bin on the right sidewalk next to the pedestrian's start", "bbox_px": [1766, 383, 1804, 437]},
+    "brick_planter_right": {"desc": "red-brick tree grate / planter on the right sidewalk", "bbox_px": [1658, 459, 1868, 553]},
+    "brick_planter_left": {"desc": "red-brick planter at the left image edge (cut off)", "bbox_px": [0, 459, 76, 524]},
+    "brick_planter_far": {"desc": "red-brick planter at the far corner under the centre traffic light", "bbox_px": [994, 227, 1104, 254]},
+    "street_lamps": {"desc": "ornate black street lamps along the far and right sidewalks", "bboxes_px": [[1226, 113, 1264, 257], [1415, 95, 1458, 219], [1564, 78, 1604, 190], [1825, 205, 1906, 410], [1966, 160, 2063, 330], [2079, 124, 2155, 272]]},
+    "bench_or_sculpture": {"desc": "dark object (bench/sculpture) on the far right sidewalk", "bbox_px": [1885, 189, 1933, 240]},
+    "sidewalk_corners": {"desc": "curb corner points of the four sidewalks", "points_px": {"near_right": [1523, 508], "far_centre": [994, 313], "left": [356, 459], "bottom": [648, 961]}},
+    "roads": {"desc": "grey asphalt, no lane markings or crosswalk stripes visible; an east-west road (runs from the left edge to the upper right) crosses a diagonal road (upper-left to lower-right)"}
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "what": "first frame; frame 1 is an exact duplicate"},
+    {"frame": 2, "t": 0.083, "what": "all four movers show motion from frame 1 to 2 (van starts from near rest: steps 2,3.5,4 px/frame, increasing)"},
+    {"frame": "0-15", "t": "0-0.625", "what": "cyclist passes in front of the taxi's front-left (image overlap, no visible contact) and moves left of the van's front"},
+    {"frame": "~25-30", "t": "~1.0-1.25", "what": "van image step peaks (~19-20 px/frame) then decreases as it recedes"},
+    {"frame": "~36", "t": "~1.5", "what": "taxi image x stops decreasing and starts increasing: the taxi turns right toward the right-hand road (heading change)"},
+    {"frame": "~36-70", "t": "~1.5-2.92", "what": "cyclist progressively hidden behind the van (only head/shoulders visible ~48-70)"},
+    {"frame": 71, "t": 2.958, "what": "last frame; cyclist reappears beside the van's rear right corner; nobody has stopped"}
+  ],
+  "apparent_size_vs_time": "see notes.md table; van bbox width 794 px (f0, clipped) -> 533 (f30) -> 208 (f71); taxi bbox height 231 (f0) -> 112 (f71); pedestrian height ~103-116 px roughly constant; cyclist head-to-wheel height ~114 px (f18) -> ~98 (f36)"
+}

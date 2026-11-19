@@ -1,0 +1,201 @@
+{
+ "video": "simulation_0241.mp4",
+ "source": "simulation",
+ "scene_type": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "size_px": [
+  1920,
+  1080
+ ],
+ "time_of_frame_i": "t = i / 24",
+ "view": "top-down (bird's-eye) render of a house roof and a lawn; animals seen from above walking in the ground plane, which faces the camera",
+ "camera": {
+  "static": true,
+  "per_frame_shift_px": 0.0,
+  "evidence": "phase correlation of rows 0-700 between consecutive frames: |shift| <= 0.01 px for all 49 pairs"
+ },
+ "units": "pixels (x right, y down), seconds; no metric scale",
+ "objects": {
+  "brown_animal": {
+   "track": "tracks/brown.csv",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "looks": "red-brown quadruped (horse/cow-like) seen from above, white nose and hooves, head pointing right (+x); upper of the three animals, just below the house eave (y ~776)",
+   "motion": "walks right (+x) ~2.5 px/frame frames 0-48; at frame 49 it jumps back ~125 px to almost its frame-0 position (animation loop reset)",
+   "ref_start": [
+    749.6,
+    776.4
+   ],
+   "ref_end": [
+    874.1,
+    778.2
+   ],
+   "frames_used": [
+    0,
+    48
+   ],
+   "net_dx_px": 124.4,
+   "net_dy_px": 1.8,
+   "path_len_px_raw": 126.7,
+   "mean_dx_per_frame_px": 2.59,
+   "bbox_w_median": 144.0,
+   "bbox_w_range": [
+    141.0,
+    155.0
+   ],
+   "bbox_h_median": 38.0,
+   "bbox_h_range": [
+    34.0,
+    40.0
+   ],
+   "len_major_median": 143.9,
+   "width_minor_median": 38.3,
+   "body_bbox_w_median": 144.0
+  },
+  "white_animal": {
+   "track": "tracks/white.csv",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "looks": "large cream/white quadruped (cow/goat/llama-like) seen from above, dark head (grey disc at right end, white in frame 0), dark tail end at left; middle animal (y ~865)",
+   "motion": "walks right (+x) ~4.5 px/frame for the whole clip; y oscillates 860-868 px with gait",
+   "ref_start": [
+    974.7,
+    868.2
+   ],
+   "ref_end": [
+    1201.0,
+    860.9
+   ],
+   "frames_used": [
+    0,
+    49
+   ],
+   "net_dx_px": 226.3,
+   "net_dy_px": -7.3,
+   "path_len_px_raw": 228.1,
+   "mean_dx_per_frame_px": 4.62,
+   "bbox_w_median": 177.0,
+   "bbox_w_range": [
+    159.0,
+    190.0
+   ],
+   "bbox_h_median": 55.0,
+   "bbox_h_range": [
+    52.0,
+    65.0
+   ],
+   "len_major_median": 177.4,
+   "width_minor_median": 55.7,
+   "body_bbox_w_median": 165.0
+  },
+  "small_animal": {
+   "track": "tracks/small.csv",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "looks": "small tan/white animal (dog/cat/rabbit-sized, ~34x20 px), lowest of the three (y ~924)",
+   "motion": "walks/trots right (+x) ~4.7 px/frame for the whole clip, y constant",
+   "ref_start": [
+    1055.0,
+    923.6
+   ],
+   "ref_end": [
+    1279.6,
+    923.6
+   ],
+   "frames_used": [
+    0,
+    49
+   ],
+   "net_dx_px": 224.6,
+   "net_dy_px": 0.0,
+   "path_len_px_raw": 224.9,
+   "mean_dx_per_frame_px": 4.58,
+   "bbox_w_median": 35.5,
+   "bbox_w_range": [
+    33.0,
+    42.0
+   ],
+   "bbox_h_median": 22.0,
+   "bbox_h_range": [
+    20.0,
+    24.0
+   ],
+   "len_major_median": 36.0,
+   "width_minor_median": 21.1,
+   "body_bbox_w_median": 34.5
+  },
+  "house_roof": {
+   "moves": false,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "looks": "cross-gabled house roof seen from above, grey tiles (left/shaded slopes) and cream tiles (right/sunlit slopes)",
+   "main_block": {
+    "x_left": 660,
+    "x_right": 1362,
+    "width_px": 702,
+    "ridge_x": 1018,
+    "y_top_at_ridge": 22,
+    "y_top_at_corners": [
+     100,
+     95
+    ],
+    "y_bottom_at_ridge": 745,
+    "y_bottom_at_corners": [
+     720,
+     718
+    ],
+    "length_px_along_ridge": 723
+   },
+   "cross_wing": {
+    "x_left": [
+     618,
+     640
+    ],
+    "x_right": [
+     1405,
+     1425
+    ],
+    "length_px": 790,
+    "y_top": 270,
+    "y_bottom": 520,
+    "width_px": 250,
+    "note": "edges slightly slanted (perspective of a tall roof seen from above)"
+   }
+  },
+  "trees_and_lawn": {
+   "moves": false,
+   "looks": "tree canopies (dark green, edges of frame) and sunlit lawn (right side); tree shadows on the lawn; no markings"
+  }
+ },
+ "events": [
+  {
+   "what": "all three animals already walking at frame 0 (no start/stop seen)",
+   "frame": 0,
+   "t": 0.0
+  },
+  {
+   "what": "brown animal jumps back ~125 px in x (loop reset), track discontinuity",
+   "frame": 49,
+   "t": 2.0417
+  },
+  {
+   "what": "white/small animals walk until the last frame",
+   "frame": 49,
+   "t": 2.0417
+  }
+ ],
+ "perspective": "2D scene, top-down; animal pixel sizes constant over the clip (no depth change). The roof top is nearer the camera than the ground, so roof pixel sizes are not on the same scale as the animals.",
+ "notes": "notes.md"
+}

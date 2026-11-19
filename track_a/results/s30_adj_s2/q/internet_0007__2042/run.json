@@ -1,0 +1,58 @@
+{
+ "wall_s": 67,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 20,
+  "duration_ms": 66089,
+  "total_cost_usd": 0.374196,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 24,
+  "cache_creation_input_tokens": 23082,
+  "cache_read_input_tokens": 306220,
+  "output_tokens": 6410,
+  "output_tokens_details": {
+   "thinking_tokens": 959
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 23082,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 541,
+    "cache_read_input_tokens": 33678,
+    "cache_creation_input_tokens": 1571,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1571
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "audit": {
+  "tool_calls": 19,
+  "flags": []
+ },
+ "video": "internet_0007",
+ "ids": [
+  2042
+ ],
+ "answered": 1,
+ "account": "a",
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "commit": "46b0e9fea"
+}

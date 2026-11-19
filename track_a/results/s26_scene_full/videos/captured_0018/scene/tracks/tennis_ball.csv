@@ -1,0 +1,50 @@
+frame,t,phase,source,cx,cy,mask_cx,mask_cy,bx0,by0,bx1,by1,bw,bh,len_major,len_minor,axis_deg,mask_area,occluded,notes
+0,0.0,held,template,771.0,256.5,,,757,243,785,270,28,27,23,23,,,1,hand: fingertips over right side
+1,0.0417,held,template,771.0,256.5,,,757,243,785,270,28,27,23,23,,,1,hand: fingertips over right side
+2,0.0833,held,template,771.0,256.5,,,757,243,785,270,28,27,23,23,,,1,hand: fingertips over right side
+3,0.125,held,template,771.0,256.5,,,757,243,785,270,28,27,23,23,,,1,hand: fingertips over right side
+4,0.1667,held,template,770.0,256.5,,,756,243,784,270,28,27,23,23,,,1,hand: fingertips over right side
+5,0.2083,held,template,770.0,256.5,,,756,243,784,270,28,27,23,23,,,1,hand: fingertips over right side
+6,0.25,held,template,770.0,256.5,,,756,243,784,270,28,27,23,23,,,1,hand: fingertips over right side
+7,0.2917,held,template,770.0,256.5,,,756,243,784,270,28,27,23,23,,,1,hand: fingertips over right side
+8,0.3333,held,template,769.0,256.5,,,755,243,783,270,28,27,23,23,,,1,hand: fingertips over right side
+9,0.375,held,template,769.0,256.5,,,755,243,783,270,28,27,23,23,,,1,hand: fingertips over right side
+10,0.4167,held,template,769.0,256.5,,,755,243,783,270,28,27,23,23,,,1,hand: fingertips over right side
+11,0.4583,held,template,768.0,256.5,,,754,243,782,270,28,27,23,23,,,1,hand: fingertips over right side
+12,0.5,held,template,767.0,256.5,,,753,243,781,270,28,27,23,23,,,1,hand: fingertips over right side
+13,0.5417,held,template,767.0,256.5,,,753,243,781,270,28,27,23,23,,,1,hand: fingertips over right side
+14,0.5833,held,template,767.0,255.5,,,753,242,781,269,28,27,23,23,,,1,hand: fingertips over right side
+15,0.625,held,template,767.0,254.5,,,753,241,781,268,28,27,23,23,,,1,hand: fingertips over right side
+16,0.6667,held,template,766.0,254.5,,,752,241,780,268,28,27,23,23,,,1,hand: fingertips over right side
+17,0.7083,held,template,766.0,253.5,,,752,240,780,267,28,27,23,23,,,1,hand: fingertips over right side
+18,0.75,held,template,766.0,252.5,,,752,239,780,266,28,27,23,23,,,1,hand: fingertips over right side
+19,0.7917,held,template,766.0,251.5,,,752,238,780,265,28,27,23,23,,,1,hand: fingertips over right side
+20,0.8333,held,template,765.0,250.5,,,751,237,779,264,28,27,23,23,,,1,hand: fingertips over right side
+21,0.875,held,template,765.0,250.5,,,751,237,779,264,28,27,23,23,,,1,hand: fingertips over right side
+22,0.9167,held,template,765.0,249.5,,,751,236,779,263,28,27,23,23,,,1,hand: fingertips over right side
+23,0.9583,held,template,765.0,249.5,,,751,236,779,263,28,27,23,23,,,1,hand: fingertips over right side
+24,1.0,held,template,765.0,249.5,,,751,236,779,263,28,27,23,23,,,1,hand: fingertips over right side
+25,1.0417,held,template,764.0,249.5,,,750,236,778,263,28,27,23,23,,,1,hand: fingertips over right side
+26,1.0833,held,template,761.0,251.5,,,747,238,775,265,28,27,23,23,,,1,hand: fingertips over right side
+27,1.125,free,mask,768.0,262.0,764.12,261.61,753,251,783,273,30,22,30.8,23.7,168.8,394,1,motion blur (13 px/frame); overlaps hand/arm
+28,1.1667,free,mask,760.0,294.0,760.11,293.87,751,283,769,305,18,22,23.1,18.9,81.2,328,0,motion blur (33 px/frame)
+29,1.2083,free,mask,761.0,318.0,759.68,318.28,753,305,769,331,16,26,26.2,16.4,82.9,302,0,motion blur (24 px/frame)
+30,1.25,free,mask,758.5,346.0,759.13,344.59,750,333,767,359,17,26,26.7,16.0,75.1,286,0,motion blur (28 px/frame)
+31,1.2917,free,mask,757.0,375.0,756.64,373.65,749,363,765,387,16,24,26.7,15.8,104.2,266,0,motion blur (29 px/frame)
+32,1.3333,free,mask,756.0,414.5,755.62,413.8,748,401,764,428,16,27,27.6,15.4,94.1,363,0,motion blur (40 px/frame)
+33,1.375,free,mask,754.5,461.0,753.69,460.77,747,447,762,475,15,28,28.5,14.4,94.7,319,0,motion blur (47 px/frame)
+34,1.4167,free,mask,753.0,514.0,752.76,514.21,743,495,763,533,20,38,38.7,20.5,96.8,535,0,motion blur (53 px/frame)
+35,1.4583,free,mask,751.5,563.5,751.47,560.25,743,545,760,582,17,37,37.1,17.0,90.6,412,0,motion blur (50 px/frame)
+36,1.5,free,mask,749.5,599.0,749.52,598.62,741,583,758,615,17,32,32.2,17.2,92.8,391,0,motion blur (36 px/frame)
+37,1.5417,free,mask,750.0,560.5,750.23,559.95,741,545,759,576,18,31,31.1,18.0,92.6,410,0,motion blur (39 px/frame)
+38,1.5833,free,mask,750.0,527.5,749.6,527.52,739,513,761,542,22,29,29.7,22.4,95.7,532,0,motion blur (33 px/frame)
+39,1.625,free,mask,750.5,502.0,748.88,501.71,740,489,761,515,21,26,26.6,21.0,86.5,426,0,motion blur (26 px/frame)
+40,1.6667,free,mask,750.0,478.5,749.86,475.6,740,465,760,492,20,27,29.5,22.6,70.6,407,0,motion blur (24 px/frame)
+41,1.7083,free,mask,750.5,460.0,750.25,457.36,741,449,760,471,19,22,23.5,21.5,43.5,297,0,motion blur (19 px/frame)
+42,1.75,free,mask,750.0,444.0,749.67,442.53,739,431,761,457,22,26,27.0,23.0,84.4,431,0,motion blur (16 px/frame)
+43,1.7917,free,mask,749.5,432.0,750.03,430.97,738,421,761,443,23,22,24.5,23.2,106.5,399,0,motion blur (12 px/frame)
+44,1.8333,free,mask,751.0,426.0,750.2,424.75,739,415,763,437,24,22,25.6,23.4,26.9,403,0,
+45,1.875,free,mask,750.5,423.0,750.01,422.69,738,413,763,433,25,20,26.0,22.0,15.7,409,0,
+46,1.9167,free,mask,750.0,426.0,749.82,425.1,737,415,763,437,26,22,25.6,22.5,13.4,397,0,
+47,1.9583,free,mask,749.0,434.0,748.89,432.41,737,421,761,447,24,26,27.3,24.8,96.5,460,0,
+48,2.0,free,mask,749.0,444.0,747.64,443.82,737,431,761,457,24,26,29.1,24.2,59.9,470,0,

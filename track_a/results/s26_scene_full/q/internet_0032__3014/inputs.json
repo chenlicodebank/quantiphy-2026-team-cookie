@@ -1,0 +1,18 @@
+{
+ "video": "internet_0032.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 29.851282,
+ "frames": 220,
+ "duration_s": 7.3699,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3014,
+  "question": "What is the distance traveled by the boat from 2s to 4.5s in meters?",
+  "prior": "length of the boat = 3.5 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 30.0
+ }
+}

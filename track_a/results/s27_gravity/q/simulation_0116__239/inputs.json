@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0116.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MC",
+ "fps": 24.006002,
+ "frames": 32,
+ "duration_s": 1.333,
+ "width": 1386,
+ "height": 1920,
+ "question": {
+  "id": 239,
+  "question": "What is the width of the middle yellow door in meters?",
+  "prior": "gravity acc = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

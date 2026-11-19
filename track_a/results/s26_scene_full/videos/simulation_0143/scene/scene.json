@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0143.mp4",
+  "source": "simulation",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 100,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t*24); frames 0..99",
+  "camera": {
+    "motion": "static (phase correlation of top 300 rows vs frame 0: max shift 0.009 px over all frames; scene/camera_shift.csv)",
+    "vanishing_point_corridor_px": [954, 532],
+    "horizon_row_px_estimate": 535,
+    "horizon_note": "VP from line through right pillar bases (y=0.409x+141.9) and left floor/wall edge (y=-0.285x+804.1); person apparent height fits H = 1.365*(feet_y - 537.8), i.e. height -> 0 at row ~538, consistent. Camera roughly level, looking down the corridor slightly to the left of its axis.",
+    "principal_point_assumed": [960, 540],
+    "focal_length": "unknown - estimate from depth_info + known size (e.g. f = H_px * depth / H_m using person height_px at the given frame)"
+  },
+  "objects": [
+    {
+      "name": "person",
+      "description": "the only moving object: adult man, black clothes (dark shirt, dark trousers), light/white face patch; seen as a dark silhouette against the bright corridor end; dark reflection on the glossy floor below his feet (excluded from the mask)",
+      "moves": true,
+      "visible_frames": [0, 99],
+      "track": "tracks/person.csv",
+      "reference_point": "pelvis_x_est, pelvis_y_est (hip level = 48% of silhouette height below top, horizontally the middle of the silhouette at that row); feet_x/feet_y = ground contact (lowest sole row)",
+      "summary": {
+        "frame0": {"bbox": [855, 415, 966, 843], "height_px": 429, "width_px": 112, "pelvis_est": [915.5, 620.9], "feet": [934, 843]},
+        "frame50": {"bbox": [672, 461, 776, 738], "height_px": 278, "width_px": 105, "pelvis_est": [725.5, 594.4]},
+        "frame99": {"bbox": [699, 484, 757, 675], "height_px": 192, "width_px": 59, "pelvis_est": [726.5, 576.2]},
+        "height_px_range": [185, 429],
+        "feet_y_range": [674, 843],
+        "pelvis_x_range": [659.5, 915.5]
+      },
+      "apparent_size_trend": "silhouette height (hair top to sole, includes gait bob) falls from 429 px (f0) to ~185-192 px (f94-99): walking away from the camera, depth grows ~2.3x over the clip (if body height constant, depth ratio ~ 429/H_px; strictly the pelvis depth). Sample heights: f0 429, f10 395, f20 366, f30 346, f40 313, f50 278, f60 242, f70 220, f80 205, f90 196, f99 192."
+    }
+  ],
+  "static_objects": [
+    {"name": "corridor_floor", "description": "glossy grey tiled floor with long tile seams converging to VP (954,532); strong reflections", "moves": false},
+    {"name": "right_pillars", "description": "row of white/grey arch pillars on the right, bases on line y=0.409x+141.9. Base (bottom-centre) image points nearest->far: (1690,834) width ~140 px; (1435,728) ~70 px; (1316,678) ~45 px; (1244,650) ~35 px; (1190,630) ~30 px; (1157,616)", "moves": false},
+    {"name": "arches_ceiling", "description": "repeating curved white arch ribs spanning the corridor, nearest arch spans most of the frame (right leg at x~1600-1760)", "moves": false},
+    {"name": "left_windows_wall", "description": "left wall with slanted ribs and glazing; floor/wall junction line y=-0.285x+804.1", "moves": false},
+    {"name": "bright_corridor_end", "description": "overexposed opening at the far end, approx x 800-1050, y 440-600", "moves": false}
+  ],
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "clip starts with the man already walking (mid-step, facing left in profile)"},
+    {"frame": 5, "time": 0.208, "event": "widest stride in side view (width 239 px)"},
+    {"frame": 34, "time": 1.417, "event": "leftmost lateral position (torso_x ~658; smoothed min frame 35); lateral direction turns from leftward to rightward, while still receding"},
+    {"frame": 74, "time": 3.083, "event": "rightmost lateral position (smoothed torso_x ~812); lateral direction turns back to leftward"},
+    {"frame": 99, "time": 4.125, "event": "clip ends, man still walking away"}
+  ],
+  "gait": "silhouette width local maxima (legs apart) at frames ~5,16-19,27,34,43,54,65,72,81,94; minima (legs together) ~0,11,25,30,38,48,63,69,76,85,99 - approximate step timing"
+}

@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0079.mp4",
+  "source": "simulation", "scene_type": "2D", "fps": 24.0, "frames": 72, "duration_s": 3.0,
+  "image_size_px": [1920, 1080],
+  "pixel_convention": "x right, y down, origin top-left, full-resolution pixels; t = frame/24",
+  "camera": {
+    "motion": "static (median background clean, no shift)",
+    "view": "top-down (bird's-eye) looking straight down at a plain uniform grey floor; finite distance -> mild perspective: elevated parts (heads) appear displaced radially away from the image centre (~960,540), e.g. walker's head sits right of shirt centre when at x~1700, centred at x~1060",
+    "scale_uniformity": "bicycle length 416-418 px at x~1650 vs 408 px at x~250 (~2% change across the frame): slight tilt or lens effect; treat one scale as adequate (~1-2% error)",
+    "note": "frames 0 and 1 show identical object positions (differences are only codec noise; repeated first frame) -> zero apparent motion between frames 0 and 1"
+  },
+  "objects": {
+    "cyclist": {
+      "description": "person in black jacket, dark hair, riding a light-cyan (turquoise) bicycle with rear rack; lower object (rides along y~648)",
+      "parts": {"bicycle": "cyan frame, front wheel to the LEFT (direction of travel), rear rack on the right",
+                "rider": "black jacket, seated near bike centre, hands on handlebar"},
+      "moves": true, "direction": "-x (right to left), straight line along y = 648-649 (bike axis)",
+      "visible_frames": [0, 40],
+      "fully_in_frame_frames": [4, 32],
+      "track_file": "tracks/cyclist.csv",
+      "reference_point": "bike_center_x/bike_center_y = midpoint of front and rear cyan tips (vehicle root proxy); rider_torso_x/y = centroid of dark (jacket+hair) blob, ~ pelvis/saddle proxy, sits ~28 px behind (right of) bike centre",
+      "pixel_motion": "constant velocity: bike centre moves -51.3 px/frame (least-squares over frames 1-40, max residual 3 px; per-frame diffs 50-52 in frames 1-32, quantisation +-1). x(f) ~ 1826.0 - 51.3*(f-1) for f>=1; no motion between frames 0 and 1",
+      "sizes_px": {
+        "bicycle_length_tip_to_tip": 412, "bicycle_length_range": [408, 418],
+        "bicycle_width_handlebar_y_extent": 100, "bicycle_width_incl_pedals_max": 124, "bicycle_bbox_height_median": 112,
+        "rider_plus_bike_y_extent (elbows/shoulders)": 126,
+        "rider_plus_bike_x_extent": 412
+      }
+    },
+    "walker": {
+      "description": "man in white/light-grey T-shirt, blue-grey jeans, black sneakers, dark hair, walking; upper object (head at y~429-438)",
+      "moves": true, "direction": "-x (right to left), roughly straight along y~433 (head), lateral sway +-4 px with 34-frame period",
+      "visible_frames": [0, 71], "truncated_frames": [0, 2],
+      "track_file": "tracks/walker.csv",
+      "reference_point": "head_x/head_y = centroid of hair blob (best-tracked, ~above pelvis; radial perspective offset of the head vs pelvis up to ~10-25 px near frame edges). shirt_x/y and mask_cx/cy also given",
+      "pixel_motion": "head x from ~1912 (f0/f1, extrapolated) / 1897.4 (f2) to 904.0 (f71): mean -14.4 px/frame, per-frame -12.4 to -16.9 (gait oscillation, 17-frame step period)",
+      "sizes_px": {
+        "bbox_x_extent (stride, feet tip to tip) max/min": [239, 101],
+        "bbox_y_extent (shoulders + arms) range": [127, 146],
+        "head_blob_diameter": 50,
+        "height": "not observable (top-down view)"
+      },
+      "gait_events_frames": {"max_stride (feet widest apart)": [9, 26, 43, 60], "feet together / passing": [17, 34, 51, 68]}
+    }
+  },
+  "static_objects": "none: plain uniform grey floor without markings; only soft contact shadows under both people",
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "video start; both already moving left; cyclist rear and walker's right side cut by right edge"},
+    {"frame": 1, "t": 0.0417, "event": "same object positions as frame 0 (repeated first frame)"},
+    {"frame": 3, "t": 0.125, "event": "walker fully in frame"},
+    {"frame": 4, "t": 0.1667, "event": "bicycle fully in frame (rear tip x=1879)"},
+    {"frame": 32, "t": 1.3333, "event": "last frame with bicycle fully in frame (front tip x=34)"},
+    {"frame": 33, "t": 1.375, "event": "bicycle front reaches left edge, starts exiting"},
+    {"frame": 40, "t": 1.6667, "event": "last frame with any of the cyclist visible (rear tip x=31)"},
+    {"frame": 41, "t": 1.7083, "event": "cyclist gone"},
+    {"frame": 71, "t": 2.9583, "event": "end; walker at head x=904"},
+    {"note": "no contact, collision, start or stop: both move at steady pace throughout; no direction changes; the two never overlap (y separation ~215 px between bike axis and walker head)"}
+  ]
+}

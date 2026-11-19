@@ -1,0 +1,83 @@
+{
+  "video": "simulation_0036.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; pixel coords x right, y down, origin top-left of the 1080x1080 frame",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of hill/sky bands (x 0-300 and 800-1080, y 560-700) vs frame 0: |shift| < 0.015 px in every tested frame",
+    "per_frame_background_shift_px": [0.0, 0.0],
+    "focal_length": "unknown (estimate from a given depth + known size)",
+    "principal_point_assumed_px": [540, 540],
+    "perspective_cues": {
+      "shoreline_far_px_y": 707,
+      "note": "true horizon hidden by sand hills; far shoreline (water meets hill base) is near-horizontal at y ~ 703-708 across the whole frame, i.e. ~165 px below image centre, so the camera looks slightly down or the horizon is close to y~700; water surface is the ground plane; the boat's waterline (y~765-770) sits ~60 px below the far shoreline"
+    }
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red fishing boat with white wheelhouse, mast with radar/aerial, white railing, yellow hull text 'AH805'; the only vehicle",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/boat.csv",
+      "reference_point": "cx,cy = centre of full-boat mask bbox (mast top to keel bottom); hull_cx,hull_cy = centre of red hull bbox; mask_cx,mask_cy = mask centroid. Blender root likely near the hull centre / waterline - not visible, choose per question",
+      "motion": "moves leftward across the image the whole clip at a near-constant ~3.05 px/frame (hull_cx 608.5 -> 398.5); image y nearly constant (waterline y1 765 -> 770)",
+      "apparent_size": {
+        "full_bbox_width_px": [178.7, 199.0],
+        "full_bbox_height_px": [221.3, 234.7],
+        "hull_width_px": [176.7, 196.7],
+        "hull_height_px": [64.0, 68.3],
+        "note": "first-frame / last-frame values; size grows ~11% linearly => boat gets ~10% closer to the camera over the clip (it moves left and toward the camera). Boat is seen at an oblique angle (bow at left, starboard side visible) so image width mixes length and beam"
+      },
+      "extents_frame0_px": {"bbox": [522, 545, 699, 765], "mast_top_y": 545, "wheelhouse_roof_y": 657, "deck_rail_y": 690, "hull_top_y": 690, "keel_bottom_y": 765}
+    },
+    {
+      "name": "person",
+      "description": "small human figure, white/light shirt, grey trousers, walking on the light-coloured walkway/sandbar on the left shore; the only person",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/person.csv",
+      "reference_point": "pelvis_x = mask centroid x, pelvis_y = top + 0.47*(height) (approximate pelvis); cx,cy = bbox centre",
+      "motion": "walks rightward (away from image left edge, toward the boat side) at ~1.05 px/frame for the whole clip (pelvis_x 128.9 -> 201.1); image y drifts down ~6 px (slightly toward camera)",
+      "apparent_size": {"height_px": [41.7, 40.7], "height_range_px": [37, 45], "width_px_range": [9, 19]},
+      "note": "tiny (~40 px tall): +/-1-2 px mask errors are 3-5 % of height"
+    },
+    {
+      "name": "walkway_sandbar",
+      "description": "light pinkish-grey flat strip (walkway/sandbar) along the left shore on which the person walks; tapers out into the water",
+      "moves": false,
+      "image_extent_px": {"x": [0, 355], "y_top": 742, "y_bottom": 765, "note": "top edge y~742-748, tip at x~355 y~758"}
+    },
+    {
+      "name": "seawall_and_wooden_block",
+      "description": "tan concrete/sand bank wall at far left (x 0-145, y ~715-742) with a dark wooden block/steps at x ~143-157, y ~728-742 just right of the person's start",
+      "moves": false
+    },
+    {
+      "name": "sand_bank_left",
+      "description": "white/pale sandy slope at the left edge, x 0-~70, y ~690-740",
+      "moves": false
+    },
+    {
+      "name": "sand_hills",
+      "description": "brown/tan dunes forming the far shore across the full width, top y ~640-690, base y ~707",
+      "moves": false
+    },
+    {
+      "name": "water",
+      "description": "rippled sea occupying y > 707; red reflection of the boat below it (do not confuse with the boat)",
+      "moves": "surface ripples only"
+    },
+    {"name": "sky", "description": "cloudy blue sky, static", "moves": false}
+  ],
+  "events": [
+    {"event": "boat in motion from first to last frame (no start/stop seen)", "frames": [0, 71], "times_s": [0.0, 2.9583]},
+    {"event": "person walking from first to last frame (no start/stop seen)", "frames": [0, 71], "times_s": [0.0, 2.9583]},
+    {"event": "no contacts, bounces or impacts; boat and person never overlap in the image (closest at frame 71: person x1~205, boat x0~295)"}
+  ]
+}

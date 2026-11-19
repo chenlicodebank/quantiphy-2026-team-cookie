@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0265.mp4",
+ "video_source": "simulation",
+ "video_type": "A2SS",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 933,
+  "question": "What is the length of the spacecraft in meters?",
+  "prior": "acceleration of the spacecraft at 1.0s = 4m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,77 @@
+{
+  "video": "simulation_0156.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 48,
+  "duration_s": 2.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0; time t -> frame round(t*24)",
+  "units": "pixels and seconds; image x to the right, y downward; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the seabed region (y>840) against frame 0 gives |shift| < 0.8 px in every 4th frame; seabed silhouette identical in all frames. Only the animated caustics / light shafts change.",
+    "per_frame_background_shift_px": [0, 0]
+  },
+  "objects": [
+    {
+      "name": "shark",
+      "description": "large grey-blue shark (great-white-like) with dorsal fin, light-grey translucent-looking snout, swims right-to-left in the upper half of the frame (centroid y ~322)",
+      "moves": true,
+      "track": "tracks/shark.csv",
+      "visible_frames": "0-46 (absent at 47)",
+      "fully_in_frame_frames": "14-30 (enters at the right edge frames 0-13, leaves at the left edge frames 31-46; frame 46 only the tail tips)",
+      "pixel_size_fully_visible_frames_14_30": {
+        "length_nose_to_tail_tip_px_median": 911,
+        "length_range_px": [883, 928],
+        "length_note": "bbox_w; the tail end (x1) is crisp, the snout tip is low contrast so x0 jitters by about +-30 px",
+        "height_dorsal_tip_to_lower_tail_lobe_px_median": 273,
+        "height_range_px": [270, 282],
+        "body_trunk_depth_px_approx": 150,
+        "orientation": "horizontal, axis angle ~0 deg, heading -x (left)"
+      },
+      "reference_point": "cx_mask, cy_mask = mask centroid (proxy for the object origin); valid only when truncated_edge is empty (frames 14-30). For other frames use the edge that is not cut by the border: tail tip x1 while the nose has left (frames 31-45), nose x0 while the tail is still outside (frames 0-13)",
+      "motion_summary_px": "nearly uniform leftward motion; tail-tip x1 moves about -52 to -61 px/frame (median ~57) over frames 13-45; vertical position constant (cy ~321-323)"
+    },
+    {
+      "name": "turtle",
+      "description": "sea turtle (leatherback-like, ridged blue carapace), smaller animal, below the shark (centroid y ~550-580); swims right-to-left; pose changes: frames 0-25 seen obliquely with the front flipper hanging down (bbox height ~200-240), frames 35-47 seen side-on with flippers level (bbox height ~130)",
+      "moves": true,
+      "track": "tracks/turtle.csv",
+      "visible_frames": "0-47",
+      "fully_in_frame_frames": "10-47 (cut by the right edge frames 0-9)",
+      "pixel_size": {
+        "length_incl_flippers_side_on_frames_36_47_px": "bbox_w 299-340, median ~310",
+        "length_frames_13_19_oblique_px": "bbox_w 343-349",
+        "height_side_on_frames_37_46_px": "bbox_h 130-133",
+        "note": "mask includes flippers and head; flippers stroke so extents vary +-20 px; light front flipper is sometimes partly missed by the mask"
+      },
+      "reference_point": "cx_mask, cy_mask = mask centroid, valid from frame 10",
+      "motion_summary_px": "leftward ~ -20 to -24 px/frame (centroid); cy rises 549->580 (frames 0-18) then returns to ~549 (frames 35-47), partly due to pose change"
+    },
+    {
+      "name": "seabed",
+      "description": "pale sandy dunes with animated cyan caustic light patches across the bottom of the frame",
+      "moves": false,
+      "image_position_px": "top silhouette: crest y~800 at x 800-1100, y~830 at x=0, y~870-880 at x 1500-1920; extends to the bottom edge (y=1079)",
+      "width_px": 1920
+    },
+    {
+      "name": "water_background",
+      "description": "blue water with light shafts from above (animated shimmer), no other objects",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "shark already entering at right edge, nose x0=1781", "frame": 0, "t_s": 0.0},
+    {"event": "turtle already entering at right edge", "frame": 0, "t_s": 0.0},
+    {"event": "turtle fully in frame", "frame": 10, "t_s": 0.4167},
+    {"event": "shark fully in frame (tail clears right edge)", "frame": 14, "t_s": 0.5833},
+    {"event": "shark nose reaches left edge", "frame": 31, "t_s": 1.2917},
+    {"event": "turtle pose transition oblique -> side-on", "frame_range": [20, 37], "t_s_range": [0.833, 1.542]},
+    {"event": "last frame with shark visible (tail tips only)", "frame": 46, "t_s": 1.9167},
+    {"event": "shark gone", "frame": 47, "t_s": 1.9583}
+  ],
+  "no_events": "no contacts, impacts, bounces or direction reversals; both animals swim leftward at nearly constant speed all clip; they never overlap in the image (shark y 160-441, turtle y 480-735)",
+  "inter_object_offset_px": "shark centroid is ~230-260 px above the turtle centroid; horizontal offset changes as the shark (~57 px/frame) pulls ahead (leftward) of the turtle (~21 px/frame); horizontal centroid gap ~0 at frame 0 (both at the right edge, centroids biased), ~370 px at frame 18, ~810 px at frame 30"
+}

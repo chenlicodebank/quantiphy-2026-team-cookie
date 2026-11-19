@@ -1,0 +1,192 @@
+{
+ "video": "simulation_0019_segmented.mp4",
+ "source": "segmentation (of a Blender simulation render)",
+ "scene": "3D",
+ "fps": 33.0,
+ "frames": 97,
+ "width": 1080,
+ "height": 1080,
+ "time_convention": "t = frame/33; frame = round(t*33)",
+ "coordinates": "pixels, origin top-left, x right, y down",
+ "camera": {
+  "motion": "static (median-background difference shows only the man changing; no background shift)",
+  "background": "plain white (segmentation replaced background); no floor, horizon or ground texture visible",
+  "perspective_cues": "pedestal top face visible from above -> camera above pedestal top (~y 672-697). Depth order front->back: pedestal/sculpture (base y 895), man (feet y ~777-787), painting stands (base y ~686), right-edge object (base y ~659). Man apparent height nearly constant -> he walks roughly parallel to the image plane at near-constant depth."
+ },
+ "objects": {
+  "man": {
+   "type": "human, walking adult male",
+   "moves": true,
+   "appearance": "white/light-grey T-shirt, grey-blue jeans, dark shoes, short dark hair; only person in scene",
+   "track_file": "tracks/man.csv",
+   "reference_point": "pelvis (estimated, see notes); columns pelvis_x/pelvis_y",
+   "visible_frames": "0-58 (full body 0-40, partially hidden 41-58), hidden 59-77, partially visible 78-96 (head only 78-79)",
+   "apparent_size_full_view_frames_0_40": {
+    "bbox_height_px": {
+     "min": 257,
+     "max": 268,
+     "median": 261.0
+    },
+    "bbox_width_px": {
+     "min": 61,
+     "max": 139
+    },
+    "feet_y_px": {
+     "min": 781,
+     "max": 787
+    },
+    "note": "bbox height = head top to lowest foot, varies with gait (min when stride widest/feet spread, max when legs together); visible full height at end (frames 94-96, legs partly hidden) 253-257"
+   },
+   "motion": "walks right->left (-x) across the whole clip, passing BEHIND the sculpture and IN FRONT OF the right painting stand; ~5-6 px/frame in pelvis_x; nearly constant image y",
+   "gait": "bbox width minima (legs passing) near frames 5-6, 21-23, 39-40; maxima (full stride) near 0, 13-14, 30-31, 47 -> one step ~16-17 frames"
+  },
+  "sculpture": {
+   "moves": false,
+   "appearance": "grey abstract flame/teardrop-shaped stone sculpture with bowl-like lower part, on the pedestal, image centre-left",
+   "bbox_px": [
+    376,
+    391,
+    602,
+    693
+   ],
+   "height_px": 302,
+   "width_px": 227,
+   "note": "tip at (488,391); bowl rests on pedestal top at y~690"
+  },
+  "pedestal_upper_tier": {
+   "moves": false,
+   "appearance": "light grey-beige stone tapered block directly under sculpture",
+   "bbox_px": [
+    355,
+    672,
+    627,
+    768
+   ],
+   "top_face_front_edge_y": 697,
+   "width_bottom_px": 272,
+   "width_top_front_edge_px": 216,
+   "height_front_face_px": 71
+  },
+  "pedestal_lower_block": {
+   "moves": false,
+   "appearance": "dark charcoal block, base of the plinth, nearest object to the camera",
+   "bbox_px": [
+    332,
+    768,
+    632,
+    895
+   ],
+   "width_px": 301,
+   "height_px": 128
+  },
+  "plinth_total": {
+   "bbox_px": [
+    332,
+    672,
+    632,
+    895
+   ],
+   "height_px": 224,
+   "note": "upper tier + lower block (sculpture excluded)"
+  },
+  "painting_left": {
+   "moves": false,
+   "appearance": "framed abstract painting (white figure, red/blue/teal) on a dark stand base, left of sculpture",
+   "bbox_px": [
+    249,
+    518,
+    377,
+    686
+   ],
+   "width_px": 129,
+   "height_px": 168,
+   "canvas_bbox_px": [
+    266,
+    520,
+    362,
+    670
+   ]
+  },
+  "painting_right": {
+   "moves": false,
+   "appearance": "framed abstract painting (face-like, yellow/red/teal) on a dark stand base, right of sculpture; the man walks in front of it (frames ~20-45)",
+   "bbox_px": [
+    656,
+    519,
+    783,
+    686
+   ],
+   "width_px": 128,
+   "height_px": 167,
+   "canvas_bbox_px": [
+    672,
+    520,
+    766,
+    670
+   ]
+  },
+  "right_edge_object": {
+   "moves": false,
+   "appearance": "brown/bronze object (another sculpture) cut off by the right image edge",
+   "bbox_px_visible": [
+    1034,
+    548,
+    1079,
+    659
+   ],
+   "note": "truncated by frame edge; only 46 px wide visible part"
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "man already walking leftward at clip start (no start of motion inside clip)"
+  },
+  {
+   "frame": 20,
+   "t": 0.606,
+   "event": "man begins to overlap (pass in front of) the right painting stand"
+  },
+  {
+   "frame": 41,
+   "t": 1.242,
+   "event": "man first touches sculpture/plinth silhouette (start of partial occlusion, hand/foot); full body measurable until frame 40"
+  },
+  {
+   "frame": 53,
+   "t": 1.606,
+   "event": "legs disappearing behind plinth/bowl; only upper body visible"
+  },
+  {
+   "frame": 59,
+   "t": 1.788,
+   "event": "man completely hidden behind sculpture"
+  },
+  {
+   "frame": 78,
+   "t": 2.364,
+   "event": "head reappears in gap of sculpture (x~437,y~523)"
+  },
+  {
+   "frame": 80,
+   "t": 2.424,
+   "event": "upper body emerging at left side of sculpture bowl"
+  },
+  {
+   "frame": 94,
+   "t": 2.848,
+   "event": "nearly full body visible again left of plinth (lower legs partly behind plinth)"
+  },
+  {
+   "frame": 96,
+   "t": 2.909,
+   "event": "clip ends; man still walking left"
+  }
+ ],
+ "files": {
+  "tracks/man.csv": "per-frame man track",
+  "notes.md": "methods and reliability",
+  "scripts/": "all measurement scripts"
+ }
+}

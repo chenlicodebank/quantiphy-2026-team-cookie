@@ -1,0 +1,18 @@
+{
+ "video": "internet_0014.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.764032,
+ "frames": 287,
+ "duration_s": 9.6425,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 2073,
+  "question": "What is the average velocity of the player with the ball from 8.0s to 9.0s in m/s?",
+  "prior": "center circle radius = 9.15m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

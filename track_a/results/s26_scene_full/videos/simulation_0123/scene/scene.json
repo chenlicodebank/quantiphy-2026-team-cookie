@@ -1,0 +1,293 @@
+{
+ "video": "simulation_0123.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (frames 0 and 1 are pixel-identical; all frame-to-frame differences lie only on the teal box)",
+  "view": "top-down (bird's-eye) view of a double bathroom vanity countertop; image x = along the counter (left->right), image y = counter depth (wall at top, front edge at bottom ~y 665). Orthographic-like, no visible perspective convergence on the counter."
+ },
+ "moving_objects": {
+  "teal_box": {
+   "description": "small teal/turquoise rectangular box (soap bar / soap box-like) on the counter, the ONLY moving object; starts just below the left basin, slides right along +x",
+   "track_file": "tracks/teal_box.csv",
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never",
+   "reference_point": "centroid of the teal top-face mask (= object origin seen from above)",
+   "start_px": [
+    412.13,
+    586.92
+   ],
+   "end_px_frame71": [
+    1429.73,
+    587.26
+   ],
+   "size_px": {
+    "length_along_x (motion dir)": "44 (bbox_w 44-46, extra 1-2 px in some frames from blur/antialias)",
+    "length_along_y (long axis of box)": 78,
+    "long_axis": "image y (perpendicular to motion)",
+    "height": "not visible (top-down view)",
+    "area_px": "~3330-3370"
+   },
+   "orientation": "axis-aligned, no rotation (minAreaRect angle -90 all frames)",
+   "motion_summary_px": {
+    "direction": "+x (rightward), cy constant 587.0 +/- 0.3",
+    "per_frame_step_mean_frames2_71": 14.54,
+    "per_frame_step_std": 0.24,
+    "linear_fit_cx_vs_frame_frames2_71": {
+     "slope_px_per_frame": 14.538,
+     "intercept": 397.85
+    },
+    "net_displacement_frame0_to_71_px": 1017.6,
+    "path_length_frame0_to_71_px": 1017.77,
+    "note": "constant velocity from frame 2 on; no acceleration phase visible"
+   }
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "teal box at rest at (412.1, 586.9)"
+  },
+  {
+   "frame": 1,
+   "t": 0.0417,
+   "event": "still identical to frame 0 (last frame at rest position)"
+  },
+  {
+   "frame": 2,
+   "t": 0.0833,
+   "event": "first displaced frame: box moved 14.9 px right -> motion starts at frame 1 (fit over frames 2-71 extrapolates to cx=412.4 at frame 1 = rest position) at full constant speed"
+  },
+  {
+   "frame": 71,
+   "t": 2.9583,
+   "event": "video ends with box still moving at ~14.5 px/frame (cx 1429.7, between the basins under the right basin's left part); no contact/impact/bounce/direction change"
+  }
+ ],
+ "static_objects": {
+  "left_basin": {
+   "desc": "left rectangular undermount sink",
+   "bbox_px": [
+    170,
+    200,
+    652,
+    515
+   ],
+   "size_px": "~482 (x) x 315 (y), rounded corners; edges soft, +/-5 px"
+  },
+  "right_basin": {
+   "desc": "right sink",
+   "bbox_px": [
+    1210,
+    200,
+    1690,
+    515
+   ],
+   "size_px": "~480 x 315, +/-5 px"
+  },
+  "left_drain": {
+   "desc": "dark round drain in left basin",
+   "centre_px": [
+    465.1,
+    366.3
+   ],
+   "diameter_px": 35.5
+  },
+  "right_drain": {
+   "desc": "dark round drain in right basin",
+   "centre_px": [
+    1501.8,
+    366.2
+   ],
+   "diameter_px": 35.5
+  },
+  "drain_spacing_px": 1036.7,
+  "left_faucet_spout": {
+   "desc": "gold spout, left basin",
+   "bbox_px": [
+    378,
+    95,
+    430,
+    279
+   ],
+   "length_y_px": 177,
+   "spout_centre_x": 409
+  },
+  "right_faucet_spout": {
+   "desc": "gold spout, right basin",
+   "bbox_px": [
+    1420,
+    95,
+    1471,
+    279
+   ],
+   "length_y_px": 179,
+   "spout_centre_x": 1453
+  },
+  "left_handles": {
+   "desc": "two gold round handles flanking left spout",
+   "centres_px": [
+    [
+     308,
+     108
+    ],
+    [
+     512,
+     108
+    ]
+   ],
+   "diameter_px": 40
+  },
+  "right_handles": {
+   "desc": "two gold handles flanking right spout",
+   "centres_px": [
+    [
+     1350,
+     108
+    ],
+    [
+     1556,
+     108
+    ]
+   ],
+   "diameter_px": 40
+  },
+  "left_gold_bar": {
+   "desc": "gold/brass bar (mirror light or shelf edge) at top-left",
+   "bbox_px": [
+    163,
+    38,
+    709,
+    58
+   ],
+   "length_px": 546,
+   "height_px": 20
+  },
+  "right_gold_bar": {
+   "desc": "gold bar top-right",
+   "bbox_px": [
+    1160,
+    38,
+    1707,
+    58
+   ],
+   "length_px": 547,
+   "height_px": 20
+  },
+  "towel": {
+   "desc": "folded white towel, rotated ~25 deg, between basins near the wall",
+   "corners_px_approx": [
+    [
+     700,
+     195
+    ],
+    [
+     1030,
+     38
+    ],
+    [
+     1115,
+     200
+    ],
+    [
+     790,
+     360
+    ]
+   ],
+   "long_side_px": 365,
+   "short_side_px": 183,
+   "centre_px": [
+    908,
+    198
+   ],
+   "accuracy": "+/-10 px (soft edges)"
+  },
+  "toothbrush_cup": {
+   "desc": "round teal cup holding a blue toothbrush, between basins",
+   "centre_px": [
+    830.2,
+    415.4
+   ],
+   "diameter_px": 46.5,
+   "bbox_px": [
+    808,
+    392,
+    853,
+    439
+   ]
+  },
+  "toothbrush_loose": {
+   "desc": "yellow-green toothbrush with white head lying diagonally left-below the cup",
+   "from_head_px": [
+    752,
+    404
+   ],
+   "to_handle_end_px": [
+    835,
+    486
+   ],
+   "length_px": 116,
+   "yellow_handle_length_px": 89
+  },
+  "drawer_pull_centre": {
+   "desc": "long gold drawer handle on the counter front edge, centre",
+   "bbox_px": [
+    764,
+    666,
+    1097,
+    684
+   ],
+   "length_px": 333
+  },
+  "small_pulls": {
+   "desc": "small gold knob pairs on front edge",
+   "centres_px": [
+    [
+     354,
+     675
+    ],
+    [
+     430,
+     676
+    ],
+    [
+     1431,
+     676
+    ],
+    [
+     1507,
+     675
+    ]
+   ]
+  },
+  "countertop": {
+   "desc": "marble countertop",
+   "bbox_px": [
+    0,
+    15,
+    1872,
+    665
+   ],
+   "front_edge_y": 665
+  },
+  "floor_rug": {
+   "desc": "woven beige rug / floor texture at bottom",
+   "y_range_px": [
+    885,
+    1080
+   ]
+  },
+  "drop_zone": {
+   "desc": "plain grey band between counter front (y 665-700) and rug (y~885): vanity cabinet front / floor"
+  }
+ }
+}

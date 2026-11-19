@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0311.mp4",
+ "video_source": "simulation",
+ "video_type": "S3SC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 1496,
+  "question": "What is the width (from the left wheel to the right wheel) of the car in meters?",
+  "prior": "height of the car = 1.15m",
+  "depth_info": "t = 1.0s, distance_car_camera = 17.8278 m\nt = 2.0s, distance_car_camera = 23.1989 m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

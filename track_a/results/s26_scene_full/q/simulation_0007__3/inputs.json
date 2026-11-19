@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0007.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 24.0,
+ "frames": 74,
+ "duration_s": 3.0833,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 3,
+  "question": "When t=3s, what is the minimum distance from the outer end of the pier to the boat in meters?",
+  "prior": "length of boat = 3.62m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

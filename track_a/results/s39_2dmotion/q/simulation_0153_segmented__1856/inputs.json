@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0153_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2SX",
+ "fps": 24.0,
+ "frames": 42,
+ "duration_s": 1.75,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1856,
+  "question": "What is the speed of the blue car at time 1.5s in m/s?",
+  "prior": "diameter of the tire of the blue car = 0.369m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

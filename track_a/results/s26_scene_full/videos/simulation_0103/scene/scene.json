@@ -1,0 +1,182 @@
+{
+ "video": "simulation_0103.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 54,
+ "size_px": [
+  1920,
+  1080
+ ],
+ "time_convention": "t = frame / 24; frame = round(t*24)",
+ "camera": {
+  "motion": "static",
+  "evidence": "horizon row (566) and water-strip edge (672/673) identical in all frames; sky/sea background differs from the frame-0/53 composite plate only where the objects are",
+  "perspective": "2D side view, motion parallel to the image plane; boat (above water line) and shark (underwater band) may be at different depths - one px scale assumed unless a question implies otherwise"
+ },
+ "objects": [
+  {
+   "name": "boat",
+   "aka": "red fishing boat AH805 / trawler / ship",
+   "moves": true,
+   "description": "red hull with white stripe and yellow lettering AH805, white wheelhouse, tall mast; on the water surface in the upper half",
+   "visible_frames": [
+    0,
+    53
+   ],
+   "fully_visible_frames": "horizontally 21-53 (stern cut by left border in 0-20); mast top cut by the top border in ALL frames",
+   "motion": "translates to the RIGHT (+x), purely horizontal (vertical drift < 2.5 px), steady about 17.9 px/frame",
+   "track": "tracks/boat.csv",
+   "reference_point": "ref_x = bow_x_sub - full_len/2 (centre of full-length bbox); ref_y fixed 436.5 (midpoint of wheelhouse roof 236 .. keel 637); origin height unknown",
+   "extents_px_frame53": {
+    "length_full_bbox_x": 858,
+    "x_range": [
+     596,
+     1451
+    ],
+    "keel_bottom_y": 637,
+    "hull_red_side_x": [
+     598,
+     1451
+    ],
+    "bow_sheer_top_y": 351,
+    "stern_deck_y_near_x620": 462,
+    "height_keel_to_wheelhouse_roof": 401,
+    "wheelhouse_roof_y": 236,
+    "antenna_tops_y": 217,
+    "mast_x": [
+     1063,
+     1088
+    ],
+    "mast_top": "above image top (y<0): total height incl. mast > 637 px, not measurable",
+    "height_keel_to_bow_tip": 286,
+    "wheelhouse_x_approx": [
+     1005,
+     1180
+    ],
+    "reflection_band_y": [
+     638,
+     670
+    ]
+   }
+  },
+  {
+   "name": "shark",
+   "aka": "grey shark (fish) swimming underwater",
+   "moves": true,
+   "description": "grey back, white belly, dorsal fin, forked tail; in the lower (deep blue) underwater band, head pointing LEFT",
+   "visible_frames": [
+    0,
+    53
+   ],
+   "occlusion": "none",
+   "motion": "swims to the LEFT (-x), horizontal (cy constant 903.6 +-0.3 px); speeds up from about 7.5 px/frame (frames 2-5) to about 14.7 px/frame (frames 48-53); tail fin oscillates (bbox length 254-264 px)",
+   "track": "tracks/shark.csv",
+   "reference_point": "mask centroid (cx, cy); bbox centre also given",
+   "extents_px": {
+    "length_nose_to_tail_bbox": "median 260 (254-264, tail motion)",
+    "height_dorsal_to_pectoral_bbox": "median 105 (104-106)",
+    "frame0_bbox": [
+     1544,
+     852,
+     1801,
+     956
+    ],
+    "frame53_bbox": [
+     958,
+     852,
+     1219,
+     956
+    ]
+   }
+  },
+  {
+   "name": "horizon",
+   "moves": false,
+   "description": "boundary between grey sky and grey-violet distant sea",
+   "y_px": 566,
+   "spans_x": [
+    0,
+    1919
+   ]
+  },
+  {
+   "name": "sea_surface_strip",
+   "moves": false,
+   "description": "grey-violet sea band between horizon and the blue underwater area; the boat sits in it",
+   "y_range_px": [
+    566,
+    672
+   ],
+   "height_px": 107
+  },
+  {
+   "name": "underwater_area",
+   "moves": false,
+   "description": "uniform blue lower part where the shark swims",
+   "y_range_px": [
+    673,
+    1079
+   ]
+  },
+  {
+   "name": "sky",
+   "moves": false,
+   "description": "uniform grey",
+   "y_range_px": [
+    0,
+    565
+   ]
+  }
+ ],
+ "events": [
+  {
+   "event": "boat_motion_start",
+   "frame": 1,
+   "time_s": 0.0417,
+   "note": "frames 0 and 1 identical for the boat; first displacement between frames 1 and 2"
+  },
+  {
+   "event": "shark_motion_start",
+   "frame": 1,
+   "time_s": 0.0417,
+   "note": "shark bbox identical in frames 0 and 1 (only tail pose changes); moves from frame 2 on"
+  },
+  {
+   "event": "boat_stern_enters_view",
+   "frame": 21,
+   "time_s": 0.875,
+   "note": "stern (left end) at x=1 at frame 20, x=19 at frame 21; full boat visible frames 21-53"
+  },
+  {
+   "event": "boat_ref_x_equals_shark_centroid_x",
+   "frame": null,
+   "time_s": null,
+   "note": "horizontal alignment only (boat is above the water line, shark below); fractional frame by linear interpolation"
+  },
+  {
+   "event": "boat_bow_x_equals_shark_nose_x",
+   "frame": 37.56,
+   "time_s": 1.565,
+   "note": "horizontal alignment only (boat is above the water line, shark below); fractional frame by linear interpolation"
+  },
+  {
+   "event": "boat_bow_x_equals_shark_centroid_x",
+   "frame": 40.88,
+   "time_s": 1.7033,
+   "note": "horizontal alignment only (boat is above the water line, shark below); fractional frame by linear interpolation"
+  },
+  {
+   "event": "boat_bow_x_equals_shark_tail_x",
+   "frame": 45.88,
+   "time_s": 1.9117,
+   "note": "horizontal alignment only (boat is above the water line, shark below); fractional frame by linear interpolation"
+  },
+  {
+   "event": "end_of_clip",
+   "frame": 53,
+   "time_s": 2.2083,
+   "note": "both still moving at the last frame"
+  }
+ ]
+}

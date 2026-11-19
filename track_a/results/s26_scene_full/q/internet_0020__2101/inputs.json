@@ -1,0 +1,18 @@
+{
+ "video": "internet_0020.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 19.594595,
+ "frames": 19,
+ "duration_s": 0.9697,
+ "width": 4096,
+ "height": 2160,
+ "question": {
+  "id": 2101,
+  "question": "What is the height of the pump bottle in cm?",
+  "prior": "height of the picked bottle = 11.7cm",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 25.0
+ }
+}

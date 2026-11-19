@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0133.mp4",
+ "video_source": "simulation",
+ "video_type": "A2MS",
+ "fps": 30.0,
+ "frames": 90,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1920,
+ "question": {
+  "id": 319,
+  "question": "What is the speed of the apple at time 1.2s, in m/s?",
+  "prior": "gravity acceleration = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

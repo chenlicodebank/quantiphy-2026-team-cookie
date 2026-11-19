@@ -1,0 +1,79 @@
+{
+  "video": "simulation_0158.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D (side view; both animals swim right-to-left in a plane facing the camera; apparent sizes constant once fully in view)",
+  "fps": 24.0,
+  "frames": 48,
+  "duration_s": 2.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale anywhere in this record",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the seabed band (y 820-1080) vs frame 0: |shift| <= 0.12 px in every frame checked (0,6,...,47); seabed outline identical in all frames",
+    "per_frame_background_shift_px": "0 for all frames",
+    "perspective": "none needed: 2D scene; shark nose-tail length constant 908-916 px over frames 26-37, turtle length ~305-333 px over frames 22-47 (variation = flipper/tail pose, not depth)"
+  },
+  "objects": [
+    {
+      "name": "shark",
+      "description": "large grey-blue shark (great-white type), upper band of the image (body centre y ~140), swims leftward; the only shark",
+      "moves": true,
+      "visible_frames": [0, 47],
+      "visibility": "frames 0-25 entering from the right edge (snout at x 1782 in frame 0); fully in view horizontally frames 26-37 (dorsal fin always cut by the top edge); frames 38-47 leaving through the left edge; frame 47 only the tail-fin tip (x 0-7) remains",
+      "track_file": "tracks/shark.csv",
+      "reference_point": "ref_x, ref_y = body centre (midpoint of snout tip and tail tip, y of the body axis) = (1124.5, 140) at frame 30 + rigid template-match shift; the true rig origin is not visible, but any fixed body point gives the same displacements",
+      "size_px": {
+        "length_snout_to_tail_tip": 911,
+        "length_range": [908, 916],
+        "length_frames": "26-37 (tail tip from mask x1, snout tip = 670 + shift_x, snout checked visually at frames 28 and 30)",
+        "body_depth_at_gills": 157,
+        "height_visible_bbox": "y 0..~257 (dorsal fin clipped by top image edge in every frame where it is in view -> true height > 258 px, not measurable)",
+        "pectoral_fin_lowest_y": 255
+      }
+    },
+    {
+      "name": "turtle",
+      "description": "sea turtle (leatherback-like ridged carapace), mid-height (body centre y ~550), right of centre, swims leftward below the shark; dark in early frames (lighting), lit blue later",
+      "moves": true,
+      "visible_frames": [0, 47],
+      "visibility": "frames 0-21 partly cut by the right edge (only head/front of shell visible in frames 0-9); fully in view frames 22-47",
+      "track_file": "tracks/turtle.csv",
+      "reference_point": "ref_x, ref_y = carapace centre = (1240, 550) at frame 40 + carapace template-match shift (three templates chained: frame 40, frame 26, frame 12 head+front shell)",
+      "size_px": {
+        "length_head_to_rear_flipper_bbox": "305-333 (frames 22-47; median ~320); 312 at frame 40",
+        "carapace_length": "~260 (x 1110-1370 at frame 40, visual)",
+        "height_bbox": "108-132 when flippers are swept back (frames 38-47); up to ~235 when front flippers point down (frames 15-25)",
+        "carapace_top_y": "492-494 (constant)"
+      }
+    },
+    {
+      "name": "seabed",
+      "description": "pale sandy dunes with animated turquoise caustic light spots, bottom of frame",
+      "moves": false,
+      "visible_frames": [0, 47],
+      "image_position": "top silhouette: y ~826 at x 0, ~900-980 at x 240-960 (front dune), crest ~792-800 at x 1000-1150 (rear dune), ~845 at x 1320, ~870 at x 1800",
+      "note": "caustic spots change from frame to frame (not objects)"
+    },
+    {
+      "name": "water / light rays",
+      "description": "blue water background with faint diagonal god-rays; static",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "both animals start almost at rest (shark ref moves 2 px, turtle 1 px in frame 0->1) and then accelerate steadily leftward for the whole clip"},
+    {"frame": 0, "t": 0.0, "event": "shark snout already in view at x 1782 (right edge entry); turtle head in view at x ~1775"},
+    {"frame": 22, "t": 0.917, "event": "turtle fully inside the frame (bbox x1 < 1919) from here on"},
+    {"frame": 26, "t": 1.083, "event": "shark tail tip enters the frame: whole shark length visible from here"},
+    {"frame": 37, "t": 1.542, "event": "last frame with the shark snout inside the frame (snout x ~89); frame 38 snout at x ~-5"},
+    {"frame": 47, "t": 1.958, "event": "shark almost gone (only tail-fin tip at x 0-7)"},
+    {"frames": "~5-25", "event": "turtle front flippers extended downward"},
+    {"frames": "~26-40", "event": "turtle front flippers sweep back (power stroke); from ~38 flippers trailing, body height ~108 px"},
+    {"event": "no contact: shark passes above the turtle (vertical gap between shark bottom y~257 and turtle top y~493)"}
+  ],
+  "motion_summary_px": {
+    "shark_ref_dx_per_frame": "-2 (f0->1) growing roughly linearly to about -107 (f46->47); y constant 140 +/- 3",
+    "turtle_ref_dx_per_frame": "-1 (f0->1) growing roughly linearly to about -43 (f46->47); y constant 550 +/- 2"
+  }
+}

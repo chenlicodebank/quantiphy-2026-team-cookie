@@ -1,0 +1,61 @@
+{
+ "video": "captured_0062.mp4",
+ "source": "lab (real capture, Orbbec Femto Mega RGB)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "image_size_px": [1280, 720],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "motion": "static (phase-correlation shift of the right wall region < 0.12 px in every frame; scene/tracks/camera_shift.csv)",
+  "intrinsics_from_benchmark_convention": {"hfov_deg": 80, "focal_px": 763, "principal_point_px": [640, 360], "note": "focal = 0.5959 x 1280; principal point assumed at image centre"},
+  "view": "elevated, looking down and forward along a carpeted room floor; floor recedes upward in the image; right wall/floor junction runs diagonally from about (700,90) to (1280,520); left wall at x < 130"
+ },
+ "moving_objects": {
+  "white_board": {
+   "description": "flat white rectangular board (white plastic board/tray) with two small clear clips on its far edge; lies flat on the floor and slides away from the camera, from the lower right toward the upper centre-left",
+   "distinguish": "the only large white object; the white tape strips on the floor are thin lines",
+   "visible_frames": "0-48 (frames 0-18 its near edge runs off the bottom of the image, so the near part is cut off)",
+   "moves": true,
+   "track": "tracks/white_board.csv (mask centroid = visible centre, bbox, minAreaRect long/short side and angle, area, cut flag); tracks/white_board_corners.csv (4 corners + edge lengths)",
+   "reference_point": "centroid of the board mask (visible centre). Biased toward the far edge in frames 0-18 while the board is cut by the image bottom",
+   "apparent_size": "minAreaRect long side 321 px (f0, cut) -> 299 (f24) -> 260 (f30) -> 230 (f36) -> 204 (f48); near edge 301 px (f0-20) -> 276 (f24) -> 222 (f36) -> 179 (f48); far edge 283 (f0) -> 236 (f24) -> 194 (f36) -> 162 (f48). It shrinks because it moves away from the camera",
+   "image_path": "centroid (961.7,631.7) at f0-15 -> (832.8,522.7) f24 -> (670.6,379.5) f36 -> (548.0,277.7) f48"
+  },
+  "basketball": {
+   "description": "orange basketball in the background behind (left of) the blue bin, next to the wooden cabinet",
+   "distinguish": "the only orange ball; the wooden cabinet behind it has a similar colour (hue 18-21 vs ball 10-15)",
+   "visible_frames": "0-48, always partly hidden by the blue bin (right side); in frames 0-17 only a small part shows",
+   "moves": true,
+   "motion_summary": "nearly still in frames 0-16, moves out to the left of the bin in frames 17-22 and down/toward the camera in frames 22-24, drifts back right behind the bin in frames 25-35, then comes out left and down again in frames 36-48 (still moving at the end)",
+   "track": "tracks/basketball.csv (visible-mask centroid, bbox, estimated diameter = vertical extent, estimated centre = left edge + d/2, vertical middle); low reliability, about +-4 px"
+  }
+ },
+ "static_objects": "static_objects.json (frame 48: centroid, bbox, minAreaRect length/width/angle in px). Verified still in all frames: milk_carton, plush_bear, blue_tote_bag, blue_bin, tennis_ball_near_tripod, wall_outlet_plate (mean abs diff vs frame 0 <= 6.4 grey levels). yellow_speck_floor and the two white tape strips are static floor features that the board covers or crosses",
+ "other_static_scene_items": {
+  "tripod": "black camera tripod at the left, legs spanning about x 100-300, y 0-270",
+  "wooden_cabinet": "light-brown cabinet at the top left, x 95-300, y 0-130",
+  "seated_person": "person seated at a desk at the top centre, legs/shoes visible about x 420-520, y 0-160 (small movements only)",
+  "standing_person": "person standing at the top centre-right, dark trousers, about x 600-665, y 0-185",
+  "cables": "orange extension cables and black cables along the right wall/floor junction and around the tripod",
+  "small_yellow_tape_mark": "small yellow mark near (995,385)"
+ },
+ "events": {
+  "board_at_rest": "frames 0-15 (t 0-0.625 s), centroid step < 0.1 px",
+  "board_motion_start": "frame 16 (t=0.667 s): first 1 px shift; frame 17 (t=0.708 s): clearly moving (11.7 px step). It is pushed in from below the frame; no pusher is visible",
+  "board_fastest_image_motion": "frames 19-22 (25-26 px/frame of centroid, partly from the cut-off part coming into view), then about 15-20 px/frame (f23-35), 12-15 px/frame (f37-48)",
+  "board_irregular_step": "frame 35->36 step = 31 px vs about 15 px in neighbouring frames: probably a dropped or duplicated capture frame (or a timing jitter); treat with care",
+  "board_end": "still sliding at frame 48 (11 px/frame); does not stop in the clip",
+  "basketball_motion": "starts moving about frame 17 (t=0.71 s); still moving at frame 48"
+ },
+ "files": {
+  "tracks/white_board.csv": "per-frame board mask track",
+  "tracks/white_board_corners.csv": "per-frame board corners (far-left, far-right, near-right, near-left) and edge lengths",
+  "tracks/basketball.csv": "per-frame basketball track (partial visibility)",
+  "tracks/camera_shift.csv": "per-frame camera shift (static check)",
+  "static_objects.json": "static object pixel extents",
+  "notes.md": "methods, reliability, ambiguities",
+  "scripts/": "all measurement scripts (run from scene_ws: track.py, then corners_post.py, static.py, checks.py)"
+ }
+}

@@ -1,0 +1,75 @@
+{
+  "video": "internet_0036.mp4",
+  "source": "internet",
+  "scene_type": "2D (top-down view of a hand-over over a plain light backdrop)",
+  "fps": 24.0625,
+  "frames": 69,
+  "width_px": 2160,
+  "height_px": 4096,
+  "time_convention": "t = frame / 24.0625, frame 0 at t = 0; pixel coords full resolution, x right, y down",
+  "camera": {
+    "motion": "static (assumed). Backdrop is a textureless light grey/blue gradient with soft shadows, so no background feature can be tracked; nothing in the footage suggests a pan or shake (the giver's arm enters at the same border position, 730-760 px x along the top edge, during frames 0-40). camera.csv phase-correlation values are not usable (response < 0.1)",
+    "perspective": "near top-down, roughly fronto-parallel to the hand-over plane; no ground markings, horizon or vanishing points. The bill looks 2-3% smaller in pixels after the receiver takes it (frames 50-64), probably because it moves a little or tilts away from the camera, or because of tracking scale drift under heavy motion blur"
+  },
+  "objects": [
+    {
+      "name": "bill",
+      "description": "US one-dollar banknote (Washington portrait, face up; long axis tilted about 44 deg up to the right in the image). It is the only bill and the only prop. The giver holds it at its upper long edge; the receiver takes it and carries it down-left out of the frame",
+      "moves": true,
+      "visible_frames": "0-67 (fully inside the frame 0-57; partly outside from 58; tracked 0-64; a blurred piece at the bottom-left corner in 65-66, a tiny corner in 67; gone in 68)",
+      "track": "tracks/bill.csv",
+      "reference_point": "cx,cy = centre of the tracked bill rectangle (intersection of its diagonals, including any part outside the frame); vis_cx,vis_cy = centroid of the part inside the frame",
+      "size_px_frame0": {
+        "long_edge_px": 1407,
+        "short_edge_px": 611,
+        "long_over_short": 2.30,
+        "how": "corners read by eye on 3x zooms of frame 0: left corner L (410,2028), bottom corner B (822,2479), right corner R (1839,1507); long = |R-B|, short = |B-L|. Top corner T (1427,1056) is inferred (parallelogram) because the top part is bent and partly hidden under the giver's fingers until the hand-over",
+        "bbox_frame0": [410, 1056, 1839, 2479],
+        "tracked_long_edge_range_px": "1397-1412 in frames 0-50, 1365-1394 in frames 51-64 (motion blur)"
+      }
+    },
+    {
+      "name": "hand_giver",
+      "description": "top hand and forearm, entering from the top/top-right edge; holds the bill at the start, lets go and pulls back up-right out of the frame",
+      "moves": true,
+      "visible_frames": "0-55",
+      "track": "tracks/hand_giver.csv",
+      "reference_point": "cx,cy = centroid of the visible skin mask (arm truncated by the frame edge); tip_x,tip_y = lowest skin pixel (fingertip)"
+    },
+    {
+      "name": "hand_receiver",
+      "description": "bottom hand and forearm, entering from the bottom-left corner; reaches up to the bill, grips it with the thumb on top (over the portrait), then pulls it down-left out of the frame",
+      "moves": true,
+      "visible_frames": "0-65 (at frame 0 only a small patch at the very bottom-left corner)",
+      "track": "tracks/hand_receiver.csv",
+      "reference_point": "cx,cy = centroid of the visible skin mask (truncated by the frame edge); tip_x,tip_y = highest skin pixel (fingertip / thumb tip)"
+    },
+    {
+      "name": "backdrop",
+      "description": "plain, seamless light grey-blue background with soft diagonal shadows; no markings, furniture or ground features",
+      "moves": false,
+      "visible_frames": "0-68"
+    }
+  ],
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "giver holds the bill still; receiver's fingertips just appear at the bottom-left corner"},
+    {"frame": "0-20", "t": "0.00-0.83", "event": "receiver's hand moves up-right toward the bill (tip y 3938 -> 1924 px)"},
+    {"frame": "15-24", "t": "0.62-1.00", "event": "receiver's hand reaches the bill and its thumb covers it (covered fraction 0.21 -> 0.34); grip settles by about frame 24-28"},
+    {"frame": "0-40", "t": "0.00-1.66", "event": "bill roughly stationary while both hands hold it (centre drifts by under 70 px, small jitters of up to 5.5 px/frame)"},
+    {"frame": 41, "t": 1.704, "event": "giver lets go; the bill starts to move down-left with the receiver (frame-to-frame step 3.4 -> 7.0 px at frame 42)"},
+    {"frame": "42-58", "t": "1.75-2.41", "event": "bill accelerates steadily down-left (step grows by about 10-14 px per frame, 7 -> 157 px/frame)"},
+    {"frame": "44-55", "t": "1.83-2.29", "event": "giver's hand pulls back up-right and leaves the frame (last visible frame 55)"},
+    {"frame": "58-64", "t": "2.41-2.66", "event": "bill's speed levels off near 190-200 px/frame and it crosses the bottom-left edge (in-frame fraction 0.98 at frame 58, 0.43 at frame 64)"},
+    {"frame": 64, "t": 2.66, "event": "bill centre crosses the left edge (cx = -65)"},
+    {"frame": "66-68", "t": "2.74-2.83", "event": "receiver's hand last visible in frame 65, bill's last corner in frame 67; frame 68 shows only the backdrop"}
+  ],
+  "files": {
+    "tracks/bill.csv": "per-frame bill corners, centre, bbox, edge lengths, angle, in-frame fraction, hand-covered fraction",
+    "tracks/hand_giver.csv": "per-frame skin-mask centroid, bbox, fingertip, area",
+    "tracks/hand_receiver.csv": "same, for the receiver",
+    "tracks/camera.csv": "phase-correlation background shift (unreliable, see notes)",
+    "tracks/bill_raw.npz": "raw tracked corner quads",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

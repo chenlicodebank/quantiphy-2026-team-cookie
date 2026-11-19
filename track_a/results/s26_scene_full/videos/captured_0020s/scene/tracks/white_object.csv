@@ -1,0 +1,50 @@
+frame,t_s,cx,cy,bbox_x0,bbox_y0,bbox_x1,bbox_y1,bbox_w,bbox_h,mask_len_major,mask_wid_minor,major_axis_deg,mask_area,occluded,note
+0,0.0000,307.4,509.3,288,494,323,531,36,38,36.9,37.6,77,839,2,held by near person (swing)
+1,0.0417,297.5,525.8,278,512,313,545,36,34,34.8,35.8,56,813,2,held by near person (swing)
+2,0.0833,287.8,538.5,256,524,303,558,48,35,44.8,37.0,36,769,2,held by near person (swing)
+3,0.1250,280.6,547.4,262,534,295,564,34,31,31.8,34.1,64,707,2,held by near person (swing)
+4,0.1667,275.9,553.0,259,540,291,571,33,32,38.5,33.7,124,658,2,held by near person (swing)
+5,0.2083,276.0,553.3,260,540,291,571,32,32,37.1,34.1,116,623,2,held by near person (swing)
+6,0.2500,281.3,547.5,264,534,295,567,32,34,33.5,31.7,86,648,2,held by near person (swing)
+7,0.2917,290.4,536.9,272,522,307,554,36,33,37.6,36.6,111,813,2,held by near person (swing)
+8,0.3333,305.2,517.8,272,504,321,538,50,35,50.5,37.4,36,812,2,held by near person (swing)
+9,0.3750,324.0,493.7,295,478,341,518,47,41,45.8,47.6,111,911,2,held by near person (swing)
+10,0.4167,344.7,462.8,329,444,361,488,33,45,47.2,32.6,100,911,2,held by near person (swing)
+11,0.4583,363.7,424.8,346,405,380,452,35,48,49.0,33.1,101,977,2,held by near person (swing)
+12,0.5000,392.5,332.8,376,312,407,359,32,48,48.6,31.4,94,954,2,held by near person (swing)
+13,0.5417,402.0,280.8,384,256,419,308,36,53,53.0,33.8,99,1295,2,held by near person (swing)
+14,0.5833,408.1,237.5,380,209,428,267,49,59,62.5,46.2,113,1587,0,touching a hand; white pixels only; free flight
+15,0.6250,418.7,190.8,400,164,437,219,38,56,61.4,34.1,112,1563,0,free flight
+16,0.6667,434.1,150.1,416,126,455,176,40,51,56.0,34.5,116,1467,0,free flight
+17,0.7083,449.5,117.2,427,92,470,140,44,49,54.7,35.2,123,1404,0,free flight
+18,0.7500,466.6,84.5,443,52,504,111,62,60,71.3,41.6,124,1646,0,crosses yellow toy in image (in front of it at 18); free flight
+19,0.7917,472.6,68.0,422,46,501,103,80,58,89.6,36.8,155,1505,0,crosses yellow toy in image (in front of it at 18); free flight
+20,0.8333,500.9,48.5,480,32,519,63,40,32,43.9,32.7,159,991,0,free flight
+21,0.8750,518.1,44.0,500,29,538,60,39,32,41.3,32.8,155,980,0,free flight
+22,0.9167,536.7,37.0,519,24,555,51,37,28,37.8,28.9,171,839,0,free flight
+23,0.9583,557.1,40.9,541,24,576,59,36,36,38.5,34.7,36,958,0,free flight
+24,1.0000,573.1,47.1,558,34,587,61,30,28,31.8,25.7,26,578,0,free flight
+25,1.0417,594.0,57.6,578,46,607,71,30,26,34.0,23.9,34,532,0,free flight
+26,1.0833,611.7,71.8,598,59,626,87,29,29,34.3,28.7,54,516,0,"free flight, touching far person hand (bright-white pixels only)"
+27,1.1250,627.2,89.0,618,76,636,109,19,34,31.9,20.9,81,333,2,contact with far person hands (catch)
+28,1.1667,645.6,108.9,635,86,655,117,21,32,36.7,20.0,54,271,2,caught/held by far person in her hands (partly covered by fingers)
+29,1.2083,652.1,115.5,642,104,662,124,21,21,24.3,21.6,20,277,2,caught/held by far person in her hands (partly covered by fingers)
+30,1.2500,660.2,122.0,650,112,670,129,21,18,21.8,19.1,13,244,2,caught/held by far person in her hands (partly covered by fingers)
+31,1.2917,668.6,130.0,659,120,678,137,20,18,20.0,18.0,180,238,2,caught/held by far person in her hands (partly covered by fingers)
+32,1.3333,676.3,138.8,666,127,685,147,20,21,20.0,21.1,179,228,2,caught/held by far person in her hands (partly covered by fingers)
+33,1.3750,683.7,148.2,673,139,695,155,23,17,24.6,17.7,12,252,2,caught/held by far person in her hands (partly covered by fingers)
+34,1.4167,691.4,155.9,681,144,703,165,23,22,27.4,17.9,34,316,2,caught/held by far person in her hands (partly covered by fingers)
+35,1.4583,698.2,163.0,688,148,709,170,22,23,24.8,20.8,23,249,2,caught/held by far person in her hands (partly covered by fingers)
+36,1.5000,704.6,160.2,696,147,715,167,20,21,20.1,21.3,179,196,2,caught/held by far person in her hands (partly covered by fingers)
+37,1.5417,704.6,155.3,696,145,715,163,20,19,22.3,19.0,19,217,2,caught/held by far person in her hands (partly covered by fingers)
+38,1.5833,701.8,149.4,693,136,713,157,21,22,25.8,18.8,25,222,2,caught/held by far person in her hands (partly covered by fingers)
+39,1.6250,697.7,142.4,688,132,709,150,22,19,22.3,19.9,14,255,2,caught/held by far person in her hands (partly covered by fingers)
+40,1.6667,693.3,133.5,680,115,703,141,24,27,35.0,18.0,48,251,2,caught/held by far person in her hands (partly covered by fingers)
+41,1.7083,686.8,123.7,676,107,697,132,22,26,32.9,20.7,47,292,2,caught/held by far person in her hands (partly covered by fingers)
+42,1.7500,680.8,112.0,672,101,691,121,20,21,25.2,19.6,55,301,2,caught/held by far person in her hands (partly covered by fingers)
+43,1.7917,674.3,100.6,663,89,683,110,21,22,22.7,19.7,40,295,2,caught/held by far person in her hands (partly covered by fingers)
+44,1.8333,668.5,89.7,657,78,678,98,22,21,20.8,22.4,110,275,2,caught/held by far person in her hands (partly covered by fingers)
+45,1.8750,663.1,79.4,652,68,673,88,22,21,21.9,21.1,110,268,2,caught/held by far person in her hands (partly covered by fingers)
+46,1.9167,658.4,72.4,647,63,668,81,22,19,22.8,19.0,149,267,2,caught/held by far person in her hands (partly covered by fingers)
+47,1.9583,655.4,69.1,643,60,666,77,24,18,24.1,22.1,157,271,2,caught/held by far person in her hands (partly covered by fingers)
+48,2.0000,649.8,70.9,641,50,658,77,18,28,31.3,18.7,44,165,2,caught/held by far person in her hands (partly covered by fingers)

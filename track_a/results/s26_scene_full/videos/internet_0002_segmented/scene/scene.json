@@ -1,0 +1,420 @@
+{
+ "video": "internet_0002_segmented.mp4",
+ "source": "segmentation (SAM2-segmented internet footage; background blacked out)",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 44,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "view": "top-down (nadir) aerial view of a multi-lane road; vehicles drive left->right; road axis ~ image x axis",
+ "camera": {
+  "motion": "static",
+  "evidence": "19 lane dashes tracked in every frame: median shift vs frame 0 within |dx|<0.45 px, |dy|<0.37 px (slow sub-pixel drift only), see camera_markings.json",
+  "per_frame_background_shift": "camera_markings.json -> per_frame_shift (dx_med, dy_med)"
+ },
+ "duplicate_frames": {
+  "frames": [
+   3,
+   8,
+   14,
+   19,
+   25,
+   30,
+   36,
+   41
+  ],
+  "note": "these frames repeat the previous frame (frame-rate conversion ~20 fps -> 24 fps); vehicle displacement is 0 into them and ~double out of them. Frame-to-frame mean abs grey difference listed in frame_diff_mean_abs.",
+  "frame_diff_mean_abs": [
+   1.987,
+   1.935,
+   0.076,
+   2.011,
+   1.989,
+   1.98,
+   2.013,
+   0.102,
+   2.286,
+   2.584,
+   2.761,
+   2.777,
+   2.771,
+   0.111,
+   2.784,
+   2.696,
+   2.553,
+   2.464,
+   0.061,
+   2.425,
+   2.398,
+   2.401,
+   2.42,
+   2.784,
+   0.047,
+   2.841,
+   2.893,
+   3.004,
+   3.203,
+   0.552,
+   3.553,
+   3.327,
+   3.524,
+   3.645,
+   3.692,
+   0.077,
+   3.521,
+   3.417,
+   3.451,
+   3.346,
+   0.06,
+   3.27,
+   3.199
+  ]
+ },
+ "objects": {
+  "dark_car_top_lane": {
+   "description": "dark grey car in the top lane, already at x~700-860 in f0, exits right edge ~f12-15",
+   "moves": true,
+   "direction": "left to right (+x); centroid y drifts slowly (+y): red ~+48 px over f0-f36, others a few px",
+   "visible_frames": [
+    0,
+    15
+   ],
+   "fully_in_view_frames": [
+    0,
+    11
+   ],
+   "length_px_median_full_view": 154.0,
+   "length_px_range": [
+    151,
+    157
+   ],
+   "width_px_median_full_view": 66.0,
+   "track_csv": "tracks/dark_car_top_lane.csv"
+  },
+  "white_car_top_lane": {
+   "description": "white/silver sedan in the top lane just below the guardrail; enters at left edge f9, moves right",
+   "moves": true,
+   "direction": "left to right (+x); centroid y drifts slowly (+y): red ~+48 px over f0-f36, others a few px",
+   "visible_frames": [
+    9,
+    43
+   ],
+   "fully_in_view_frames": [
+    13,
+    43
+   ],
+   "length_px_median_full_view": 158.0,
+   "length_px_range": [
+    156,
+    162
+   ],
+   "width_px_median_full_view": 70.0,
+   "track_csv": "tracks/white_car_top_lane.csv"
+  },
+  "dark_car2_top_lane": {
+   "description": "second dark grey car in the top lane, enters at left edge f33 behind the white car",
+   "moves": true,
+   "direction": "left to right (+x); centroid y drifts slowly (+y): red ~+48 px over f0-f36, others a few px",
+   "visible_frames": [
+    33,
+    43
+   ],
+   "fully_in_view_frames": [
+    38,
+    43
+   ],
+   "length_px_median_full_view": 166.5,
+   "length_px_range": [
+    163,
+    175
+   ],
+   "width_px_median_full_view": 57.0,
+   "track_csv": "tracks/dark_car2_top_lane.csv"
+  },
+  "red_pickup_mid_lane": {
+   "description": "red/orange vehicle (pickup/SUV; grey-blue section at its left (trailing) end, red body, light front at right end), lane between dash rows y~330 and y~435; the main subject, crosses the whole frame left->right",
+   "moves": true,
+   "direction": "left to right (+x); centroid y drifts slowly (+y): red ~+48 px over f0-f36, others a few px",
+   "visible_frames": [
+    0,
+    42
+   ],
+   "fully_in_view_frames": [
+    0,
+    36
+   ],
+   "length_px_median_full_view": 184.0,
+   "length_px_range": [
+    179,
+    190
+   ],
+   "width_px_median_full_view": 70.0,
+   "track_csv": "tracks/red_pickup_mid_lane.csv"
+  },
+  "gray_car_low_lane": {
+   "description": "dark grey car in the lane below the red pickup (between dash rows y~435 and y~540); enters at left edge f24",
+   "moves": true,
+   "direction": "left to right (+x); centroid y drifts slowly (+y): red ~+48 px over f0-f36, others a few px",
+   "visible_frames": [
+    24,
+    43
+   ],
+   "fully_in_view_frames": [
+    29,
+    43
+   ],
+   "length_px_median_full_view": 176.0,
+   "length_px_range": [
+    170,
+    179
+   ],
+   "width_px_median_full_view": 62.0,
+   "track_csv": "tracks/gray_car_low_lane.csv"
+  }
+ },
+ "static_objects": {
+  "guardrail": {
+   "description": "grey guardrail/barrier band along the top edge",
+   "y_range_px": [
+    0,
+    24
+   ],
+   "spans_full_width": true
+  },
+  "lane_dash_rows": [
+   {
+    "mean_y": 118.5,
+    "slope_dy_per_dx": 0.0043,
+    "dashes": [
+     {
+      "cx": 210.9,
+      "cy": 116.0,
+      "length_px": 103,
+      "thickness_px": 11
+     },
+     {
+      "cx": 592.8,
+      "cy": 120.3,
+      "length_px": 99,
+      "thickness_px": 10
+     },
+     {
+      "cx": 974.6,
+      "cy": 119.3,
+      "length_px": 101,
+      "thickness_px": 10
+     }
+    ],
+    "dash_center_spacing_px": [
+     381.9,
+     381.8
+    ]
+   },
+   {
+    "mean_y": 221.1,
+    "slope_dy_per_dx": 0.0055,
+    "dashes": [
+     {
+      "cx": 220.0,
+      "cy": 218.4,
+      "length_px": 101,
+      "thickness_px": 12
+     },
+     {
+      "cx": 603.5,
+      "cy": 222.3,
+      "length_px": 100,
+      "thickness_px": 9
+     },
+     {
+      "cx": 981.9,
+      "cy": 222.6,
+      "length_px": 103,
+      "thickness_px": 10
+     }
+    ],
+    "dash_center_spacing_px": [
+     383.5,
+     378.4
+    ]
+   },
+   {
+    "mean_y": 329.8,
+    "slope_dy_per_dx": 0.0039,
+    "dashes": [
+     {
+      "cx": 250.1,
+      "cy": 328.0,
+      "length_px": 104,
+      "thickness_px": 11
+     },
+     {
+      "cx": 631.5,
+      "cy": 330.4,
+      "length_px": 102,
+      "thickness_px": 10
+     },
+     {
+      "cx": 1013.6,
+      "cy": 331.0,
+      "length_px": 107,
+      "thickness_px": 12
+     }
+    ],
+    "dash_center_spacing_px": [
+     381.4,
+     382.1
+    ]
+   },
+   {
+    "mean_y": 436.7,
+    "slope_dy_per_dx": 0.0074,
+    "dashes": [
+     {
+      "cx": 247.3,
+      "cy": 434.1,
+      "length_px": 102,
+      "thickness_px": 11
+     },
+     {
+      "cx": 630.2,
+      "cy": 436.3,
+      "length_px": 98,
+      "thickness_px": 10
+     },
+     {
+      "cx": 1014.8,
+      "cy": 439.8,
+      "length_px": 103,
+      "thickness_px": 10
+     }
+    ],
+    "dash_center_spacing_px": [
+     382.9,
+     384.6
+    ]
+   },
+   {
+    "mean_y": 538.7,
+    "slope_dy_per_dx": 0.0078,
+    "dashes": [
+     {
+      "cx": 218.8,
+      "cy": 535.5,
+      "length_px": 103,
+      "thickness_px": 10
+     },
+     {
+      "cx": 688.8,
+      "cy": 538.4,
+      "length_px": 99,
+      "thickness_px": 10
+     },
+     {
+      "cx": 1076.1,
+      "cy": 542.2,
+      "length_px": 103,
+      "thickness_px": 10
+     }
+    ],
+    "dash_center_spacing_px": [
+     470.0,
+     387.3
+    ]
+   },
+   {
+    "mean_y": 648.5,
+    "slope_dy_per_dx": 0.0035,
+    "dashes": [
+     {
+      "cx": 38.8,
+      "cy": 646.3,
+      "length_px": 84,
+      "thickness_px": 13
+     },
+     {
+      "cx": 418.6,
+      "cy": 647.9,
+      "length_px": 105,
+      "thickness_px": 9
+     },
+     {
+      "cx": 798.1,
+      "cy": 649.4,
+      "length_px": 105,
+      "thickness_px": 10
+     },
+     {
+      "cx": 1186.1,
+      "cy": 650.3,
+      "length_px": 106,
+      "thickness_px": 11
+     }
+    ],
+    "dash_center_spacing_px": [
+     379.8,
+     379.5,
+     388.0
+    ]
+   }
+  ],
+  "lane_dash_summary": "white dashed lane lines in 6 rows (y~117,220,330,435,540,648 at x~600); dashes ~98-107 px long (threshold grey>60), ~9-12 px thick; dash-centre spacing along a row ~380-388 px (row y~539 has one gap of 470 px: dash positions are as listed); lane width (row to row) ~105 px; rows tilt slightly downward to the right (slope ~0.005-0.01)",
+  "watermark": "\"Modified with Segment Anything 2 Demo\" text bottom-right, y>695"
+ },
+ "events": [
+  {
+   "event": "dark_car_top_lane front reaches right edge",
+   "frame": 12,
+   "time": 0.5
+  },
+  {
+   "event": "dark_car_top_lane leaves view (last visible)",
+   "frame": 15,
+   "time": 0.625
+  },
+  {
+   "event": "white_car_top_lane enters at left edge",
+   "frame": 9,
+   "time": 0.375
+  },
+  {
+   "event": "white_car_top_lane fully in view",
+   "frame": 13,
+   "time": 0.5417
+  },
+  {
+   "event": "gray_car_low_lane enters at left edge",
+   "frame": 24,
+   "time": 1.0
+  },
+  {
+   "event": "gray_car_low_lane fully in view",
+   "frame": 29,
+   "time": 1.2083
+  },
+  {
+   "event": "dark_car2_top_lane enters at left edge",
+   "frame": 33,
+   "time": 1.375
+  },
+  {
+   "event": "dark_car2_top_lane fully in view",
+   "frame": 38,
+   "time": 1.5833
+  },
+  {
+   "event": "red_pickup front reaches right edge",
+   "frame": 37,
+   "time": 1.5417
+  },
+  {
+   "event": "red_pickup last visible (sliver)",
+   "frame": 42,
+   "time": 1.75
+  },
+  {
+   "note": "all vehicles move continuously for the whole time they are visible; no stops, contacts or direction reversals"
+  }
+ ]
+}

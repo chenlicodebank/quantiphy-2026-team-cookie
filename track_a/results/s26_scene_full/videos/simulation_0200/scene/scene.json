@@ -1,0 +1,91 @@
+{
+  "video": "simulation_0200.mp4",
+  "source": "simulation (Blender render)",
+  "scene_type": "2D",
+  "fps": 60.0,
+  "frames": 14,
+  "duration_s": 0.2333,
+  "image_size_px": [2560, 2560],
+  "time_convention": "t = frame / 60; frame 0 at t = 0",
+  "pixel_convention": "x right, y DOWN, origin at top-left of the 2560x2560 image",
+  "camera": {
+    "motion": "static (no pan/shake: static objects identical between frames; frame 13 used as clean background, diff outside the drop is noise only)",
+    "view": "low side view, slightly upward-looking (bottle base slightly below pedestal top edge); drop falls in a plane facing the camera; no visible ground plane or horizon",
+    "per_frame_background_shift_px": 0
+  },
+  "objects": [
+    {
+      "name": "drop",
+      "aliases": ["droplet", "serum drop", "liquid drop", "oil drop"],
+      "description": "single translucent amber/brown teardrop, pointed tip UP and rounded bottom, falls from the glass pipette tip straight down to the right of the bottle",
+      "moves": true,
+      "visible_frames": [0, 11],
+      "track_file": "tracks/drop.csv",
+      "reference_point": "centre of the drop's bounding box (taken as the object origin)",
+      "size_px": {"height_vertical": 86, "width_horizontal": 57, "uncertainty_px": 2,
+                  "note": "constant shape (rigid-like) in all frames; measured on clean frames 2-5"},
+      "motion_summary_px": "falls vertically; x stays 1175.2-1176.3 px; cy 560.45 (f0) -> 2327.34 (f11); per-frame dy = 16.4, 44.5, 73.5, 102.6, 132.0, 161.2, 189.8, 220.0, 247.2, 276.1, 303.7 px; total vertical drop 1766.9 px over 11 frames"
+    },
+    {
+      "name": "dropper_pipette",
+      "aliases": ["dropper", "glass pipette", "pipette tip"],
+      "description": "glass pipette with white rubber bulb/cap, lying tilted across the bottle mouth, tip pointing down-right; the drop hangs from its tip at frame 0",
+      "moves": false,
+      "visible_frames": [0, 13],
+      "image_position_px": {
+        "white_cap_and_bulb_bbox": [665, 105, 1000, 385],
+        "glass_tube": "from about (930, 330) to tip ring centre (1172, 510); tube axis tilted ~37 deg below horizontal",
+        "tip_ring": {"centre": [1172, 510], "outer_diameter": 52}
+      },
+      "reliability": "approximate +/- 5-10 px (read from grid images; transparent glass edges)"
+    },
+    {
+      "name": "bottle",
+      "aliases": ["serum bottle", "amber bottle", "SKYNOVA bottle", "glass bottle"],
+      "description": "frosted glass bottle with amber/orange liquid, vertical text SKYNOVA on its right side; stands on the pedestal",
+      "moves": false,
+      "visible_frames": [0, 13],
+      "image_position_px": {
+        "body_bbox": [703, 395, 1072, 1048],
+        "body_width_px": 369,
+        "height_base_to_neck_top_px": 653,
+        "neck_threads_x_range": [762, 1015],
+        "neck_top_y": 395,
+        "shoulder_y": 560,
+        "base_y": "1025 (front-left, at pedestal edge) to 1048 (lowest point of base rim)",
+        "amber_liquid_bbox": [720, 645, 1071, 1044],
+        "total_height_with_dropper_cap_px": "~943 (y 105 to 1048)"
+      },
+      "reliability": "+/- 5 px for side edges (frosted glass edges soft)"
+    },
+    {
+      "name": "pedestal",
+      "aliases": ["block", "plinth", "white box", "stand", "table"],
+      "description": "large light-grey/white rectangular block on the left whose top surface the bottle stands on; extends past the left and bottom image borders",
+      "moves": false,
+      "visible_frames": [0, 13],
+      "image_position_px": {
+        "top_edge_y": 1026,
+        "front_face_right_edge_x": "954 at y=1100, 945 at y=1500, ~941 at y=2500 (slight perspective lean)",
+        "side_face_right_edge_x": "~1000 at top (thin darker side face 954-1000), faint",
+        "visible_front_face": "x 0-954, y 1026-2560 (cut by image edges), so its full size is NOT visible",
+        "visible_height_px": 1534
+      },
+      "reliability": "top edge +/- 1 px; right edge +/- 3 px"
+    },
+    {
+      "name": "background_wall",
+      "description": "plain grey studio backdrop with vignette (darker at the bottom and corners); no markings",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "drop pinch-off / release from pipette tip (drop still touching tip, at rest)", "frame": 0, "time_s": 0.0},
+    {"event": "drop clearly detached, free fall", "frame": 1, "time_s": 0.01667},
+    {"event": "drop passes level of pedestal top edge (y 1026)", "frame": "between 5 (cy 929) and 6 (cy 1091)", "time_s": "0.083-0.100"},
+    {"event": "drop last visible (centre y 2327)", "frame": 11, "time_s": 0.18333},
+    {"event": "drop leaves the image through the bottom edge; no impact/splash seen", "frame": 12, "time_s": 0.2}
+  ],
+  "perspective": "2D scene: drop path is a vertical line at x~1175.6 px in a plane facing the camera. Drop apparent size constant (86x57 px) during the whole fall, so no measurable depth change.",
+  "files": {"tracks": ["tracks/drop.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

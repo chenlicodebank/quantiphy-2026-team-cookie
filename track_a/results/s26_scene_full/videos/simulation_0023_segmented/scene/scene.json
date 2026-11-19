@@ -1,0 +1,102 @@
+{
+ "video": "simulation_0023_segmented.mp4",
+ "source": "segmentation (Blender render, background replaced by white)",
+ "scene": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "width": 960,
+ "height": 960,
+ "time_of_frame_i": "t = i / 25",
+ "camera": {
+  "motion": "static (assumed: simulation camera fixed within clip; background is uniform white so no background features to verify, but boat hull bottom/size change smoothly with no jitter)",
+  "perspective_cues": "no ground plane, horizon or water visible (segmented). Boat seen in 3/4 view from slightly above (deck visible). Boat shrinks smoothly over the clip -> it recedes from the camera while moving left."
+ },
+ "objects": {
+  "boat": {
+   "description": "red/pink-hulled fishing boat (trawler) with white/grey wheelhouse, tall mast with crossbar, black chimney/davit; the large object in the left-centre",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "track": "tracks/boat.csv",
+   "motion": "translates leftwards (image -x) about 3.88 px/frame (centroid), nearly constant; hull bottom rises 632->617 px and hull width shrinks 258->226 px (receding from camera); mast crossbar visible frames 0-~4 and ~37-74 but edge-on in between (small yaw/rock)",
+   "pixel_size_frame0": {
+    "bbox_w_px": 261,
+    "bbox_h_px_mast_top_to_keel": 329,
+    "hull_w_px": 258,
+    "hull_h_px": 98
+   },
+   "pixel_size_frame74": {
+    "bbox_w_px": 228,
+    "bbox_h_px_mast_top_to_keel": 305,
+    "hull_w_px": 226,
+    "hull_h_px": 91
+   },
+   "apparent_scale_change": "hull_w ratio frame74/frame0 = 0.876; keel-to-mast-top height ratio ~ 0.927 (mast tip faint, +-8 px)",
+   "reference_point": "origin unknown; recorded bbox centre (ref_x, ref_y), mask centroid, hull bbox centre (hull_cx, hull_cy) and keel line (hull_y1). For a boat model the origin is most likely near the hull centre (hull_cx, hull_cy)."
+  },
+  "bird": {
+   "description": "small dark-brown flying bird (gull/eagle-like) with flapping wings, flies left to right at mast height (y ~370-400 px)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    66
+   ],
+   "track": "tracks/bird.csv",
+   "motion": "flies rightwards about 11.2 px/frame (bbox centre, noisy because of wing flapping), slight vertical undulation y 368-398 px; passes the boat's mast frames 10-13 (merged in mask, flagged occluded); leaves through right image edge frames 63-66, absent 67-74",
+   "size_px": {
+    "bbox_w_range_unclipped": [
+     23,
+     54
+    ],
+    "bbox_h_range_unclipped": [
+     9,
+     34
+    ],
+    "median_bbox_w": 38.0,
+    "median_bbox_h": 20.0
+   },
+   "reference_point": "bbox centre (ref_x, ref_y); centroid also given. Wingspan changes with flapping: use bbox_w/len_main_axis min and max for min/max wingspan."
+  }
+ },
+ "static_objects": "none: background removed by segmentation (uniform white); no ground, water or markings.",
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "clip start; boat and bird both already moving (boat left, bird right)"
+  },
+  {
+   "frame": 10,
+   "t": 0.4,
+   "event": "bird reaches boat mast (touches mast in mask)"
+  },
+  {
+   "frame": 13,
+   "t": 0.52,
+   "event": "bird clears mast on its right side (overlap frames 10-13, bird crosses mast ~frame 11-12)"
+  },
+  {
+   "frame": 63,
+   "t": 2.52,
+   "event": "bird begins to be cut by right image edge"
+  },
+  {
+   "frame": 66,
+   "t": 2.64,
+   "event": "last frame with bird visible (sliver)"
+  },
+  {
+   "frame": 67,
+   "t": 2.68,
+   "event": "bird out of view for rest of clip"
+  },
+  {
+   "frame": 74,
+   "t": 2.96,
+   "event": "clip end; boat still moving left"
+  }
+ ],
+ "notes_file": "notes.md"
+}

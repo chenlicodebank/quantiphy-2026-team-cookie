@@ -1,0 +1,196 @@
+{
+ "video": "simulation_0199.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 60.0,
+ "frames": 14,
+ "width": 2560,
+ "height": 2560,
+ "time_rule": "t = frame/60; frame = round(t*60)",
+ "units": "pixels (full 2560x2560 resolution, x right, y down) and seconds",
+ "camera": {
+  "motion": "static",
+  "evidence": "mean |frame0-frame13| = 0.14 grey levels outside the droplet; no background shift",
+  "view": "product shot, side view, slight low angle; 2D scene (droplet falls in a plane facing the camera)"
+ },
+ "objects": [
+  {
+   "name": "droplet",
+   "desc": "single amber/brown teardrop-shaped serum drop, point up, falling from the dropper tip; the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    10
+   ],
+   "track": "tracks/droplet.csv",
+   "size_px": {
+    "height_vertical_bbox": "88-90 (frames 0-7; 83-86 in 8-10 because of motion blur/low contrast at the tip)",
+    "width_horizontal_bbox": "55-58",
+    "major_axis_len": "~89",
+    "minor_axis_width": "~57",
+    "mask_area": "~3200 px^2"
+   },
+   "reference_point": "mask centroid (cx, cy); bbox centre (bbox_cx, bbox_cy) also given; centroid sits ~5 px below bbox centre because of the teardrop shape"
+  },
+  {
+   "name": "dropper",
+   "desc": "glass pipette with white/grey rubber bulb and cap collar, lying tilted across the open bottle neck, tip at lower left",
+   "moves": false,
+   "visible_frames": [
+    0,
+    13
+   ],
+   "size_px": {
+    "tip_point": [
+     1440,
+     700
+    ],
+    "tip_opening_centre": [
+     1460,
+     690
+    ],
+    "bulb_end": [
+     2262,
+     170
+    ],
+    "overall_length_tip_to_bulb_end": "~980 (along its tilted axis, ~33 deg above horizontal)",
+    "glass_tube_diameter": "~40-45",
+    "bulb_diameter": "~110-120",
+    "cap_collar_x_range": [
+     1810,
+     2170
+    ]
+   },
+   "accuracy": "+-15 px (soft, translucent, out-of-focus bulb)"
+  },
+  {
+   "name": "bottle",
+   "desc": "frosted glass serum bottle with amber liquid, label 'SKYNOVA / RADIANCE / VITAMIN B / 30ml', open neck with screw threads, standing on the pedestal",
+   "moves": false,
+   "visible_frames": [
+    0,
+    13
+   ],
+   "size_px": {
+    "body_x_range": [
+     1704,
+     2131
+    ],
+    "body_width": 427,
+    "shoulder_top_y": "~675",
+    "bottom_y": "~1246",
+    "body_height_shoulder_to_bottom": "~570",
+    "neck_threads_x_range": [
+     1780,
+     2065
+    ],
+    "neck_top_y": "~495",
+    "overall_height_neck_top_to_bottom": "~750",
+    "liquid_top_y": "~778"
+   },
+   "accuracy": "body sides +-3 px; top/shoulder +-10 px"
+  },
+  {
+   "name": "pedestal",
+   "desc": "light-grey/white block (plinth) the bottle stands on, from x~1650 to the right frame edge, top at y=1232 down to the bottom edge",
+   "moves": false,
+   "visible_frames": [
+    0,
+    13
+   ],
+   "size_px": {
+    "top_edge_y": 1232,
+    "left_edge_x": "1666 at y=1500, 1649 at y=2500 (slight lean)",
+    "visible_width": "~900 (to frame edge, cut off)",
+    "visible_height": "~1328 (cut off by frame bottom)"
+   },
+   "accuracy": "+-3 px"
+  },
+  {
+   "name": "background_wall",
+   "desc": "plain grey studio backdrop with vignette",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "droplet detaching from dropper tip / start of fall",
+   "frame": 0,
+   "t": 0.0,
+   "note": "frame 0 drop top (y=698) still touches the glass tip (tip ~y 690-700); step 0->1 is 17 px, then 48, 81, ... - consistent with release at ~frame 0 from rest"
+  },
+  {
+   "event": "droplet fully clear of the dropper",
+   "frame": 2,
+   "t": 0.0333
+  },
+  {
+   "event": "droplet last fully visible",
+   "frame": 10,
+   "t": 0.1667,
+   "note": "bottom at y=2381"
+  },
+  {
+   "event": "droplet leaves bottom of frame (not visible)",
+   "frame": 11,
+   "t": 0.1833
+  },
+  {
+   "event": "no impact / bounce in view; frames 11-13 show only the static scene"
+  }
+ ],
+ "droplet_per_frame_centroid_steps_px": [
+  {
+   "frame": 1,
+   "dx": -0.08,
+   "dy": 17.11
+  },
+  {
+   "frame": 2,
+   "dx": 0.47,
+   "dy": 48.29
+  },
+  {
+   "frame": 3,
+   "dx": -2.26,
+   "dy": 80.99
+  },
+  {
+   "frame": 4,
+   "dx": -0.97,
+   "dy": 111.46
+  },
+  {
+   "frame": 5,
+   "dx": -1.92,
+   "dy": 145.18
+  },
+  {
+   "frame": 6,
+   "dx": -2.87,
+   "dy": 175.97
+  },
+  {
+   "frame": 7,
+   "dx": -3.3,
+   "dy": 206.94
+  },
+  {
+   "frame": 8,
+   "dx": -2.97,
+   "dy": 236.53
+  },
+  {
+   "frame": 9,
+   "dx": -2.97,
+   "dy": 269.77
+  },
+  {
+   "frame": 10,
+   "dx": -4.22,
+   "dy": 300.96
+  }
+ ],
+ "droplet_motion_summary_px": "nearly vertical fall; drifts left ~21 px total (x 1449 -> 1428) while falling 1593 px (y 748 -> 2341); vertical step grows ~31-33 px per frame each frame (constant acceleration)",
+ "perspective": "2D scene; the droplet stays the same pixel size (89x57) throughout, so it moves in a plane at constant depth; it falls in front of the backdrop and pedestal-left region (x~1430, left of the pedestal edge at ~1660)"
+}

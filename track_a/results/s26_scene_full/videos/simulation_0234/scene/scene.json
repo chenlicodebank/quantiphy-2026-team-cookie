@@ -1,0 +1,101 @@
+{
+  "video": "simulation_0234.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 50,
+  "duration_s": 2.0833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 is t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds; no metric scale assumed",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of wall patch (x100-700, y350-650) vs frame 0: |shift| < 0.03 px in every frame (columns bg_dx, bg_dy in tracks/ball.csv)",
+    "view": "front view of a gym wall with a basketball backboard; floor seen slightly from above at the bottom (wall/floor junction y~981). Ball moves purely vertically in a plane facing the camera."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "crimson/magenta basketball with dark seams; the only moving object",
+      "moves": true,
+      "visible_frames": "0-49 (all), never occluded",
+      "track": "tracks/ball.csv",
+      "reference_point": "circle-fit centre (cx, cy) of the ball silhouette = ball origin",
+      "diameter_px": {"best_estimate": 75, "circle_fit_mean": 74.75, "circle_fit_range": [74.16, 76.02], "area_equiv_mean": 75.7, "bbox_w_mean": 74.7, "bbox_h_mean": 76.0},
+      "x_px": 986.65,
+      "x_note": "constant to +/-0.2 px: no horizontal motion",
+      "y_px_key": {"frame0": 738.84, "frame24_lowest": 1004.24, "frame49": 738.96},
+      "vertical_travel_px": {"drop_f0_to_f24": 265.4, "rise_f24_to_f49": 265.3}
+    },
+    {
+      "name": "backboard",
+      "description": "white rectangular backboard, top centre of image",
+      "moves": false,
+      "bbox_px": [794.5, 71.5, 1152.5, 280.5],
+      "width_px": 358, "height_px": 209,
+      "centre_px": [973.5, 176]
+    },
+    {
+      "name": "backboard_square",
+      "description": "orange-red outlined rectangle (shooter's square) painted on the backboard",
+      "moves": false,
+      "bbox_px": [916, 158, 1031, 231],
+      "width_px": 116, "height_px": 74
+    },
+    {
+      "name": "rim",
+      "description": "orange hoop ring below the square (seen nearly edge-on, as a flat ellipse)",
+      "moves": false,
+      "bbox_px": [916, 236, 1031, 259],
+      "width_px": 116, "apparent_height_px": 23,
+      "centre_px": [973.5, 246]
+    },
+    {
+      "name": "net",
+      "description": "dark mesh net hanging below the rim",
+      "moves": false,
+      "bbox_px": [933, 242, 1018, 297],
+      "width_px": 86, "height_px": 56
+    },
+    {
+      "name": "backboard_support_frame",
+      "description": "black U-shaped bracket under the backboard",
+      "moves": false,
+      "bbox_px": [809, 280, 1137, 317],
+      "width_px": 329, "height_px": 37
+    },
+    {
+      "name": "wall_upper",
+      "description": "light grey textured wall, y 0 to ~679",
+      "moves": false,
+      "boundary_y_px": 679
+    },
+    {
+      "name": "wall_teal_band",
+      "description": "teal/green lower wall band (wainscot) from y~679 to y~981 across the full width",
+      "moves": false,
+      "bbox_px": [0, 679, 1919, 981],
+      "height_px": 302
+    },
+    {
+      "name": "floor",
+      "description": "orange wooden court floor, y>~981; white baseline along the wall at y~989-991 and white court lines (slanted near x~100, x~590, x~1390, x~1850 at the bottom edge); orange light reflections/glare at x~1480 and on the upper right wall are lighting, not objects",
+      "moves": false,
+      "wall_floor_junction_y_px": 981,
+      "baseline_y_px": 990
+    },
+    {
+      "name": "ball_shadow",
+      "description": "soft dark shadow on the floor/wall below the ball, most visible near the bounce (frames ~20-28)",
+      "moves": true,
+      "note": "excluded from the ball mask (low saturation)"
+    }
+  ],
+  "events": [
+    {"event": "start of motion / release from rest (apex)", "frame": 0, "t": 0.0, "note": "parabola fit to frames 0-22 puts apex at frame 0.01; ball falls straight down from rest"},
+    {"event": "bounce / floor impact (lowest point)", "frame": 24, "t": 1.0, "note": "lowest measured centre y=1004.24 at frame 24; parabola branches intersect at frame 23.995 (y~1010.8). Descent before, ascent after."},
+    {"event": "direction change down->up", "frame": 24, "t": 1.0},
+    {"event": "apex after bounce (velocity ~0)", "frame": 49, "t": 2.0417, "note": "ascent fit apex at frame 49.00, y=738.7, essentially the starting height; last frame of video"}
+  ],
+  "files": {"ball_track": "tracks/ball.csv", "notes": "notes.md", "scripts": "scripts/"}
+}

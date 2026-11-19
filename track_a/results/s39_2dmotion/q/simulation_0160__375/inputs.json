@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0160.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MC",
+ "fps": 30.0,
+ "frames": 40,
+ "duration_s": 1.3333,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 375,
+  "question": "What is the speed of the ball at time 0.5s in m/s?",
+  "prior": "diameter of the ball = 0.0757m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 30.0
+ }
+}

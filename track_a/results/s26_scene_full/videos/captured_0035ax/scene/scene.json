@@ -1,0 +1,204 @@
+{
+ "video": "captured_0035ax.mp4",
+ "source": "lab (captured; background replaced by green via Segment Anything 2)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame": "t = frame / 24",
+ "camera": {
+  "motion": "static (assumed; background is uniform green so no direct check; standing feet of both people stay fixed to <2 px)",
+  "intrinsics_from_benchmark": {
+   "fx_px": 763.0,
+   "fy_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "view": "looking obliquely down at the floor; floor not visible (keyed out); no horizon or vanishing points available",
+  "frame_timing": "timestamps uniform at 1/24 s, but both balls show ~2x steps at frames 11->12 and 35->36 (simultaneously), i.e. probably a dropped capture frame at each; use frame indices as given (reference convention) but beware single-frame differences there"
+ },
+ "files": {
+  "tracks": {
+   "basketball": "tracks/basketball.csv",
+   "soccer_ball": "tracks/soccer_ball.csv",
+   "far_person": "tracks/far_person.csv",
+   "near_person": "tracks/near_person.csv"
+  },
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ },
+ "inventory": [
+  {
+   "name": "basketball",
+   "look": "orange ball (Wilson logo), larger of the two balls",
+   "role": "held in near person's hand at her image-left side, dropped and kicked away from camera by her",
+   "moves": true,
+   "visible_frames": "0-48",
+   "reference_point": "centre of circle fitted to the silhouette (cx, cy)",
+   "diameter_px_at": {
+    "0": 80.4,
+    "13": 74.5,
+    "21": 69.5,
+    "30": 69.4,
+    "40": 69.2,
+    "48": 68.4
+   },
+   "diameter_px_stats_free": {
+    "frames": "21-48",
+    "median": 69.15,
+    "min": 67.43,
+    "max": 70.05
+   }
+  },
+  {
+   "name": "soccer_ball",
+   "look": "white ball with black pentagons, smaller ball",
+   "role": "at the far person's image-left foot, kicked toward the camera, collides with basketball, rolls back to far person",
+   "moves": true,
+   "visible_frames": "0-48",
+   "reference_point": "centre of fitted circle (cx, cy)",
+   "diameter_px_at": {
+    "0": 42.0,
+    "12": 49.7,
+    "16": 57.3,
+    "24": 49.3,
+    "30": 45.6,
+    "40": 43.5,
+    "47": 41.5
+   },
+   "diameter_px_stats_after_collision": {
+    "frames": "30-47",
+    "median": 43.47,
+    "min": 41.47,
+    "max": 45.64
+   }
+  },
+  {
+   "name": "far_person",
+   "look": "woman in light grey T-shirt, dark blue-grey trousers, white sneakers; upper-left, head cut off by top edge",
+   "role": "kicks the soccer ball with her image-left foot (her right; frames 4-9)",
+   "moves": "small (kicking leg, slight sway; feet stay in place)",
+   "visible_frames": "0-48 (truncated by top edge)",
+   "reference_point": "visible mask centroid (cx, cy) - not a full-body centre",
+   "visible_height_px": {
+    "frames": "15-35",
+    "median": 313.0,
+    "min": 313.0,
+    "max": 313.0
+   },
+   "feet_y_px": "shoe bottoms ~312 (frames 0-35), ~324 (36-48)"
+  },
+  {
+   "name": "near_person",
+   "look": "woman with long dark hair, dark grey oversized T-shirt with print, black trousers; right side, close to camera, back/side to camera",
+   "role": "holds basketball (0-7), drops it and kicks it with her image-left foot (~frames 9-12), leg returns by ~26",
+   "moves": "kicking leg and torso lean; stands in place",
+   "visible_frames": "0-48 (truncated by right and bottom edges, head at top ~y=100)",
+   "reference_point": "visible mask centroid (cx, cy)",
+   "visible_bbox_px": "x 784-1279, y ~100-719"
+  },
+  {
+   "name": "watermark",
+   "look": "\"Modified with Segment Anything 2 Demo\" box bottom-right x>=1029, y>=690",
+   "moves": false,
+   "note": "not a scene object; excluded from masks"
+  }
+ ],
+ "static_objects": "none visible (floor, walls and all background replaced by uniform green)",
+ "events": [
+  {
+   "event": "soccer ball at rest at far person's left foot",
+   "frames": "0-4",
+   "center_px": [
+    353.0,
+    304.0
+   ]
+  },
+  {
+   "event": "soccer ball kicked (far person, image-left foot) - motion starts",
+   "frame": 5,
+   "t": 0.20833333333333334,
+   "note": "first displacement 0.2->8.7 px between 4 and 5; foot contact frames ~4-9 (ball blurred, merged with shoe)"
+  },
+  {
+   "event": "soccer ball separates from foot",
+   "frame": 10,
+   "t": 0.4166666666666667
+  },
+  {
+   "event": "basketball held still in near person's hand",
+   "frames": "0-7",
+   "center_px": [
+    884.0,
+    614.8
+   ]
+  },
+  {
+   "event": "basketball released / starts moving",
+   "frame": 8,
+   "t": 0.3333333333333333
+  },
+  {
+   "event": "basketball kicked by near person's image-left (kicking) foot (foot touches ball)",
+   "frames": "9-11",
+   "t": "0.375-0.458",
+   "note": "ball leaves the foot by frame 12"
+  },
+  {
+   "event": "possible dropped capture frame (both balls jump ~2x)",
+   "frame": 12
+  },
+  {
+   "event": "collision soccer ball - basketball (contact)",
+   "frame": 19,
+   "t": 0.7916666666666666,
+   "note": "balls touch in frames 19-20; soccer ball reverses direction 19->20, basketball slows from ~17.4 to ~5 px/frame and turns left",
+   "center_distance_px": [
+    {
+     "frame": 17,
+     "px": 135.2
+    },
+    {
+     "frame": 18,
+     "px": 98.3
+    },
+    {
+     "frame": 19,
+     "px": 62.5
+    },
+    {
+     "frame": 20,
+     "px": 63.6
+    },
+    {
+     "frame": 21,
+     "px": 79.2
+    },
+    {
+     "frame": 22,
+     "px": 92.9
+    }
+   ]
+  },
+  {
+   "event": "possible dropped capture frame (both balls jump ~2x)",
+   "frame": 36
+  },
+  {
+   "event": "soccer ball reaches the far person's image-right foot (contact)",
+   "frame": 47,
+   "t": 1.9583333333333333,
+   "note": "touching in 47-48; video ends"
+  },
+  {
+   "event": "basketball still rolling at video end (~4.5 px/frame leftward)",
+   "frame": 48
+  }
+ ],
+ "apparent_size_trend": {
+  "basketball": "diam ~80 px held (0-7, occluded), 77-75 (8-13), shrinks to ~69.5 by frame 18 then constant 69-70 px through 48 (moving mostly sideways after collision)",
+  "soccer_ball": "diam 42 px at rest (0-4); grows to ~53-57 px when nearest (13-19, includes motion blur), shrinks to ~41-43 px by 44-47"
+ }
+}

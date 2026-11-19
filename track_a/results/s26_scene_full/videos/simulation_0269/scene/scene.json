@@ -1,0 +1,161 @@
+{
+ "video": "simulation_0269.mp4",
+ "source": "simulation",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 72,
+ "image_size_px": [
+  2560,
+  1440
+ ],
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "effective_resolution_note": "edges move in 2 px steps: the render was upsampled ~2x (1280x720 native); pixel quantisation ~2 px",
+ "camera": {
+  "motion": "static",
+  "evidence": "plain light-grey backdrop with fixed radial vignette (203-224 grey); no texture moves; the bird crosses it"
+ },
+ "view": "bird seen from above / below in a plane facing the camera: head points to image -x (left), wings spread along image y (vertical), tail feathers fan out to the right. Its grey shadow falls on the backdrop up-left of it.",
+ "objects": [
+  {
+   "name": "bird",
+   "aka": "phoenix / peacock-like flying bird",
+   "appearance": "green body, purple/red/orange wing feathers, orange peacock-eye tail feathers, red-tipped beak; the only coloured object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "occluded": "never; never cut by the image edge",
+   "track": "tracks/bird.csv",
+   "reference_point_recommended": "beak_x/beak_y (leftmost mask pixel = beak tip, rigid with the head) for horizontal motion; the rig origin is presumably at the body ~130 px behind the beak (body_est_x = beak_x + 130, rough) - displacements/speeds are the same for any rigidly attached point up to flap-induced head bob (~+/-4 px in y)",
+   "beak_x_px_by_frame_sparse": {
+    "0": 1484.0,
+    "6": 1460.0,
+    "12": 1416.0,
+    "18": 1392.0,
+    "24": 1364.0,
+    "30": 1284.0,
+    "36": 1180.0,
+    "42": 1094.0,
+    "48": 1004.0,
+    "54": 872.0,
+    "60": 706.0,
+    "66": 552.0,
+    "71": 432.0
+   },
+   "motion_summary_px": {
+    "net_dx_beak_0_to_71": -1052.0,
+    "beak_y_range": [
+     711.5,
+     720.5
+    ],
+    "beak_path_length_0_to_71": 1054.9,
+    "direction": "-x (leftward), essentially horizontal; per-frame beak step grows from ~4 px (frames 2-6) to ~16 px (frames 28-46) to ~25 px (frames 52-71), with slower phases each flap cycle (e.g. frames 15-23)"
+   },
+   "size_px": {
+    "length_x_beak_to_tail_tip": {
+     "median": 438.0,
+     "min": 396.0,
+     "max": 450.0,
+     "note": "bbox x-extent; colour mask may miss ~10-60 px of the faint grey central tail spike tip"
+    },
+    "vertical_extent_wingspan_y": {
+     "min": 238.0,
+     "min_frame": 12,
+     "max": 630.0,
+     "max_frame": 46,
+     "frame0": 274.0,
+     "local_max_frames": [
+      10,
+      21,
+      35,
+      46,
+      60
+     ],
+     "local_max_values": [
+      544.0,
+      624.0,
+      540.0,
+      630.0,
+      542.0
+     ],
+     "local_min_frames": [
+      12,
+      37,
+      62
+     ],
+     "local_min_values": [
+      238.0,
+      238.0,
+      240.0
+     ],
+     "note": "image-y extent of colour mask = wingspan when wings are spread; at minima the y-extent is set by the folded wings / tail fan (~240-280 px)"
+    }
+   }
+  },
+  {
+   "name": "bird_shadow",
+   "appearance": "flat dark-grey silhouette of the bird on the backdrop, offset up-left (~-80 px x, ~-100..-200 px y) from the bird, partly hidden behind it",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/bird_shadow.csv",
+   "note": "only the visible (not covered) part is measured; not a physical object"
+  },
+  {
+   "name": "backdrop",
+   "appearance": "uniform light-grey background, no ground features or markings",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "frames 0 and 1 are identical (bird at rest pose / duplicated first frame)",
+   "frames": [
+    0,
+    1
+   ]
+  },
+  {
+   "event": "motion starts (beak first moves)",
+   "frame": 2,
+   "time_s": 0.08333333333333333
+  },
+  {
+   "event": "wings fully spread (vertical-extent maxima, flap cycle ~25 frames)",
+   "frames": [
+    10,
+    21,
+    35,
+    46,
+    60
+   ],
+   "times_s": [
+    0.4167,
+    0.875,
+    1.4583,
+    1.9167,
+    2.5
+   ]
+  },
+  {
+   "event": "wings most folded (vertical-extent minima)",
+   "frames": [
+    12,
+    37,
+    62
+   ],
+   "times_s": [
+    0.5,
+    1.5417,
+    2.5833
+   ]
+  },
+  {
+   "event": "no contact, bounce or direction change; bird still moving left at last frame",
+   "frame": 71
+  }
+ ]
+}

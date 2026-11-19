@@ -1,0 +1,18 @@
+{
+ "video": "captured_0015.mp4",
+ "video_source": "lab",
+ "video_type": "A2MC",
+ "fps": 24.0,
+ "frames": 73,
+ "duration_s": 3.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2267,
+  "question": "What is the velocity of the toy at 0.6s in cm/s?",
+  "prior": "Gravity acc = 9.8m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

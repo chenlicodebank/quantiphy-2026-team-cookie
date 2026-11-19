@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0206.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 30,
+ "duration_s": 1.25,
+ "width": 2124,
+ "height": 1080,
+ "question": {
+  "id": 1582,
+  "question": "What is the width of the paper next to the typewriter in meters?",
+  "prior": "acceleration of the typewriter before 0.45s = 9.8m/s^2",
+  "depth_info": "t=0s, distance_typewriter_camera = 4.32m  \nt=0.5s, distance_typewriter_camera = 4.501m  \ndistance_gun_camera = 4.704m  \ndistance_desktop_corner_far_right_camera = 5.009m  \ndistance_desktop_corner_closest_to_camera = 3.593m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

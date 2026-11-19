@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0058.mp4",
+ "video_source": "simulation",
+ "video_type": "A3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2160,
+ "height": 1080,
+ "question": {
+  "id": 1235,
+  "question": "What is the length of the white car in meters?",
+  "prior": "acceleration of the white car = 4m/s^2",
+  "depth_info": "t=0.58s, distance_human_camera = 18.7297m\nt=1.58s, distance_human_camera = 17.6974m\nt=0.58s, distance_yellow_car_camera = 25.7041m\nt=1.58s, distance_yellow_car_camera = 22.2916m\nt=0.58s, distance_white_car_camera = 31.0700m\nt=1.58s, distance_white_car_camera = 29.9182m\nt=0.58s, distance_bike_camera = 27.8122m\nt=1.58s, distance_bike_camera = 27.1221m",
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

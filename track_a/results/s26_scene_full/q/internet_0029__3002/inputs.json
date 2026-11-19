@@ -1,0 +1,18 @@
+{
+ "video": "internet_0029.mp4",
+ "video_source": "internet",
+ "video_type": "A2SS",
+ "fps": 50.0,
+ "frames": 25,
+ "duration_s": 0.5,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 3002,
+  "question": "What is the displacement of the ball from 0.30s to 0.40s in meters?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 50.0
+ }
+}

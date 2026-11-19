@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0128_segmented.mp4",
+  "source": "segmentation (Blender simulation, background replaced by plain white)",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 38,
+  "duration_s": 1.5833,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left, units px",
+  "camera": {
+    "motion": "static (background is uniform white RGB 255 in every frame; no pan/shake possible to measure and none implied)",
+    "background_shift_px_per_frame": 0,
+    "perspective": "2D scene; no ground plane, horizon or vanishing points visible. Use one metres-per-pixel scale for both objects."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small red sphere (dark red, slightly shaded), the only red object; starts upper-centre at about (962, 253)",
+      "moves": true,
+      "visible_frames": [0, 37],
+      "track": "tracks/ball.csv",
+      "reference_point": "intensity-weighted centre of the ball (= sphere centre/origin), columns cx_px, cy_px",
+      "diameter_px": {"mean_bbox_width": 27.0, "mean_bbox_height": 25.9, "mean_equiv_area_diameter": 25.7, "best_estimate": 26.0, "range": [25, 28]},
+      "motion": "falls straight down (x constant 961.9 +- 0.15 px) from rest; y 253.45 at frame 0 -> 977.62 at frame 37 (net 724.2 px down); still falling at last frame, no bounce/impact"
+    },
+    {
+      "name": "forklift",
+      "description": "orange-and-black Toyota counterbalance forklift seen side-on, forks/mast at right (front faces +x), lower-left of frame",
+      "moves": true,
+      "visible_frames": [0, 37],
+      "track": "tracks/forklift.csv (ref_x_px/ref_y_px = frame-0 bbox centre + sub-pixel template shift; bbox and mask columns per frame); tracks/forklift_shift.csv (raw template shift)",
+      "reference_point": "bbox centre of the full silhouette, (271.0, 935.5) at frame 0, carried rigidly by template shift (ref_x_px, ref_y_px)",
+      "size_px": {"length_bbox_x": 293.6, "length_range": [291, 298], "height_bbox_y": 242.4, "height_range": [242, 244],
+                   "top_of_overhead_guard_y": 815, "wheel_bottom_ground_y": 1056,
+                   "note": "length includes rear counterweight to front of mast/fork carriage (forks themselves are lowered and hidden behind the front wheel)"},
+      "motion": "drives right (+x) along y = const (y drift < 0.25 px); net +120.1 px over frames 0-37"
+    }
+  ],
+  "static_objects": [],
+  "ground_line_y_px": 1056,
+  "events": [
+    {"event": "ball release / start of fall from rest", "frame": 0, "t_s": 0.0, "evidence": "parabola fit of cy(t) over frames 2-37 has vertex at frame -0.01 (y 253.16), rms residual 0.13 px"},
+    {"event": "forklift starts moving from rest", "frame": 0, "t_s": 0.0, "evidence": "dx frame0->1 = 0.04 px, then increasing steadily"},
+    {"event": "forklift per-frame dx levels off at ~3.0-3.5 px/frame", "frame_range": [17, 27], "t_s_range": [0.708, 1.125]},
+    {"event": "forklift speeds up again", "frame_range": [27, 35], "t_s_range": [1.125, 1.458], "evidence": "dx rises 3.47 -> 6.78 px/frame"},
+    {"event": "forklift dx ~7 px/frame", "frame_range": [35, 37]},
+    {"event": "end of clip, ball still airborne (centre y 977.6, bottom 989, ground line 1056)", "frame": 37, "t_s": 1.5417}
+  ],
+  "contacts": "none: ball (x~962) and forklift (x <= 537) never overlap; ball never reaches ground in clip"
+}

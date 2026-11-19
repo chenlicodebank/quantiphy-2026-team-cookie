@@ -1,0 +1,75 @@
+{
+  "video": "simulation_0101.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 73,
+  "width": 1920,
+  "height": 1080,
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down, origin top-left) and seconds",
+  "camera": {
+    "motion": "static",
+    "evidence": "clean background strips identical between frame 0 and 72 (mean abs diff < 2, noise only); horizon and underwater boundary fixed",
+    "per_frame_background_shift_px": [0, 0]
+  },
+  "layout": {
+    "sky": "grey gradient, y 0-~565",
+    "horizon_sea_line_y": 565,
+    "sea_surface_band": "grey-blue, y ~565-672 (boat sits here; boat reflection y ~645-672)",
+    "underwater_boundary_y": 673,
+    "underwater": "uniform bright blue, y 673-1079 (cut-away underwater view; the shark swims here)"
+  },
+  "objects": [
+    {
+      "name": "boat",
+      "description": "red fishing boat with white cabin, mast and rear railings, hull lettering 'AH805'; bow points left",
+      "moves": true,
+      "visible_frames": "0-72 (stern and right part cut by the right image edge in frames 0-25; mast top cut by the top edge in all frames)",
+      "track": "tracks/boat.csv",
+      "motion": "translates left, horizontally only; frames 0 and 1 are identical, then about -17.8 px/frame (x) every frame, steady; no vertical motion",
+      "extents_px": {
+        "hull_length_bow_tip_to_stern": 858,
+        "length_measured_frames": "26-72 (856-860 px, median 858)",
+        "keel_bottom_y": 645,
+        "keel_note": "hull meets its reflection at y ~645 (dark contact line at 646-648); y 648-672 is reflection",
+        "bow_top_y": 352,
+        "cabin_roof_y": 237,
+        "visible_height_keel_to_cabin_roof": 408,
+        "visible_height_keel_to_frame_top": 645,
+        "mast": "thin pole, about 120 px right of the cabin's left edge, runs off the top of the frame: full height NOT measurable",
+        "at_frame_72": {"bow_tip_x": 227, "stern_x": 1085, "cabin_x": [493, 673], "mast_x": [595, 605], "rear_railing_x": [768, 1065], "rudder_x": [1028, 1062]}
+      },
+      "reference_point": "ref_x = bow_x + 428.5 (centre of the full 858-px horizontal extent, valid even while clipped); ref_y = 441 (centre of keel y 645 to cabin roof y 237; constant). True Blender origin unknown, but the boat is rigid and only translates, so displacements and speeds are the same for any point"
+    },
+    {
+      "name": "shark",
+      "description": "grey-and-white shark (dorsal fin, crescent tail) swimming underwater below the boat, facing left",
+      "moves": true,
+      "visible_frames": "0-72, never occluded or clipped",
+      "track": "tracks/shark.csv",
+      "motion": "swims left horizontally; frames 0 and 1 identical, then speeds up steadily: per-frame dx about -8 px at the start, rising to about -18 px by frame 72; y constant (centroid y 905.4 +- 0.2)",
+      "extents_px": {
+        "length_nose_to_tail_tip": 268,
+        "length_range": "266-274 over the clip (fins and tail barely change)",
+        "height_dorsal_fin_tip_to_pectoral_fin_tip": 108,
+        "body_vertical_centre_y": 905,
+        "note": "the snout is rendered semi-transparent. The mask loses about 5-9 px of the nose tip, so the true nose-to-tail length is about 275 px"
+      },
+      "reference_point": "ref = mask bbox centre (bbox_cx, bbox_cy); the mask centroid is also given (it sits about 23 px left of the bbox centre, toward the heavier head)"
+    }
+  ],
+  "static_objects": [
+    {"name": "horizon / sea line", "y": 565},
+    {"name": "underwater boundary (surface seen in cut-away)", "y": 673},
+    {"name": "boat reflection on water", "y": [645, 672], "moves_with_boat": true}
+  ],
+  "events": [
+    {"event": "both objects stationary (frame 1 identical to frame 0)", "frames": [0, 1], "t": [0.0, 0.0417]},
+    {"event": "motion start, boat and shark (first displacement)", "frame": 2, "t": 0.0833, "note": "displacement first seen between frames 1 and 2"},
+    {"event": "boat stern enters the frame (full boat visible)", "frame": 26, "t": 1.0833},
+    {"event": "relative position", "note": "the boat's bow is left of (ahead of) the shark's nose in every frame (frame 0: bow 1496 vs nose ~1530; frame 72: bow 227 vs nose ~632). The gap grows because the boat is faster for most of the clip; no crossing"},
+    {"event": "end of clip, both still moving left", "frame": 72, "t": 3.0}
+  ],
+  "no_events": "no bounces, collisions, contacts or direction changes"
+}

@@ -1,0 +1,188 @@
+{
+ "video": "simulation_0248_segmented.mp4",
+ "source": "segmentation (Blender render, background replaced by plain white)",
+ "scene": "2D",
+ "fps": 24.0,
+ "frames": 50,
+ "width": 1920,
+ "height": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "camera": {
+  "static": true,
+  "note": "plain white background, no background features; animals translate smoothly, no evidence of pan/shake. Side view: all three animals walk left-to-right parallel to the image plane, at nearly the same depth (ground contact y ~627-636 px)."
+ },
+ "static_objects": [],
+ "objects": {
+  "red_horse": {
+   "description": "smaller horse, reddish-brown (chestnut) coat, white face blaze and white lower legs; leftmost animal; walks right",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded_frames": [],
+   "track_file": "tracks/red_horse.csv",
+   "length_px_horizontal(nose/front to tail/back, bbox)": {
+    "frame0": 185.0,
+    "min": 183.0,
+    "median": 192.0,
+    "max": 215.0
+   },
+   "height_px(bbox top of head to hooves)": {
+    "frame0": 164.0,
+    "min": 161.0,
+    "median": 165.0,
+    "max": 169.0
+   },
+   "width_px": "not observable (pure side view)",
+   "position_frame0": {
+    "bbox_cx": 666.5,
+    "bbox_cy": 546.0,
+    "centroid": [
+     655.19,
+     541.23
+    ],
+    "torso": [
+     645.0,
+     534.5
+    ]
+   },
+   "position_last_frame": {
+    "frame": 49,
+    "bbox_cx": 660.0,
+    "centroid": [
+     654.3,
+     541.61
+    ],
+    "torso": [
+     644.98,
+     534.66
+    ]
+   },
+   "position_frame48": {
+    "bbox_cx": 815.0,
+    "centroid": [
+     808.67,
+     535.71
+    ],
+    "torso": [
+     801.01,
+     535.1
+    ]
+   },
+   "length/height stats": "computed over frames 0-48"
+  },
+  "brown_horse": {
+   "description": "larger horse, grey-brown/dun coat, dark legs and tail, white face; middle animal; walks right",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded_frames": [],
+   "track_file": "tracks/brown_horse.csv",
+   "length_px_horizontal(nose/front to tail/back, bbox)": {
+    "frame0": 229.0,
+    "min": 223.0,
+    "median": 229.0,
+    "max": 241.0
+   },
+   "height_px(bbox top of head to hooves)": {
+    "frame0": 174.0,
+    "min": 174.0,
+    "median": 177.5,
+    "max": 184.0
+   },
+   "width_px": "not observable (pure side view)",
+   "position_frame0": {
+    "bbox_cx": 925.5,
+    "bbox_cy": 545.0,
+    "centroid": [
+     912.94,
+     534.41
+    ],
+    "torso": [
+     899.5,
+     533.0
+    ]
+   },
+   "position_last_frame": {
+    "frame": 49,
+    "bbox_cx": 1216.5,
+    "centroid": [
+     1204.09,
+     535.01
+    ],
+    "torso": [
+     1189.48,
+     532.69
+    ]
+   }
+  },
+  "hamster": {
+   "description": "small orange-brown rodent (hamster/guinea-pig-like) near the brown horse's front hooves; rightmost; moves right with a hopping gait",
+   "moves": true,
+   "visible_frames": [
+    0,
+    49
+   ],
+   "occluded_frames": [],
+   "track_file": "tracks/hamster.csv",
+   "length_px_horizontal(nose/front to tail/back, bbox)": {
+    "frame0": 45.0,
+    "min": 42.0,
+    "median": 46.0,
+    "max": 53.0
+   },
+   "height_px(bbox top of head to hooves)": {
+    "frame0": 37.0,
+    "min": 29.0,
+    "median": 34.5,
+    "max": 39.0
+   },
+   "width_px": "not observable (pure side view)",
+   "position_frame0": {
+    "bbox_cx": 1032.5,
+    "bbox_cy": 617.5,
+    "centroid": [
+     1031.41,
+     619.42
+    ],
+    "torso": [
+     1032.5,
+     617.5
+    ]
+   },
+   "position_last_frame": {
+    "frame": 49,
+    "bbox_cx": 1339.5,
+    "centroid": [
+     1338.69,
+     619.02
+    ],
+    "torso": [
+     1339.51,
+     617.99
+    ]
+   }
+  }
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "what": "all three animals already walking right at the first frame (no start of motion inside the clip)"
+  },
+  {
+   "frame": 49,
+   "t": 2.0417,
+   "what": "red_horse teleports back ~156 px to the left (48->49): animation loop reset; its frame-49 image is identical to frame 0 (torso x 645.0 both). Not real motion."
+  },
+  {
+   "frame": 49,
+   "t": 2.0417,
+   "what": "brown_horse and hamster keep moving right to the last frame (no stop, no direction change)"
+  }
+ ],
+ "notes": "Reference point columns: torso_x/y = template-matched torso centre (best proxy for the rig origin of the horses, free of leg swing); centroid_x/y = mask centroid; bbox_cx/cy = bbox centre. All in image px, y down."
+}

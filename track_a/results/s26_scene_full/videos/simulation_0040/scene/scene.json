@@ -1,0 +1,51 @@
+{
+ "video": "simulation_0040.mp4",
+ "source": "simulation (Blender render)",
+ "scene_type": "3D",
+ "fps": 24.0, "frames": 72, "duration_s": 3.0, "width_px": 1080, "height_px": 1080,
+ "time_convention": "t = frame / 24; frame 0 at t = 0",
+ "units": "pixels (x right, y down, full-resolution 1080x1080 image) and seconds; no metric scale",
+ "camera": {
+  "motion": "static: phase correlation of background regions vs frame 0 gives shifts < 0.03 px for every frame",
+  "view": "aerial, looking (nearly) straight down onto a beach; no horizon or vanishing points visible. The ground is roughly fronto-parallel; a slight tilt shows the walker's front/top (walker appears ~45 px long as a standing figure, so the view is not exactly nadir).",
+  "per_frame_background_shift_px": [0.0, 0.0],
+  "duplicate_frame": "frame 1 is an exact duplicate of frame 0 (all objects identical); real motion starts between frames 1 and 2"
+ },
+ "objects": {
+  "walker": {
+   "kind": "human (man, white T-shirt, grey trousers, brown hair)", "moves": true, "frames_visible": [0, 71],
+   "distinguish": "only person; on the sand at x~356-375, y~367-519, walking toward the bottom of the image (toward the water). Long dark shadow attached at his feet pointing up-right.",
+   "track": "tracks/walker.csv",
+   "reference_point": "pelvis_torso_x/y (shirt centroid + constant offset (2.6, 8.8) px; recommended, smooth) or pelvis_x/y (0.48 of head-top..feet span; noisier with leg swing)",
+   "motion_px_per_frame": "about (0.1, +1.5) px/frame, direction ~86 deg (straight down the image), steady over the whole clip",
+   "apparent_size_px": "vertical body length (head top to lowest foot) 39-50 px, median 45.5; width 17-24 px; no trend over time (constant depth)"
+  },
+  "walker_shadow": {"kind": "cast shadow of walker", "moves": true, "frames_visible": [0, 71], "track": "tracks/walker_shadow.csv",
+   "distinguish": "sharp dark silhouette from the walker's feet to the up-right, axis ~151 deg (image coords), length ~100-108 px"},
+  "bird": {
+   "kind": "large dark bird (eagle/raven-like, black)", "moves": true, "frames_visible": [0, 67],
+   "distinguish": "only flying animal; near-black, crisp; enters at the left edge (x=0, y~360) at frame 0, crosses over the walker's feet/shadow at frames 22-25, flies over the water and leaves at the right edge after frame 67 (partly outside image at frames 0-2 and 67)",
+   "track": "tracks/bird.csv",
+   "reference_point": "cx, cy = mask centroid (bbc_x/bbc_y = bbox centre also given)",
+   "motion_px_per_frame": "~16-17.5 px/frame in x, +2..+6 px/frame in y (heading wavers between ~7 and ~27 deg below the +x axis in a ~12-frame rhythm)",
+   "apparent_size_px": "mask main-axis length (≈ wingspan in projection) oscillates with wing beats: 36-63 px. Peaks at frames 5 (57), 31 (58), 54 (63); troughs ~frames 11, 22-24 (36), 47. bbox up to 39x59 px. Minimum (clean frames) 35.9 px at frame 22, maximum 62.8 px at frame 54."
+  },
+  "bird_shadow": {"kind": "cast shadow of the bird on the sand", "moves": true, "frames_visible": [0, 38], "track": "tracks/bird_shadow.csv",
+   "distinguish": "blurry dark-brown bird shape far up-right of the bird (offset ~ +360 px x, -45 px y at frame 0), crosses the walker at frames 6-8, fades out over the water after frame ~36 (37-38 weak)"},
+  "sand_beach": {"kind": "static ground", "moves": false,
+   "extent_px": "dry sand covers the upper-left; sand x-range at y=380: 0-841, y=490: 0-739, y=600: 56-627, y=700: 171-527; pointed lower tip near (395-430, 720-760) where it blends into shallow water; light curved bands (wet-sand lines) parallel to the shore"},
+  "water_sea": {"kind": "static (green sea, lower and right part)", "moves": false, "extent_px": "everything below/right of the sand edge; bbox (0,82)-(1079,1079)"},
+  "rock_cliff": {"kind": "static rocky outcrop with dark rocks at top right of the sand", "moves": false, "extent_px": "approx x 500-1000, y 0-215 (dark rock part detected x 702-990, y 0-217); a white/light patch at its top-left around x 520-700, y 0-110"}
+ },
+ "events": [
+  {"frame": 0, "t": 0.0, "what": "clip starts; walker already walking; bird entering at left edge"},
+  {"frame": 1, "t": 0.0417, "what": "duplicate of frame 0 (no motion between frames 0 and 1)"},
+  {"frame": 3, "t": 0.125, "what": "bird fully inside the image from frame 3 (cut by the left edge in frames 0-2, so its centroid there is biased toward the visible part, i.e. to the right)"},
+  {"frames": [6, 8], "what": "bird shadow passes over the walker's shadow / body (merge, occlusion flag)"},
+  {"frames": [23, 24], "what": "bird passes directly over the walker's feet / shadow root (image overlap; bird is above, not in contact)"},
+  {"frame": 36, "t": 1.5, "what": "bird shadow reaches the water and fades (last weak detection frame 38)"},
+  {"frame": 67, "t": 2.792, "what": "bird touches right edge (last visible frame); absent from frame 68 on"},
+  {"frame": 71, "t": 2.958, "what": "last frame; walker still walking"}
+ ],
+ "no_contacts_or_bounces": "no impacts/bounces; walker never stops or turns"
+}

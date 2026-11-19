@@ -1,0 +1,76 @@
+{
+  "video": "internet_0063.mp4",
+  "source": "internet",
+  "scene_type_input": "2D",
+  "fps": 30.015965,
+  "frames": 94,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / fps, frame 0 at t = 0; frame for time t = round(t * fps)",
+  "units": "pixels (full 1920x1080 image coords, x right, y down) and seconds; no metric scale assumed",
+  "scene_summary": "Camera is rotated 90 deg: a hand at the left edge holds an Evian-type plastic water bottle (blue cap, white/pink label) horizontally against a grey wall, releases it, the bottle FALLS toward image +x (gravity points to image +x / right), hits the black skirting board / floor at about frame 52-53, tumbles ~210 deg clockwise, lands on the wooden floor (right side of the image) and then rolls slowly toward the image top until the end. Evidence for gravity = +x: after release the bottle's per-frame x displacement grows linearly (12, 26, 38, 51, 64, 76, 90, 101, 114, 123, 135, 145, 150 px/frame for frames 41..53), i.e. a constant pixel acceleration, with the hand left behind.",
+  "gravity_direction_in_image": "+x (to the right); 'up' in the world = image -x",
+  "camera": {
+    "motion": "handheld-steady: slow drift, no zoom",
+    "drift_vs_frame0_px": "dx 0 -> -19 px (frames 0->75, then ~-18..-19), dy 0 -> ~+4..+6 px (y weakly constrained; frame 85 value +16 is suspect). Rotation < 0.15 deg.",
+    "zoom": "none: black skirting strip width is constant 132-137 px at rows 150/540/950 in all frames",
+    "file": "tracks/camera_shift.csv (frame, dx_px, dy_px, rot_deg; x_frame = R x_frame0 + (dx,dy))",
+    "note": "drift is ~0.2 px/frame, about 1% of the fall motion; bottle.csv gives both raw and drift-compensated (stab) centres"
+  },
+  "objects": [
+    {
+      "name": "bottle",
+      "description": "clear plastic water bottle (Evian-like) with a blue screw cap, white label with pink 'evian' lettering on the other side; the only free-moving object",
+      "moves": true,
+      "visible_frames": "0-93 (whole clip); cap partly covered by fingers 0-39; base end leaves the top of the frame from frame 84 (bottle partially outside the image 84-93)",
+      "track": "tracks/bottle.csv",
+      "reference_point": "center_x/center_y = visible geometric centre of the bottle = cap end + 130 px along the bottle axis (half of the 260 px cap-to-base length)",
+      "size_px": {
+        "length_cap_end_to_base": "260 px (258 +-4 held horizontal frames 0-39, e.g. frame 15: x 120..378; 263 at frame 72 on the floor, vertical). Use 260 px as the bottle's pixel length in the fall plane.",
+        "diameter": "about 70 px (+-8) in the held / falling phase (frame 15 top edge y 547, bottom edge ~617; lower edge merges with its shadow); on the floor it looks wider: ~85 px at frame 72, ~108 px at frame 82 (perspective, see notes)",
+        "length_on_floor_late": "apparent length grows on the floor: ~255 px (frame 66) -> ~263 (72) -> ~273 (82) as the bottle rolls toward the image top (closer to the camera)",
+        "foreshortened_during_tumble": "frames 54-57 apparent length only 228-238 px (bottle tipped out of the image plane while bouncing)"
+      }
+    },
+    {
+      "name": "hand_arm",
+      "description": "person's right hand/forearm entering from the left image edge (light skin, white/beige wrist band)",
+      "moves": true,
+      "visible_frames": "0-93; holds the bottle 0-39 (fingertips around x 100-140, y 520-600), then rests at the left edge (x < ~110) until ~84, then the arm swings into the lower-left area (y ~620-1080, x up to ~290) frames ~85-93",
+      "track": "tracks/hand.csv (skin-pixel bbox; low precision)"
+    },
+    {
+      "name": "wall",
+      "description": "light grey painted surface filling x < ~1380 (the plane the bottle falls along); small dark marks e.g. near (675,70), (750,535), (1020,655); a faint horizontal seam/line at y ~365-375 from x ~950 to the skirting",
+      "moves": false
+    },
+    {
+      "name": "skirting_board",
+      "description": "black vertical strip (skirting board / floor edge) between wall and wooden floor",
+      "moves": false,
+      "image_position_frame0": "left edge x = 1386 (y=150), 1392 (y=540), 1406 (y=950); right edge x = 1518 (y=150), 1529 (y=540), 1540 (y=950); spans full image height",
+      "size_px": "width 132-137 px (constant over the clip); length = full frame height 1080 px; tilted ~1.4 deg from the image vertical"
+    },
+    {
+      "name": "wooden_floor",
+      "description": "light-brown wood (planks run along image y) right of the black strip, x > ~1520-1540 at frame 0; the bottle lands and rolls here",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"name": "held_at_rest", "frames": "0-39", "times_s": "0.000-1.299", "note": "bottle held still; cap creeps ~14 px to the left (134 -> 120) as the hand adjusts"},
+    {"name": "release_start_of_fall", "frame": 40, "time_s": 1.333, "note": "cap x 120.5 (f39), 121.4 (f40), 133.3 (f41): motion starts between frames 39 and 41; a constant-acceleration fit to the cap x positions places zero velocity at frame ~39.5 (t ~1.32 s)"},
+    {"name": "free_fall", "frames": "40-53", "note": "falls toward +x; centre y drifts slightly up the image (578 -> 557); bottle axis rotates clockwise 1 deg -> 25 deg"},
+    {"name": "impact_with_skirting_floor", "frame": 53, "time_s": 1.766, "note": "base end crosses the black strip edge (x ~1368) between frames 52 and 53; x motion stops abruptly after frame 53 (centre x 1356 -> 1372 -> 1368)"},
+    {"name": "tumble_bounce", "frames": "53-60", "note": "bottle spins clockwise ~25 -> 236 deg, appears foreshortened (tipped out of plane) frames 54-57; centre x nearly constant 1358-1386, centre moves up the image (y 557 -> 352)"},
+    {"name": "lands_on_wood_floor", "frames": "60-66", "time_s": "2.00-2.20", "note": "bottle settles with axis ~265 deg (cap toward image bottom, base toward image top)"},
+    {"name": "rolling_on_floor", "frames": "66-93", "note": "slow steady motion toward the image top-right (centre (1492,242) at f66 -> (1640,111) at f93); continues to the end of the clip"},
+    {"name": "arm_swings_in", "frames": "~85-93", "note": "the person's arm moves into the lower-left of the frame"}
+  ],
+  "files": {
+    "tracks/bottle.csv": "per-frame bottle centre, cap, cap end, base end, axis angle, mask bbox/extents, occlusion, blur",
+    "tracks/hand.csv": "per-frame skin bbox of the hand/arm",
+    "tracks/camera_shift.csv": "per-frame camera drift relative to frame 0",
+    "notes.md": "methods, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

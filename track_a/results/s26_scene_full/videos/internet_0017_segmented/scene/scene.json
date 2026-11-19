@@ -1,0 +1,55 @@
+{
+  "video": "internet_0017_segmented.mp4",
+  "source": "segmentation (internet footage, background replaced by pure white)",
+  "scene_type": "2D (top-down view of a desk)",
+  "fps": 30.0003, "frames": 34, "duration_s": 1.1333, "width": 1280, "height": 674,
+  "time_convention": "t = frame / fps, frame 0 at t = 0",
+  "units": "pixels and seconds; image coords x right, y down; no metric scale assumed",
+  "camera": {
+    "motion": "static (pen, tin and keyboard centroids constant to <1 px std over all 34 frames; no background to track, it is pure white)",
+    "view": "overhead, roughly perpendicular to desk; no strong perspective (tin is nearly round: 133 x 125 px)",
+    "duplicate_frames": "frames 3, 9, 15, 21, 27, 33 are near-repeats of the previous frame (likely 25->30 fps conversion); frame-to-frame displacements are 0 there"
+  },
+  "objects": {
+    "right_hand": {
+      "description": "person's right hand + forearm, skin coloured, enters from bottom edge at x~900-1100, fingers on the keyboard's lower-right keys",
+      "moves": true, "visible_frames": "0-33", "track": "tracks/right_hand.csv",
+      "notes": "forearm truncated by bottom image edge (y=673) in every frame; mask centroid (cx,cy) is of the visible part; hand_cx/hand_cy = centroid of mask within 200 px of topmost point (hand only); tip_x/tip_y = topmost fingertip",
+      "fingertip_range_px": {"rest_start": [1030, 386], "max_reach_frames_14_19": [924, 292], "rest_end": [1034, 388]},
+      "hand_centroid_range_px": {"frame0": [1004.6, 492.6], "frame18": [948.6, 408.4], "frame33": [1014.6, 489.0]},
+      "extent_px": "visible hand+forearm main-axis length 307-384 (grows as the hand reaches up), width across 108-131"
+    },
+    "left_hand": {
+      "description": "person's left hand + forearm entering from bottom-left (x~480-825), fingers pinched, resting left of the keyboard",
+      "moves": "essentially static (centroid std 0.7 px; slight finger fidget, <=4 px)", "visible_frames": "0-33", "track": "tracks/left_hand.csv",
+      "extent_px": "visible hand+forearm main-axis length ~459-464, width ~107; bbox x 478-825, y 326-673 (truncated by bottom edge)"
+    },
+    "keyboard": {
+      "description": "white/silver Apple-style wireless keyboard (no numpad), rotated, centre right of image",
+      "moves": false, "visible_frames": "0-33 (lower-right part partly covered by right hand)", "track": "tracks/keyboard.csv (raw mask, contaminated by hand occlusion - use footprint below)",
+      "footprint_px": {"centre": [997.8, 332.1], "length_long_axis": 363, "width_short_axis": 167,
+        "long_axis_direction": "from upper-left corner (~900,162) down-right to (~1190,372), ~36 deg below horizontal",
+        "corners_approx": [[900, 162], [1190, 372], [1085, 497], [810, 292]],
+        "method": "per-frame minAreaRect of grey keyboard pixels away from skin, median over 34 frames (frame std <1 px); rect may include ~2-4 px of rounded corner slack"}
+    },
+    "pen": {
+      "description": "pen/marker (clear-grey barrel, dark tip at lower-right end) lying diagonally at lower left",
+      "moves": false, "visible_frames": "0-33", "track": "tracks/pen.csv",
+      "extent_px": {"length": 181, "width": 19, "centre": [219.7, 493.3], "ends_approx": [[162, 430], [281, 562]], "bbox": [159, 426, 283, 565]}
+    },
+    "tin": {
+      "description": "round dark metal tin / desk organiser with paper clips and pins, top-right corner",
+      "moves": false, "visible_frames": "0-33", "track": "tracks/tin.csv",
+      "extent_px": {"diameter_horizontal": 133, "diameter_vertical": 125, "centre": [1148.0, 132.9], "bbox": [1082, 71, 1214, 195]}
+    }
+  },
+  "events": [
+    {"frame": 0, "t": 0.0, "event": "right fingers resting on keyboard lower-right keys (tip ~1030,386)"},
+    {"frame": 7, "t": 0.233, "event": "right hand starts moving up-left across the keyboard (tip y 386->378; first clear motion; slight drift from frame 4-6)"},
+    {"frame": 10, "t": 0.333, "event": "fastest outward motion frames 9-12 (tip moves ~20-28 px/frame)"},
+    {"frame": 14, "t": 0.467, "event": "right hand reaches farthest up-left position (tip ~930,292); stays roughly there through frame 19 (min hand_cx at frame 18)"},
+    {"frame": 20, "t": 0.667, "event": "right hand starts moving back down-right (direction reversal between frames 19 and 20)"},
+    {"frame": 29, "t": 0.967, "event": "right hand back near starting position (tip ~1038,388); stationary to end"},
+    {"frame": 33, "t": 1.1, "event": "last frame"}
+  ]
+}

@@ -1,0 +1,115 @@
+{
+ "video": "simulation_0245_segmented.mp4",
+ "fps": 30.0,
+ "frames": 75,
+ "width": 1080,
+ "height": 1920,
+ "scene": "2D",
+ "source": "segmentation (Blender render, background replaced by flat white RGB 253)",
+ "pixel_convention": "x right, y down, pixels of the original 1080x1920 frame; t = frame/30",
+ "camera": {
+  "static": true,
+  "note": "flat white background, no texture; ground line (lowest hoof/paw pixel) constant at y=1549-1553 for both animals in all frames, apparent sizes constant -> no zoom, no pan detectable; motion is in a plane facing the camera."
+ },
+ "ground_line_y_px": 1551,
+ "objects": {
+  "ibex": {
+   "description": "large brown ibex/antelope-like quadruped with long swept-back ridged horn(s), whitish snout, long tufted tail; walks left->right (faces right)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "occluded": "never; never touches the frame edge (snout x1=1042 at f74)",
+   "track": "tracks/ibex.csv",
+   "reference_point_recommended": "cx_centroid, cy_centroid (whole-mask centroid, close to the body/hip root); trunk_cx = centre of torso barrel (rows 1300-1400) as alternative",
+   "bbox_length_px (nose/horn to tail tip, x extent)": {
+    "median": 489.0,
+    "min": 471.0,
+    "max": 510.0
+   },
+   "bbox_height_px (horn top to hooves)": {
+    "median": 421.0,
+    "min": 415.0,
+    "max": 426.0
+   },
+   "torso_length_px (trunk_x1-trunk_x0, chest front to rump at rows 1300-1400)": {
+    "median": 273.0,
+    "min": 267.0,
+    "max": 280.0
+   },
+   "centroid_x_f0_f74": [
+    348.21,
+    831.78
+   ],
+   "centroid_y_range": [
+    1325.36,
+    1332.26
+   ],
+   "net_dx_centroid_px_f0_f74": 483.57,
+   "mean_dx_per_frame_centroid_px": 6.5347297297297295,
+   "path_length_centroid_px_f0_f74": 490.31547180750584,
+   "path_length_trunk_cx_px_f0_f74": 477.0
+  },
+  "rabbit": {
+   "description": "small brown rabbit/hare-like animal on the ground just ahead (right) of the ibex front hooves; moves right with it at nearly the same speed, small hop-like body bob (height 52-72 px)",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "occluded": "never by the ibex; partly cut by the right image edge from frame 69 on (touches_edge=1; f74 only 32 px of it visible) -> centroid/bbox centre biased left in 69-74; use x0 (rear edge) + ~half median length there",
+   "track": "tracks/rabbit.csv",
+   "reference_point_recommended": "cx_centroid, cy_centroid (frames 0-68); frames 69-74: x0 + 36 px",
+   "bbox_length_px (frames 0-68)": {
+    "median": 72.0,
+    "min": 68.0,
+    "max": 88.0
+   },
+   "bbox_height_px (frames 0-68)": {
+    "median": 63.0,
+    "min": 52.0,
+    "max": 73.0
+   },
+   "centroid_x_f0_f68": [
+    580.13,
+    1033.3
+   ],
+   "mean_dx_per_frame_centroid_px_f0_f68": 6.664264705882353,
+   "mean_dx_per_frame_rear_x0_px_f0_f74": 6.8108108108108105,
+   "path_length_centroid_px_f0_f68": 456.6397290608625
+  },
+  "background_ground": {
+   "description": "no visible floor or scenery (segmented): only an implied ground line at y~1551 where hooves/paws rest",
+   "moves": false
+  }
+ },
+ "distance_ibex_centroid_to_rabbit_centroid_px": {
+  "0": 297.8502283027496,
+  "15": 298.7812912482976,
+  "30": 301.26086503228396,
+  "45": 307.0724092132015,
+  "60": 311.00130031882503,
+  "68": 310.31727248092386
+ },
+ "events": [
+  {
+   "frame": 0,
+   "t": 0.0,
+   "event": "both animals already moving right at start (no start-from-rest)"
+  },
+  {
+   "frame": 69,
+   "t": 2.3,
+   "event": "rabbit front reaches right image edge (x=1079)"
+  },
+  {
+   "frame": 74,
+   "t": 2.4667,
+   "event": "last frame; both still moving; ibex fully in view"
+  },
+  {
+   "note": "ibex gait: centroid dx per frame oscillates ~5.5-8 px with the walk cycle (irregular ~20-frame rhythm, peaks near f9-11, 23, 29-30, 49-51, 69-74); no direction change; vertical centroid bob only +-3.5 px. Rabbit dx per frame 3-10 px in hop cycles (period ~12-13 frames, faster phases near f7, 19-20, 32-33, 45-46, 58-59), no direction change."
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0311.mp4",
+ "video_source": "simulation",
+ "video_type": "S3SC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 1494,
+  "question": "What is the speed of the car at 2.0s, in m/s?",
+  "prior": "height of the car = 1.15m",
+  "depth_info": "t = 1.0s, distance_car_camera = 17.8278 m\nt = 2.0s, distance_car_camera = 23.1989 m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "internet_0039.mp4",
+ "video_source": "internet",
+ "video_type": "S2SC",
+ "fps": 18.537415,
+ "frames": 72,
+ "duration_s": 3.884,
+ "width": 2160,
+ "height": 3840,
+ "question": {
+  "id": 3047,
+  "question": "What is the speed of the swimming man between 1 to 2.33s in m/s?",
+  "prior": "height of the swimming man = 1.68 m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 25.0
+ }
+}

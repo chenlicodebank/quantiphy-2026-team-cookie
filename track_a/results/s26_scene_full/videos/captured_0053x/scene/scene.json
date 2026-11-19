@@ -1,0 +1,168 @@
+{
+ "video": "captured_0053x.mp4",
+ "source": "lab (green-screen background from SAM2 segmentation)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 48,
+ "width": 1280,
+ "height": 720,
+ "time": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "state": "static (static objects jitter < 0.2 px over all 48 frames)",
+  "intrinsics_lab": "f = 0.5959*1280 = 763 px, principal point ~ (640, 360)",
+  "perspective": "background removed; no visible floor/horizon. Objects appear to rest on a floor seen obliquely from above (notebook top face visible, cup seen from above). Box moves up-left in the image and shrinks -> receding from the camera."
+ },
+ "objects": {
+  "blue_box": {
+   "desc": "blue box/toy with yellow and white patches (small white wheel/foot visible on underside), the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "tracks/blue_box.csv",
+   "ref_point": "mask centroid (visible centre)",
+   "start_px": [
+    895.1,
+    442.9
+   ],
+   "end_px": [
+    537.4,
+    220.0
+   ],
+   "net_disp_px": 421.5,
+   "image_path_length_px": 422.4,
+   "per_frame_step_px": [
+    12.04,
+    11.49,
+    9.98,
+    8.84,
+    11.5,
+    12.73,
+    12.92,
+    13.12,
+    12.42,
+    11.54,
+    11.14,
+    19.69,
+    9.51,
+    9.96,
+    10.78,
+    10.79,
+    11.05,
+    10.23,
+    9.79,
+    10.21,
+    9.18,
+    8.1,
+    7.69,
+    7.87,
+    6.57,
+    7.07,
+    7.7,
+    8.05,
+    6.0,
+    7.44,
+    7.94,
+    6.81,
+    5.8,
+    5.87,
+    5.58,
+    13.12,
+    6.4,
+    6.22,
+    6.11,
+    7.41,
+    7.56,
+    6.55,
+    6.05,
+    6.55,
+    6.74,
+    6.72,
+    5.58
+   ],
+   "sqrt_mask_area_px_frame0_47": [
+    106.8,
+    80.1
+   ],
+   "apparent_size_ratio_end_over_start": 0.75,
+   "bbox_frame0": [
+    822,
+    376,
+    965,
+    501
+   ],
+   "bbox_frame47": [
+    486,
+    176,
+    592,
+    262
+   ]
+  },
+  "basketball": {
+   "desc": "orange-brown basketball, right of centre",
+   "moves": false,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "tracks/basketball.csv",
+   "centre_px": [
+    985.8,
+    369.7
+   ],
+   "centre_jitter_px": 0.08,
+   "bbox_w_px": 67,
+   "bbox_h_px": 61,
+   "mask_major_px": 66.0,
+   "mask_minor_px": 60.0,
+   "mask_area_px": 3224
+  },
+  "cup": {
+   "desc": "small white/grey cup or tumbler with dark lid, left of centre",
+   "moves": false,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "tracks/cup.csv",
+   "centre_px": [
+    564.4,
+    423.9
+   ],
+   "centre_jitter_px": 0.1,
+   "bbox_w_px": 26,
+   "bbox_h_px": 44,
+   "mask_major_px": 43.0,
+   "mask_minor_px": 25.0,
+   "mask_area_px": 932
+  },
+  "notebook": {
+   "desc": "white rectangular package/notebook with green print (green print keyed out as holes), bottom centre, rotated ~30 deg",
+   "moves": false,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "tracks/notebook.csv",
+   "centre_px": [
+    664.6,
+    614.6
+   ],
+   "centre_jitter_px": 0.05,
+   "bbox_w_px": 72,
+   "bbox_h_px": 77,
+   "mask_major_px": 78.3,
+   "mask_minor_px": 47.5,
+   "mask_area_px": 3277
+  },
+  "watermark": {
+   "desc": "\"Modified with Segment Anything 2 Demo\" label, bottom right (x>1030, y>690); not an object"
+  }
+ },
+ "events": {
+  "box_motion": "already moving at frame 0 and still moving at frame 47 (no start/stop in clip); image speed decreases over the clip (see per_frame_step_px)",
+  "box_closest_to_basketball": "frame 0 (box right edge x=965, ball left edge x~953, gap only diagonal; masks do not touch)",
+  "contacts": "none detected"
+ }
+}

@@ -1,0 +1,58 @@
+{
+  "video": "simulation_0221.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 80,
+  "duration_s": 3.3333,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame = round(t*24); frame 0 at t=0",
+  "pixel_convention": "x right, y down, origin top-left of the 1920x1080 frame",
+  "camera": {
+    "motion": "static (phase correlation frame 0 vs 79 on furniture: shift < 0.07 px)",
+    "view": "top-down (bird's-eye) view of a living room floor; motion is in the floor plane facing the camera -> one m/px scale applies",
+    "perspective_note": "tall objects show their side walls slightly away from image centre; the vacuum disc's apparent diameter goes from 122.9 px (x~1670, right) to 120.9 px (x~650), i.e. about 1.7%. Use the floor-plane scale from the prior object."
+  },
+  "moving_objects": {
+    "robot_vacuum": {
+      "description": "the only moving object: white round robot vacuum cleaner (disc), starts docked against its white charging dock on the right wall, drives left across the room and stops in front of the sofa, left of centre",
+      "track_file": "tracks/robot_vacuum.csv",
+      "reference_point": "centre of the fitted circle of the disc's outer rim (= the rigid object's origin seen from above)",
+      "visible_frames": [0, 79],
+      "occluded": "never",
+      "apparent_diameter_px": {"frames_0_10": 122.9, "frame_40": 120.7, "frames_69_79": 120.9, "mean_all": 121.6},
+      "orientation": "does not rotate visibly (the seam line on its top stays vertical on the right side of the disc in all frames)",
+      "start_position_px": [1673.53, 423.17],
+      "end_position_px": [649.79, 500.57],
+      "net_displacement_px": 1026.7,
+      "path_length_px": 1053.8,
+      "per_frame_step_px_summary": "0.5 at f1 rising to ~20.6 at f26, falling to ~15.2 at f39, rising to ~23.1 at f50, falling to ~0.85 at f69, 0 from f70"
+    }
+  },
+  "events": [
+    {"event": "vacuum at rest docked (touching the dock)", "frame": 0, "t_s": 0.0},
+    {"event": "vacuum starts moving (first displacement 0.5 px)", "frame": 1, "t_s": 0.0417},
+    {"event": "loses contact with the dock (rim gap appears)", "frame": "about 3-4", "t_s": 0.15},
+    {"event": "first speed peak ~20.6 px/frame", "frame": 26, "t_s": 1.0833},
+    {"event": "topmost point of the path / direction changes from up-left to down-left (heading crosses 180 deg)", "frame": 39, "t_s": 1.625},
+    {"event": "local speed minimum ~15.2 px/frame", "frame": 39, "t_s": 1.625},
+    {"event": "enters the sunlit patch (lighting change only, no physical event)", "frame": "about 33-45", "t_s": 1.5},
+    {"event": "second speed peak ~23.1 px/frame", "frame": 50, "t_s": 2.0833},
+    {"event": "vacuum stops (last step 0.85 px at f69, <0.1 px after)", "frame": 69, "t_s": 2.875}
+  ],
+  "static_objects": {
+    "charging_dock": {"desc": "small white two-block dock against the right wall, right of the vacuum's start position", "bbox_px": [1700, 398, 1754, 451], "size_px": "54 (x) x 53 (y)", "centre_px": [1727, 425], "note": "left block partly hidden by the vacuum in frames 0-3"},
+    "wooden_bench": {"desc": "orange-brown slatted wooden bench/crate at top-left by the wall", "bbox_px": [295, 173, 583, 290], "size_px": "288 long (x) x 117 wide (y)", "centre_px": [439, 232]},
+    "console_table": {"desc": "long dark low sideboard/TV console at top centre, between the vase and the lamp", "bbox_px": [710, 170, 1160, 292], "size_px": "~450 long (x, right end under the lamp) x 122 wide (y)", "centre_px": [935, 231]},
+    "vase": {"desc": "white/blue patterned round vase on the left end of the console", "bbox_px": [716, 200, 791, 272], "size_px": "~75 diameter", "centre_px": [753, 235]},
+    "pleated_lamp": {"desc": "white pleated (fan-shaped) round lampshade at the right end of the console, brass centre", "bbox_px": [1115, 148, 1265, 300], "size_px": "~150 diameter", "centre_px": [1192, 222]},
+    "curved_sofa": {"desc": "large cream curved (kidney-shaped) sofa in the lower centre, two grey cushions", "bbox_px": [565, 578, 1450, 1060], "size_px": "~885 (x) x ~482 (y); curved so the bbox is loose", "centre_px": [1005, 820]},
+    "sofa_cushions": {"desc": "two grey-white cushions on the sofa, left at ~(730,820) and right at ~(1260,830)", "size_px": "each ~200 x ~140 (rotated)"},
+    "fluffy_round_rug_or_pouf": {"desc": "round shaggy white fur rug/pouf at bottom-left, left of the sofa", "bbox_px": [200, 585, 645, 1080], "size_px": "~445 (x) x >=495 (y, cut by the frame bottom)", "centre_px": [420, 840]},
+    "chair_frame_top_right": {"desc": "light wooden chair/stand frame against the top wall, right of the lamp", "bbox_px": [1345, 85, 1610, 222], "size_px": "~265 x ~137"},
+    "carpet_floor": {"desc": "grey-beige carpet floor of the room", "bbox_px": [158, 122, 1750, 1080], "size_px": "~1592 (x) x >=958 (y)"},
+    "walls": {"desc": "white walls/baseboard: top wall above y~120, right wall x>~1750, left wall x<~158"},
+    "sunlit_patch": {"desc": "diagonal band of sunlight on the carpet (top-left to centre), not an object; the vacuum crosses it at frames ~33-79"}
+  },
+  "files": {"notes": "notes.md", "tracks": ["tracks/robot_vacuum.csv"], "scripts": "scripts/"}
+}

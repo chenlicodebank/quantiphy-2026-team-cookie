@@ -1,0 +1,82 @@
+{
+  "video": "captured_0020s.mp4",
+  "source": "lab (real recording, background replaced by a synthetic blue gradient with SAM2; watermark 'Modified with Segment Anything 2 Demo' bottom-right)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "frame_time": "t = frame / 24 (frame 0 at t = 0; last frame 48 at t = 2.000 s)",
+  "image_size_px": [1280, 720],
+  "units": "pixels and seconds; image origin top-left, x right, y down. No metric scale is assumed.",
+  "camera": {
+    "motion": "static. Both people's shoes stay fixed to <0.7 px std over all 49 frames (far person left shoe mean (713.4, 255.7), near person shoe mean (366.3, 675.8)); background is synthetic so it carries no motion information",
+    "intrinsics_from_benchmark": "Orbbec Femto Mega, HFOV 80 deg: f = 0.5959 * 1280 = 763 px, principal point ~ (640, 360)",
+    "orientation_cue": "camera looks steeply downward. Body axes of the two standing people (leg PCA at frame 0) converge at the vertical vanishing point ~ (835, 1068) (below the image), i.e. optical axis ~ 44 deg from the downward vertical / pitched ~45 deg down; horizon far above the image (roughly y ~ -400). Rough (+/- 10 deg): the near person's leg axis is used and she may not stand exactly vertical.",
+    "depth_ordering": "near person (lower-left, large) is close to the camera; far person (top centre, small, head cut off by the top edge) is far. The two objects are thrown between them, so the white object shrinks in the image during its flight (moving away) and the yellow toy grows (approaching)."
+  },
+  "objects": [
+    {
+      "name": "white_object",
+      "description": "small white object (cup-/roll-like, ~37 px across when in the near person's hand at frame 0, crumpled-looking white blob in flight)",
+      "distinguish": "only bright white small object; thrown by the near person (black shirt) to the far person (grey top)",
+      "moves": true,
+      "visible_frames": "0-48 (partly covered by hands 0-13 and 27-48; in the image crosses the yellow toy at 18-19, in front of it at 18)",
+      "track": "tracks/white_object.csv",
+      "phases": {"held_by_near_person_swing": "0-13", "free_flight": "14-26", "caught_held_by_far_person": "27-48"},
+      "apparent_size_px": "in flight major x minor: frame 15 61x34, 16 56x35, 17 55x35, 20 44x33, 21 41x33, 22 38x29, 23 38x35, 24 32x26, 25 34x24 (shrinks as it flies away); in near person's hand frames 0-7 ~35-38 px; in far person's hands ~20-25 px (partly covered)"
+    },
+    {
+      "name": "yellow_toy",
+      "description": "elongated yellow object with a green leafy end (banana / corn-cob like toy)",
+      "distinguish": "only yellow object; thrown by the far person (grey top) to the near person (black shirt)",
+      "moves": true,
+      "visible_frames": "0-3, 8-27, 38-48 (hidden behind far person's hand/leg 4-7, hidden in near person's hands / behind her hair 28-37)",
+      "track": "tracks/yellow_toy.csv",
+      "phases": {"held_by_far_person": "0-13", "free_flight": "14-26", "caught_by_near_person": "27", "hidden": "28-37", "held_by_near_person": "38-48"},
+      "apparent_size_px": "in flight major x minor: frame 14 53x33, 15 54x34, 16 54x33, 17 59x32, 20 62x31, 21 68x29, 22 74x30, 23 79x34, 24 88x46, 25 87x40, 26 96x34 (grows as it approaches the near camera person; it also tumbles so the projected length varies). Mask excludes most of the dark green end; held in hand masks are partial."
+    },
+    {
+      "name": "person_near",
+      "description": "woman with long brown hair, dark grey/black oversized T-shirt, black trousers, white sneakers; lower-left, close to the camera; appears strongly tilted by the downward-looking wide-angle view",
+      "distinguish": "large figure on the left; throws the white object (right hand, underarm), catches the yellow toy with both hands",
+      "moves": "stands in place (feet fixed); arms move",
+      "visible_frames": "0-48, cut off by the left image edge (head/hair partly), feet visible at the bottom",
+      "track": "tracks/person_near.csv (visible-mask centre and extents, not a pelvis)",
+      "static_refs": "her right shoe (white sneaker) bbox x 340-389, y 652-708 (centre 366, 676), fixed all clip"
+    },
+    {
+      "name": "person_far",
+      "description": "woman in light-grey fitted T-shirt, dark navy trousers, white sneakers with black stripes; top centre, far from camera; head cut off by the top edge",
+      "distinguish": "small figure at top centre; throws the yellow toy (her right hand = image-left, underarm), catches the white object with both hands",
+      "moves": "stands in place (feet fixed); arms and torso move (bends forward to catch ~26-36)",
+      "visible_frames": "0-48 (from shoulders/neck down; head out of frame)",
+      "track": "tracks/person_far.csv (visible-mask centre and extents)",
+      "static_refs": "shoes: left (image) bbox x 704-723, y 241-268 centre (713.9, 255.1); right bbox x 735-753, y 242-269 centre (743.2, 255.8); feet bottom y ~269-271; trousers waistband y ~60-70; visible body from y=0 to 271 px; leg axis direction (0.127, 0.992)"
+    },
+    {
+      "name": "background",
+      "description": "synthetic blue vertical gradient (no floor, walls or markings visible; the real ground plane is not visible)",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "near person's backswing with the white object: object at its lowest/rearmost point", "frames": "4-5", "t_s": "0.167-0.208"},
+    {"event": "far person's backswing with the yellow toy (toy hidden behind her)", "frames": "4-7", "t_s": "0.167-0.292"},
+    {"event": "white object forward swing starts", "frame": 6, "t_s": 0.250},
+    {"event": "yellow toy forward swing (far person's arm) starts", "frame": 9, "t_s": 0.375},
+    {"event": "release of the white object (last frame still in hand 13; at 14 the hand is just behind it)", "frame": 14, "t_s": 0.583, "uncertainty_frames": 1},
+    {"event": "release of the yellow toy (13 in hand, 14 free just past the fingers)", "frame": 14, "t_s": 0.583, "uncertainty_frames": 1},
+    {"event": "the two objects cross in the image (white in front of yellow at 18, overlapping edges at 19)", "frames": "18-19", "t_s": "0.750-0.792"},
+    {"event": "white object highest point in image (min y = 37.0)", "frame": 22, "t_s": 0.917},
+    {"event": "yellow toy highest point in image (min y ~67 at 18, partly hidden; ~73 at 17)", "frame": 18, "t_s": 0.750},
+    {"event": "white object touches far person's hand / catch", "frames": "26-27", "t_s": "1.083-1.125"},
+    {"event": "yellow toy reaches near person's hands (contact) / catch, hands close over it", "frames": "26-27", "t_s": "1.083-1.125"},
+    {"event": "far person carries the caught white object down (lowest y ~163 at 35-36) then back up to ~70 by 47", "frames": "27-48"},
+    {"event": "yellow toy hidden in near person's hands/behind hair, reappears held in front of her", "frames": "28-37 hidden, 38 reappears"}
+  ],
+  "files": {
+    "tracks": "tracks/white_object.csv, tracks/yellow_toy.csv, tracks/person_near.csv, tracks/person_far.csv",
+    "static_measure": "static_measure.json (per-frame shoe blobs, body axes, vanishing point)",
+    "notes": "notes.md",
+    "scripts": "scripts/"
+  }
+}

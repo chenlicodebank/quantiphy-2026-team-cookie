@@ -1,0 +1,18 @@
+{
+ "video": "internet_0059.mp4",
+ "video_source": "internet",
+ "video_type": "A2SS",
+ "fps": 30.0,
+ "frames": 123,
+ "duration_s": 4.1,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3187,
+  "question": "What is the average velocity of the ball between 2.50s and 3.20s in m/s?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

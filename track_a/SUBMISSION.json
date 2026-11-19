@@ -1,0 +1,30 @@
+{
+ "224": {
+  "file": "track_a_s43_strict_rsi.csv",
+  "build": "results/fulltest_s43_strict_rsi",
+  "sha256": "5e73fc704f79848ae6aab025bfaf0a743cbfa1207859bdfdd017c9690c822f92",
+  "submission_id": "9de2b974-6be8-4c1a-938d-c9acc93ccc47",
+  "submitted_utc": "2026-10-26T02:29:09",
+  "created_at_portal": "2026-10-26T02:29:09.455506+00:00",
+  "mra": "0.8499",
+  "S2": "0.8527",
+  "D2": "0.8918",
+  "S3": "0.8148",
+  "D3": "0.8404",
+  "role": "entry"
+ },
+ "225": {
+  "file": "track_a_s43_gray_rsi.csv",
+  "build": "results/fulltest_s43_gray_rsi",
+  "sha256": "2c4b1273948dfc67f355a0f237f500ee318d9d0a046b144359414b15453459bd",
+  "submission_id": "5978cdf6-3fcf-4594-8f1f-2d1867bd8f4b",
+  "submitted_utc": "2026-10-26T07:51:34",
+  "created_at_portal": "2026-10-26T07:51:34.851074+00:00",
+  "mra": "0.8606",
+  "S2": "0.8591",
+  "D2": "0.8964",
+  "S3": "0.8265",
+  "D3": "0.8605",
+  "role": "alternative, only if the organisers allow its gray steps (STATEMENT.md)"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "video": "captured_0028x.mp4",
+ "video_source": "lab",
+ "video_type": "S3SX",
+ "fps": 24.0,
+ "frames": 49,
+ "duration_s": 2.0417,
+ "width": 1280,
+ "height": 720,
+ "question": {
+  "id": 2489,
+  "question": "What is the acceleration of the ping pong ball at 1.3s in cm/s^2?",
+  "prior": "diameter of the ping pong ball = 40mm",
+  "depth_info": "t=1.0s, distance_ball_camera=1.8050m\nt=1.1s, distance_ball_camera=1.5570m\nt=1.3s (max height), distance_ball_camera=1.4115m",
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

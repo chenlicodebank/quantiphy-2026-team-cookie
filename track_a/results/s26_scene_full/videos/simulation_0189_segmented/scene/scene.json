@@ -1,0 +1,50 @@
+{
+  "video": "simulation_0189_segmented.mp4",
+  "source": "segmentation (Blender render, background replaced by white)",
+  "scene": "2D",
+  "fps": 120.0,
+  "frames": 401,
+  "size_px": [1920, 1080],
+  "time_convention": "t = frame / 120; frame = round(t*120)",
+  "image_coords": "x right, y DOWN, pixels; 'rise' = decreasing y",
+  "camera": {"motion": "static (chassis, wheels, cab unchanged across all 401 frames, no background shift)", "view": "side view, truck facing right, near-orthographic; no ground or horizon visible (white background)"},
+  "objects": {
+    "box": {
+      "desc": "brown cardboard box with 'FRAGAIL' print and handling icons, open flap sticking up at top right; sits on the roof of the truck's cargo body",
+      "moves": true, "visible_frames": [0, 400], "occluded": "never",
+      "track": "tracks/box.csv",
+      "ref_point": "centre of box face: x = centre of full-height columns, y = mean of sub-pixel top and bottom edges",
+      "size_px": {"length_x": 408, "height_y": "184-193 (frame0 187.7, frame400 184.2; flap adds ~12 px above top edge at the right)"},
+      "pos_frame0": {"ref": [734.0, 274.3], "bbox": [530, 180, 937, 367]},
+      "pos_frame400": {"ref": [734.0, 210.2], "bbox": [530, 106, 937, 299]},
+      "motion": "purely vertical, rises 64 px (ref) / ~67 px (rides with cargo body); x constant 733-734"
+    },
+    "cargo_body": {
+      "desc": "large white/grey box body (container) of the catering/high-loader truck, lifted by a scissor lift (yellow-black striped scissor arms appear underneath as it rises)",
+      "moves": true, "visible_frames": [0, 400], "occluded": "right end hidden behind the front platform pillar (x ~1455-1480)",
+      "track": "tracks/cargo_body.csv",
+      "ref_point": "centre_y = mean of top and bottom edges; x centre ~ (129+1455)/2 = 792 (constant)",
+      "size_px": {"length_x": "~1326 visible (x 129 to ~1455 where it meets the platform pillar; ~1352 to 1481 incl. the pillar)", "height_y": 433.5},
+      "pos_frame0": {"top_y": 369.95, "bottom_y": 803.56},
+      "pos_frame400": {"top_y": 302.74, "bottom_y": 735.97},
+      "motion": "purely vertical lift, rises 67.2 px over frames 0-400, slow start and gradually faster (~0.06 px/frame in frames 0-40, ~0.22 px/frame in frames 320-400); still moving at last frame"
+    },
+    "truck": {
+      "desc": "white catering truck (cab on right, front catering platform with railings above the cab, chassis, 2 visible wheels, stabiliser leg near x=1280)",
+      "moves": false,
+      "overall_bbox_px_frame0": [124, 164, 1839, 1027], "note_bbox": "includes box; truck alone x 124-1839 (length ~1716 px), y top ~308 (platform) at frame0 to tyre bottom 1024",
+      "length_px": 1716,
+      "platform": {"bbox_approx": [1385, 308, 1825, 525], "moves": false},
+      "rear_wheel": {"centre": [705, 940], "diameter_px": 168, "bottom_y": 1024},
+      "front_wheel": {"centre": [1584, 943], "diameter_px": 163, "bottom_y": 1023},
+      "wheelbase_px": 879,
+      "ground_line_y": 1024
+    },
+    "scissor_lift": {"desc": "yellow-black striped scissor arms between chassis and cargo body; exposed height grows as body rises (gap = body bottom to chassis top ~805)", "moves": "deforms with lift"}
+  },
+  "events": [
+    {"event": "lift start", "frame": 0, "t": 0.0, "note": "body/box almost still for first ~8 frames (<0.3 px), ~1 px by frame 20; motion gradually speeds up"},
+    {"event": "clip end, still lifting", "frame": 400, "t": 3.3333}
+  ],
+  "per_frame_rise_px": {"body_top_total_0_400": 67.2, "marker_L": 67.4, "marker_R": 67.1, "box_ref": 64.1, "box_top_edge": 62.3}
+}

@@ -1,0 +1,194 @@
+{
+ "video": "captured_0033s.mp4",
+ "source": "lab (real recording; background replaced with Segment Anything 2 - sky backdrop, the thrower/hand removed)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (table edges constant within 2-4 px over all 49 frames, mask noise)",
+  "intrinsics_lab_convention": {
+   "fx_px": 763.0,
+   "fy_px": 763.0,
+   "cx_px": 640,
+   "cy_px": 360,
+   "hfov_deg": 80
+  },
+  "view": "camera looks roughly horizontally at a table from the front, slightly above table-top height; table top seen as trapezoid (far edge short, near edge long)"
+ },
+ "objects": [
+  {
+   "name": "ball",
+   "desc": "small white/pinkish ball (ping-pong-like), the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    37
+   ],
+   "track": "tracks/ball.csv",
+   "apparent_diameter_px_unblurred": {
+    "frames_0_3": 21,
+    "frame_9_10": 25,
+    "frames_19_20": 29.5,
+    "frames_26_28": 33,
+    "frames_30_34": 36,
+    "frame_35": 45,
+    "note": "use width_across_px (perpendicular to blur); grows as the ball comes toward the camera"
+   }
+  },
+  {
+   "name": "table",
+   "desc": "wooden table top (brown) on one dark grey central pedestal",
+   "moves": false,
+   "visible_frames": [
+    0,
+    48
+   ],
+   "top_far_edge": {
+    "y": 431,
+    "x_left": 452,
+    "x_right": 765,
+    "length_px": 313
+   },
+   "top_near_edge_upper": {
+    "left_corner": [
+     304,
+     519
+    ],
+    "right_corner": [
+     907,
+     534
+    ],
+    "length_px": 603
+   },
+   "front_face": {
+    "left_x": 304,
+    "right_x": 909,
+    "top_y_left": 519,
+    "bottom_y_left": 546,
+    "top_y_right": 534,
+    "bottom_y_right": 561,
+    "thickness_px": 27
+   },
+   "bbox_px": [
+    302,
+    430,
+    911,
+    561
+   ],
+   "top_depth_extent_in_image_px": "far edge y~431 to near edge y~519-534 (~95 px, strongly foreshortened)",
+   "note": "near edge slopes slightly (right side ~15 px lower): table/camera slightly rolled; pixel corners +-3 px (soft segmentation edges)"
+  },
+  {
+   "name": "table_pedestal",
+   "desc": "dark grey vertical post under the table centre",
+   "moves": false,
+   "x0": 562,
+   "x1": 605,
+   "width_px": 44,
+   "y_top": 552,
+   "y_bottom": 719,
+   "note": "continues below the bottom of the image"
+  },
+  {
+   "name": "background",
+   "desc": "uniform blue sky (synthetic replacement); no ground plane, no horizon",
+   "moves": false
+  },
+  {
+   "name": "watermark",
+   "desc": "text 'Modified with Segment Anything 2 Demo' bottom right (x>1030, y>690)",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "ball held still (in removed hand)",
+   "frames": [
+    0,
+    2
+   ],
+   "t_s": [
+    0.0,
+    0.0833
+   ],
+   "pos_px": [
+    624.5,
+    234.5
+   ]
+  },
+  {
+   "event": "release / start of throw (upward)",
+   "frame": 3,
+   "t_s": 0.125,
+   "note": "upward motion clear from frame 4; +-1 frame"
+  },
+  {
+   "event": "apex 1 (highest point, min image y)",
+   "frame": 8,
+   "t_s": 0.3333,
+   "cy_px": 180.5,
+   "note": "flat 7-9"
+  },
+  {
+   "event": "first bounce on far part of table top",
+   "frame": 14,
+   "t_s": 0.5833,
+   "cy_px": 405.1,
+   "note": "ball bottom at y~432 = far table edge; shadow under it; blurred 12-15"
+  },
+  {
+   "event": "apex 2",
+   "frame": 20,
+   "t_s": 0.8333,
+   "cy_px": 313.3
+  },
+  {
+   "event": "second impact on table",
+   "frame": 25,
+   "t_s": 1.0417,
+   "cy_px": 434.6,
+   "note": "contact between frames 24 and 25"
+  },
+  {
+   "event": "small hop",
+   "frames": [
+    26,
+    27
+   ],
+   "note": "cy 426-427 then rolls/skips"
+  },
+  {
+   "event": "rolling across table toward camera and left",
+   "frames": [
+    27,
+    35
+   ],
+   "t_s": [
+    1.125,
+    1.4583
+   ]
+  },
+  {
+   "event": "leaves front-left edge of table",
+   "frame": 35,
+   "t_s": 1.4583,
+   "note": "over the front face at frame 35/36; between 35 and 36"
+  },
+  {
+   "event": "falls out of the bottom of the image",
+   "frame": 38,
+   "t_s": 1.5833,
+   "note": "last visible frame 37 (bbox bottom 706)"
+  }
+ ],
+ "files": {
+  "notes": "notes.md",
+  "tracks": [
+   "tracks/ball.csv"
+  ],
+  "scripts": "scripts/"
+ }
+}

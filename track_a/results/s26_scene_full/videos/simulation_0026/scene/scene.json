@@ -1,0 +1,225 @@
+{
+ "video": "simulation_0026.mp4",
+ "source": "simulation",
+ "scene": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "duration_s": 3.0,
+ "width": 960,
+ "height": 960,
+ "time_convention": "t = frame / 25",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of cliff regions vs frame 0: |shift| < 0.5 px all frames (scripts/camshift.py); sky clouds drift <0.5 px",
+  "horizon": "not visible (hidden behind the cliff); cliff top edge y~250-290; ground plane = beach/sea seen from slightly above"
+ },
+ "objects": {
+  "boat": {
+   "desc": "red-and-white fishing boat (red hull with white \"AH805\"-like lettering, white wheelhouse, black/white mast with crossbar, black davit), standing in the shallow water at the shoreline",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "occluded": "never",
+   "motion": "drifts steadily leftward (image -x), slightly receding (apparent scale 1.046 -> 0.952, keel line y 627 -> 617)",
+   "track": "tracks/boat.csv",
+   "ref_point": "bbox_cx/bbox_cy = centre of full image bbox (mast top to keel, bow to stern); hull_cx/hull_cy = centre of hull (gunwale y540..keel at f37); keel = bottom centre",
+   "extents_frame37_px": {
+    "length_bow_to_stern": 244,
+    "height_mast_top_to_keel": 317,
+    "height_mast_top_to_rudder_bottom": 326,
+    "hull_height_gunwale_to_keel": 83,
+    "wheelhouse_top_y": 470,
+    "mast_top_y": 306,
+    "keel_y": 623
+   },
+   "summary": {
+    "bbox_cx": {
+     "frame0": 415.87,
+     "frame37": 269.98,
+     "frame74": 134.52
+    },
+    "bbox_cy": {
+     "frame0": 465.41,
+     "frame37": 464.51,
+     "frame74": 464.36
+    },
+    "x_min": {
+     "frame0": 289.0,
+     "frame37": 148.0,
+     "frame74": 18.0
+    },
+    "x_max": {
+     "frame0": 542.8,
+     "frame37": 392.0,
+     "frame74": 251.0
+    },
+    "y_min": {
+     "frame0": 300.6,
+     "frame37": 306.0,
+     "frame74": 313.0
+    },
+    "length_px": {
+     "frame0": 253.8,
+     "frame37": 244.0,
+     "frame74": 233.0
+    },
+    "height_px": {
+     "frame0": 329.7,
+     "frame37": 317.0,
+     "frame74": 302.7
+    },
+    "scale_fit": {
+     "frame0": 1.05,
+     "frame37": 1.0,
+     "frame74": 0.95
+    }
+   }
+  },
+  "person": {
+   "desc": "single adult walking on the wet sand right of the boat (white/grey top, dark trousers), the only human in the scene",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "occluded": "never; frames 0-2 the boat stern is within ~8 px to the left (flag=1 in frame 0)",
+   "motion": "walks slowly left and slightly toward the camera (feet y 579/583 -> 590), about 0.5 px/frame in x",
+   "track": "tracks/person.csv",
+   "ref_point": "pelvis_x = torso-mean x, pelvis_y = y_min + 0.47*height (pelvis estimate)",
+   "apparent_height_px": "about 52-55 (head to feet), no clear trend; width 14-19 (arm swing)",
+   "summary": {
+    "pelvis_x": {
+     "frame0": 560.4,
+     "frame37": 542.03,
+     "frame74": 522.34
+    },
+    "pelvis_y": {
+     "frame0": 552.97,
+     "frame37": 558.38,
+     "frame74": 563.38
+    },
+    "y_min": {
+     "frame0": 529.0,
+     "frame37": 533.0,
+     "frame74": 538.0
+    },
+    "y_max": {
+     "frame0": 579.0,
+     "frame37": 586.0,
+     "frame74": 591.0
+    },
+    "height_px": {
+     "frame0": 51.0,
+     "frame37": 54.0,
+     "frame74": 54.0
+    }
+   }
+  },
+  "cliff": {
+   "desc": "large sand-coloured cliff/bluff filling the background",
+   "moves": false,
+   "image_extent_px": {
+    "x": [
+     0,
+     960
+    ],
+    "top_y": "250 (left) .. 290 (right)",
+    "base_y": "~495 at x 180-500"
+   }
+  },
+  "beach": {
+   "desc": "flat pale sand beach between cliff base and water",
+   "moves": false,
+   "image_extent_px": {
+    "y": [
+     495,
+     600
+    ],
+    "shoreline_y": "~575 at x<270, ~600-605 at x>500"
+   }
+  },
+  "sea": {
+   "desc": "animated green/brown water in the foreground with reflections of the boat",
+   "moves": "surface animation only",
+   "image_extent_px": {
+    "y": [
+     575,
+     960
+    ]
+   }
+  },
+  "fence_posts_cliff": {
+   "desc": "row of wooden posts/palisade at the cliff foot behind the boat",
+   "moves": false,
+   "image_extent_px": {
+    "x": [
+     185,
+     470
+    ],
+    "y": [
+     465,
+     502
+    ],
+    "length": 285,
+    "height": 37
+   }
+  },
+  "white_rock_right": {
+   "desc": "white sand dune/rock at the right edge",
+   "moves": false,
+   "image_extent_px": {
+    "x": [
+     810,
+     960
+    ],
+    "y": [
+     455,
+     580
+    ],
+    "note": "cut by the right image edge"
+   }
+  },
+  "fence_posts_right": {
+   "desc": "short row of posts at the foot of the white rock",
+   "moves": false,
+   "image_extent_px": {
+    "x": [
+     880,
+     960
+    ],
+    "y": [
+     558,
+     582
+    ]
+   }
+  }
+ },
+ "events": [
+  {
+   "event": "boat moving leftward the whole clip (no start/stop seen)",
+   "frames": [
+    0,
+    74
+   ]
+  },
+  {
+   "event": "person walking leftward the whole clip (no start/stop seen)",
+   "frames": [
+    0,
+    74
+   ]
+  },
+  {
+   "event": "boat stern passes left of the person; closest image gap at frame 0 (stern x 547 vs person x_min 554)",
+   "frame": 0
+  }
+ ],
+ "files": [
+  "tracks/boat.csv",
+  "tracks/person.csv",
+  "tracks/boat_raw.csv (diff-mask cross-check)",
+  "notes.md"
+ ]
+}

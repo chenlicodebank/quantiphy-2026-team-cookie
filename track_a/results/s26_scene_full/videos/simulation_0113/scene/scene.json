@@ -1,0 +1,81 @@
+{
+  "video": "simulation_0113.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0048,
+  "frames": 120,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24.0048; frame = round(t * 24.0048)",
+  "view": "straight top-down (orthographic-looking) view of a square swimming pool; the motion plane is the water surface, facing the camera",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of the deck/ground strip (y 820-1060) vs frame 0: |shift| <= 0.04 px in all frames (scene/tracks/bg_shift.csv)",
+    "perspective": "none usable; pool rim appears as a near-square (458 x 456 px), so a single px scale applies on the water plane"
+  },
+  "objects": [
+    {
+      "name": "ring",
+      "aka": ["swim ring", "inflatable ring", "pool float", "torus", "donut float", "life ring"],
+      "description": "pink/red inflatable torus with blue-violet blotches, floating in the upper-left part of the pool; the only moving object",
+      "moves": true,
+      "visible_frames": [0, 119],
+      "occluded_frames": [],
+      "track_file": "tracks/ring.csv",
+      "reference_point": "centroid of the filled outer outline = centre of the torus hole (object origin)",
+      "position_px": {"frame_0": [394.70, 387.14], "frame_119": [428.45, 420.63]},
+      "size_px": {
+        "outer_diameter": 73.0,
+        "outer_diameter_range": "fitEllipse major 73.6-74.2, minor 70.9-71.4; bbox 74-76 x 72-76 (bbox includes 1-2 px antialias)",
+        "recommended_outer_diameter_px": 73.0,
+        "hole_diameter_approx": 32.0,
+        "tube_width_approx": 20.5,
+        "note": "seen from above: length = width = outer diameter; vertical thickness (height) is not visible in this top view"
+      },
+      "motion_summary_px": {
+        "direction": "straight line toward lower-right (image +x and +y equally, ~45 deg)",
+        "net_displacement_frame0_to_119": [33.75, 33.49],
+        "net_displacement_magnitude": 47.55,
+        "linear_fit_px_per_frame": {"vx": 0.2848, "vy": 0.2841, "speed": 0.4023},
+        "linear_fit_rms_residual_px": 0.08,
+        "raw_per_frame_step": {"mean": 0.406, "std": 0.094, "min": 0.15, "max": 0.615},
+        "raw_path_length_frame0_to_119": 48.31,
+        "character": "constant velocity drift for the whole clip (quadratic term ~1e-5 px/frame^2, i.e. no measurable acceleration); raw per-frame steps are dominated by ~0.1 px centroid noise, so use the linear fit for per-frame speed"
+      }
+    },
+    {
+      "name": "pool",
+      "aka": ["swimming pool", "water", "pool basin"],
+      "description": "square pool of dark blue water with tiled floor, centre of the image",
+      "moves": false,
+      "visible_frames": [0, 119],
+      "water_bbox_px": {"x0": 313, "y0": 310, "x1": 770, "y1": 765},
+      "water_size_px": {"width_x": 458, "height_y": 456},
+      "rim_outer_approx_px": {"x0": 308, "y0": 308, "x1": 772, "y1": 770, "size": 464},
+      "centre_px": [541.5, 537.5],
+      "note": "water surface has small animated ripples; right ~1/3 of the floor is in shadow (darker), not a separate object"
+    },
+    {
+      "name": "pool_deck",
+      "aka": ["deck", "tiled deck", "paving around pool"],
+      "description": "light lilac surface around the pool, irregular outer border against rough brown ground",
+      "moves": false,
+      "visible_frames": [0, 119],
+      "extent_px": "roughly x 0-1060, y 30-1060 (irregular outline)",
+      "deck_tile_pitch_px": "roughly 18-20 px, eyeballed, not measured (small square tiles visible in frames 0-23)",
+      "note": "its rendered appearance changes abruptly at frame 24 (tile grid disappears, becomes smooth/blurred lilac); a render/texture switch, not motion"
+    },
+    {
+      "name": "ground",
+      "aka": ["gravel", "soil", "rough ground", "bushes"],
+      "description": "rough brown speckled ground surrounding the deck at the image edges",
+      "moves": false,
+      "visible_frames": [0, 119]
+    }
+  ],
+  "events": [
+    {"frame": 0, "time": 0.0, "event": "ring already moving (drifting toward lower-right) at clip start; no start of motion inside the clip"},
+    {"frame": 24, "time": 0.9998, "event": "deck texture/appearance switches (tile grid disappears); camera and objects unaffected"},
+    {"frame": 119, "time": 4.9573, "event": "clip ends; ring still drifting at the same velocity, no contact with the pool wall (ring right/bottom edge ~465/457 px vs wall 770/765)"}
+  ],
+  "no_events": "no bounce, impact, contact, release or direction change"
+}

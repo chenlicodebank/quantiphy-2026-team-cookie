@@ -1,0 +1,18 @@
+{
+ "video": "internet_0021.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 29.553957,
+ "frames": 107,
+ "duration_s": 3.6205,
+ "width": 3840,
+ "height": 2160,
+ "question": {
+  "id": 2106,
+  "question": "What is the the displacement of the airplane from 0s to 2.00s in meters?",
+  "prior": "length of the airplane = 40m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 25.0
+ }
+}

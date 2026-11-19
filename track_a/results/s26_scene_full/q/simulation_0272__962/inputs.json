@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0272.mp4",
+ "video_source": "simulation",
+ "video_type": "A2SC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 2560,
+ "height": 1440,
+ "question": {
+  "id": 962,
+  "question": "What is the width (wing span) of the phoenix in meters?",
+  "prior": "acceleration of the phoenix at 2.0s = 2m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

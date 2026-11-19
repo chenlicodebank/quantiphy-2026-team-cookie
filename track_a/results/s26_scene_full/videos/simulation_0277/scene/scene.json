@@ -1,0 +1,81 @@
+{
+  "video": "simulation_0277.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "time_convention": "t = frame / 24; frame = round(t * 24); frame 0 = t 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale recorded",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of the tree region (y<500) vs frame 0: max shift 0.001 px over all 72 frames",
+    "per_frame_shift_px": 0.0,
+    "notes": "Side view of a forest clearing. Horizon / far tree line at y~740-760. Raccoon runs left->right roughly parallel to the image plane at nearly constant depth (its apparent length stays 277-329 px with no trend, only gait variation), so one px scale applies to the raccoon."
+  },
+  "objects": [
+    {
+      "name": "raccoon",
+      "description": "the only animal / only moving object: grey raccoon with dark-ringed tail, running (galloping) left to right along the ground",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/raccoon.csv",
+      "reference_point": "cx,cy = mask centroid (best proxy for the rig origin / body centre); bbox_cx,bbox_cy also given. True Blender origin is not visible; it moves rigidly with the body, so pixel displacements/speeds from cx (or bbox_cx) are the usable proxy.",
+      "extent_px": {
+        "bbox_w_nose_to_tail_tip": {"min": 277, "median": 300.5, "max": 329},
+        "bbox_h_top_to_feet": {"min": 108, "median": 122, "max": 145},
+        "note": "length includes the tail (tail ~110-130 px of it); body nose-to-rump ~ 180-200 px. Height varies with gallop phase (max when back arches / legs extended)."
+      },
+      "position_summary_px": {
+        "cx_frame0": 707.1, "cx_frame71": 2287.0,
+        "cy_range": [773.6, 794.3],
+        "net_dx_frame1_to_71": 1581.9,
+        "direction": "+x (rightwards), essentially horizontal; cy oscillates ~±10 px with the gallop"
+      },
+      "occluded": "never; passes in front of the small conifer (frames 0-3), the bush (~frames 27-40) and the big pine trunk (~frames 45-60)"
+    },
+    {
+      "name": "small_conifer",
+      "description": "young spruce/fir standing in the left foreground with a thin bare trunk; raccoon starts just in front of it",
+      "moves": false,
+      "image_position_px": {"trunk_x": 540, "base_y": 900},
+      "extent_px": {"height_base_to_top": 570, "crown_width": 375, "crown_x_range": [335, 710], "top_y": 330},
+      "reliability": "±15 px; crown top merges with taller tree behind it"
+    },
+    {
+      "name": "bush",
+      "description": "broad-leaved bright-green shrub in the middle with several thin stems",
+      "moves": false,
+      "image_position_px": {"stems_center_x": 1440, "base_y": 860},
+      "extent_px": {"width": 485, "x_range": [1190, 1677], "height": 500, "top_y": 358},
+      "reliability": "±15 px; leaf edges ragged"
+    },
+    {
+      "name": "pine_trunk",
+      "description": "thick brown trunk of a tall pine, right of centre, rising past the top edge of the frame",
+      "moves": false,
+      "image_position_px": {"center_x": 1775, "base_y": 852},
+      "extent_px": {"trunk_width_at_base": 140, "trunk_width_at_y600": 100, "base_x_range": [1706, 1847], "visible_height": 852, "note": "top cut off by frame edge"},
+      "reliability": "±8 px"
+    },
+    {
+      "name": "background_forest",
+      "description": "many conifers and bushes behind the clearing (far tree line, bases y~740-760), out-of-focus in the distance",
+      "moves": false
+    },
+    {
+      "name": "ground",
+      "description": "undulating bare brown-grey soil clearing filling the lower half of the image",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "raccoon nearly stationary between frames 0 and 1 (frame 0 and 1 almost identical, mean abs diff 0.07 vs ~1.4 for later pairs)", "frame": 1, "t": 0.0417},
+    {"event": "running motion visible from frame 1->2 onward, continues to the last frame", "frame": 2, "t": 0.0833},
+    {"event": "gallop cycle: maximum body height / top of bbox (y0 ~720) at frames 0-1, 16-17, 32, 47, 62-63 (period ~15.3 frames = 0.64 s)", "frames": [1, 17, 32, 47, 62]},
+    {"event": "raccoon passes in front of the bush", "frames": [27, 40]},
+    {"event": "raccoon passes in front of the pine trunk", "frames": [45, 60]},
+    {"event": "end of clip, raccoon still running (right edge of bbox x=2407 at frame 71, has not left the frame)", "frame": 71, "t": 2.9583}
+  ]
+}

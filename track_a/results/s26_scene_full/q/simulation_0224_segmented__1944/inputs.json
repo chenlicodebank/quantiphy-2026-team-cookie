@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0224_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MX",
+ "fps": 24.0,
+ "frames": 45,
+ "duration_s": 1.875,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1944,
+  "question": "What is the speed of the red general chess at time 0.5s in m/s?",
+  "prior": "diameter of one chinese chess = 0.097m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

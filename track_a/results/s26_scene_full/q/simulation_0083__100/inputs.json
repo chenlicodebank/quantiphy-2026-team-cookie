@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0083.mp4",
+ "video_source": "simulation",
+ "video_type": "S2MX",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 100,
+  "question": "What is the speed of the yellow car at 1.0s in m/s?",
+  "prior": "length of the yellow car = 5.67m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SD",
+  "question_fps": 24.0
+ }
+}

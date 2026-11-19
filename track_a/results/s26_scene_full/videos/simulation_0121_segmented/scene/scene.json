@@ -1,0 +1,51 @@
+{
+  "video": "simulation_0121_segmented.mp4",
+  "source": "segmentation (simulation footage, background replaced by white)",
+  "scene_type": "2D",
+  "fps": 30.0,
+  "frames": 80,
+  "duration_s": 2.6667,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 30; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale",
+  "camera": {"motion": "static (no background; ball_middle stays within ~1 px while untouched, frames 0-27)", "perspective": "none visible; 2D plane facing camera; all three balls have the same pixel diameter (~164 px)"},
+  "description": "Newton's-cradle-like setup: three equal grey spheres hanging (strings invisible) in a row. The left ball starts raised up-left, swings down along an arc and strikes the middle ball; the right ball is knocked out up-right along an arc, reaches its highest point at frame 54 and swings back. The middle ball barely moves (drifts ~10 px left and back); the left ball stops after impact, drifts ~16 px left and back.",
+  "bad_frames": {"1": "segmentation failure: balls missing, only a stray half-dome blob at x 560-717, y 861-936; track centres in frame 1 are linear interpolation of frames 0 and 2 (bad_frame=1)"},
+  "objects": {
+    "ball_left": {
+      "describe": "leftmost sphere; the striking ball; starts raised upper-left at (285, 654); in frames 0-17 the segmentation cuts a white sliver through it (shows a dark reflective inner part)",
+      "moves": true, "visible_frames": "0, 2-79",
+      "diameter_px": 164.0, "mask_w_h_median_px": [163, 166],
+      "start_centre_px": [284.9, 653.9], "rest_after_impact_centre_px": [639.4, 784.6],
+      "path": "circular arc, fitted pivot (645.0, 226.4), radius 558.9 px (frames 2-27, max residual 2.6 px)",
+      "track": "tracks/ball_left.csv"
+    },
+    "ball_middle": {
+      "describe": "middle sphere, initially at (806.4, 792.3); is hit by ball_left",
+      "moves": "almost static: x drifts from 806.5 to min 796.6 (frames ~51-55) and back to 805.1 at frame 79; y constant 792.3",
+      "visible_frames": "0, 2-79",
+      "diameter_px": 163.8, "mask_w_h_median_px": [163, 166],
+      "track": "tracks/ball_middle.csv"
+    },
+    "ball_right": {
+      "describe": "rightmost sphere, initially at rest at (1311.8, 792.4); knocked out by the impact",
+      "moves": true, "visible_frames": "0, 2-79",
+      "diameter_px": 165.6, "mask_w_h_median_px": [165, 165],
+      "path": "circular arc, fitted pivot (1308.7, 240.4), radius 552.4 px (frames 29-79, max residual 0.5 px)",
+      "apex_centre_px": [1660.2, 666.9],
+      "track": "tracks/ball_right.csv"
+    }
+  },
+  "static_objects": "none (white background; strings, frame and ground are not rendered)",
+  "events": [
+    {"name": "ball_left release / start of motion", "frame": 0, "t": 0.0, "note": "moves 0.4 px/frame over frames 0-2, then accelerates (2.4, 2.9, 4.7, 6.1 px/frame from frame 2)"},
+    {"name": "ball_left lowest point / impact with ball_middle", "frame": 28, "t": 0.9333, "note": "centre gap left-middle 184.3 (f27), 167.0 (f28), 164.0 (f29) = one diameter; ball_right first moves at f28 (+4 px), so the impact is between frames 27 and 28"},
+    {"name": "ball_right starts moving", "frame": 28, "t": 0.9333},
+    {"name": "ball_left stops (max x 643.5 at f29, then drifts left)", "frame": 29, "t": 0.9667},
+    {"name": "ball_right apex (max x, min y; direction reversal)", "frame": 54, "t": 1.8, "centre_px": [1660.2, 666.9]},
+    {"name": "ball_left min x 623.2 (slow drift reverses)", "frame": 54, "t": 1.8},
+    {"name": "ball_middle min x ~796.6 (drift reverses)", "frame": 51, "t": 1.7},
+    {"name": "video ends; ball_right still swinging back left at (1355.4, 790.9), not yet returned to its rest x 1311.8", "frame": 79, "t": 2.6333}
+  ],
+  "reliability": "centres from circle fits to the convex-hull outline: ~0.5 px typical; ball_left frames 0-17 ~1-2 px (segmentation cut), frames 28-30 ~2 px (light crescent at contact edge, fitted radius up to 85)"
+}

@@ -1,0 +1,299 @@
+{
+ "video": "simulation_0023.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 25.0,
+ "frames": 75,
+ "width": 960,
+ "height": 960,
+ "time_convention": "t = frame / 25; frame 0 at t = 0; last frame 74 at t = 2.96 s",
+ "units": "pixels (x right, y down, origin top-left of the 960x960 image) and seconds; no metric scale anywhere",
+ "camera": {
+  "motion": "static",
+  "evidence": "phase correlation of 3 background patches (cliff top, left cliff, cliff base) vs frame 0: |shift| <= 0.04 px for all 75 frames (scene/camera_shift.json: [frame, dx1, dy1, dx2, dy2, dx3, dy3])",
+  "perspective": "eye-level-ish view across water toward a beach and cliff; no horizon visible (cliff fills y 230-500, sky above). Ground/water plane recedes upward in the image: shoreline (water/sand boundary) runs from y~572 at x=0 to y~608 at x=450 and y~603 at x=959; beach/cliff-base line at y~500 (x<500) rising to y~440-470 at the right. Water ripples grow toward the image bottom (perspective). No usable vanishing points.",
+  "focal_length": "unknown (simulation; estimate from depth_info + a known size if given)"
+ },
+ "objects": [
+  {
+   "name": "boat",
+   "aka": [
+    "fishing boat",
+    "ship",
+    "trawler",
+    "vessel"
+   ],
+   "description": "small fishing boat: red/pink hull with white upper stripe and the text \"AH805\" on its side, white wheelhouse/cabin, mast with cross-bar and rigging, black davit/post at the rear, white railings. Bow points left (toward image left), stern at right.",
+   "moves": true,
+   "visible_frames": [
+    0,
+    74
+   ],
+   "track": "tracks/boat.csv",
+   "motion": "translates steadily to the image LEFT the whole clip (bow-stern midpoint x 416.5 -> 136.0 px, about -3.8 px/frame, fairly constant) and slightly UP in the image (hull bottom y 618 -> 605.5, mast top y 304 -> 313) while its apparent size shrinks (rigid scale of superstructure 1.000 -> 0.929; hull length 263 -> 228 px) => moving left AND away from the camera (depth grows ~7-8 % if scale ~ 1/depth). Hull length shrinks faster than the rigid scale, so the boat also yaws slightly (bow-stern line turning a little toward the viewing direction); the rigging lines swap side relative to the mast by the end. No start/stop within the clip; slight bobbing not detectable.",
+   "reference_point": "ref_x = midpoint of bow tip and stern extreme; ref_y = midpoint of mast top and hull bottom (full-boat bbox centre). Alternative hull_center_(x,y) = hull-only box centre. The Blender origin of a boat rig is unknown; it is most likely near the hull centre - choose per question.",
+   "extents_frame0": {
+    "hull_length_bow_to_stern_px": 263,
+    "full_bbox_px": [
+     285,
+     304,
+     548,
+     618
+    ],
+    "full_width_px": 263,
+    "height_mast_top_to_hull_bottom_px": 314,
+    "mast_top": [
+     390,
+     304
+    ],
+    "hull_bottom_mid": [
+     420,
+     618
+    ],
+    "rudder_bottom": [
+     517,
+     634
+    ],
+    "cabin_roof_left_corner": [
+     347,
+     468
+    ],
+    "cabin_roof_y": 468,
+    "deck_at_bow_y": 516,
+    "hull_waterline_y_approx": 605
+   },
+   "extents_frame74": {
+    "hull_length_bow_to_stern_px": 228,
+    "full_bbox_px": [
+     22,
+     313,
+     250,
+     605.5
+    ],
+    "height_mast_top_to_hull_bottom_px": 292.5
+   },
+   "summary": {
+    "ref_x": {
+     "first": 416.5,
+     "last": 136.0,
+     "min": 136.0,
+     "max": 416.5,
+     "median": 270.5
+    },
+    "ref_y": {
+     "first": 461.0,
+     "last": 459.2,
+     "min": 459.1,
+     "max": 461.4,
+     "median": 459.8
+    },
+    "hull_length_px": {
+     "first": 263.0,
+     "last": 228.0,
+     "min": 228.0,
+     "max": 263.0,
+     "median": 245.0
+    },
+    "height_masttop_to_hullbottom_px": {
+     "first": 314.0,
+     "last": 291.9,
+     "min": 291.9,
+     "max": 314.0,
+     "median": 304.7
+    },
+    "rigid_scale_vs_f0": {
+     "first": 1.0,
+     "last": 0.9293,
+     "min": 0.9293,
+     "max": 1.0,
+     "median": 0.9704
+    }
+   }
+  },
+  {
+   "name": "bird",
+   "aka": [
+    "eagle",
+    "hawk",
+    "seagull",
+    "flying bird"
+   ],
+   "description": "single dark-brown bird with broad wings, flying (flapping) left-to-right across the cliff face at roughly the height of the boat mast (y ~355-410). Only flying animal in the scene.",
+   "moves": true,
+   "visible_frames": [
+    0,
+    66
+   ],
+   "track": "tracks/bird.csv",
+   "motion": "flies to the image RIGHT the whole time it is visible: centroid x 233 (f0) -> 953 (f66, leaving through the right edge); y oscillates gently 368-400 (dips to ~396 around f9-13, rises to ~372 at f24, ~369 at f50). Already in flight at frame 0 (no take-off/landing). Passes the boat mast around frames 10-14 (mask partly hidden by mast). Starts leaving the frame at f63 (bbox touches x=959), gone from f67 on.",
+   "reference_point": "ref_x, ref_y = centroid of the dark bird mask (visible centre); bbox_cx/cy also given",
+   "apparent_size": "roughly constant over the clip (no clear depth change): wingspan-like horizontal extent width_x_px ~ 21-56 px (median 39) depending on wing phase; mask major axis 31-56 px; height_y_px 6-32 px. Wing-beat: bbox height peaks (wings up/down) near frames 0, 9-11, 22-27, 48-51, 60; flattest (wings level, max width) near 5-6, 15, 31-34, 42, 55-61.",
+   "summary": {
+    "ref_x": {
+     "first": 233.2,
+     "last": 915.1,
+     "min": 233.2,
+     "max": 915.1,
+     "median": 569.95
+    },
+    "ref_y": {
+     "first": 379.2,
+     "last": 383.2,
+     "min": 369.1,
+     "max": 396.0,
+     "median": 380.7
+    },
+    "width_x_px": {
+     "first": 31.0,
+     "last": 49.0,
+     "min": 21.0,
+     "max": 56.0,
+     "median": 39.0
+    },
+    "height_y_px": {
+     "first": 26.0,
+     "last": 18.0,
+     "min": 6.0,
+     "max": 32.0,
+     "median": 19.0
+    },
+    "major_px": {
+     "first": 31.5,
+     "last": 49.4,
+     "min": 23.2,
+     "max": 56.0,
+     "median": 39.45
+    }
+   }
+  }
+ ],
+ "static_objects": [
+  {
+   "name": "cliff",
+   "description": "large sandy/tan cliff or rocky bluff spanning the whole width behind the beach",
+   "image_position": "top edge y~228-290 (left tip plateau y~228-248 at x 0-135; ridge y~250-275 across), base y~500 at left, ~440-470 at right",
+   "extent_px": {
+    "width": ">=960 (cut by frame)",
+    "height_at_x400": "about 245 (y 255-500)"
+   }
+  },
+  {
+   "name": "beach",
+   "description": "flat pale pink-white sand strip between cliff base and water",
+   "image_position": "y ~500 -> ~575-608 (wider at right where the cliff base rises to ~450)"
+  },
+  {
+   "name": "shoreline",
+   "description": "water/sand boundary (the boat floats just in front of it)",
+   "polyline_px": [
+    [
+     0,
+     572
+    ],
+    [
+     100,
+     578
+    ],
+    [
+     200,
+     590
+    ],
+    [
+     270,
+     597
+    ],
+    [
+     350,
+     603
+    ],
+    [
+     450,
+     608
+    ],
+    [
+     600,
+     607
+    ],
+    [
+     750,
+     604
+    ],
+    [
+     959,
+     603
+    ]
+   ]
+  },
+  {
+   "name": "water",
+   "description": "rippled green-grey sea in the foreground, y > shoreline to the bottom of the frame, shows the boat reflection (red streaks) below the boat"
+  },
+  {
+   "name": "white rock / dune",
+   "description": "smooth white mound at the right edge on the beach",
+   "bbox_px": [
+    810,
+    455,
+    959,
+    582
+   ],
+   "note": "cut by right image edge; vertical brown striations along its base y~560-582"
+  },
+  {
+   "name": "vertical striations / fence-like posts",
+   "description": "row of vertical light stripes at the cliff base (eroded rock or fence) x~185-470, y~462-500; another short row at the dune base x~880-959",
+   "note": "part of the terrain texture, not separate objects (probably)"
+  },
+  {
+   "name": "sky and clouds",
+   "description": "blue sky with white clouds, y < ~230-290; static"
+  }
+ ],
+ "events": [
+  {
+   "frame": 0,
+   "time": 0.0,
+   "event": "clip start: boat already moving left, bird already flying right"
+  },
+  {
+   "frame": 10,
+   "time": 0.4,
+   "event": "bird reaches the boat mast (mask touches mast column) - frames 10-14 bird partly hidden/merged with mast"
+  },
+  {
+   "frame": 14,
+   "time": 0.56,
+   "event": "bird clear of the mast, to its right"
+  },
+  {
+   "frame": 63,
+   "time": 2.52,
+   "event": "bird bbox touches the right image edge (starts to leave)"
+  },
+  {
+   "frame": 66,
+   "time": 2.64,
+   "event": "last frame with the bird visible (only a sliver)"
+  },
+  {
+   "frame": 67,
+   "time": 2.68,
+   "event": "bird out of frame"
+  },
+  {
+   "frame": 74,
+   "time": 2.96,
+   "event": "clip end: boat still moving left (no stop)"
+  }
+ ],
+ "no_contacts_or_collisions": "no bounces, impacts or contacts; the bird never touches the boat (bird passes ~25 px in front of/behind the mast in image space, different depth unknown)",
+ "files": {
+  "tracks": [
+   "tracks/boat.csv",
+   "tracks/bird.csv"
+  ],
+  "camera": "camera_shift.json",
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

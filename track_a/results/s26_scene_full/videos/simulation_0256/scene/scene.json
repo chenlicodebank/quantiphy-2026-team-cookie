@@ -1,0 +1,48 @@
+{
+  "video": "simulation_0256.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 41,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of background band y 700-1000, x 200-1700 vs frame 0: |shift| <= 0.105 px all frames (tracks/camera_bgshift.csv)",
+    "perspective": "plain beige backdrop, no markings; darker band at top (y < ~150, a curved backdrop/wall edge) and soft radial lighting. Ball path is horizontal at constant y (363.3-364.2 px) and its apparent diameter is constant (36 px), so motion is in one plane at constant depth: one metres-per-pixel scale applies."
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "single small yellow-green tennis-style ball (seam visible), the only object in the scene",
+      "moves": true,
+      "visible_frames": [5, 40],
+      "fully_in_frame": [6, 39],
+      "partially_cut_by_edge": {"5": "enters at left edge, only x 0-7 visible", "40": "leaving at right edge, x 1900-1919 visible"},
+      "not_visible": [0, 1, 2, 3, 4],
+      "reference_point": "mask centroid (= sphere centre = origin)",
+      "size_px": {"diameter": 36.0, "uncertainty": 1.0, "notes": "bbox w=h=36 median over frames 6-39 at b*>12; equivalent-area diameter 34.7 (mask misses some shaded rim pixels); looser threshold gives 37-38 including blur"},
+      "track_file": "tracks/ball.csv",
+      "motion_summary_px": "moves left -> right, purely horizontal (cy 363.3-364.2), decelerating: per-frame dx ~60.8 px at frames 6-7 falling steadily to ~49.4 px at frames 38-39",
+      "edge_frame_centre_estimates": {"5": {"cx": -10.5, "cy": 363.5, "method": "right edge x=7 minus radius 17.5"}, "40": {"cx": 1917.5, "cy": 364.1, "method": "left edge x=1900 plus radius 17.5"}}
+    },
+    {
+      "name": "shadow_of_ball",
+      "description": "soft dark blur just above / up-left of the ball, moves with it; not part of the ball mask",
+      "moves": true
+    },
+    {
+      "name": "backdrop",
+      "description": "uniform beige background; darker horizontal band across top ~y 0-150 (backdrop curve / horizon-like edge)",
+      "moves": false,
+      "extent_px": "full frame"
+    }
+  ],
+  "events": [
+    {"event": "ball enters frame at left edge", "frame": 5, "time_s": 0.2083},
+    {"event": "ball first fully in frame", "frame": 6, "time_s": 0.25},
+    {"event": "ball last fully in frame", "frame": 39, "time_s": 1.625},
+    {"event": "ball partially out at right edge (video ends)", "frame": 40, "time_s": 1.6667},
+    {"note": "no bounce, impact, contact or direction change; motion is continuous decelerating horizontal translation throughout"}
+  ]
+}

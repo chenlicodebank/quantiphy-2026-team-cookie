@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0190_segmented.mp4",
+ "video_source": "segmentation",
+ "video_type": "S2MX",
+ "fps": 120.0,
+ "frames": 401,
+ "duration_s": 3.3417,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 1912,
+  "question": "What is the speed of the box at time 2s in m/s?",
+  "prior": "width of the box = 1.33m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 120.0
+ }
+}

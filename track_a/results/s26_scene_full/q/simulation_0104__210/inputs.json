@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0104.mp4",
+ "video_source": "simulation",
+ "video_type": "V2MX",
+ "fps": 24.0,
+ "frames": 31,
+ "duration_s": 1.2917,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 210,
+  "question": "What is the extension of the charging post at 0.5s in meters?",
+  "prior": "the lifting speed of the charging post = 0.2m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 24.0
+ }
+}

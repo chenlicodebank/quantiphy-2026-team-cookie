@@ -1,0 +1,18 @@
+{
+ "video": "internet_0047.mp4",
+ "video_source": "internet",
+ "video_type": "V2SS",
+ "fps": 30.0,
+ "frames": 30,
+ "duration_s": 1.0,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3101,
+  "question": "What is width of the lines on the floor in cm?",
+  "prior": "velocity of the rolling ball at 0.5s = 2.94m/s",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DS",
+  "question_fps": 30.0
+ }
+}

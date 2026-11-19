@@ -1,0 +1,18 @@
+{
+ "video": "internet_0064.mp4",
+ "video_source": "internet",
+ "video_type": "A2MS",
+ "fps": 30.0,
+ "frames": 170,
+ "duration_s": 5.6667,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3216,
+  "question": "What is the velocity of the person at 4.4s in m/s?",
+  "prior": "gravity acceleration = 9.8 m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}

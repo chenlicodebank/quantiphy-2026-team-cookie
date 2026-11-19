@@ -1,0 +1,76 @@
+{
+ "wall_s": 1614,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 40,
+  "duration_ms": 1613469,
+  "total_cost_usd": 1.1337828,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 46,
+  "cache_creation_input_tokens": 53011,
+  "cache_read_input_tokens": 1026054,
+  "output_tokens": 25215,
+  "output_tokens_details": {
+   "thinking_tokens": 11220
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 53011,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 605,
+    "cache_read_input_tokens": 63392,
+    "cache_creation_input_tokens": 1786,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 1786
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "account": "a",
+ "audit": {
+  "tool_calls": 39,
+  "flags": [
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-a-simulation-0312-q-1633/622b346f-3cab-413d-a075-e745632877fa/tasks/bsqbqramn.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-a-simulation-0312-q-1633/622b346f-3cab-413d-a075-e745632877fa/tasks/bsqbqramn.output\"}"
+   },
+   {
+    "tool": "Read",
+    "paths": [
+     "/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-a-simulation-0312-q-1633/622b346f-3cab-413d-a075-e745632877fa/tasks/bsqbqramn.output"
+    ],
+    "words": [],
+    "input": "{\"file_path\": \"/private/tmp/claude-501/-private-tmp-qp-blind-scene-full-a-simulation-0312-q-1633/622b346f-3cab-413d-a075-e745632877fa/tasks/bsqbqramn.output\", \"offset\": 15}"
+   }
+  ]
+ },
+ "video": "simulation_0312",
+ "ids": [
+  1633
+ ],
+ "answered": 1,
+ "error": null,
+ "attempt": 1,
+ "trigger": "first run",
+ "stream": "streams_a/simulation_0312__q1633.jsonl"
+}

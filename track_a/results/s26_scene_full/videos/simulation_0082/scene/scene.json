@@ -1,0 +1,75 @@
+{
+  "video": "simulation_0082.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels (x right, y down) and seconds; no metric scale",
+  "camera": {
+    "motion": "static (background corners constant to 0.05 grey levels over all frames; no pan/shake)",
+    "view": "top-down (bird's-eye) onto a uniform grey ground plane; both trucks drive horizontally in the image",
+    "perspective_note": "Rendered with a perspective camera: the cab interiors are seen from different angles as the trucks cross the image, and pixel length changes by ~3% (yellow 314 px at x~1590 -> 304 px at x~800; white 312 -> 302-306). Different heights of the truck move at slightly different pixel rates (low front bumper ~11.26, high cab/roof texture ~11.40 px/frame for yellow). Treat as 2D with one scale; use lengths measured near the image centre (x~960) as the best single value."
+  },
+  "objects": [
+    {
+      "name": "yellow_truck",
+      "description": "yellow pickup truck (yellow paint, dark cab glass, yellow bed), upper lane (y ~348-455); front (rounded hood) points left, open bed at right",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/yellow_truck.csv",
+      "reference_point": "centre of the body box (cx, cy); cx_xcorr = sub-pixel version for differences",
+      "lane_y_centre_px": 401.5,
+      "body_box_y_px": [348, 455],
+      "width_body_px": 108,
+      "width_with_mirrors_px": 131,
+      "mirror_rows_px": [335, 465],
+      "length_px": {"near_image_centre_frame55_cx975": 304, "frame0_cx1588": 314, "frame71_cx796": 304, "median": 308},
+      "start_position_frame0": {"cx": 1588.5, "cy": 401.5, "front_x": 1432, "rear_x": 1745},
+      "end_position_frame71": {"cx": 795.5, "cx_xcorr": 790.2, "cy": 401.5, "front_x": 644, "rear_x": 947},
+      "motion_summary": "stationary frames 0-1 (identical images), then constant leftward motion, pure -x, no vertical motion; per-frame shift -11.40 px (cx_xcorr, rms residual from a line 0.1 px), -11.33 (box centre), -11.26 (front edge), -11.41 (rear edge)",
+      "net_x_displacement_px_frame0_to_71": {"cx_xcorr": -798.3, "cx": -793.0}
+    },
+    {
+      "name": "white_truck",
+      "description": "white/silver pickup truck (white hood and roof rails, dark glass, black bed/tonneau), lower lane (y ~489-590); front points left",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "track_file": "tracks/white_truck.csv",
+      "reference_point": "centre of the body box (cx, cy); cx_xcorr = sub-pixel version for differences",
+      "lane_y_centre_px": 539.5,
+      "body_box_y_px": [489, 590],
+      "width_body_px": 102,
+      "width_with_mirrors_px": 131,
+      "mirror_rows_px": [474, 605],
+      "length_px": {"near_image_centre_frame40_cx968": 302, "frame0_cx1588": 312, "frame71_cx478": 306, "median": 305},
+      "start_position_frame0": {"cx": 1587.5, "cy": 539.5, "front_x": 1432, "rear_x": 1743},
+      "end_position_frame71": {"cx": 477.5, "cx_xcorr": 484.8, "cy": 539.5, "front_x": 325, "rear_x": 630},
+      "motion_summary": "stationary frames 0-1, then constant leftward motion, pure -x; per-frame shift -15.96 px (cx_xcorr frames 1-36), -15.88 (frames 36-71), -15.86 (box centre, whole clip), -15.81 front edge, -15.91 rear edge (rear edge exactly -16.00 px/frame in frames 1-36)",
+      "net_x_displacement_px_frame0_to_71": {"cx_xcorr": -1102.7, "cx": -1110.0}
+    },
+    {
+      "name": "ground",
+      "description": "uniform flat grey ground plane (grey ~158), no markings, lanes or other static objects; soft shadows under the trucks",
+      "moves": false,
+      "visible_frames": [0, 71]
+    }
+  ],
+  "pair_relations": {
+    "vertical_centre_separation_px": 138.0,
+    "gap_between_bodies_px": "33 (yellow bottom 455 to white top 489)",
+    "frame0": "side by side, fronts aligned (both front_x = 1432, centres dx = 1 px)",
+    "later": "white truck pulls ahead; centre dx (yellow - white) grows by ~4.5 px/frame: frame 24 = 104, frame 47 = 209, frame 71 = 318 px (box centres)"
+  },
+  "events": [
+    {"event": "both trucks at rest, side by side, fronts aligned", "frames": [0, 1], "times_s": [0.0, 0.0417]},
+    {"event": "motion starts (first displacement between frame 1 and 2), both trucks", "frame": 2, "time_s": 0.0833, "note": "frame 1 is identical to frame 0; constant velocity from then on (no visible ramp)"},
+    {"event": "white truck front edge reaches x=960 (image centre)", "frame": 31, "time_s": 1.2917},
+    {"event": "yellow truck front edge reaches x=960", "frame": 43, "time_s": 1.7917},
+    {"event": "white truck fully ahead of yellow (white rear_x 677 < yellow front_x 678)", "frame": 68, "time_s": 2.8333},
+    {"event": "end of clip, both still moving", "frame": 71, "time_s": 2.958}
+  ],
+  "notes_file": "notes.md"
+}

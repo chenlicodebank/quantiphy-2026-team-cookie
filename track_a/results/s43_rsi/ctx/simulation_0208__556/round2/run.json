@@ -1,0 +1,68 @@
+{
+ "wall_s": 256,
+ "timed_out": false,
+ "result": {
+  "is_error": false,
+  "num_turns": 50,
+  "duration_ms": 255413,
+  "total_cost_usd": 1.1849526000000001,
+  "subtype": "success"
+ },
+ "usage": {
+  "input_tokens": 48,
+  "cache_creation_input_tokens": 55721,
+  "cache_read_input_tokens": 1082763,
+  "output_tokens": 26122,
+  "output_tokens_details": {
+   "thinking_tokens": 10464
+  },
+  "server_tool_use": {
+   "web_search_requests": 0,
+   "web_fetch_requests": 0
+  },
+  "service_tier": "standard",
+  "cache_creation": {
+   "ephemeral_1h_input_tokens": 55721,
+   "ephemeral_5m_input_tokens": 0
+  },
+  "inference_geo": "global",
+  "iterations": [
+   {
+    "input_tokens": 2,
+    "output_tokens": 976,
+    "cache_read_input_tokens": 72981,
+    "cache_creation_input_tokens": 3332,
+    "cache_creation": {
+     "ephemeral_5m_input_tokens": 0,
+     "ephemeral_1h_input_tokens": 3332
+    },
+    "type": "message"
+   }
+  ],
+  "speed": "standard",
+  "fallback_credit": null
+ },
+ "audit": {
+  "tool_calls": 48,
+  "flags": [
+   {
+    "tool": "Bash",
+    "paths": [
+     "/private/tmp/qp_blind/s43_rsi;"
+    ],
+    "words": [],
+    "input": "{\"command\": \"P=/private/tmp/qp_blind/s43_rsi; for t in 0 0.2917 0.3333; do ~/miniforge3/envs/ml/bin/python $P/tools/framekit2.py frame $P/simulation_0208__556/simulation_0208.mp4 --t $t --crop 820 180 1160 720 --scale 2 --grid 50 --out $P/simulation_0208__556/frames/z_$t.png 2>&1 | grep "
+   }
+  ]
+ },
+ "video": "simulation_0208",
+ "ids": [
+  556
+ ],
+ "round": 2,
+ "harness": "v3",
+ "account": "a",
+ "model": "claude-opus-5-5",
+ "effort": "high",
+ "commit": "fa62153bd"
+}

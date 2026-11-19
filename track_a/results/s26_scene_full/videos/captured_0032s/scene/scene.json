@@ -1,0 +1,88 @@
+{
+  "video": "captured_0032s.mp4",
+  "source": "lab (captured; background replaced by a SAM2 'Segment Anything 2 Demo' composite - bluish snowy backdrop)",
+  "scene_type": "3D",
+  "fps": 24.0,
+  "frames": 49,
+  "duration_s": 2.0417,
+  "image_size_px": [1280, 720],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, pixel centres at integer coordinates; bbox_x1/bbox_y1 inclusive, bbox_w = x1 - x0 + 1",
+  "camera": {
+    "motion": "static (phase correlation on the table between consecutive frames < 0.3 px every frame; background is a static replacement)",
+    "intrinsics_from_benchmark_convention": {"fx_fy_px": 763.0, "cx_cy_px": [640, 360], "hfov_deg": 80},
+    "perspective": {
+      "surface": "table top is the support plane for both balls (horizontal plane below the camera)",
+      "table_side_edge_vanishing_point_px": [720, 351],
+      "horizon_y_px": 351,
+      "note": "horizon ~9 px above image centre -> camera optical axis ~level (pitch ~0.7 deg up, uncertain +-2 deg); objects lower in the image on the table top are closer to the camera"
+    },
+    "dropped_frame": "between frames 35 and 36 both balls move ~2x their neighbouring per-frame displacement (yellow 14.7 -> 31.4 -> 17.1 px, white 7.7 -> 16 -> 4.6 px): a recording frame was most likely dropped; the file has no gap marker"
+  },
+  "objects": [
+    {
+      "name": "yellow_ball",
+      "description": "yellow-green fuzzy ball (tennis-ball like), the larger ball; starts on the right part of the table top (back), rolls left and toward the camera, hits the white ball, rolls off the left side of the table and falls out of the bottom of the frame",
+      "moves": true,
+      "visible_frames": "0-47 (47 truncated by the bottom image edge); absent at 48",
+      "track_file": "tracks/yellow_ball.csv",
+      "reference_point": "mask centroid (visible centre)",
+      "start_position_px": [775.4, 410.2],
+      "apparent_diameter_px": {"at_rest_f0_21": 32, "f29": 33, "f36": 43, "f41": 46, "falling_f43_47": "45-53 (across-streak width; along-streak length inflated by motion blur)"}
+    },
+    {
+      "name": "white_ball",
+      "description": "small white/cream ball (ping-pong-ball like); starts at rest on the back-left part of the table top, is struck by the yellow ball, then rolls right and toward the camera, still rolling on the table at the last frame",
+      "moves": true,
+      "visible_frames": "0-48; partly hidden behind the yellow ball at 30, 32, 33; fully hidden at 31",
+      "track_file": "tracks/white_ball.csv",
+      "reference_point": "circle model: cx = bbox centre x, cy = bbox top + (bbox_w-1)/2 (the mask misses the shaded lower rim); centroid of visible part in occluded frames",
+      "start_position_px": [647.5, 414.5],
+      "apparent_diameter_px": {"at_rest_f0_29": "16-18 (direct row/column profile at f0: x 640-657, y 406/407-423 -> ~17.5)", "f36": 29, "f42": 30, "f48": 32}
+    },
+    {
+      "name": "table",
+      "description": "single wooden square-ish table top (brown wood grain) on one dark grey central leg (pedestal); camera looks at it from the front, slightly above table height",
+      "moves": false,
+      "visible_frames": "0-48",
+      "extents_px_at_frame_48": {
+        "top_back_edge": {"left_corner": [576, 425], "right_corner": [851, 428], "length_px": 275},
+        "top_front_edge": {"left_corner": [463, 483], "right_corner": [965, 495], "length_px": 502},
+        "top_surface_image_height_px": "~58 (left) to ~67 (right) between back and front edges",
+        "front_face_slab_thickness_px": "~22-25 (front edge y ~483-495 to bottom of slab y ~508-520)",
+        "overall_bbox": [462, 424, 965, 520]
+      }
+    },
+    {
+      "name": "table_leg",
+      "description": "dark grey vertical pole under the table centre",
+      "moves": false,
+      "visible_frames": "0-48",
+      "extents_px": {"x_range": [714, 748], "width_px": 33, "y_range": [515, 719], "visible_height_px": 205, "note": "cut by the bottom image edge; ragged SAM mask at frame 0"}
+    },
+    {
+      "name": "watermark",
+      "description": "text 'Modified with Segment Anything 2 Demo' bottom-right (x ~1035-1280, y ~695-718); not a physical object",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "yellow_ball at rest", "frames": "0-21", "t_s": "0-0.875"},
+    {"event": "yellow_ball starts rolling (first displacement between frames 21 and 22; no pusher visible - background replaced)", "frame": 22, "t_s": 0.917},
+    {"event": "yellow_ball contacts white_ball (white first displaced at frame 29/30: x 646.3 -> 647.8 -> 652.9)", "frame": "29-30", "t_s": "1.208-1.25"},
+    {"event": "white_ball starts moving (right and toward the camera)", "frame": 30, "t_s": 1.25},
+    {"event": "white_ball hidden behind yellow_ball", "frames": "30-33 (fully at 31)"},
+    {"event": "probable dropped frame", "frames": "35->36", "t_s": "1.458-1.5"},
+    {"event": "yellow_ball rolls off the left side edge of the table top (last frame on table 41; centre drop begins at 42)", "frame": "41-42", "t_s": "1.708-1.75"},
+    {"event": "yellow_ball falling (free fall + leftward motion, motion-blurred)", "frames": "42-47", "t_s": "1.75-1.958"},
+    {"event": "yellow_ball leaves the frame through the bottom edge", "frame": "47-48", "t_s": "1.958-2.0"},
+    {"event": "white_ball still rolling at the end (about 6 px/frame in x)", "frame": 48, "t_s": 2.0}
+  ],
+  "files": {
+    "tracks/yellow_ball.csv": "final per-frame track",
+    "tracks/white_ball.csv": "final per-frame track",
+    "tracks/*_raw.csv": "raw colour-mask statistics (centroid, bbox, PCA extents, equal-area diameter, min-enclosing circle)",
+    "notes.md": "method, reliability, ambiguities",
+    "scripts/": "all measurement scripts"
+  }
+}

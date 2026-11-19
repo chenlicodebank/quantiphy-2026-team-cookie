@@ -1,0 +1,52 @@
+{
+  "video": "simulation_0255.mp4",
+  "source": "simulation",
+  "scene": "2D",
+  "fps": 24.0,
+  "frames": 41,
+  "duration_s": 1.7083,
+  "image_size_px": [1920, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "units": "pixels, seconds; image coords x right, y down, origin top-left",
+  "camera": {
+    "motion": "static",
+    "evidence": "phase correlation of top region frame 0 vs 40: shift (-0.15, 0.00) px, i.e. none",
+    "background": "plain grey studio: back wall (top) meets floor along a soft horizontal edge at y ~ 544-547 px; no markings, no texture",
+    "perspective": "2D scene; ball moves horizontally at constant image row, apparent size constant (no depth change)"
+  },
+  "objects": [
+    {
+      "name": "ball",
+      "description": "small olive/yellow-green sphere (tennis-ball-like colour), the only object in the scene; rolls/slides on the floor just below the wall-floor edge",
+      "moves": true,
+      "visible_frames": [0, 40],
+      "occluded_frames": [],
+      "track_file": "tracks/ball.csv",
+      "reference_point": "centroid of the colour (chroma) mask = sphere centre/origin (cx, cy)",
+      "diameter_px": {"best": 24.5, "range": [22, 26], "note": "chroma mask width 22-24 (misses dark lower rim), circle fit 24.2-27, background-difference mask 24-25 wide at slow frames (wider at fast frames due to motion blur) and 25-26 tall (includes a little contact shadow)"},
+      "position_start_px": [70.36, 562.26],
+      "position_end_px": [1622.71, 562.40],
+      "row_y_px": {"mean": 562.6, "std": 0.29}
+    },
+    {
+      "name": "floor",
+      "description": "grey floor plane, lower part of image below y ~ 546",
+      "moves": false
+    },
+    {
+      "name": "back_wall",
+      "description": "grey wall, upper part of image above y ~ 545; wall-floor edge is soft and spans the full width",
+      "moves": false
+    }
+  ],
+  "events": [
+    {"event": "ball already moving rightward at first frame", "frame": 0, "t": 0.0, "x_px": 70.36},
+    {"event": "ball decelerates steadily across the whole clip: per-frame dx 43.8 px (frame 0->1) down to 33.6 px (39->40); no bounce, no direction change, no collision"},
+    {"event": "clip ends with ball still moving, still inside frame", "frame": 40, "t": 1.6667, "x_px": 1622.71}
+  ],
+  "summary_px": {
+    "net_displacement_frame0_to_40": 1552.35,
+    "path_length_frame0_to_40": 1552.39,
+    "per_frame_dx": [43.84, 43.97, 43.69, 42.93, 42.93, 42.99, 42.06, 42.4, 42.09, 41.11, 41.9, 40.35, 41.06, 40.46, 40.54, 39.68, 39.54, 39.62, 39.41, 39.55, 37.64, 38.78, 37.93, 37.91, 37.73, 37.31, 37.11, 36.84, 36.66, 36.4, 35.82, 36.05, 34.85, 35.26, 35.02, 35.0, 34.41, 34.24, 33.62, 33.65]
+  }
+}

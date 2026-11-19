@@ -1,0 +1,200 @@
+{
+ "video": "captured_0006s.mp4",
+ "source": "lab (segmented: background replaced by a blue gradient, 'Modified with Segment Anything 2 Demo' watermark bottom-right)",
+ "scene": "3D",
+ "fps": 24.0,
+ "frames": 49,
+ "width": 1280,
+ "height": 720,
+ "time_of_frame_i": "t = i/24",
+ "camera": {
+  "static": true,
+  "evidence": "table back-edge row, right edge column, leg left column identical (434, 977, 672 px) in all 49 frames",
+  "intrinsics_from_task": {
+   "fx_fy_px": 763.0,
+   "cx_cy_px": [
+    640,
+    360
+   ],
+   "hfov_deg": 80
+  },
+  "perspective": "table top seen from slightly above: back edge y=434 (513-816 px wide = 304 px), front top edge y~514 (390-976 = 587 px); edges converge upward, vanishing point of the table side edges at about (645, 348) px, i.e. ~12 px above the principal point: the table top is a near-horizontal plane seen from slightly above, optical axis roughly horizontal and roughly perpendicular to the table front edge"
+ },
+ "objects": [
+  {
+   "name": "fruit",
+   "aka": "yellow fruit (mango/yellow-lemon-like, elongated, small stem/tip visible in frames 46-47); the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    47
+   ],
+   "track": "tracks/fruit.csv",
+   "reference_point": "ref_x, ref_y = centroid of filled mask (visible centre); bbox_cx/cy also given",
+   "apparent_size_px": {
+    "held_frames_0_18": {
+     "major": 47,
+     "minor": 42.5,
+     "eq_diam": 46.3
+    },
+    "frame_24_apex": {
+     "major": 58,
+     "minor": 55
+    },
+    "frame_28": {
+     "major": 77.5,
+     "minor": 75.6
+    },
+    "frames_29_31_minor_(blur-free axis)": [
+     72.6,
+     71.1,
+     73.8
+    ],
+    "on_table_frames_33_42_minor_range": [
+     79,
+     99
+    ],
+    "on_table_frames_36_42_major_range": [
+     101,
+     121
+    ],
+    "falling_frames_43_45_minor": [
+     107,
+     115,
+     95
+    ]
+   },
+   "note": "apparent size grows ~2.5x from start to end: the fruit moves strongly toward the camera"
+  },
+  {
+   "name": "table",
+   "aka": "wooden table, brown top, single dark central leg",
+   "moves": false,
+   "top_back_edge": {
+    "y": 434,
+    "x": [
+     513,
+     816
+    ],
+    "len_px": 304
+   },
+   "top_front_edge": {
+    "y": 514,
+    "x": [
+     390,
+     976
+    ],
+    "len_px": 587
+   },
+   "front_band_thickness_px": {
+    "y_range": [
+     515,
+     541
+    ],
+    "px": 27
+   },
+   "top_depth_extent_on_image_px": 80,
+   "front_left_corner_px": [
+    390,
+    514
+   ],
+   "front_right_corner_px": [
+    976,
+    514
+   ],
+   "back_left_corner_px": [
+    513,
+    434
+   ],
+   "back_right_corner_px": [
+    816,
+    434
+   ],
+   "leg": {
+    "x": [
+     672,
+     715
+    ],
+    "width_px": 44,
+    "y": [
+     542,
+     719
+    ],
+    "note": "continues below image border"
+   },
+   "overall_bbox_px": [
+    389,
+    434,
+    977,
+    719
+   ]
+  },
+  {
+   "name": "hand/person",
+   "note": "held the fruit in frames 0-18 and threw it, but was removed by the segmentation: not visible",
+   "moves": null
+  }
+ ],
+ "events": [
+  {
+   "event": "held, nearly still (slow downward drift cy 221->237 px)",
+   "frames": [
+    0,
+    18
+   ]
+  },
+  {
+   "event": "release/throw start (upward motion begins)",
+   "frame": 19,
+   "t": 0.792,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "apex in image (min ref_y 137.6, min bbox top 110)",
+   "frame": 25,
+   "t": 1.042,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "first impact on table top (mask bottom y~485)",
+   "frame": 32,
+   "t": 1.333
+  },
+  {
+   "event": "small rebound (bottom lifts to ~470-475, shadow visible below)",
+   "frames": [
+    33,
+    35
+   ]
+  },
+  {
+   "event": "back on table near front-left, rolling/sliding left",
+   "frames": [
+    36,
+    42
+   ]
+  },
+  {
+   "event": "goes over table front-left corner (x<390) and falls",
+   "frame": 43,
+   "t": 1.792,
+   "uncertainty_frames": 1
+  },
+  {
+   "event": "reaches bottom image border",
+   "frame": 46,
+   "t": 1.917
+  },
+  {
+   "event": "out of frame",
+   "frame": 48,
+   "t": 2.0
+  }
+ ],
+ "files": {
+  "track": "tracks/fruit.csv",
+  "raw_auto_track": "tracks/fruit_auto.csv",
+  "notes": "notes.md",
+  "scripts": "scripts/"
+ }
+}

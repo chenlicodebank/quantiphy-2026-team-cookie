@@ -1,0 +1,7 @@
+{"answer": 0.4, "decision": "switch", "follows": "C6",
+ "crux": "which image track supplies the curvature of the root path at f12 inside segment f0-14: C1's silhouette-edge landmarks vs sub-pixel rigid/waist tracks; same scale (~0.0059 m/px) for all plausible candidates",
+ "fault_found": "C1's rear-edge x-landmark drifts 9.5 px against the rigid backpack flow track over f0-14 (spurious x curvature 0.11-0.16 vs 0.06-0.10 px/f^2); C1's own quadratic fits reproduce -0.24/-0.26/-0.06 on its landmarks but give -0.41 to -0.47 on dense-flow waist-band tracks",
+ "closure_pct": 0.0,
+ "confidence": "medium",
+ "verified_previous": true,
+ "lesson": "When a body turns or leans during a derivative window, different body parts give different curvatures; measure the track at the level of the origin (e.g. the waist for a pelvis origin) rather than the head or upper body, and treat the spread across parts as the uncertainty."}

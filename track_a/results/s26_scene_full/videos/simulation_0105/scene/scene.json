@@ -1,0 +1,58 @@
+{
+  "video": "simulation_0105.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 47,
+  "duration_s": 1.9583,
+  "image_size_px": [1080, 1080],
+  "time_convention": "t = frame / 24; frame 0 at t = 0",
+  "pixel_convention": "x right, y down, origin top-left of the 1080x1080 frame",
+  "camera": {
+    "motion": "static (no pan/shake; cup and saucer pixel-identical position in all frames)",
+    "background": "uniform plain grey (~155 grey level), no ground line, horizon or markings",
+    "perspective": "orthographic-looking side view; 2D scene - one metres-per-pixel scale applies to everything"
+  },
+  "objects": [
+    {
+      "name": "cube",
+      "aka": ["sugar cube", "falling cube", "small white block"],
+      "description": "small white cube with a slightly darker centre spot, falls straight down at x ~539.5 into the cup",
+      "moves": true,
+      "visible_frames": [21, 45],
+      "partially_visible_frames": [21],
+      "hidden_frames": "0-20 (above the top image edge), 46 (inside cup, behind cup wall)",
+      "reference_point": "centroid of the cube mask (= cube centre / origin)",
+      "size_px": {"width": 26, "height": 26.6, "note": "bbox incl. ~1 px anti-aliased edge; solid core ~25 px. Mean bbox over frames 22-45: 26.0 x 26.9 (frames 38-40 26 x 26)"},
+      "track_file": "tracks/cube.csv",
+      "motion": "pure vertical fall (x constant 539.4-539.6 px); y increases every frame, frame-to-frame step grows from ~27 px (f22->23) to ~53 px (f44->45)"
+    },
+    {
+      "name": "cup",
+      "aka": ["teacup", "coffee cup", "mug"],
+      "description": "white teacup standing on the saucer, handle on the LEFT side; rim at y=974",
+      "moves": false,
+      "visible_frames": [0, 46],
+      "image_position_px": {"rim_y": 974, "rim_x": [478, 611], "rim_centre_x": 544.5, "bottom_y": 1052, "body_centre_approx": [540, 1013]},
+      "extents_px": {"width_incl_handle": 143, "x_range_incl_handle": [469, 611], "rim_diameter": 134, "body_bottom_width_at_y1050": 91, "height_rim_to_saucer": 79},
+      "note": "frames 0-1 render the cup semi-transparent (cut-away look, inner cavity visible: inner wall roughly x 512-578, bottom y~1045); from frame 2 it is opaque. Cup outline identical."
+    },
+    {
+      "name": "saucer",
+      "aka": ["plate", "dish"],
+      "description": "white shallow saucer under the cup, lowest object in frame",
+      "moves": false,
+      "visible_frames": [0, 46],
+      "image_position_px": {"top_y": 1052, "bottom_y": 1073, "centre_x": 543.5},
+      "extents_px": {"width": 186, "x_range": [451, 636], "height": 22}
+    }
+  ],
+  "events": [
+    {"event": "cube first appears at top image edge (partly visible, bottom edge at y=11)", "frame": 21, "time_s": 0.875},
+    {"event": "cube first fully visible", "frame": 22, "time_s": 0.9167},
+    {"event": "cube last visible, bottom edge at y=958, 16 px above cup rim", "frame": 45, "time_s": 1.875},
+    {"event": "cube enters the cup (passes rim y=974, hidden by cup wall; small disturbance visible at rim)", "frame": 46, "time_s": 1.9167, "note": "entry happens between frames 45 and 46"},
+    {"event": "release / start of fall: not visible (cube is already moving ~19-27 px/frame when it appears)", "frame": null}
+  ],
+  "files": {"tracks": ["tracks/cube.csv"], "notes": "notes.md", "scripts": "scripts/"}
+}

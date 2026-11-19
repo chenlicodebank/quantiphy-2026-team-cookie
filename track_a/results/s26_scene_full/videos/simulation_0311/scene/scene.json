@@ -1,0 +1,207 @@
+{
+ "video": "simulation_0311.mp4",
+ "source": "simulation",
+ "scene_type": "3D",
+ "fps": 24.0,
+ "frames": 72,
+ "width": 2560,
+ "height": 1440,
+ "time_convention": "t = frame/24, frame 0 at t=0",
+ "camera": {
+  "motion": "static (phase correlation of background vs frame 0: |shift| < 0.02 px for all frames)",
+  "view": "elevated, looking steeply down onto a snowy rural road; no horizon visible",
+  "vertical_vanishing_point_px_approx": [
+   1250,
+   13300
+  ],
+  "vertical_vp_note": "from the two tilted utility poles (left pole leans right going down, near pole leans left); rough, +-30%",
+  "road_direction_in_image": "road runs from bottom-right (near camera) to top-left (far); car travels along it away from camera"
+ },
+ "objects": [
+  {
+   "name": "red_car",
+   "desc": "red sports car (Ferrari LaFerrari-like, red body, black roof/glass), the only moving object",
+   "moves": true,
+   "visible_frames": [
+    0,
+    71
+   ],
+   "track": "tracks/red_car.csv",
+   "notes": "partly out of frame (bottom edge) frames 0-22 and partly hidden behind the near wooden pole frames 0-28; fully visible frames 29-71",
+   "apparent_size_px": {
+    "frame29_main_axis": 699.5,
+    "frame40_main_axis": 608.4,
+    "frame50_main_axis": 543.7,
+    "frame60_main_axis": 491.9,
+    "frame71_main_axis": 448.5,
+    "frame29_bbox_wh": [
+     652,
+     410
+    ],
+    "frame71_bbox_wh": [
+     426,
+     232
+    ]
+   },
+   "orientation": "heading toward image upper-left; main image axis angle ~-158 deg (frame 29) to ~-166 deg (frame 71) (x right, y down)"
+  },
+  {
+   "name": "near_utility_pole",
+   "desc": "thick wooden pole in the foreground right, spans the full image height, in front of the road (occludes the car)",
+   "moves": false,
+   "edges_px": {
+    "y0": [
+     1972,
+     2100
+    ],
+    "y720": [
+     1935,
+     2055
+    ],
+    "y1440": [
+     1900,
+     2002
+    ]
+   },
+   "width_px": "128 at top, ~120 at middle, ~102 at bottom",
+   "visible_height_px": 1440,
+   "feature": "metal band at y~365 (x 1955-2085); small peg at (2090,560) and (2065,970)"
+  },
+  {
+   "name": "far_left_utility_pole",
+   "desc": "thin wooden pole left of the road, top cut by image top",
+   "moves": false,
+   "top_px": [
+    245,
+    0
+   ],
+   "base_px": [
+    313,
+    900
+   ],
+   "width_px": "~34 at top, ~40 at base",
+   "visible_length_px": 903
+  },
+  {
+   "name": "middle_fence_pole",
+   "desc": "thin tall pole in the right fence line behind the road",
+   "moves": false,
+   "top_px": [
+    1128,
+    0
+   ],
+   "base_px": [
+    1130,
+    370
+   ],
+   "width_px": "~22",
+   "visible_length_px": 370
+  },
+  {
+   "name": "right_fence",
+   "desc": "wooden post-and-rail fence on the far (right/upper) side of the road, running diagonally from (750,0) to (2560,~1000)",
+   "moves": false,
+   "posts_px_bases": [
+    [
+     1062,
+     235
+    ],
+    [
+     1238,
+     330
+    ],
+    [
+     1352,
+     385
+    ],
+    [
+     1462,
+     455
+    ],
+    [
+     1530,
+     505
+    ],
+    [
+     1600,
+     580
+    ],
+    [
+     1700,
+     575
+    ],
+    [
+     2070,
+     1000
+    ]
+   ]
+  },
+  {
+   "name": "left_fence",
+   "desc": "wooden fence on the near-left side of the road, from (0,~800) down to (~450,1440)",
+   "moves": false,
+   "posts_px_bases": [
+    [
+     35,
+     960
+    ],
+    [
+     120,
+     1090
+    ],
+    [
+     215,
+     1230
+    ],
+    [
+     330,
+     1405
+    ]
+   ]
+  },
+  {
+   "name": "road",
+   "desc": "asphalt road partly covered with snow streaks and tree/pole shadows, diagonal from bottom-right to top-left; faint dashed white centre marks near (400-700, 290-520)",
+   "moves": false
+  },
+  {
+   "name": "trees",
+   "desc": "snow-covered small trees right of the road behind the fence (largest at x 1600-1960, y 0-400)",
+   "moves": false
+  }
+ ],
+ "events": [
+  {
+   "event": "car stationary/duplicate frame",
+   "frames": [
+    0,
+    1
+   ],
+   "t": [
+    0.0,
+    0.0417
+   ],
+   "note": "frames 0 and 1 are pixel-identical (max diff 9 grey levels); visible motion starts between frame 1 and 2"
+  },
+  {
+   "event": "car visible from first frame (enters at bottom-right, partly cut by bottom edge, behind near pole)",
+   "frame": 0
+  },
+  {
+   "event": "car fully inside frame (bottom edge clear)",
+   "frame": 23,
+   "t": 0.958
+  },
+  {
+   "event": "car clear of near pole occlusion",
+   "frame": 29,
+   "t": 1.208
+  },
+  {
+   "event": "car still moving at last frame, no stop, no turns (slight heading drift)",
+   "frame": 71,
+   "t": 2.958
+  }
+ ],
+ "reference_point_note": "CSV gives mask centroid (cx_mask, cy_mask), bbox centre, and bbox; vehicle root (origin) in Blender is unknown - likely ground-level centre between the axles, which projects near the lower-middle of the silhouette. For displacements the choice matters little."
+}

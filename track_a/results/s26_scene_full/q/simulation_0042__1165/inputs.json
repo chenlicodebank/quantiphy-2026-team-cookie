@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0042.mp4",
+ "video_source": "simulation",
+ "video_type": "V3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1165,
+  "question": "What is the speed of the boat at 1.0s in m/s?",
+  "prior": "speed of the eagle = 11.84m/s",
+  "depth_info": "t=1s, distance_eagle_camera = 179.2691 m\nt=2s, distance_eagle_camera = 177.1009 m\nt=1s, distance_boat_camera = 177.2077 m\nt=2s, distance_boat_camera = 177.9993 m",
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 24.0
+ }
+}

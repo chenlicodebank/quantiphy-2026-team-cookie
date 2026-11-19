@@ -1,0 +1,59 @@
+{
+  "video": "simulation_0291.mp4",
+  "source": "simulation",
+  "scene_type": "2D",
+  "fps": 24.0,
+  "frames": 72,
+  "duration_s": 3.0,
+  "image_size_px": [2560, 1440],
+  "units": "pixels (x right, y down, original resolution) and seconds; t = frame/24",
+  "camera": {
+    "static": true,
+    "evidence": "phase correlation of seafloor/rock region vs frame 0: |shift| <= 0.03 px for all frames; only animated caustics and water-surface texture change",
+    "per_frame_background_shift_px": [0, 0],
+    "perspective": "side view; water surface band y~0-200, seafloor starts at y~870-890 and recedes upward (mild perspective on the floor only). The fish swims in a vertical plane facing the camera at constant y, constant apparent size -> one px scale applies to the fish."
+  },
+  "objects": [
+    {
+      "name": "fish",
+      "description": "koi/carp, blue-white with dark blue-black patches, long dorsal fin, forked tail; the only moving object; swims right-to-left (head pointing left) at mid-water height",
+      "moves": true,
+      "visible_frames": [0, 71],
+      "partially_out_of_frame": "frames 0-4 (tail cut by right image edge x=2559)",
+      "track": "tracks/fish.csv (mask/bbox per frame + ref_x/ref_y rigid-translation centre) and tracks/fish_head_shift.csv (sub-pixel per-frame shift of head)",
+      "size_px_unclipped_frames_5_71": {
+        "bbox_w_snout_to_tail_tip": {"median": 582, "min": 539, "max": 627, "note": "varies with tail flapping"},
+        "bbox_h_incl_dorsal_and_ventral_fins": {"median": 293, "min": 290, "max": 294},
+        "mask_main_axis_length": {"median": 579, "min": 556, "max": 621},
+        "mask_width_across_axis": {"median": 274, "min": 272, "max": 276},
+        "main_axis_angle_deg": "about 6-7 deg (image coords, slightly nose-up/tail-down due to body shape, not tilt of motion)"
+      },
+      "motion_summary_px": {
+        "direction": "-x (leftwards), vertical drift < 2 px over the clip",
+        "ref_x_frame0": 2353.8, "ref_x_frame71": 804.7, "ref_y": 642,
+        "per_frame_dx": "0 at frame 1 (duplicate of frame 0); -21.9..-23.5 px at frames 2-70 (slowly varying: ~-22.0 at f2, peak ~-23.5 near f21-24, back to ~-22.0 by f38, ~-22.2..-22.5 to f70); 0 at frame 71",
+        "net_displacement_frames_0_71_px": 1549.2
+      }
+    },
+    {"name": "brain_coral_rock", "description": "large pale, pitted dome-shaped coral/rock on the seafloor, lower centre-left", "moves": false,
+     "bbox_px": [980, 1210, 1400, 1420], "width_px": 420, "height_px": 210, "accuracy_px": 15},
+    {"name": "branching_coral", "description": "dark, leafless-tree-like sea fan/branching coral just left of the rock, in front of it", "moves": false,
+     "bbox_px": [755, 1240, 1010, 1415], "width_px": 255, "height_px": 175, "accuracy_px": 15},
+    {"name": "seaweed_1_tall_left", "description": "tallest seaweed stalk at far left", "moves": false, "bbox_px": [260, 630, 390, 1440], "height_px": ">=810 (bottom cut by frame edge)", "accuracy_px": 20},
+    {"name": "seaweed_2", "description": "short seaweed left of the coral", "moves": false, "bbox_px": [545, 1060, 620, 1435], "height_px": 375, "accuracy_px": 20},
+    {"name": "seaweed_3", "description": "seaweed rising behind the branching coral (left of pair)", "moves": false, "bbox_px": [915, 815, 985, 1260], "height_px": "~445 visible", "accuracy_px": 20},
+    {"name": "seaweed_4", "description": "thin seaweed right of seaweed_3, behind coral", "moves": false, "bbox_px": [1020, 900, 1060, 1260], "height_px": "~360 visible", "accuracy_px": 20},
+    {"name": "seaweed_5_right", "description": "seaweed right of the rock", "moves": false, "bbox_px": [1440, 810, 1510, 1400], "height_px": 590, "accuracy_px": 20},
+    {"name": "water_surface", "description": "rippled surface band at top", "moves": "texture animates only", "y_range_px": [0, 200]},
+    {"name": "seafloor", "description": "sandy floor with moving light caustics", "moves": "texture animates only", "top_edge_y_px": 880}
+  ],
+  "events": [
+    {"event": "fish stationary (frame 1 is an exact duplicate of frame 0)", "frames": [0, 1], "times_s": [0.0, 0.0417]},
+    {"event": "fish motion starts (first nonzero displacement)", "frame": 2, "time_s": 0.0833},
+    {"event": "fish fully inside frame (tail no longer clipped)", "frame": 5, "time_s": 0.2083},
+    {"event": "fish speed peak (~23.5 px/frame)", "frame": 21, "time_s": 0.875, "note": "broad maximum frames ~19-25"},
+    {"event": "fish last motion step", "frame": 70, "time_s": 2.9167},
+    {"event": "fish stops: frame 71 fish at same position as frame 70 (background still animates)", "frame": 71, "time_s": 2.9583}
+  ],
+  "files": {"notes": "notes.md", "tracks": ["tracks/fish.csv", "tracks/fish_head_shift.csv"], "scripts": "scripts/"}
+}

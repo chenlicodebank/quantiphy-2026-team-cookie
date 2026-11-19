@@ -1,0 +1,18 @@
+{
+ "video": "internet_0012.mp4",
+ "video_source": "internet",
+ "video_type": "S2MC",
+ "fps": 59.346597,
+ "frames": 108,
+ "duration_s": 1.8198,
+ "width": 2160,
+ "height": 3840,
+ "question": {
+  "id": 2060,
+  "question": "What is the length of the car on the leftmost lane in meters?",
+  "prior": "lane width = 3.66m",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 60.0
+ }
+}

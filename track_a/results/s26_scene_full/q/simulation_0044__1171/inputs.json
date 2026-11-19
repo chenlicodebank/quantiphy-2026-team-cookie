@@ -1,0 +1,18 @@
+{
+ "video": "simulation_0044.mp4",
+ "video_source": "simulation",
+ "video_type": "S3MC",
+ "fps": 24.0,
+ "frames": 72,
+ "duration_s": 3.0,
+ "width": 1080,
+ "height": 1080,
+ "question": {
+  "id": 1171,
+  "question": "What is the width of the rock in meters?",
+  "prior": "length of the eagle = 0.8m",
+  "depth_info": "t=1s, distance_eagle_camera = 175.3081m\nt=2s, distance_eagle_camera = 172.9881m",
+  "prior_kind_to_question_kind": "SS",
+  "question_fps": 24.0
+ }
+}

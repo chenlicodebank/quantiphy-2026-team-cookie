@@ -1,0 +1,48 @@
+{
+  "video": "captured_0036.mp4",
+  "source": "lab (captured; background blurred/replaced by 'Segment Anything 2 Demo' - watermark bottom-right x>1030,y>690)",
+  "scene": "3D",
+  "fps": 24.0, "frames": 49, "width": 1280, "height": 720,
+  "time_convention": "t = frame / 24; frame 0 at t=0; container pts are uniform (512 ticks/frame)",
+  "camera": {
+    "motion": "static (phase-correlation shift vs frame 0 < 0.15 px at frames 12,24,36,48)",
+    "intrinsics_from_benchmark": "Orbbec Femto Mega, HFOV 80 deg, f = 0.5959*1280 = 763 px, principal point ~ (640,360)",
+    "perspective": {
+      "table_side_edges_vanishing_point_px": [567, 341],
+      "horizon_y_px_if_table_level": 341,
+      "note": "table-top left edge x = -1.573*y + 1102.5, right edge x = 1.782*y - 40.5 (frame 48); they converge at (567,341). Camera looks along the table, slightly down (horizon ~19 px above principal point)."
+    }
+  },
+  "objects": [
+    {"name": "ball", "moving": true,
+     "description": "small white ball (only white sphere in scene); held by a hand at the back-left of the table top, pushed/released, rolls diagonally toward the camera and to the right, leaves the table over the front-right edge, falls and exits the image bottom",
+     "visible_frames": "0-39 fully (0-12 partly covered by blurred hand), 40 sliver at image bottom behind watermark, absent 41-48",
+     "track": "tracks/ball.csv",
+     "apparent_diameter_px": {"frame0_held": 24, "frame15": "27 (vertical)", "frame24": "33 v / 37 h", "frame30": "39 v / 46 h", "frame35": "45 v / 58 h",
+                              "note": "vertical extent (diam_v_px) is the blur-free diameter while rolling; horizontal includes motion blur. Size roughly doubles 0->35: ball approaches camera (depth roughly halves)"}},
+    {"name": "hand", "moving": true,
+     "description": "blurred skin-coloured hand at back-left of the table (x~380-410,y~410-445) holding the ball; ball drifts ~6 px left during frames 4-10 while held, then pushed right at frame 12-13; hand withdraws/blurs out after",
+     "visible_frames": "0-~16 (heavily blurred background layer)", "track": "not tracked (blurred, unreliable)"},
+    {"name": "table", "moving": false,
+     "description": "rectangular wooden table top (light brown wood grain) in the centre-bottom, long axis pointing away from camera, dark front edge face, single pedestal leg",
+     "image_corners_px_frame48": {"back_left": [404, 444], "back_right": [762, 447], "front_left": [188, 590], "front_right": [1000, 593]},
+     "extents_px": {"front_edge_length": 812, "back_edge_length": 358, "top_surface_image_height_back_to_front": 147,
+                    "front_face_thickness": 36, "front_face_y_range": [590, 626], "bbox": [188, 426, 1000, 626]},
+     "reliability": "corners +-4 px (edges soft)"},
+    {"name": "chair", "moving": false, "description": "blurred chair back (dark arch) just behind the back-left part of the table, x~430-520, y~395-445; slight change in this blurred area at frames 41-48 (background layer, not a measurable motion)"},
+    {"name": "tripod_light_stand", "moving": false, "description": "blurred tripod stand with blue light on top behind the table, centre x~690, top y~65, legs down to y~440"},
+    {"name": "person_legs", "moving": false, "description": "blurred jeans of a seated person under/behind the table, y>630, x~300-650"},
+    {"name": "tv_screen", "moving": false, "description": "black screen/monitor top-right corner, x~1010-1280, y~0-130"},
+    {"name": "walls", "moving": false, "description": "grey acoustic panel walls (blurred)"}
+  ],
+  "events": [
+    {"event": "ball held still (hand)", "frames": "0-3", "t": "0-0.125"},
+    {"event": "ball drifts slowly left in hand (~6 px)", "frames": "4-10", "t": "0.167-0.417"},
+    {"event": "push/release - ball starts moving right", "frame": 12, "t": 0.5, "note": "first displacement 11->12 (+3.5 px), clear motion from 13 (t=0.542)"},
+    {"event": "rolling on table", "frames": "13-35", "t": "0.542-1.458"},
+    {"event": "ball reaches front-right table edge / leaves table", "frame": 36, "t": 1.5, "note": "large image jump 35->36 (~73 px vs ~29 px per frame before) - possibly a capture irregularity; centre at the right edge line at frame 36"},
+    {"event": "falling off the table", "frames": "37-39", "t": "1.542-1.625"},
+    {"event": "ball exits bottom of image", "frame": 40, "t": 1.667},
+    {"event": "ball out of view", "frames": "41-48", "t": "1.708-2.0"}
+  ]
+}

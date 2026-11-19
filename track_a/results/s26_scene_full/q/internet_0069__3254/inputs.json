@@ -1,0 +1,18 @@
+{
+ "video": "internet_0069.mp4",
+ "video_source": "internet",
+ "video_type": "A2SS",
+ "fps": 30.013158,
+ "frames": 114,
+ "duration_s": 3.7983,
+ "width": 1920,
+ "height": 1080,
+ "question": {
+  "id": 3254,
+  "question": "What is the velocity of the cup at 2.20s in m/s?",
+  "prior": "acceleration of the cup from 2.00s to 2.30s = 0.32m/s^2",
+  "depth_info": null,
+  "prior_kind_to_question_kind": "DD",
+  "question_fps": 30.0
+ }
+}
